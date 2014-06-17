@@ -5,11 +5,8 @@ function __autoload($class) {
     require_once $class . '.php';
 }
 
-$session = new Session(array(
-    'client_id' => '',
-    'client_secret' => '',
-    'redirect_uri' => ''
-));
+$config = json_decode(file_get_contents('config.json'), true);
+$session = new Session($config);
 
 if (isset($_GET['code'])) {
     $session->requestToken($_GET['code']);
