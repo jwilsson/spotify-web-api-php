@@ -51,7 +51,7 @@ class Request
         list($headers, $body) = explode("\r\n\r\n", $response);
 
         return array(
-            'body' => $body,
+            'body' => json_decode($body),
             'headers' => $headers
         );
     }
