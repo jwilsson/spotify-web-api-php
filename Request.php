@@ -1,20 +1,16 @@
 <?php
 class Request
 {
-    const ACCOUNT_URL = 'https://accounts.spotify.com/';
-    const API_URL = 'https://api.spotify.com/';
+    const ACCOUNT_URL = 'https://accounts.spotify.com';
+    const API_URL = 'https://api.spotify.com';
 
     public static function account($method, $uri, $parameters = array(), $headers = array())
     {
-        $uri = trim($uri, '/');
-
         return self::send($method, self::ACCOUNT_URL . $uri, $parameters, $headers);
     }
 
     public static function api($method, $uri, $parameters = array(), $headers = array())
     {
-        $uri = trim($uri, '/');
-
         return self::send($method, self::API_URL . $uri, $parameters, $headers);
     }
 
@@ -37,6 +33,7 @@ class Request
             $options[CURLOPT_POST] = true;
             $options[CURLOPT_POSTFIELDS] = $parameters;
         } else {
+            rtrim($url, '/');
             $url .= '/?' . $parameters;
         }
 

@@ -38,7 +38,7 @@ class Session
             'state' => $state
         );
 
-        return Request::ACCOUNT_URL . 'authorize/?' . http_build_query($parameters);
+        return Request::ACCOUNT_URL . '/authorize/?' . http_build_query($parameters);
     }
 
     public function getAccessToken()
@@ -74,7 +74,7 @@ class Session
             'Authorization' => 'Basic ' . $payload
         );
 
-        $response = Request::account('POST', 'api/token', $parameters, $headers);
+        $response = Request::account('POST', '/api/token', $parameters, $headers);
     }
 
     public function requestToken($code = '')
@@ -87,7 +87,7 @@ class Session
             'redirect_uri' => $this->getRedirectURI()
         );
 
-        $response = Request::account('POST', 'api/token', $parameters);
+        $response = Request::account('POST', '/api/token', $parameters);
         $response = json_decode($response['body']);
 
         if (isset($response->access_token)) {

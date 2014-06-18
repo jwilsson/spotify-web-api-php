@@ -1,4 +1,7 @@
 <?php
+error_reporting(-1);
+ini_set('display_errors', 1);
+
 function __autoload($class) {
     $class = $class;
 
@@ -13,8 +16,15 @@ if (isset($_GET['code'])) {
     $response = '';
 
     // Get tracks from an album
-    /*$album = new Album('41MnTivkwTO3UUJ8DrqEJJ');
-    $response = $album->getTracks();*/
+    $album = new Album();
+    $albums = $album->getMany(array(
+        '41MnTivkwTO3UUJ8DrqEJJ',
+        '6JWc4iAiJ9FjyK0B59ABb4',
+        '6UXCm6bOO4gFlDQZV5yL37'
+    ));
+
+    print_r($albums);
+    die();
 
     // Get the current user's info
     /*$response = Request::api('GET', 'v1/me', array(), array(
