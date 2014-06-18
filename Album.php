@@ -58,14 +58,25 @@ class Album
         return true;
     }
 
-    public function getTracks()
+    public function getTracks($id = '')
     {
+        $id = $id ?: $this->id;
         $uri = '/v1/albums/' . $this->id . '/tracks';
 
         $response = Request::api('GET', $uri);
         $response = json_decode($response['body']);
 
-        return $response;
+        $tracks = array();
+        if (isset($response->items)) {
+            foreach ($response->items as $track) {
+                $track = new Track($track->id);
+                $track->getSingle();
+
+                $tracks[] = $track;
+            }
+        }
+
+        return $tracks;
     }
 
     public function setID($id)
