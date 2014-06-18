@@ -1,6 +1,7 @@
 <?php
 class Album
 {
+    private $data = null;
     private $id = '';
 
     public function __construct($id = '')
@@ -25,7 +26,10 @@ class Album
         $albums = array();
         if (isset($response->albums)) {
             foreach ($response->albums as $album) {
-                $albums[] = new Album($album->id);
+                $album = new Album($album->id);
+                $album->getSingle();
+
+                $albums[] = $album;
             }
         }
 
@@ -35,14 +39,21 @@ class Album
     public function getSingle($id = '')
     {
         $id = $id ?: $this->id;
-        $uri = '/v1/albums/' . $id;
 
+        // Check if we already has data for this album
+        if (isset($this->data->id) && $this->data->id == $id) {
+            return true;
+        }
+
+        $uri = '/v1/albums/' . $id;
         $response = Request::api('GET', $uri);
+        $response = json_decode($response['body']);
+
         if (!isset($response->id)) {
             return false;
         }
 
-
+        $this->data = $response;
 
         return true;
     }
@@ -52,7 +63,9 @@ class Album
         $uri = '/v1/albums/' . $this->id . '/tracks';
 
         $response = Request::api('GET', $uri);
-        return $response['body'];
+        $response = json_decode($response['body']);
+
+        return $response;
     }
 
     public function setID($id)
