@@ -1,6 +1,6 @@
 <?php
 function __autoload($class) {
-    $class = strtolower($class);
+    $class = $class;
 
     require_once $class . '.php';
 }
