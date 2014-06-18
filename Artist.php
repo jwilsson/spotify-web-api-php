@@ -8,6 +8,27 @@ class Artist
         $this->setID($id);
     }
 
+    public function getAlbums($id = '')
+    {
+        $id = $id ?: $this->id;
+        $uri = '/v1/artists/' . $this->id . '/albums';
+
+        $response = Request::api('GET', $uri);
+        $response = json_decode($response['body']);
+
+        $albums = array();
+        if (isset($response->items)) {
+            foreach ($response->items as $album) {
+                $album = new Album($album->id);
+                $album->getSingle();
+
+                $albums[] = $album;
+            }
+        }
+
+        return $albums;
+    }
+
     public function getMany($id)
     {
         if (!is_array($id)) {

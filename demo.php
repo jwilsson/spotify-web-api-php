@@ -14,14 +14,11 @@ $session = new Session($config);
 if (isset($_GET['code'])) {
     $session->requestToken($_GET['code']);
 
-    // Get many artists
-    $artist = new Artist();
-    $artists = $artist->getMany(array(
-        '0oSGxfWSnnOXhD2fKuz2Gy',
-        '3dBVyJ7JuOMt4GE9607Qin'
-    ));
+    // Get artist albums
+    $artist = new Artist('0oSGxfWSnnOXhD2fKuz2Gy');
+    $albums = $artist->getAlbums();
 
-    print_r($artists);
+    print_r($albums);
 
     // Get album tracks
     /*$album = new Album('41MnTivkwTO3UUJ8DrqEJJ');
