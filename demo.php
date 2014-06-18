@@ -10,10 +10,16 @@ $session = new Session($config);
 
 if (isset($_GET['code'])) {
     $session->requestToken($_GET['code']);
+    $response = '';
 
-    $response = Request::api('GET', 'v1/me', array(), array(
+    // Get tracks from an album
+    /*$album = new Album('41MnTivkwTO3UUJ8DrqEJJ');
+    $response = $album->getTracks();*/
+
+    // Get the current user's info
+    /*$response = Request::api('GET', 'v1/me', array(), array(
         'Authorization' => 'Bearer ' . $session->getAccessToken()
-    ));
+    ));*/
 
     print_r($response);
 } else {
