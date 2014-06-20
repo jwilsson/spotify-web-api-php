@@ -153,7 +153,7 @@ class Session
     /**
      * Set the client ID.
      *
-     * @return string
+     * @return void
      */
     public function setClientId($clientId)
     {
@@ -163,7 +163,7 @@ class Session
     /**
      * Set the client secret.
      *
-     * @return string
+     * @return void
      */
     public function setClientSecret($clientSecret)
     {
@@ -173,7 +173,7 @@ class Session
     /**
      * Set the client's redirect URI.
      *
-     * @return string
+     * @return void
      */
     public function setRedirectUri($redirectUri)
     {
