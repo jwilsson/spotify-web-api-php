@@ -2,37 +2,43 @@
 class Session
 {
     private $accessToken = '';
-    private $clientID = '';
+    private $clientId = '';
     private $clientSecret = '';
     private $expires = 0;
-    private $redirectURI = '';
+    private $redirectUri = '';
     private $refreshToken = '';
 
-    public function __construct($options = array())
+    /**
+     * Constructor
+     * Set up client credentials.
+     *
+     * @param string $clientId
+     * @param string $clientSecret
+     * @param string $redirectUri
+     *
+     * @return void
+     */
+    public function __construct($clientId, $clientSecret, $redirectUri)
     {
-        $defaults = array(
-            'client_id' => '',
-            'client_secret' => '',
-            'redirect_uri' => ''
-        );
-
-        $options = array_merge($defaults, $options);
-        extract($options, EXTR_SKIP);
-
-        $this->setClientID($client_id);
-        $this->setClientSecret($client_secret);
-        $this->setRedirectURI($redirect_uri);
+        $this->setClientId($clientId);
+        $this->setClientSecret($clientSecret);
+        $this->setRedirectUri($redirectUri);
     }
 
-    public function getAuthorizeURL($scope = '', $state = '')
+    /**
+     * Get the authorization URL.
+     *
+     * @param array $scope Scopes to request from the user.
+     * @param string $state Optional. A CSRF token.
+     *
+     * @return string
+     */
+    public function getAuthorizeUrl($scope = array(), $state = '')
     {
-        if (is_array($scope)) {
-            $scope = implode(' ', $scope);
-        }
-
+        $scope = implode(' ', $scope);
         $parameters = array(
-            'client_id' => $this->getClientID(),
-            'redirect_uri' => $this->getRedirectURI(),
+            'client_id' => $this->getClientId(),
+            'redirect_uri' => $this->getRedirectUri(),
             'response_type' => 'code',
             'scope' => $scope,
             'state' => $state
@@ -41,29 +47,54 @@ class Session
         return Request::ACCOUNT_URL . '/authorize/?' . http_build_query($parameters);
     }
 
+    /**
+     * Get the access token.
+     *
+     * @return string
+     */
     public function getAccessToken()
     {
         return $this->accessToken;
     }
 
-    public function getClientID()
+    /**
+     * Get the client ID.
+     *
+     * @return string
+     */
+    public function getClientId()
     {
-        return $this->clientID;
+        return $this->clientId;
     }
 
+    /**
+     * Get the client secret.
+     *
+     * @return string
+     */
     public function getClientSecret()
     {
         return $this->clientSecret;
     }
 
-    public function getRedirectURI()
+    /**
+     * Get the client's redirect URI.
+     *
+     * @return string
+     */
+    public function getRedirectUri()
     {
-        return $this->redirectURI;
+        return $this->redirectUri;
     }
 
+    /**
+     * Refresh a access token.
+     *
+     * @return bool
+     */
     public function refreshToken()
     {
-        $payload = base64_encode($this->getClientID() . ':' . $this->getClientSecret());
+        $payload = base64_encode($this->getClientId() . ':' . $this->getClientSecret());
 
         $parameters = array(
             'grant_type' => 'refresh_token',
@@ -77,14 +108,21 @@ class Session
         $response = Request::account('POST', '/api/token', $parameters, $headers);
     }
 
-    public function requestToken($code = '')
+    /**
+     * Request a access token.
+     *
+     * @param string $code The authorization code from Spotify.
+     *
+     * @return bool
+     */
+    public function requestToken($code)
     {
         $parameters = array(
-            'client_id' => $this->getClientID(),
+            'client_id' => $this->getClientId(),
             'client_secret' => $this->getClientSecret(),
             'code' => $code,
             'grant_type' => 'authorization_code',
-            'redirect_uri' => $this->getRedirectURI()
+            'redirect_uri' => $this->getRedirectUri()
         );
 
         $response = Request::account('POST', '/api/token', $parameters);
@@ -94,21 +132,40 @@ class Session
             $this->accessToken = $response->access_token;
             $this->expires = $response->expires_in;
             $this->refreshToken = $response->refresh_token;
+
+            return true;
         }
+
+        return false;
     }
 
-    public function setClientID($clientID)
+    /**
+     * Set the client ID.
+     *
+     * @return string
+     */
+    public function setClientId($clientId)
     {
-        $this->clientID = $clientID;
+        $this->clientId = $clientId;
     }
 
+    /**
+     * Set the client secret.
+     *
+     * @return string
+     */
     public function setClientSecret($clientSecret)
     {
         $this->clientSecret = $clientSecret;
     }
 
-    public function setRedirectURI($redirectURI)
+    /**
+     * Set the client's redirect URI.
+     *
+     * @return string
+     */
+    public function setRedirectUri($redirectUri)
     {
-        $this->redirectURI = $redirectURI;
+        $this->redirectUri = $redirectUri;
     }
 }

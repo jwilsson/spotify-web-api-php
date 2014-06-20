@@ -8,13 +8,12 @@ function __autoload($class) {
     require_once 'src/' . $class . '.php';
 }
 
-$config = json_decode(file_get_contents('config.json'), true);
-$session = new Session($config);
+$session = new Session('', '', '');
 
 if (isset($_GET['code'])) {
     $session->requestToken($_GET['code']);
 
     print_r(SpotifyWebAPI::getAlbum('0sNOF9WDwhWunNAHPD3Baj'));
 } else {
-    header('Location: ' . $session->getAuthorizeURL('user-read-email'));
+    header('Location: ' . $session->getAuthorizeUrl('user-read-email'));
 }

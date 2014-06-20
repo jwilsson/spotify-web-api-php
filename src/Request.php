@@ -4,16 +4,47 @@ class Request
     const ACCOUNT_URL = 'https://accounts.spotify.com';
     const API_URL = 'https://api.spotify.com';
 
+    /**
+     * Make a request to the "account" endpoint.
+     *
+     * @param string $method The HTTP method to use.
+     * @param string $uri The URI to request.
+     * @param array $parameters Optional. Query parameters.
+     * @param array $headers HTTP headers.
+     *
+     * @return array
+     */
     public static function account($method, $uri, $parameters = array(), $headers = array())
     {
         return self::send($method, self::ACCOUNT_URL . $uri, $parameters, $headers);
     }
 
+    /**
+     * Make a request to the "api" endpoint.
+     *
+     * @param string $method The HTTP method to use.
+     * @param string $uri The URI to request.
+     * @param array $parameters Optional. Query parameters.
+     * @param array $headers HTTP headers.
+     *
+     * @return array
+     */
     public static function api($method, $uri, $parameters = array(), $headers = array())
     {
         return self::send($method, self::API_URL . $uri, $parameters, $headers);
     }
 
+    /**
+     * Make a request to Spotify.
+     * You'll probably want to use one of the convenience methods instead.
+     *
+     * @param string $method The HTTP method to use.
+     * @param string $uri The URL to request.
+     * @param array $parameters Optional. Query parameters.
+     * @param array $headers HTTP headers.
+     *
+     * @return array
+     */
     public static function send($method, $url, $parameters = array(), $headers = array())
     {
         $parameters = http_build_query($parameters);
