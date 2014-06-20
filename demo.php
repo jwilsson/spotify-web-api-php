@@ -3,7 +3,7 @@ error_reporting(-1);
 ini_set('display_errors', 1);
 
 function __autoload($class) {
-    $class = $class;
+    $class = strtolower($class);
 
     require_once 'src/' . $class . '.php';
 }
