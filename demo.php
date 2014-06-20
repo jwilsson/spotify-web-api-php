@@ -14,24 +14,7 @@ $session = new Session($config);
 if (isset($_GET['code'])) {
     $session->requestToken($_GET['code']);
 
-    // Get artist albums
-    /*$artist = new Artist('0oSGxfWSnnOXhD2fKuz2Gy');
-    $albums = $artist->getAlbums();
-
-    print_r($albums);*/
-
-    // Get album tracks
-    /*$album = new Album('41MnTivkwTO3UUJ8DrqEJJ');
-    $tracks = $album->getTracks();
-
-    print_r($tracks);*/
-
-    // Get the current user's info
-    /*$response = Request::api('GET', 'v1/me', array(), array(
-        'Authorization' => 'Bearer ' . $session->getAccessToken()
-    ));
-
-    print_r($response);*/
+    print_r(SpotifyWebAPI::getAlbum('0sNOF9WDwhWunNAHPD3Baj'));
 } else {
     header('Location: ' . $session->getAuthorizeURL('user-read-email'));
 }
