@@ -1,4 +1,6 @@
 <?php
+namespace SpotifyWebAPI;
+
 class Session
 {
     private $accessToken = '';

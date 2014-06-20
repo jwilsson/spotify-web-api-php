@@ -2,21 +2,16 @@
 error_reporting(-1);
 ini_set('display_errors', 1);
 
-function __autoload($class) {
-    $class = strtolower($class);
+require 'vendor/autoload.php';
 
-    require_once 'src/' . $class . '.php';
-}
-
-$session = new Session('', '', '');
+$session = new SpotifyWebAPI\Session('', '', '');
 
 if (isset($_GET['code'])) {
     $session->requestToken($_GET['code']);
 
-    SpotifyWebAPI::setAccessToken($session->getAccessToken());
+    SpotifyWebAPI\SpotifyWebAPI::setAccessToken($session->getAccessToken());
 
-    print_r(SpotifyWebAPI::me());
-    //print_r(SpotifyWebAPI::getAlbum('0sNOF9WDwhWunNAHPD3Baj'));
+    print_r(SpotifyWebAPI\SpotifyWebAPI::me());
 } else {
     header('Location: ' . $session->getAuthorizeUrl(array('user-read-email')));
 }

@@ -1,4 +1,6 @@
 <?php
+namespace SpotifyWebAPI;
+
 class SpotifyWebAPI
 {
     private static $accessToken = '';

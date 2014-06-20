@@ -1,4 +1,6 @@
 <?php
+namespace SpotifyWebAPI;
+
 class Request
 {
     const ACCOUNT_URL = 'https://accounts.spotify.com';
