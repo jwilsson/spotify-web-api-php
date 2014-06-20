@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 function __autoload($class) {
     $class = $class;
 
-    require_once $class . '.php';
+    require_once 'src/' . $class . '.php';
 }
 
 $config = json_decode(file_get_contents('config.json'), true);
@@ -15,10 +15,10 @@ if (isset($_GET['code'])) {
     $session->requestToken($_GET['code']);
 
     // Get artist albums
-    $artist = new Artist('0oSGxfWSnnOXhD2fKuz2Gy');
+    /*$artist = new Artist('0oSGxfWSnnOXhD2fKuz2Gy');
     $albums = $artist->getAlbums();
 
-    print_r($albums);
+    print_r($albums);*/
 
     // Get album tracks
     /*$album = new Album('41MnTivkwTO3UUJ8DrqEJJ');
