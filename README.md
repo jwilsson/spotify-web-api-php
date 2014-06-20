@@ -7,10 +7,3 @@ Look at `demo.php` for a simple example. All endpoints can be requested. However
 1. Create a new app at https://developer.spotify.com/
 2. Enter your app credentials
 3. Call the API!
-
-## TODO
-* Error handling
-* Separate objects for each endpoint (e.g. Album, User)
-* Composer support
-* Unit tests
-* Prettier code

@@ -1,6 +1,8 @@
 <?php
 class SpotifyWebAPI
 {
+    private static $accessToken = '';
+
     /**
      * Add track(s) to a user's playlist.
      * Requires a valid access token.
@@ -16,7 +18,7 @@ class SpotifyWebAPI
     {
         $tracks = json_encode($tracks);
         $response = Request::api('POST', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', $tracks, array(
-            'Authorization' => 'Bearer ' . $accessToken, // @todo Get this from somewhere
+            'Authorization' => 'Bearer ' . self::$accessToken,
             'Content-Type' => 'application/json'
         ));
 
@@ -41,7 +43,7 @@ class SpotifyWebAPI
         ));
 
         $response = Request::api('POST', '/v1/users/' . $userId . '/playlists', $data, array(
-            'Authorization' => 'Bearer ' . $accessToken, // @todo Get this from somewhere
+            'Authorization' => 'Bearer ' . self::$accessToken,
             'Content-Type' => 'application/json'
         ));
 
@@ -202,7 +204,7 @@ class SpotifyWebAPI
     public static function getUserPlaylists($userId)
     {
         $response = Request::api('GET', '/v1/users/' . $userId . '/playlists', array(), array(
-            'Authorization' => 'Bearer ' . $accessToken // @todo Get this from somewhere
+            'Authorization' => 'Bearer ' . self::$accessToken
         ));
 
         return json_decode($response['body']);
@@ -219,7 +221,7 @@ class SpotifyWebAPI
     public static function getUserPlaylist($userId, $playlistId)
     {
         $response = Request::api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId, array(), array(
-            'Authorization' => 'Bearer ' . $accessToken // @todo Get this from somewhere
+            'Authorization' => 'Bearer ' . self::$accessToken
         ));
     }
 
@@ -234,7 +236,7 @@ class SpotifyWebAPI
     public static function getUserPlaylistTracks($userId, $playlistId)
     {
         $response = Request::api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', array(), array(
-            'Authorization' => 'Bearer ' . $accessToken // @todo Get this from somewhere
+            'Authorization' => 'Bearer ' . self::$accessToken
         ));
     }
 
@@ -246,7 +248,7 @@ class SpotifyWebAPI
     public static function me()
     {
         $response = Request::api('GET', '/v1/me', array(), array(
-            'Authorization' => 'Bearer ' . $accessToken // @todo Get this from somewhere
+            'Authorization' => 'Bearer ' . self::$accessToken
         ));
 
         return json_decode($response['body']);
@@ -273,5 +275,17 @@ class SpotifyWebAPI
         ));
 
         return json_decode($response['body']);
+    }
+
+    /**
+     * Set the access token to use
+     *
+     * @param string $accessToken The access token.
+     *
+     * @return void
+     */
+    public static function setAccessToken($accessToken)
+    {
+        self::$accessToken = $accessToken;
     }
 }

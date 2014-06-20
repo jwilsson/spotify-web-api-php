@@ -13,7 +13,10 @@ $session = new Session('', '', '');
 if (isset($_GET['code'])) {
     $session->requestToken($_GET['code']);
 
-    print_r(SpotifyWebAPI::getAlbum('0sNOF9WDwhWunNAHPD3Baj'));
+    SpotifyWebAPI::setAccessToken($session->getAccessToken());
+
+    print_r(SpotifyWebAPI::me());
+    //print_r(SpotifyWebAPI::getAlbum('0sNOF9WDwhWunNAHPD3Baj'));
 } else {
-    header('Location: ' . $session->getAuthorizeUrl('user-read-email'));
+    header('Location: ' . $session->getAuthorizeUrl(array('user-read-email')));
 }
