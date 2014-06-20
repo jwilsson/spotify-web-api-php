@@ -30,6 +30,8 @@ $session = new Session('CLIENT_ID', 'CLIENT_SECRET', 'REDIRECT_URI');
 header('Location: ' . $session->getAuthorizeUrl(array('scope-1', 'scope-2')));
 ```
 
+When receiving a request back to your redirect URI:
+
 ```php
 // Request a access token using the code from Spotify
 $session->requestToken($_GET['code']);
