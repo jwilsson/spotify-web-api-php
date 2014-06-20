@@ -13,5 +13,5 @@ Please submit all your bug reports, feature requests and pull requests here but 
     * Possible solutions or other relevant information/suggestions.
 
 ## Coding Guidelines
-We follow the coding standards outlined in PSR-1 and PSR-2. Please follow these guidelines when commiting new code.
+We follow the coding standards outlined in [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) and [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md). Please follow these guidelines when commiting new code.
 Fixes for existing code which doesn't follow these standards are highly appreciated!
