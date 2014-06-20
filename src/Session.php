@@ -106,6 +106,17 @@ class Session
         );
 
         $response = Request::account('POST', '/api/token', $parameters, $headers);
+        $response = json_decode($response['body']);
+
+        if (isset($response->access_token)) {
+            $this->accessToken = $response->access_token;
+            $this->expires = $response->expires_in;
+            $this->refreshToken = $response->refresh_token;
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
