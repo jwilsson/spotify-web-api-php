@@ -1,5 +1,7 @@
 # Spotify Web API PHP
 
+[![Build Status](https://travis-ci.org/jwilsson/spotify-web-api-php.svg?branch=master)](https://travis-ci.org/jwilsson/spotify-web-api-php)
+
 This is a PHP implementation of the Spotify Web API. It includes the following:
 
 * Helper methods for all API methods (Information about artists, albums and tracks).
