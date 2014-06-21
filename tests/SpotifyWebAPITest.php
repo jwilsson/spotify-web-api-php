@@ -84,7 +84,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetArtistAlbumsNonExistent()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums(array('nonexistent'));
+        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums('nonexistent');
 
         $this->assertObjectHasAttribute('error', $response);
     }
