@@ -12,7 +12,7 @@ class SpotifyWebAPI
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to add tracks to.
      * @param array $tracks Spotify URIs for the tracks to add.
-     * @param array|object $options Options for the new tracks.
+     * @param array|object Optional. $options Options for the new tracks.
      * - int position Optional. Zero-based position of where in the playlist to add the tracks. Tracks will be appened if omitted or false.
      *
      * @return bool|object
