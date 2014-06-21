@@ -30,7 +30,7 @@ class Session
     /**
      * Get the authorization URL.
      *
-     * @param array $scope Scopes to request from the user.
+     * @param array $scope Optional. Scopes to request from the user.
      * @param string $state Optional. A CSRF token.
      *
      * @return string
