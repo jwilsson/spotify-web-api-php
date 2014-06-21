@@ -12,7 +12,7 @@ class Request
      * @param string $method The HTTP method to use.
      * @param string $uri The URI to request.
      * @param array $parameters Optional. Query parameters.
-     * @param array $headers HTTP headers.
+     * @param array $headers Optional. HTTP headers.
      *
      * @return array
      */
@@ -27,7 +27,7 @@ class Request
      * @param string $method The HTTP method to use.
      * @param string $uri The URI to request.
      * @param array $parameters Optional. Query parameters.
-     * @param array $headers HTTP headers.
+     * @param array $headers Optional. HTTP headers.
      *
      * @return array
      */
@@ -43,7 +43,7 @@ class Request
      * @param string $method The HTTP method to use.
      * @param string $uri The URL to request.
      * @param array $parameters Optional. Query parameters.
-     * @param array $headers HTTP headers.
+     * @param array $headers Optional. HTTP headers.
      *
      * @return array
      */
