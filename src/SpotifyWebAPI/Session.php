@@ -146,7 +146,6 @@ class Session
             $this->expires = $response->expires_in;
             $this->refreshToken = $response->refresh_token;
 
-
             return true;
         }
 

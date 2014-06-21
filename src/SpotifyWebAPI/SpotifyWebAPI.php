@@ -123,7 +123,7 @@ class SpotifyWebAPI
      */
     public static function getArtist($artistId)
     {
-        $response = Request::api('GET', '/v1/artists/' . $albumId);
+        $response = Request::api('GET', '/v1/artists/' . $artistId);
 
         return $response['body'];
     }
@@ -152,7 +152,7 @@ class SpotifyWebAPI
      */
     public static function getArtistAlbums($artistId)
     {
-        $response = Request::api('GET', '/v1/artists/' . $albumId . '/albums');
+        $response = Request::api('GET', '/v1/artists/' . $artistId . '/albums');
 
         return $response['body'];
     }
@@ -167,7 +167,7 @@ class SpotifyWebAPI
      */
     public static function getArtistTopTracks($artistId, $country)
     {
-        $response = Request::api('GET', '/v1/artists/' . $albumId . '/top-tracks', array('country' =>  $country));
+        $response = Request::api('GET', '/v1/artists/' . $artistId . '/top-tracks', array('country' =>  $country));
 
         return $response['body'];
     }
@@ -279,20 +279,20 @@ class SpotifyWebAPI
      * Search for an item.
      *
      * @param string $query The query to search for. Will be URL-encoded. More info: https://developer.spotify.com/web-api/search-item/
-     * @param string $type The type of item to search for, "album", "artist" or "track".
+     * @param string|array $type The type of item to search for, "album", "artist" or "track".
      * @param int $limit Optional. The number of items in the result to return. Maximum is 50. Default is 20.
      * @param int $offset Optional. The number of items in the result to skip. Default is 0.
      */
     public static function search($query, $type, $limit = 20, $offset = 0)
     {
         $query = rawurlencode($query);
-        $type = implode(',', $type);
+        $type = implode(',', (array) $type);
 
         $response = Request::api('GET', '/v1/search', array(
             'limit' => $limit,
             'offset' => $offset,
             'query' => $query,
-            'type' => 'type'
+            'type' => $type
         ));
 
         return $response['body'];

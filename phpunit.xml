@@ -9,7 +9,7 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="./tests/bootstrap.php"
+         bootstrap="./phpunit.php"
 >
     <testsuites>
         <testsuite name="Spotify Web API Test Suite">
