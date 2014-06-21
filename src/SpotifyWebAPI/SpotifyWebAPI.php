@@ -15,7 +15,7 @@ class SpotifyWebAPI
      * @param array|object $options Options for the new tracks.
      * - int position Optional. Zero-based position of where in the playlist to add the tracks. Tracks will be appened if omitted or false.
      *
-     * @return bool
+     * @return bool|object
      */
     public static function addUserPlaylistTracks($userId, $playlistId, $tracks, $options = array())
     {
@@ -37,7 +37,11 @@ class SpotifyWebAPI
             'Content-Type' => 'application/json'
         ));
 
-        return $response['status'] == 201;
+        if ($response['status'] == 201) {
+            return true;
+        }
+
+        return $response['body'];
     }
 
     /**
