@@ -11,20 +11,33 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to add tracks to.
-     * @param array $tracks Spotify URIs of the tracks to add.
-     * @param int $position Optional. Zero-based position of where in the playlist to add the tracks. Tracks will be appened if omitted.
+     * @param array $tracks Spotify URIs for the tracks to add.
+     * @param array|object $options Options for the new tracks.
+     * - int position Optional. Zero-based position of where in the playlist to add the tracks. Tracks will be appened if omitted or false.
      *
-     * @return object
+     * @return bool
      */
-    public static function addUserPlaylistTracks($userId, $playlistId, $tracks, $position = false)
+    public static function addUserPlaylistTracks($userId, $playlistId, $tracks, $options = array())
     {
+        $defaults = array(
+            'position' => false
+        );
+
+        $data = array_merge($defaults, (array) $options);
+        $data = array_filter($data, function ($value) {
+            return $value !== false;
+        });
+
+        $data = http_build_query($data);
         $tracks = json_encode($tracks);
-        $response = Request::api('POST', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', $tracks, array(
+
+        // We need to manually append data to the URI since it's a POST request
+        $response = Request::api('POST', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks?' . $data, $tracks, array(
             'Authorization' => 'Bearer ' . self::$accessToken,
             'Content-Type' => 'application/json'
         ));
 
-        return json_decode($response['body']);
+        return $response['status'] == 201;
     }
 
     /**
@@ -32,7 +45,7 @@ class SpotifyWebAPI
      * Requires a valid access token.
      *
      * @param string $userId ID of the user to create the playlist for.
-     * @param array|object $data
+     * @param array|object $data Data for the new playlist.
      * - name string Required Name of the playlist
      * - public bool Optional. Whether the playlist should be public or not. Default is true.
      *

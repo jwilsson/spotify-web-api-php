@@ -67,7 +67,10 @@ class Request
 
         if (strtoupper($method) == 'POST') {
             $options[CURLOPT_POST] = true;
-            $options[CURLOPT_POSTFIELDS] = $parameters;
+
+            if ($parameters) {
+                $options[CURLOPT_POSTFIELDS] = $parameters;
+            }
         } else {
             rtrim($url, '/');
             $url .= '/?' . $parameters;
@@ -83,9 +86,12 @@ class Request
 
         list($headers, $body) = explode("\r\n\r\n", $response);
 
+        $status = (int) substr($headers, 9, 3);
+
         return array(
             'body' => $body,
-            'headers' => $headers
+            'headers' => $headers,
+            'status' => $status
         );
     }
 }
