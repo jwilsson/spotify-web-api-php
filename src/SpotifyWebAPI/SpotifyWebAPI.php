@@ -32,18 +32,20 @@ class SpotifyWebAPI
      * Requires a valid access token.
      *
      * @param string $userId ID of the user to create the playlist for.
-     * @param string $name Name of the playlist.
-     * @param bool $public Whether the playlist should be public or not. Default is true.
+     * @param array|object $data
+     * - name string Required Name of the playlist
+     * - public bool Optional. Whether the playlist should be public or not. Default is true.
      *
      * @return object
      */
-    public static function createUserPlaylist($userId, $name, $public = true)
+    public static function createUserPlaylist($userId, $data)
     {
-        $data = json_encode(array(
-            'name' => $name,
-            'public' => $public
-        ));
+        $defaults = array(
+            'name' =>  '',
+            'public' => true
+        );
 
+        $data = json_encode(array_merge($defaults, (array) $data));
         $response = Request::api('POST', '/v1/users/' . $userId . '/playlists', $data, array(
             'Authorization' => 'Bearer ' . self::$accessToken,
             'Content-Type' => 'application/json'

@@ -49,9 +49,12 @@ class Request
      */
     public static function send($method, $url, $parameters = array(), $headers = array())
     {
-        $parameters = http_build_query($parameters);
-        $mergedHeaders = array();
+        // Sometimes a JSON object is passed
+        if (is_array($parameters) || is_object($parameters)) {
+            $parameters = http_build_query($parameters);
+        }
 
+        $mergedHeaders = array();
         foreach ($headers as $key => $val) {
             $mergedHeaders[] = "$key: $val";
         }
