@@ -68,7 +68,7 @@ class SpotifyWebAPI
             'Content-Type' => 'application/json'
         ));
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**
@@ -82,7 +82,7 @@ class SpotifyWebAPI
     {
         $response = Request::api('GET', '/v1/albums/' . $albumId);
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**
@@ -97,7 +97,7 @@ class SpotifyWebAPI
         $albumIds = implode(',', $albumIds);
         $response = Request::api('GET', '/v1/albums/', array('ids' => $albumIds));
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**
@@ -111,7 +111,7 @@ class SpotifyWebAPI
     {
         $response = Request::api('GET', '/v1/albums/' . $albumId . '/tracks');
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**
@@ -125,7 +125,7 @@ class SpotifyWebAPI
     {
         $response = Request::api('GET', '/v1/artists/' . $albumId);
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**
@@ -140,7 +140,7 @@ class SpotifyWebAPI
         $artistIds = implode(',', $artistIds);
         $response = Request::api('GET', '/v1/artists/', array('ids' => $artistIds));
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**
@@ -154,7 +154,7 @@ class SpotifyWebAPI
     {
         $response = Request::api('GET', '/v1/artists/' . $albumId . '/albums');
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**
@@ -169,7 +169,7 @@ class SpotifyWebAPI
     {
         $response = Request::api('GET', '/v1/artists/' . $albumId . '/top-tracks', array('country' =>  $country));
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**
@@ -183,7 +183,7 @@ class SpotifyWebAPI
     {
         $response = Request::api('GET', '/v1/tracks/' . $trackId);
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**
@@ -198,7 +198,7 @@ class SpotifyWebAPI
         $trackIds = implode(',', $trackIds);
         $response = Request::api('GET', '/v1/tracks/', array('ids' => $trackIds));
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**
@@ -212,7 +212,7 @@ class SpotifyWebAPI
     {
         $response = Request::api('GET', '/v1/users/' . $userId);
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**
@@ -228,7 +228,7 @@ class SpotifyWebAPI
             'Authorization' => 'Bearer ' . self::$accessToken
         ));
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**
@@ -272,7 +272,7 @@ class SpotifyWebAPI
             'Authorization' => 'Bearer ' . self::$accessToken
         ));
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**
@@ -295,7 +295,7 @@ class SpotifyWebAPI
             'type' => 'type'
         ));
 
-        return json_decode($response['body']);
+        return $response['body'];
     }
 
     /**

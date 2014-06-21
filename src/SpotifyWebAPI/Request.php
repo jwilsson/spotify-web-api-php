@@ -89,7 +89,7 @@ class Request
         $status = (int) substr($headers, 9, 3);
 
         return array(
-            'body' => $body,
+            'body' => json_decode($body),
             'headers' => $headers,
             'status' => $status
         );
