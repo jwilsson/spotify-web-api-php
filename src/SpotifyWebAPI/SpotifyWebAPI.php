@@ -23,16 +23,16 @@ class SpotifyWebAPI
             'position' => false
         );
 
-        $data = array_merge($defaults, (array) $options);
-        $data = array_filter($data, function ($value) {
+        $options = array_merge($defaults, (array) $options);
+        $options = array_filter($options, function ($value) {
             return $value !== false;
         });
 
-        $data = http_build_query($data);
+        $options = http_build_query($options);
         $tracks = json_encode($tracks);
 
         // We need to manually append data to the URI since it's a POST request
-        $response = Request::api('POST', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks?' . $data, $tracks, array(
+        $response = Request::api('POST', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks?' . $options, $tracks, array(
             'Authorization' => 'Bearer ' . self::$accessToken,
             'Content-Type' => 'application/json'
         ));
