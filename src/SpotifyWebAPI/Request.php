@@ -67,10 +67,7 @@ class Request
 
         if (strtoupper($method) == 'POST') {
             $options[CURLOPT_POST] = true;
-
-            if ($parameters) {
-                $options[CURLOPT_POSTFIELDS] = $parameters;
-            }
+            $options[CURLOPT_POSTFIELDS] = $parameters;
         } else {
             $url = rtrim($url, '/');
             $url .= '/?' . $parameters;
