@@ -72,7 +72,7 @@ class Request
                 $options[CURLOPT_POSTFIELDS] = $parameters;
             }
         } else {
-            rtrim($url, '/');
+            $url = rtrim($url, '/');
             $url .= '/?' . $parameters;
         }
 
