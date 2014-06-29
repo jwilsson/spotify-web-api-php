@@ -74,6 +74,14 @@ $albums = SpotifyWebAPI\SpotifyWebAPI::getAlbums(array('1oR3KrPIp4CbagPa3PhtPp',
 print_r($albums);
 ```
 
+Get all tracks from an album
+
+```php
+$tracks = SpotifyWebAPI\SpotifyWebAPI::getAlbumTracks('1oR3KrPIp4CbagPa3PhtPp');
+
+print_r($tracks);
+```
+
 Get an artist
 
 ```php
@@ -90,4 +98,108 @@ $artists = SpotifyWebAPI\SpotifyWebAPI::getArtists(array('6v8FB84lnmJs434UJf2Mrm
 print_r($artists);
 ```
 
-Browse through `src/spotifywebapi.php` for more methods.
+Get all albums by an artist
+
+```php
+$albums = SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums('6v8FB84lnmJs434UJf2Mrm');
+
+print_r($albums);
+```
+
+Get an artist's top tracks in a country
+
+```php
+$tracks = SpotifyWebAPI\SpotifyWebAPI::getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', 'se');
+
+print_r($tracks);
+```
+
+Get a track
+
+```php
+$track = SpotifyWebAPI\SpotifyWebAPI::getTrack('7EjyzZcbLxW7PaaLua9Ksb');
+
+print_r($track);
+```
+
+Get multiple tracks
+
+```php
+$tracks = SpotifyWebAPI\SpotifyWebAPI::getTracks(array('0eGsygTp906u18L0Oimnem', '1lDWb6b6ieDQ2xT7ewTC3G'));
+
+print_r($tracks);
+```
+
+Get a user
+
+```php
+$user = SpotifyWebAPI\SpotifyWebAPI::getUser('mcgurk');
+
+print_r($user);
+```
+
+Get a user's playlists
+
+```php
+$playlists = SpotifyWebAPI\SpotifyWebAPI::getUserPlaylists('mcgurk');
+
+print_r($playlists);
+```
+
+Get a specific playlist
+
+```php
+$playlists = SpotifyWebAPI\SpotifyWebAPI::getUserPlaylist('mcgurk', '606nLQuR41ZaA2vEZ4Ofb8');
+
+print_r($playlists);
+```
+
+Get all tracks in a user's playlist
+
+```php
+$tracks = SpotifyWebAPI\SpotifyWebAPI::getUserPlaylistTracks('mcgurk', '606nLQuR41ZaA2vEZ4Ofb8');
+
+print_r($tracks);
+```
+
+Get the currently authenticated user
+
+```php
+$user = SpotifyWebAPI\SpotifyWebAPI::me();
+
+print_r($user);
+```
+
+Search for an album
+
+```php
+$albums = SpotifyWebAPI\SpotifyWebAPI::search('blur', 'album');
+
+print_r($albums);
+```
+
+Search for an artist
+
+```php
+$artists = SpotifyWebAPI\SpotifyWebAPI::search('blur', 'artist');
+
+print_r($artists);
+```
+
+Search for a track
+
+```php
+$tracks = SpotifyWebAPI\SpotifyWebAPI::search('song 2', 'track');
+
+print_r($tracks);
+```
+
+Search with a limit
+
+```php
+$tracks = SpotifyWebAPI\SpotifyWebAPI::search('song 2', 'track', 5);
+
+print_r($tracks);
+```
+
+Browse through `src/spotifywebapi.php` and look at the tests for more methods and examples.
