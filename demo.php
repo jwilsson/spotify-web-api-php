@@ -4,9 +4,6 @@ ini_set('display_errors', 1);
 
 require 'vendor/autoload.php';
 
-print_r(SpotifyWebAPI\SpotifyWebAPI::me());
-die();
-
 $session = new SpotifyWebAPI\Session('', '', '');
 
 if (isset($_GET['code'])) {
