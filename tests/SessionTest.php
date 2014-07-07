@@ -15,7 +15,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $clientID = getenv('SPOTIFY_CLIENT_ID');
         $redirectUri = urlencode(getenv('SPOTIFY_REDIRECT_URI'));
 
-        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=&state=";
+        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=&show_dialog=false&state=";
         $url = $this->session->getAuthorizeUrl();
 
         $this->assertEquals($expected, $url);
@@ -28,7 +28,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $scope = array('user-read-email');
         $scopeOut = urlencode(implode(' ', $scope));
 
-        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&state=";
+        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&show_dialog=false&state=";
         $url = $this->session->getAuthorizeUrl(array(
             'scope' => $scope
         ));
@@ -43,9 +43,33 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $scope = array('user-read-email', 'playlist-modify');
         $scopeOut = urlencode(implode(' ', $scope));
 
-        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&state=";
+        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&show_dialog=false&state=";
         $url = $this->session->getAuthorizeUrl(array(
             'scope' => $scope
+        ));
+
+        $this->assertEquals($expected, $url);
+    }
+
+    public function testGetAuthorizeUrlDefaultShowDialog()
+    {
+        $clientID = getenv('SPOTIFY_CLIENT_ID');
+        $redirectUri = urlencode(getenv('SPOTIFY_REDIRECT_URI'));
+
+        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=&show_dialog=false&state=";
+        $url = $this->session->getAuthorizeUrl();
+
+        $this->assertEquals($expected, $url);
+    }
+
+    public function testGetAuthorizeUrlShowDialog()
+    {
+        $clientID = getenv('SPOTIFY_CLIENT_ID');
+        $redirectUri = urlencode(getenv('SPOTIFY_REDIRECT_URI'));
+
+        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=&show_dialog=true&state=";
+        $url = $this->session->getAuthorizeUrl(array(
+            'show_dialog' => true
         ));
 
         $this->assertEquals($expected, $url);
@@ -57,7 +81,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $redirectUri = urlencode(getenv('SPOTIFY_REDIRECT_URI'));
         $state = 'foobar';
 
-        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=&state=$state";
+        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=&show_dialog=false&state=$state";
         $url = $this->session->getAuthorizeUrl(array(
             'state' => $state
         ));
@@ -73,9 +97,27 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $scopeOut = urlencode(implode(' ', $scope));
         $state = 'foobar';
 
-        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&state=$state";
+        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&show_dialog=false&state=$state";
         $url = $this->session->getAuthorizeUrl(array(
             'scope' => $scope,
+            'state' => $state
+        ));
+
+        $this->assertEquals($expected, $url);
+    }
+
+    public function testGetAuthorizeUrlOptions()
+    {
+        $clientID = getenv('SPOTIFY_CLIENT_ID');
+        $redirectUri = urlencode(getenv('SPOTIFY_REDIRECT_URI'));
+        $scope = array('user-read-email');
+        $scopeOut = urlencode(implode(' ', $scope));
+        $state = 'foobar';
+
+        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&show_dialog=true&state=$state";
+        $url = $this->session->getAuthorizeUrl(array(
+            'scope' => $scope,
+            'show_dialog' => true,
             'state' => $state
         ));
 
@@ -90,7 +132,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $scopeOut = urlencode(implode(' ', $scope));
         $state = 'foobar';
 
-        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&state=$state";
+        $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&show_dialog=false&state=$state";
         $url = $this->session->getAuthorizeUrl(array(
             'scope' => $scope,
             'state' => $state

@@ -32,6 +32,7 @@ class Session
      *
      * @param array|object $options Optional. Options for the authorization URL.
      * - array scope Optional. Scope(s) to request from the user.
+     * - boolean show_dialog Optional. Whether or not to force the user to always approve the app. Default is false.
      * - string state Optional. A CSRF token.
      *
      * @return string
@@ -40,6 +41,7 @@ class Session
     {
         $defaults = array(
             'scope' => array(),
+            'show_dialog' => false,
             'state' => ''
         );
 
@@ -49,6 +51,7 @@ class Session
             'redirect_uri' => $this->getRedirectUri(),
             'response_type' => 'code',
             'scope' => implode(' ', $options['scope']),
+            'show_dialog' => $options['show_dialog'] ? 'true' : 'false',
             'state' => $options['state']
         );
 
