@@ -244,6 +244,8 @@ class SpotifyWebAPI
         $response = Request::api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId, array(), array(
             'Authorization' => 'Bearer ' . self::$accessToken
         ));
+        
+        return $response['body'];
     }
 
     /**
@@ -259,6 +261,8 @@ class SpotifyWebAPI
         $response = Request::api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', array(), array(
             'Authorization' => 'Bearer ' . self::$accessToken
         ));
+        
+        return $response['body'];
     }
 
     /**
