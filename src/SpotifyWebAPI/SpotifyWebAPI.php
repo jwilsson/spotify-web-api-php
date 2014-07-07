@@ -269,7 +269,7 @@ class SpotifyWebAPI
     public static function me()
     {
         $response = Request::api('GET', '/v1/me', array(), array(
-            'Authorization' => 'Bearer ' . self::$accessToken
+            'Authorization' => 'Bearer test' // 'Bearer ' . self::$accessToken
         ));
 
         return $response['body'];

@@ -29,7 +29,9 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $scopeOut = urlencode(implode(' ', $scope));
 
         $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&state=";
-        $url = $this->session->getAuthorizeUrl($scope);
+        $url = $this->session->getAuthorizeUrl(array(
+            'scope' => $scope
+        ));
 
         $this->assertEquals($expected, $url);
     }
@@ -42,7 +44,9 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $scopeOut = urlencode(implode(' ', $scope));
 
         $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&state=";
-        $url = $this->session->getAuthorizeUrl($scope);
+        $url = $this->session->getAuthorizeUrl(array(
+            'scope' => $scope
+        ));
 
         $this->assertEquals($expected, $url);
     }
@@ -54,7 +58,9 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $state = 'foobar';
 
         $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=&state=$state";
-        $url = $this->session->getAuthorizeUrl(array(), $state);
+        $url = $this->session->getAuthorizeUrl(array(
+            'state' => $state
+        ));
 
         $this->assertEquals($expected, $url);
     }
@@ -68,7 +74,10 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $state = 'foobar';
 
         $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&state=$state";
-        $url = $this->session->getAuthorizeUrl($scope, $state);
+        $url = $this->session->getAuthorizeUrl(array(
+            'scope' => $scope,
+            'state' => $state
+        ));
 
         $this->assertEquals($expected, $url);
     }
@@ -82,7 +91,10 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $state = 'foobar';
 
         $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&state=$state";
-        $url = $this->session->getAuthorizeUrl($scope, $state);
+        $url = $this->session->getAuthorizeUrl(array(
+            'scope' => $scope,
+            'state' => $state
+        ));
 
         $this->assertEquals($expected, $url);
     }

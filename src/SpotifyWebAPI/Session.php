@@ -30,20 +30,26 @@ class Session
     /**
      * Get the authorization URL.
      *
-     * @param array $scope Optional. Scope(s) to request from the user.
-     * @param string $state Optional. A CSRF token.
+     * @param array|object $options Optional. Options for the authorization URL.
+     * - array scope Optional. Scope(s) to request from the user.
+     * - string state Optional. A CSRF token.
      *
      * @return string
      */
-    public function getAuthorizeUrl($scope = array(), $state = '')
+    public function getAuthorizeUrl($options = array())
     {
-        $scope = implode(' ', $scope);
+        $defaults = array(
+            'scope' => array(),
+            'state' => ''
+        );
+
+        $options = array_merge($defaults, (array) $options);
         $parameters = array(
             'client_id' => $this->getClientId(),
             'redirect_uri' => $this->getRedirectUri(),
             'response_type' => 'code',
-            'scope' => $scope,
-            'state' => $state
+            'scope' => implode(' ', $options['scope']),
+            'state' => $options['state']
         );
 
         return Request::ACCOUNT_URL . '/authorize/?' . http_build_query($parameters);
