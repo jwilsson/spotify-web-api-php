@@ -40,7 +40,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
     {
         $clientID = getenv('SPOTIFY_CLIENT_ID');
         $redirectUri = urlencode(getenv('SPOTIFY_REDIRECT_URI'));
-        $scope = array('user-read-email', 'playlist-modify');
+        $scope = array('user-read-email', 'playlist-modify-public');
         $scopeOut = urlencode(implode(' ', $scope));
 
         $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&show_dialog=false&state=";
@@ -128,7 +128,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
     {
         $clientID = getenv('SPOTIFY_CLIENT_ID');
         $redirectUri = urlencode(getenv('SPOTIFY_REDIRECT_URI'));
-        $scope = array('user-read-email', 'playlist-modify');
+        $scope = array('user-read-email', 'playlist-modify-public');
         $scopeOut = urlencode(implode(' ', $scope));
         $state = 'foobar';
 
