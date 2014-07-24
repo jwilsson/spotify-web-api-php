@@ -46,6 +46,15 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('error', $response);
     }
 
+    public function testGetAlbumTracksLimit()
+    {
+        $response = SpotifyWebAPI\SpotifyWebAPI::getAlbumTracks('1oR3KrPIp4CbagPa3PhtPp', array(
+            'limit' => 5
+        ));
+
+        $this->assertCount(5, $response->items);
+    }
+
     public function testGetArtist()
     {
         $response = SpotifyWebAPI\SpotifyWebAPI::getArtist('36QJpDe2go2KgaRleHCDTp');
