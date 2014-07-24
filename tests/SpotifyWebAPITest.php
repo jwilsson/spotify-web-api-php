@@ -150,21 +150,21 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $response = SpotifyWebAPI\SpotifyWebAPI::search('blur', 'album');
 
-        $this->assertObjectHasAttribute('albums', $response);
+        $this->assertNotEmpty($response->albums->items);
     }
 
     public function testSearchArtist()
     {
         $response = SpotifyWebAPI\SpotifyWebAPI::search('blur', 'artist');
 
-        $this->assertObjectHasAttribute('artists', $response);
+        $this->assertNotEmpty($response->artists->items);
     }
 
     public function testSearchTrack()
     {
         $response = SpotifyWebAPI\SpotifyWebAPI::search('song 2', 'track');
 
-        $this->assertObjectHasAttribute('tracks', $response);
+        $this->assertNotEmpty($response->tracks->items);
     }
 
     public function testSearchNonExistent()
