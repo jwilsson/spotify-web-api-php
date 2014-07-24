@@ -104,7 +104,7 @@ class SpotifyWebAPI
      * Get a album's tracks.
      *
      * @param string $albumId ID of the album.
-     * @param array|object $options Optional. Options for the .
+     * @param array|object $options Optional. Options for the tracks.
      * - int limit Optional. Limit the number of tracks. Default is 20.
      * - int offset Optional. Number of tracks to skip. Default is 0.
      *
@@ -156,12 +156,21 @@ class SpotifyWebAPI
      * Get a artist's albums.
      *
      * @param string $artistId ID of the artist.
+     * @param array|object $options Optional. Options for the albums.
+     * - int limit Optional. Limit the number of albums. Default is 20.
+     * - int offset Optional. Number of albums to skip. Default is 0.
      *
      * @return object
      */
-    public static function getArtistAlbums($artistId)
+    public static function getArtistAlbums($artistId, $options = array())
     {
-        $response = Request::api('GET', '/v1/artists/' . $artistId . '/albums');
+        $defaults = array(
+            'limit' => 20,
+            'offset' => 0
+        );
+
+        $options = array_merge($defaults, (array) $options);
+        $response = Request::api('GET', '/v1/artists/' . $artistId . '/albums', $options);
 
         return $response['body'];
     }
