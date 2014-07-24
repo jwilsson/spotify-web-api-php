@@ -138,6 +138,20 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get an artist's related artists.
+     *
+     * @param string $artistId ID of the artist.
+     *
+     * @return object
+     */
+    public static function getArtistRelatedArtists($artistId)
+    {
+        $response = Request::api('GET', '/v1/artists/' . $artistId . '/related-artists');
+
+        return $response['body'];
+    }
+
+    /**
      * Get multiple artists.
      *
      * @param array $artistIds ID of the artists.

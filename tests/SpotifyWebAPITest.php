@@ -69,6 +69,20 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('error', $response);
     }
 
+    public function testGetArtistRelatedArtists()
+    {
+        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistRelatedArtists('36QJpDe2go2KgaRleHCDTp');
+
+        $this->assertNotEmpty($response->artists);
+    }
+
+    public function testGetArtistRelatedArtistsNonExistent()
+    {
+        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistRelatedArtists('nonexistent');
+
+        $this->assertObjectHasAttribute('error', $response);
+    }
+
     public function testGetArtists()
     {
         $response = SpotifyWebAPI\SpotifyWebAPI::getArtists(array('6v8FB84lnmJs434UJf2Mrm', '6olE6TJLqED3rqDCT0FyPh'));
