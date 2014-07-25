@@ -321,7 +321,6 @@ class SpotifyWebAPI
      */
     public static function search($query, $type, $limit = 20, $offset = 0)
     {
-        $query = rawurlencode($query);
         $type = implode(',', (array) $type);
 
         $response = Request::api('GET', '/v1/search', array(
