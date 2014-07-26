@@ -9,7 +9,7 @@ This is a PHP implementation of the Spotify Web API. It includes the following:
 * Get information about users.
 * Manage playlists for users.
 * Authorization flow helpers.
-* PSR-0 autoloading support.
+* PSR-4 autoloading support.
 
 ## Requirements
 PHP 5.3 or greater.

@@ -18,8 +18,8 @@
         "phpunit/phpunit": "~4.1"
     },
     "autoload": {
-        "psr-0": {
-            "SpotifyWebAPI": "src/"
+        "psr-4": {
+            "SpotifyWebAPI\\": "src/"
         }
     }
 }
