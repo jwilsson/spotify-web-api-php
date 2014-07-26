@@ -90,6 +90,14 @@ $artist = SpotifyWebAPI\SpotifyWebAPI::getArtist('36QJpDe2go2KgaRleHCDTp');
 print_r($artist);
 ```
 
+Get an artist's related artists
+
+```php
+$artists = SpotifyWebAPI\SpotifyWebAPI::getArtistRelatedArtists('36QJpDe2go2KgaRleHCDTp');
+
+print_r($artists);
+```
+
 Get multiple artists
 
 ```php
