@@ -1,6 +1,9 @@
 # Spotify Web API PHP
 
 [![Build Status](https://travis-ci.org/jwilsson/spotify-web-api-php.svg?branch=master)](https://travis-ci.org/jwilsson/spotify-web-api-php)
+[![Latest Stable Version](https://poser.pugx.org/jwilsson/spotify-web-api-php/v/stable.svg)](https://packagist.org/packages/jwilsson/spotify-web-api-php)
+[![Latest Unstable Version](https://poser.pugx.org/jwilsson/spotify-web-api-php/v/unstable.svg)](https://packagist.org/packages/jwilsson/spotify-web-api-php)
+[![License](https://poser.pugx.org/jwilsson/spotify-web-api-php/license.svg)](https://packagist.org/packages/jwilsson/spotify-web-api-php)
 
 This is a PHP implementation of the Spotify Web API. It includes the following:
 
