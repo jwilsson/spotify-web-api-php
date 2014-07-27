@@ -18,7 +18,7 @@ This is a PHP implementation of the Spotify Web API. It includes the following:
 PHP 5.3 or greater.
 
 ## Installation
-1. If you're already using [Composer](https://getcomposer.org/) then you'll just need to include `SpotifyWebAPI` as a dependency. Otherwise, download the library and include the files.
+1. If you're already using [Composer](https://getcomposer.org/) then you'll just need to include `jwilsson/spotify-web-api-php` as a dependency. Otherwise, download the library and include the files.
 2. Create a new app at https://developer.spotify.com/
 3. Enter your app credentials.
 4. Call the API!
