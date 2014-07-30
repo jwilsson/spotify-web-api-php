@@ -6,6 +6,27 @@ class SpotifyWebAPI
     private static $accessToken = '';
 
     /**
+     * Add track(s) to the current uer's library.
+     * Requires a valid access token.
+     *
+     * @param string|array IDs of the track(s) to check for.
+     *
+     * @return bool
+     */
+    public static function addMyTracks($tracks)
+    {
+        $tracks = (array) $tracks;
+        $tracks = json_encode($tracks);
+
+        $response = Request::api('PUT', '/v1/me/tracks', $tracks, array(
+            'Authorization' => 'Bearer ' . self::$accessToken,
+            'Content-Type' => 'application/json'
+        ));
+
+        return $response['status'] == 200;
+    }
+
+    /**
      * Add track(s) to a user's playlist.
      * Requires a valid access token.
      *
@@ -15,7 +36,7 @@ class SpotifyWebAPI
      * @param array|object $options Optional. Options for the new tracks.
      * - int position Optional. Zero-based position of where in the playlist to add the tracks. Tracks will be appened if omitted or false.
      *
-     * @return bool|object
+     * @return bool
      */
     public static function addUserPlaylistTracks($userId, $playlistId, $tracks, $options = array())
     {
@@ -37,11 +58,7 @@ class SpotifyWebAPI
             'Content-Type' => 'application/json'
         ));
 
-        if ($response['status'] == 201) {
-            return true;
-        }
-
-        return $response['body'];
+        return $response['status'] == 201;
     }
 
     /**
