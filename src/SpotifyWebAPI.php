@@ -206,6 +206,7 @@ class SpotifyWebAPI
 
     /**
      * Get the current user’s saved tracks.
+     * Requires a valid access token.
      *
      * @param array|object $options Optional. Options for the tracks.
      * - int limit Optional. Limit the number of tracks. Default is 20.
@@ -273,6 +274,7 @@ class SpotifyWebAPI
 
     /**
      * Get a user's playlists.
+     * Requires a valid access token.
      *
      * @param string $userId ID of the user.
      *
@@ -289,6 +291,7 @@ class SpotifyWebAPI
 
     /**
      * Get a user's specific playlist.
+     * Requires a valid access token.
      *
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
@@ -306,6 +309,7 @@ class SpotifyWebAPI
 
     /**
      * Get the tracks in a user's playlist.
+     * Requires a valid access token.
      *
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
@@ -323,6 +327,7 @@ class SpotifyWebAPI
 
     /**
      * Get the currently authenticated user.
+     * Requires a valid access token.
      *
      * @return object
      */
@@ -337,6 +342,7 @@ class SpotifyWebAPI
 
     /**
      * Check if the track(s) is saved in the current user's Spotify library.
+     * Requires a valid access token.
      *
      * @param string|array IDs of the track(s) to check for.
      *
@@ -377,7 +383,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Set the access token to use
+     * Set the access token to use.
      *
      * @param string $accessToken The access token.
      *
