@@ -65,12 +65,27 @@ class Request
             CURLOPT_RETURNTRANSFER => true
         );
 
-        if (strtoupper($method) == 'POST') {
-            $options[CURLOPT_POST] = true;
-            $options[CURLOPT_POSTFIELDS] = $parameters;
-        } else {
-            $url = rtrim($url, '/');
-            $url .= '/?' . $parameters;
+        $method = strtoupper($method);
+        switch ($method) {
+            case 'POST':
+                $options[CURLOPT_POST] = true;
+                $options[CURLOPT_POSTFIELDS] = $parameters;
+
+                break;
+            case 'PUT':
+                $options[CURLOPT_CUSTOMREQUEST] = 'PUT';
+                $options[CURLOPT_POSTFIELDS] = $parameters;
+
+                break;
+            default:
+                $options[CURLOPT_CUSTOMREQUEST] = $method;
+
+                if ($method == 'GET') {
+                    $url = rtrim($url, '/');
+                    $url .= '/?' . $parameters;
+                }
+
+                break;
         }
 
         $options[CURLOPT_URL] = $url;
