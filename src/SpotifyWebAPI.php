@@ -6,7 +6,7 @@ class SpotifyWebAPI
     private static $accessToken = '';
 
     /**
-     * Add track(s) to the current uer's library.
+     * Add track(s) to the current user's Spotify library.
      * Requires a valid access token.
      *
      * @param string|array IDs of the track(s) to check for.
@@ -86,6 +86,26 @@ class SpotifyWebAPI
         ));
 
         return $response['body'];
+    }
+
+    /**
+     * Delete track(s) from current user's Spotify library.
+     * Requires a valid access token.
+     *
+     * @param string|array IDs of the track(s) to delete.
+     *
+     * @return bool
+     */
+    public static function deleteMyTracks($tracks)
+    {
+        $tracks = (array) $tracks;
+        $tracks = implode(',', $tracks);
+
+        $response = Request::api('DELETE', '/v1/me/tracks', array('ids' => $tracks), array(
+            'Authorization' => 'Bearer ' . self::$accessToken
+        ));
+
+        return $response['status'] == 200;
     }
 
     /**
