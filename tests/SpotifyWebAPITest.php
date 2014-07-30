@@ -208,7 +208,9 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testSearchLimit()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::search('blur', 'artist', 5);
+        $response = SpotifyWebAPI\SpotifyWebAPI::search('blur', 'artist', array(
+            'limit' => 5
+        ));
 
         $this->assertCount(5, $response->artists->items);
     }
