@@ -80,10 +80,8 @@ class Request
             default:
                 $options[CURLOPT_CUSTOMREQUEST] = $method;
 
-                if ($method == 'GET') {
-                    $url = rtrim($url, '/');
-                    $url .= '/?' . $parameters;
-                }
+                $url = rtrim($url, '/');
+                $url .= '/?' . $parameters;
 
                 break;
         }
