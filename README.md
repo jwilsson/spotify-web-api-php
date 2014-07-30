@@ -9,7 +9,7 @@ This is a PHP implementation of the Spotify Web API. It includes the following:
 
 * Helper methods for all API methods (Information about artists, albums and tracks).
 * Search the Spotify catalog.
-* Get information about users.
+* Get information about users and their music library.
 * Manage playlists for users.
 * Authorization flow helpers.
 * PSR-4 autoloading support.
