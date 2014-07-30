@@ -13,5 +13,7 @@ if (isset($_GET['code'])) {
 
     print_r(SpotifyWebAPI\SpotifyWebAPI::me());
 } else {
-    header('Location: ' . $session->getAuthorizeUrl(array('user-read-email')));
+    header('Location: ' . $session->getAuthorizeUrl(array(
+        'scope' => array('user-read-email')
+    )));
 }
