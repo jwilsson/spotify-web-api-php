@@ -205,7 +205,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get the current user’s saved tracks
+     * Get the current user’s saved tracks.
      *
      * @param array|object $options Optional. Options for the tracks.
      * - int limit Optional. Limit the number of tracks. Default is 20.
@@ -213,7 +213,8 @@ class SpotifyWebAPI
      *
      * @return array
      */
-    public static function getMySavedTracks($options = array()) {
+    public static function getMySavedTracks($options = array())
+    {
         $defaults = array(
             'limit' => 20,
             'offset' => 0
@@ -328,6 +329,25 @@ class SpotifyWebAPI
     public static function me()
     {
         $response = Request::api('GET', '/v1/me', array(), array(
+            'Authorization' => 'Bearer ' . self::$accessToken
+        ));
+
+        return $response['body'];
+    }
+
+    /**
+     * Check if the track(s) is saved in the current user's Spotify library.
+     *
+     * @param string|array IDs of the track(s) to check for.
+     *
+     * @return array
+     */
+    public static function myTracksContains($tracks)
+    {
+        $tracks = (array) $tracks;
+        $tracks = implode(',', $tracks);
+
+        $response = Request::api('GET', '/v1/me/tracks/contains', array('ids' => $tracks), array(
             'Authorization' => 'Bearer ' . self::$accessToken
         ));
 
