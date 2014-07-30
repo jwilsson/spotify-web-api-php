@@ -205,6 +205,29 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the current user’s saved tracks
+     *
+     * @param array|object $options Optional. Options for the tracks.
+     * - int limit Optional. Limit the number of tracks. Default is 20.
+     * - int offset Optional. Number of tracks to skip. Default is 0.
+     *
+     * @return array
+     */
+    public static function getMySavedTracks($options = array()) {
+        $defaults = array(
+            'limit' => 20,
+            'offset' => 0
+        );
+
+        $options = array_merge($defaults, (array) $options);
+        $response = Request::api('GET', '/v1/me/tracks', $options, array(
+            'Authorization' => 'Bearer ' . self::$accessToken
+        ));
+
+        return $response['body'];
+    }
+
+    /**
      * Get a track.
      *
      * @param string $trackId ID of the track.
