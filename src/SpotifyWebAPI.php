@@ -430,4 +430,25 @@ class SpotifyWebAPI
     {
         self::$accessToken = $accessToken;
     }
+
+    /**
+     * Update the details of a user's playlist.
+     * Requires a valid access token.
+     *
+     * @param array|object $data Data for the new playlist.
+     * - name string Required Name of the playlist
+     * - public bool Optional. Whether the playlist should be public or not. Default is true.
+     *
+     * @return bool
+     */
+    public static function updateUserPlaylist($userId, $playlistId, $data)
+    {
+        $data = json_encode($data);
+        $response = Request::api('PUT', '/v1/users/' . $userId . '/playlists/' . $playlistId, $data, array(
+            'Authorization' => 'Bearer ' . self::$accessToken,
+            'Content-Type' => 'application/json'
+        ));
+
+        return $response['status'] == 200;
+    }
 }
