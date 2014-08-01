@@ -14,9 +14,9 @@ class Session
      * Constructor
      * Set up client credentials.
      *
-     * @param string $clientId
-     * @param string $clientSecret
-     * @param string $redirectUri
+     * @param string $clientId The client ID.
+     * @param string $clientSecret The client secret
+     * @param string $redirectUri The redirect URI.
      *
      * @return void
      */
@@ -164,6 +164,8 @@ class Session
     /**
      * Set the client ID.
      *
+     * @param string $clientId The client ID.
+     *
      * @return void
      */
     public function setClientId($clientId)
@@ -174,6 +176,8 @@ class Session
     /**
      * Set the client secret.
      *
+     * @param string $clientSecret The client secret.
+     *
      * @return void
      */
     public function setClientSecret($clientSecret)
@@ -183,6 +187,8 @@ class Session
 
     /**
      * Set the client's redirect URI.
+     *
+     * @param string $redirectUri The redirect URI.
      *
      * @return void
      */

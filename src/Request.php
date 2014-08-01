@@ -41,7 +41,7 @@ class Request
      * You'll probably want to use one of the convenience methods instead.
      *
      * @param string $method The HTTP method to use.
-     * @param string $uri The URL to request.
+     * @param string $url The URL to request.
      * @param array $parameters Optional. Query parameters.
      * @param array $headers Optional. HTTP headers.
      *
