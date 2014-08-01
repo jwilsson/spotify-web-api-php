@@ -122,7 +122,6 @@ class Session
         if (isset($response->access_token)) {
             $this->accessToken = $response->access_token;
             $this->expires = $response->expires_in;
-            //$this->refreshToken = $response->refresh_token; // @todo Doesn't seem like Spotify is supplying a new refresh token
 
             return true;
         }
