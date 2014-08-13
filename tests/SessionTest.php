@@ -164,4 +164,20 @@ class SessionTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $redirectUri);
     }
+
+    public function testRequestCredentialsToken()
+    {
+        $this->session = new SpotifyWebAPI\Session(getenv('SPOTIFY_CLIENT_ID'), getenv('SPOTIFY_CLIENT_SECRET'), getenv('SPOTIFY_REDIRECT_URI'));
+        $this->session->requestCredentialsToken();
+
+        $this->assertNotEmpty($this->session->getAccessToken());
+    }
+
+    public function testRequestCredentialsTokenScope()
+    {
+        $this->session = new SpotifyWebAPI\Session(getenv('SPOTIFY_CLIENT_ID'), getenv('SPOTIFY_CLIENT_SECRET'), getenv('SPOTIFY_REDIRECT_URI'));
+        $this->session->requestCredentialsToken(array('user-read-email'));
+
+        $this->assertNotEmpty($this->session->getAccessToken());
+    }
 }
