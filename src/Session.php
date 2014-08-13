@@ -130,6 +130,39 @@ class Session
     }
 
     /**
+     * Request a access token using the Client Credentials Flow.
+     *
+     * @param array $scope Optional. Scope(s) to request from the user.
+     *
+     * @return string
+     */
+    public function requestCredentialsToken($scope = array())
+    {
+        $payload = base64_encode($this->getClientId() . ':' . $this->getClientSecret());
+
+        $parameters = array(
+            'grant_type' => 'client_credentials',
+            'scope' => implode(' ', $scope)
+        );
+
+        $headers = array(
+            'Authorization' => 'Basic ' . $payload
+        );
+
+        $response = Request::account('POST', '/api/token', $parameters, $headers);
+        $response = $response['body'];
+
+        if (isset($response->access_token)) {
+            $this->accessToken = $response->access_token;
+            $this->expires = $response->expires_in;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Request a access token.
      *
      * @param string $code The authorization code from Spotify.
