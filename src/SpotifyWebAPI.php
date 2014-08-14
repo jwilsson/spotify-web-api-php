@@ -381,7 +381,7 @@ class SpotifyWebAPI
      * Check if the track(s) is saved in the current user's Spotify library.
      * Requires a valid access token.
      *
-     * @param string|array IDs of the track(s) to check for.
+     * @param string|array $tracks IDs of the track(s) to check for.
      *
      * @return array
      */
@@ -395,6 +395,28 @@ class SpotifyWebAPI
         ));
 
         return $response['body'];
+    }
+
+    /**
+     * Replace all tracks in a user's playlist, overwriting the existing tracks.
+     * Requires a valid access token.
+     *
+     * @param string $userId ID of the user.
+     * @param string $playlistId ID of the playlist.
+     * @param string|array $tracks IDs of the track(s) add.
+     *
+     * @return bool
+     */
+    public static function replacePlaylistTracks($userID, $playlistId, $tracks)
+    {
+        $tracks = (array) $tracks;
+        $tracks = implode(',', $tracks);
+
+        $response = Request::api('PUT', 'v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', array('uris' => $tracks), array(
+            'Authorization' => 'Bearer ' . self::$accessToken
+        ));
+
+        return $response['status'] == 201;
     }
 
     /**
