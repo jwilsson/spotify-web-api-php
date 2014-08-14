@@ -9,7 +9,7 @@ class SpotifyWebAPI
      * Add track(s) to the current user's Spotify library.
      * Requires a valid access token.
      *
-     * @param string|array IDs of the track(s) to check for.
+     * @param string|array IDs of the track to check for.
      *
      * @return bool
      */
@@ -32,7 +32,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to add tracks to.
-     * @param array $tracks Spotify URIs for the tracks to add.
+     * @param array $tracks Spotify URIs for the track to add.
      * @param array|object $options Optional. Options for the new tracks.
      * - int position Optional. Zero-based position of where in the playlist to add the tracks. Tracks will be appened if omitted or false.
      *
@@ -92,7 +92,7 @@ class SpotifyWebAPI
      * Delete track(s) from current user's Spotify library.
      * Requires a valid access token.
      *
-     * @param string|array IDs of the track(s) to delete.
+     * @param string|array IDs of the track to delete.
      *
      * @return bool
      */
@@ -381,7 +381,7 @@ class SpotifyWebAPI
      * Check if the track(s) is saved in the current user's Spotify library.
      * Requires a valid access token.
      *
-     * @param string|array $tracks IDs of the track(s) to check for.
+     * @param string|array $tracks IDs of the track to check for.
      *
      * @return array
      */
@@ -398,12 +398,12 @@ class SpotifyWebAPI
     }
 
     /**
-     * Replace all tracks in a user's playlist, overwriting the existing tracks.
+     * Replace all tracks in a user's playlist with new ones.
      * Requires a valid access token.
      *
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
-     * @param string|array $tracks IDs of the track(s) add.
+     * @param string|array $tracks IDs of the track(s) to add.
      *
      * @return bool
      */
