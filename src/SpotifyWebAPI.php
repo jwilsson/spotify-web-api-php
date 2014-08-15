@@ -67,7 +67,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user to create the playlist for.
      * @param array|object $data Data for the new playlist.
-     * - name string Required Name of the playlist
+     * - name string Required. Name of the playlist
      * - public bool Optional. Whether the playlist should be public or not. Default is true.
      *
      * @return object
@@ -100,8 +100,9 @@ class SpotifyWebAPI
     {
         $tracks = (array) $tracks;
         $tracks = implode(',', $tracks);
+        $tracks = urlencode($tracks);
 
-        $response = Request::api('DELETE', '/v1/me/tracks', array('ids' => $tracks), array(
+        $response = Request::api('DELETE', '/v1/me/tracks?ids=' . $tracks, array(), array(
             'Authorization' => 'Bearer ' . self::$accessToken
         ));
 
@@ -465,7 +466,7 @@ class SpotifyWebAPI
      * Requires a valid access token.
      *
      * @param array|object $data Data for the new playlist.
-     * - name string Required Name of the playlist
+     * - name string Required. Name of the playlist
      * - public bool Optional. Whether the playlist should be public or not. Default is true.
      *
      * @return bool
