@@ -110,6 +110,41 @@ class SpotifyWebAPI
     }
 
     /**
+     * Delete tracks from a playlist and retrieve a new snapshot ID.
+     * Requires a valid access token.
+     *
+     * @param string $userId ID of the user who owns the playlist.
+     * @param string $playlistId ID of the playlist to delete tracks from.
+     * @param array $tracks Tracks to delete and optional position in the playlist where the track is located.
+     * - uri string Required. Spotify track URI.
+     * - position array Optional. Position of the track in the playlist.
+     * @param string $snapshotId Optional. The playlist's snapshot ID.
+     *
+     * @return string|bool
+     */
+    public static function deletePlaylistTrack($userId, $playlistId, $tracks, $snapshotId = '')
+    {
+        $data = array();
+        if ($snapshotId) {
+            $data['snapshot_id'] = $snapshotId;
+        }
+
+        $data['tracks'] = $tracks;
+        $data = json_encode($data);
+
+        $response = Request::api('DELETE', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', $data, array(
+            'Authorization' => 'Bearer ' . self::$accessToken
+        ));
+        $response = $response['body'];
+
+        if (isset($response->snapshot_id)) {
+            return $response->snapshot_id;
+        }
+
+        return false;
+    }
+
+    /**
      * Get a album.
      *
      * @param string $albumId ID of the album.
