@@ -1,4 +1,15 @@
 # Changelog
+## 0.3
+* Added new methods to
+    * Get Current User’s Saved Tracks
+    * Check Current User’s Saved Tracks
+    * Save Tracks for Current User
+    * Remove Tracks for Current User
+    * Change a Playlist’s Details
+    * Remove Tracks from a Playlist
+    * Replace a Playlist’s Tracks
+* Added support for the Client Credentials Authorization Flow.
+* Added support for more HTTP methods in Request::send().
 
 ## 0.2
 * Added Artist’s Related Artists endpoint.
