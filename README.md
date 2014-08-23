@@ -28,6 +28,8 @@ Depending on the API methods you're planning on using you can choose between aut
 
 ### Authenticating a user
 
+#### Using Authorization Code Flow
+
 ```php
 require 'vendor/autoload.php';
 
@@ -51,6 +53,22 @@ $accessToken = $session->getAccessToken(); // We're good to go!
 // Set the code on the API wrapper
 SpotifyWebAPI\SpotifyWebAPI::setAccessToken($accessToken);
 ```
+
+#### Using Client Credentials Flow
+```php
+require 'vendor/autoload.php';
+
+$session = new SpotifyWebAPI\Session('CLIENT_ID', 'CLIENT_SECRET', 'REDIRECT_URI');
+
+// Request a access token specifying optional scopes
+$session->requestCredentialsToken(array('scope-1', 'scope-2'));
+$accessToken = $session->getAccessToken(); // We're good to go!
+
+// Set the code on the API wrapper
+SpotifyWebAPI\SpotifyWebAPI::setAccessToken($accessToken);
+```
+
+
 ### Making API calls
 
 ```php
