@@ -60,7 +60,7 @@ require 'vendor/autoload.php';
 
 $session = new SpotifyWebAPI\Session('CLIENT_ID', 'CLIENT_SECRET', 'REDIRECT_URI');
 
-// Request a access token specifying optional scopes
+// Request a access token with optional scopes
 $session->requestCredentialsToken(array('scope-1', 'scope-2'));
 $accessToken = $session->getAccessToken(); // We're good to go!
 
