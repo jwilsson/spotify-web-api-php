@@ -6,6 +6,28 @@ class SpotifyWebAPI
     private static $accessToken = '';
 
     /**
+     * Convert Spotify object IDs to Spotify URIs
+     *
+     * @param array|string $ids ID(s) to convert
+     *
+     * @return array|string
+     */
+    protected static function idToUri($ids)
+    {
+        $ids = (array) $ids;
+
+        for ($i = 0; $i < count($ids); $i++) {
+            if (strpos($ids[$i], 'spotify:track:') !== false) {
+                continue;
+            }
+
+            $ids[$i] = 'spotify:track:' . $ids[$i];
+        }
+
+        return (count($ids) == 1) ? $ids[0] : $ids;
+    }
+
+    /**
      * Add track(s) to the current user's Spotify library.
      * Requires a valid access token.
      *
@@ -32,7 +54,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to add tracks to.
-     * @param array $tracks Spotify URIs for the track to add.
+     * @param array $tracks Spotify IDs of the tracks to add.
      * @param array|object $options Optional. Options for the new tracks.
      * - int position Optional. Zero-based position of where in the playlist to add the tracks. Tracks will be appened if omitted or false.
      *
@@ -50,6 +72,7 @@ class SpotifyWebAPI
         });
 
         $options = http_build_query($options);
+        $tracks = self::idToUri($tracks);
         $tracks = json_encode($tracks);
 
         // We need to manually append data to the URI since it's a POST request
@@ -116,7 +139,7 @@ class SpotifyWebAPI
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to delete tracks from.
      * @param array $tracks Tracks to delete and optional position in the playlist where the track is located.
-     * - uri string Required. Spotify track URI.
+     * - id string Required. Spotify track ID.
      * - position array Optional. Position of the track in the playlist.
      * @param string $snapshotId Optional. The playlist's snapshot ID.
      *
@@ -127,6 +150,11 @@ class SpotifyWebAPI
         $data = array();
         if ($snapshotId) {
             $data['snapshot_id'] = $snapshotId;
+        }
+
+        for ($i = 0; $i < count($tracks); $i++) {
+            $tracks[$i] = (array) $tracks[$i];
+            $tracks[$i]['uri'] = self::idToUri($tracks[$i]['id']);
         }
 
         $data['tracks'] = $tracks;
@@ -445,7 +473,7 @@ class SpotifyWebAPI
      */
     public static function replacePlaylistTracks($userID, $playlistId, $tracks)
     {
-        $tracks = (array) $tracks;
+        $tracks = self::idToUri($tracks);
         $tracks = implode(',', $tracks);
 
         $response = Request::api('PUT', 'v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', array('uris' => $tracks), array(
