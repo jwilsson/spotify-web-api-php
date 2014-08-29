@@ -145,7 +145,7 @@ class SpotifyWebAPI
      *
      * @return string|bool
      */
-    public static function deletePlaylistTrack($userId, $playlistId, $tracks, $snapshotId = '')
+    public static function deletePlaylistTracks($userId, $playlistId, $tracks, $snapshotId = '')
     {
         $data = array();
         if ($snapshotId) {
