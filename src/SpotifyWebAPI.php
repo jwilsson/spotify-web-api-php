@@ -30,6 +30,7 @@ class SpotifyWebAPI
     /**
      * Add track(s) to the current user's Spotify library.
      * Requires a valid access token.
+     * https://developer.spotify.com/web-api/save-tracks-user/
      *
      * @param string|array IDs of the track to check for.
      *
@@ -51,6 +52,7 @@ class SpotifyWebAPI
     /**
      * Add track(s) to a user's playlist.
      * Requires a valid access token.
+     * https://developer.spotify.com/web-api/add-tracks-to-playlist/
      *
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to add tracks to.
@@ -87,6 +89,7 @@ class SpotifyWebAPI
     /**
      * Create a new playlist for a user.
      * Requires a valid access token.
+     * https://developer.spotify.com/web-api/create-playlist/
      *
      * @param string $userId ID of the user to create the playlist for.
      * @param array|object $data Data for the new playlist.
@@ -114,6 +117,7 @@ class SpotifyWebAPI
     /**
      * Delete track(s) from current user's Spotify library.
      * Requires a valid access token.
+     * https://developer.spotify.com/web-api/remove-tracks-user/
      *
      * @param string|array IDs of the track to delete.
      *
@@ -135,6 +139,7 @@ class SpotifyWebAPI
     /**
      * Delete tracks from a playlist and retrieve a new snapshot ID.
      * Requires a valid access token.
+     * https://developer.spotify.com/web-api/remove-tracks-playlist/
      *
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to delete tracks from.
@@ -174,6 +179,7 @@ class SpotifyWebAPI
 
     /**
      * Get a album.
+     * https://developer.spotify.com/web-api/get-album/
      *
      * @param string $albumId ID of the album.
      *
@@ -203,6 +209,7 @@ class SpotifyWebAPI
 
     /**
      * Get a album's tracks.
+     * https://developer.spotify.com/web-api/get-several-albums/
      *
      * @param string $albumId ID of the album.
      * @param array|object $options Optional. Options for the tracks.
@@ -226,6 +233,7 @@ class SpotifyWebAPI
 
     /**
      * Get a artist.
+     * https://developer.spotify.com/web-api/get-artist/
      *
      * @param string $artistId ID of the artist.
      *
@@ -239,21 +247,8 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get an artist's related artists.
-     *
-     * @param string $artistId ID of the artist.
-     *
-     * @return object
-     */
-    public static function getArtistRelatedArtists($artistId)
-    {
-        $response = Request::api('GET', '/v1/artists/' . $artistId . '/related-artists');
-
-        return $response['body'];
-    }
-
-    /**
      * Get multiple artists.
+     * https://developer.spotify.com/web-api/get-several-artists/
      *
      * @param array $artistIds ID of the artists.
      *
@@ -268,7 +263,23 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get an artist's related artists.
+     * https://developer.spotify.com/web-api/get-related-artists/
+     *
+     * @param string $artistId ID of the artist.
+     *
+     * @return object
+     */
+    public static function getArtistRelatedArtists($artistId)
+    {
+        $response = Request::api('GET', '/v1/artists/' . $artistId . '/related-artists');
+
+        return $response['body'];
+    }
+
+    /**
      * Get a artist's albums.
+     * https://developer.spotify.com/web-api/get-artists-albums/
      *
      * @param string $artistId ID of the artist.
      * @param array|object $options Optional. Options for the albums.
@@ -292,6 +303,7 @@ class SpotifyWebAPI
 
     /**
      * Get a artist's top tracks in a country.
+     * https://developer.spotify.com/web-api/get-artists-top-tracks/
      *
      * @param string $artistId ID of the artist.
      * @param string $country An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
@@ -308,6 +320,7 @@ class SpotifyWebAPI
     /**
      * Get the current user’s saved tracks.
      * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-users-saved-tracks/
      *
      * @param array|object $options Optional. Options for the tracks.
      * - int limit Optional. Limit the number of tracks. Default is 20.
@@ -332,6 +345,7 @@ class SpotifyWebAPI
 
     /**
      * Get a track.
+     * https://developer.spotify.com/web-api/get-track/
      *
      * @param string $trackId ID of the track.
      *
@@ -346,6 +360,7 @@ class SpotifyWebAPI
 
     /**
      * Get multiple tracks.
+     * https://developer.spotify.com/web-api/get-several-tracks/
      *
      * @param array $trackIds ID of the tracks.
      *
@@ -361,6 +376,7 @@ class SpotifyWebAPI
 
     /**
      * Get a user.
+     * https://developer.spotify.com/web-api/get-users-profile/
      *
      * @param string $userId ID of the user.
      *
@@ -376,6 +392,7 @@ class SpotifyWebAPI
     /**
      * Get a user's playlists.
      * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-list-users-playlists/
      *
      * @param string $userId ID of the user.
      *
@@ -393,6 +410,7 @@ class SpotifyWebAPI
     /**
      * Get a user's specific playlist.
      * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-playlist/
      *
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
@@ -411,6 +429,7 @@ class SpotifyWebAPI
     /**
      * Get the tracks in a user's playlist.
      * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-playlists-tracks/
      *
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
@@ -429,6 +448,7 @@ class SpotifyWebAPI
     /**
      * Get the currently authenticated user.
      * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-current-users-profile/
      *
      * @return object
      */
@@ -444,6 +464,7 @@ class SpotifyWebAPI
     /**
      * Check if the track(s) is saved in the current user's Spotify library.
      * Requires a valid access token.
+     * https://developer.spotify.com/web-api/check-users-saved-tracks/
      *
      * @param string|array $tracks IDs of the track to check for.
      *
@@ -464,6 +485,7 @@ class SpotifyWebAPI
     /**
      * Replace all tracks in a user's playlist with new ones.
      * Requires a valid access token.
+     * https://developer.spotify.com/web-api/replace-playlists-tracks/
      *
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
@@ -485,6 +507,7 @@ class SpotifyWebAPI
 
     /**
      * Search for an item.
+     * https://developer.spotify.com/web-api/search-item/
      *
      * @param string $query The query to search for. Will be URL-encoded. More info: https://developer.spotify.com/web-api/search-item/
      * @param string|array $type The type of item to search for, "album", "artist" or "track".
@@ -527,6 +550,7 @@ class SpotifyWebAPI
     /**
      * Update the details of a user's playlist.
      * Requires a valid access token.
+     * https://developer.spotify.com/web-api/change-playlist-details/
      *
      * @param array|object $data Data for the new playlist.
      * - name string Required. Name of the playlist
