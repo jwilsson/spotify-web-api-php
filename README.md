@@ -45,13 +45,14 @@ When receiving a request back to your redirect URI:
 require 'vendor/autoload.php';
 
 $session = new SpotifyWebAPI\Session('CLIENT_ID', 'CLIENT_SECRET', 'REDIRECT_URI');
+$api = new SpotifyWebAPI\SpotifyWebAPI();
 
 // Request a access token using the code from Spotify
 $session->requestToken($_GET['code']);
 $accessToken = $session->getAccessToken(); // We're good to go!
 
 // Set the code on the API wrapper
-SpotifyWebAPI\SpotifyWebAPI::setAccessToken($accessToken);
+$api->setAccessToken($accessToken);
 ```
 
 #### Using Client Credentials Flow
@@ -65,24 +66,53 @@ $session->requestCredentialsToken(array('scope-1', 'scope-2'));
 $accessToken = $session->getAccessToken(); // We're good to go!
 
 // Set the code on the API wrapper
-SpotifyWebAPI\SpotifyWebAPI::setAccessToken($accessToken);
+$api->setAccessToken($accessToken);
 ```
-
 
 ### Making API calls
 
 ```php
-$track = SpotifyWebAPI\SpotifyWebAPI::getTrack('7EjyzZcbLxW7PaaLua9Ksb');
+$track = $api->getTrack('7EjyzZcbLxW7PaaLua9Ksb');
 
 print_r($track);
 ```
 
 ## More examples
 
+Add tracks to a user's library
+
+```php
+$api->addMyTracks(array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'));
+```
+
+Add tracks to a user's playlist
+
+```php
+$api->addUserPlaylistTracks('username', 'playlist_id' array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'));
+```
+
+Create a new playlist for a user
+
+```php
+$api->createUserPlaylist('username', array('name' => 'My shiny playlist'));
+```
+
+Delete tracks from a user's library
+
+```php
+$api->deleteMyTracks(array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'));
+```
+
+Delete tracks from a user's playlist
+
+```php
+$api->deleteMyTracks('username', 'playlist_id', array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'), 'snapshot_id');
+```
+
 Get a album
 
 ```php
-$album = SpotifyWebAPI\SpotifyWebAPI::getAlbum('7u6zL7kqpgLPISZYXNTgYk');
+$album = $api->getAlbum('7u6zL7kqpgLPISZYXNTgYk');
 
 print_r($album);
 ```
@@ -90,7 +120,7 @@ print_r($album);
 Get multiple albums
 
 ```php
-$albums = SpotifyWebAPI\SpotifyWebAPI::getAlbums(array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'));
+$albums = $api->getAlbums(array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'));
 
 print_r($albums);
 ```
@@ -98,7 +128,7 @@ print_r($albums);
 Get all tracks from an album
 
 ```php
-$tracks = SpotifyWebAPI\SpotifyWebAPI::getAlbumTracks('1oR3KrPIp4CbagPa3PhtPp');
+$tracks = $api->getAlbumTracks('1oR3KrPIp4CbagPa3PhtPp');
 
 print_r($tracks);
 ```
@@ -106,7 +136,7 @@ print_r($tracks);
 Get an artist
 
 ```php
-$artist = SpotifyWebAPI\SpotifyWebAPI::getArtist('36QJpDe2go2KgaRleHCDTp');
+$artist = $api->getArtist('36QJpDe2go2KgaRleHCDTp');
 
 print_r($artist);
 ```
@@ -114,7 +144,7 @@ print_r($artist);
 Get an artist's related artists
 
 ```php
-$artists = SpotifyWebAPI\SpotifyWebAPI::getArtistRelatedArtists('36QJpDe2go2KgaRleHCDTp');
+$artists = $api->getArtistRelatedArtists('36QJpDe2go2KgaRleHCDTp');
 
 print_r($artists);
 ```
@@ -122,7 +152,7 @@ print_r($artists);
 Get multiple artists
 
 ```php
-$artists = SpotifyWebAPI\SpotifyWebAPI::getArtists(array('6v8FB84lnmJs434UJf2Mrm', '6olE6TJLqED3rqDCT0FyPh'));
+$artists = $api->getArtists(array('6v8FB84lnmJs434UJf2Mrm', '6olE6TJLqED3rqDCT0FyPh'));
 
 print_r($artists);
 ```
@@ -130,7 +160,7 @@ print_r($artists);
 Get all albums by an artist
 
 ```php
-$albums = SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums('6v8FB84lnmJs434UJf2Mrm');
+$albums = $api->getArtistAlbums('6v8FB84lnmJs434UJf2Mrm');
 
 print_r($albums);
 ```
@@ -138,7 +168,14 @@ print_r($albums);
 Get an artist's top tracks in a country
 
 ```php
-$tracks = SpotifyWebAPI\SpotifyWebAPI::getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', 'se');
+$tracks = $api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', 'se');
+
+print_r($tracks);
+```
+
+Get a user's saved tracks
+```php
+$tracks = $api->getMySavedTracks();
 
 print_r($tracks);
 ```
@@ -146,7 +183,7 @@ print_r($tracks);
 Get a track
 
 ```php
-$track = SpotifyWebAPI\SpotifyWebAPI::getTrack('7EjyzZcbLxW7PaaLua9Ksb');
+$track = $api->getTrack('7EjyzZcbLxW7PaaLua9Ksb');
 
 print_r($track);
 ```
@@ -154,7 +191,7 @@ print_r($track);
 Get multiple tracks
 
 ```php
-$tracks = SpotifyWebAPI\SpotifyWebAPI::getTracks(array('0eGsygTp906u18L0Oimnem', '1lDWb6b6ieDQ2xT7ewTC3G'));
+$tracks = $api->getTracks(array('0eGsygTp906u18L0Oimnem', '1lDWb6b6ieDQ2xT7ewTC3G'));
 
 print_r($tracks);
 ```
@@ -162,7 +199,7 @@ print_r($tracks);
 Get a user
 
 ```php
-$user = SpotifyWebAPI\SpotifyWebAPI::getUser('mcgurk');
+$user = $api->getUser('username');
 
 print_r($user);
 ```
@@ -170,7 +207,7 @@ print_r($user);
 Get a user's playlists
 
 ```php
-$playlists = SpotifyWebAPI\SpotifyWebAPI::getUserPlaylists('mcgurk');
+$playlists = $api->getUserPlaylists('username');
 
 print_r($playlists);
 ```
@@ -178,15 +215,15 @@ print_r($playlists);
 Get a specific playlist
 
 ```php
-$playlists = SpotifyWebAPI\SpotifyWebAPI::getUserPlaylist('mcgurk', '606nLQuR41ZaA2vEZ4Ofb8');
+$playlist = $api->getUserPlaylist('username', '606nLQuR41ZaA2vEZ4Ofb8');
 
-print_r($playlists);
+print_r($playlist);
 ```
 
 Get all tracks in a user's playlist
 
 ```php
-$tracks = SpotifyWebAPI\SpotifyWebAPI::getUserPlaylistTracks('mcgurk', '606nLQuR41ZaA2vEZ4Ofb8');
+$tracks = $api->getUserPlaylistTracks('username', '606nLQuR41ZaA2vEZ4Ofb8');
 
 print_r($tracks);
 ```
@@ -194,15 +231,29 @@ print_r($tracks);
 Get the currently authenticated user
 
 ```php
-$user = SpotifyWebAPI\SpotifyWebAPI::me();
+$user = $api->me();
 
 print_r($user);
+```
+
+See if a user's tracks contains the specified tracks
+
+```php
+$contains = $api->myTracksContains(array('0eGsygTp906u18L0Oimnem', '1lDWb6b6ieDQ2xT7ewTC3G'));
+
+var_dump($contains);
+```
+
+Replace all tracks in a user's playlist with new ones
+
+```php
+$api->replacePlaylistTracks('username', 'playlist_id', array('0eGsygTp906u18L0Oimnem', '1lDWb6b6ieDQ2xT7ewTC3G'));
 ```
 
 Search for an album
 
 ```php
-$albums = SpotifyWebAPI\SpotifyWebAPI::search('blur', 'album');
+$albums = $api->search('blur', 'album');
 
 print_r($albums);
 ```
@@ -210,7 +261,7 @@ print_r($albums);
 Search for an artist
 
 ```php
-$artists = SpotifyWebAPI\SpotifyWebAPI::search('blur', 'artist');
+$artists = $api->search('blur', 'artist');
 
 print_r($artists);
 ```
@@ -218,7 +269,7 @@ print_r($artists);
 Search for a track
 
 ```php
-$tracks = SpotifyWebAPI\SpotifyWebAPI::search('song 2', 'track');
+$tracks = $api->search('song 2', 'track');
 
 print_r($tracks);
 ```
@@ -226,9 +277,15 @@ print_r($tracks);
 Search with a limit
 
 ```php
-$tracks = SpotifyWebAPI\SpotifyWebAPI::search('song 2', 'track', 5);
+$tracks = $api->search('song 2', 'track', 5);
 
 print_r($tracks);
+```
+
+Search with a limit
+
+```php
+$api->updateUserPlaylist('username', 'playlist_id', array('name' => 'New name'));
 ```
 
 Browse through `src/spotifywebapi.php` and look at the tests for more methods and examples.
