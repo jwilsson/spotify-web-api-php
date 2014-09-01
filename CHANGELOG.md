@@ -1,4 +1,11 @@
 # Changelog
+## 0.4
+* **This release contains lots of breaking changes, read through this list before updating.**
+* All methods which previously required a Spotify URI now just needs an ID.
+* `deletePlaylistTrack()` has been renamed to `deletePlaylistTracks()`.
+* When something goes wrong, a `SpotifyWebAPIException` is thrown.
+* The `SpotifyWebAPI` methods are no longer static, you'll need to instantiate the class now.
+
 ## 0.3
 * Added new methods to
     * Get Current User’s Saved Tracks
