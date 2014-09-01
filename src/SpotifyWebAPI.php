@@ -3,7 +3,7 @@ namespace SpotifyWebAPI;
 
 class SpotifyWebAPI
 {
-    private static $accessToken = '';
+    private $accessToken = '';
 
     /**
      * Convert Spotify object IDs to Spotify URIs
@@ -12,7 +12,7 @@ class SpotifyWebAPI
      *
      * @return array|string
      */
-    protected static function idToUri($ids)
+    protected function idToUri($ids)
     {
         $ids = (array) $ids;
 
@@ -36,13 +36,12 @@ class SpotifyWebAPI
      *
      * @return bool
      */
-    public static function addMyTracks($tracks)
+    public function addMyTracks($tracks)
     {
-        $tracks = (array) $tracks;
-        $tracks = json_encode($tracks);
+        $tracks = json_encode((array) $tracks);
 
         $response = Request::api('PUT', '/v1/me/tracks', $tracks, array(
-            'Authorization' => 'Bearer ' . self::$accessToken,
+            'Authorization' => 'Bearer ' . $this->accessToken,
             'Content-Type' => 'application/json'
         ));
 
@@ -62,7 +61,7 @@ class SpotifyWebAPI
      *
      * @return bool
      */
-    public static function addUserPlaylistTracks($userId, $playlistId, $tracks, $options = array())
+    public function addUserPlaylistTracks($userId, $playlistId, $tracks, $options = array())
     {
         $defaults = array(
             'position' => false
@@ -74,12 +73,12 @@ class SpotifyWebAPI
         });
 
         $options = http_build_query($options);
-        $tracks = self::idToUri($tracks);
+        $tracks = array($this->idToUri($tracks));
         $tracks = json_encode($tracks);
 
         // We need to manually append data to the URI since it's a POST request
         $response = Request::api('POST', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks?' . $options, $tracks, array(
-            'Authorization' => 'Bearer ' . self::$accessToken,
+            'Authorization' => 'Bearer ' . $this->accessToken,
             'Content-Type' => 'application/json'
         ));
 
@@ -98,7 +97,7 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function createUserPlaylist($userId, $data)
+    public function createUserPlaylist($userId, $data)
     {
         $defaults = array(
             'name' =>  '',
@@ -107,7 +106,7 @@ class SpotifyWebAPI
 
         $data = json_encode(array_merge($defaults, (array) $data));
         $response = Request::api('POST', '/v1/users/' . $userId . '/playlists', $data, array(
-            'Authorization' => 'Bearer ' . self::$accessToken,
+            'Authorization' => 'Bearer ' . $this->accessToken,
             'Content-Type' => 'application/json'
         ));
 
@@ -123,14 +122,13 @@ class SpotifyWebAPI
      *
      * @return bool
      */
-    public static function deleteMyTracks($tracks)
+    public function deleteMyTracks($tracks)
     {
-        $tracks = (array) $tracks;
-        $tracks = implode(',', $tracks);
+        $tracks = implode(',', (array) $tracks);
         $tracks = urlencode($tracks);
 
         $response = Request::api('DELETE', '/v1/me/tracks?ids=' . $tracks, array(), array(
-            'Authorization' => 'Bearer ' . self::$accessToken
+            'Authorization' => 'Bearer ' . $this->accessToken
         ));
 
         return $response['status'] == 200;
@@ -150,7 +148,7 @@ class SpotifyWebAPI
      *
      * @return string|bool
      */
-    public static function deletePlaylistTracks($userId, $playlistId, $tracks, $snapshotId = '')
+    public function deletePlaylistTracks($userId, $playlistId, $tracks, $snapshotId = '')
     {
         $data = array();
         if ($snapshotId) {
@@ -159,14 +157,14 @@ class SpotifyWebAPI
 
         for ($i = 0; $i < count($tracks); $i++) {
             $tracks[$i] = (array) $tracks[$i];
-            $tracks[$i]['uri'] = self::idToUri($tracks[$i]['id']);
+            $tracks[$i]['uri'] = $this->idToUri($tracks[$i]['id']);
         }
 
         $data['tracks'] = $tracks;
         $data = json_encode($data);
 
         $response = Request::api('DELETE', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', $data, array(
-            'Authorization' => 'Bearer ' . self::$accessToken
+            'Authorization' => 'Bearer ' . $this->accessToken
         ));
         $response = $response['body'];
 
@@ -185,7 +183,7 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getAlbum($albumId)
+    public function getAlbum($albumId)
     {
         $response = Request::api('GET', '/v1/albums/' . $albumId);
 
@@ -199,7 +197,7 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getAlbums($albumIds)
+    public function getAlbums($albumIds)
     {
         $albumIds = implode(',', $albumIds);
         $response = Request::api('GET', '/v1/albums/', array('ids' => $albumIds));
@@ -218,7 +216,7 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getAlbumTracks($albumId, $options = array())
+    public function getAlbumTracks($albumId, $options = array())
     {
         $defaults = array(
             'limit' => 20,
@@ -239,7 +237,7 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getArtist($artistId)
+    public function getArtist($artistId)
     {
         $response = Request::api('GET', '/v1/artists/' . $artistId);
 
@@ -254,7 +252,7 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getArtists($artistIds)
+    public function getArtists($artistIds)
     {
         $artistIds = implode(',', $artistIds);
         $response = Request::api('GET', '/v1/artists/', array('ids' => $artistIds));
@@ -270,7 +268,7 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getArtistRelatedArtists($artistId)
+    public function getArtistRelatedArtists($artistId)
     {
         $response = Request::api('GET', '/v1/artists/' . $artistId . '/related-artists');
 
@@ -288,7 +286,7 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getArtistAlbums($artistId, $options = array())
+    public function getArtistAlbums($artistId, $options = array())
     {
         $defaults = array(
             'limit' => 20,
@@ -310,7 +308,7 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getArtistTopTracks($artistId, $country)
+    public function getArtistTopTracks($artistId, $country)
     {
         $response = Request::api('GET', '/v1/artists/' . $artistId . '/top-tracks', array('country' =>  $country));
 
@@ -328,7 +326,7 @@ class SpotifyWebAPI
      *
      * @return array
      */
-    public static function getMySavedTracks($options = array())
+    public function getMySavedTracks($options = array())
     {
         $defaults = array(
             'limit' => 20,
@@ -337,7 +335,7 @@ class SpotifyWebAPI
 
         $options = array_merge($defaults, (array) $options);
         $response = Request::api('GET', '/v1/me/tracks', $options, array(
-            'Authorization' => 'Bearer ' . self::$accessToken
+            'Authorization' => 'Bearer ' . $this->accessToken
         ));
 
         return $response['body'];
@@ -351,7 +349,7 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getTrack($trackId)
+    public function getTrack($trackId)
     {
         $response = Request::api('GET', '/v1/tracks/' . $trackId);
 
@@ -366,7 +364,7 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getTracks($trackIds)
+    public function getTracks($trackIds)
     {
         $trackIds = implode(',', $trackIds);
         $response = Request::api('GET', '/v1/tracks/', array('ids' => $trackIds));
@@ -382,7 +380,7 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getUser($userId)
+    public function getUser($userId)
     {
         $response = Request::api('GET', '/v1/users/' . $userId);
 
@@ -398,10 +396,10 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getUserPlaylists($userId)
+    public function getUserPlaylists($userId)
     {
         $response = Request::api('GET', '/v1/users/' . $userId . '/playlists', array(), array(
-            'Authorization' => 'Bearer ' . self::$accessToken
+            'Authorization' => 'Bearer ' . $this->accessToken
         ));
 
         return $response['body'];
@@ -417,10 +415,10 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getUserPlaylist($userId, $playlistId)
+    public function getUserPlaylist($userId, $playlistId)
     {
         $response = Request::api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId, array(), array(
-            'Authorization' => 'Bearer ' . self::$accessToken
+            'Authorization' => 'Bearer ' . $this->accessToken
         ));
 
         return $response['body'];
@@ -436,10 +434,10 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function getUserPlaylistTracks($userId, $playlistId)
+    public function getUserPlaylistTracks($userId, $playlistId)
     {
         $response = Request::api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', array(), array(
-            'Authorization' => 'Bearer ' . self::$accessToken
+            'Authorization' => 'Bearer ' . $this->accessToken
         ));
 
         return $response['body'];
@@ -452,10 +450,10 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public static function me()
+    public function me()
     {
         $response = Request::api('GET', '/v1/me', array(), array(
-            'Authorization' => 'Bearer ' . self::$accessToken
+            'Authorization' => 'Bearer ' . $this->accessToken
         ));
 
         return $response['body'];
@@ -470,13 +468,12 @@ class SpotifyWebAPI
      *
      * @return array
      */
-    public static function myTracksContains($tracks)
+    public function myTracksContains($tracks)
     {
-        $tracks = (array) $tracks;
-        $tracks = implode(',', $tracks);
+        $tracks = implode(',', (array) $tracks);
 
         $response = Request::api('GET', '/v1/me/tracks/contains', array('ids' => $tracks), array(
-            'Authorization' => 'Bearer ' . self::$accessToken
+            'Authorization' => 'Bearer ' . $this->accessToken
         ));
 
         return $response['body'];
@@ -493,13 +490,13 @@ class SpotifyWebAPI
      *
      * @return bool
      */
-    public static function replacePlaylistTracks($userID, $playlistId, $tracks)
+    public function replacePlaylistTracks($userID, $playlistId, $tracks)
     {
-        $tracks = self::idToUri($tracks);
+        $tracks = $this->idToUri($tracks);
         $tracks = implode(',', $tracks);
 
         $response = Request::api('PUT', 'v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', array('uris' => $tracks), array(
-            'Authorization' => 'Bearer ' . self::$accessToken
+            'Authorization' => 'Bearer ' . $this->accessToken
         ));
 
         return $response['status'] == 201;
@@ -517,7 +514,7 @@ class SpotifyWebAPI
      *
      * @return array
      */
-    public static function search($query, $type, $options = array())
+    public function search($query, $type, $options = array())
     {
         $defaults = array(
             'limit' => 20,
@@ -542,9 +539,9 @@ class SpotifyWebAPI
      *
      * @return void
      */
-    public static function setAccessToken($accessToken)
+    public function setAccessToken($accessToken)
     {
-        self::$accessToken = $accessToken;
+        $this->accessToken = $accessToken;
     }
 
     /**
@@ -558,11 +555,11 @@ class SpotifyWebAPI
      *
      * @return bool
      */
-    public static function updateUserPlaylist($userId, $playlistId, $data)
+    public function updateUserPlaylist($userId, $playlistId, $data)
     {
         $data = json_encode($data);
         $response = Request::api('PUT', '/v1/users/' . $userId . '/playlists/' . $playlistId, $data, array(
-            'Authorization' => 'Bearer ' . self::$accessToken,
+            'Authorization' => 'Bearer ' . $this->accessToken,
             'Content-Type' => 'application/json'
         ));
 

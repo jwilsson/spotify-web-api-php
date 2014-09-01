@@ -3,9 +3,16 @@ use \SpotifyWebAPI;
 
 class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 {
+    private $api;
+
+    public function setUp()
+    {
+        $this->api = new SpotifyWebAPI\SpotifyWebAPI();
+    }
+
     public function testGetAlbum()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getAlbum('7u6zL7kqpgLPISZYXNTgYk');
+        $response = $this->api->getAlbum('7u6zL7kqpgLPISZYXNTgYk');
 
         $this->assertObjectHasAttribute('id', $response);
     }
@@ -14,12 +21,12 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $response = SpotifyWebAPI\SpotifyWebAPI::getAlbum('nonexistent');
+        $response = $this->api->getAlbum('nonexistent');
     }
 
     public function testGetAlbums()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getAlbums(array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'));
+        $response = $this->api->getAlbums(array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'));
 
         $this->assertObjectHasAttribute('id', $response->albums[0]);
         $this->assertObjectHasAttribute('id', $response->albums[1]);
@@ -27,14 +34,14 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetAlbumsNonExistent()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getAlbums(array('nonexistent'));
+        $response = $this->api->getAlbums(array('nonexistent'));
 
         $this->assertEmpty($response->albums[0]);
     }
 
     public function testGetAlbumTracks()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getAlbumTracks('1oR3KrPIp4CbagPa3PhtPp');
+        $response = $this->api->getAlbumTracks('1oR3KrPIp4CbagPa3PhtPp');
 
         $this->assertObjectHasAttribute('items', $response);
     }
@@ -43,12 +50,12 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $response = SpotifyWebAPI\SpotifyWebAPI::getAlbumTracks('nonexistent');
+        $response = $this->api->getAlbumTracks('nonexistent');
     }
 
     public function testGetAlbumTracksLimit()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getAlbumTracks('1oR3KrPIp4CbagPa3PhtPp', array(
+        $response = $this->api->getAlbumTracks('1oR3KrPIp4CbagPa3PhtPp', array(
             'limit' => 5
         ));
 
@@ -57,7 +64,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetArtist()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtist('36QJpDe2go2KgaRleHCDTp');
+        $response = $this->api->getArtist('36QJpDe2go2KgaRleHCDTp');
 
         $this->assertObjectHasAttribute('id', $response);
     }
@@ -66,12 +73,12 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtist('nonexistent');
+        $response = $this->api->getArtist('nonexistent');
     }
 
     public function testGetArtistRelatedArtists()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistRelatedArtists('36QJpDe2go2KgaRleHCDTp');
+        $response = $this->api->getArtistRelatedArtists('36QJpDe2go2KgaRleHCDTp');
 
         $this->assertNotEmpty($response->artists);
     }
@@ -80,12 +87,12 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistRelatedArtists('nonexistent');
+        $response = $this->api->getArtistRelatedArtists('nonexistent');
     }
 
     public function testGetArtists()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtists(array('6v8FB84lnmJs434UJf2Mrm', '6olE6TJLqED3rqDCT0FyPh'));
+        $response = $this->api->getArtists(array('6v8FB84lnmJs434UJf2Mrm', '6olE6TJLqED3rqDCT0FyPh'));
 
         $this->assertObjectHasAttribute('id', $response->artists[0]);
         $this->assertObjectHasAttribute('id', $response->artists[1]);
@@ -93,14 +100,14 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetArtistsNonExistent()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtists(array('nonexistent'));
+        $response = $this->api->getArtists(array('nonexistent'));
 
         $this->assertEmpty($response->artists[0]);
     }
 
     public function testGetArtistAlbums()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums('6v8FB84lnmJs434UJf2Mrm');
+        $response = $this->api->getArtistAlbums('6v8FB84lnmJs434UJf2Mrm');
 
         $this->assertObjectHasAttribute('items', $response);
     }
@@ -109,12 +116,12 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums('nonexistent');
+        $response = $this->api->getArtistAlbums('nonexistent');
     }
 
     public function testGetArtistAlbumsLimit()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums('6v8FB84lnmJs434UJf2Mrm', array(
+        $response = $this->api->getArtistAlbums('6v8FB84lnmJs434UJf2Mrm', array(
             'limit' => 5
         ));
 
@@ -123,7 +130,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetArtistTopTracks()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', 'se');
+        $response = $this->api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', 'se');
 
         $this->assertObjectHasAttribute('tracks', $response);
     }
@@ -132,12 +139,12 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums('nonexistent', 'se');
+        $response = $this->api->getArtistAlbums('nonexistent', 'se');
     }
 
     public function testGetTrack()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getTrack('7EjyzZcbLxW7PaaLua9Ksb');
+        $response = $this->api->getTrack('7EjyzZcbLxW7PaaLua9Ksb');
 
         $this->assertObjectHasAttribute('id', $response);
     }
@@ -146,12 +153,12 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $response = SpotifyWebAPI\SpotifyWebAPI::getTrack('nonexistent');
+        $response = $this->api->getTrack('nonexistent');
     }
 
     public function testGetTracks()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getTracks(array('0eGsygTp906u18L0Oimnem', '1lDWb6b6ieDQ2xT7ewTC3G'));
+        $response = $this->api->getTracks(array('0eGsygTp906u18L0Oimnem', '1lDWb6b6ieDQ2xT7ewTC3G'));
 
         $this->assertObjectHasAttribute('id', $response->tracks[0]);
         $this->assertObjectHasAttribute('id', $response->tracks[1]);
@@ -159,14 +166,14 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetTracksNonExistent()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getTracks(array('nonexistent'));
+        $response = $this->api->getTracks(array('nonexistent'));
 
         $this->assertEmpty($response->tracks[0]);
     }
 
     public function testGetUser()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getUser('mcgurk');
+        $response = $this->api->getUser('mcgurk');
 
         $this->assertObjectHasAttribute('id', $response);
     }
@@ -175,40 +182,40 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $response = SpotifyWebAPI\SpotifyWebAPI::getUser('not_a_real_user');
+        $response = $this->api->getUser('not_a_real_user');
     }
 
     public function testSearchAlbum()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::search('blur', 'album');
+        $response = $this->api->search('blur', 'album');
 
         $this->assertNotEmpty($response->albums->items);
     }
 
     public function testSearchArtist()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::search('blur', 'artist');
+        $response = $this->api->search('blur', 'artist');
 
         $this->assertNotEmpty($response->artists->items);
     }
 
     public function testSearchTrack()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::search('song 2', 'track');
+        $response = $this->api->search('song 2', 'track');
 
         $this->assertNotEmpty($response->tracks->items);
     }
 
     public function testSearchNonExistent()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::search('nonexistent_foobar', 'album');
+        $response = $this->api->search('nonexistent_foobar', 'album');
 
         $this->assertEmpty($response->albums->items);
     }
 
     public function testSearchLimit()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::search('blur', 'artist', array(
+        $response = $this->api->search('blur', 'artist', array(
             'limit' => 5
         ));
 
