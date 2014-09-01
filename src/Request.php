@@ -102,9 +102,16 @@ class Request
         list($headers, $body) = explode("\r\n\r\n", $response);
 
         $status = (int) substr($headers, 9, 3);
+        $body = json_decode($body);
+
+        if ($status < 200 || $status > 299) {
+            $error = $body->error;
+
+            throw new SpotifyWebAPIException($error->message, $error->status);
+        }
 
         return array(
-            'body' => json_decode($body),
+            'body' => $body,
             'headers' => $headers,
             'status' => $status
         );

@@ -12,9 +12,9 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetAlbumNonExistent()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getAlbum('nonexistent');
+        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $this->assertObjectHasAttribute('error', $response);
+        $response = SpotifyWebAPI\SpotifyWebAPI::getAlbum('nonexistent');
     }
 
     public function testGetAlbums()
@@ -41,9 +41,9 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetAlbumTracksNonExistent()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getAlbumTracks('nonexistent');
+        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $this->assertObjectHasAttribute('error', $response);
+        $response = SpotifyWebAPI\SpotifyWebAPI::getAlbumTracks('nonexistent');
     }
 
     public function testGetAlbumTracksLimit()
@@ -64,9 +64,9 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetArtistNonExistent()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtist('nonexistent');
+        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $this->assertObjectHasAttribute('error', $response);
+        $response = SpotifyWebAPI\SpotifyWebAPI::getArtist('nonexistent');
     }
 
     public function testGetArtistRelatedArtists()
@@ -78,9 +78,9 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetArtistRelatedArtistsNonExistent()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistRelatedArtists('nonexistent');
+        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $this->assertObjectHasAttribute('error', $response);
+        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistRelatedArtists('nonexistent');
     }
 
     public function testGetArtists()
@@ -107,9 +107,9 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetArtistAlbumsNonExistent()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums('nonexistent');
+        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $this->assertObjectHasAttribute('error', $response);
+        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums('nonexistent');
     }
 
     public function testGetArtistAlbumsLimit()
@@ -130,9 +130,9 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetArtistTopTracksNonExistent()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums('nonexistent', 'se');
+        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $this->assertObjectHasAttribute('error', $response);
+        $response = SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums('nonexistent', 'se');
     }
 
     public function testGetTrack()
@@ -144,9 +144,9 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetTrackNonExistent()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getTrack('nonexistent');
+        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $this->assertObjectHasAttribute('error', $response);
+        $response = SpotifyWebAPI\SpotifyWebAPI::getTrack('nonexistent');
     }
 
     public function testGetTracks()
@@ -173,9 +173,9 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetUserNonExistent()
     {
-        $response = SpotifyWebAPI\SpotifyWebAPI::getUser('not_a_real_user');
+        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
 
-        $this->assertObjectHasAttribute('error', $response);
+        $response = SpotifyWebAPI\SpotifyWebAPI::getUser('not_a_real_user');
     }
 
     public function testSearchAlbum()
