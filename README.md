@@ -106,7 +106,12 @@ $api->deleteMyTracks(array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'));
 Delete tracks from a user's playlist
 
 ```php
-$api->deleteMyTracks('username', 'playlist_id', array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'), 'snapshot_id');
+$tracks = array(
+    array('id' => '1oR3KrPIp4CbagPa3PhtPp'),
+    array('id' => '6lPb7Eoon6QPbscWbMsk6a')
+);
+
+$api->deletePlaylistTracks('username', 'playlist_id', $tracks, 'snapshot_id');
 ```
 
 Get a album
