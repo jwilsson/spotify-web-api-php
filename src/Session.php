@@ -89,6 +89,16 @@ class Session
     }
 
     /**
+     * Get the number of seconds before the access token expires.
+     *
+     * @return int
+     */
+    public function getExpires()
+    {
+        return $this->expires;
+    }
+
+    /**
      * Get the client's redirect URI.
      *
      * @return string
