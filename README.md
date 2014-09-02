@@ -5,7 +5,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/jwilsson/spotify-web-api-php/v/unstable.svg)](https://packagist.org/packages/jwilsson/spotify-web-api-php)
 [![License](https://poser.pugx.org/jwilsson/spotify-web-api-php/license.svg)](https://packagist.org/packages/jwilsson/spotify-web-api-php)
 
-This is a PHP implementation of the Spotify Web API. It includes the following:
+This is a PHP implementation of the [Spotify Web API](https://developer.spotify.com/web-api/). It includes the following:
 
 * Helper methods for all API methods (Information about artists, albums and tracks).
 * Search the Spotify catalog.
