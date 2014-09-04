@@ -393,12 +393,21 @@ class SpotifyWebAPI
      * https://developer.spotify.com/web-api/get-list-users-playlists/
      *
      * @param string $userId ID of the user.
+     * @param array|object $options Optional. Options for the tracks.
+     * - int limit Optional. Limit the number of tracks. Default is 20.
+     * - int offset Optional. Number of tracks to skip. Default is 0.
      *
      * @return object
      */
-    public function getUserPlaylists($userId)
+    public function getUserPlaylists($userId, $options = array())
     {
-        $response = Request::api('GET', '/v1/users/' . $userId . '/playlists', array(), array(
+        $defaults = array(
+            'limit' => 20,
+            'offset' => 0
+        );
+
+        $options = array_merge($defaults, (array) $options);
+        $response = Request::api('GET', '/v1/users/' . $userId . '/playlists', $options, array(
             'Authorization' => 'Bearer ' . $this->accessToken
         ));
 
