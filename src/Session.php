@@ -59,6 +59,16 @@ class Session
     }
 
     /**
+     * Get the refresh token.
+     *
+     * @return string
+     */
+    public function getRefreshToken()
+    {
+        return $this->refreshToken;
+    }
+
+    /**
      * Get the access token.
      *
      * @return string
