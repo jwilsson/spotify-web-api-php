@@ -59,16 +59,6 @@ class Session
     }
 
     /**
-     * Get the refresh token.
-     *
-     * @return string
-     */
-    public function getRefreshToken()
-    {
-        return $this->refreshToken;
-    }
-
-    /**
      * Get the access token.
      *
      * @return string
@@ -247,5 +237,27 @@ class Session
     public function setRedirectUri($redirectUri)
     {
         $this->redirectUri = $redirectUri;
+    }
+
+    /**
+     * Get the refresh token.
+     *
+     * @return string
+     */
+    public function getRefreshToken()
+    {
+        return $this->refreshToken;
+    }
+
+    /**
+     * Set the refresh token.
+     *
+     * @param string $refreshToken The refresh token.
+     * 
+     * @return void
+     */
+    public function setRefreshToken($refreshToken)
+    {
+        $this->refreshToken = $refreshToken;
     }
 }
