@@ -36,7 +36,7 @@ require 'vendor/autoload.php';
 $session = new SpotifyWebAPI\Session('CLIENT_ID', 'CLIENT_SECRET', 'REDIRECT_URI');
 
 // Get the authorization URL and send the user there
-header('Location: ' . $session->getAuthorizeUrl(array('scope-1', 'scope-2')));
+header('Location: ' . $session->getAuthorizeUrl(array('scope' => array('scope-1', 'scope-2'))));
 ```
 
 When receiving a request back to your redirect URI:
