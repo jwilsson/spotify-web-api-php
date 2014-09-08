@@ -55,7 +55,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to add tracks to.
-     * @param array $tracks Spotify IDs of the tracks to add.
+     * @param string|array $tracks IDs of the track(s) to add.
      * @param array|object $options Optional. Options for the new tracks.
      * - int position Optional. Zero-based position of where in the playlist to add the tracks. Tracks will be appened if omitted or false.
      *
@@ -73,8 +73,8 @@ class SpotifyWebAPI
         });
 
         $options = http_build_query($options);
-        $tracks = array($this->idToUri($tracks));
-        $tracks = json_encode($tracks);
+        $tracks = $this->idToUri($tracks);
+        $tracks = json_encode((array) $tracks);
 
         // We need to manually append data to the URI since it's a POST request
         $response = Request::api('POST', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks?' . $options, $tracks, array(
@@ -499,12 +499,14 @@ class SpotifyWebAPI
      *
      * @return bool
      */
-    public function replacePlaylistTracks($userID, $playlistId, $tracks)
+    public function replacePlaylistTracks($userId, $playlistId, $tracks)
     {
         $tracks = $this->idToUri($tracks);
-        $tracks = implode(',', $tracks);
+        $tracks = implode(',', (array) $tracks);
+        $tracks = array('uris' => array($tracks));
+        $tracks = json_encode($tracks);
 
-        $response = Request::api('PUT', 'v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', array('uris' => $tracks), array(
+        $response = Request::api('PUT', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', $tracks, array(
             'Authorization' => 'Bearer ' . $this->accessToken
         ));
 
