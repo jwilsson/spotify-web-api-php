@@ -107,7 +107,14 @@ class Request
         if ($status < 200 || $status > 299) {
             $error = $body->error;
 
-            throw new SpotifyWebAPIException($error->message, $error->status);
+            // These properties only exist on API calls, not auth calls
+            if (isset($error->message) && isset($error->status)) {
+                throw new SpotifyWebAPIException($error->message, $error->status);
+            } elseif (isset($body->error_description)) {
+                throw new SpotifyWebAPIException($body->error_description);
+            } else {
+                throw new SpotifyWebAPIException($error);
+            }
         }
 
         return array(
