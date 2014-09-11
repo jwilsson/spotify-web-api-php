@@ -97,23 +97,27 @@ class Request
         curl_setopt_array($ch, $options);
 
         $response = curl_exec($ch);
+        $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
-        list($headers, $body) = explode("\r\n\r\n", $response);
+        list($headers, $body) = explode("\r\n\r\n", $response, 2);
 
-        $status = (int) substr($headers, 9, 3);
         $body = json_decode($body);
 
         if ($status < 200 || $status > 299) {
-            $error = $body->error;
+            if (isset($body->error)) {
+                $error = $body->error;
 
-            // These properties only exist on API calls, not auth calls
-            if (isset($error->message) && isset($error->status)) {
-                throw new SpotifyWebAPIException($error->message, $error->status);
-            } elseif (isset($body->error_description)) {
-                throw new SpotifyWebAPIException($body->error_description);
+                // These properties only exist on API calls, not auth calls
+                if (isset($error->message) && isset($error->status)) {
+                    throw new SpotifyWebAPIException($error->message, $error->status);
+                } elseif (isset($body->error_description)) {
+                    throw new SpotifyWebAPIException($body->error_description, $status);
+                } else {
+                    throw new SpotifyWebAPIException($error, $status);
+                }
             } else {
-                throw new SpotifyWebAPIException($error);
+                throw new SpotifyWebAPIException('No \'error\' provided in response body', $status);
             }
         }
 
