@@ -282,12 +282,14 @@ print_r($tracks);
 Search with a limit
 
 ```php
-$tracks = $api->search('song 2', 'track', 5);
+$tracks = $api->search('song 2', 'track', array(
+    'limit' => 5
+));
 
 print_r($tracks);
 ```
 
-Search with a limit
+Update a user's playlist
 
 ```php
 $api->updateUserPlaylist('username', 'playlist_id', array('name' => 'New name'));
