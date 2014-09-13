@@ -519,7 +519,8 @@ class SpotifyWebAPI
      *
      * @param string $query The query to search for. Will be URL-encoded. More info: https://developer.spotify.com/web-api/search-item/
      * @param string|array $type The type of item to search for, "album", "artist" or "track".
-     * @param array|object $options Optional. Options for the tracks.
+     * @param array|object $options Optional. Options for the search.
+     * - string market Optional. A ISO 3166-1 alpha-2 country code. Limit the results to tracks that are playable in this market.
      * - int limit Optional. Limit the number of tracks. Default is 20.
      * - int offset Optional. Number of tracks to skip. Default is 0.
      *
@@ -528,11 +529,13 @@ class SpotifyWebAPI
     public function search($query, $type, $options = array())
     {
         $defaults = array(
+            'market' => '',
             'limit' => 20,
             'offset' => 0
         );
 
         $options = array_merge($defaults, (array) $options);
+        $options = array_filter($options);
         $type = implode(',', (array) $type);
 
         $response = Request::api('GET', '/v1/search', array_merge($options, array(

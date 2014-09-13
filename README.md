@@ -289,6 +289,16 @@ $tracks = $api->search('song 2', 'track', array(
 print_r($tracks);
 ```
 
+Search for tracks in a specific market
+
+```php
+$tracks = $api->search('song 2', 'track', array(
+    'market' => 'se'
+));
+
+print_r($tracks);
+```
+
 Update a user's playlist
 
 ```php
