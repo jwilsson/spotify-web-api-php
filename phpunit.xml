@@ -17,10 +17,4 @@
         </testsuite>
     </testsuites>
 
-    <php>
-        <env name="SPOTIFY_CLIENT_ID" value="40eba578acc44b5cae8680ccd5542b4f" />
-        <env name="SPOTIFY_CLIENT_SECRET" value="b37723a51a914fbca4c4c825ea8fb704" />
-        <env name="SPOTIFY_REDIRECT_URI" value="http://localhost/spotify-web-api-php/demo.php" />
-    </php>
-
 </phpunit>
