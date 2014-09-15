@@ -1,6 +1,7 @@
 # Spotify Web API PHP
 
 [![Build Status](https://travis-ci.org/jwilsson/spotify-web-api-php.svg?branch=master)](https://travis-ci.org/jwilsson/spotify-web-api-php)
+[![Coverage Status](https://img.shields.io/coveralls/jwilsson/spotify-web-api-php.svg)](https://coveralls.io/r/jwilsson/spotify-web-api-php?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/jwilsson/spotify-web-api-php/v/stable.svg)](https://packagist.org/packages/jwilsson/spotify-web-api-php)
 [![Latest Unstable Version](https://poser.pugx.org/jwilsson/spotify-web-api-php/v/unstable.svg)](https://packagist.org/packages/jwilsson/spotify-web-api-php)
 [![License](https://poser.pugx.org/jwilsson/spotify-web-api-php/license.svg)](https://packagist.org/packages/jwilsson/spotify-web-api-php)
