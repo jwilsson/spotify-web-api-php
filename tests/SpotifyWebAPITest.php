@@ -254,7 +254,9 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
             '69kOkLUCkxIZYexIgSG8rq'
         ));
 
-        $response = $this->api->getMySavedTracks();
+        $response = $this->api->getMySavedTracks(array(
+            'limit' => 5
+        ));
         $this->assertCount(5, $response->items);
 
         $this->api->deleteMyTracks(array(
