@@ -32,7 +32,7 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/save-tracks-user/
      *
-     * @param string|array IDs of the track to check for.
+     * @param string|array ID of the track(s) to add.
      *
      * @return bool
      */
@@ -55,7 +55,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to add tracks to.
-     * @param string|array $tracks IDs of the track(s) to add.
+     * @param string|array $tracks ID of the track(s) to add.
      * @param array|object $options Optional. Options for the new tracks.
      * - int position Optional. Zero-based position of where in the playlist to add the tracks. Tracks will be appened if omitted or false.
      *
@@ -118,7 +118,7 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/remove-tracks-user/
      *
-     * @param string|array IDs of the track to delete.
+     * @param string|array ID of the track(s) to delete.
      *
      * @return bool
      */
@@ -473,7 +473,7 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/check-users-saved-tracks/
      *
-     * @param string|array $tracks IDs of the track to check for.
+     * @param string|array $tracks ID of the track(s) to check for.
      *
      * @return array
      */
@@ -495,15 +495,14 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
-     * @param string|array $tracks IDs of the track(s) to add.
+     * @param string|array $tracks ID of the track(s) to add.
      *
      * @return bool
      */
     public function replacePlaylistTracks($userId, $playlistId, $tracks)
     {
         $tracks = $this->idToUri($tracks);
-        $tracks = implode(',', (array) $tracks);
-        $tracks = array('uris' => array($tracks));
+        $tracks = array('uris' => (array) $tracks);
         $tracks = json_encode($tracks);
 
         $response = Request::api('PUT', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', $tracks, array(

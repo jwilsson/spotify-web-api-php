@@ -109,6 +109,16 @@ class Session
     }
 
     /**
+     * Get the refresh token.
+     *
+     * @return string
+     */
+    public function getRefreshToken()
+    {
+        return $this->refreshToken;
+    }
+
+    /**
      * Refresh a access token.
      *
      * @return bool
@@ -240,20 +250,10 @@ class Session
     }
 
     /**
-     * Get the refresh token.
-     *
-     * @return string
-     */
-    public function getRefreshToken()
-    {
-        return $this->refreshToken;
-    }
-
-    /**
      * Set the refresh token.
      *
      * @param string $refreshToken The refresh token.
-     * 
+     *
      * @return void
      */
     public function setRefreshToken($refreshToken)
