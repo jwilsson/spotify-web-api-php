@@ -15,8 +15,9 @@
         "php": ">=5.3.3"
     },
     "require-dev": {
-        "vlucas/phpdotenv": "1.*",
-        "phpunit/phpunit": "4.*"
+        "phpunit/phpunit": "4.*",
+        "satooshi/php-coveralls": "dev-master",
+        "vlucas/phpdotenv": "1.*"
     },
     "autoload": {
         "psr-4": {
