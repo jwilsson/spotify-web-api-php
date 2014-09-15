@@ -154,7 +154,7 @@ class Session
      *
      * @param array $scope Optional. Scope(s) to request from the user.
      *
-     * @return string
+     * @return bool
      */
     public function requestCredentialsToken($scope = array())
     {
