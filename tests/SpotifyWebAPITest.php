@@ -4,6 +4,7 @@ use \SpotifyWebAPI;
 class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 {
     private $api;
+    private $playlistID;
 
     public function setUp()
     {
@@ -14,6 +15,13 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->session->refreshToken();
 
         $this->api->setAccessToken($this->session->getAccessToken());
+
+        // Create a new playlist each time the tests are run
+        $response = $this->api->createUserPlaylist('mcgurk', array(
+            'name' => 'Test playlist'
+        ));
+
+        $this->playlistID = $response->id;
     }
 
     public function testAddMyTracksSingle()
@@ -35,14 +43,14 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testAddUserPlaylistTracksSingle()
     {
-        $result = $this->api->addUserPlaylistTracks('mcgurk', '606nLQuR41ZaA2vEZ4Ofb8', '7EjyzZcbLxW7PaaLua9Ksb');
+        $result = $this->api->addUserPlaylistTracks('mcgurk', $this->playlistID, '7EjyzZcbLxW7PaaLua9Ksb');
 
         $this->assertTrue($result);
     }
 
     public function testAddUserPlaylistTracksMultiple()
     {
-        $result = $this->api->addUserPlaylistTracks('mcgurk', '606nLQuR41ZaA2vEZ4Ofb8', array(
+        $result = $this->api->addUserPlaylistTracks('mcgurk', $this->playlistID, array(
             '1id6H6vcwSB9GGv9NXh5cl',
             '3mqRLlD9j92BBv1ueFhJ1l'
         ));
@@ -53,7 +61,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     public function testCreateUserPlaylist()
     {
         $response = $this->api->createUserPlaylist('mcgurk', array(
-            'name' => 'Foobar playlist'
+            'name' => 'Foobar playlist',
+            'public' => false
         ));
 
         $this->assertObjectHasAttribute('id', $response);
@@ -87,7 +96,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testDeletePlaylistTracks()
     {
-        $response = $this->api->deletePlaylistTracks('mcgurk', '606nLQuR41ZaA2vEZ4Ofb8', array(
+        $response = $this->api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
             array(
                 'id' => '7EjyzZcbLxW7PaaLua9Ksb'
             )
@@ -332,14 +341,19 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetUserPlaylist()
     {
-        $response = $this->api->getUserPlaylist('mcgurk', '606nLQuR41ZaA2vEZ4Ofb8');
+        $response = $this->api->getUserPlaylist('mcgurk', $this->playlistID);
 
         $this->assertObjectHasAttribute('id', $response);
     }
 
     public function testGetUserPlaylistTracks()
     {
-        $response = $this->api->getUserPlaylistTracks('mcgurk', '606nLQuR41ZaA2vEZ4Ofb8');
+        $this->api->addUserPlaylistTracks('mcgurk', $this->playlistID, array(
+            '1id6H6vcwSB9GGv9NXh5cl',
+            '3mqRLlD9j92BBv1ueFhJ1l'
+        ));
+
+        $response = $this->api->getUserPlaylistTracks('mcgurk', $this->playlistID);
 
         $this->assertObjectHasAttribute('track', $response->items[0]);
         $this->assertObjectHasAttribute('track', $response->items[1]);
@@ -385,14 +399,14 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testReplacePlaylistTracksSingle()
     {
-        $result = $this->api->replacePlaylistTracks('mcgurk', '606nLQuR41ZaA2vEZ4Ofb8', '7EjyzZcbLxW7PaaLua9Ksb');
+        $result = $this->api->replacePlaylistTracks('mcgurk', $this->playlistID, '7EjyzZcbLxW7PaaLua9Ksb');
 
         $this->assertTrue($result);
     }
 
     public function testReplacePlaylistTracksMultiple()
     {
-        $result = $this->api->replacePlaylistTracks('mcgurk', '606nLQuR41ZaA2vEZ4Ofb8', array(
+        $result = $this->api->replacePlaylistTracks('mcgurk', $this->playlistID, array(
             '1id6H6vcwSB9GGv9NXh5cl',
             '3mqRLlD9j92BBv1ueFhJ1l'
         ));
@@ -439,7 +453,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testUpdateUserPlaylist()
     {
-        $result = $this->api->updateUserPlaylist('mcgurk', '606nLQuR41ZaA2vEZ4Ofb8', array(
+        $result = $this->api->updateUserPlaylist('mcgurk', $this->playlistID, array(
             'public' => false
         ));
 
