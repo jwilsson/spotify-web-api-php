@@ -281,6 +281,7 @@ class SpotifyWebAPI
      *
      * @param string $artistId ID of the artist.
      * @param array|object $options Optional. Options for the albums.
+     * - string market Optional. A ISO 3166-1 alpha-2 country code. Limit the results to tracks that are playable in this market.
      * - int limit Optional. Limit the number of albums. Default is 20.
      * - int offset Optional. Number of albums to skip. Default is 0.
      *
@@ -289,11 +290,13 @@ class SpotifyWebAPI
     public function getArtistAlbums($artistId, $options = array())
     {
         $defaults = array(
+            'market' => '',
             'limit' => 20,
             'offset' => 0
         );
 
         $options = array_merge($defaults, (array) $options);
+        $options = array_filter($options);
         $response = Request::api('GET', '/v1/artists/' . $artistId . '/albums', $options);
 
         return $response['body'];
