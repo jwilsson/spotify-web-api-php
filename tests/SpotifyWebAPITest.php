@@ -79,6 +79,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testDeleteMyTracksSingle()
     {
+        $this->api->addMyTracks('7EjyzZcbLxW7PaaLua9Ksb');
+
         $result = $this->api->deleteMyTracks('7EjyzZcbLxW7PaaLua9Ksb');
 
         $this->assertTrue($result);
@@ -86,6 +88,11 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testDeleteMyTracksMultiple()
     {
+        $this->api->addMyTracks(array(
+            '1id6H6vcwSB9GGv9NXh5cl',
+            '3mqRLlD9j92BBv1ueFhJ1l'
+        ));
+
         $result = $this->api->deleteMyTracks(array(
             '1id6H6vcwSB9GGv9NXh5cl',
             '3mqRLlD9j92BBv1ueFhJ1l'
