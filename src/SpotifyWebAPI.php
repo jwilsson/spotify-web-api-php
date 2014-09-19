@@ -446,9 +446,17 @@ class SpotifyWebAPI
      *
      * @return object
      */
-    public function getUserPlaylistTracks($userId, $playlistId)
+    public function getUserPlaylistTracks($userId, $playlistId, $options = array())
     {
-        $response = Request::api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', array(), array(
+
+        $defaults = array(
+            'limit' => 20,
+            'offset' => 0
+        );
+
+        $options = array_merge($defaults, (array) $options);
+
+        $response = Request::api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', $options, array(
             'Authorization' => 'Bearer ' . $this->accessToken
         ));
 
