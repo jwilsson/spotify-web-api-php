@@ -46,6 +46,13 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $result = $this->api->addUserPlaylistTracks('mcgurk', $this->playlistID, '7EjyzZcbLxW7PaaLua9Ksb');
 
         $this->assertTrue($result);
+
+        // Clean up
+        $this->api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
+            array(
+                'id' => '7EjyzZcbLxW7PaaLua9Ksb'
+            )
+        ));
     }
 
     public function testAddUserPlaylistTracksMultiple()
@@ -56,6 +63,16 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         ));
 
         $this->assertTrue($result);
+
+        // Clean up
+        $this->api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
+            array(
+                'id' => '1id6H6vcwSB9GGv9NXh5cl'
+            ),
+            array(
+                'id' => '3mqRLlD9j92BBv1ueFhJ1l'
+            )
+        ));
     }
 
     public function testCreateUserPlaylist()
