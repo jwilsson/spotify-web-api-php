@@ -443,18 +443,24 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
+     * @param array|object $options Optional. Options for the tracks.
+     * - array fields Optional. A list of fields to return. See Spotify docs for more info.
+     * - int limit Optional. Limit the number of tracks. Default is 20.
+     * - int offset Optional. Number of tracks to skip. Default is 0.
      *
      * @return object
      */
     public function getUserPlaylistTracks($userId, $playlistId, $options = array())
     {
-
         $defaults = array(
+            'fields' => array(),
             'limit' => 20,
             'offset' => 0
         );
 
         $options = array_merge($defaults, (array) $options);
+        $options['fields'] = implode(',', $options['fields']);
+        $options = array_filter($options);
 
         $response = Request::api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', $options, array(
             'Authorization' => 'Bearer ' . $this->accessToken

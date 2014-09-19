@@ -404,6 +404,34 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('track', $response->items[1]);
     }
 
+    public function testGetUserPlaylistTracksFields()
+    {
+        $this->api->addUserPlaylistTracks('mcgurk', $this->playlistID, array(
+            '1id6H6vcwSB9GGv9NXh5cl',
+            '3mqRLlD9j92BBv1ueFhJ1l'
+        ));
+
+        $response = $this->api->getUserPlaylistTracks('mcgurk', $this->playlistID, array(
+            'fields' => array('href')
+        ));
+
+        $this->assertObjectHasAttribute('href', $response);
+    }
+
+    public function testGetUserPlaylistTracksLimit()
+    {
+        $this->api->addUserPlaylistTracks('mcgurk', $this->playlistID, array(
+            '1id6H6vcwSB9GGv9NXh5cl',
+            '3mqRLlD9j92BBv1ueFhJ1l'
+        ));
+
+        $response = $this->api->getUserPlaylistTracks('mcgurk', $this->playlistID, array(
+            'limit' => 1
+        ));
+
+        $this->assertCount(1, $response->items);
+    }
+
     public function testMe()
     {
         $response = $this->api->me();
