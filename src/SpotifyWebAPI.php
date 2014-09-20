@@ -146,7 +146,7 @@ class SpotifyWebAPI
      * - position array Optional. Position of the track in the playlist.
      * @param string $snapshotId Optional. The playlist's snapshot ID.
      *
-     * @return string|bool
+     * @return string|bool
      */
     public function deletePlaylistTracks($userId, $playlistId, $tracks, $snapshotId = '')
     {
