@@ -531,6 +531,7 @@ class SpotifyWebAPI
 
     /**
      * Search for an item.
+     * Requires a valid access token if market=from_token is used.
      * https://developer.spotify.com/web-api/search-item/
      *
      * @param string $query The query to search for. Will be URL-encoded. More info: https://developer.spotify.com/web-api/search-item/
@@ -550,14 +551,20 @@ class SpotifyWebAPI
             'offset' => 0
         );
 
+        $type = implode(',', (array) $type);
         $options = array_merge($defaults, (array) $options);
         $options = array_filter($options);
-        $type = implode(',', (array) $type);
-
-        $response = Request::api('GET', '/v1/search', array_merge($options, array(
+        $options =  array_merge($options, array(
             'query' => $query,
             'type' => $type
-        )));
+        ));
+
+        $headers = array();
+        if (isset($options['market']) && $options['market'] == 'from_token') {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
+        }
+
+        $response = Request::api('GET', '/v1/search', $options, $headers);
 
         return $response['body'];
     }
