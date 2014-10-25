@@ -288,6 +288,25 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $response = $this->api->getArtistAlbums('nonexistent', 'se');
     }
 
+    public function testGetFeaturedPlaylists()
+    {
+        $response = $this->api->getFeaturedPlaylists(array(
+            'timestamp' => '2014-10-25T21:00:00' // Saturday night
+        ));
+
+        $this->assertObjectHasAttribute('playlists', $response);
+    }
+
+    public function testGetFeaturedPlaylistsLimit()
+    {
+        $response = $this->api->getFeaturedPlaylists(array(
+            'timestamp' => '2014-10-25T21:00:00', // Saturday night
+            'limit' => 3
+        ));
+
+        $this->assertCount(3, $response->playlists->items);
+    }
+
     public function testGetMySavedTracks()
     {
         $this->api->addMyTracks('7EjyzZcbLxW7PaaLua9Ksb');

@@ -179,6 +179,13 @@ $tracks = $api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', 'se');
 print_r($tracks);
 ```
 
+Get Spotify featured playlists
+```php
+$playlists = $api->getFeaturedPlaylists();
+
+print_r($playlists);
+```
+
 Get a user's saved tracks
 ```php
 $tracks = $api->getMySavedTracks();
