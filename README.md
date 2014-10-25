@@ -89,7 +89,7 @@ $api->addMyTracks(array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'));
 Add tracks to a user's playlist
 
 ```php
-$api->addUserPlaylistTracks('username', 'playlist_id' array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'));
+$api->addUserPlaylistTracks('username', 'playlist_id', array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'));
 ```
 
 Create a new playlist for a user
