@@ -13,7 +13,9 @@ if (isset($_GET['code'])) {
     $session->requestToken($_GET['code']);
     $api->setAccessToken($session->getAccessToken());
 
-    print_r($api->me());
+    print_r($api->getNewReleases(array(
+        'country' => 'se'
+    )));
 } else {
     header('Location: ' . $session->getAuthorizeUrl(array(
         'scope' => array('user-read-email')

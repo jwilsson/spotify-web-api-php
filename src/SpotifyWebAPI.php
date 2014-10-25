@@ -327,8 +327,8 @@ class SpotifyWebAPI
      * - string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Show playlists in this language. Default is en_US.
      * - string country Optional. An ISO 3166-1 alpha-2 country code. Show playlists from this country.
      * - string timestamp Optional. A ISO 8601 timestamp. Show playlists relevant to this date and time. Default is UTC time.
-     * - int limit Optional. Limit the number of albums. Default is 20.
-     * - int offset Optional. Number of albums to skip. Default is 0.
+     * - int limit Optional. Limit the number of playlists. Default is 20.
+     * - int offset Optional. Number of playlists to skip. Default is 0.
      *
      * @return object
      */
@@ -345,6 +345,35 @@ class SpotifyWebAPI
         $options = array_merge($defaults, (array) $options);
         $options = array_filter($options);
         $response = Request::api('GET', '/v1/browse/featured-playlists', $options, array(
+            'Authorization' => 'Bearer ' . $this->accessToken
+        ));
+
+        return $response['body'];
+    }
+
+    /**
+     * Get new releases
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-list-new-releases/
+     *
+     * @param array|object $options Optional. Options for the items.
+     * - string country Optional. An ISO 3166-1 alpha-2 country code. Show items relevant to this country.
+     * - int limit Optional. Limit the number of items. Default is 20.
+     * - int offset Optional. Number of items to skip. Default is 0.
+     *
+     * @return object
+     */
+    public function getNewReleases($options = array())
+    {
+        $defaults = array(
+            'country' => '',
+            'limit' => 20,
+            'offset' => 0
+        );
+
+        $options = array_merge($defaults, (array) $options);
+        $options = array_filter($options);
+        $response = Request::api('GET', '/v1/browse/new-releases', $options, array(
             'Authorization' => 'Bearer ' . $this->accessToken
         ));
 

@@ -186,6 +186,15 @@ $playlists = $api->getFeaturedPlaylists();
 print_r($playlists);
 ```
 
+Get new releases
+```php
+$items = $api->getNewReleases(array(
+    'country' => 'se'
+));
+
+print_r($items);
+```
+
 Get a user's saved tracks
 ```php
 $tracks = $api->getMySavedTracks();
