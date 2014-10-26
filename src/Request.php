@@ -16,9 +16,9 @@ class Request
      *
      * @return array
      */
-    public static function account($method, $uri, $parameters = array(), $headers = array())
+    public function account($method, $uri, $parameters = array(), $headers = array())
     {
-        return self::send($method, self::ACCOUNT_URL . $uri, $parameters, $headers);
+        return $this->send($method, self::ACCOUNT_URL . $uri, $parameters, $headers);
     }
 
     /**
@@ -31,9 +31,9 @@ class Request
      *
      * @return array
      */
-    public static function api($method, $uri, $parameters = array(), $headers = array())
+    public function api($method, $uri, $parameters = array(), $headers = array())
     {
-        return self::send($method, self::API_URL . $uri, $parameters, $headers);
+        return $this->send($method, self::API_URL . $uri, $parameters, $headers);
     }
 
     /**
@@ -47,7 +47,7 @@ class Request
      *
      * @return array
      */
-    public static function send($method, $url, $parameters = array(), $headers = array())
+    public function send($method, $url, $parameters = array(), $headers = array())
     {
         // Sometimes a JSON object is passed
         if (is_array($parameters) || is_object($parameters)) {

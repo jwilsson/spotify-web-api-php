@@ -10,6 +10,8 @@ class Session
     private $redirectUri = '';
     private $refreshToken = '';
 
+    private $request = null;
+
     /**
      * Constructor
      * Set up client credentials.
@@ -17,14 +19,21 @@ class Session
      * @param string $clientId The client ID.
      * @param string $clientSecret The client secret.
      * @param string $redirectUri The redirect URI.
+     * @param Request $request Optional. The Request object to use.
      *
      * @return void
      */
-    public function __construct($clientId, $clientSecret, $redirectUri)
+    public function __construct($clientId, $clientSecret, $redirectUri, $request = null)
     {
         $this->setClientId($clientId);
         $this->setClientSecret($clientSecret);
         $this->setRedirectUri($redirectUri);
+
+        if (is_null($request)) {
+            $request = new Request();
+        }
+
+        $this->request = $request;
     }
 
     /**
@@ -136,7 +145,7 @@ class Session
             'Authorization' => 'Basic ' . $payload
         );
 
-        $response = Request::account('POST', '/api/token', $parameters, $headers);
+        $response = $this->request->account('POST', '/api/token', $parameters, $headers);
         $response = $response['body'];
 
         if (isset($response->access_token)) {
@@ -169,7 +178,7 @@ class Session
             'Authorization' => 'Basic ' . $payload
         );
 
-        $response = Request::account('POST', '/api/token', $parameters, $headers);
+        $response = $this->request->account('POST', '/api/token', $parameters, $headers);
         $response = $response['body'];
 
         if (isset($response->access_token)) {
@@ -199,7 +208,7 @@ class Session
             'redirect_uri' => $this->getRedirectUri()
         );
 
-        $response = Request::account('POST', '/api/token', $parameters);
+        $response = $this->request->account('POST', '/api/token', $parameters);
         $response = $response['body'];
 
         if (isset($response->access_token)) {
