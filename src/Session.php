@@ -15,7 +15,7 @@ class Session
      * Set up client credentials.
      *
      * @param string $clientId The client ID.
-     * @param string $clientSecret The client secret
+     * @param string $clientSecret The client secret.
      * @param string $redirectUri The redirect URI.
      *
      * @return void

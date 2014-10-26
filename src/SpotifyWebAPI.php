@@ -6,9 +6,9 @@ class SpotifyWebAPI
     private $accessToken = '';
 
     /**
-     * Convert Spotify object IDs to Spotify URIs
+     * Convert Spotify object IDs to Spotify URIs.
      *
-     * @param array|string $ids ID(s) to convert
+     * @param array|string $ids ID(s) to convert.
      *
      * @return array|string
      */
@@ -92,7 +92,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user to create the playlist for.
      * @param array|object $data Data for the new playlist.
-     * - name string Required. Name of the playlist
+     * - name string Required. Name of the playlist.
      * - public bool Optional. Whether the playlist should be public or not. Default is true.
      *
      * @return object
@@ -319,7 +319,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get Spotify featured playlists
+     * Get Spotify featured playlists.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-list-featured-playlists/
      *
@@ -352,7 +352,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get new releases
+     * Get new releases.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-list-new-releases/
      *
@@ -649,7 +649,7 @@ class SpotifyWebAPI
      * https://developer.spotify.com/web-api/change-playlist-details/
      *
      * @param array|object $data Data for the new playlist.
-     * - name string Required. Name of the playlist
+     * - name string Required. Name of the playlist.
      * - public bool Optional. Whether the playlist should be public or not. Default is true.
      *
      * @return bool
