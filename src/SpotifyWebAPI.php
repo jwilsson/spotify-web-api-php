@@ -122,7 +122,9 @@ class SpotifyWebAPI
             'public' => true
         );
 
-        $data = json_encode(array_merge($defaults, (array) $data));
+        $data = array_merge($defaults, (array) $data);
+        $data = json_encode($data);
+
         $response = $this->request->api('POST', '/v1/users/' . $userId . '/playlists', $data, array(
             'Authorization' => 'Bearer ' . $this->accessToken,
             'Content-Type' => 'application/json'
@@ -687,7 +689,14 @@ class SpotifyWebAPI
      */
     public function updateUserPlaylist($userId, $playlistId, $data)
     {
+        $defaults = array(
+            'name' =>  '',
+            'public' => true
+        );
+
+        $data = array_merge($defaults, (array) $data);
         $data = json_encode($data);
+
         $response = $this->request->api('PUT', '/v1/users/' . $userId . '/playlists/' . $playlistId, $data, array(
             'Authorization' => 'Bearer ' . $this->accessToken,
             'Content-Type' => 'application/json'
