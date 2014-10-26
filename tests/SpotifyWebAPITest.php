@@ -3,82 +3,75 @@ use \SpotifyWebAPI;
 
 class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 {
-    private $api;
-    private $playlistID;
+    private $playlistID = '0UZ0Ll4HJHR7yvURYbHJe9';
 
-    public function setUp()
+    private function setupMock($fixture = 200)
     {
-        $this->api = new SpotifyWebAPI\SpotifyWebAPI();
-        $this->session = new SpotifyWebAPI\Session(getenv('SPOTIFY_CLIENT_ID'), getenv('SPOTIFY_CLIENT_SECRET'), getenv('SPOTIFY_REDIRECT_URI'));
+        if (is_int($fixture)) {
+            $return = array(
+                'status' => $fixture
+            );
+        } else {
+            $fixture = __DIR__ . '/fixtures/' . $fixture . '.json';
+            $fixture = file_get_contents($fixture);
 
-        $this->session->setRefreshToken(getenv('SPOTIFY_REFRESH_TOKEN'));
-        $this->session->refreshToken();
+            $response = json_decode($fixture);
+            $return = array(
+                'body' => $response
+            );
+        }
 
-        $this->api->setAccessToken($this->session->getAccessToken());
+        $request = $this->getMock('SpotifyWebAPI\Request');
+        $request->method('api')
+                ->willReturn($return);
 
-        // Create a new playlist each time the tests are run
-        $response = $this->api->createUserPlaylist('mcgurk', array(
-            'name' => 'Test playlist'
-        ));
-
-        $this->playlistID = $response->id;
+        $api = new SpotifyWebAPI\SpotifyWebAPI($request);
+        return $api;
     }
 
     public function testAddMyTracksSingle()
     {
-        $result = $this->api->addMyTracks('7EjyzZcbLxW7PaaLua9Ksb');
+        $api = $this->setupMock();
+        $response = $api->addMyTracks('7EjyzZcbLxW7PaaLua9Ksb');
 
-        $this->assertTrue($result);
+        $this->assertTrue($response);
     }
 
     public function testAddMyTracksMultiple()
     {
-        $result = $this->api->addMyTracks(array(
+        $api = $this->setupMock();
+        $response = $api->addMyTracks(array(
             '1id6H6vcwSB9GGv9NXh5cl',
             '3mqRLlD9j92BBv1ueFhJ1l'
         ));
 
-        $this->assertTrue($result);
+        $this->assertTrue($response);
     }
 
     public function testAddUserPlaylistTracksSingle()
     {
-        $result = $this->api->addUserPlaylistTracks('mcgurk', $this->playlistID, '7EjyzZcbLxW7PaaLua9Ksb');
+        $api = $this->setupMock(201);
+        $response = $api->addUserPlaylistTracks('mcgurk', $this->playlistID, '7EjyzZcbLxW7PaaLua9Ksb');
 
-        $this->assertTrue($result);
-
-        // Clean up
-        $this->api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
-            array(
-                'id' => '7EjyzZcbLxW7PaaLua9Ksb'
-            )
-        ));
+        $this->assertTrue($response);
     }
 
     public function testAddUserPlaylistTracksMultiple()
     {
-        $result = $this->api->addUserPlaylistTracks('mcgurk', $this->playlistID, array(
+        $api = $this->setupMock(201);
+        $response = $api->addUserPlaylistTracks('mcgurk', $this->playlistID, array(
             '1id6H6vcwSB9GGv9NXh5cl',
             '3mqRLlD9j92BBv1ueFhJ1l'
         ));
 
-        $this->assertTrue($result);
-
-        // Clean up
-        $this->api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
-            array(
-                'id' => '1id6H6vcwSB9GGv9NXh5cl'
-            ),
-            array(
-                'id' => '3mqRLlD9j92BBv1ueFhJ1l'
-            )
-        ));
+        $this->assertTrue($response);
     }
 
     public function testCreateUserPlaylist()
     {
-        $response = $this->api->createUserPlaylist('mcgurk', array(
-            'name' => 'Foobar playlist',
+        $api = $this->setupMock('user-playlist');
+        $response = $api->createUserPlaylist('mcgurk', array(
+            'name' => 'Test playlist',
             'public' => false
         ));
 
@@ -87,8 +80,9 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testCreateUserPlaylistPublic()
     {
-        $response = $this->api->createUserPlaylist('mcgurk', array(
-            'name' => 'Public playlist'
+        $api = $this->setupMock('user-playlist-public');
+        $response = $api->createUserPlaylist('mcgurk', array(
+            'name' => 'Test playlist'
         ));
 
         $this->assertTrue($response->public);
@@ -96,33 +90,27 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testDeleteMyTracksSingle()
     {
-        $this->api->addMyTracks('7EjyzZcbLxW7PaaLua9Ksb');
+        $api = $this->setupMock();
+        $response = $api->deleteMyTracks('7EjyzZcbLxW7PaaLua9Ksb');
 
-        $result = $this->api->deleteMyTracks('7EjyzZcbLxW7PaaLua9Ksb');
-
-        $this->assertTrue($result);
+        $this->assertTrue($response);
     }
 
     public function testDeleteMyTracksMultiple()
     {
-        $this->api->addMyTracks(array(
+        $api = $this->setupMock();
+        $response = $api->deleteMyTracks(array(
             '1id6H6vcwSB9GGv9NXh5cl',
             '3mqRLlD9j92BBv1ueFhJ1l'
         ));
 
-        $result = $this->api->deleteMyTracks(array(
-            '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l'
-        ));
-
-        $this->assertTrue($result);
+        $this->assertTrue($response);
     }
 
     public function testDeletePlaylistTracksSingle()
     {
-        $this->api->addUserPlaylistTracks('mcgurk', $this->playlistID, '7EjyzZcbLxW7PaaLua9Ksb');
-
-        $response = $this->api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
+        $api = $this->setupMock('user-playlist-snapshot-id');
+        $response = $api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
             array(
                 'id' => '7EjyzZcbLxW7PaaLua9Ksb'
             )
@@ -133,12 +121,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testDeletePlaylistTracksMultiple()
     {
-        $this->api->addUserPlaylistTracks('mcgurk', $this->playlistID, array(
-            '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l'
-        ));
-
-        $response = $this->api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
+        $api = $this->setupMock('user-playlist-snapshot-id');
+        $response = $api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
             array(
                 'id' => '1id6H6vcwSB9GGv9NXh5cl'
             ),
@@ -152,21 +136,16 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetAlbum()
     {
-        $response = $this->api->getAlbum('7u6zL7kqpgLPISZYXNTgYk');
+        $api = $this->setupMock('album');
+        $response = $api->getAlbum('7u6zL7kqpgLPISZYXNTgYk');
 
         $this->assertObjectHasAttribute('id', $response);
     }
 
-    public function testGetAlbumNonExistent()
-    {
-        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
-
-        $response = $this->api->getAlbum('nonexistent');
-    }
-
     public function testGetAlbums()
     {
-        $response = $this->api->getAlbums(array(
+        $api = $this->setupMock('albums');
+        $response = $api->getAlbums(array(
             '1oR3KrPIp4CbagPa3PhtPp',
             '6lPb7Eoon6QPbscWbMsk6a'
         ));
@@ -175,67 +154,34 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('id', $response->albums[1]);
     }
 
-    public function testGetAlbumsNonExistent()
-    {
-        $response = $this->api->getAlbums(array('nonexistent'));
-
-        $this->assertEmpty($response->albums[0]);
-    }
-
     public function testGetAlbumTracks()
     {
-        $response = $this->api->getAlbumTracks('1oR3KrPIp4CbagPa3PhtPp');
+        $api = $this->setupMock('album-tracks');
+        $response = $api->getAlbumTracks('1oR3KrPIp4CbagPa3PhtPp');
 
         $this->assertObjectHasAttribute('items', $response);
     }
 
-    public function testGetAlbumTracksNonExistent()
-    {
-        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
-
-        $response = $this->api->getAlbumTracks('nonexistent');
-    }
-
-    public function testGetAlbumTracksLimit()
-    {
-        $response = $this->api->getAlbumTracks('1oR3KrPIp4CbagPa3PhtPp', array(
-            'limit' => 5
-        ));
-
-        $this->assertCount(5, $response->items);
-    }
-
     public function testGetArtist()
     {
-        $response = $this->api->getArtist('36QJpDe2go2KgaRleHCDTp');
+        $api = $this->setupMock('artist');
+        $response = $api->getArtist('36QJpDe2go2KgaRleHCDTp');
 
         $this->assertObjectHasAttribute('id', $response);
     }
 
-    public function testGetArtistNonExistent()
-    {
-        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
-
-        $response = $this->api->getArtist('nonexistent');
-    }
-
     public function testGetArtistRelatedArtists()
     {
-        $response = $this->api->getArtistRelatedArtists('36QJpDe2go2KgaRleHCDTp');
+        $api = $this->setupMock('artist-related-artists');
+        $response = $api->getArtistRelatedArtists('36QJpDe2go2KgaRleHCDTp');
 
         $this->assertNotEmpty($response->artists);
     }
 
-    public function testGetArtistRelatedArtistsNonExistent()
-    {
-        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
-
-        $response = $this->api->getArtistRelatedArtists('nonexistent');
-    }
-
     public function testGetArtists()
     {
-        $response = $this->api->getArtists(array(
+        $api = $this->setupMock('artists');
+        $response = $api->getArtists(array(
             '6v8FB84lnmJs434UJf2Mrm',
             '6olE6TJLqED3rqDCT0FyPh'
         ));
@@ -244,139 +190,62 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('id', $response->artists[1]);
     }
 
-    public function testGetArtistsNonExistent()
-    {
-        $response = $this->api->getArtists(array('nonexistent'));
-
-        $this->assertEmpty($response->artists[0]);
-    }
-
     public function testGetArtistAlbums()
     {
-        $response = $this->api->getArtistAlbums('6v8FB84lnmJs434UJf2Mrm');
+        $api = $this->setupMock('artist-albums');
+        $response = $api->getArtistAlbums('6v8FB84lnmJs434UJf2Mrm');
 
         $this->assertObjectHasAttribute('items', $response);
     }
 
-    public function testGetArtistAlbumsNonExistent()
-    {
-        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
-
-        $response = $this->api->getArtistAlbums('nonexistent');
-    }
-
-    public function testGetArtistAlbumsLimit()
-    {
-        $response = $this->api->getArtistAlbums('6v8FB84lnmJs434UJf2Mrm', array(
-            'limit' => 5
-        ));
-
-        $this->assertCount(5, $response->items);
-    }
-
     public function testGetArtistTopTracks()
     {
-        $response = $this->api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', 'se');
+        $api = $this->setupMock('artist-top-tracks');
+        $response = $api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', 'se');
 
         $this->assertObjectHasAttribute('tracks', $response);
     }
 
-    public function testGetArtistTopTracksNonExistent()
-    {
-        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
-
-        $response = $this->api->getArtistAlbums('nonexistent', 'se');
-    }
-
     public function testGetFeaturedPlaylists()
     {
-        $response = $this->api->getFeaturedPlaylists(array(
+        $api = $this->setupMock('featured-playlists');
+        $response = $api->getFeaturedPlaylists(array(
             'timestamp' => '2014-10-25T21:00:00' // Saturday night
         ));
 
         $this->assertObjectHasAttribute('playlists', $response);
     }
 
-    public function testGetFeaturedPlaylistsLimit()
-    {
-        $response = $this->api->getFeaturedPlaylists(array(
-            'timestamp' => '2014-10-25T21:00:00', // Saturday night
-            'limit' => 3
-        ));
-
-        $this->assertCount(3, $response->playlists->items);
-    }
-
     public function testGetNewReleases()
     {
-        $response = $this->api->getNewReleases(array(
+        $api = $this->setupMock('albums');
+        $response = $api->getNewReleases(array(
             'country' => 'se',
         ));
 
         $this->assertObjectHasAttribute('albums', $response);
     }
 
-    public function testGetNewReleasesLimit()
-    {
-        $response = $this->api->getNewReleases(array(
-            'country' => 'se',
-            'limit' => 3
-        ));
-
-        $this->assertCount(3, $response->albums->items);
-    }
-
     public function testGetMySavedTracks()
     {
-        $this->api->addMyTracks('7EjyzZcbLxW7PaaLua9Ksb');
+        $api = $this->setupMock('user-tracks');
+        $response = $api->getMySavedTracks();
 
-        $response = $this->api->getMySavedTracks();
         $this->assertNotEmpty($response->items);
-
-        $this->api->deleteMyTracks('7EjyzZcbLxW7PaaLua9Ksb');
-    }
-
-    public function testGetMySavedTracksLimit()
-    {
-        $this->api->addMyTracks(array(
-            '0oks4FnzhNp5QPTZtoet7c',
-            '2cGxRwrMyEAp8dEbuZaVv6',
-            '5CMjjywI0eZMixPeqNd75R',
-            '7oaEjLP2dTJLJsITbAxTOz',
-            '69kOkLUCkxIZYexIgSG8rq'
-        ));
-
-        $response = $this->api->getMySavedTracks(array(
-            'limit' => 5
-        ));
-        $this->assertCount(5, $response->items);
-
-        $this->api->deleteMyTracks(array(
-            '0oks4FnzhNp5QPTZtoet7c',
-            '2cGxRwrMyEAp8dEbuZaVv6',
-            '5CMjjywI0eZMixPeqNd75R',
-            '7oaEjLP2dTJLJsITbAxTOz',
-            '69kOkLUCkxIZYexIgSG8rq'
-        ));
     }
 
     public function testGetTrack()
     {
-        $response = $this->api->getTrack('7EjyzZcbLxW7PaaLua9Ksb');
+        $api = $this->setupMock('track');
+        $response = $api->getTrack('7EjyzZcbLxW7PaaLua9Ksb');
 
         $this->assertObjectHasAttribute('id', $response);
     }
 
-    public function testGetTrackNonExistent()
-    {
-        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
-
-        $response = $this->api->getTrack('nonexistent');
-    }
-
     public function testGetTracks()
     {
-        $response = $this->api->getTracks(array(
+        $api = $this->setupMock('tracks');
+        $response = $api->getTracks(array(
             '0eGsygTp906u18L0Oimnem',
             '1lDWb6b6ieDQ2xT7ewTC3G'
         ));
@@ -385,236 +254,117 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('id', $response->tracks[1]);
     }
 
-    public function testGetTracksNonExistent()
-    {
-        $response = $this->api->getTracks(array('nonexistent'));
-
-        $this->assertEmpty($response->tracks[0]);
-    }
-
     public function testGetUser()
     {
-        $response = $this->api->getUser('mcgurk');
+        $api = $this->setupMock('user');
+        $response = $api->getUser('mcgurk');
 
         $this->assertObjectHasAttribute('id', $response);
     }
 
-    public function testGetUserNonExistent()
-    {
-        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
-
-        $response = $this->api->getUser('not_a_real_user');
-    }
-
     public function testGetUserPlaylists()
     {
-        $response = $this->api->getUserPlaylists('mcgurk');
+        $api = $this->setupMock('user-playlists');
+        $response = $api->getUserPlaylists('mcgurk');
 
         $this->assertNotEmpty($response->items);
     }
 
-    public function testGetUserPlaylistsLimit()
-    {
-        $response = $this->api->getUserPlaylists('mcgurk', array(
-            'limit' => 5
-        ));
-
-        $this->assertCount(5, $response->items);
-    }
-
     public function testGetUserPlaylist()
     {
-        $response = $this->api->getUserPlaylist('mcgurk', $this->playlistID);
+        $api = $this->setupMock('user-playlist');
+        $response = $api->getUserPlaylist('mcgurk', $this->playlistID);
 
         $this->assertObjectHasAttribute('id', $response);
     }
 
     public function testGetUserPlaylistTracks()
     {
-        $this->api->addUserPlaylistTracks('mcgurk', $this->playlistID, array(
-            '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l'
-        ));
-
-        $response = $this->api->getUserPlaylistTracks('mcgurk', $this->playlistID);
+        $api = $this->setupMock('user-playlist-tracks');
+        $response = $api->getUserPlaylistTracks('mcgurk', $this->playlistID);
 
         $this->assertObjectHasAttribute('track', $response->items[0]);
         $this->assertObjectHasAttribute('track', $response->items[1]);
-
-        // Clean up
-        $this->api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
-            array(
-                'id' => '1id6H6vcwSB9GGv9NXh5cl'
-            ),
-            array(
-                'id' => '3mqRLlD9j92BBv1ueFhJ1l'
-            )
-        ));
-    }
-
-    public function testGetUserPlaylistTracksFields()
-    {
-        $this->api->addUserPlaylistTracks('mcgurk', $this->playlistID, array(
-            '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l'
-        ));
-
-        $response = $this->api->getUserPlaylistTracks('mcgurk', $this->playlistID, array(
-            'fields' => array('href')
-        ));
-
-        $this->assertObjectHasAttribute('href', $response);
-
-        // Clean up
-        $this->api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
-            array(
-                'id' => '1id6H6vcwSB9GGv9NXh5cl'
-            ),
-            array(
-                'id' => '3mqRLlD9j92BBv1ueFhJ1l'
-            )
-        ));
-    }
-
-    public function testGetUserPlaylistTracksLimit()
-    {
-        $this->api->addUserPlaylistTracks('mcgurk', $this->playlistID, array(
-            '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l'
-        ));
-
-        $response = $this->api->getUserPlaylistTracks('mcgurk', $this->playlistID, array(
-            'limit' => 1
-        ));
-
-        $this->assertCount(1, $response->items);
-
-        // Clean up
-        $this->api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
-            array(
-                'id' => '1id6H6vcwSB9GGv9NXh5cl'
-            ),
-            array(
-                'id' => '3mqRLlD9j92BBv1ueFhJ1l'
-            )
-        ));
     }
 
     public function testMe()
     {
-        $response = $this->api->me();
+        $api = $this->setupMock('user');
+        $response = $api->me();
 
         $this->assertObjectHasAttribute('id', $response);
     }
 
     public function testMyTracksContainsSingle()
     {
-        $this->api->addMyTracks('7EjyzZcbLxW7PaaLua9Ksb');
+        $api = $this->setupMock('user-tracks-contain');
+        $response = $api->myTracksContains('0oks4FnzhNp5QPTZtoet7c');
 
-        $response = $this->api->myTracksContains('7EjyzZcbLxW7PaaLua9Ksb');
         $this->assertTrue($response[0]);
-
-        $this->api->deleteMyTracks('7EjyzZcbLxW7PaaLua9Ksb');
     }
 
     public function testMyTracksContainsMultiple()
     {
-        $this->api->addMyTracks(array(
-            '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l'
-        ));
-
-        $response = $this->api->myTracksContains(array(
-            '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l'
+        $api = $this->setupMock('user-tracks-contains');
+        $response = $api->myTracksContains(array(
+            '0oks4FnzhNp5QPTZtoet7c',
+            '69kOkLUCkxIZYexIgSG8rq'
         ));
 
         $this->assertTrue($response[0]);
         $this->assertTrue($response[1]);
-
-        $this->api->deleteMyTracks(array(
-            '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l'
-        ));
     }
 
     public function testReplacePlaylistTracksSingle()
     {
-        $result = $this->api->replacePlaylistTracks('mcgurk', $this->playlistID, '7EjyzZcbLxW7PaaLua9Ksb');
+        $api = $this->setupMock(201);
+        $response = $api->replacePlaylistTracks('mcgurk', $this->playlistID, '7eEfbAG7wgV4AgkdTakVFT');
 
-        $this->assertTrue($result);
-
-        // Clean up
-        $this->api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
-            array(
-                'id' => '7EjyzZcbLxW7PaaLua9Ksb'
-            )
-        ));
+        $this->assertTrue($response);
     }
 
     public function testReplacePlaylistTracksMultiple()
     {
-        $result = $this->api->replacePlaylistTracks('mcgurk', $this->playlistID, array(
-            '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l'
+        $api = $this->setupMock(201);
+        $response = $api->replacePlaylistTracks('mcgurk', $this->playlistID, array(
+            '7kz6GbFr2MCI7PgXJOdq8c',
+            '6HM9UgDB38hLDFm7e1RF6W'
         ));
 
-        $this->assertTrue($result);
-
-        // Clean up
-        $this->api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
-            array(
-                'id' => '1id6H6vcwSB9GGv9NXh5cl'
-            ),
-            array(
-                'id' => '3mqRLlD9j92BBv1ueFhJ1l'
-            )
-        ));
+        $this->assertTrue($response);
     }
 
     public function testSearchAlbum()
     {
-        $response = $this->api->search('blur', 'album');
+        $api = $this->setupMock('search-album');
+        $response = $api->search('blur', 'album');
 
         $this->assertNotEmpty($response->albums->items);
     }
 
     public function testSearchArtist()
     {
-        $response = $this->api->search('blur', 'artist');
+        $api = $this->setupMock('search-artist');
+        $response = $api->search('blur', 'artist');
 
         $this->assertNotEmpty($response->artists->items);
     }
 
     public function testSearchTrack()
     {
-        $response = $this->api->search('song 2', 'track');
+        $api = $this->setupMock('search-track');
+        $response = $api->search('song 2', 'track');
 
         $this->assertNotEmpty($response->tracks->items);
     }
 
-    public function testSearchNonExistent()
-    {
-        $response = $this->api->search('nonexistent_foobar', 'album');
-
-        $this->assertEmpty($response->albums->items);
-    }
-
-    public function testSearchLimit()
-    {
-        $response = $this->api->search('blur', 'artist', array(
-            'limit' => 5
-        ));
-
-        $this->assertCount(5, $response->artists->items);
-    }
-
     public function testUpdateUserPlaylist()
     {
-        $result = $this->api->updateUserPlaylist('mcgurk', $this->playlistID, array(
+        $api = $this->setupMock();
+        $response = $api->updateUserPlaylist('mcgurk', $this->playlistID, array(
             'public' => false
         ));
 
-        $this->assertTrue($result);
+        $this->assertTrue($response);
     }
 }
