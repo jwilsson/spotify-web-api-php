@@ -57,4 +57,11 @@ class RequestTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(200, $response['status']);
     }
+
+    public function testSendMalformed()
+    {
+        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
+
+        $response = $this->request->send('GET', 'https://api.spotify.com/v1/albums/NON_EXISTING_ALBUM');
+    }
 }
