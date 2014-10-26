@@ -111,7 +111,7 @@ class SpotifyWebAPI
      * @param string $userId ID of the user to create the playlist for.
      * @param array|object $data Data for the new playlist.
      * - name string Required. Name of the playlist.
-     * - public bool Optional. Whether the playlist should be public or not. Default is true.
+     * - public bool Optional. Whether the playlist should be public or not.
      *
      * @return object
      */
@@ -231,8 +231,8 @@ class SpotifyWebAPI
      *
      * @param string $albumId ID of the album.
      * @param array|object $options Optional. Options for the tracks.
-     * - int limit Optional. Limit the number of tracks. Default is 20.
-     * - int offset Optional. Number of tracks to skip. Default is 0.
+     * - int limit Optional. Limit the number of tracks.
+     * - int offset Optional. Number of tracks to skip.
      *
      * @return object
      */
@@ -305,8 +305,8 @@ class SpotifyWebAPI
      * @param array|object $options Optional. Options for the albums.
      * - array album_type Optional. Album types to return. If omitted, all album types will be returned.
      * - string market Optional. A ISO 3166-1 alpha-2 country code. Limit the results to tracks that are playable in this market.
-     * - int limit Optional. Limit the number of albums. Default is 20.
-     * - int offset Optional. Number of albums to skip. Default is 0.
+     * - int limit Optional. Limit the number of albums.
+     * - int offset Optional. Number of albums to skip.
      *
      * @return object
      */
@@ -350,11 +350,11 @@ class SpotifyWebAPI
      * https://developer.spotify.com/web-api/get-list-featured-playlists/
      *
      * @param array|object $options Optional. Options for the playlists.
-     * - string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Show playlists in this language. Default is en_US.
+     * - string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Show playlists in this language.
      * - string country Optional. An ISO 3166-1 alpha-2 country code. Show playlists from this country.
-     * - string timestamp Optional. A ISO 8601 timestamp. Show playlists relevant to this date and time. Default is UTC time.
-     * - int limit Optional. Limit the number of playlists. Default is 20.
-     * - int offset Optional. Number of playlists to skip. Default is 0.
+     * - string timestamp Optional. A ISO 8601 timestamp. Show playlists relevant to this date and time.
+     * - int limit Optional. Limit the number of playlists.
+     * - int offset Optional. Number of playlists to skip.
      *
      * @return object
      */
@@ -385,8 +385,8 @@ class SpotifyWebAPI
      *
      * @param array|object $options Optional. Options for the items.
      * - string country Optional. An ISO 3166-1 alpha-2 country code. Show items relevant to this country.
-     * - int limit Optional. Limit the number of items. Default is 20.
-     * - int offset Optional. Number of items to skip. Default is 0.
+     * - int limit Optional. Limit the number of items.
+     * - int offset Optional. Number of items to skip.
      *
      * @return object
      */
@@ -414,8 +414,8 @@ class SpotifyWebAPI
      * https://developer.spotify.com/web-api/get-users-saved-tracks/
      *
      * @param array|object $options Optional. Options for the tracks.
-     * - int limit Optional. Limit the number of tracks. Default is 20.
-     * - int offset Optional. Number of tracks to skip. Default is 0.
+     * - int limit Optional. Limit the number of tracks.
+     * - int offset Optional. Number of tracks to skip.
      *
      * @return array
      */
@@ -489,8 +489,8 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user.
      * @param array|object $options Optional. Options for the tracks.
-     * - int limit Optional. Limit the number of tracks. Default is 20.
-     * - int offset Optional. Number of tracks to skip. Default is 0.
+     * - int limit Optional. Limit the number of tracks.
+     * - int offset Optional. Number of tracks to skip.
      *
      * @return object
      */
@@ -539,8 +539,8 @@ class SpotifyWebAPI
      * @param string $playlistId ID of the playlist.
      * @param array|object $options Optional. Options for the tracks.
      * - array fields Optional. A list of fields to return. See Spotify docs for more info.
-     * - int limit Optional. Limit the number of tracks. Default is 20.
-     * - int offset Optional. Number of tracks to skip. Default is 0.
+     * - int limit Optional. Limit the number of tracks.
+     * - int offset Optional. Number of tracks to skip.
      *
      * @return object
      */
@@ -628,12 +628,12 @@ class SpotifyWebAPI
      * Requires a valid access token if market=from_token is used.
      * https://developer.spotify.com/web-api/search-item/
      *
-     * @param string $query The query to search for. Will be URL-encoded. More info: https://developer.spotify.com/web-api/search-item/
-     * @param string|array $type The type of item to search for, "album", "artist" or "track".
+     * @param string $query The term to search for.
+     * @param string|array $type The type of item to search for; "album", "artist", or "track".
      * @param array|object $options Optional. Options for the search.
-     * - string market Optional. A ISO 3166-1 alpha-2 country code. Limit the results to tracks that are playable in this market.
-     * - int limit Optional. Limit the number of tracks. Default is 20.
-     * - int offset Optional. Number of tracks to skip. Default is 0.
+     * - string market Optional. A ISO 3166-1 alpha-2 country code. Limit the results to items that are playable in this market.
+     * - int limit Optional. Limit the number of items.
+     * - int offset Optional. Number of items to skip.
      *
      * @return array
      */
@@ -683,7 +683,7 @@ class SpotifyWebAPI
      *
      * @param array|object $data Data for the new playlist.
      * - name string Required. Name of the playlist.
-     * - public bool Optional. Whether the playlist should be public or not. Default is true.
+     * - public bool Optional. Whether the playlist should be public or not.
      *
      * @return bool
      */
