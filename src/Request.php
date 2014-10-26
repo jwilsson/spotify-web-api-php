@@ -65,7 +65,9 @@ class Request
             CURLOPT_RETURNTRANSFER => true
         );
 
+        $url = rtrim($url, '/');
         $method = strtoupper($method);
+
         switch ($method) {
             case 'DELETE':
                 $options[CURLOPT_CUSTOMREQUEST] = $method;
@@ -85,8 +87,9 @@ class Request
             default:
                 $options[CURLOPT_CUSTOMREQUEST] = $method;
 
-                $url = rtrim($url, '/');
-                $url .= '/?' . $parameters;
+                if ($parameters) {
+                    $url .= '/?' . $parameters;
+                }
 
                 break;
         }
