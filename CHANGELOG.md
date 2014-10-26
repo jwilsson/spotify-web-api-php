@@ -1,4 +1,12 @@
 # Changelog
+## 0.6.0
+* **This release contains breaking changes, read through this list before updating.**
+* All static methods on `Request` have been removed. `Request` now needs to be instantiated before using.
+* All methods that accepted the `limit` option now uses the correct Spotify default value if nothing has been specified.
+* It's now possible to specify your own `Request` object in `SpotifyWebAPI` and `Session` constructors.
+* `SpotifyWebAPI::getArtistAlbums()` now supports the `album_type` option.
+* `Request::send()` will only modify URLs when needed.
+
 ## 0.5.0
 * The following methods has been added
     * `Session::getExpires()`
