@@ -237,11 +237,13 @@ class SpotifyWebAPI
     public function getAlbumTracks($albumId, $options = array())
     {
         $defaults = array(
-            'limit' => 20,
+            'limit' => 0,
             'offset' => 0
         );
 
         $options = array_merge($defaults, (array) $options);
+        $options = array_filter($options);
+
         $response = $this->request->api('GET', '/v1/albums/' . $albumId . '/tracks', $options);
 
         return $response['body'];
@@ -311,7 +313,7 @@ class SpotifyWebAPI
         $defaults = array(
             'album_type' => array(),
             'market' => '',
-            'limit' => 20,
+            'limit' => 0,
             'offset' => 0
         );
 
@@ -358,7 +360,7 @@ class SpotifyWebAPI
     {
         $defaults = array(
             'country' => '',
-            'limit' => 20,
+            'limit' => 0,
             'locale' => '',
             'offset' => 0,
             'timestamp' => ''
@@ -366,6 +368,7 @@ class SpotifyWebAPI
 
         $options = array_merge($defaults, (array) $options);
         $options = array_filter($options);
+
         $response = $this->request->api('GET', '/v1/browse/featured-playlists', $options, array(
             'Authorization' => 'Bearer ' . $this->accessToken
         ));
@@ -389,12 +392,13 @@ class SpotifyWebAPI
     {
         $defaults = array(
             'country' => '',
-            'limit' => 20,
+            'limit' => 0,
             'offset' => 0
         );
 
         $options = array_merge($defaults, (array) $options);
         $options = array_filter($options);
+
         $response = $this->request->api('GET', '/v1/browse/new-releases', $options, array(
             'Authorization' => 'Bearer ' . $this->accessToken
         ));
@@ -416,11 +420,13 @@ class SpotifyWebAPI
     public function getMySavedTracks($options = array())
     {
         $defaults = array(
-            'limit' => 20,
+            'limit' => 0,
             'offset' => 0
         );
 
         $options = array_merge($defaults, (array) $options);
+        $options = array_filter($options);
+
         $response = $this->request->api('GET', '/v1/me/tracks', $options, array(
             'Authorization' => 'Bearer ' . $this->accessToken
         ));
@@ -489,11 +495,13 @@ class SpotifyWebAPI
     public function getUserPlaylists($userId, $options = array())
     {
         $defaults = array(
-            'limit' => 20,
+            'limit' => 0,
             'offset' => 0
         );
 
         $options = array_merge($defaults, (array) $options);
+        $options = array_filter($options);
+
         $response = $this->request->api('GET', '/v1/users/' . $userId . '/playlists', $options, array(
             'Authorization' => 'Bearer ' . $this->accessToken
         ));
@@ -538,7 +546,7 @@ class SpotifyWebAPI
     {
         $defaults = array(
             'fields' => array(),
-            'limit' => 20,
+            'limit' => 0,
             'offset' => 0
         );
 
@@ -631,11 +639,12 @@ class SpotifyWebAPI
     {
         $defaults = array(
             'market' => '',
-            'limit' => 20,
+            'limit' => 0,
             'offset' => 0
         );
 
         $type = implode(',', (array) $type);
+
         $options = array_merge($defaults, (array) $options);
         $options = array_filter($options);
         $options =  array_merge($options, array(
