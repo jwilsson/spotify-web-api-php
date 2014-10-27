@@ -518,12 +518,22 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
+     * @param array|object $options Optional. Options for the playlist.
+     * - array fields Optional. A list of fields to return. See Spotify docs for more info.
      *
      * @return object
      */
-    public function getUserPlaylist($userId, $playlistId)
+    public function getUserPlaylist($userId, $playlistId, $options = array())
     {
-        $response = $this->request->api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId, array(), array(
+        $defaults = array(
+            'fields' => array()
+        );
+
+        $options = array_merge($defaults, (array) $options);
+        $options['fields'] = implode(',', $options['fields']);
+        $options = array_filter($options);
+
+        $response = $this->request->api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId, $options, array(
             'Authorization' => 'Bearer ' . $this->accessToken
         ));
 
