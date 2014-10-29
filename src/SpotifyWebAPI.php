@@ -714,4 +714,30 @@ class SpotifyWebAPI
 
         return $response['status'] == 200;
     }
+
+    /**
+     * Set the return type for the Request body element
+     * If unset or set to false it will return a stdObject, but
+     * if set to true it will return an associative array.
+     *
+     * @param bool $returnAssoc Whether to return an associative array or not.
+     *
+     * @return void
+     */
+    public function setReturnAssoc($returnAssoc)
+    {
+        $this->request->setReturnAssoc($returnAssoc);
+    }
+
+    /**
+     * Get the return type for the Request body element
+     * Returns true if the body is returned as an associative array,
+     * and false if it is returned as an stdObject.
+     *
+     * @return bool true if body is returned as an array, else false.
+     */
+    public function getReturnAssoc()
+    {
+        return $this->request->getReturnAssoc();
+    }
 }
