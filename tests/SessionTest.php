@@ -144,6 +144,8 @@ class SessionTest extends PHPUnit_Framework_TestCase
     public function testGetClientId()
     {
         $expected = getenv('SPOTIFY_CLIENT_ID');
+        $this->session->setClientId(getenv('SPOTIFY_CLIENT_ID'));
+
         $clientID = $this->session->getClientId();
 
         $this->assertEquals($expected, $clientID);
@@ -152,6 +154,8 @@ class SessionTest extends PHPUnit_Framework_TestCase
     public function testGetClientSecret()
     {
         $expected = getenv('SPOTIFY_CLIENT_SECRET');
+        $this->session->setClientSecret(getenv('SPOTIFY_CLIENT_SECRET'));
+
         $clientSecret = $this->session->getClientSecret();
 
         $this->assertEquals($expected, $clientSecret);
@@ -168,6 +172,8 @@ class SessionTest extends PHPUnit_Framework_TestCase
     public function testGetRedirectUri()
     {
         $expected = getenv('SPOTIFY_REDIRECT_URI');
+        $this->session->setRedirectUri(getenv('SPOTIFY_REDIRECT_URI'));
+
         $redirectUri = $this->session->getRedirectUri();
 
         $this->assertEquals($expected, $redirectUri);
@@ -201,32 +207,32 @@ class SessionTest extends PHPUnit_Framework_TestCase
 
     public function testSetClientId()
     {
-        $clientID = getenv('SPOTIFY_CLIENT_ID');
-        $this->session->setClientId($clientID);
+        $expected = getenv('SPOTIFY_CLIENT_ID');
+        $this->session->setClientId(getenv('SPOTIFY_CLIENT_ID'));
 
-        $result = $this->session->getClientId();
+        $clientID = $this->session->getClientId();
 
-        $this->assertEquals($clientID, $result);
+        $this->assertEquals($expected, $clientID);
     }
 
     public function testSetClientSecret()
     {
-        $clientSecret = getenv('SPOTIFY_CLIENT_SECRET');
-        $this->session->setClientSecret($clientSecret);
+        $expected = getenv('SPOTIFY_CLIENT_SECRET');
+        $this->session->setClientSecret(getenv('SPOTIFY_CLIENT_SECRET'));
 
-        $result = $this->session->getClientSecret();
+        $clientSecret = $this->session->getClientSecret();
 
-        $this->assertEquals($clientSecret, $result);
+        $this->assertEquals($expected, $clientSecret);
     }
 
     public function testSetRedirectUri()
     {
-        $redirectUri = getenv('SPOTIFY_REDIRECT_URI');
-        $this->session->setRedirectUri($redirectUri);
+        $expected = getenv('SPOTIFY_REDIRECT_URI');
+        $this->session->setRedirectUri(getenv('SPOTIFY_REDIRECT_URI'));
 
-        $result = $this->session->getRedirectUri();
+        $redirectUri = $this->session->getRedirectUri();
 
-        $this->assertEquals($redirectUri, $result);
+        $this->assertEquals($expected, $redirectUri);
     }
 
     public function testSetRefreshToken()
