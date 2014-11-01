@@ -196,7 +196,7 @@ class Session
      *
      * @param string $code The authorization code from Spotify.
      *
-     * @return bool
+     * @return bool
      */
     public function requestToken($code)
     {

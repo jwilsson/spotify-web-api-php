@@ -157,12 +157,30 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $clientSecret);
     }
 
+    public function testGetExpires()
+    {
+        $this->session = new SpotifyWebAPI\Session(getenv('SPOTIFY_CLIENT_ID'), getenv('SPOTIFY_CLIENT_SECRET'), getenv('SPOTIFY_REDIRECT_URI'));
+        $this->session->requestCredentialsToken();
+
+        $this->assertGreaterThan(0, $this->session->getExpires());
+    }
+
     public function testGetRedirectUri()
     {
         $expected = getenv('SPOTIFY_REDIRECT_URI');
         $redirectUri = $this->session->getRedirectUri();
 
         $this->assertEquals($expected, $redirectUri);
+    }
+
+    public function testGetRefreshToken()
+    {
+        $expected = getenv('SPOTIFY_REFRESH_TOKEN');
+        $this->session->setRefreshToken(getenv('SPOTIFY_REFRESH_TOKEN'));
+
+        $refreshToken = $this->session->getRefreshToken();
+
+        $this->assertEquals($expected, $refreshToken);
     }
 
     public function testRequestCredentialsToken()
@@ -179,5 +197,45 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $this->session->requestCredentialsToken(array('user-read-email'));
 
         $this->assertNotEmpty($this->session->getAccessToken());
+    }
+
+    public function testSetClientId()
+    {
+        $clientID = getenv('SPOTIFY_CLIENT_ID');
+        $this->session->setClientId($clientID);
+
+        $result = $this->session->getClientId();
+
+        $this->assertEquals($clientID, $result);
+    }
+
+    public function testSetClientSecret()
+    {
+        $clientSecret = getenv('SPOTIFY_CLIENT_SECRET');
+        $this->session->setClientSecret($clientSecret);
+
+        $result = $this->session->getClientSecret();
+
+        $this->assertEquals($clientSecret, $result);
+    }
+
+    public function testSetRedirectUri()
+    {
+        $redirectUri = getenv('SPOTIFY_REDIRECT_URI');
+        $this->session->setRedirectUri($redirectUri);
+
+        $result = $this->session->getRedirectUri();
+
+        $this->assertEquals($redirectUri, $result);
+    }
+
+    public function testSetRefreshToken()
+    {
+        $expected = getenv('SPOTIFY_REFRESH_TOKEN');
+        $this->session->setRefreshToken(getenv('SPOTIFY_REFRESH_TOKEN'));
+
+        $refreshToken = $this->session->getRefreshToken();
+
+        $this->assertEquals($expected, $refreshToken);
     }
 }
