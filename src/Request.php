@@ -39,6 +39,18 @@ class Request
     }
 
     /**
+     * Returns true if this class returns the body as an
+     * associative array, and false if it returns the body
+     * as a stdClass.
+     *
+     * @return bool Whether the body is returned as an array or not.
+     */
+    public function getReturnAssoc()
+    {
+        return $this->returnAssoc;
+    }
+
+    /**
      * Make a request to Spotify.
      * You'll probably want to use one of the convenience methods instead.
      *
@@ -145,8 +157,8 @@ class Request
     }
 
     /**
-     * Set the return type for the body element
-     * If unset or set to false it will return a stdObject, but
+     * Set the return type for the response body.
+     * If unset or set to false it will return a stdClass, but
      * if set to true it will return an associative array.
      *
      * @param bool $returnAssoc Whether to return an associative array or not.
@@ -156,17 +168,5 @@ class Request
     public function setReturnAssoc($returnAssoc)
     {
         $this->returnAssoc = $returnAssoc;
-    }
-
-    /**
-     * Returns true if this class returns the body as an
-     * associative array, and false if it returns the body
-     * as a stdObject.
-     *
-     * @return bool true if body is returned as an array, else false.
-     */
-    public function getReturnAssoc()
-    {
-        return $this->returnAssoc;
     }
 }

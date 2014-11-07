@@ -50,7 +50,7 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/save-tracks-user/
      *
-     * @param string|array ID of the track(s) to add.
+     * @param string|array $tracks ID of the track(s) to add.
      *
      * @return bool
      */
@@ -138,7 +138,7 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/remove-tracks-user/
      *
-     * @param string|array ID of the track(s) to delete.
+     * @param string|array $tracks ID of the track(s) to delete.
      *
      * @return bool
      */
@@ -212,6 +212,7 @@ class SpotifyWebAPI
 
     /**
      * Get multiple albums.
+     * https://developer.spotify.com/web-api/get-several-albums/
      *
      * @param array $albumIds ID of the albums.
      *
@@ -252,7 +253,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get a artist.
+     * Get an artist.
      * https://developer.spotify.com/web-api/get-artist/
      *
      * @param string $artistId ID of the artist.
@@ -298,7 +299,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get a artist's albums.
+     * Get an artist's albums.
      * https://developer.spotify.com/web-api/get-artists-albums/
      *
      * @param string $artistId ID of the artist.
@@ -329,7 +330,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get a artist's top tracks in a country.
+     * Get an artist's top tracks in a country.
      * https://developer.spotify.com/web-api/get-artists-top-tracks/
      *
      * @param string $artistId ID of the artist.
