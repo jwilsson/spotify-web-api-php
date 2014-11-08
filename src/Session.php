@@ -130,7 +130,7 @@ class Session
     /**
      * Refresh a access token.
      *
-     * @return bool Whether the token was successfully refreshed.
+     * @return bool Whether the access token was successfully refreshed.
      */
     public function refreshToken()
     {

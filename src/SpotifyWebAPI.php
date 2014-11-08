@@ -130,7 +130,7 @@ class SpotifyWebAPI
      * - name string Required. Name of the playlist.
      * - public bool Optional. Whether the playlist should be public or not.
      *
-     * @return array|object The new playlist.
+     * @return array|object The new playlist. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function createUserPlaylist($userId, $data)
     {
@@ -218,7 +218,7 @@ class SpotifyWebAPI
      *
      * @param string $albumId ID of the album.
      *
-     * @return array|object The requested album.
+     * @return array|object The requested album. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getAlbum($albumId)
     {
@@ -234,7 +234,7 @@ class SpotifyWebAPI
      *
      * @param array $albumIds ID of the albums.
      *
-     * @return array|object The requested albums.
+     * @return array|object The requested albums. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getAlbums($albumIds)
     {
@@ -256,7 +256,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of tracks.
      * - int offset Optional. Number of tracks to skip.
      *
-     * @return array|object The requested album tracks.
+     * @return array|object The requested album tracks. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getAlbumTracks($albumId, $options = array())
     {
@@ -280,7 +280,7 @@ class SpotifyWebAPI
      *
      * @param string $artistId ID of the artist.
      *
-     * @return array|object The requested artist.
+     * @return array|object The requested artist. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getArtist($artistId)
     {
@@ -296,7 +296,7 @@ class SpotifyWebAPI
      *
      * @param array $artistIds ID of the artists.
      *
-     * @return array|object The requested artists.
+     * @return array|object The requested artists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getArtists($artistIds)
     {
@@ -315,7 +315,7 @@ class SpotifyWebAPI
      *
      * @param string $artistId ID of the artist.
      *
-     * @return array|object The artist's related artists.
+     * @return array|object The artist's related artists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getArtistRelatedArtists($artistId)
     {
@@ -336,7 +336,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of albums.
      * - int offset Optional. Number of albums to skip.
      *
-     * @return array|object The artist's albums.
+     * @return array|object The artist's albums. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getArtistAlbums($artistId, $options = array())
     {
@@ -364,7 +364,7 @@ class SpotifyWebAPI
      * @param string $artistId ID of the artist.
      * @param string $country An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
      *
-     * @return array|object The top tracks.
+     * @return array|object The artist's top tracks. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getArtistTopTracks($artistId, $country)
     {
@@ -388,7 +388,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of playlists.
      * - int offset Optional. Number of playlists to skip.
      *
-     * @return array|object The featured playlists.
+     * @return array|object The featured playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getFeaturedPlaylists($options = array())
     {
@@ -419,7 +419,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of items.
      * - int offset Optional. Number of items to skip.
      *
-     * @return array|object The new releases.
+     * @return array|object The new releases. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getNewReleases($options = array())
     {
@@ -447,7 +447,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of tracks.
      * - int offset Optional. Number of tracks to skip.
      *
-     * @return array|object The user's saved tracks.
+     * @return array|object The user's saved tracks. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getMySavedTracks($options = array())
     {
@@ -481,7 +481,7 @@ class SpotifyWebAPI
      *
      * @param string $trackId ID of the track.
      *
-     * @return array|object The requested track.
+     * @return array|object The requested track. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getTrack($trackId)
     {
@@ -497,7 +497,7 @@ class SpotifyWebAPI
      *
      * @param array $trackIds ID of the tracks.
      *
-     * @return array|object The requested tracks.
+     * @return array|object The requested tracks. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getTracks($trackIds)
     {
@@ -516,7 +516,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user.
      *
-     * @return array|object The requested user.
+     * @return array|object The requested user. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getUser($userId)
     {
@@ -536,7 +536,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of tracks.
      * - int offset Optional. Number of tracks to skip.
      *
-     * @return array|object The user's playlists.
+     * @return array|object The user's playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getUserPlaylists($userId, $options = array())
     {
@@ -564,7 +564,7 @@ class SpotifyWebAPI
      * @param array|object $options Optional. Options for the playlist.
      * - array fields Optional. A list of fields to return. See Spotify docs for more info.
      *
-     * @return array|object The user's playlist.
+     * @return array|object The user's playlist. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getUserPlaylist($userId, $playlistId, $options = array())
     {
@@ -594,7 +594,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of tracks.
      * - int offset Optional. Number of tracks to skip.
      *
-     * @return array|object The tracks in the playlist.
+     * @return array|object The tracks in the playlist. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function getUserPlaylistTracks($userId, $playlistId, $options = array())
     {
@@ -619,7 +619,7 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-current-users-profile/
      *
-     * @return array|object The currently authenticated user.
+     * @return array|object The currently authenticated user. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function me()
     {
@@ -686,7 +686,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of items.
      * - int offset Optional. Number of items to skip.
      *
-     * @return array The search results.
+     * @return array|object The search results. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
     public function search($query, $type, $options = array())
     {

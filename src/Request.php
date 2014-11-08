@@ -16,7 +16,7 @@ class Request
      * @param array $parameters Optional. Query parameters.
      * @param array $headers Optional. HTTP headers.
      *
-     * @return array Response data
+     * @return array Response data.
      * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
      * - string headers Response headers.
      * - int status HTTP status code.
@@ -34,7 +34,7 @@ class Request
      * @param array $parameters Optional. Query parameters.
      * @param array $headers Optional. HTTP headers.
      *
-     * @return array Response data
+     * @return array Response data.
      * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
      * - string headers Response headers.
      * - int status HTTP status code.
@@ -63,7 +63,7 @@ class Request
      * @param array $parameters Optional. Query parameters.
      * @param array $headers Optional. HTTP headers.
      *
-     * @return array Response data
+     * @return array Response data.
      * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
      * - string headers Response headers.
      * - int status HTTP status code.
