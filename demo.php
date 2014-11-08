@@ -13,9 +13,7 @@ if (isset($_GET['code'])) {
     $session->requestToken($_GET['code']);
     $api->setAccessToken($session->getAccessToken());
 
-    print_r($api->updateUserPlaylist('mcgurk', '02PZVT1gt1qesQVbI7dQYI', array(
-        'name' => 'apa'
-    )));
+    print_r($api->me());
 } else {
     header('Location: ' . $session->getAuthorizeUrl(array(
         'scope' => array('user-read-email', 'user-library-modify')
