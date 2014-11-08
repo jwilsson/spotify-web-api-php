@@ -16,7 +16,10 @@ class Request
      * @param array $parameters Optional. Query parameters.
      * @param array $headers Optional. HTTP headers.
      *
-     * @return array
+     * @return array Response data
+     * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
+     * - string headers Response headers.
+     * - int status HTTP status code.
      */
     public function account($method, $uri, $parameters = array(), $headers = array())
     {
@@ -31,7 +34,10 @@ class Request
      * @param array $parameters Optional. Query parameters.
      * @param array $headers Optional. HTTP headers.
      *
-     * @return array
+     * @return array Response data
+     * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
+     * - string headers Response headers.
+     * - int status HTTP status code.
      */
     public function api($method, $uri, $parameters = array(), $headers = array())
     {
@@ -39,11 +45,9 @@ class Request
     }
 
     /**
-     * Returns true if this class returns the body as an
-     * associative array, and false if it returns the body
-     * as a stdClass.
+     * Get a value indicating the response body type.
      *
-     * @return bool Whether the body is returned as an array or not.
+     * @return bool Whether the body is returned as an associative array or an stdClass.
      */
     public function getReturnAssoc()
     {
@@ -59,7 +63,10 @@ class Request
      * @param array $parameters Optional. Query parameters.
      * @param array $headers Optional. HTTP headers.
      *
-     * @return array
+     * @return array Response data
+     * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
+     * - string headers Response headers.
+     * - int status HTTP status code.
      */
     public function send($method, $url, $parameters = array(), $headers = array())
     {
@@ -158,10 +165,8 @@ class Request
 
     /**
      * Set the return type for the response body.
-     * If unset or set to false it will return a stdClass, but
-     * if set to true it will return an associative array.
      *
-     * @param bool $returnAssoc Whether to return an associative array or not.
+     * @param bool $returnAssoc Whether to return an associative array or an stdClass.
      *
      * @return void
      */

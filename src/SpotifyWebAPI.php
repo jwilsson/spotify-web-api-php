@@ -691,8 +691,8 @@ class SpotifyWebAPI
     public function search($query, $type, $options = array())
     {
         $defaults = array(
-            'market' => '',
             'limit' => 0,
+            'market' => '',
             'offset' => 0
         );
 
@@ -756,7 +756,7 @@ class SpotifyWebAPI
     /**
      * Set the return type for the Request body element.
      *
-     * @param bool $returnAssoc Whether to return an associative array.
+     * @param bool $returnAssoc Whether to return an associative array or an stdClass.
      *
      * @return void
      */
