@@ -1,5 +1,7 @@
-/vendor
 .DS_Store
-composer.lock
-Thumbs.db
 .env
+/vendor
+composer.lock
+Gemfile
+Gemfile.lock
+Thumbs.db
