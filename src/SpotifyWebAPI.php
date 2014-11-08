@@ -24,6 +24,22 @@ class SpotifyWebAPI
     }
 
     /**
+     * Add authorization headers
+     *
+     * @return array
+     */
+    protected function authHeaders()
+    {
+        $headers = array();
+
+        if ($this->accessToken) {
+            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
+        }
+
+        return $headers;
+    }
+
+    /**
      * Convert Spotify object IDs to Spotify URIs.
      *
      * @param array|string $ids ID(s) to convert.
@@ -58,10 +74,10 @@ class SpotifyWebAPI
     {
         $tracks = json_encode((array) $tracks);
 
-        $response = $this->request->api('PUT', '/v1/me/tracks', $tracks, array(
-            'Authorization' => 'Bearer ' . $this->accessToken,
-            'Content-Type' => 'application/json'
-        ));
+        $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
+
+        $response = $this->request->api('PUT', '/v1/me/tracks', $tracks, $headers);
 
         return $response['status'] == 200;
     }
@@ -94,11 +110,12 @@ class SpotifyWebAPI
         $tracks = $this->idToUri($tracks);
         $tracks = json_encode((array) $tracks);
 
+        $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
+
         // We need to manually append data to the URI since it's a POST request
-        $response = $this->request->api('POST', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks?' . $options, $tracks, array(
-            'Authorization' => 'Bearer ' . $this->accessToken,
-            'Content-Type' => 'application/json'
-        ));
+        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks?' . $options;
+        $response = $this->request->api('POST', $uri, $tracks, $headers);
 
         return $response['status'] == 201;
     }
@@ -125,10 +142,10 @@ class SpotifyWebAPI
         $data = array_merge($defaults, (array) $data);
         $data = json_encode($data);
 
-        $response = $this->request->api('POST', '/v1/users/' . $userId . '/playlists', $data, array(
-            'Authorization' => 'Bearer ' . $this->accessToken,
-            'Content-Type' => 'application/json'
-        ));
+        $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
+
+        $response = $this->request->api('POST', '/v1/users/' . $userId . '/playlists', $data, $headers);
 
         return $response['body'];
     }
@@ -146,10 +163,9 @@ class SpotifyWebAPI
     {
         $tracks = implode(',', (array) $tracks);
         $tracks = urlencode($tracks);
+        $headers = $this->authHeaders();
 
-        $response = $this->request->api('DELETE', '/v1/me/tracks?ids=' . $tracks, array(), array(
-            'Authorization' => 'Bearer ' . $this->accessToken
-        ));
+        $response = $this->request->api('DELETE', '/v1/me/tracks?ids=' . $tracks, array(), $headers);
 
         return $response['status'] == 200;
     }
@@ -183,9 +199,10 @@ class SpotifyWebAPI
         $data['tracks'] = $tracks;
         $data = json_encode($data);
 
-        $response = $this->request->api('DELETE', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', $data, array(
-            'Authorization' => 'Bearer ' . $this->accessToken
-        ));
+        $headers = $this->authHeaders();
+        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
+
+        $response = $this->request->api('DELETE', $uri, $data, $headers);
         $response = $response['body'];
 
         if (isset($response->snapshot_id)) {
@@ -205,7 +222,8 @@ class SpotifyWebAPI
      */
     public function getAlbum($albumId)
     {
-        $response = $this->request->api('GET', '/v1/albums/' . $albumId);
+        $headers = $this->authHeaders();
+        $response = $this->request->api('GET', '/v1/albums/' . $albumId, array(), $headers);
 
         return $response['body'];
     }
@@ -221,7 +239,10 @@ class SpotifyWebAPI
     public function getAlbums($albumIds)
     {
         $albumIds = implode(',', $albumIds);
-        $response = $this->request->api('GET', '/v1/albums/', array('ids' => $albumIds));
+        $options = array('ids' => $albumIds);
+        $headers = $this->authHeaders();
+
+        $response = $this->request->api('GET', '/v1/albums/', $options, $headers);
 
         return $response['body'];
     }
@@ -246,8 +267,9 @@ class SpotifyWebAPI
 
         $options = array_merge($defaults, (array) $options);
         $options = array_filter($options);
+        $headers = $this->authHeaders();
 
-        $response = $this->request->api('GET', '/v1/albums/' . $albumId . '/tracks', $options);
+        $response = $this->request->api('GET', '/v1/albums/' . $albumId . '/tracks', $options, $headers);
 
         return $response['body'];
     }
@@ -262,7 +284,8 @@ class SpotifyWebAPI
      */
     public function getArtist($artistId)
     {
-        $response = $this->request->api('GET', '/v1/artists/' . $artistId);
+        $headers = $this->authHeaders();
+        $response = $this->request->api('GET', '/v1/artists/' . $artistId, array(), $headers);
 
         return $response['body'];
     }
@@ -278,7 +301,10 @@ class SpotifyWebAPI
     public function getArtists($artistIds)
     {
         $artistIds = implode(',', $artistIds);
-        $response = $this->request->api('GET', '/v1/artists/', array('ids' => $artistIds));
+        $options = array('ids' => $artistIds);
+        $headers = $this->authHeaders();
+
+        $response = $this->request->api('GET', '/v1/artists/', $options, $headers);
 
         return $response['body'];
     }
@@ -293,7 +319,8 @@ class SpotifyWebAPI
      */
     public function getArtistRelatedArtists($artistId)
     {
-        $response = $this->request->api('GET', '/v1/artists/' . $artistId . '/related-artists');
+        $headers = $this->authHeaders();
+        $response = $this->request->api('GET', '/v1/artists/' . $artistId . '/related-artists', array(), $headers);
 
         return $response['body'];
     }
@@ -324,7 +351,8 @@ class SpotifyWebAPI
         $options['album_type'] = implode(',', $options['album_type']);
         $options = array_filter($options);
 
-        $response = $this->request->api('GET', '/v1/artists/' . $artistId . '/albums', $options);
+        $headers = $this->authHeaders();
+        $response = $this->request->api('GET', '/v1/artists/' . $artistId . '/albums', $options, $headers);
 
         return $response['body'];
     }
@@ -340,7 +368,10 @@ class SpotifyWebAPI
      */
     public function getArtistTopTracks($artistId, $country)
     {
-        $response = $this->request->api('GET', '/v1/artists/' . $artistId . '/top-tracks', array('country' =>  $country));
+        $options = array('country' =>  $country);
+        $headers = $this->authHeaders();
+
+        $response = $this->request->api('GET', '/v1/artists/' . $artistId . '/top-tracks', $options, $headers);
 
         return $response['body'];
     }
@@ -372,9 +403,8 @@ class SpotifyWebAPI
         $options = array_merge($defaults, (array) $options);
         $options = array_filter($options);
 
-        $response = $this->request->api('GET', '/v1/browse/featured-playlists', $options, array(
-            'Authorization' => 'Bearer ' . $this->accessToken
-        ));
+        $headers = $this->authHeaders();
+        $response = $this->request->api('GET', '/v1/browse/featured-playlists', $options, $headers);
 
         return $response['body'];
     }
@@ -402,9 +432,8 @@ class SpotifyWebAPI
         $options = array_merge($defaults, (array) $options);
         $options = array_filter($options);
 
-        $response = $this->request->api('GET', '/v1/browse/new-releases', $options, array(
-            'Authorization' => 'Bearer ' . $this->accessToken
-        ));
+        $headers = $this->authHeaders();
+        $response = $this->request->api('GET', '/v1/browse/new-releases', $options, $headers);
 
         return $response['body'];
     }
@@ -430,11 +459,22 @@ class SpotifyWebAPI
         $options = array_merge($defaults, (array) $options);
         $options = array_filter($options);
 
-        $response = $this->request->api('GET', '/v1/me/tracks', $options, array(
-            'Authorization' => 'Bearer ' . $this->accessToken
-        ));
+        $headers = $this->authHeaders();
+        $response = $this->request->api('GET', '/v1/me/tracks', $options, $headers);
 
         return $response['body'];
+    }
+
+    /**
+     * Get the return type for the Request body element
+     * Returns true if the body is returned as an associative array,
+     * and false if it is returned as an stdClass.
+     *
+     * @return bool
+     */
+    public function getReturnAssoc()
+    {
+        return $this->request->getReturnAssoc();
     }
 
     /**
@@ -447,7 +487,8 @@ class SpotifyWebAPI
      */
     public function getTrack($trackId)
     {
-        $response = $this->request->api('GET', '/v1/tracks/' . $trackId);
+        $headers = $this->authHeaders();
+        $response = $this->request->api('GET', '/v1/tracks/' . $trackId, array(), $headers);
 
         return $response['body'];
     }
@@ -463,7 +504,10 @@ class SpotifyWebAPI
     public function getTracks($trackIds)
     {
         $trackIds = implode(',', $trackIds);
-        $response = $this->request->api('GET', '/v1/tracks/', array('ids' => $trackIds));
+        $options = array('ids' => $trackIds);
+        $headers = $this->authHeaders();
+
+        $response = $this->request->api('GET', '/v1/tracks/', $options, $headers);
 
         return $response['body'];
     }
@@ -478,7 +522,8 @@ class SpotifyWebAPI
      */
     public function getUser($userId)
     {
-        $response = $this->request->api('GET', '/v1/users/' . $userId);
+        $headers = $this->authHeaders();
+        $response = $this->request->api('GET', '/v1/users/' . $userId, array(), $headers);
 
         return $response['body'];
     }
@@ -505,9 +550,8 @@ class SpotifyWebAPI
         $options = array_merge($defaults, (array) $options);
         $options = array_filter($options);
 
-        $response = $this->request->api('GET', '/v1/users/' . $userId . '/playlists', $options, array(
-            'Authorization' => 'Bearer ' . $this->accessToken
-        ));
+        $headers = $this->authHeaders();
+        $response = $this->request->api('GET', '/v1/users/' . $userId . '/playlists', $options, $headers);
 
         return $response['body'];
     }
@@ -534,9 +578,8 @@ class SpotifyWebAPI
         $options['fields'] = implode(',', $options['fields']);
         $options = array_filter($options);
 
-        $response = $this->request->api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId, $options, array(
-            'Authorization' => 'Bearer ' . $this->accessToken
-        ));
+        $headers = $this->authHeaders();
+        $response = $this->request->api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId, $options, $headers);
 
         return $response['body'];
     }
@@ -567,9 +610,8 @@ class SpotifyWebAPI
         $options['fields'] = implode(',', $options['fields']);
         $options = array_filter($options);
 
-        $response = $this->request->api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', $options, array(
-            'Authorization' => 'Bearer ' . $this->accessToken
-        ));
+        $headers = $this->authHeaders();
+        $response = $this->request->api('GET', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', $options, $headers);
 
         return $response['body'];
     }
@@ -583,9 +625,8 @@ class SpotifyWebAPI
      */
     public function me()
     {
-        $response = $this->request->api('GET', '/v1/me', array(), array(
-            'Authorization' => 'Bearer ' . $this->accessToken
-        ));
+        $headers = $this->authHeaders();
+        $response = $this->request->api('GET', '/v1/me', array(), $headers);
 
         return $response['body'];
     }
@@ -602,10 +643,10 @@ class SpotifyWebAPI
     public function myTracksContains($tracks)
     {
         $tracks = implode(',', (array) $tracks);
+        $options = array('ids' => $tracks);
+        $headers = $this->authHeaders();
 
-        $response = $this->request->api('GET', '/v1/me/tracks/contains', array('ids' => $tracks), array(
-            'Authorization' => 'Bearer ' . $this->accessToken
-        ));
+        $response = $this->request->api('GET', '/v1/me/tracks/contains', $options, $headers);
 
         return $response['body'];
     }
@@ -627,9 +668,10 @@ class SpotifyWebAPI
         $tracks = array('uris' => (array) $tracks);
         $tracks = json_encode($tracks);
 
-        $response = $this->request->api('PUT', '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks', $tracks, array(
-            'Authorization' => 'Bearer ' . $this->accessToken
-        ));
+        $headers = $this->authHeaders();
+        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
+
+        $response = $this->request->api('PUT', $uri, $tracks, $headers);
 
         return $response['status'] == 201;
     }
@@ -665,11 +707,7 @@ class SpotifyWebAPI
             'type' => $type
         ));
 
-        $headers = array();
-        if (isset($options['market']) && $options['market'] == 'from_token') {
-            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
-        }
-
+        $headers = $this->authHeaders();
         $response = $this->request->api('GET', '/v1/search', $options, $headers);
 
         return $response['body'];
@@ -708,17 +746,18 @@ class SpotifyWebAPI
         $data = array_merge($defaults, (array) $data);
         $data = json_encode($data);
 
-        $response = $this->request->api('PUT', '/v1/users/' . $userId . '/playlists/' . $playlistId, $data, array(
-            'Authorization' => 'Bearer ' . $this->accessToken,
-            'Content-Type' => 'application/json'
-        ));
+        $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
+
+        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId;
+        $response = $this->request->api('PUT', $uri, $data, $headers);
 
         return $response['status'] == 200;
     }
 
     /**
      * Set the return type for the Request body element
-     * If unset or set to false it will return a stdObject, but
+     * If unset or set to false it will return a stdClass, but
      * if set to true it will return an associative array.
      *
      * @param bool $returnAssoc Whether to return an associative array or not.
@@ -728,17 +767,5 @@ class SpotifyWebAPI
     public function setReturnAssoc($returnAssoc)
     {
         $this->request->setReturnAssoc($returnAssoc);
-    }
-
-    /**
-     * Get the return type for the Request body element
-     * Returns true if the body is returned as an associative array,
-     * and false if it is returned as an stdObject.
-     *
-     * @return bool true if body is returned as an array, else false.
-     */
-    public function getReturnAssoc()
-    {
-        return $this->request->getReturnAssoc();
     }
 }
