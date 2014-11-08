@@ -1,0 +1,6 @@
+.env
+_site
+composer.lock
+Gemfile
+Gemfile.lock
+vendor
