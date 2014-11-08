@@ -28,7 +28,7 @@ Requires a valid access token. <br>
 
 #### Arguments
 
-* $tracks **string|array** - ID(s) of the track(s) to add.
+* $tracks **string\|array** - ID(s) of the track(s) to add.
 
 #### Return values
 
@@ -48,8 +48,8 @@ Requires a valid access token. <br>
 
 * $userId **string** - ID of the user who owns the playlist.
 * $playlistId **string** - ID of the playlist to add tracks to.
-* $tracks **string|array** - ID(s) of the track(s) to add.
-* $options **array|object** - Optional. Options for the new tracks.
+* $tracks **string\|array** - ID(s) of the track(s) to add.
+* $options **array\|object** - Optional. Options for the new tracks.
     * position **int** Optional. Zero-based position of where in the playlist to add the tracks. Tracks will be appened if omitted or false.
 
 #### Return values
@@ -69,13 +69,13 @@ Requires a valid access token. <br>
 #### Arguments
 
 * $userId **string** - ID of the user to create the playlist for.
-* $data **array|object** - Data for the new playlist.
+* $data **array\|object** - Data for the new playlist.
     * name **string** Required. Name of the playlist.
     * public **bool** Optional. Whether the playlist should be public or not.
 
 #### Return values
 
-* **array|object** The new playlist. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The new playlist. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::deleteMyTracks()
 
@@ -89,7 +89,7 @@ Requires a valid access token. <br>
 
 #### Arguments
 
-* $tracks **string|array** - ID(s) of the track(s) to delete.
+* $tracks **string\|array** - ID(s) of the track(s) to delete.
 
 #### Return values
 
@@ -116,7 +116,7 @@ Requires a valid access token. <br>
 
 #### Return values
 
-* **string|boolean** A new snapshot ID or false if the tracks weren't deleted.
+* **string\|boolean** A new snapshot ID or false if the tracks weren't deleted.
 
 ### SpotifyWebAPI\SpotifyWebAPI::getAlbum()
 
@@ -133,7 +133,7 @@ Get a album. <br>
 
 #### Return values
 
-* **array|object** The requested album. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The requested album. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getAlbums()
 
@@ -150,7 +150,7 @@ Get multiple albums. <br>
 
 #### Return values
 
-* **array|object** The requested albums. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The requested albums. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getAlbumTracks()
 
@@ -164,13 +164,13 @@ Get a album's tracks. <br>
 #### Arguments
 
 * $albumId **string** - ID of the album.
-* $options **array|object** - Optional. Options for the tracks.
+* $options **array\|object** - Optional. Options for the tracks.
     * limit **int** Optional. Limit the number of tracks.
     * offset **int** Optional. Number of tracks to skip.
 
 #### Return values
 
-* **array|object** The requested album tracks. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The requested album tracks. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getArtist()
 
@@ -187,7 +187,7 @@ Get an artist. <br>
 
 #### Return values
 
-* **array|object** The requested artist. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The requested artist. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getArtists()
 
@@ -204,7 +204,7 @@ Get multiple artists. <br>
 
 #### Return values
 
-* **array|object** The requested artists. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The requested artists. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getArtistRelatedArtists()
 
@@ -221,7 +221,7 @@ Get an artist's related artists. <br>
 
 #### Return values
 
-* **array|object** The artist's related artists. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The artist's related artists. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums()
 
@@ -235,7 +235,7 @@ Get an artist's albums. <br>
 #### Arguments
 
 * $artistId **string** - ID of the artist.
-* $options **array|object** - Optional. Options for the albums.
+* $options **array\|object** - Optional. Options for the albums.
     * album_type **array** Optional. Album types to return. If omitted, all album types will be returned.
     * market **string** Optional. A ISO 3166-1 alpha-2 country code. Limit the results to tracks that are playable in this market.
     * limit **int** Optional. Limit the number of albums.
@@ -243,7 +243,7 @@ Get an artist's albums. <br>
 
 #### Return values
 
-* **array|object** The artist's albums. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The artist's albums. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getArtistTopTracks()
 
@@ -261,7 +261,7 @@ Get an artist's top tracks in a country. <br>
 
 #### Return values
 
-* **array|object** The artist's top tracks. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The artist's top tracks. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getFeaturedPlaylists()
 
@@ -275,7 +275,7 @@ Requires a valid access token. <br>
 
 #### Arguments
 
-* $options **array|object** - Optional. Options for the playlists.
+* $options **array\|object** - Optional. Options for the playlists.
     * locale **string** Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Show playlists in this language.
     * country **string** Optional. An ISO 3166-1 alpha-2 country code. Show playlists from this country.
     * timestamp **string** Optional. A ISO 8601 timestamp. Show playlists relevant to this date and time.
@@ -284,7 +284,7 @@ Requires a valid access token. <br>
 
 #### Return values
 
-* **array|object** The featured playlists. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The featured playlists. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getNewReleases()
 
@@ -298,14 +298,14 @@ Requires a valid access token. <br>
 
 #### Arguments
 
-* $options **array|object** - Optional. Options for the items.
+* $options **array\|object** - Optional. Options for the items.
     * country **string** Optional. An ISO 3166-1 alpha-2 country code. Show items relevant to this country.
     * limit **int** Optional. Limit the number of items.
     * offset **int** Optional. Number of items to skip.
 
 #### Return values
 
-* **array|object** The new releases. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The new releases. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getMySavedTracks()
 
@@ -319,13 +319,13 @@ Requires a valid access token. <br>
 
 #### Arguments
 
-* $options **array|object** - Optional. Options for the tracks.
+* $options **array\|object** - Optional. Options for the tracks.
     * limit **int** Optional. Limit the number of tracks.
     * offset **int** Optional. Number of tracks to skip.
 
 #### Return values
 
-* **array|object** The user's saved tracks. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The user's saved tracks. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getReturnAssoc()
 
@@ -350,7 +350,7 @@ Get a track. <br>
 
 #### Return values
 
-* **array|object** The requested track. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The requested track. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getTracks()
 
@@ -367,7 +367,7 @@ Get multiple tracks. <br>
 
 #### Return values
 
-* **array|object** The requested tracks. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The requested tracks. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getUser()
 
@@ -384,7 +384,7 @@ Get a user. <br>
 
 #### Return values
 
-* **array|object** The requested user. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The requested user. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getUserPlaylists()
 
@@ -399,13 +399,13 @@ Requires a valid access token. <br>
 #### Arguments
 
 * $userId **string** - ID of the user.
-* $options **array|object** - Optional. Options for the tracks.
+* $options **array\|object** - Optional. Options for the tracks.
     * limit **int** Optional. Limit the number of tracks.
     * offset **int** Optional. Number of tracks to skip.
 
 #### Return values
 
-* **array|object** The user's playlists. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The user's playlists. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getUserPlaylist()
 
@@ -421,12 +421,12 @@ Requires a valid access token. <br>
 
 * $userId **string** - ID of the user.
 * $playlistId **string** - ID of the playlist.
-* $options **array|object** - Optional. Options for the playlist.
+* $options **array\|object** - Optional. Options for the playlist.
     * fields **array** Optional. A list of fields to return. See Spotify docs for more info.
 
 #### Return values
 
-* **array|object** The user's playlist. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The user's playlist. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::getUserPlaylistTracks()
 
@@ -442,14 +442,14 @@ Requires a valid access token. <br>
 
 * $userId **string** - ID of the user.
 * $playlistId **string** - ID of the playlist.
-* $options **array|object** - Optional. Options for the tracks.
+* $options **array\|object** - Optional. Options for the tracks.
     * fields **array** Optional. A list of fields to return. See Spotify docs for more info.
     * limit **int** Optional. Limit the number of tracks.
     * offset **int** Optional. Number of tracks to skip.
 
 #### Return values
 
-* **array|object** The tracks in the playlist. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The tracks in the playlist. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::me()
 
@@ -463,7 +463,7 @@ Requires a valid access token. <br>
 
 #### Return values
 
-* **array|object** The currently authenticated user. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The currently authenticated user. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::myTracksContains()
 
@@ -477,7 +477,7 @@ Requires a valid access token. <br>
 
 #### Arguments
 
-* $tracks **string|array** - ID(s) of the track(s) to check for.
+* $tracks **string\|array** - ID(s) of the track(s) to check for.
 
 #### Return values
 
@@ -497,7 +497,7 @@ Requires a valid access token. <br>
 
 * $userId **string** - ID of the user.
 * $playlistId **string** - ID of the playlist.
-* $tracks **string|array** - ID(s) of the track(s) to add.
+* $tracks **string\|array** - ID(s) of the track(s) to add.
 
 #### Return values
 
@@ -516,15 +516,15 @@ Requires a valid access token if market=from_token is used. <br>
 #### Arguments
 
 * $query **string** - The term to search for.
-* $type **string|array** - The type of item to search for; &quot;album&quot;, &quot;artist&quot;, or &quot;track&quot;.
-* $options **array|object** - Optional. Options for the search.
+* $type **string\|array** - The type of item to search for; &quot;album&quot;, &quot;artist&quot;, or &quot;track&quot;.
+* $options **array\|object** - Optional. Options for the search.
     * market **string** Optional. A ISO 3166-1 alpha-2 country code. Limit the results to items that are playable in this market.
     * limit **int** Optional. Limit the number of items.
     * offset **int** Optional. Number of items to skip.
 
 #### Return values
 
-* **array|object** The search results. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
+* **array\|object** The search results. Type is controlled by [SpotifyWebAPI::setReturnAssoc()](#spotifywebapispotifywebapisetreturnassoc).
 
 ### SpotifyWebAPI\SpotifyWebAPI::setAccessToken()
 
@@ -552,7 +552,7 @@ Requires a valid access token. <br>
 
 * $userId **mixed**
 * $playlistId **mixed**
-* $data **array|object** - Data for the new playlist.
+* $data **array\|object** - Data for the new playlist.
     * name **string** Required. Name of the playlist.
     * public **bool** Optional. Whether the playlist should be public or not.
 

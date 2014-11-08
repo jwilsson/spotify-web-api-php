@@ -29,7 +29,7 @@ Get the authorization URL.
 
 #### Arguments
 
-* $options **array|object** - Optional. Options for the authorization URL.
+* $options **array\|object** - Optional. Options for the authorization URL.
     * scope **array** Optional. Scope(s) to request from the user.
     * show_dialog **boolean** Optional. Whether or not to force the user to always approve the app. Default is false.
     * state **string** Optional. A CSRF token.

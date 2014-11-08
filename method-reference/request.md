@@ -21,7 +21,7 @@ Make a request to the "account" endpoint.
 #### Return values
 
 * **array** Response data.
-    * body **array|object** The response body. Type is controlled by [Request::setReturnAssoc()](#spotifywebapirequestsetreturnassoc).
+    * body **array\|object** The response body. Type is controlled by [Request::setReturnAssoc()](#spotifywebapirequestsetreturnassoc).
     * headers **string** Response headers.
     * status **int** HTTP status code.
 
@@ -43,7 +43,7 @@ Make a request to the "api" endpoint.
 #### Return values
 
 * **array** Response data.
-    * body **array|object** The response body. Type is controlled by [Request::setReturnAssoc()](#spotifywebapirequestsetreturnassoc).
+    * body **array\|object** The response body. Type is controlled by [Request::setReturnAssoc()](#spotifywebapirequestsetreturnassoc).
     * headers **string** Response headers.
     * status **int** HTTP status code.
 
@@ -78,7 +78,7 @@ You'll probably want to use one of the convenience methods instead.
 #### Return values
 
 * **array** Response data.
-    * body **array|object** The response body. Type is controlled by [Request::setReturnAssoc()](#spotifywebapirequestsetreturnassoc).
+    * body **array\|object** The response body. Type is controlled by [Request::setReturnAssoc()](#spotifywebapirequestsetreturnassoc).
     * headers **string** Response headers.
     * status **int** HTTP status code.
 
