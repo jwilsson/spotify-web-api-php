@@ -62,11 +62,11 @@ class SpotifyWebAPI
     }
 
     /**
-     * Add track(s) to the current user's Spotify library.
+     * Add tracks to the current user's Spotify library.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/save-tracks-user/
      *
-     * @param string|array $tracks ID of the track(s) to add.
+     * @param string|array $tracks ID(s) of the track(s) to add.
      *
      * @return bool Whether the tracks was successfully added.
      */
@@ -83,13 +83,13 @@ class SpotifyWebAPI
     }
 
     /**
-     * Add track(s) to a user's playlist.
+     * Add tracks to a user's playlist.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/add-tracks-to-playlist/
      *
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to add tracks to.
-     * @param string|array $tracks ID of the track(s) to add.
+     * @param string|array $tracks ID(s) of the track(s) to add.
      * @param array|object $options Optional. Options for the new tracks.
      * - int position Optional. Zero-based position of where in the playlist to add the tracks. Tracks will be appened if omitted or false.
      *
@@ -151,11 +151,11 @@ class SpotifyWebAPI
     }
 
     /**
-     * Delete track(s) from current user's Spotify library.
+     * Delete tracks from current user's Spotify library.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/remove-tracks-user/
      *
-     * @param string|array $tracks ID of the track(s) to delete.
+     * @param string|array $tracks ID(s) of the track(s) to delete.
      *
      * @return bool Whether the tracks was successfully deleted.
      */
@@ -232,7 +232,7 @@ class SpotifyWebAPI
      * Get multiple albums.
      * https://developer.spotify.com/web-api/get-several-albums/
      *
-     * @param array $albumIds ID of the albums.
+     * @param array $albumIds IDs of the albums.
      *
      * @return array|object The requested albums. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
@@ -294,7 +294,7 @@ class SpotifyWebAPI
      * Get multiple artists.
      * https://developer.spotify.com/web-api/get-several-artists/
      *
-     * @param array $artistIds ID of the artists.
+     * @param array $artistIds IDs of the artists.
      *
      * @return array|object The requested artists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
@@ -495,7 +495,7 @@ class SpotifyWebAPI
      * Get multiple tracks.
      * https://developer.spotify.com/web-api/get-several-tracks/
      *
-     * @param array $trackIds ID of the tracks.
+     * @param array $trackIds IDs of the tracks.
      *
      * @return array|object The requested tracks. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
@@ -630,11 +630,11 @@ class SpotifyWebAPI
     }
 
     /**
-     * Check if the track(s) is saved in the current user's Spotify library.
+     * Check if tracks is saved in the current user's Spotify library.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/check-users-saved-tracks/
      *
-     * @param string|array $tracks ID of the track(s) to check for.
+     * @param string|array $tracks ID(s) of the track(s) to check for.
      *
      * @return array Whether each track is saved.
      */
@@ -656,7 +656,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
-     * @param string|array $tracks ID of the track(s) to add.
+     * @param string|array $tracks ID(s) of the track(s) to add.
      *
      * @return bool Whether the tracks was successfully replaced.
      */
