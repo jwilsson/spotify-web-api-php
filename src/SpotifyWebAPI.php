@@ -680,7 +680,7 @@ class SpotifyWebAPI
      * https://developer.spotify.com/web-api/search-item/
      *
      * @param string $query The term to search for.
-     * @param string|array $type The type of item to search for; "album", "artist", or "track".
+     * @param string|array $type The type of item to search for.
      * @param array|object $options Optional. Options for the search.
      * - string market Optional. A ISO 3166-1 alpha-2 country code. Limit the results to items that are playable in this market.
      * - int limit Optional. Limit the number of items.
