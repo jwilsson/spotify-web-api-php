@@ -19,7 +19,7 @@ before_script:
 
 script:
   - mkdir -p build/logs
-  - vendor/bin/phpunit --verbose --coverage-clover build/logs/clover.xml
+  - vendor/bin/phpunit
 
 after_script:
  - php vendor/bin/coveralls -v
