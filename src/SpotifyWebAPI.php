@@ -177,7 +177,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to delete tracks from.
-     * @param array $tracks Tracks to delete and optional position in the playlist where the track is located.
+     * @param array $tracks Array of arrays with tracks to delete and optional position in the playlist where the track is located.
      * - id string Required. Spotify track ID.
      * - position array Optional. Position of the track in the playlist.
      * @param string $snapshotId Optional. The playlist's snapshot ID.
