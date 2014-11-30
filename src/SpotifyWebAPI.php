@@ -382,7 +382,7 @@ class SpotifyWebAPI
      * https://developer.spotify.com/web-api/get-list-featured-playlists/
      *
      * @param array|object $options Optional. Options for the playlists.
-     * - string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Show playlists in this language.
+     * - string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Separated by an underscore. Show playlists in this language.
      * - string country Optional. An ISO 3166-1 alpha-2 country code. Show playlists from this country.
      * - string timestamp Optional. A ISO 8601 timestamp. Show playlists relevant to this date and time.
      * - int limit Optional. Limit the number of playlists.
