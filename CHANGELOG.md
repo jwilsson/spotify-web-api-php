@@ -1,4 +1,14 @@
 # Changelog
+## 0.7.0 (2014-12-06)
+* The following methods to control the return type of all API methods were added:
+    * `Request::getReturnAssoc()`
+    * `Request::setReturnAssoc()`
+    * `SpotifyWebAPI::getReturnAssoc()`
+    * `SpotifyWebAPI::setReturnAssoc()`
+* Added `fields` option to `SpotifyWebAPI::getUserPlaylist()`.
+* All methods now automatically send authorization headers (if a access token is supplied), increasing rate limits.
+* Lots of inline documentation improvements.
+
 ## 0.6.0 (2014-10-26)
 * **This release contains breaking changes, read through this list before updating.**
 * All static methods on `Request` have been removed. `Request` now needs to be instantiated before using.
