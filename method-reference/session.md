@@ -16,7 +16,7 @@ Set up client credentials.
 
 * $clientId **string** - The client ID.
 * $clientSecret **string** - The client secret.
-* $redirectUri **string** - The redirect URI.
+* $redirectUri **string** - Optional. The redirect URI.
 * $request **[SpotifyWebAPI\Request](request.html)** - Optional. The Request object to use.
 
 ### getAuthorizeUrl()
