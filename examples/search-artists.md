@@ -12,3 +12,5 @@ title: Search for artists
     foreach ($results->artists->items as $artist) {
         echo $artist->name, '<br>';
     }
+
+There are lots of different options to use when searching. Please refer to the [Spotify documentation](https://developer.spotify.com/web-api/search-item/) for more information.
