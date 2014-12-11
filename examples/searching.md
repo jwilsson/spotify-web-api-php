@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Search for artists
+title: Searching the Spotify catalog
 ---
 
     <?php
