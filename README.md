@@ -6,7 +6,7 @@
 
 This is a PHP implementation of the [Spotify Web API](https://developer.spotify.com/web-api/). It includes the following:
 
-* Helper methods for all API methods (Information about artists, albums and tracks).
+* Helper methods for all API methods (information about artists, albums and tracks).
 * Search the Spotify catalog.
 * Get information about users and their music library.
 * Manage playlists for users.
@@ -170,7 +170,7 @@ $user = $api->getUser('username');
 print_r($user);
 ```
 
-Get a user's playlists
+Get user's playlists
 
 ```php
 $playlists = $api->getUserPlaylists('username');
@@ -266,7 +266,7 @@ Update a user's playlist
 $api->updateUserPlaylist('username', 'playlist_id', array('name' => 'New name'));
 ```
 
-Follow/Unfollow artist or user
+Follow and unfollow an artist or user
 
 ```php
 
@@ -281,7 +281,7 @@ $api->followArtistsOrUsers('user',array('spotify','spotify_france'));
 $api->unfollowArtistsOrUsers('user',array('spotify','spotify_france'));
 ```
 
-Check if current user follows artist or user
+Check if current user follows an artist or user
 
 ```php
 
