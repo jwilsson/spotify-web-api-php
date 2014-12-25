@@ -98,9 +98,9 @@ class Session
     }
 
     /**
-     * Get the number of seconds before the access token expires.
+     * Get the number of seconds for which the access token is valid.
      *
-     * @return int The expires time.
+     * @return int The time period (in seconds) for which the access token is valid.
      */
     public function getExpires()
     {
@@ -171,7 +171,7 @@ class Session
      *
      * @param array $scope Optional. Scope(s) to request from the user.
      *
-     * @return bool Whether a access token was successfully granted.
+     * @return bool True whether an access token was successfully granted, false otherwise.
      */
     public function requestCredentialsToken($scope = array())
     {
@@ -210,11 +210,11 @@ class Session
     /**
      * Request a refresh and access token.
      *
-     * @param string $code The authorization code from Spotify.
+     * @param string $authorizationCode The authorization code from Spotify.
      *
      * @return bool Whether both the refresh and access tokens were successfully granted.
      */
-    public function requestRefreshAndAccessToken($code)
+    public function requestRefreshAndAccessToken($authorizationCode)
     {
         $parameters = array(
             'client_id' => $this->getClientId(),
