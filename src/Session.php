@@ -219,7 +219,7 @@ class Session
         $parameters = array(
             'client_id' => $this->getClientId(),
             'client_secret' => $this->getClientSecret(),
-            'code' => $code,
+            'code' => $authorizationCode,
             'grant_type' => 'authorization_code',
             'redirect_uri' => $this->getRedirectUri(),
         );
