@@ -14,7 +14,7 @@ $session = new SpotifyWebAPI\Session(
 $api = new SpotifyWebAPI\SpotifyWebAPI();
 
 if (isset($_GET['code'])) {
-    $session->requestRefreshAndAccessToken($_GET['code']);
+    $session->requestAccessToken($_GET['code']);
     $api->setAccessToken($session->getAccessToken());
 
     print_r($api->me());

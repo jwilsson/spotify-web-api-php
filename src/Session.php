@@ -133,6 +133,7 @@ class Session
     public function refreshToken()
     {
         trigger_error('Use Session::refreshAccessToken instead', E_USER_DEPRECATED);
+        return $this->refreshAccessToken();
     }
 
     /**
@@ -167,11 +168,11 @@ class Session
     }
 
     /**
-     * Request a access token using the Client Credentials Flow.
+     * Request an access token using the Client Credentials Flow.
      *
      * @param array $scope Optional. Scope(s) to request from the user.
      *
-     * @return bool True whether an access token was successfully granted, false otherwise.
+     * @return bool True when an access token was successfully granted, false otherwise.
      */
     public function requestCredentialsToken($scope = array())
     {
@@ -200,21 +201,22 @@ class Session
     }
 
     /**
-     * @deprecated Use Session::requestRefreshAndAccessToken instead. This dummy function will be removed in 1.0.0.
+     * @deprecated Use Session::requestAccessToken instead. This dummy function will be removed in 1.0.0.
      */
     public function requestToken($code)
     {
-        trigger_error('Use Session::requestRefreshAndAccessToken instead', E_USER_DEPRECATED);
+        trigger_error('Use Session::requestAccessToken instead', E_USER_DEPRECATED);
+        return $this->requestAccessToken($code);
     }
 
     /**
-     * Request a refresh and access token.
+     * Request an access token given an authorization code.
      *
      * @param string $authorizationCode The authorization code from Spotify.
      *
-     * @return bool Whether both the refresh and access tokens were successfully granted.
+     * @return bool True when the access token was successfully granted, false otherwise.
      */
-    public function requestRefreshAndAccessToken($authorizationCode)
+    public function requestAccessToken($authorizationCode)
     {
         $parameters = array(
             'client_id' => $this->getClientId(),
