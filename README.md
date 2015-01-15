@@ -296,6 +296,31 @@ $follows = $api->currentUserFollows('artist','74ASZWbe4lXaubB36ztrGX');
 var_dump($follows);
 ```
 
+Follow publicly a playlist
+
+```php
+
+$api->followPlaylist('username', 'playlist_id', true);
+
+```
+
+Follow privately a playlist
+
+```php
+
+$api->followPlaylist('username', 'playlist_id', false);
+
+```
+
+Unfollow a playlist
+
+```php
+
+$api->unfollowPlaylist('username', 'playlist_id');
+
+```
+
+
 
 Browse through `src/SpotifyWebAPI.php` and look at the tests for more methods and examples.
 

@@ -28,15 +28,15 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI($request);
         return $api;
     }
- 
+
     public function testAddMyTracksSingle()
     {
         $api = $this->setupMock();
         $response = $api->addMyTracks('7EjyzZcbLxW7PaaLua9Ksb');
 
         $this->assertTrue($response);
-    }    
-      
+    }
+
     public function testAddMyTracksMultiple()
     {
         $api = $this->setupMock();
@@ -367,7 +367,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($response);
     }
-    
+
     public function testCurrentUserFollowsSingle()
     {
         $api = $this->setupMock('user-follow');
@@ -386,7 +386,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertTrue($response[0]);
         $this->assertTrue($response[1]);
     }
-    
+
     public function testFollowArtistSingle()
     {
         $api = $this->setupMock(204);
@@ -394,7 +394,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($response);
     }
-      
+
     public function testFollowArtistMultiple()
     {
         $api = $this->setupMock(204);
@@ -410,7 +410,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($response);
     }
-      
+
     public function testFollowUserMultiple()
     {
         $api = $this->setupMock(204);
@@ -418,7 +418,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($response);
     }
- 
+
      public function testUnfollowArtistSingle()
     {
         $api = $this->setupMock(204);
@@ -426,7 +426,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($response);
     }
-      
+
     public function testUnfollowArtistMultiple()
     {
         $api = $this->setupMock(204);
@@ -442,11 +442,35 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($response);
     }
-      
+
     public function testUnfollowUserMultiple()
     {
         $api = $this->setupMock(204);
         $response = $api->unfollowArtistsOrUsers('user',array('mcgurk','spotify'));
+
+        $this->assertTrue($response);
+    }
+
+    public function testFollowPlaylistPublicly()
+    {
+        $api = $this->setupMock(200);
+        $response = $api->followPlaylist('mcgurk', $this->playlistID, true);
+
+        $this->assertTrue($response);
+    }
+
+    public function testFollowPlaylistPrivately()
+    {
+        $api = $this->setupMock(200);
+        $response = $api->followPlaylist('mcgurk', $this->playlistID, false);
+
+        $this->assertTrue($response);
+    }
+
+    public function testUnfollowPlaylist()
+    {
+        $api = $this->setupMock(200);
+        $response = $api->unfollowPlaylist('mcgurk', $this->playlistID);
 
         $this->assertTrue($response);
     }
