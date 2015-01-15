@@ -835,12 +835,12 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to follow.
-     * @param array|object $options Options for the followed playlist.
+     * @param array|object $options Optional. Options for the followed playlist.
      * - public bool Optional. Whether the followed playlist should be public or not.
      *
      * @return bool Whether it worked or not.
      */
-    public function followPlaylist($userId, $playlistId, $options)
+    public function followPlaylist($userId, $playlistId, $options = array())
     {
         $defaults = array(
             'public' => true
