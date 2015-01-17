@@ -3,10 +3,6 @@ layout: default
 title: Getting Spotify featured content
 ---
 
-There are lots of operations involving a user's profile that can be performed.
-First off, you'll need an access token with the correct scope.
-In this example, we'll request all available profile scopes, in a real world application you'll probably won't need all of them so just request the ones you need.
-
     <?php
     require 'vendor/autoload.php';
 
