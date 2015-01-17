@@ -10,8 +10,6 @@ title: Method Reference - Request
 
 Make a request to the "account" endpoint.
 
-
-
 #### Arguments
 * $method **string** - The HTTP method to use.
 * $uri **string** - The URI to request.
@@ -32,8 +30,6 @@ Make a request to the "account" endpoint.
     array SpotifyWebAPI\Request::api(string $method, string $uri, array $parameters, array $headers)
 
 Make a request to the "api" endpoint.
-
-
 
 #### Arguments
 * $method **string** - The HTTP method to use.
@@ -57,8 +53,6 @@ Make a request to the "api" endpoint.
 Get a value indicating the response body type.
 
 
-
-
 #### Return values
 * **boolean** Whether the body is returned as an associative array or an stdClass.
 
@@ -68,8 +62,7 @@ Get a value indicating the response body type.
 
     array SpotifyWebAPI\Request::send(string $method, string $url, array $parameters, array $headers)
 
-Make a request to Spotify.
-
+Make a request to Spotify.<br>
 You'll probably want to use one of the convenience methods instead.
 
 #### Arguments
@@ -92,8 +85,6 @@ You'll probably want to use one of the convenience methods instead.
     void SpotifyWebAPI\Request::setReturnAssoc(boolean $returnAssoc)
 
 Set the return type for the response body.
-
-
 
 #### Arguments
 * $returnAssoc **boolean** - Whether to return an associative array or an stdClass.

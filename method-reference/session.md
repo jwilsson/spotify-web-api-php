@@ -8,10 +8,8 @@ title: Method Reference - Session
 
     void SpotifyWebAPI\Session::__construct(string $clientId, string $clientSecret, string $redirectUri, \SpotifyWebAPI\Request $request)
 
-Constructor
+Constructor<br>
 Set up client credentials.
-
-
 
 #### Arguments
 * $clientId **string** - The client ID.
@@ -30,8 +28,6 @@ Set up client credentials.
     string SpotifyWebAPI\Session::getAuthorizeUrl(array|object $options)
 
 Get the authorization URL.
-
-
 
 #### Arguments
 * $options **array\|object** - Optional. Options for the authorization URL.
@@ -53,8 +49,6 @@ Get the authorization URL.
 Get the access token.
 
 
-
-
 #### Return values
 * **string** The access token.
 
@@ -65,8 +59,6 @@ Get the access token.
     string SpotifyWebAPI\Session::getClientId()
 
 Get the client ID.
-
-
 
 
 #### Return values
@@ -81,8 +73,6 @@ Get the client ID.
 Get the client secret.
 
 
-
-
 #### Return values
 * **string** The client secret.
 
@@ -93,8 +83,6 @@ Get the client secret.
     integer SpotifyWebAPI\Session::getExpires()
 
 Get the number of seconds before the access token expires.
-
-
 
 
 #### Return values
@@ -109,8 +97,6 @@ Get the number of seconds before the access token expires.
 Get the client's redirect URI.
 
 
-
-
 #### Return values
 * **string** The redirect URI.
 
@@ -121,8 +107,6 @@ Get the client's redirect URI.
     string SpotifyWebAPI\Session::getRefreshToken()
 
 Get the refresh token.
-
-
 
 
 #### Return values
@@ -137,8 +121,6 @@ Get the refresh token.
 Refresh a access token.
 
 
-
-
 #### Return values
 * **boolean** Whether the access token was successfully refreshed.
 
@@ -149,8 +131,6 @@ Refresh a access token.
     boolean SpotifyWebAPI\Session::requestCredentialsToken(array $scope)
 
 Request a access token using the Client Credentials Flow.
-
-
 
 #### Arguments
 * $scope **array** - Optional. Scope(s) to request from the user.
@@ -167,8 +147,6 @@ Request a access token using the Client Credentials Flow.
 
 Request a access token.
 
-
-
 #### Arguments
 * $code **string** - The authorization code from Spotify.
 
@@ -183,8 +161,6 @@ Request a access token.
     void SpotifyWebAPI\Session::setClientId(string $clientId)
 
 Set the client ID.
-
-
 
 #### Arguments
 * $clientId **string** - The client ID.
@@ -201,8 +177,6 @@ Set the client ID.
 
 Set the client secret.
 
-
-
 #### Arguments
 * $clientSecret **string** - The client secret.
 
@@ -218,8 +192,6 @@ Set the client secret.
 
 Set the client's redirect URI.
 
-
-
 #### Arguments
 * $redirectUri **string** - The redirect URI.
 
@@ -234,8 +206,6 @@ Set the client's redirect URI.
     void SpotifyWebAPI\Session::setRefreshToken(string $refreshToken)
 
 Set the refresh token.
-
-
 
 #### Arguments
 * $refreshToken **string** - The refresh token.
