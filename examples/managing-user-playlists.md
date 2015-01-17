@@ -106,4 +106,4 @@ In this example, we'll request all available playlist scopes, in a real world ap
     <?php
     $api->unfollowPlaylist('USER_ID', 'PLAYLIST_ID');
 
-Please see the [Method Reference]({{ site.baseurl }}/method-reference/spotifywebapi.html) for more available options for each method.
+Please see the [method reference]({{ site.baseurl }}/method-reference/spotifywebapi.html) for more available options for each method.

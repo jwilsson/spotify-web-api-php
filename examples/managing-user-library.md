@@ -63,4 +63,4 @@ In this example, we'll request all available library scopes, in a real world app
 
     var_dump($contains);
 
-Please see the [Method Reference]({{ site.baseurl }}/method-reference/spotifywebapi.html) for more available options for each method.
+Please see the [method reference]({{ site.baseurl }}/method-reference/spotifywebapi.html) for more available options for each method.

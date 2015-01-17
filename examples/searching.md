@@ -13,4 +13,5 @@ title: Searching the Spotify catalog
         echo $artist->name, '<br>';
     }
 
-There are lots of different options to use when searching. Please refer to the [Spotify documentation](https://developer.spotify.com/web-api/search-item/) for more information.
+There are lots of different options to use when searching.
+Please refer to the [Spotify documentation](https://developer.spotify.com/web-api/search-item/) and [method reference]({{ site.baseurl }}/method-reference/spotifywebapi.html) for more information.
