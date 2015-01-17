@@ -34,6 +34,8 @@ In this example, we'll request all available library scopes, in a real world app
     ));
 
     foreach ($tracks->items as $track) {
+        $track = $track->track;
+
         echo '<a href="' . $track->external_urls->spotify . '">' . $track->name . '</a> <br>';
     }
 

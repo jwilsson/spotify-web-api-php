@@ -41,7 +41,7 @@ In this example, we'll request all available playlist scopes, in a real world ap
 ### Getting info about a specific playlist
 
     <?php
-    $playlist = $api->getUserPlaylists('USER_ID', 'PLAYLIST_ID');
+    $playlist = $api->getUserPlaylist('USER_ID', 'PLAYLIST_ID');
 
     echo $playlist->name;
 
@@ -51,7 +51,9 @@ In this example, we'll request all available playlist scopes, in a real world ap
     $playlistTracks = $api->getUserPlaylistTracks('USER_ID', 'PLAYLIST_ID');
 
     foreach ($playlistTracks->items as $track) {
-        echo '<a href="' . $playlist->external_urls->spotify . '">' . $playlist->name . '</a> <br>';
+        $track = $track->track;
+
+        echo '<a href="' . $track->external_urls->spotify . '">' . $track->name . '</a> <br>';
     }
 
 ### Creating a new playlist

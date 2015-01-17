@@ -28,7 +28,7 @@ In this example, we'll request all available profile scopes, in a real world app
         'country' => 'se'
     ));
 
-    foreach ($releases->alumbs as $album) {
+    foreach ($releases->albums->items as $album) {
         echo '<a href="' . $album->external_urls->spotify . '">' . $album->name . '</a> <br>';
     }
 
@@ -41,7 +41,7 @@ In this example, we'll request all available profile scopes, in a real world app
         'timestamp' => '2015-01-17T21:00:00', // Saturday night
     ));
 
-    foreach ($playlists->items as $playlist) {
+    foreach ($playlists->playlists->items as $playlist) {
         echo '<a href="' . $playlist->external_urls->spotify . '">' . $playlist->name . '</a> <br>';
     }
 
