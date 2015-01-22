@@ -2,7 +2,4 @@
 .env
 /vendor
 composer.lock
-Gemfile
-Gemfile.lock
 phpunit.xml
-Thumbs.db
