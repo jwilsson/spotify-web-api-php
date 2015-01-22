@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Getting artists, alumbs or tracks
+title: Getting artists, albums or tracks
 ---
 
     <?php
