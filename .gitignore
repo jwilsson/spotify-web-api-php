@@ -1,7 +1,2 @@
-.env
 _site
-composer.lock
-Gemfile
 Gemfile.lock
-phpunit.xml
-vendor

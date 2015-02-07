@@ -108,4 +108,16 @@ In this example, we'll request all available playlist scopes, in a real world ap
     <?php
     $api->unfollowPlaylist('USER_ID', 'PLAYLIST_ID');
 
+### Checking if user(s) are following a playlist
+
+    <?php
+    $users = array(
+        'USER_1',
+        'USER_2',
+    );
+
+    $api->userFollowsPlaylist('OWNER_ID', 'PLAYLIST_ID', array(
+        'ids' => $users
+    ));
+
 Please see the [method reference]({{ site.baseurl }}/method-reference/spotifywebapi.html) for more available options for each method.
