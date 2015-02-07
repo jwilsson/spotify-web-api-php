@@ -163,13 +163,9 @@ class SpotifyWebAPI
     {
         $tracks = implode(',', (array) $tracks);
         $tracks = urlencode($tracks);
-        $options = array(
-            'ids' => $tracks
-        );
-
         $headers = $this->authHeaders();
 
-        $response = $this->request->api('DELETE', '/v1/me/tracks', $tracks, $headers);
+        $response = $this->request->api('DELETE', '/v1/me/tracks?ids=' . $tracks, array(), $headers);
 
         return $response['status'] == 200;
     }
