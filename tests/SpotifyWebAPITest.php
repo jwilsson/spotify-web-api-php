@@ -368,6 +368,27 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertTrue($response);
     }
 
+    public function testUserFollowsPlaylist()
+    {
+        $api = $this->setupMock('user-follows-playlist');
+        $response = $api->userFollowsPlaylist('mcgurk', $this->playlistID, array(
+            'ids' => array('jmperezperez')
+        ));
+
+        $this->assertTrue($response[0]);
+    }
+
+    public function testUsersFollowsPlaylist()
+    {
+        $api = $this->setupMock('users-follows-playlist');
+        $response = $api->userFollowsPlaylist('mcgurk', $this->playlistID, array(
+            'ids' => array('jmperezperez', 'wizzler')
+        ));
+
+        $this->assertTrue($response[0]);
+        $this->assertTrue($response[1]);
+    }
+
     public function testCurrentUserFollowsSingle()
     {
         $api = $this->setupMock('user-follow');

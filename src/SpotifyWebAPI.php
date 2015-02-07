@@ -163,9 +163,13 @@ class SpotifyWebAPI
     {
         $tracks = implode(',', (array) $tracks);
         $tracks = urlencode($tracks);
+        $options = array(
+            'ids' => $tracks
+        );
+
         $headers = $this->authHeaders();
 
-        $response = $this->request->api('DELETE', '/v1/me/tracks?ids=' . $tracks, array(), $headers);
+        $response = $this->request->api('DELETE', '/v1/me/tracks', $tracks, $headers);
 
         return $response['status'] == 200;
     }
@@ -751,6 +755,34 @@ class SpotifyWebAPI
         $response = $this->request->api('PUT', $uri, $data, $headers);
 
         return $response['status'] == 200;
+    }
+
+    /**
+     * Check if a user is following a playlist
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/check-user-following-playlist/
+     *
+     * @param string $ownerId User ID of the playlist owner.
+     * @param string $playlistId ID of the playlist.
+     * @param $options array|object Options for the check.
+     * - ids array Required. IDs of the user(s) to check for.
+     *
+     * @return array Whether each user is following the playlist.
+     */
+    public function userFollowsPlaylist($ownerId, $playlistId, $options)
+    {
+        $defaults = array(
+            'ids' => array()
+        );
+
+        $options = array_merge($defaults, (array) $options);
+        $options['ids'] = implode(',', $options['ids']);
+        $headers = $this->authHeaders();
+
+        $url = '/v1/users/' . $ownerId . '/playlists/' . $playlistId . '/followers/contains';
+        $response = $this->request->api('GET', $url, $options, $headers);
+
+        return $response['body'];
     }
 
     /**

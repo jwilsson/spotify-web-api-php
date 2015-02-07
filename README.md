@@ -289,6 +289,19 @@ $api->updateUserPlaylist('username', 'playlist_id', array(
 ));
 ```
 
+Check if a user is following a playlist
+
+```php
+$users = array(
+    'user1',
+    'user2'
+);
+
+$api->userFollowsPlaylist('owner_id', 'playlist_id', array(
+    'ids' => $users
+));
+```
+
 Follow/Unfollow artist or user
 
 ```php
