@@ -142,6 +142,33 @@ $playlists = $api->getFeaturedPlaylists();
 print_r($playlists);
 ```
 
+Get Spotify list of categories
+```php
+$categories = $api->getListCategories(array(
+    'country' => 'se'
+));
+
+print_r($categories);
+```
+
+Get Spotify category
+```php
+$category = $api->getcategory('dinner', array(
+    'country' => 'se'
+));
+
+print_r($category);
+```
+
+Get playlists of a Spotify category
+```php
+$playlists = $api->getCategoryPlaylists('dinner', array(
+    'country' => 'se'
+));
+
+print_r($playlists);
+```
+
 Get new releases
 ```php
 $items = $api->getNewReleases(array(
