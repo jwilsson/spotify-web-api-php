@@ -153,7 +153,7 @@ print_r($categories);
 
 Get Spotify category
 ```php
-$category = $api->getcategory('dinner', array(
+$category = $api->getCategory('dinner', array(
     'country' => 'se'
 ));
 
