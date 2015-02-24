@@ -216,10 +216,10 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('playlists', $response);
     }
 
-    public function testGetListCategories()
+    public function testGetCategoriesList()
     {
         $api = $this->setupMock('list-categories');
-        $response = $api->getListCategories(array(
+        $response = $api->getCategoriesList(array(
             'country' => 'SE'
         ));
 

@@ -144,7 +144,7 @@ print_r($playlists);
 
 Get Spotify list of categories
 ```php
-$categories = $api->getListCategories(array(
+$categories = $api->getCategoriesList(array(
     'country' => 'se'
 ));
 
