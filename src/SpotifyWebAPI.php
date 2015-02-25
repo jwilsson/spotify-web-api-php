@@ -466,7 +466,7 @@ class SpotifyWebAPI
         $options = array_filter($options);
 
         $headers = $this->authHeaders();
-        $response = $this->request->api('GET', '/v1/browse/categories' . $categoryId, $options, $headers);
+        $response = $this->request->api('GET', '/v1/browse/categories/' . $categoryId, $options, $headers);
 
         return $response['body'];
     }
