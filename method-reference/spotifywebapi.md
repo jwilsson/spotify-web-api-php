@@ -282,6 +282,74 @@ Requires a valid access token.<br>
 
 
 
+### getCategoriesList
+
+    array|object SpotifyWebAPI\SpotifyWebAPI::getCategoriesList(array|object $options)
+
+Get a List of Categories.<br>
+Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab<br>
+Requires a valid access token.<br>
+[https://developer.spotify.com/web-api/get-list-categories/](https://developer.spotify.com/web-api/get-list-categories/)
+
+#### Arguments
+* $options **array\|object** - Optional. Options for the categories.
+    * string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Separated by an underscore. Show categories in this language.
+    * string country Optional. An ISO 3166-1 alpha-2 country code. Show categories from this country.
+    * int limit Optional. Limit the number of categories.
+    * int offset Optional. Number of categories to skip.
+
+
+
+#### Return values
+* **array\|object** The list of categories. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+
+
+
+### getCategory
+
+    array|object SpotifyWebAPI\SpotifyWebAPI::getCategory(string $categoryId, array|object $options)
+
+Get a Category.<br>
+Get a single category used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).<br>
+Requires a valid access token.<br>
+[https://developer.spotify.com/web-api/get-category/](https://developer.spotify.com/web-api/get-category/)
+
+#### Arguments
+* $categoryId **string** - The Spotify ID for the category.
+* $options **array\|object** - Optional. Options for the category.
+    * string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Separated by an underscore. Show category in this language.
+    * string country Optional. An ISO 3166-1 alpha-2 country code. Show category from this country.
+
+
+
+#### Return values
+* **array\|object** The category. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+
+
+
+### getCategoryPlaylists
+
+    array|object SpotifyWebAPI\SpotifyWebAPI::getCategoryPlaylists(string $categoryId, array|object $options)
+
+Get a Category’s Playlists.<br>
+Get a list of Spotify playlists tagged with a particular category.<br>
+Requires a valid access token.<br>
+[https://developer.spotify.com/web-api/get-categorys-playlists/](https://developer.spotify.com/web-api/get-categorys-playlists/)
+
+#### Arguments
+* $categoryId **string** - The Spotify ID for the category.
+* $options **array\|object** - Optional. Options for the category&#039;s playlists.
+    * string country Optional. An ISO 3166-1 alpha-2 country code. Show category playlists from this country.
+    * int limit Optional. Limit the number of playlists.
+    * int offset Optional. Number of playlists to skip.
+
+
+
+#### Return values
+* **array\|object** The list of playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+
+
+
 ### getNewReleases
 
     array|object SpotifyWebAPI\SpotifyWebAPI::getNewReleases(array|object $options)
