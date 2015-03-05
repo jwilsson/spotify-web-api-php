@@ -345,6 +345,18 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertTrue($response[1]);
     }
 
+    public function testReorderPlaylistTracks()
+    {
+        $api = $this->setupMock('user-playlist-snapshot-id');
+        $response = $api->reorderPlaylistTracks('mcgurk', $this->playlistID, array(
+            'range_start' => 2,
+            'range_length' => 1,
+            'insert_before' => 5,
+        ));
+
+        $this->assertNotFalse($response);
+    }
+
     public function testReplacePlaylistTracksSingle()
     {
         $api = $this->setupMock(201);
