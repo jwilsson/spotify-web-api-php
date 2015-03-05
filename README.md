@@ -6,10 +6,11 @@
 
 This is a PHP implementation of the [Spotify Web API](https://developer.spotify.com/web-api/). It includes the following:
 
-* Helper methods for all API methods (Information about artists, albums and tracks).
-* Search the Spotify catalog.
-* Get information about users and their music library.
-* Manage playlists for users.
+* Helper methods for all API methods:
+    * Information about artists, albums, tracks, and users.
+    * Spotify catalog search.
+    * Playlist and user music library management.
+    * Music featured by Spotify.
 * Authorization flow helpers.
 * PSR-4 autoloading support.
 
@@ -255,7 +256,7 @@ $contains = $api->myTracksContains(array(
 var_dump($contains);
 ```
 
-Reorder tracks in a user's playlist
+Reorder the tracks in a user's playlist
 
 ```php
 $api->reorderPlaylistTracks('username', 'playlist_id', array(
