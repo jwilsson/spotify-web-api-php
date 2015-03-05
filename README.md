@@ -258,7 +258,7 @@ var_dump($contains);
 Reorder tracks in a user's playlist
 
 ```php
-$api->replacePlaylistTracks('username', 'playlist_id', array(
+$api->reorderPlaylistTracks('username', 'playlist_id', array(
     'range_start' => 1,
     'range_length' => 5,
     'insert_before' => 10,
