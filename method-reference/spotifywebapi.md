@@ -547,6 +547,30 @@ Requires a valid access token.<br>
 
 
 
+### reorderPlaylistTracks
+
+    string|boolean SpotifyWebAPI\SpotifyWebAPI::reorderPlaylistTracks(string $userId, string $playlistId, array|object $options)
+
+Reorder tracks in a user's playlist<br>
+Requires a valid access token.<br>
+[https://developer.spotify.com/web-api/reorder-playlists-tracks/](https://developer.spotify.com/web-api/reorder-playlists-tracks/)
+
+#### Arguments
+* $userId **string** - ID of the user.
+* $playlistId **string** - ID of the playlist.
+* $options **array\|object** - Options for the new .
+    * int range_start Position of the first track to be reordered.
+    * int range_length Optional. The amount of tracks to be reordered.
+    * int insert_before Position where the tracks should be inserted.
+    * string $snapshotId Optional. The playlist&#039;s snapshot ID.
+
+
+
+#### Return values
+* **string\|boolean** A new snapshot ID or false if the tracks weren&#039;t reordered.
+
+
+
 ### replacePlaylistTracks
 
     boolean SpotifyWebAPI\SpotifyWebAPI::replacePlaylistTracks(string $userId, string $playlistId, string|array $tracks)
