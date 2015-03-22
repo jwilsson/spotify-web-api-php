@@ -551,7 +551,7 @@ Requires a valid access token.<br>
 
     string|boolean SpotifyWebAPI\SpotifyWebAPI::reorderPlaylistTracks(string $userId, string $playlistId, array|object $options)
 
-Reorder tracks in a user's playlist<br>
+Reorder the tracks in a user's playlist.<br>
 Requires a valid access token.<br>
 [https://developer.spotify.com/web-api/reorder-playlists-tracks/](https://developer.spotify.com/web-api/reorder-playlists-tracks/)
 
@@ -703,7 +703,7 @@ Requires a valid access token.<br>
 
 
 #### Return values
-* **boolean** Whether it worked or not.
+* **boolean** True when all went well, false otherwise.
 
 
 
@@ -721,7 +721,7 @@ Requires a valid access token.<br>
 
 
 #### Return values
-* **boolean** Whether it worked or not.
+* **boolean** True when all went well, false otherwise.
 
 
 

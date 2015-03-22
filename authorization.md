@@ -48,17 +48,17 @@ You'll need to use this code to request a access token from Spotify and tell the
     $api = new SpotifyWebAPI\SpotifyWebAPI();
 
     // Request a access token using the code from Spotify
-    $session->requestToken($_GET['code']);
+    $session->requestAccessToken($_GET['code']);
     $accessToken = $session->getAccessToken();
 
     // Set the access token on the API wrapper
     $api->setAccessToken($accessToken);
 
 When requesting a access token, a **refresh token** will also be included. This can be used to extend the validity of access tokens.
-To refresh a access token, the `refreshToken()` method can be used:
+To refresh a access token, the `refreshAccessToken()` method can be used:
 
 
-    $session->refreshToken();
+    $session->refreshAccessToken();
 
 
 You can also retrieve the refresh token and store it for later use:
@@ -72,7 +72,7 @@ Later, when you want to refresh a session with it, tell a `Session` object about
     // Fetch an old refresh token from somewhere...
 
     $session->setRefreshToken($refreshToken);
-    $session->refreshToken();
+    $session->refreshAccessToken();
 
     $accessToken = $session->getAccessToken();
 

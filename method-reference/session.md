@@ -82,11 +82,11 @@ Get the client secret.
 
     integer SpotifyWebAPI\Session::getExpires()
 
-Get the number of seconds before the access token expires.
+Get the number of seconds for which the access token is valid.
 
 
 #### Return values
-* **integer** The expires time.
+* **integer** The time period (in seconds) for which the access token is valid.
 
 
 
@@ -116,9 +116,18 @@ Get the refresh token.
 
 ### refreshToken
 
-    boolean SpotifyWebAPI\Session::refreshToken()
+     SpotifyWebAPI\Session::refreshToken()
 
-Refresh a access token.
+
+
+
+
+
+### refreshAccessToken
+
+    boolean SpotifyWebAPI\Session::refreshAccessToken()
+
+Refresh an access token.
 
 
 #### Return values
@@ -130,29 +139,41 @@ Refresh a access token.
 
     boolean SpotifyWebAPI\Session::requestCredentialsToken(array $scope)
 
-Request a access token using the Client Credentials Flow.
+Request an access token using the Client Credentials Flow.
 
 #### Arguments
 * $scope **array** - Optional. Scope(s) to request from the user.
 
 
 #### Return values
-* **boolean** Whether a access token was successfully granted.
+* **boolean** True when an access token was successfully granted, false otherwise.
 
 
 
 ### requestToken
 
-    boolean SpotifyWebAPI\Session::requestToken(string $code)
+     SpotifyWebAPI\Session::requestToken($code)
 
-Request a access token.
+
 
 #### Arguments
-* $code **string** - The authorization code from Spotify.
+* $code **mixed**
+
+
+
+
+### requestAccessToken
+
+    boolean SpotifyWebAPI\Session::requestAccessToken(string $authorizationCode)
+
+Request an access token given an authorization code.
+
+#### Arguments
+* $authorizationCode **string** - The authorization code from Spotify.
 
 
 #### Return values
-* **boolean** Whether a access token was successfully granted.
+* **boolean** True when the access token was successfully granted, false otherwise.
 
 
 
