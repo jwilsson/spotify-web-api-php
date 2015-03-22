@@ -4,7 +4,7 @@
     "type": "library",
     "license": "MIT",
     "keywords": ["spotify"],
-    "homepage": "https://github.com/jwilsson/spotify-web-api-php",
+    "homepage": "http://jwilsson.github.io/spotify-web-api-php/",
     "authors": [
         {
             "name": "Jonathan Wilsson",
