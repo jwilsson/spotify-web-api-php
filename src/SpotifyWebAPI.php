@@ -744,7 +744,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Reorder tracks in a user's playlist
+     * Reorder the tracks in a user's playlist.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/reorder-playlists-tracks/
      *
