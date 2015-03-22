@@ -1,4 +1,22 @@
 # Changelog
+### 0.8.0 (2015-03-22)
+* **This release contains breaking changes, read through this list before updating.**
+* The following methods have been renamed:
+    * `Session::refreshToken()` -> `Session::refreshAccessToken()`
+    * `Session::requestToken() -> Session::requestAccessToken()`
+* The following methods has been added:
+    * `SpotifyWebAPI::currentUserFollows()`
+    * `SpotifyWebAPI::followArtistsOrUsers()`
+    * `SpotifyWebAPI::followPlaylist()`
+    * `SpotifyWebAPI::getCategoriesList()`
+    * `SpotifyWebAPI::getCategory()`
+    * `SpotifyWebAPI::getFeaturedPlaylists()`
+    * `SpotifyWebAPI::reorderPlaylistTracks()`
+    * `SpotifyWebAPI::unfollowArtistsOrUsers()`
+    * `SpotifyWebAPI::unfollowPlaylist()`
+    * `SpotifyWebAPI::userFollowsPlaylist()`
+* The `$redirectUri` argument in `Session::__construct()` is now optional.
+
 ## 0.7.0 (2014-12-06)
 * The following methods to control the return type of all API methods were added:
     * `Request::getReturnAssoc()`
