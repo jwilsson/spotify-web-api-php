@@ -213,7 +213,7 @@ $user = $api->getUser('username');
 print_r($user);
 ```
 
-Get a user's playlists
+Get user's playlists
 
 ```php
 $playlists = $api->getUserPlaylists('username');
@@ -341,10 +341,9 @@ $api->userFollowsPlaylist('owner_id', 'playlist_id', array(
 ));
 ```
 
-Follow/Unfollow artist or user
+Follow and unfollow an artist or user
 
 ```php
-
 $api->followArtistsOrUsers('artist', '74ASZWbe4lXaubB36ztrGX');
 
 $api->unfollowArtistsOrUsers('artist', '74ASZWbe4lXaubB36ztrGX');
@@ -365,7 +364,7 @@ $api->unfollowArtistsOrUsers('user', array(
 ));
 ```
 
-Check if current user follows artist or user
+Check if current user follows a user or artist
 
 ```php
 $follows = $api->currentUserFollows('user', array(
