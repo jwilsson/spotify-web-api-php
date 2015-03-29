@@ -1138,7 +1138,7 @@ class SpotifyWebAPI
      * @param string $ownerId User ID of the playlist owner.
      * @param string $playlistId ID of the playlist.
      * @param $options array|object Options for the check.
-     * - ids array Required. IDs of the user(s) to check for.
+     * - ids string|array Required. ID(s) of the user(s) to check for.
      *
      * @return array Whether each user is following the playlist.
      */
@@ -1149,7 +1149,7 @@ class SpotifyWebAPI
         );
 
         $options = array_merge($defaults, (array) $options);
-        $options['ids'] = implode(',', $options['ids']);
+        $options['ids'] = implode(',', (array) $options['ids']);
 
         $headers = $this->authHeaders();
 

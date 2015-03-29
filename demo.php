@@ -18,7 +18,9 @@ if (isset($_GET['code'])) {
     $session->requestAccessToken($_GET['code']);
     $api->setAccessToken($session->getAccessToken());
 
-    print_r($api->me());
+    print_r($api->userFollowsPlaylist('mcgurk', '0jF78Hb6Np1eFaan46EyBl', array(
+        'ids' => 'jmperezperez',
+    )));
 } else {
     $scopes = array(
         'scope' => array(
