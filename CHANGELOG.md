@@ -1,9 +1,12 @@
 # Changelog
+### 0.8.1 (2015-03-29)
+* Fixed an issue where `SpotifyWebAPI::updateUserPlaylist()` would fail without `name` set.
+
 ### 0.8.0 (2015-03-22)
 * **This release contains breaking changes, read through this list before updating.**
 * The following methods have been renamed:
     * `Session::refreshToken()` -> `Session::refreshAccessToken()`
-    * `Session::requestToken() -> Session::requestAccessToken()`
+    * `Session::requestToken()` -> `Session::requestAccessToken()`
 * The following methods has been added:
     * `SpotifyWebAPI::currentUserFollows()`
     * `SpotifyWebAPI::followArtistsOrUsers()`
