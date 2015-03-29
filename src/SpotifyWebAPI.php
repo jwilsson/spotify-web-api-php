@@ -449,7 +449,7 @@ class SpotifyWebAPI
      *
      * @param string $artistId ID of the artist.
      * @param array|object $options Optional. Options for the albums.
-     * - array album_type Optional. Album types to return. If omitted, all album types will be returned.
+     * - string|array album_type Optional. Album type(s) to return. If omitted, all album types will be returned.
      * - string market Optional. A ISO 3166-1 alpha-2 country code. Limit the results to tracks that are playable in this market.
      * - int limit Optional. Limit the number of albums.
      * - int offset Optional. Number of albums to skip.
@@ -466,7 +466,7 @@ class SpotifyWebAPI
         );
 
         $options = array_merge($defaults, (array) $options);
-        $options['album_type'] = implode(',', $options['album_type']);
+        $options['album_type'] = implode(',', (array) $options['album_type']);
         $options = array_filter($options);
 
         $headers = $this->authHeaders();

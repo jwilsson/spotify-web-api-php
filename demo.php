@@ -18,8 +18,8 @@ if (isset($_GET['code'])) {
     $session->requestAccessToken($_GET['code']);
     $api->setAccessToken($session->getAccessToken());
 
-    print_r($api->userFollowsPlaylist('mcgurk', '0jF78Hb6Np1eFaan46EyBl', array(
-        'ids' => 'jmperezperez',
+    print_r($api->getArtistAlbums('6jJ0s89eD6GaHleKKya26X', array(
+        'album_type' => 'album',
     )));
 } else {
     $scopes = array(
