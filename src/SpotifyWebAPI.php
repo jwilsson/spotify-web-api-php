@@ -888,6 +888,14 @@ class SpotifyWebAPI
         );
 
         $data = array_merge($defaults, (array) $data);
+        $data = array_filter($data, function ($value) {
+            if (is_bool($value)) {
+                return true;
+            }
+
+            return (bool) $value;
+        });
+
         $data = json_encode($data);
 
         $headers = $this->authHeaders();
