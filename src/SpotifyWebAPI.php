@@ -151,6 +151,31 @@ class SpotifyWebAPI
     }
 
     /**
+     * Check to see if the current user is following one or more artists or other Spotify users
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/check-current-user-follows/
+     *
+     * @param string The type to check: either 'artist' or 'user'.
+     * @param string|array ID(s) of the user(s) or artist(s) to check for.
+     *
+     * @return array Whether each user or artist is followed.
+     */
+    public function currentUserFollows($type, $ids)
+    {
+        $ids = implode(',', (array) $ids);
+        $options = array(
+            'ids' => $ids,
+            'type' => $type,
+        );
+
+        $headers = $this->authHeaders();
+
+        $response = $this->request->api('GET', '/v1/me/following/contains', $options, $headers);
+
+        return $response['body'];
+    }
+
+    /**
      * Delete tracks from current user's Spotify library.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/remove-tracks-user/
@@ -210,6 +235,65 @@ class SpotifyWebAPI
         }
 
         return false;
+    }
+
+    /**
+     * Add the current user as a follower of one or more artists or other Spotify users
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/follow-artists-users/
+     *
+     * @param string The type to check: either 'artist' or 'user'.
+     * @param string|array ID(s) of the user(s) or artist(s) to follow.
+     *
+     * @return bool Whether the artist or user was successfully followed.
+     */
+    public function followArtistsOrUsers($type, $ids)
+    {
+        $ids = array(
+            'ids' => (array) $ids,
+        );
+        $ids = json_encode($ids);
+
+        $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
+
+        // We need to manually append data to the URI since it's a PUT request
+        $uri = '/v1/me/following?type=' . $type;
+
+        $response = $this->request->api('PUT', $uri, $ids, $headers);
+
+        return $response['status'] == 204;
+    }
+
+    /**
+     * Add the current user as a follower of a playlist.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/follow-playlist/
+     *
+     * @param string $userId ID of the user who owns the playlist.
+     * @param string $playlistId ID of the playlist to follow.
+     * @param array|object $options Optional. Options for the followed playlist.
+     * - public bool Optional. Whether the followed playlist should be public or not.
+     *
+     * @return bool Whether the playlist was successfully followed.
+     */
+    public function followPlaylist($userId, $playlistId, $options = array())
+    {
+        $defaults = array(
+            'public' => true
+        );
+
+        $options = array_merge($defaults, (array) $options);
+        $options = json_encode($options);
+
+        $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
+
+        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/followers';
+
+        $response = $this->request->api('PUT', $uri, $options, $headers);
+
+        return $response['status'] == 200;
     }
 
     /**
@@ -870,6 +954,68 @@ class SpotifyWebAPI
     }
 
     /**
+     * Set the return type for the Request body element.
+     *
+     * @param bool $returnAssoc Whether to return an associative array or an stdClass.
+     *
+     * @return void
+     */
+    public function setReturnAssoc($returnAssoc)
+    {
+        $this->request->setReturnAssoc($returnAssoc);
+    }
+
+    /**
+     * Remove the current user as a follower of one or more artists or other Spotify users
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/unfollow-artists-users/
+     *
+     * @param string The type to check: either 'artist' or 'user'.
+     * @param string|array ID(s) of the user(s) or artist(s) to unfollow.
+     *
+     * @return bool Whether the artist(s) or user(s) where successfully unfollowed.
+     */
+    public function unfollowArtistsOrUsers($type, $ids)
+    {
+        $ids = array(
+            'ids' => (array) $ids,
+        );
+        $ids = json_encode($ids);
+
+        $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
+
+        // We need to manually append data to the URI since it's a DELETE request
+        $uri = '/v1/me/following?type=' . $type;
+
+        $response = $this->request->api('DELETE', $uri, $ids, $headers);
+
+        return $response['status'] == 204;
+    }
+
+    /**
+     * Remove the current user as a follower of a playlist.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/unfollow-playlist/
+     *
+     * @param string $userId ID of the user who owns the playlist.
+     * @param string $playlistId ID of the playlist to unfollow
+     *
+     * @return bool Whether the playlist where successfully unfollowed.
+     */
+    public function unfollowPlaylist($userId, $playlistId)
+    {
+        $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
+
+        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/followers';
+
+        $response = $this->request->api('DELETE', $uri, null, $headers);
+
+        return $response['status'] == 200;
+    }
+
+    /**
      * Update the details of a user's playlist.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/change-playlist-details/
@@ -925,152 +1071,5 @@ class SpotifyWebAPI
         $response = $this->request->api('GET', $url, $options, $headers);
 
         return $response['body'];
-    }
-
-    /**
-     * Check to see if the current user is following one or more artists or other Spotify users
-     * Requires a valid access token.
-     * https://developer.spotify.com/web-api/check-current-user-follows/
-     *
-     * @param string The type to check: either 'artist' or 'user'.
-     * @param string|array ID(s) of the user(s) or artist(s) to check for.
-     *
-     * @return array Whether each user or artist is followed.
-     */
-    public function currentUserFollows($type, $ids)
-    {
-        $ids = implode(',', (array) $ids);
-        $options = array(
-            'ids' => $ids,
-            'type' => $type,
-        );
-
-        $headers = $this->authHeaders();
-
-        $response = $this->request->api('GET', '/v1/me/following/contains', $options, $headers);
-
-        return $response['body'];
-    }
-
-    /**
-     * Add the current user as a follower of one or more artists or other Spotify users
-     * Requires a valid access token.
-     * https://developer.spotify.com/web-api/follow-artists-users/
-     *
-     * @param string The type to check: either 'artist' or 'user'.
-     * @param string|array ID(s) of the user(s) or artist(s) to follow.
-     *
-     * @return bool Whether the artist or user was successfully followed.
-     */
-    public function followArtistsOrUsers($type, $ids)
-    {
-        $ids = array(
-            'ids' => (array) $ids,
-        );
-        $ids = json_encode($ids);
-
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
-
-        // We need to manually append data to the URI since it's a PUT request
-        $uri = '/v1/me/following?type=' . $type;
-
-        $response = $this->request->api('PUT', $uri, $ids, $headers);
-
-        return $response['status'] == 204;
-    }
-
-    /**
-     * Remove the current user as a follower of one or more artists or other Spotify users
-     * Requires a valid access token.
-     * https://developer.spotify.com/web-api/unfollow-artists-users/
-     *
-     * @param string The type to check: either 'artist' or 'user'.
-     * @param string|array ID(s) of the user(s) or artist(s) to unfollow.
-     *
-     * @return bool Whether the artist(s) or user(s) where successfully unfollowed.
-     */
-    public function unfollowArtistsOrUsers($type, $ids)
-    {
-        $ids = array(
-            'ids' => (array) $ids,
-        );
-        $ids = json_encode($ids);
-
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
-
-        // We need to manually append data to the URI since it's a DELETE request
-        $uri = '/v1/me/following?type=' . $type;
-
-        $response = $this->request->api('DELETE', $uri, $ids, $headers);
-
-        return $response['status'] == 204;
-    }
-
-    /**
-     * Add the current user as a follower of a playlist.
-     * Requires a valid access token.
-     * https://developer.spotify.com/web-api/follow-playlist/
-     *
-     * @param string $userId ID of the user who owns the playlist.
-     * @param string $playlistId ID of the playlist to follow.
-     * @param array|object $options Optional. Options for the followed playlist.
-     * - public bool Optional. Whether the followed playlist should be public or not.
-     *
-     * @return bool Whether the playlist was successfully followed.
-     */
-    public function followPlaylist($userId, $playlistId, $options = array())
-    {
-        $defaults = array(
-            'public' => true
-        );
-
-        $options = array_merge($defaults, (array) $options);
-        $options = json_encode($options);
-
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
-
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/followers';
-
-        $response = $this->request->api('PUT', $uri, $options, $headers);
-
-        return $response['status'] == 200;
-    }
-
-
-    /**
-     * Remove the current user as a follower of a playlist.
-     * Requires a valid access token.
-     * https://developer.spotify.com/web-api/unfollow-playlist/
-     *
-     * @param string $userId ID of the user who owns the playlist.
-     * @param string $playlistId ID of the playlist to unfollow
-     *
-     * @return bool Whether the playlist where successfully unfollowed.
-     */
-    public function unfollowPlaylist($userId, $playlistId)
-    {
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
-
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/followers';
-
-        $response = $this->request->api('DELETE', $uri, null, $headers);
-
-        return $response['status'] == 200;
-    }
-
-    /**
-     * Set the return type for the Request body element.
-     *
-     * @param bool $returnAssoc Whether to return an associative array or an stdClass.
-     *
-     * @return void
-     */
-    public function setReturnAssoc($returnAssoc)
-    {
-        $this->request->setReturnAssoc($returnAssoc);
     }
 }

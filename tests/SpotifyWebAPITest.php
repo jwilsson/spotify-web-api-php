@@ -9,7 +9,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         if (is_int($fixture)) {
             $return = array(
-                'status' => $fixture
+                'status' => $fixture,
             );
         } else {
             $fixture = __DIR__ . '/fixtures/' . $fixture . '.json';
@@ -17,7 +17,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
             $response = json_decode($fixture);
             $return = array(
-                'body' => $response
+                'body' => $response,
             );
         }
 
@@ -25,8 +25,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $request->method('api')
                 ->willReturn($return);
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($request);
-        return $api;
+        return new SpotifyWebAPI\SpotifyWebAPI($request);
     }
 
     public function testAddMyTracksSingle()
@@ -42,7 +41,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = $this->setupMock();
         $response = $api->addMyTracks(array(
             '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l'
+            '3mqRLlD9j92BBv1ueFhJ1l',
         ));
 
         $this->assertTrue($response);
@@ -61,7 +60,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = $this->setupMock(201);
         $response = $api->addUserPlaylistTracks('mcgurk', $this->playlistID, array(
             '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l'
+            '3mqRLlD9j92BBv1ueFhJ1l',
         ));
 
         $this->assertTrue($response);
@@ -72,7 +71,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = $this->setupMock('user-playlist');
         $response = $api->createUserPlaylist('mcgurk', array(
             'name' => 'Test playlist',
-            'public' => false
+            'public' => false,
         ));
 
         $this->assertObjectHasAttribute('id', $response);
@@ -82,10 +81,30 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $api = $this->setupMock('user-playlist-public');
         $response = $api->createUserPlaylist('mcgurk', array(
-            'name' => 'Test playlist'
+            'name' => 'Test playlist',
         ));
 
         $this->assertTrue($response->public);
+    }
+
+    public function testCurrentUserFollowsSingle()
+    {
+        $api = $this->setupMock('user-follow');
+        $response = $api->currentUserFollows('artist','74ASZWbe4lXaubB36ztrGX');
+
+        $this->assertTrue($response[0]);
+    }
+
+    public function testCurrentUserFollowsMultiple()
+    {
+        $api = $this->setupMock('user-follows');
+        $response = $api->currentUserFollows('user', array(
+            'mcgurk',
+            'spotify',
+        ));
+
+        $this->assertTrue($response[0]);
+        $this->assertTrue($response[1]);
     }
 
     public function testDeleteMyTracksSingle()
@@ -101,7 +120,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = $this->setupMock();
         $response = $api->deleteMyTracks(array(
             '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l'
+            '3mqRLlD9j92BBv1ueFhJ1l',
         ));
 
         $this->assertTrue($response);
@@ -112,8 +131,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = $this->setupMock('user-playlist-snapshot-id');
         $response = $api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
             array(
-                'id' => '7EjyzZcbLxW7PaaLua9Ksb'
-            )
+                'id' => '7EjyzZcbLxW7PaaLua9Ksb',
+            ),
         ));
 
         $this->assertNotFalse($response);
@@ -124,14 +143,70 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = $this->setupMock('user-playlist-snapshot-id');
         $response = $api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
             array(
-                'id' => '1id6H6vcwSB9GGv9NXh5cl'
+                'id' => '1id6H6vcwSB9GGv9NXh5cl',
             ),
             array(
-                'id' => '3mqRLlD9j92BBv1ueFhJ1l'
-            )
+                'id' => '3mqRLlD9j92BBv1ueFhJ1l',
+            ),
         ));
 
         $this->assertNotFalse($response);
+    }
+
+    public function testFollowArtistSingle()
+    {
+        $api = $this->setupMock(204);
+        $response = $api->followArtistsOrUsers('artist', '74ASZWbe4lXaubB36ztrGX');
+
+        $this->assertTrue($response);
+    }
+
+    public function testFollowArtistMultiple()
+    {
+        $api = $this->setupMock(204);
+        $response = $api->followArtistsOrUsers('artist', array(
+            '74ASZWbe4lXaubB36ztrGX',
+            '2t9yJDJIEtvPmr2iRIdqBf',
+        ));
+
+        $this->assertTrue($response);
+    }
+
+    public function testFollowPlaylistPublicly()
+    {
+        $api = $this->setupMock(200);
+        $response = $api->followPlaylist('mcgurk', $this->playlistID);
+
+        $this->assertTrue($response);
+    }
+
+    public function testFollowPlaylistPrivately()
+    {
+        $api = $this->setupMock(200);
+        $response = $api->followPlaylist('mcgurk', $this->playlistID, array(
+            'public' => false,
+        ));
+
+        $this->assertTrue($response);
+    }
+
+    public function testFollowUserSingle()
+    {
+        $api = $this->setupMock(204);
+        $response = $api->followArtistsOrUsers('user','mcgurk');
+
+        $this->assertTrue($response);
+    }
+
+    public function testFollowUserMultiple()
+    {
+        $api = $this->setupMock(204);
+        $response = $api->followArtistsOrUsers('user', array(
+            'mcgurk',
+            'spotify',
+        ));
+
+        $this->assertTrue($response);
     }
 
     public function testGetAlbum()
@@ -147,7 +222,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = $this->setupMock('albums');
         $response = $api->getAlbums(array(
             '1oR3KrPIp4CbagPa3PhtPp',
-            '6lPb7Eoon6QPbscWbMsk6a'
+            '6lPb7Eoon6QPbscWbMsk6a',
         ));
 
         $this->assertObjectHasAttribute('id', $response->albums[0]);
@@ -183,7 +258,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = $this->setupMock('artists');
         $response = $api->getArtists(array(
             '6v8FB84lnmJs434UJf2Mrm',
-            '6olE6TJLqED3rqDCT0FyPh'
+            '6olE6TJLqED3rqDCT0FyPh',
         ));
 
         $this->assertObjectHasAttribute('id', $response->artists[0]);
@@ -201,7 +276,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     public function testGetArtistTopTracks()
     {
         $api = $this->setupMock('artist-top-tracks');
-        $response = $api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', 'se');
+        $response = $api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', 'SE');
 
         $this->assertObjectHasAttribute('tracks', $response);
     }
@@ -210,7 +285,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $api = $this->setupMock('featured-playlists');
         $response = $api->getFeaturedPlaylists(array(
-            'timestamp' => '2014-10-25T21:00:00' // Saturday night
+            'timestamp' => '2014-10-25T21:00:00', // Saturday night
         ));
 
         $this->assertObjectHasAttribute('playlists', $response);
@@ -220,7 +295,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $api = $this->setupMock('list-categories');
         $response = $api->getCategoriesList(array(
-            'country' => 'SE'
+            'country' => 'SE',
         ));
 
         $this->assertObjectHasAttribute('categories', $response);
@@ -230,7 +305,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $api = $this->setupMock('category');
         $response = $api->getCategory('party', array(
-            'country' => 'SE'
+            'country' => 'SE',
         ));
 
         $this->assertNotEmpty($response->id);
@@ -240,7 +315,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $api = $this->setupMock('category-playlists');
         $response = $api->getCategoryPlaylists('dinner', array(
-            'country' => 'SE'
+            'country' => 'SE',
         ));
 
         $this->assertObjectHasAttribute('playlists', $response);
@@ -250,7 +325,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $api = $this->setupMock('albums');
         $response = $api->getNewReleases(array(
-            'country' => 'se',
+            'country' => 'SE',
         ));
 
         $this->assertObjectHasAttribute('albums', $response);
@@ -262,6 +337,17 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $response = $api->getMySavedTracks();
 
         $this->assertNotEmpty($response->items);
+    }
+
+    public function testGetReturnAssoc()
+    {
+        $request = $this->getMock('SpotifyWebAPI\Request');
+        $request->expects($this->once())
+            ->method('getReturnAssoc')
+            ->willReturn(true);
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($request);
+        $this->assertTrue($api->getReturnAssoc(true));
     }
 
     public function testGetTrack()
@@ -277,7 +363,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = $this->setupMock('tracks');
         $response = $api->getTracks(array(
             '0eGsygTp906u18L0Oimnem',
-            '1lDWb6b6ieDQ2xT7ewTC3G'
+            '1lDWb6b6ieDQ2xT7ewTC3G',
         ));
 
         $this->assertObjectHasAttribute('id', $response->tracks[0]);
@@ -338,7 +424,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = $this->setupMock('user-tracks-contains');
         $response = $api->myTracksContains(array(
             '0oks4FnzhNp5QPTZtoet7c',
-            '69kOkLUCkxIZYexIgSG8rq'
+            '69kOkLUCkxIZYexIgSG8rq',
         ));
 
         $this->assertTrue($response[0]);
@@ -349,9 +435,9 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $api = $this->setupMock('user-playlist-snapshot-id');
         $response = $api->reorderPlaylistTracks('mcgurk', $this->playlistID, array(
-            'range_start' => 2,
-            'range_length' => 1,
             'insert_before' => 5,
+            'range_length' => 1,
+            'range_start' => 2,
         ));
 
         $this->assertNotFalse($response);
@@ -370,7 +456,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = $this->setupMock(201);
         $response = $api->replacePlaylistTracks('mcgurk', $this->playlistID, array(
             '7kz6GbFr2MCI7PgXJOdq8c',
-            '6HM9UgDB38hLDFm7e1RF6W'
+            '6HM9UgDB38hLDFm7e1RF6W',
         ));
 
         $this->assertTrue($response);
@@ -400,92 +486,21 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertNotEmpty($response->tracks->items);
     }
 
-    public function testUpdateUserPlaylist()
+    public function testSetReturnAssoc()
     {
-        $api = $this->setupMock();
-        $response = $api->updateUserPlaylist('mcgurk', $this->playlistID, array(
-            'public' => false
-        ));
+        $request = $this->getMock('SpotifyWebAPI\Request');
+        $request->expects($this->once())
+            ->method('setReturnAssoc')
+            ->with(true);
 
-        $this->assertTrue($response);
+        $api = new SpotifyWebAPI\SpotifyWebAPI($request);
+        $api->setReturnAssoc(true);
     }
 
-    public function testUserFollowsPlaylist()
-    {
-        $api = $this->setupMock('user-follows-playlist');
-        $response = $api->userFollowsPlaylist('mcgurk', $this->playlistID, array(
-            'ids' => array('jmperezperez')
-        ));
-
-        $this->assertTrue($response[0]);
-    }
-
-    public function testUsersFollowsPlaylist()
-    {
-        $api = $this->setupMock('users-follows-playlist');
-        $response = $api->userFollowsPlaylist('mcgurk', $this->playlistID, array(
-            'ids' => array('jmperezperez', 'wizzler')
-        ));
-
-        $this->assertTrue($response[0]);
-        $this->assertTrue($response[1]);
-    }
-
-    public function testCurrentUserFollowsSingle()
-    {
-        $api = $this->setupMock('user-follow');
-        $response = $api->currentUserFollows('artist','74ASZWbe4lXaubB36ztrGX');
-
-        $this->assertTrue($response[0]);
-    }
-
-    public function testCurrentUserFollowsMultiple()
-    {
-        $api = $this->setupMock('user-follows');
-        $response = $api->currentUserFollows('user',
-            'mcgurk,spotify'
-        );
-
-        $this->assertTrue($response[0]);
-        $this->assertTrue($response[1]);
-    }
-
-    public function testFollowArtistSingle()
+    public function testUnfollowArtistSingle()
     {
         $api = $this->setupMock(204);
-        $response = $api->followArtistsOrUsers('artist','74ASZWbe4lXaubB36ztrGX');
-
-        $this->assertTrue($response);
-    }
-
-    public function testFollowArtistMultiple()
-    {
-        $api = $this->setupMock(204);
-        $response = $api->followArtistsOrUsers('artist',array('74ASZWbe4lXaubB36ztrGX','2t9yJDJIEtvPmr2iRIdqBf'));
-
-        $this->assertTrue($response);
-    }
-
-    public function testFollowUserSingle()
-    {
-        $api = $this->setupMock(204);
-        $response = $api->followArtistsOrUsers('user','mcgurk');
-
-        $this->assertTrue($response);
-    }
-
-    public function testFollowUserMultiple()
-    {
-        $api = $this->setupMock(204);
-        $response = $api->followArtistsOrUsers('user',array('mcgurk','spotify'));
-
-        $this->assertTrue($response);
-    }
-
-     public function testUnfollowArtistSingle()
-    {
-        $api = $this->setupMock(204);
-        $response = $api->unfollowArtistsOrUsers('artist','74ASZWbe4lXaubB36ztrGX');
+        $response = $api->unfollowArtistsOrUsers('artist', '74ASZWbe4lXaubB36ztrGX');
 
         $this->assertTrue($response);
     }
@@ -493,39 +508,10 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     public function testUnfollowArtistMultiple()
     {
         $api = $this->setupMock(204);
-        $response = $api->unfollowArtistsOrUsers('artist',array('74ASZWbe4lXaubB36ztrGX','2t9yJDJIEtvPmr2iRIdqBf'));
-
-        $this->assertTrue($response);
-    }
-
-    public function testUnfollowUserSingle()
-    {
-        $api = $this->setupMock(204);
-        $response = $api->unfollowArtistsOrUsers('user','mcgurk');
-
-        $this->assertTrue($response);
-    }
-
-    public function testUnfollowUserMultiple()
-    {
-        $api = $this->setupMock(204);
-        $response = $api->unfollowArtistsOrUsers('user',array('mcgurk','spotify'));
-
-        $this->assertTrue($response);
-    }
-
-    public function testFollowPlaylistPublicly()
-    {
-        $api = $this->setupMock(200);
-        $response = $api->followPlaylist('mcgurk', $this->playlistID);
-
-        $this->assertTrue($response);
-    }
-
-    public function testFollowPlaylistPrivately()
-    {
-        $api = $this->setupMock(200);
-        $response = $api->followPlaylist('mcgurk', $this->playlistID, array('public' => false));
+        $response = $api->unfollowArtistsOrUsers('artist', array(
+            '74ASZWbe4lXaubB36ztrGX',
+            '2t9yJDJIEtvPmr2iRIdqBf',
+        ));
 
         $this->assertTrue($response);
     }
@@ -538,23 +524,56 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertTrue($response);
     }
 
-    public function testSetReturnAssoc()
+    public function testUnfollowUserSingle()
     {
-        $request = $this->getMock('SpotifyWebAPI\Request');
-        $request->expects($this->once())->method('setReturnAssoc')->with(true);
+        $api = $this->setupMock(204);
+        $response = $api->unfollowArtistsOrUsers('user', 'mcgurk');
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($request);
-        $api->setReturnAssoc(true);
+        $this->assertTrue($response);
     }
 
-    public function testGetReturnAssoc()
+    public function testUnfollowUserMultiple()
     {
-        $request = $this->getMock('SpotifyWebAPI\Request');
-        $request->expects($this->once())
-            ->method('getReturnAssoc')
-            ->willReturn(true);
+        $api = $this->setupMock(204);
+        $response = $api->unfollowArtistsOrUsers('user', array(
+            'mcgurk',
+            'spotify',
+        ));
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($request);
-        $this->assertTrue($api->getReturnAssoc(true));
+        $this->assertTrue($response);
+    }
+
+    public function testUpdateUserPlaylist()
+    {
+        $api = $this->setupMock();
+        $response = $api->updateUserPlaylist('mcgurk', $this->playlistID, array(
+            'public' => false,
+        ));
+
+        $this->assertTrue($response);
+    }
+
+    public function testUserFollowsPlaylist()
+    {
+        $api = $this->setupMock('user-follows-playlist');
+        $response = $api->userFollowsPlaylist('mcgurk', $this->playlistID, array(
+            'ids' => 'jmperezperez',
+        ));
+
+        $this->assertTrue($response[0]);
+    }
+
+    public function testUsersFollowsPlaylist()
+    {
+        $api = $this->setupMock('users-follows-playlist');
+        $response = $api->userFollowsPlaylist('mcgurk', $this->playlistID, array(
+            'ids' => array(
+                'jmperezperez',
+                'wizzler',
+            ),
+        ));
+
+        $this->assertTrue($response[0]);
+        $this->assertTrue($response[1]);
     }
 }
