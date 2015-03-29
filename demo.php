@@ -11,6 +11,7 @@ $session = new SpotifyWebAPI\Session(
     getenv('SPOTIFY_CLIENT_SECRET'),
     getenv('SPOTIFY_REDIRECT_URI')
 );
+
 $api = new SpotifyWebAPI\SpotifyWebAPI();
 
 if (isset($_GET['code'])) {
@@ -19,7 +20,12 @@ if (isset($_GET['code'])) {
 
     print_r($api->me());
 } else {
-    header('Location: ' . $session->getAuthorizeUrl(array(
-        'scope' => array('user-read-email', 'user-library-modify')
-    )));
+    $scopes = array(
+        'scope' => array(
+            'user-read-email',
+            'user-library-modify',
+        ),
+    );
+
+    header('Location: ' . $session->getAuthorizeUrl($scopes));
 }

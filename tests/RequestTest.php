@@ -20,7 +20,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
     public function testApiParameters()
     {
         $response = $this->request->api('GET', '/v1/albums', array(
-            'ids' => '1oR3KrPIp4CbagPa3PhtPp,6lPb7Eoon6QPbscWbMsk6a'
+            'ids' => '1oR3KrPIp4CbagPa3PhtPp,6lPb7Eoon6QPbscWbMsk6a',
         ));
 
         $this->assertObjectHasAttribute('id', $response['body']->albums[0]);
@@ -37,7 +37,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
     public function testSendParameters()
     {
         $response = $this->request->send('GET', 'https://api.spotify.com/v1/albums', array(
-            'ids' => '1oR3KrPIp4CbagPa3PhtPp,6lPb7Eoon6QPbscWbMsk6a'
+            'ids' => '1oR3KrPIp4CbagPa3PhtPp,6lPb7Eoon6QPbscWbMsk6a',
         ));
 
         $this->assertObjectHasAttribute('id', $response['body']->albums[0]);

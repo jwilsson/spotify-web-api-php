@@ -55,6 +55,7 @@ class Session
         );
 
         $options = array_merge($defaults, (array) $options);
+
         $parameters = array(
             'client_id' => $this->getClientId(),
             'redirect_uri' => $this->getRedirectUri(),
@@ -133,6 +134,7 @@ class Session
     public function refreshToken()
     {
         trigger_error('Use Session::refreshAccessToken instead', E_USER_DEPRECATED);
+
         return $this->refreshAccessToken();
     }
 
@@ -206,6 +208,7 @@ class Session
     public function requestToken($code)
     {
         trigger_error('Use Session::requestAccessToken instead', E_USER_DEPRECATED);
+
         return $this->requestAccessToken($code);
     }
 
@@ -229,8 +232,7 @@ class Session
         $response = $this->request->account('POST', '/api/token', $parameters);
         $response = $response['body'];
 
-        if (isset($response->refresh_token)
-                && isset($response->access_token)) {
+        if (isset($response->refresh_token) && isset($response->access_token)) {
             $this->refreshToken = $response->refresh_token;
             $this->accessToken = $response->access_token;
             $this->expires = $response->expires_in;

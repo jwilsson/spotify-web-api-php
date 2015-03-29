@@ -30,7 +30,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
 
         $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&show_dialog=false&state=";
         $url = $this->session->getAuthorizeUrl(array(
-            'scope' => $scope
+            'scope' => $scope,
         ));
 
         $this->assertEquals($expected, $url);
@@ -45,7 +45,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
 
         $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&show_dialog=false&state=";
         $url = $this->session->getAuthorizeUrl(array(
-            'scope' => $scope
+            'scope' => $scope,
         ));
 
         $this->assertEquals($expected, $url);
@@ -69,7 +69,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
 
         $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=&show_dialog=true&state=";
         $url = $this->session->getAuthorizeUrl(array(
-            'show_dialog' => true
+            'show_dialog' => true,
         ));
 
         $this->assertEquals($expected, $url);
@@ -83,7 +83,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
 
         $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=&show_dialog=false&state=$state";
         $url = $this->session->getAuthorizeUrl(array(
-            'state' => $state
+            'state' => $state,
         ));
 
         $this->assertEquals($expected, $url);
@@ -100,7 +100,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&show_dialog=false&state=$state";
         $url = $this->session->getAuthorizeUrl(array(
             'scope' => $scope,
-            'state' => $state
+            'state' => $state,
         ));
 
         $this->assertEquals($expected, $url);
@@ -118,7 +118,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $url = $this->session->getAuthorizeUrl(array(
             'scope' => $scope,
             'show_dialog' => true,
-            'state' => $state
+            'state' => $state,
         ));
 
         $this->assertEquals($expected, $url);
@@ -135,7 +135,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $expected = "https://accounts.spotify.com/authorize/?client_id=$clientID&redirect_uri=$redirectUri&response_type=code&scope=$scopeOut&show_dialog=false&state=$state";
         $url = $this->session->getAuthorizeUrl(array(
             'scope' => $scope,
-            'state' => $state
+            'state' => $state,
         ));
 
         $this->assertEquals($expected, $url);
