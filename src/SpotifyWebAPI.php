@@ -842,7 +842,7 @@ class SpotifyWebAPI
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
      * @param array|object $options Optional. Options for the tracks.
-     * - array fields Optional. A list of fields to return. See Spotify docs for more info.
+     * - string|array fields Optional. A list of fields to return. See Spotify docs for more info.
      * - int limit Optional. Limit the number of tracks.
      * - int offset Optional. Number of tracks to skip.
      *
@@ -857,7 +857,7 @@ class SpotifyWebAPI
         );
 
         $options = array_merge($defaults, (array) $options);
-        $options['fields'] = implode(',', $options['fields']);
+        $options['fields'] = implode(',', (array) $options['fields']);
         $options = array_filter($options);
 
         $headers = $this->authHeaders();
