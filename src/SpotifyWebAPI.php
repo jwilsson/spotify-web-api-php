@@ -811,7 +811,7 @@ class SpotifyWebAPI
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
      * @param array|object $options Optional. Options for the playlist.
-     * - array fields Optional. A list of fields to return. See Spotify docs for more info.
+     * - string|array fields Optional. A list of fields to return. See Spotify docs for more info.
      *
      * @return array|object The user's playlist. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
@@ -822,7 +822,7 @@ class SpotifyWebAPI
         );
 
         $options = array_merge($defaults, (array) $options);
-        $options['fields'] = implode(',', $options['fields']);
+        $options['fields'] = implode(',', (array) $options['fields']);
         $options = array_filter($options);
 
         $headers = $this->authHeaders();
