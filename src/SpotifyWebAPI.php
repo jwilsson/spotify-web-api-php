@@ -416,8 +416,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get a List of Categories.
-     * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab
+     * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s "Browse" tab
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-list-categories/
      *
@@ -448,12 +447,11 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get a Category.
-     * Get a single category used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
+     * Get a single category used to tag items in Spotify (on, for example, the Spotify player’s "Browse" tab).
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-category/
      *
-     * @param string $categoryId The Spotify ID for the category.
+     * @param string $categoryId The Spotify ID of the category.
      *
      * @param array|object $options Optional. Options for the category.
      * - string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Separated by an underscore. Show category in this language.
@@ -478,12 +476,11 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get a Category’s Playlists.
      * Get a list of Spotify playlists tagged with a particular category.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-categorys-playlists/
      *
-     * @param string $categoryId The Spotify ID for the category.
+     * @param string $categoryId The Spotify ID of the category.
      *
      * @param array|object $options Optional. Options for the category's playlists.
      * - string country Optional. An ISO 3166-1 alpha-2 country code. Show category playlists from this country.
@@ -766,7 +763,7 @@ class SpotifyWebAPI
      * - int insert_before Position where the tracks should be inserted.
      * - string $snapshotId Optional. The playlist's snapshot ID.
      *
-     * @return string|bool A new snapshot ID or false if the tracks weren't reordered.
+     * @return string|bool A new snapshot ID or false if the tracks weren't successfully reordered.
      */
     public function reorderPlaylistTracks($userId, $playlistId, $options)
     {
@@ -935,10 +932,10 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/check-current-user-follows/
      *
-     * @param string The ID type: either 'artist' or 'user'.
+     * @param string The type to check: either 'artist' or 'user'.
      * @param string|array ID(s) of the user(s) or artist(s) to check for.
      *
-     * @return array Whether each id (for user or artist) is followed.
+     * @return array Whether each user or artist is followed.
      */
     public function currentUserFollows($type, $ids)
     {
@@ -960,10 +957,10 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/follow-artists-users/
      *
-     * @param string The ID type: either 'artist' or 'user'.
+     * @param string The type to check: either 'artist' or 'user'.
      * @param string|array ID(s) of the user(s) or artist(s) to follow.
      *
-     * @return bool True when all went well, false otherwise.
+     * @return bool Whether the artist or user was successfully followed.
      */
     public function followArtistsOrUsers($type, $ids)
     {
@@ -988,10 +985,10 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/unfollow-artists-users/
      *
-     * @param string The ID type: either 'artist' or 'user'.
+     * @param string The type to check: either 'artist' or 'user'.
      * @param string|array ID(s) of the user(s) or artist(s) to unfollow.
      *
-     * @return bool True when all went well, false otherwise.
+     * @return bool Whether the artist(s) or user(s) where successfully unfollowed.
      */
     public function unfollowArtistsOrUsers($type, $ids)
     {
@@ -1021,7 +1018,7 @@ class SpotifyWebAPI
      * @param array|object $options Optional. Options for the followed playlist.
      * - public bool Optional. Whether the followed playlist should be public or not.
      *
-     * @return bool Whether it worked or not.
+     * @return bool Whether the playlist was successfully followed.
      */
     public function followPlaylist($userId, $playlistId, $options = array())
     {
@@ -1051,7 +1048,7 @@ class SpotifyWebAPI
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to unfollow
      *
-     * @return bool Whether it worked or not.
+     * @return bool Whether the playlist where successfully unfollowed.
      */
     public function unfollowPlaylist($userId, $playlistId)
     {
