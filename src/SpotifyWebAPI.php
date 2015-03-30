@@ -157,7 +157,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Check to see if the current user is following one or more artists or other Spotify users
+     * Check to see if the current user is following one or more artists or other Spotify users.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/check-current-user-follows/
      *
@@ -250,7 +250,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Add the current user as a follower of one or more artists or other Spotify users
+     * Add the current user as a follower of one or more artists or other Spotify users.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/follow-artists-users/
      *
@@ -539,7 +539,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s "Browse" tab
+     * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s "Browse" tab).
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-list-categories/
      *
@@ -1049,14 +1049,14 @@ class SpotifyWebAPI
     }
 
     /**
-     * Remove the current user as a follower of one or more artists or other Spotify users
+     * Remove the current user as a follower of one or more artists or other Spotify users.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/unfollow-artists-users/
      *
      * @param string The type to check: either 'artist' or 'user'.
      * @param string|array ID(s) of the user(s) or artist(s) to unfollow.
      *
-     * @return bool Whether the artist(s) or user(s) where successfully unfollowed.
+     * @return bool Whether the artist(s) or user(s) were successfully unfollowed.
      */
     public function unfollowArtistsOrUsers($type, $ids)
     {
@@ -1085,7 +1085,7 @@ class SpotifyWebAPI
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to unfollow
      *
-     * @return bool Whether the playlist where successfully unfollowed.
+     * @return bool Whether the playlist was successfully unfollowed.
      */
     public function unfollowPlaylist($userId, $playlistId)
     {
@@ -1139,7 +1139,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Check if a user is following a playlist
+     * Check if a user is following a playlist.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/check-user-following-playlist/
      *
