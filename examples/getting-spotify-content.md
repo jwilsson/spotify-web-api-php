@@ -45,4 +45,40 @@ If you wish to access content that's featured/curated by Spotify there are a num
         echo '<a href="' . $playlist->external_urls->spotify . '">' . $playlist->name . '</a> <br>';
     }
 
+### Getting a list of Spotify categories
+
+    <?php
+    $categories = $api->getCategoriesList(array(
+        'country' => 'se',
+        'locale' => 'sv_SE',
+        'limit' => 10,
+        'offset' => 0,
+    ));
+
+    foreach ($categories->categories->items as $category) {
+        echo '<a href="' . $category->href . '">' . $category->name . '</a><br>';
+    }
+
+### Getting a single Spotify category
+
+    <?php
+    $category = $api->getCategory('dinner', array(
+        'country' => 'se'
+    ));
+
+    echo '<a href="' . $category->href . '">' . $category->name . '</a>';
+
+### Getting a category's playlists
+
+    <?php
+    $playlists = $api->getCategoryPlaylists('dinner', array(
+        'country' => 'se',
+        'limit' => 10,
+        'offset' => 0
+    ));
+
+    foreach ($playlists->playlists->items as $playlist) {
+        echo '<a href="' . $playlist->href . '">' . $playlist->name . '</a><br>';
+    }
+
 Please see the [method reference]({{ site.baseurl }}/method-reference/spotifywebapi.html) for more available options for each method.
