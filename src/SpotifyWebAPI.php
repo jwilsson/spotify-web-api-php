@@ -62,6 +62,28 @@ class SpotifyWebAPI
     }
 
     /**
+     * Merge options with defaults and optionally filter out falsy values.
+     *
+     * @param array|object The default values.
+     * @param array|object The options to merge with $defaults.
+     * @param bool|callabe Optional. A boolean to filter or a callback to handle the filtering. Default is true.
+     *
+     * @return array The merged (and optionally filtered) options.
+     */
+    protected function mergeOptions($defaults, $options, $filter = true)
+    {
+        $options = array_merge((array) $defaults, (array) $options);
+
+        if (is_callable($filter)) {
+            $options = array_filter($options, $filter);
+        } elseif ($filter) {
+            $options = array_filter($options);
+        }
+
+        return $options;
+    }
+
+    /**
      * Add tracks to the current user's Spotify library.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/save-tracks-user/
@@ -103,8 +125,7 @@ class SpotifyWebAPI
             'position' => false,
         );
 
-        $options = array_merge($defaults, (array) $options);
-        $options = array_filter($options, function ($value) {
+        $options = $this->mergeOptions($defaults, $options, function ($value) {
             return $value !== false;
         });
 
@@ -369,8 +390,7 @@ class SpotifyWebAPI
             'offset' => 0,
         );
 
-        $options = array_merge($defaults, (array) $options);
-        $options = array_filter($options);
+        $options = $this->mergeOptions($defaults, $options, true);
 
         $headers = $this->authHeaders();
 
@@ -526,8 +546,7 @@ class SpotifyWebAPI
             'timestamp' => '',
         );
 
-        $options = array_merge($defaults, (array) $options);
-        $options = array_filter($options);
+        $options = $this->mergeOptions($defaults, $options, true);
 
         $headers = $this->authHeaders();
 
@@ -560,8 +579,7 @@ class SpotifyWebAPI
             'offset' => 0
         );
 
-        $options = array_merge($defaults, (array) $options);
-        $options = array_filter($options);
+        $options = $this->mergeOptions($defaults, $options, true);
 
         $headers = $this->authHeaders();
 
@@ -592,8 +610,7 @@ class SpotifyWebAPI
             'locale' => ''
         );
 
-        $options = array_merge($defaults, (array) $options);
-        $options = array_filter($options);
+        $options = $this->mergeOptions($defaults, $options, true);
 
         $headers = $this->authHeaders();
 
@@ -626,8 +643,7 @@ class SpotifyWebAPI
             'offset' => 0
         );
 
-        $options = array_merge($defaults, (array) $options);
-        $options = array_filter($options);
+        $options = $this->mergeOptions($defaults, $options, true);
 
         $headers = $this->authHeaders();
 
@@ -658,8 +674,7 @@ class SpotifyWebAPI
             'offset' => 0,
         );
 
-        $options = array_merge($defaults, (array) $options);
-        $options = array_filter($options);
+        $options = $this->mergeOptions($defaults, $options, true);
 
         $headers = $this->authHeaders();
 
@@ -688,8 +703,7 @@ class SpotifyWebAPI
             'offset' => 0,
         );
 
-        $options = array_merge($defaults, (array) $options);
-        $options = array_filter($options);
+        $options = $this->mergeOptions($defaults, $options, true);
 
         $headers = $this->authHeaders();
 
@@ -791,8 +805,7 @@ class SpotifyWebAPI
             'offset' => 0,
         );
 
-        $options = array_merge($defaults, (array) $options);
-        $options = array_filter($options);
+        $options = $this->mergeOptions($defaults, $options, true);
 
         $headers = $this->authHeaders();
 
@@ -936,8 +949,7 @@ class SpotifyWebAPI
             'snapshot_id' => ''
         );
 
-        $options = array_merge($defaults, (array) $options);
-        $options = array_filter($options);
+        $options = $this->mergeOptions($defaults, $options, true);
         $options = json_encode($options);
 
         $headers = $this->authHeaders();
@@ -1008,8 +1020,7 @@ class SpotifyWebAPI
 
         $type = implode(',', (array) $type);
 
-        $options = array_merge($defaults, (array) $options);
-        $options = array_filter($options);
+        $options = $this->mergeOptions($defaults, $options);
         $options = array_merge($options, array(
             'query' => $query,
             'type' => $type,
@@ -1117,8 +1128,7 @@ class SpotifyWebAPI
             'public' => null,
         );
 
-        $data = array_merge($defaults, (array) $data);
-        $data = array_filter($data, function ($value) {
+        $data = $this->mergeOptions($defaults, $data, function ($value) {
             if (is_bool($value)) {
                 return true;
             }
