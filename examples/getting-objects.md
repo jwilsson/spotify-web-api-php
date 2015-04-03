@@ -3,6 +3,9 @@ layout: default
 title: Getting artists, albums or tracks
 ---
 
+There are a lot of information about the music on Spotify that can be retrieved.
+Everything from info about a single track to an artist's top tracks in each country.
+
     <?php
     require 'vendor/autoload.php';
 
