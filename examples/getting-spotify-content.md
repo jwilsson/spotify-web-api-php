@@ -3,6 +3,10 @@ layout: default
 title: Getting Spotify featured content
 ---
 
+If you wish to access content that's featured/curated by Spotify there are a number of methods to achieve that.
+
+*Note: All of these methods require authentication.*
+
     <?php
     require 'vendor/autoload.php';
 
