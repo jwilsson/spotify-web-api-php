@@ -98,6 +98,16 @@ In this example, we'll request all available playlist scopes, in a real world ap
         '1lDWb6b6ieDQ2xT7ewTC3G'
     ));
 
+### Reorder the tracks in a user's playlist
+
+    <?php
+    $api->reorderPlaylistTracks('USER_ID', 'PLAYLIST_ID', array(
+        'range_start' => 1,
+        'range_length' => 5,
+        'insert_before' => 10,
+        'snapshot_id' => 'SNAPSHOT_ID'
+    ));
+
 ### Following a playlist
 
     <?php
