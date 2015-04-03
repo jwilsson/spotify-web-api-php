@@ -1022,7 +1022,7 @@ class SpotifyWebAPI
 
         $options = $this->mergeOptions($defaults, $options);
         $options = array_merge($options, array(
-            'query' => $query,
+            'q' => $query,
             'type' => $type,
         ));
 
