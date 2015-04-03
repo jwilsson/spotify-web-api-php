@@ -151,28 +151,28 @@ class SpotifyWebAPI
      * https://developer.spotify.com/web-api/create-playlist/
      *
      * @param string $userId ID of the user to create the playlist for.
-     * @param array|object $data Data for the new playlist.
+     * @param array|object $options Options for the new playlist.
      * - name string Required. Name of the playlist.
      * - public bool Optional. Whether the playlist should be public or not.
      *
      * @return array|object The new playlist. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function createUserPlaylist($userId, $data)
+    public function createUserPlaylist($userId, $options)
     {
         $defaults = array(
             'name' => '',
             'public' => true,
         );
 
-        $data = array_merge($defaults, (array) $data);
-        $data = json_encode($data);
+        $options = array_merge($defaults, (array) $options);
+        $options = json_encode($options);
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
         $uri = '/v1/users/' . $userId . '/playlists';
 
-        $response = $this->request->api('POST', $uri, $data, $headers);
+        $response = $this->request->api('POST', $uri, $options, $headers);
 
         return $response['body'];
     }
@@ -243,9 +243,9 @@ class SpotifyWebAPI
      */
     public function deletePlaylistTracks($userId, $playlistId, $tracks, $snapshotId = '')
     {
-        $data = array();
+        $options = array();
         if ($snapshotId) {
-            $data['snapshot_id'] = $snapshotId;
+            $options['snapshot_id'] = $snapshotId;
         }
 
         for ($i = 0; $i < count($tracks); $i++) {
@@ -253,14 +253,14 @@ class SpotifyWebAPI
             $tracks[$i]['uri'] = $this->idToUri($tracks[$i]['id']);
         }
 
-        $data['tracks'] = $tracks;
-        $data = json_encode($data);
+        $options['tracks'] = $tracks;
+        $options = json_encode($options);
 
         $headers = $this->authHeaders();
 
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
 
-        $response = $this->request->api('DELETE', $uri, $data, $headers);
+        $response = $this->request->api('DELETE', $uri, $options, $headers);
         $response = $response['body'];
 
         if (isset($response->snapshot_id)) {
@@ -1115,20 +1115,20 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/change-playlist-details/
      *
-     * @param array|object $data Data for the playlist.
+     * @param array|object $options Options for the playlist.
      * - name string Optional. Name of the playlist.
      * - public bool Optional. Whether the playlist should be public or not.
      *
      * @return bool Whether the playlist was successfully updated.
      */
-    public function updateUserPlaylist($userId, $playlistId, $data)
+    public function updateUserPlaylist($userId, $playlistId, $options)
     {
         $defaults = array(
             'name' => '',
             'public' => null,
         );
 
-        $data = $this->mergeOptions($defaults, $data, function ($value) {
+        $options = $this->mergeOptions($defaults, $options, function ($value) {
             if (is_bool($value)) {
                 return true;
             }
@@ -1136,14 +1136,14 @@ class SpotifyWebAPI
             return (bool) $value;
         });
 
-        $data = json_encode($data);
+        $options = json_encode($options);
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId;
 
-        $response = $this->request->api('PUT', $uri, $data, $headers);
+        $response = $this->request->api('PUT', $uri, $options, $headers);
 
         return $response['status'] == 200;
     }
