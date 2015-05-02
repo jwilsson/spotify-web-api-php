@@ -1,4 +1,7 @@
 # Changelog
+### 0.8.2 (2015-05-02)
+* CA Root Certificates are now included with the library, allowing cURL to always find it. [#32](https://github.com/jwilsson/spotify-web-api-php/issues/32).
+
 ### 0.8.1 (2015-03-29)
 * Fixed an issue where `SpotifyWebAPI::updateUserPlaylist()` would fail without `name` set.
 

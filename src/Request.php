@@ -81,9 +81,10 @@ class Request
         }
 
         $options = array(
+            CURLOPT_CAINFO => __DIR__ . '/cacert.pem',
             CURLOPT_HEADER => true,
             CURLOPT_HTTPHEADER => $mergedHeaders,
-            CURLOPT_RETURNTRANSFER => true
+            CURLOPT_RETURNTRANSFER => true,
         );
 
         $url = rtrim($url, '/');
