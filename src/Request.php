@@ -161,6 +161,7 @@ class Request
             'body' => $body,
             'headers' => $headers,
             'status' => $status,
+            'url' => $url,
         );
     }
 
