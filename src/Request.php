@@ -122,12 +122,17 @@ class Request
         curl_setopt_array($ch, $options);
 
         $response = curl_exec($ch);
-        $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
+
+        if (curl_error($ch)) {
+            throw new SpotifyWebAPIException('cURL transport error: ' . curl_errno($ch) . ' ' .  curl_error($ch));
+        }
 
         list($headers, $body) = explode("\r\n\r\n", $response, 2);
 
+        $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $body = json_decode($body, $this->returnAssoc);
+
+        curl_close($ch);
 
         if ($status < 200 || $status > 299) {
             if (!$this->returnAssoc && isset($body->error)) {
