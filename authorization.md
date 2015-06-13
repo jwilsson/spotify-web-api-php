@@ -54,6 +54,8 @@ You'll need to use this code to request a access token from Spotify and tell the
     // Set the access token on the API wrapper
     $api->setAccessToken($accessToken);
 
+    // Start using the API!
+
 When requesting a access token, a **refresh token** will also be included. This can be used to extend the validity of access tokens.
 To refresh a access token, the `refreshAccessToken()` method can be used:
 
@@ -87,6 +89,7 @@ This method doesn't require any user interaction and no access to user informati
     require 'vendor/autoload.php';
 
     $session = new SpotifyWebAPI\Session('CLIENT_ID', 'CLIENT_SECRET', 'REDIRECT_URI');
+    $api = new SpotifyWebAPI\SpotifyWebAPI();
 
     // Request a access token with optional scopes
     $scopes = array(
@@ -99,6 +102,8 @@ This method doesn't require any user interaction and no access to user informati
 
     // Set the code on the API wrapper
     $api->setAccessToken($accessToken);
+
+    // Start using the API!
 
 As you can see, this flow is very similar to the Authorization Code Flow, however no refresh token is available.
 
