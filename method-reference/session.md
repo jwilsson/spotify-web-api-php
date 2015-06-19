@@ -12,10 +12,10 @@ Constructor<br>
 Set up client credentials.
 
 #### Arguments
-* $clientId **string** - The client ID.
-* $clientSecret **string** - The client secret.
-* $redirectUri **string** - Optional. The redirect URI.
-* $request **\SpotifyWebAPI\Request** - Optional. The Request object to use.
+* `$clientId` **string** - The client ID.
+* `$clientSecret` **string** - The client secret.
+* `$redirectUri` **string** - Optional. The redirect URI.
+* `$request` **\SpotifyWebAPI\Request** - Optional. The Request object to use.
 
 
 #### Return values
@@ -30,7 +30,7 @@ Set up client credentials.
 Get the authorization URL.
 
 #### Arguments
-* $options **array\|object** - Optional. Options for the authorization URL.
+* `$options` **array\|object** - Optional. Options for the authorization URL.
     * array scope Optional. Scope(s) to request from the user.
     * boolean show_dialog Optional. Whether or not to force the user to always approve the app. Default is false.
     * string state Optional. A CSRF token.
@@ -142,7 +142,7 @@ Refresh an access token.
 Request an access token using the Client Credentials Flow.
 
 #### Arguments
-* $scope **array** - Optional. Scope(s) to request from the user.
+* `$scope` **array** - Optional. Scope(s) to request from the user.
 
 
 #### Return values
@@ -157,7 +157,7 @@ Request an access token using the Client Credentials Flow.
 
 
 #### Arguments
-* $code **mixed**
+* `$code` **mixed**
 
 
 
@@ -169,7 +169,7 @@ Request an access token using the Client Credentials Flow.
 Request an access token given an authorization code.
 
 #### Arguments
-* $authorizationCode **string** - The authorization code from Spotify.
+* `$authorizationCode` **string** - The authorization code from Spotify.
 
 
 #### Return values
@@ -184,7 +184,7 @@ Request an access token given an authorization code.
 Set the client ID.
 
 #### Arguments
-* $clientId **string** - The client ID.
+* `$clientId` **string** - The client ID.
 
 
 #### Return values
@@ -199,7 +199,7 @@ Set the client ID.
 Set the client secret.
 
 #### Arguments
-* $clientSecret **string** - The client secret.
+* `$clientSecret` **string** - The client secret.
 
 
 #### Return values
@@ -214,7 +214,7 @@ Set the client secret.
 Set the client's redirect URI.
 
 #### Arguments
-* $redirectUri **string** - The redirect URI.
+* `$redirectUri` **string** - The redirect URI.
 
 
 #### Return values
@@ -229,7 +229,7 @@ Set the client's redirect URI.
 Set the refresh token.
 
 #### Arguments
-* $refreshToken **string** - The refresh token.
+* `$refreshToken` **string** - The refresh token.
 
 
 #### Return values

@@ -11,10 +11,10 @@ title: Method Reference - Request
 Make a request to the "account" endpoint.
 
 #### Arguments
-* $method **string** - The HTTP method to use.
-* $uri **string** - The URI to request.
-* $parameters **array** - Optional. Query parameters.
-* $headers **array** - Optional. HTTP headers.
+* `$method` **string** - The HTTP method to use.
+* `$uri` **string** - The URI to request.
+* `$parameters` **array** - Optional. Query parameters.
+* `$headers` **array** - Optional. HTTP headers.
 
 
 #### Return values
@@ -32,10 +32,10 @@ Make a request to the "account" endpoint.
 Make a request to the "api" endpoint.
 
 #### Arguments
-* $method **string** - The HTTP method to use.
-* $uri **string** - The URI to request.
-* $parameters **array** - Optional. Query parameters.
-* $headers **array** - Optional. HTTP headers.
+* `$method` **string** - The HTTP method to use.
+* `$uri` **string** - The URI to request.
+* `$parameters` **array** - Optional. Query parameters.
+* `$headers` **array** - Optional. HTTP headers.
 
 
 #### Return values
@@ -66,10 +66,10 @@ Make a request to Spotify.<br>
 You'll probably want to use one of the convenience methods instead.
 
 #### Arguments
-* $method **string** - The HTTP method to use.
-* $url **string** - The URL to request.
-* $parameters **array** - Optional. Query parameters.
-* $headers **array** - Optional. HTTP headers.
+* `$method` **string** - The HTTP method to use.
+* `$url` **string** - The URL to request.
+* `$parameters` **array** - Optional. Query parameters.
+* `$headers` **array** - Optional. HTTP headers.
 
 
 #### Return values
@@ -87,7 +87,7 @@ You'll probably want to use one of the convenience methods instead.
 Set the return type for the response body.
 
 #### Arguments
-* $returnAssoc **boolean** - Whether to return an associative array or an stdClass.
+* `$returnAssoc` **boolean** - Whether to return an associative array or an stdClass.
 
 
 #### Return values
