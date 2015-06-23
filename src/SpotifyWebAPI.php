@@ -115,7 +115,7 @@ class SpotifyWebAPI
      * @param string $playlistId ID of the playlist to add tracks to.
      * @param string|array $tracks ID(s) of the track(s) to add.
      * @param array|object $options Optional. Options for the new tracks.
-     * - int position Optional. Zero-based position of where in the playlist to add the tracks. Tracks will be appened if omitted or false.
+     * - int position Optional. Zero-based track position in playlist. Tracks will be appened if omitted or false.
      *
      * @return bool Whether the tracks was successfully added.
      */
@@ -234,7 +234,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to delete tracks from.
-     * @param array $tracks Array of arrays with tracks to delete and optional position in the playlist where the track is located.
+     * @param array $tracks Array of arrays with tracks to delete.
      * - id string Required. Spotify track ID.
      * - position array Optional. Position of the track in the playlist.
      * @param string $snapshotId Optional. The playlist's snapshot ID.
@@ -470,7 +470,7 @@ class SpotifyWebAPI
      * @param string $artistId ID of the artist.
      * @param array|object $options Optional. Options for the albums.
      * - string|array album_type Optional. Album type(s) to return. If omitted, all album types will be returned.
-     * - string market Optional. A ISO 3166-1 alpha-2 country code. Limit the results to tracks that are playable in this market.
+     * - string market Optional. Limit the results to items that are playable in this market, for example SE.
      * - int limit Optional. Limit the number of albums.
      * - int offset Optional. Number of albums to skip.
      *
@@ -528,7 +528,7 @@ class SpotifyWebAPI
      * https://developer.spotify.com/web-api/get-list-featured-playlists/
      *
      * @param array|object $options Optional. Options for the playlists.
-     * - string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Separated by an underscore. Show playlists in this language.
+     * - string locale Optional. Language to show playlists in, for example sv_SE.
      * - string country Optional. An ISO 3166-1 alpha-2 country code. Show playlists from this country.
      * - string timestamp Optional. A ISO 8601 timestamp. Show playlists relevant to this date and time.
      * - int limit Optional. Limit the number of playlists.
@@ -563,7 +563,7 @@ class SpotifyWebAPI
      * https://developer.spotify.com/web-api/get-list-categories/
      *
      * @param array|object $options Optional. Options for the categories.
-     * - string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Separated by an underscore. Show categories in this language.
+     * - string locale Optional. Language to show categories in, for example sv_SE.
      * - string country Optional. An ISO 3166-1 alpha-2 country code. Show categories from this country.
      * - int limit Optional. Limit the number of categories.
      * - int offset Optional. Number of categories to skip.
@@ -598,7 +598,7 @@ class SpotifyWebAPI
      * @param string $categoryId The Spotify ID of the category.
      *
      * @param array|object $options Optional. Options for the category.
-     * - string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Separated by an underscore. Show category in this language.
+     * - string locale Optional. Language to show category in, for example sv_SE.
      * - string country Optional. An ISO 3166-1 alpha-2 country code. Show category from this country.
      *
      * @return array|object The category. Type is controlled by SpotifyWebAPI::setReturnAssoc().
@@ -1004,7 +1004,7 @@ class SpotifyWebAPI
      * @param string $query The term to search for.
      * @param string|array $type The type of item to search for.
      * @param array|object $options Optional. Options for the search.
-     * - string market Optional. A ISO 3166-1 alpha-2 country code. Limit the results to items that are playable in this market.
+     * - string market Optional. Limit the results to items that are playable in this market, for example SE.
      * - int limit Optional. Limit the number of items.
      * - int offset Optional. Number of items to skip.
      *
