@@ -25,5 +25,8 @@
         "psr-4": {
             "SpotifyWebAPI\\": "src/"
         }
+    },
+    "scripts": {
+        "test": "phpcs src -v --standard=PSR2 && phpunit"
     }
 }
