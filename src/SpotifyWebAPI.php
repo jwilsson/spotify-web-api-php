@@ -950,6 +950,16 @@ class SpotifyWebAPI
     }
 
     /**
+     * @deprecated Use SpotifyWebAPI::reorderUserPlaylistTracks() instead. This dummy function will be removed in 1.0.0.
+     */
+    public function reorderPlaylistTracks($userId, $playlistId, $options)
+    {
+        trigger_error('Use SpotifyWebAPI::reorderUserPlaylistTracks() instead', E_USER_DEPRECATED);
+
+        return $this->reorderUserPlaylistTracks($userId, $playlistId, $options);
+    }
+
+    /**
      * Reorder the tracks in a user's playlist.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/reorder-playlists-tracks/
@@ -960,11 +970,11 @@ class SpotifyWebAPI
      * - int range_start Position of the first track to be reordered.
      * - int range_length Optional. The amount of tracks to be reordered.
      * - int insert_before Position where the tracks should be inserted.
-     * - string $snapshotId Optional. The playlist's snapshot ID.
+     * - string snapshot_id Optional. The playlist's snapshot ID.
      *
      * @return string|bool A new snapshot ID or false if the tracks weren't successfully reordered.
      */
-    public function reorderPlaylistTracks($userId, $playlistId, $options)
+    public function reorderUserPlaylistTracks($userId, $playlistId, $options)
     {
         $defaults = array(
             'range_start' => '',
