@@ -50,7 +50,7 @@ Requires a valid access token.<br>
 * `$playlistId` **string** - ID of the playlist to add tracks to.
 * `$tracks` **string\|array** - ID(s) of the track(s) to add.
 * `$options` **array\|object** - Optional. Options for the new tracks.
-    * int position Optional. Zero-based position of where in the playlist to add the tracks. Tracks will be appened if omitted or false.
+    * int position Optional. Zero-based track position in playlist. Tracks will be appened if omitted or false.
 
 
 
@@ -117,7 +117,22 @@ Requires a valid access token.<br>
 
 ### deletePlaylistTracks
 
-    string|boolean SpotifyWebAPI\SpotifyWebAPI::deletePlaylistTracks(string $userId, string $playlistId, array $tracks, string $snapshotId)
+     SpotifyWebAPI\SpotifyWebAPI::deletePlaylistTracks($userId, $playlistId, $tracks, $snapshotId)
+
+
+
+#### Arguments
+* `$userId` **mixed**
+* `$playlistId` **mixed**
+* `$tracks` **mixed**
+* `$snapshotId` **mixed**
+
+
+
+
+### deleteUserPlaylistTracks
+
+    string|boolean SpotifyWebAPI\SpotifyWebAPI::deleteUserPlaylistTracks(string $userId, string $playlistId, array $tracks, string $snapshotId)
 
 Delete tracks from a playlist and retrieve a new snapshot ID.<br>
 Requires a valid access token.<br>
@@ -126,7 +141,7 @@ Requires a valid access token.<br>
 #### Arguments
 * `$userId` **string** - ID of the user who owns the playlist.
 * `$playlistId` **string** - ID of the playlist to delete tracks from.
-* `$tracks` **array** - Array of arrays with tracks to delete and optional position in the playlist where the track is located.
+* `$tracks` **array** - Array of arrays with tracks to delete.
     * id string Required. Spotify track ID.
     * position array Optional. Position of the track in the playlist.
 
@@ -288,7 +303,7 @@ Get an artist's albums.<br>
 * `$artistId` **string** - ID of the artist.
 * `$options` **array\|object** - Optional. Options for the albums.
     * string\|array album_type Optional. Album type(s) to return. If omitted, all album types will be returned.
-    * string market Optional. A ISO 3166-1 alpha-2 country code. Limit the results to tracks that are playable in this market.
+    * string market Optional. Limit the results to items that are playable in this market, for example SE.
     * int limit Optional. Limit the number of albums.
     * int offset Optional. Number of albums to skip.
 
@@ -326,7 +341,7 @@ Requires a valid access token.<br>
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the playlists.
-    * string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Separated by an underscore. Show playlists in this language.
+    * string locale Optional. Language to show playlists in, for example sv_SE.
     * string country Optional. An ISO 3166-1 alpha-2 country code. Show playlists from this country.
     * string timestamp Optional. A ISO 8601 timestamp. Show playlists relevant to this date and time.
     * int limit Optional. Limit the number of playlists.
@@ -349,7 +364,7 @@ Requires a valid access token.<br>
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the categories.
-    * string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Separated by an underscore. Show categories in this language.
+    * string locale Optional. Language to show categories in, for example sv_SE.
     * string country Optional. An ISO 3166-1 alpha-2 country code. Show categories from this country.
     * int limit Optional. Limit the number of categories.
     * int offset Optional. Number of categories to skip.
@@ -372,7 +387,7 @@ Requires a valid access token.<br>
 #### Arguments
 * `$categoryId` **string** - The Spotify ID of the category.
 * `$options` **array\|object** - Optional. Options for the category.
-    * string locale Optional. An lowercase ISO 639 language code and an uppercase ISO 3166-1 alpha-2 country code. Separated by an underscore. Show category in this language.
+    * string locale Optional. Language to show category in, for example sv_SE.
     * string country Optional. An ISO 3166-1 alpha-2 country code. Show category from this country.
 
 
@@ -401,6 +416,21 @@ Requires a valid access token.<br>
 
 #### Return values
 * **array\|object** The list of playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+
+
+
+### getLastResponse
+
+    array SpotifyWebAPI\SpotifyWebAPI::getLastResponse()
+
+Get the latest full response from the Spotify API.
+
+
+#### Return values
+* **array** Response data.
+    * array\|object body The response body. Type is controlled by Request::setReturnAssoc().
+    * string headers Response headers.
+    * int status HTTP status code.
 
 
 
@@ -603,7 +633,21 @@ Requires a valid access token.<br>
 
 ### reorderPlaylistTracks
 
-    string|boolean SpotifyWebAPI\SpotifyWebAPI::reorderPlaylistTracks(string $userId, string $playlistId, array|object $options)
+     SpotifyWebAPI\SpotifyWebAPI::reorderPlaylistTracks($userId, $playlistId, $options)
+
+
+
+#### Arguments
+* `$userId` **mixed**
+* `$playlistId` **mixed**
+* `$options` **mixed**
+
+
+
+
+### reorderUserPlaylistTracks
+
+    string|boolean SpotifyWebAPI\SpotifyWebAPI::reorderUserPlaylistTracks(string $userId, string $playlistId, array|object $options)
 
 Reorder the tracks in a user's playlist.<br>
 Requires a valid access token.<br>
@@ -616,7 +660,7 @@ Requires a valid access token.<br>
     * int range_start Position of the first track to be reordered.
     * int range_length Optional. The amount of tracks to be reordered.
     * int insert_before Position where the tracks should be inserted.
-    * string $snapshotId Optional. The playlist&#039;s snapshot ID.
+    * string snapshot_id Optional. The playlist&#039;s snapshot ID.
 
 
 
@@ -627,7 +671,21 @@ Requires a valid access token.<br>
 
 ### replacePlaylistTracks
 
-    boolean SpotifyWebAPI\SpotifyWebAPI::replacePlaylistTracks(string $userId, string $playlistId, string|array $tracks)
+     SpotifyWebAPI\SpotifyWebAPI::replacePlaylistTracks($userId, $playlistId, $tracks)
+
+
+
+#### Arguments
+* `$userId` **mixed**
+* `$playlistId` **mixed**
+* `$tracks` **mixed**
+
+
+
+
+### replaceUserPlaylistTracks
+
+    boolean SpotifyWebAPI\SpotifyWebAPI::replaceUserPlaylistTracks(string $userId, string $playlistId, string|array $tracks)
 
 Replace all tracks in a user's playlist with new ones.<br>
 Requires a valid access token.<br>
@@ -656,7 +714,7 @@ Requires a valid access token if market=from_token is used.<br>
 * `$query` **string** - The term to search for.
 * `$type` **string\|array** - The type of item to search for.
 * `$options` **array\|object** - Optional. Options for the search.
-    * string market Optional. A ISO 3166-1 alpha-2 country code. Limit the results to items that are playable in this market.
+    * string market Optional. Limit the results to items that are playable in this market, for example SE.
     * int limit Optional. Limit the number of items.
     * int offset Optional. Number of items to skip.
 
