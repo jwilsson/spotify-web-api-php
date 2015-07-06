@@ -64,7 +64,7 @@ $tracks = array(
     array('id' => '6lPb7Eoon6QPbscWbMsk6a')
 );
 
-$api->deletePlaylistTracks('username', 'playlist_id', $tracks, 'snapshot_id');
+$api->deleteUserPlaylistTracks('username', 'playlist_id', $tracks, 'snapshot_id');
 ```
 
 Get a album
@@ -260,7 +260,7 @@ var_dump($contains);
 Reorder the tracks in a user's playlist
 
 ```php
-$api->reorderPlaylistTracks('username', 'playlist_id', array(
+$api->reorderUserPlaylistTracks('username', 'playlist_id', array(
     'range_start' => 1,
     'range_length' => 5,
     'insert_before' => 10,
@@ -271,7 +271,7 @@ $api->reorderPlaylistTracks('username', 'playlist_id', array(
 Replace all tracks in a user's playlist with new ones
 
 ```php
-$api->replacePlaylistTracks('username', 'playlist_id', array(
+$api->replaceUserPlaylistTracks('username', 'playlist_id', array(
     '0eGsygTp906u18L0Oimnem',
     '1lDWb6b6ieDQ2xT7ewTC3G'
 ));
