@@ -48,7 +48,21 @@ class RequestTest extends PHPUnit_Framework_TestCase
     {
         $response = $this->request->send('GET', 'https://api.spotify.com/v1/albums/7u6zL7kqpgLPISZYXNTgYk');
 
-        $this->assertInternalType('string', $response['headers']);
+        $this->assertInternalType('array', $response['headers']);
+    }
+
+    public function testSendHeadersParsingKey()
+    {
+        $response = $this->request->send('GET', 'https://api.spotify.com/v1/albums/7u6zL7kqpgLPISZYXNTgYk');
+
+        $this->assertArrayHasKey('Content-Type', $response['headers']);
+    }
+
+    public function testSendHeadersParsingValue()
+    {
+        $response = $this->request->send('GET', 'https://api.spotify.com/v1/albums/7u6zL7kqpgLPISZYXNTgYk');
+
+        $this->assertEquals('application/json; charset=utf-8', $response['headers']['Content-Type']);
     }
 
     public function testSendStatus()
