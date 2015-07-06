@@ -1,4 +1,20 @@
 # Changelog
+### 0.9.0 (2015-07-06)
+* **This release contains breaking changes, read through this list before updating.**
+* As we're moving closer to 1.0 the work to make the API more consistent and stable is continuing. This time with an effort to make method names and signatures more consistent.
+* Thus, the following methods have been renamed and the old names are deprecated:
+    * `SpotifyWebAPI::deletePlaylistTracks()` -> `SpotifyWebAPI::deleteUserPlaylistTracks()`
+    * `SpotifyWebAPI::reorderPlaylistTracks` -> `SpotifyWebAPI::reorderUserPlaylistTracks()`
+    * `SpotifyWebAPI::replacePlaylistTracks()` -> `SpotifyWebAPI::replaceUserPlaylistTracks()`
+* The following method arguments now also accepts strings:
+    * `fields` in `SpotifyWebAPI::getUserPlaylistTracks()`.
+    * `fields` in `SpotifyWebAPI::getUserPlaylist()`.
+    * `album_type` in `SpotifyWebAPI::getArtistAlbums()`.
+    * `ids` in `SpotifyWebAPI::userFollowsPlaylist()`.
+* A new method, `SpotifyWebAPI::getLastResponse()` has been introduced which allows for retrieval of the latest full response from the Spotify API.
+* Lots of internal changes to increase code consistency and ensure full PSR-2 compatibility.
+* Better handling of errors from cURL.
+
 ### 0.8.2 (2015-05-02)
 * CA Root Certificates are now included with the library, allowing cURL to always find it. [#32](https://github.com/jwilsson/spotify-web-api-php/issues/32).
 
