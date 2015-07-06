@@ -1002,6 +1002,16 @@ class SpotifyWebAPI
     }
 
     /**
+     * @deprecated Use SpotifyWebAPI::replaceUserPlaylistTracks() instead. This dummy function will be removed in 1.0.0.
+     */
+    public function replacePlaylistTracks($userId, $playlistId, $tracks)
+    {
+        trigger_error('Use SpotifyWebAPI::replaceUserPlaylistTracks() instead', E_USER_DEPRECATED);
+
+        return $this->replaceUserPlaylistTracks($userId, $playlistId, $tracks);
+    }
+
+    /**
      * Replace all tracks in a user's playlist with new ones.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/replace-playlists-tracks/
@@ -1012,7 +1022,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the tracks was successfully replaced.
      */
-    public function replacePlaylistTracks($userId, $playlistId, $tracks)
+    public function replaceUserPlaylistTracks($userId, $playlistId, $tracks)
     {
         $tracks = $this->idToUri($tracks);
         $tracks = array(

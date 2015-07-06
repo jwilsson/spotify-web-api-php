@@ -501,18 +501,43 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertNotFalse($response);
     }
 
+    // Deprecated test, to be removed in 1.0. See testReplaceUserPlaylistTracksSingle
     public function testReplacePlaylistTracksSingle()
     {
+        $this->setExpectedException('PHPUnit_Framework_Error');
+
         $api = $this->setupMock(201);
         $response = $api->replacePlaylistTracks('mcgurk', $this->playlistID, '7eEfbAG7wgV4AgkdTakVFT');
 
         $this->assertTrue($response);
     }
 
+    // Deprecated test, to be removed in 1.0. See testReplaceUserPlaylistTracksMultiple
     public function testReplacePlaylistTracksMultiple()
     {
+        $this->setExpectedException('PHPUnit_Framework_Error');
+
         $api = $this->setupMock(201);
         $response = $api->replacePlaylistTracks('mcgurk', $this->playlistID, array(
+            '7kz6GbFr2MCI7PgXJOdq8c',
+            '6HM9UgDB38hLDFm7e1RF6W',
+        ));
+
+        $this->assertTrue($response);
+    }
+
+    public function testReplaceUserPlaylistTracksSingle()
+    {
+        $api = $this->setupMock(201);
+        $response = $api->replaceUserPlaylistTracks('mcgurk', $this->playlistID, '7eEfbAG7wgV4AgkdTakVFT');
+
+        $this->assertTrue($response);
+    }
+
+    public function testReplaceUserPlaylistTracksMultiple()
+    {
+        $api = $this->setupMock(201);
+        $response = $api->replaceUserPlaylistTracks('mcgurk', $this->playlistID, array(
             '7kz6GbFr2MCI7PgXJOdq8c',
             '6HM9UgDB38hLDFm7e1RF6W',
         ));
