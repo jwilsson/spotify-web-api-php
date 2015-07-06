@@ -19,8 +19,15 @@ This is a PHP implementation of the [Spotify Web API](https://developer.spotify.
 * PHP [cURL extension](http://php.net/manual/en/book.curl.php) (Usually included with PHP).
 
 ## Installation
+Add `spotify-web-api-php` as a dependency to your `composer.json`:
 
-Please refer to the [documentation](http://jwilsson.github.io/spotify-web-api-php/) for installation and usage instructions.
+```json
+"require": {
+    "jwilsson/spotify-web-api-php": "0.9.*"
+}
+```
+
+For more instructions, please refer to the [documentation](http://jwilsson.github.io/spotify-web-api-php/).
 
 ## Examples
 
