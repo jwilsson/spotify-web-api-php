@@ -229,6 +229,16 @@ class SpotifyWebAPI
     }
 
     /**
+     * @deprecated Use SpotifyWebAPI::deleteUserPlaylistTracks() instead. This dummy function will be removed in 1.0.0.
+     */
+    public function deletePlaylistTracks($userId, $playlistId, $tracks, $snapshotId = '')
+    {
+        trigger_error('Use SpotifyWebAPI::deleteUserPlaylistTracks() instead', E_USER_DEPRECATED);
+
+        return $this->deleteUserPlaylistTracks($userId, $playlistId, $tracks, $snapshotId);
+    }
+
+    /**
      * Delete tracks from a playlist and retrieve a new snapshot ID.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/remove-tracks-playlist/
@@ -242,7 +252,7 @@ class SpotifyWebAPI
      *
      * @return string|bool A new snapshot ID or false if the tracks weren't successfully deleted.
      */
-    public function deletePlaylistTracks($userId, $playlistId, $tracks, $snapshotId = '')
+    public function deleteUserPlaylistTracks($userId, $playlistId, $tracks, $snapshotId = '')
     {
         $options = array();
         if ($snapshotId) {

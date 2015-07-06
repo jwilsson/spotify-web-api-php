@@ -126,8 +126,11 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertTrue($response);
     }
 
+    // Deprecated test, to be removed in 1.0. See testDeleteUserPlaylistTracksSingle
     public function testDeletePlaylistTracksSingle()
     {
+        $this->setExpectedException('PHPUnit_Framework_Error');
+
         $api = $this->setupMock('user-playlist-snapshot-id');
         $response = $api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
             array(
@@ -138,10 +141,40 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertNotFalse($response);
     }
 
+    // Deprecated test, to be removed in 1.0. See testDeleteUserPlaylistTracksMultiple
     public function testDeletePlaylistTracksMultiple()
     {
+        $this->setExpectedException('PHPUnit_Framework_Error');
+
         $api = $this->setupMock('user-playlist-snapshot-id');
         $response = $api->deletePlaylistTracks('mcgurk', $this->playlistID, array(
+            array(
+                'id' => '1id6H6vcwSB9GGv9NXh5cl',
+            ),
+            array(
+                'id' => '3mqRLlD9j92BBv1ueFhJ1l',
+            ),
+        ));
+
+        $this->assertNotFalse($response);
+    }
+
+    public function testDeleteUserPlaylistTracksSingle()
+    {
+        $api = $this->setupMock('user-playlist-snapshot-id');
+        $response = $api->deleteUserPlaylistTracks('mcgurk', $this->playlistID, array(
+            array(
+                'id' => '7EjyzZcbLxW7PaaLua9Ksb',
+            ),
+        ));
+
+        $this->assertNotFalse($response);
+    }
+
+    public function testDeleteUserPlaylistTracksMultiple()
+    {
+        $api = $this->setupMock('user-playlist-snapshot-id');
+        $response = $api->deleteUserPlaylistTracks('mcgurk', $this->playlistID, array(
             array(
                 'id' => '1id6H6vcwSB9GGv9NXh5cl',
             ),
