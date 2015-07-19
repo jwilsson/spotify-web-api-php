@@ -811,6 +811,36 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the artists followed by the current user.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-followed-artists/
+     *
+     * @param array|object $options Optional. Options for the artists.
+     * - int limit Optional. Limit the number of artists returned.
+     * - string after Optional. The last artist ID retrieved from the previous request.
+     *
+     * @return array|object A list of artists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+     */
+    public function getUserFollowedArtists($options = array())
+    {
+        $defaults = array(
+            'after' => '',
+            'limit' => 0,
+            'type' => 'artist', // Undocumented until more values are supported.
+        );
+
+        $options = $this->mergeOptions($defaults, $options, true);
+
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/me/following';
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get a user's playlists.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-list-users-playlists/
