@@ -1,4 +1,8 @@
 # Changelog
+### 0.10.0 (2015-09-05)
+* The following methods has been added:
+    * `SpotifyWebAPI::getUserFollowedArtists()`
+
 ### 0.9.0 (2015-07-06)
 * **This release contains breaking changes, read through this list before updating.**
 * As we're moving closer to 1.0 the work to make the API more consistent and stable is continuing. This time with an effort to make method names and signatures more consistent.
