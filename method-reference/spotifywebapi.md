@@ -535,6 +535,26 @@ Get a user.<br>
 
 
 
+### getUserFollowedArtists
+
+    array|object SpotifyWebAPI\SpotifyWebAPI::getUserFollowedArtists(array|object $options)
+
+Get the artists followed by the current user.<br>
+Requires a valid access token.<br>
+[https://developer.spotify.com/web-api/get-followed-artists/](https://developer.spotify.com/web-api/get-followed-artists/)
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options for the artists.
+    * int limit Optional. Limit the number of artists returned.
+    * string after Optional. The last artist ID retrieved from the previous request.
+
+
+
+#### Return values
+* **array\|object** A list of artists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+
+
+
 ### getUserPlaylists
 
     array|object SpotifyWebAPI\SpotifyWebAPI::getUserPlaylists(string $userId, array|object $options)
