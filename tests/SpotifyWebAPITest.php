@@ -1,6 +1,4 @@
 <?php
-use \SpotifyWebAPI;
-
 class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 {
     private $playlistID = '0UZ0Ll4HJHR7yvURYbHJe9';

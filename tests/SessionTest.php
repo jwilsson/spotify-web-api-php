@@ -1,6 +1,4 @@
 <?php
-use \SpotifyWebAPI;
-
 class SessionTest extends PHPUnit_Framework_TestCase
 {
     private $session;
