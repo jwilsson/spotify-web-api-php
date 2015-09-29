@@ -129,16 +129,6 @@ class Session
     }
 
     /**
-     * @deprecated Use Session::refreshAccessToken instead. This dummy function will be removed in 1.0.0.
-     */
-    public function refreshToken()
-    {
-        trigger_error('Use Session::refreshAccessToken instead', E_USER_DEPRECATED);
-
-        return $this->refreshAccessToken();
-    }
-
-    /**
      * Refresh an access token.
      *
      * @return bool Whether the access token was successfully refreshed.
@@ -200,16 +190,6 @@ class Session
         }
 
         return false;
-    }
-
-    /**
-     * @deprecated Use Session::requestAccessToken instead. This dummy function will be removed in 1.0.0.
-     */
-    public function requestToken($code)
-    {
-        trigger_error('Use Session::requestAccessToken instead', E_USER_DEPRECATED);
-
-        return $this->requestAccessToken($code);
     }
 
     /**
