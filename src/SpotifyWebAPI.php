@@ -247,7 +247,7 @@ class SpotifyWebAPI
      * @param string $playlistId ID of the playlist to delete tracks from.
      * @param array $tracks Array of arrays with tracks to delete.
      * - id string Required. Spotify track ID.
-     * - position array Optional. Position of the track in the playlist.
+     * - positions int|array Optional. The track's position(s) in the playlist.
      * @param string $snapshotId Optional. The playlist's snapshot ID.
      *
      * @return string|bool A new snapshot ID or false if the tracks weren't successfully deleted.
@@ -259,15 +259,23 @@ class SpotifyWebAPI
             $options['snapshot_id'] = $snapshotId;
         }
 
+        $options['tracks'] = array();
         for ($i = 0; $i < count($tracks); $i++) {
-            $tracks[$i] = (array) $tracks[$i];
-            $tracks[$i]['uri'] = $this->idToUri($tracks[$i]['id']);
+            $track = array();
+
+            if (isset($tracks[$i]['positions'])) {
+                $track['positions'] = (array) $tracks[$i]['positions'];
+            }
+
+            $track['uri'] = $this->idToUri($tracks[$i]['id']);
+
+            $options['tracks'][] = $track;
         }
 
-        $options['tracks'] = $tracks;
         $options = json_encode($options);
 
         $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
 
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
 
@@ -317,7 +325,7 @@ class SpotifyWebAPI
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to follow.
      * @param array|object $options Optional. Options for the followed playlist.
-     * - public bool Optional. Whether the followed playlist should be public or not.
+     * - public bool Optional. Whether the playlist should be followed publicly or not.
      *
      * @return bool Whether the playlist was successfully followed.
      */
@@ -841,36 +849,6 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get a user's playlists.
-     * Requires a valid access token.
-     * https://developer.spotify.com/web-api/get-list-users-playlists/
-     *
-     * @param string $userId ID of the user.
-     * @param array|object $options Optional. Options for the tracks.
-     * - int limit Optional. Limit the number of tracks.
-     * - int offset Optional. Number of tracks to skip.
-     *
-     * @return array|object The user's playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
-     */
-    public function getUserPlaylists($userId, $options = array())
-    {
-        $defaults = array(
-            'limit' => 0,
-            'offset' => 0,
-        );
-
-        $options = $this->mergeOptions($defaults, $options, true);
-
-        $headers = $this->authHeaders();
-
-        $uri = '/v1/users/' . $userId . '/playlists';
-
-        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
-
-        return $this->lastResponse['body'];
-    }
-
-    /**
      * Get a user's specific playlist.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-playlist/
@@ -895,6 +873,36 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
 
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId;
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
+     * Get a user's playlists.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-list-users-playlists/
+     *
+     * @param string $userId ID of the user.
+     * @param array|object $options Optional. Options for the tracks.
+     * - int limit Optional. Limit the number of tracks.
+     * - int offset Optional. Number of tracks to skip.
+     *
+     * @return array|object The user's playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+     */
+    public function getUserPlaylists($userId, $options = array())
+    {
+        $defaults = array(
+            'limit' => 0,
+            'offset' => 0,
+        );
+
+        $options = $this->mergeOptions($defaults, $options, true);
+
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/users/' . $userId . '/playlists';
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
 
@@ -997,9 +1005,9 @@ class SpotifyWebAPI
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
      * @param array|object $options Options for the new .
-     * - int range_start Position of the first track to be reordered.
+     * - int range_start Required. Position of the first track to be reordered.
      * - int range_length Optional. The amount of tracks to be reordered.
-     * - int insert_before Position where the tracks should be inserted.
+     * - int insert_before Required. Position where the tracks should be inserted.
      * - string snapshot_id Optional. The playlist's snapshot ID.
      *
      * @return string|bool A new snapshot ID or false if the tracks weren't successfully reordered.
@@ -1007,10 +1015,10 @@ class SpotifyWebAPI
     public function reorderUserPlaylistTracks($userId, $playlistId, $options)
     {
         $defaults = array(
-            'range_start' => '',
-            'range_length' => 1,
             'insert_before' => '',
-            'snapshot_id' => ''
+            'range_length' => 1,
+            'range_start' => '',
+            'snapshot_id' => '',
         );
 
         $options = $this->mergeOptions($defaults, $options, true);
@@ -1062,6 +1070,7 @@ class SpotifyWebAPI
         $options = json_encode($tracks);
 
         $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
 
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
 

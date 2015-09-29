@@ -60,9 +60,9 @@ class Session
             'client_id' => $this->getClientId(),
             'redirect_uri' => $this->getRedirectUri(),
             'response_type' => 'code',
-            'scope' => implode(' ', $options['scope']),
+            'scope' => $options['scope'] ? implode(' ', $options['scope']) : null,
             'show_dialog' => $options['show_dialog'] ? 'true' : 'false',
-            'state' => $options['state'],
+            'state' => $options['state'] ?: null,
         );
 
         return Request::ACCOUNT_URL . '/authorize/?' . http_build_query($parameters);
@@ -229,7 +229,7 @@ class Session
             'redirect_uri' => $this->getRedirectUri(),
         );
 
-        $response = $this->request->account('POST', '/api/token', $parameters);
+        $response = $this->request->account('POST', '/api/token', $parameters, array());
         $response = $response['body'];
 
         if (isset($response->refresh_token) && isset($response->access_token)) {

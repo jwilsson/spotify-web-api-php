@@ -15,11 +15,6 @@
     <testsuites>
         <testsuite name="Spotify Web API Test Suite">
             <directory>./tests/</directory>
-            <exclude>./tests/SessionTest.php</exclude>
-        </testsuite>
-
-        <testsuite name="Spotify Web API Integration Tests">
-            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 
