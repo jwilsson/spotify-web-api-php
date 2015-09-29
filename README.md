@@ -15,7 +15,7 @@ This is a PHP implementation of the [Spotify Web API](https://developer.spotify.
 * PSR-4 autoloading support.
 
 ## Requirements
-* PHP 5.3 or greater.
+* PHP 5.5 or greater.
 * PHP [cURL extension](http://php.net/manual/en/book.curl.php) (Usually included with PHP).
 
 ## Installation
