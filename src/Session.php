@@ -6,10 +6,9 @@ class Session
     private $accessToken = '';
     private $clientId = '';
     private $clientSecret = '';
-    private $expires = 0;
+    private $expirationTime = 0;
     private $redirectUri = '';
     private $refreshToken = '';
-
     private $request = null;
 
     /**
@@ -99,13 +98,13 @@ class Session
     }
 
     /**
-     * Get the number of seconds for which the access token is valid.
+     * Get the access token expiration time.
      *
-     * @return int The time period (in seconds) for which the access token is valid.
+     * @return int A Unix timestamp indicating the token expiration time.
      */
-    public function getExpires()
+    public function getTokenExpiration()
     {
-        return $this->expires;
+        return $this->expirationTime;
     }
 
     /**
@@ -131,15 +130,17 @@ class Session
     /**
      * Refresh an access token.
      *
+     * @param string $refreshToken The refresh token to use.
+     *
      * @return bool Whether the access token was successfully refreshed.
      */
-    public function refreshAccessToken()
+    public function refreshAccessToken($refreshToken)
     {
         $payload = base64_encode($this->getClientId() . ':' . $this->getClientSecret());
 
         $parameters = array(
             'grant_type' => 'refresh_token',
-            'refresh_token' => $this->refreshToken,
+            'refresh_token' => $refreshToken,
         );
 
         $headers = array(
@@ -151,7 +152,7 @@ class Session
 
         if (isset($response->access_token)) {
             $this->accessToken = $response->access_token;
-            $this->expires = $response->expires_in;
+            $this->expirationTime = time() + $response->expires_in;
 
             return true;
         }
@@ -184,7 +185,7 @@ class Session
 
         if (isset($response->access_token)) {
             $this->accessToken = $response->access_token;
-            $this->expires = $response->expires_in;
+            $this->expirationTime = time() + $response->expires_in;
 
             return true;
         }
@@ -215,7 +216,7 @@ class Session
         if (isset($response->refresh_token) && isset($response->access_token)) {
             $this->refreshToken = $response->refresh_token;
             $this->accessToken = $response->access_token;
-            $this->expires = $response->expires_in;
+            $this->expirationTime = time() + $response->expires_in;
 
             return true;
         }
@@ -257,17 +258,5 @@ class Session
     public function setRedirectUri($redirectUri)
     {
         $this->redirectUri = $redirectUri;
-    }
-
-    /**
-     * Set the refresh token.
-     *
-     * @param string $refreshToken The refresh token.
-     *
-     * @return void
-     */
-    public function setRefreshToken($refreshToken)
-    {
-        $this->refreshToken = $refreshToken;
     }
 }

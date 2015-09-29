@@ -94,16 +94,6 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $session->getClientSecret());
     }
 
-    public function testGetExpires()
-    {
-        $this->markTestSkipped('Skipped since we are going to change/remove this functionality anyway. See #20.');
-
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
-        $session->requestCredentialsToken();
-
-        $this->assertGreaterThan(0, $session->getExpires());
-    }
-
     public function testGetRedirectUri()
     {
         $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
@@ -114,21 +104,11 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $session->getRedirectUri());
     }
 
-    public function testGetRefreshToken()
-    {
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
-        $expected = $this->refreshToken;
-
-        $session->setRefreshToken($expected);
-
-        $this->assertEquals($expected, $session->getRefreshToken());
-    }
-
     public function testRefreshAccessToken()
     {
         $expected = array(
             'grant_type' => 'refresh_token',
-            'refresh_token' => '',
+            'refresh_token' => $this->refreshToken,
         );
 
         $headers = array(
@@ -148,7 +128,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
         );
 
         $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI, $stub);
-        $session->refreshAccessToken();
+        $session->refreshAccessToken($this->refreshToken);
 
         $this->assertNotEmpty($session->getAccessToken());
     }
@@ -181,6 +161,8 @@ class SessionTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($result);
         $this->assertNotEmpty($session->getAccessToken());
+        $this->assertNotEmpty($session->getRefreshToken());
+        $this->assertEquals(time() + 3600, $session->getTokenExpiration());
     }
 
     public function testRequestCredentialsToken()
@@ -211,6 +193,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($result);
         $this->assertNotEmpty($session->getAccessToken());
+        $this->assertEquals(time() + 3600, $session->getTokenExpiration());
     }
 
     public function testSetClientId()
@@ -241,15 +224,5 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $session->setRedirectUri($expected);
 
         $this->assertEquals($expected, $session->getRedirectUri());
-    }
-
-    public function testSetRefreshToken()
-    {
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
-        $expected = $this->refreshToken;
-
-        $session->setRefreshToken($expected);
-
-        $this->assertEquals($expected, $session->getRefreshToken());
     }
 }
