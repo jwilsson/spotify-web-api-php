@@ -5,9 +5,9 @@ ini_set('display_errors', 1);
 require 'vendor/autoload.php';
 
 $session = new SpotifyWebAPI\Session(
-    '',
-    '',
-    ''
+    'CLIENT_ID',
+    'CLIENT_SECRET',
+    'REDIRECT_URI'
 );
 
 $api = new SpotifyWebAPI\SpotifyWebAPI();
