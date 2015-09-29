@@ -131,6 +131,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $session->refreshAccessToken($this->refreshToken);
 
         $this->assertNotEmpty($session->getAccessToken());
+        $this->assertEquals(time() + 3600, $session->getTokenExpiration());
     }
 
     public function testRequestAccessToken()
