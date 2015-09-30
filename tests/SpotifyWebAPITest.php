@@ -58,7 +58,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     public function testAddUserPlaylistTracks()
     {
         $tracks = array(
-            '1id6H6vcwSB9GGv9NXh5cl',
+            'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
             '3mqRLlD9j92BBv1ueFhJ1l',
         );
 
