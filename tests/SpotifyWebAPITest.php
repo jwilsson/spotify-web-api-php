@@ -412,10 +412,12 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $options = array(
             'limit' => 10,
             'offset' => 0,
+            'market' => 'SE',
         );
 
         $expected = array(
             'limit' => 10,
+            'market' => 'SE',
         );
 
         $headers = array(

@@ -387,12 +387,13 @@ class SpotifyWebAPI
 
     /**
      * Get a album's tracks.
-     * https://developer.spotify.com/web-api/get-several-albums/
+     * https://developer.spotify.com/web-api/get-albums-tracks/
      *
      * @param string $albumId ID of the album.
      * @param array|object $options Optional. Options for the tracks.
      * - int limit Optional. Limit the number of tracks.
      * - int offset Optional. Number of tracks to skip.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
      * @return array|object The requested album tracks. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
@@ -400,6 +401,7 @@ class SpotifyWebAPI
     {
         $defaults = array(
             'limit' => 0,
+            'market' => '',
             'offset' => 0,
         );
 
