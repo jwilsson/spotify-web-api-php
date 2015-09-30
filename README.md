@@ -23,7 +23,7 @@ Add `spotify-web-api-php` as a dependency to your `composer.json`:
 
 ```json
 "require": {
-    "jwilsson/spotify-web-api-php": "0.9.*"
+    "jwilsson/spotify-web-api-php": "^1.0.0"
 }
 ```
 
@@ -54,6 +54,17 @@ $api->createUserPlaylist('username', array(
 ));
 ```
 
+Check if the current user follows a user or artist
+
+```php
+$follows = $api->currentUserFollows('user', array(
+    'spotify',
+    'spotify_france'
+));
+
+var_dump($follows);
+```
+
 Delete tracks from a user's library
 
 ```php
@@ -72,6 +83,21 @@ $tracks = array(
 );
 
 $api->deleteUserPlaylistTracks('username', 'playlist_id', $tracks, 'snapshot_id');
+```
+
+Follow an artist or user
+
+```php
+$api->followArtistsOrUsers('artist', array(
+    '74ASZWbe4lXaubB36ztrGX',
+    '2t9yJDJIEtvPmr2iRIdqBf'
+));
+```
+
+Follow a playlist
+
+```php
+$api->followPlaylist('username', 'playlist_id');
 ```
 
 Get a album
@@ -139,7 +165,9 @@ print_r($albums);
 Get an artist's top tracks in a country
 
 ```php
-$tracks = $api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', 'se');
+$tracks = $api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', array(
+    'country' => 'se'
+));
 
 print_r($tracks);
 ```
@@ -336,6 +364,21 @@ $api->updateUserPlaylist('username', 'playlist_id', array(
 ));
 ```
 
+Unfollow an artist or user
+
+```php
+$api->unfollowArtistsOrUsers('user', array(
+    'spotify',
+    'spotify_france'
+));
+```
+
+Unfollow a playlist
+
+```php
+$api->unfollowPlaylist('username', 'playlist_id');
+```
+
 Check if a user is following a playlist
 
 ```php
@@ -347,56 +390,6 @@ $users = array(
 $api->userFollowsPlaylist('owner_id', 'playlist_id', array(
     'ids' => $users
 ));
-```
-
-Follow and unfollow an artist or user
-
-```php
-$api->followArtistsOrUsers('artist', '74ASZWbe4lXaubB36ztrGX');
-
-$api->unfollowArtistsOrUsers('artist', '74ASZWbe4lXaubB36ztrGX');
-
-$api->followArtistsOrUsers('artist', array(
-    '74ASZWbe4lXaubB36ztrGX',
-    '2t9yJDJIEtvPmr2iRIdqBf'
-));
-
-$api->followArtistsOrUsers('user', array(
-    'spotify',
-    'spotify_france'
-));
-
-$api->unfollowArtistsOrUsers('user', array(
-    'spotify',
-    'spotify_france'
-));
-```
-
-Check if the current user follows a user or artist
-
-```php
-$follows = $api->currentUserFollows('user', array(
-    'spotify',
-    'spotify_france'
-));
-
-var_dump($follows);
-
-$follows = $api->currentUserFollows('artist', '74ASZWbe4lXaubB36ztrGX');
-
-var_dump($follows);
-```
-
-Follow a playlist
-
-```php
-$api->followPlaylist('username', 'playlist_id');
-```
-
-Unfollow a playlist
-
-```php
-$api->unfollowPlaylist('username', 'playlist_id');
 ```
 
 For more examples, please see the [homepage](http://jwilsson.github.io/spotify-web-api-php/examples/).
