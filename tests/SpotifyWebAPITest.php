@@ -1320,6 +1320,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $options = array(
             'name' => 'New playlist name',
+            'public' => false,
         );
 
         $expected = json_encode($options);
