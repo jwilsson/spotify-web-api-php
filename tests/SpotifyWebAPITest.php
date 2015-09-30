@@ -973,10 +973,12 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $options = array(
             'fields' => array('id', 'uri'),
+            'market' => 'SE',
         );
 
         $expected = array(
             'fields' => 'id,uri',
+            'market' => 'SE',
         );
 
         $headers = array(

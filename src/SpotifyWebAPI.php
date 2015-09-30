@@ -373,7 +373,7 @@ class SpotifyWebAPI
             'market' => '',
         );
 
-        $options = $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options, true);
         $options['ids'] = implode(',', $albumIds);
 
         $headers = $this->authHeaders();
@@ -770,7 +770,7 @@ class SpotifyWebAPI
             'market' => '',
         );
 
-        $options = $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options, true);
 
         $headers = $this->authHeaders();
 
@@ -797,7 +797,7 @@ class SpotifyWebAPI
             'market' => '',
         );
 
-        $options = $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options, true);
         $options['ids'] = implode(',', $trackIds);
 
         $headers = $this->authHeaders();
@@ -867,6 +867,7 @@ class SpotifyWebAPI
      * @param string $playlistId ID of the playlist.
      * @param array|object $options Optional. Options for the playlist.
      * - string|array fields Optional. A list of fields to return. See Spotify docs for more info.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
      * @return array|object The user's playlist. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
@@ -874,6 +875,7 @@ class SpotifyWebAPI
     {
         $defaults = array(
             'fields' => array(),
+            'market' => '',
         );
 
         $options = array_merge($defaults, (array) $options);
