@@ -518,15 +518,18 @@ class SpotifyWebAPI
      * https://developer.spotify.com/web-api/get-artists-top-tracks/
      *
      * @param string $artistId ID of the artist.
-     * @param string $country An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
+     * @param array|object $options Options for the tracks.
+     * - string $country Required. An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
      *
      * @return array|object The artist's top tracks. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getArtistTopTracks($artistId, $country)
+    public function getArtistTopTracks($artistId, $options)
     {
-        $options = array(
-            'country' => $country,
+        $defaults = array(
+            'country' => '',
         );
+
+        $options = $this->mergeOptions($defaults, $options, true);
 
         $headers = $this->authHeaders();
 

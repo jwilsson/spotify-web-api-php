@@ -565,6 +565,10 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetArtistTopTracks()
     {
+        $options = array(
+            'country' => 'SE',
+        );
+
         $expected = array(
             'country' => 'SE',
         );
@@ -587,7 +591,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getArtistTopTracks('36QJpDe2go2KgaRleHCDTp', 'SE');
+        $response = $api->getArtistTopTracks('36QJpDe2go2KgaRleHCDTp', $options);
 
         $this->assertObjectHasAttribute('tracks', $response);
     }
