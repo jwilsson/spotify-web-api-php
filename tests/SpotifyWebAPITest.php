@@ -213,7 +213,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
             ),
             array(
                 'id' => '3mqRLlD9j92BBv1ueFhJ1l',
-                'positions' => array(1),
+                'positions' => array(1, 2),
             ),
             array(
                 'id' => '4iV5W9uYEdYUVa79Axb7Rh',
@@ -228,7 +228,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
                     'uri' => 'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
                 ),
                 array(
-                    'positions' => array(1),
+                    'positions' => array(1, 2),
                     'uri' => 'spotify:track:3mqRLlD9j92BBv1ueFhJ1l',
                 ),
                 array(
