@@ -370,7 +370,7 @@ class SpotifyWebAPI
     public function getAlbums($albumIds, $options = array())
     {
         $defaults = array(
-            'market' => ''
+            'market' => '',
         );
 
         $options = $options = $this->mergeOptions($defaults, $options, true);
@@ -786,15 +786,19 @@ class SpotifyWebAPI
      * https://developer.spotify.com/web-api/get-several-tracks/
      *
      * @param array $trackIds IDs of the tracks.
+     * @param array|object $options Optional. Options for the albums.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
      * @return array|object The requested tracks. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getTracks($trackIds)
+    public function getTracks($trackIds, $options = array())
     {
-        $trackIds = implode(',', $trackIds);
-        $options = array(
-            'ids' => $trackIds,
+        $defaults = array(
+            'market' => '',
         );
+
+        $options = $options = $this->mergeOptions($defaults, $options, true);
+        $options['ids'] = implode(',', $trackIds);
 
         $headers = $this->authHeaders();
 
