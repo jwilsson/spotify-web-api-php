@@ -932,6 +932,7 @@ class SpotifyWebAPI
      * - string|array fields Optional. A list of fields to return. See Spotify docs for more info.
      * - int limit Optional. Limit the number of tracks.
      * - int offset Optional. Number of tracks to skip.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
      * @return array|object The tracks in the playlist. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
@@ -940,6 +941,7 @@ class SpotifyWebAPI
         $defaults = array(
             'fields' => array(),
             'limit' => 0,
+            'market' => '',
             'offset' => 0,
         );
 
