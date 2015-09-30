@@ -838,6 +838,14 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetTrack()
     {
+        $options = array(
+            'market' => 'SE',
+        );
+
+        $expected = array(
+            'market' => 'SE',
+        );
+
         $headers = array(
             'Authorization' => 'Bearer ' . $this->accessToken,
         );
@@ -849,14 +857,14 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $stub = $this->setupStub(
             'GET',
             '/v1/tracks/0eGsygTp906u18L0Oimnem',
-            array(),
+            $expected,
             $headers,
             $return
         );
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getTrack('0eGsygTp906u18L0Oimnem');
+        $response = $api->getTrack('0eGsygTp906u18L0Oimnem', $options);
 
         $this->assertObjectHasAttribute('id', $response);
     }

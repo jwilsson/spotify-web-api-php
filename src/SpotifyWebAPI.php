@@ -759,16 +759,24 @@ class SpotifyWebAPI
      * https://developer.spotify.com/web-api/get-track/
      *
      * @param string $trackId ID of the track.
+     * @param array|object $options Optional. Options for the track.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
      * @return array|object The requested track. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getTrack($trackId)
+    public function getTrack($trackId, $options = array())
     {
+        $defaults = array(
+            'market' => '',
+        );
+
+        $options = $options = $this->mergeOptions($defaults, $options, true);
+
         $headers = $this->authHeaders();
 
         $uri = '/v1/tracks/' . $trackId;
 
-        $this->lastResponse = $this->request->api('GET', $uri, array(), $headers);
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
 
         return $this->lastResponse['body'];
     }
