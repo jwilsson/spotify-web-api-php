@@ -373,7 +373,7 @@ class SpotifyWebAPI
             'market' => '',
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
         $options['ids'] = implode(',', $albumIds);
 
         $headers = $this->authHeaders();
@@ -405,7 +405,7 @@ class SpotifyWebAPI
             'offset' => 0,
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
 
         $headers = $this->authHeaders();
 
@@ -529,7 +529,7 @@ class SpotifyWebAPI
             'country' => '',
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
 
         $headers = $this->authHeaders();
 
@@ -564,7 +564,7 @@ class SpotifyWebAPI
             'timestamp' => '',
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
 
         $headers = $this->authHeaders();
 
@@ -597,7 +597,7 @@ class SpotifyWebAPI
             'offset' => 0
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
 
         $headers = $this->authHeaders();
 
@@ -628,7 +628,7 @@ class SpotifyWebAPI
             'locale' => ''
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
 
         $headers = $this->authHeaders();
 
@@ -661,7 +661,7 @@ class SpotifyWebAPI
             'offset' => 0
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
 
         $headers = $this->authHeaders();
 
@@ -705,7 +705,7 @@ class SpotifyWebAPI
             'offset' => 0,
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
 
         $headers = $this->authHeaders();
 
@@ -736,7 +736,7 @@ class SpotifyWebAPI
             'offset' => 0,
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
 
         $headers = $this->authHeaders();
 
@@ -773,7 +773,7 @@ class SpotifyWebAPI
             'market' => '',
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
 
         $headers = $this->authHeaders();
 
@@ -800,7 +800,7 @@ class SpotifyWebAPI
             'market' => '',
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
         $options['ids'] = implode(',', $trackIds);
 
         $headers = $this->authHeaders();
@@ -850,7 +850,7 @@ class SpotifyWebAPI
             'type' => 'artist', // Undocumented until more values are supported.
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
 
         $headers = $this->authHeaders();
 
@@ -913,7 +913,7 @@ class SpotifyWebAPI
             'offset' => 0,
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
 
         $headers = $this->authHeaders();
 
@@ -1028,7 +1028,7 @@ class SpotifyWebAPI
             'snapshot_id' => '',
         );
 
-        $options = $this->mergeOptions($defaults, $options, true);
+        $options = $this->mergeOptions($defaults, $options);
         $options = json_encode($options);
 
         $headers = $this->authHeaders();
