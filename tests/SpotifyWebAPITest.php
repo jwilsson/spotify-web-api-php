@@ -375,8 +375,13 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
             '6lPb7Eoon6QPbscWbMsk6a',
         );
 
+        $options = array(
+            'market' => 'SE'
+        );
+
         $expected = array(
-            'ids' => '1oR3KrPIp4CbagPa3PhtPp,6lPb7Eoon6QPbscWbMsk6a'
+            'ids' => '1oR3KrPIp4CbagPa3PhtPp,6lPb7Eoon6QPbscWbMsk6a',
+            'market' => 'SE',
         );
 
         $headers = array(
@@ -397,7 +402,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getAlbums($albums);
+        $response = $api->getAlbums($albums, $options);
 
         $this->assertNotEmpty($response->albums);
     }
