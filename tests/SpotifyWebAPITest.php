@@ -530,8 +530,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     public function testGetArtistAlbums()
     {
         $options = array(
-            'market' => 'SE',
             'limit' => 10,
+            'market' => 'SE',
             'offset' => 0,
         );
 
@@ -792,11 +792,13 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $options = array(
             'limit' => 10,
+            'market' => 'SE',
             'offset' => 0,
         );
 
         $expected = array(
             'limit' => 10,
+            'market' => 'SE',
         );
 
         $headers = array(
