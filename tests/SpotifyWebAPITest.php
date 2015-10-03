@@ -1139,8 +1139,6 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testReorderUserPlaylistTracks()
     {
-        $this->markTestSkipped('Skipped due to known bug in reorderUserPlaylistTracks(). A fix is on the way.');
-
         $options = array(
             'insert_before' => 20,
             'range_length' => 5,
