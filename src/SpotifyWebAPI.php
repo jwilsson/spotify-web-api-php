@@ -1021,14 +1021,6 @@ class SpotifyWebAPI
      */
     public function reorderUserPlaylistTracks($userId, $playlistId, $options)
     {
-        $defaults = array(
-            'insert_before' => '',
-            'range_length' => 1,
-            'range_start' => '',
-            'snapshot_id' => '',
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
         $options = json_encode($options);
 
         $headers = $this->authHeaders();
