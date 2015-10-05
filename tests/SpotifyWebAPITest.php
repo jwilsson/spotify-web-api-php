@@ -411,7 +411,6 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $options = array(
             'limit' => 10,
-            'offset' => 0,
             'market' => 'SE',
         );
 
@@ -530,12 +529,13 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     public function testGetArtistAlbums()
     {
         $options = array(
+            'album_type' => array('album', 'single'),
             'limit' => 10,
             'market' => 'SE',
-            'offset' => 0,
         );
 
         $expected = array(
+            'album_type' => 'album,single',
             'market' => 'SE',
             'limit' => 10,
         );
@@ -601,7 +601,6 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $options = array(
             'country' => 'SE',
             'limit' => 10,
-            'offset' => 0,
         );
 
         $expected = array(
@@ -637,7 +636,6 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $options = array(
             'country' => 'SE',
             'limit' => 10,
-            'offset' => 0,
         );
 
         $expected = array(
@@ -703,7 +701,6 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $options = array(
             'country' => 'SE',
             'limit' => 10,
-            'offset' => 0,
         );
 
         $expected = array(
@@ -761,7 +758,6 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $options = array(
             'country' => 'SE',
             'limit' => 10,
-            'offset' => 0,
         );
 
         $expected = array(
@@ -797,7 +793,6 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $options = array(
             'limit' => 10,
             'market' => 'SE',
-            'offset' => 0,
         );
 
         $expected = array(
@@ -940,9 +935,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     public function testGetUserFollowedArtists()
     {
         $options = array(
-            'after' => '',
             'limit' => 10,
-            'type' => 'artist',
         );
 
         $expected = array(
@@ -1012,7 +1005,6 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $options = array(
             'limit' => 10,
-            'offset' => 0,
         );
 
         $expected = array(
@@ -1045,12 +1037,13 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     public function testGetUserPlaylistTracks()
     {
         $options = array(
+            'fields' => array('id', 'uri'),
             'limit' => 10,
             'market' => 'SE',
-            'offset' => 0,
         );
 
         $expected = array(
+            'fields' => 'id,uri',
             'limit' => 10,
             'market' => 'SE',
         );
@@ -1230,7 +1223,6 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $options = array(
             'limit' => 10,
-            'offset' => 0,
         );
 
         $expected = array(

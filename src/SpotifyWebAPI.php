@@ -63,28 +63,6 @@ class SpotifyWebAPI
     }
 
     /**
-     * Merge options with defaults and optionally filter out falsy values.
-     *
-     * @param array|object The default values.
-     * @param array|object The options to merge with $defaults.
-     * @param bool|callabe Optional. A boolean to filter or a callback to handle the filtering. Default is true.
-     *
-     * @return array The merged (and optionally filtered) options.
-     */
-    protected function mergeOptions($defaults, $options, $filter = true)
-    {
-        $options = array_merge((array) $defaults, (array) $options);
-
-        if (is_callable($filter)) {
-            $options = array_filter($options, $filter);
-        } elseif ($filter) {
-            $options = array_filter($options);
-        }
-
-        return $options;
-    }
-
-    /**
      * Add tracks to the current user's Spotify library.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/save-tracks-user/
@@ -122,14 +100,6 @@ class SpotifyWebAPI
      */
     public function addUserPlaylistTracks($userId, $playlistId, $tracks, $options = array())
     {
-        $defaults = array(
-            'position' => false,
-        );
-
-        $options = $this->mergeOptions($defaults, $options, function ($value) {
-            return $value !== false;
-        });
-
         $options = http_build_query($options);
 
         $tracks = $this->idToUri($tracks);
@@ -160,12 +130,6 @@ class SpotifyWebAPI
      */
     public function createUserPlaylist($userId, $options)
     {
-        $defaults = array(
-            'name' => '',
-            'public' => true,
-        );
-
-        $options = array_merge($defaults, (array) $options);
         $options = json_encode($options);
 
         $headers = $this->authHeaders();
@@ -291,10 +255,9 @@ class SpotifyWebAPI
      */
     public function followArtistsOrUsers($type, $ids)
     {
-        $ids = array(
+        $ids = json_encode(array(
             'ids' => (array) $ids,
-        );
-        $ids = json_encode($ids);
+        ));
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
@@ -321,11 +284,6 @@ class SpotifyWebAPI
      */
     public function followPlaylist($userId, $playlistId, $options = array())
     {
-        $defaults = array(
-            'public' => true
-        );
-
-        $options = array_merge($defaults, (array) $options);
         $options = json_encode($options);
 
         $headers = $this->authHeaders();
@@ -369,11 +327,6 @@ class SpotifyWebAPI
      */
     public function getAlbums($albumIds, $options = array())
     {
-        $defaults = array(
-            'market' => '',
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
         $options['ids'] = implode(',', $albumIds);
 
         $headers = $this->authHeaders();
@@ -399,14 +352,6 @@ class SpotifyWebAPI
      */
     public function getAlbumTracks($albumId, $options = array())
     {
-        $defaults = array(
-            'limit' => 0,
-            'market' => '',
-            'offset' => 0,
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
-
         $headers = $this->authHeaders();
 
         $uri = '/v1/albums/' . $albumId . '/tracks';
@@ -493,16 +438,9 @@ class SpotifyWebAPI
      */
     public function getArtistAlbums($artistId, $options = array())
     {
-        $defaults = array(
-            'album_type' => array(),
-            'market' => '',
-            'limit' => 0,
-            'offset' => 0,
-        );
-
-        $options = array_merge($defaults, (array) $options);
-        $options['album_type'] = implode(',', (array) $options['album_type']);
-        $options = array_filter($options);
+        if (isset($options['album_type'])) {
+            $options['album_type'] = implode(',', (array) $options['album_type']);
+        }
 
         $headers = $this->authHeaders();
 
@@ -525,12 +463,6 @@ class SpotifyWebAPI
      */
     public function getArtistTopTracks($artistId, $options)
     {
-        $defaults = array(
-            'country' => '',
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
-
         $headers = $this->authHeaders();
 
         $uri = '/v1/artists/' . $artistId . '/top-tracks';
@@ -556,16 +488,6 @@ class SpotifyWebAPI
      */
     public function getFeaturedPlaylists($options = array())
     {
-        $defaults = array(
-            'country' => '',
-            'limit' => 0,
-            'locale' => '',
-            'offset' => 0,
-            'timestamp' => '',
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
-
         $headers = $this->authHeaders();
 
         $uri = '/v1/browse/featured-playlists';
@@ -590,15 +512,6 @@ class SpotifyWebAPI
      */
     public function getCategoriesList($options = array())
     {
-        $defaults = array(
-            'country' => '',
-            'limit' => 0,
-            'locale' => '',
-            'offset' => 0
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
-
         $headers = $this->authHeaders();
 
         $uri = '/v1/browse/categories';
@@ -623,13 +536,6 @@ class SpotifyWebAPI
      */
     public function getCategory($categoryId, $options = array())
     {
-        $defaults = array(
-            'country' => '',
-            'locale' => ''
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
-
         $headers = $this->authHeaders();
 
         $uri = '/v1/browse/categories/' . $categoryId;
@@ -655,14 +561,6 @@ class SpotifyWebAPI
      */
     public function getCategoryPlaylists($categoryId, $options = array())
     {
-        $defaults = array(
-            'country' => '',
-            'limit' => 0,
-            'offset' => 0
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
-
         $headers = $this->authHeaders();
 
         $uri = '/v1/browse/categories/' . $categoryId . '/playlists';
@@ -699,14 +597,6 @@ class SpotifyWebAPI
      */
     public function getNewReleases($options = array())
     {
-        $defaults = array(
-            'country' => '',
-            'limit' => 0,
-            'offset' => 0,
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
-
         $headers = $this->authHeaders();
 
         $uri = '/v1/browse/new-releases';
@@ -730,14 +620,6 @@ class SpotifyWebAPI
      */
     public function getMySavedTracks($options = array())
     {
-        $defaults = array(
-            'limit' => 0,
-            'market' => '',
-            'offset' => 0,
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
-
         $headers = $this->authHeaders();
 
         $uri = '/v1/me/tracks';
@@ -769,12 +651,6 @@ class SpotifyWebAPI
      */
     public function getTrack($trackId, $options = array())
     {
-        $defaults = array(
-            'market' => '',
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
-
         $headers = $this->authHeaders();
 
         $uri = '/v1/tracks/' . $trackId;
@@ -796,11 +672,6 @@ class SpotifyWebAPI
      */
     public function getTracks($trackIds, $options = array())
     {
-        $defaults = array(
-            'market' => '',
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
         $options['ids'] = implode(',', $trackIds);
 
         $headers = $this->authHeaders();
@@ -844,13 +715,9 @@ class SpotifyWebAPI
      */
     public function getUserFollowedArtists($options = array())
     {
-        $defaults = array(
-            'after' => '',
-            'limit' => 0,
-            'type' => 'artist', // Undocumented until more values are supported.
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
+        if (!isset($options['type'])) {
+            $options['type'] = 'artist'; // Undocumented until more values are supported.
+        }
 
         $headers = $this->authHeaders();
 
@@ -876,14 +743,9 @@ class SpotifyWebAPI
      */
     public function getUserPlaylist($userId, $playlistId, $options = array())
     {
-        $defaults = array(
-            'fields' => array(),
-            'market' => '',
-        );
-
-        $options = array_merge($defaults, (array) $options);
-        $options['fields'] = implode(',', (array) $options['fields']);
-        $options = array_filter($options);
+        if (isset($options['fields'])) {
+            $options['fields'] = implode(',', (array) $options['fields']);
+        }
 
         $headers = $this->authHeaders();
 
@@ -908,13 +770,6 @@ class SpotifyWebAPI
      */
     public function getUserPlaylists($userId, $options = array())
     {
-        $defaults = array(
-            'limit' => 0,
-            'offset' => 0,
-        );
-
-        $options = $this->mergeOptions($defaults, $options);
-
         $headers = $this->authHeaders();
 
         $uri = '/v1/users/' . $userId . '/playlists';
@@ -941,16 +796,9 @@ class SpotifyWebAPI
      */
     public function getUserPlaylistTracks($userId, $playlistId, $options = array())
     {
-        $defaults = array(
-            'fields' => array(),
-            'limit' => 0,
-            'market' => '',
-            'offset' => 0,
-        );
-
-        $options = array_merge($defaults, (array) $options);
-        $options['fields'] = implode(',', (array) $options['fields']);
-        $options = array_filter($options);
+        if (isset($options['fields'])) {
+            $options['fields'] = implode(',', (array) $options['fields']);
+        }
 
         $headers = $this->authHeaders();
 
@@ -1052,18 +900,16 @@ class SpotifyWebAPI
     public function replaceUserPlaylistTracks($userId, $playlistId, $tracks)
     {
         $tracks = $this->idToUri($tracks);
-        $tracks = array(
+        $tracks = json_encode(array(
             'uris' => (array) $tracks,
-        );
-
-        $options = json_encode($tracks);
+        ));
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
 
-        $this->lastResponse = $this->request->api('PUT', $uri, $options, $headers);
+        $this->lastResponse = $this->request->api('PUT', $uri, $tracks, $headers);
 
         return $this->lastResponse['status'] == 201;
     }
@@ -1084,15 +930,7 @@ class SpotifyWebAPI
      */
     public function search($query, $type, $options = array())
     {
-        $defaults = array(
-            'limit' => 0,
-            'market' => '',
-            'offset' => 0,
-        );
-
         $type = implode(',', (array) $type);
-
-        $options = $this->mergeOptions($defaults, $options);
         $options = array_merge($options, array(
             'q' => $query,
             'type' => $type,
@@ -1143,11 +981,9 @@ class SpotifyWebAPI
      */
     public function unfollowArtistsOrUsers($type, $ids)
     {
-        $ids = array(
+        $ids = json_encode(array(
             'ids' => (array) $ids,
-        );
-
-        $options = json_encode($ids);
+        ));
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
@@ -1155,7 +991,7 @@ class SpotifyWebAPI
         // We need to manually append data to the URI since it's a DELETE request
         $uri = '/v1/me/following?type=' . $type;
 
-        $this->lastResponse = $this->request->api('DELETE', $uri, $options, $headers);
+        $this->lastResponse = $this->request->api('DELETE', $uri, $ids, $headers);
 
         return $this->lastResponse['status'] == 204;
     }
@@ -1195,19 +1031,6 @@ class SpotifyWebAPI
      */
     public function updateUserPlaylist($userId, $playlistId, $options)
     {
-        $defaults = array(
-            'name' => '',
-            'public' => null,
-        );
-
-        $options = $this->mergeOptions($defaults, $options, function ($value) {
-            if (is_bool($value)) {
-                return true;
-            }
-
-            return (bool) $value;
-        });
-
         $options = json_encode($options);
 
         $headers = $this->authHeaders();
@@ -1234,12 +1057,9 @@ class SpotifyWebAPI
      */
     public function userFollowsPlaylist($ownerId, $playlistId, $options)
     {
-        $defaults = array(
-            'ids' => array()
-        );
-
-        $options = array_merge($defaults, (array) $options);
-        $options['ids'] = implode(',', (array) $options['ids']);
+        if (isset($options['ids'])) {
+            $options['ids'] = implode(',', (array) $options['ids']);
+        }
 
         $headers = $this->authHeaders();
 
