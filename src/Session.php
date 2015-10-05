@@ -47,21 +47,15 @@ class Session
      */
     public function getAuthorizeUrl($options = array())
     {
-        $defaults = array(
-            'scope' => array(),
-            'show_dialog' => false,
-            'state' => '',
-        );
-
-        $options = array_merge($defaults, (array) $options);
+        $options = (array) $options;
 
         $parameters = array(
             'client_id' => $this->getClientId(),
             'redirect_uri' => $this->getRedirectUri(),
             'response_type' => 'code',
-            'scope' => $options['scope'] ? implode(' ', $options['scope']) : null,
-            'show_dialog' => $options['show_dialog'] ? 'true' : 'false',
-            'state' => $options['state'] ?: null,
+            'scope' => isset($options['scope']) ? implode(' ', $options['scope']) : null,
+            'show_dialog' => !empty($options['show_dialog']) ? 'true' : null,
+            'state' => isset($options['state']) ? $options['state'] : null,
         );
 
         return Request::ACCOUNT_URL . '/authorize/?' . http_build_query($parameters);

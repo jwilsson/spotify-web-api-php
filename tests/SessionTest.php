@@ -27,21 +27,24 @@ class SessionTest extends PHPUnit_Framework_TestCase
 
     public function testGetAuthorizeUrl()
     {
-        $expected = sprintf('https://accounts.spotify.com/authorize/?client_id=%s&redirect_uri=%s&response_type=%s&show_dialog=false',
+        $expected = sprintf('https://accounts.spotify.com/authorize/?client_id=%s&redirect_uri=%s&response_type=%s&show_dialog=%s',
             $this->clientID,
             urlencode($this->redirectURI),
-            'code'
+            'code',
+            'true'
         );
 
         $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
-        $url = $session->getAuthorizeUrl();
+        $url = $session->getAuthorizeUrl(array(
+            'show_dialog' => true,
+        ));
 
         $this->assertEquals($expected, $url);
     }
 
     public function testGetAuthorizeUrlScope()
     {
-        $expected = sprintf('https://accounts.spotify.com/authorize/?client_id=%s&redirect_uri=%s&response_type=%s&scope=%s&show_dialog=false',
+        $expected = sprintf('https://accounts.spotify.com/authorize/?client_id=%s&redirect_uri=%s&response_type=%s&scope=%s',
             $this->clientID,
             urlencode($this->redirectURI),
             'code',
@@ -59,7 +62,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
     public function testGetAuthorizeUrlState()
     {
         $state = 'foobar';
-        $expected = sprintf('https://accounts.spotify.com/authorize/?client_id=%s&redirect_uri=%s&response_type=%s&show_dialog=false&state=%s',
+        $expected = sprintf('https://accounts.spotify.com/authorize/?client_id=%s&redirect_uri=%s&response_type=%s&state=%s',
             $this->clientID,
             urlencode($this->redirectURI),
             'code',
