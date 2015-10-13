@@ -78,15 +78,15 @@ Get the client secret.
 
 
 
-### getExpires
+### getTokenExpiration
 
-    integer SpotifyWebAPI\Session::getExpires()
+    integer SpotifyWebAPI\Session::getTokenExpiration()
 
-Get the number of seconds for which the access token is valid.
+Get the access token expiration time.
 
 
 #### Return values
-* **integer** The time period (in seconds) for which the access token is valid.
+* **integer** A Unix timestamp indicating the token expiration time.
 
 
 
@@ -114,20 +114,14 @@ Get the refresh token.
 
 
 
-### refreshToken
-
-     SpotifyWebAPI\Session::refreshToken()
-
-
-
-
-
-
 ### refreshAccessToken
 
-    boolean SpotifyWebAPI\Session::refreshAccessToken()
+    boolean SpotifyWebAPI\Session::refreshAccessToken(string $refreshToken)
 
 Refresh an access token.
+
+#### Arguments
+* `$refreshToken` **string** - The refresh token to use.
 
 
 #### Return values
@@ -147,18 +141,6 @@ Request an access token using the Client Credentials Flow.
 
 #### Return values
 * **boolean** True when an access token was successfully granted, false otherwise.
-
-
-
-### requestToken
-
-     SpotifyWebAPI\Session::requestToken($code)
-
-
-
-#### Arguments
-* `$code` **mixed**
-
 
 
 
@@ -215,21 +197,6 @@ Set the client's redirect URI.
 
 #### Arguments
 * `$redirectUri` **string** - The redirect URI.
-
-
-#### Return values
-* **void** 
-
-
-
-### setRefreshToken
-
-    void SpotifyWebAPI\Session::setRefreshToken(string $refreshToken)
-
-Set the refresh token.
-
-#### Arguments
-* `$refreshToken` **string** - The refresh token.
 
 
 #### Return values

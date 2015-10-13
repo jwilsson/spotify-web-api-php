@@ -14,7 +14,7 @@ If you wish to access content that's featured/curated by Spotify there are a num
     $api = new SpotifyWebAPI\SpotifyWebAPI();
 
     if (isset($_GET['code'])) {
-        $session->requestToken($_GET['code']);
+        $session->requestAccessToken($_GET['code']);
         $api->setAccessToken($session->getAccessToken());
     } else {
         header('Location: ' . $session->getAuthorizeUrl());

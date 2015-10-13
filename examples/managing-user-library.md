@@ -14,7 +14,7 @@ In this example, we'll request all available library scopes, in a real world app
     $api = new SpotifyWebAPI\SpotifyWebAPI();
 
     if (isset($_GET['code'])) {
-        $session->requestToken($_GET['code']);
+        $session->requestAccessToken($_GET['code']);
         $api->setAccessToken($session->getAccessToken());
     } else {
         header('Location: ' . $session->getAuthorizeUrl(array(

@@ -69,12 +69,11 @@ You can also retrieve the refresh token and store it for later use:
 
     // Store it somewhere...
 
-Later, when you want to refresh a session with it, tell a `Session` object about it and refresh the access token:
+Later, when you want to refresh a session with it, fetch it and request a new access token:
 
     // Fetch an old refresh token from somewhere...
 
-    $session->setRefreshToken($refreshToken);
-    $session->refreshAccessToken();
+    $session->refreshAccessToken($refreshToken);
 
     $accessToken = $session->getAccessToken();
 

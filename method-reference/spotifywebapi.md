@@ -115,21 +115,6 @@ Requires a valid access token.<br>
 
 
 
-### deletePlaylistTracks
-
-     SpotifyWebAPI\SpotifyWebAPI::deletePlaylistTracks($userId, $playlistId, $tracks, $snapshotId)
-
-
-
-#### Arguments
-* `$userId` **mixed**
-* `$playlistId` **mixed**
-* `$tracks` **mixed**
-* `$snapshotId` **mixed**
-
-
-
-
 ### deleteUserPlaylistTracks
 
     string|boolean SpotifyWebAPI\SpotifyWebAPI::deleteUserPlaylistTracks(string $userId, string $playlistId, array $tracks, string $snapshotId)
@@ -143,7 +128,7 @@ Requires a valid access token.<br>
 * `$playlistId` **string** - ID of the playlist to delete tracks from.
 * `$tracks` **array** - Array of arrays with tracks to delete.
     * id string Required. Spotify track ID.
-    * position array Optional. Position of the track in the playlist.
+    * positions int\|array Optional. The track&#039;s position(s) in the playlist.
 
 * `$snapshotId` **string** - Optional. The playlist&#039;s snapshot ID.
 
@@ -183,7 +168,7 @@ Requires a valid access token.<br>
 * `$userId` **string** - ID of the user who owns the playlist.
 * `$playlistId` **string** - ID of the playlist to follow.
 * `$options` **array\|object** - Optional. Options for the followed playlist.
-    * public bool Optional. Whether the followed playlist should be public or not.
+    * public bool Optional. Whether the playlist should be followed publicly or not.
 
 
 
@@ -210,13 +195,16 @@ Get a album.<br>
 
 ### getAlbums
 
-    array|object SpotifyWebAPI\SpotifyWebAPI::getAlbums(array $albumIds)
+    array|object SpotifyWebAPI\SpotifyWebAPI::getAlbums(array $albumIds, array|object $options)
 
 Get multiple albums.<br>
 [https://developer.spotify.com/web-api/get-several-albums/](https://developer.spotify.com/web-api/get-several-albums/)
 
 #### Arguments
 * `$albumIds` **array** - IDs of the albums.
+* `$options` **array\|object** - Optional. Options for the albums.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+
 
 
 #### Return values
@@ -229,13 +217,14 @@ Get multiple albums.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getAlbumTracks(string $albumId, array|object $options)
 
 Get a album's tracks.<br>
-[https://developer.spotify.com/web-api/get-several-albums/](https://developer.spotify.com/web-api/get-several-albums/)
+[https://developer.spotify.com/web-api/get-albums-tracks/](https://developer.spotify.com/web-api/get-albums-tracks/)
 
 #### Arguments
 * `$albumId` **string** - ID of the album.
 * `$options` **array\|object** - Optional. Options for the tracks.
     * int limit Optional. Limit the number of tracks.
     * int offset Optional. Number of tracks to skip.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
 
 
@@ -316,14 +305,16 @@ Get an artist's albums.<br>
 
 ### getArtistTopTracks
 
-    array|object SpotifyWebAPI\SpotifyWebAPI::getArtistTopTracks(string $artistId, string $country)
+    array|object SpotifyWebAPI\SpotifyWebAPI::getArtistTopTracks(string $artistId, array|object $options)
 
 Get an artist's top tracks in a country.<br>
 [https://developer.spotify.com/web-api/get-artists-top-tracks/](https://developer.spotify.com/web-api/get-artists-top-tracks/)
 
 #### Arguments
 * `$artistId` **string** - ID of the artist.
-* `$country` **string** - An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
+* `$options` **array\|object** - Options for the tracks.
+    * string $country Required. An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
+
 
 
 #### Return values
@@ -467,6 +458,7 @@ Requires a valid access token.<br>
 * `$options` **array\|object** - Optional. Options for the tracks.
     * int limit Optional. Limit the number of tracks.
     * int offset Optional. Number of tracks to skip.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
 
 
@@ -489,13 +481,16 @@ Get the return type for the Request body element.
 
 ### getTrack
 
-    array|object SpotifyWebAPI\SpotifyWebAPI::getTrack(string $trackId)
+    array|object SpotifyWebAPI\SpotifyWebAPI::getTrack(string $trackId, array|object $options)
 
 Get a track.<br>
 [https://developer.spotify.com/web-api/get-track/](https://developer.spotify.com/web-api/get-track/)
 
 #### Arguments
 * `$trackId` **string** - ID of the track.
+* `$options` **array\|object** - Optional. Options for the track.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+
 
 
 #### Return values
@@ -505,13 +500,16 @@ Get a track.<br>
 
 ### getTracks
 
-    array|object SpotifyWebAPI\SpotifyWebAPI::getTracks(array $trackIds)
+    array|object SpotifyWebAPI\SpotifyWebAPI::getTracks(array $trackIds, array|object $options)
 
 Get multiple tracks.<br>
 [https://developer.spotify.com/web-api/get-several-tracks/](https://developer.spotify.com/web-api/get-several-tracks/)
 
 #### Arguments
 * `$trackIds` **array** - IDs of the tracks.
+* `$options` **array\|object** - Optional. Options for the albums.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+
 
 
 #### Return values
@@ -555,6 +553,28 @@ Requires a valid access token.<br>
 
 
 
+### getUserPlaylist
+
+    array|object SpotifyWebAPI\SpotifyWebAPI::getUserPlaylist(string $userId, string $playlistId, array|object $options)
+
+Get a user's specific playlist.<br>
+Requires a valid access token.<br>
+[https://developer.spotify.com/web-api/get-playlist/](https://developer.spotify.com/web-api/get-playlist/)
+
+#### Arguments
+* `$userId` **string** - ID of the user.
+* `$playlistId` **string** - ID of the playlist.
+* `$options` **array\|object** - Optional. Options for the playlist.
+    * string\|array fields Optional. A list of fields to return. See Spotify docs for more info.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+
+
+
+#### Return values
+* **array\|object** The user&#039;s playlist. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+
+
+
 ### getUserPlaylists
 
     array|object SpotifyWebAPI\SpotifyWebAPI::getUserPlaylists(string $userId, array|object $options)
@@ -576,27 +596,6 @@ Requires a valid access token.<br>
 
 
 
-### getUserPlaylist
-
-    array|object SpotifyWebAPI\SpotifyWebAPI::getUserPlaylist(string $userId, string $playlistId, array|object $options)
-
-Get a user's specific playlist.<br>
-Requires a valid access token.<br>
-[https://developer.spotify.com/web-api/get-playlist/](https://developer.spotify.com/web-api/get-playlist/)
-
-#### Arguments
-* `$userId` **string** - ID of the user.
-* `$playlistId` **string** - ID of the playlist.
-* `$options` **array\|object** - Optional. Options for the playlist.
-    * string\|array fields Optional. A list of fields to return. See Spotify docs for more info.
-
-
-
-#### Return values
-* **array\|object** The user&#039;s playlist. Type is controlled by SpotifyWebAPI::setReturnAssoc().
-
-
-
 ### getUserPlaylistTracks
 
     array|object SpotifyWebAPI\SpotifyWebAPI::getUserPlaylistTracks(string $userId, string $playlistId, array|object $options)
@@ -612,6 +611,7 @@ Requires a valid access token.<br>
     * string\|array fields Optional. A list of fields to return. See Spotify docs for more info.
     * int limit Optional. Limit the number of tracks.
     * int offset Optional. Number of tracks to skip.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
 
 
@@ -651,20 +651,6 @@ Requires a valid access token.<br>
 
 
 
-### reorderPlaylistTracks
-
-     SpotifyWebAPI\SpotifyWebAPI::reorderPlaylistTracks($userId, $playlistId, $options)
-
-
-
-#### Arguments
-* `$userId` **mixed**
-* `$playlistId` **mixed**
-* `$options` **mixed**
-
-
-
-
 ### reorderUserPlaylistTracks
 
     string|boolean SpotifyWebAPI\SpotifyWebAPI::reorderUserPlaylistTracks(string $userId, string $playlistId, array|object $options)
@@ -677,29 +663,15 @@ Requires a valid access token.<br>
 * `$userId` **string** - ID of the user.
 * `$playlistId` **string** - ID of the playlist.
 * `$options` **array\|object** - Options for the new .
-    * int range_start Position of the first track to be reordered.
+    * int range_start Required. Position of the first track to be reordered.
     * int range_length Optional. The amount of tracks to be reordered.
-    * int insert_before Position where the tracks should be inserted.
+    * int insert_before Required. Position where the tracks should be inserted.
     * string snapshot_id Optional. The playlist&#039;s snapshot ID.
 
 
 
 #### Return values
 * **string\|boolean** A new snapshot ID or false if the tracks weren&#039;t successfully reordered.
-
-
-
-### replacePlaylistTracks
-
-     SpotifyWebAPI\SpotifyWebAPI::replacePlaylistTracks($userId, $playlistId, $tracks)
-
-
-
-#### Arguments
-* `$userId` **mixed**
-* `$playlistId` **mixed**
-* `$tracks` **mixed**
-
 
 
 

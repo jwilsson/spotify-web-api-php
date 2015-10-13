@@ -14,7 +14,7 @@ In this example, we'll request all available playlist scopes, in a real world ap
     $api = new SpotifyWebAPI\SpotifyWebAPI();
 
     if (isset($_GET['code'])) {
-        $session->requestToken($_GET['code']);
+        $session->requestAccessToken($_GET['code']);
         $api->setAccessToken($session->getAccessToken());
     } else {
         header('Location: ' . $session->getAuthorizeUrl(array(
@@ -88,12 +88,12 @@ In this example, we'll request all available playlist scopes, in a real world ap
         array('id' => '6lPb7Eoon6QPbscWbMsk6a')
     );
 
-    $api->deletePlaylistTracks('USER_ID', 'PLAYLIST_ID', $tracks, 'SNAPSHOT_ID');
+    $api->deleteUserPlaylistTracks('USER_ID', 'PLAYLIST_ID', $tracks, 'SNAPSHOT_ID');
 
 ### Replacing all tracks in a user's playlist with new ones
 
     <?php
-    $api->replacePlaylistTracks('USER_ID', 'PLAYLIST_ID', array(
+    $api->replaceUserPlaylistTracks('USER_ID', 'PLAYLIST_ID', array(
         '0eGsygTp906u18L0Oimnem',
         '1lDWb6b6ieDQ2xT7ewTC3G'
     ));
@@ -101,7 +101,7 @@ In this example, we'll request all available playlist scopes, in a real world ap
 ### Reorder the tracks in a user's playlist
 
     <?php
-    $api->reorderPlaylistTracks('USER_ID', 'PLAYLIST_ID', array(
+    $api->reorderUserPlaylistTracks('USER_ID', 'PLAYLIST_ID', array(
         'range_start' => 1,
         'range_length' => 5,
         'insert_before' => 10,
