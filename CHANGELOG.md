@@ -1,4 +1,35 @@
 # Changelog
+# Changelog
+### 1.0.0 (2015-10-13)
+* **This release contains breaking changes, read through this list before updating.**
+* The following, deprecated, methods have been removed:
+    * `Session::refreshToken()`
+    * `Session::requestToken()`
+    * `SpotifyWebAPI::deletePlaylistTracks()`
+    * `SpotifyWebAPI::reorderPlaylistTracks()`
+    * `SpotifyWebAPI::replacePlaylistTracks()`
+* Added docs for the `market` parameter to the following methods:
+    * `SpotifyWebAPI::getAlbums()`
+    * `SpotifyWebAPI::getAlbumTracks()`
+    * `SpotifyWebAPI::getMySavedTracks()`
+    * `SpotifyWebAPI::getTrack()`
+    * `SpotifyWebAPI::getTracks()`
+    * `SpotifyWebAPI::getUserPlaylist()`
+    * `SpotifyWebAPI::getUserPlaylistTracks()`
+* `Session::setRefreshToken()` has been removed, a refresh token is now passed directly to `Session::refreshAccessToken()` instead. [#20](https://github.com/jwilsson/spotify-web-api-php/issues/20).
+* `Session::getExpires()` has been removed and `Session::getTokenExpiration()` has been added instead, returning the exact token expiration time.
+* The minimum required PHP version has been increased to 5.5 and support for PHP 7 has been added.
+* HTTP response headers returned by `Request::send()` and `SpotifyWebAPI::getLastResponse()` are now parsed to an array.
+* In `SpotifyWebAPI::deleteUserPlaylistTracks()`, `position` has been renamed to `positions` (note the extra "s"). This change was made to better align with the official Spotify docs.
+* The `positions` argument to `SpotifyWebAPI::deleteUserPlaylistTracks()` now also accept `int`s.
+* `SpotifyWebAPI::getArtistTopTracks()` now accepts an array of options.
+* `Session::getAuthorizeUrl()` no longer sends empty query strings.
+* Stopped `SpotifyWebAPI::deleteUserPlaylistTracks()` from sending internal, leftover data.
+* Clarified docs for `SpotifyWebAPI::followPlaylist()` and `SpotifyWebAPI::reorderUserPlaylistTracks()`.
+* Fixed an issue where `SpotifyWebAPI::reorderUserPlaylistTracks()` couldn't reorder the first track.
+[#39](https://github.com/jwilsson/spotify-web-api-php/pull/39) props [@vorenusgithub](https://github.com/vorenusgithub).
+* Better tests and coverage.
+
 ### 0.10.0 (2015-09-05)
 * The following methods has been added:
     * `SpotifyWebAPI::getUserFollowedArtists()`
