@@ -438,6 +438,8 @@ class SpotifyWebAPI
      */
     public function getArtistAlbums($artistId, $options = array())
     {
+        $options = (array) $options;
+
         if (isset($options['album_type'])) {
             $options['album_type'] = implode(',', (array) $options['album_type']);
         }
@@ -715,6 +717,8 @@ class SpotifyWebAPI
      */
     public function getUserFollowedArtists($options = array())
     {
+        $options = (array) $options;
+
         if (!isset($options['type'])) {
             $options['type'] = 'artist'; // Undocumented until more values are supported.
         }
@@ -743,6 +747,8 @@ class SpotifyWebAPI
      */
     public function getUserPlaylist($userId, $playlistId, $options = array())
     {
+        $options = (array) $options;
+
         if (isset($options['fields'])) {
             $options['fields'] = implode(',', (array) $options['fields']);
         }
@@ -796,6 +802,8 @@ class SpotifyWebAPI
      */
     public function getUserPlaylistTracks($userId, $playlistId, $options = array())
     {
+        $options = (array) $options;
+
         if (isset($options['fields'])) {
             $options['fields'] = implode(',', (array) $options['fields']);
         }
@@ -931,7 +939,7 @@ class SpotifyWebAPI
     public function search($query, $type, $options = array())
     {
         $type = implode(',', (array) $type);
-        $options = array_merge($options, array(
+        $options = array_merge((array) $options, array(
             'q' => $query,
             'type' => $type,
         ));
@@ -1057,6 +1065,8 @@ class SpotifyWebAPI
      */
     public function userFollowsPlaylist($ownerId, $playlistId, $options)
     {
+        $options = (array) $options;
+
         if (isset($options['ids'])) {
             $options['ids'] = implode(',', (array) $options['ids']);
         }
