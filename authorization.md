@@ -60,7 +60,7 @@ When requesting a access token, a **refresh token** will also be included. This 
 To refresh a access token, the `refreshAccessToken()` method can be used:
 
 
-    $session->refreshAccessToken();
+    $session->refreshAccessToken($refreshToken);
 
 
 You can also retrieve the refresh token and store it for later use:
