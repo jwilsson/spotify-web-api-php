@@ -807,7 +807,7 @@ Requires a valid access token.<br>
 
 ### userFollowsPlaylist
 
-    array SpotifyWebAPI\SpotifyWebAPI::userFollowsPlaylist(string $ownerId, string $playlistId, $options)
+    array SpotifyWebAPI\SpotifyWebAPI::userFollowsPlaylist(string $ownerId, string $playlistId, array|object $options)
 
 Check if a user is following a playlist.<br>
 Requires a valid access token.<br>
@@ -816,7 +816,7 @@ Requires a valid access token.<br>
 #### Arguments
 * `$ownerId` **string** - User ID of the playlist owner.
 * `$playlistId` **string** - ID of the playlist.
-* `$options` **mixed** - array\|object Options for the check.
+* `$options` **array\|object** - Options for the check.
     * ids string\|array Required. ID(s) of the user(s) to check for.
 
 
