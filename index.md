@@ -13,9 +13,7 @@ It's highly recommend to use [Composer](https://getcomposer.org/) or at least a 
 The second way is by using [Composer](https://getcomposer.org/) and adding `spotify-web-api-php` as a dependency.
 
     "require": {
-        "jwilsson/spotify-web-api-php": "0.9.*"
+        "jwilsson/spotify-web-api-php": "^1.0.0"
     }
-
-*Note: Before a 1.0 release the API should be considered unstable and you should lock your dependency version to a minor one. For more info about versions, please refer to the [semver](http://semver.org/) documentation.*
 
 Now, take a look at the [Authorization steps](authorization.html), the [Method Reference]({{ site.baseurl }}/method-reference/) and some [examples]({{ site.baseurl }}/examples/).
