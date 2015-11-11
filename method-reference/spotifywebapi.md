@@ -82,15 +82,15 @@ Requires a valid access token.<br>
 
 ### currentUserFollows
 
-    array SpotifyWebAPI\SpotifyWebAPI::currentUserFollows($type, $ids)
+    array SpotifyWebAPI\SpotifyWebAPI::currentUserFollows(string $type, string|array $ids)
 
 Check to see if the current user is following one or more artists or other Spotify users.<br>
 Requires a valid access token.<br>
 [https://developer.spotify.com/web-api/check-current-user-follows/](https://developer.spotify.com/web-api/check-current-user-follows/)
 
 #### Arguments
-* `$type` **mixed**
-* `$ids` **mixed**
+* `$type` **string** - The type to check: either &#039;artist&#039; or &#039;user&#039;.
+* `$ids` **string\|array** - ID(s) of the user(s) or artist(s) to check for.
 
 
 #### Return values
@@ -140,15 +140,15 @@ Requires a valid access token.<br>
 
 ### followArtistsOrUsers
 
-    boolean SpotifyWebAPI\SpotifyWebAPI::followArtistsOrUsers($type, $ids)
+    boolean SpotifyWebAPI\SpotifyWebAPI::followArtistsOrUsers(string $type, string|array $ids)
 
 Add the current user as a follower of one or more artists or other Spotify users.<br>
 Requires a valid access token.<br>
 [https://developer.spotify.com/web-api/follow-artists-users/](https://developer.spotify.com/web-api/follow-artists-users/)
 
 #### Arguments
-* `$type` **mixed**
-* `$ids` **mixed**
+* `$type` **string** - The type to check: either &#039;artist&#039; or &#039;user&#039;.
+* `$ids` **string\|array** - ID(s) of the user(s) or artist(s) to follow.
 
 
 #### Return values
@@ -749,15 +749,15 @@ Set the return type for the Request body element.
 
 ### unfollowArtistsOrUsers
 
-    boolean SpotifyWebAPI\SpotifyWebAPI::unfollowArtistsOrUsers($type, $ids)
+    boolean SpotifyWebAPI\SpotifyWebAPI::unfollowArtistsOrUsers(string $type, string|array $ids)
 
 Remove the current user as a follower of one or more artists or other Spotify users.<br>
 Requires a valid access token.<br>
 [https://developer.spotify.com/web-api/unfollow-artists-users/](https://developer.spotify.com/web-api/unfollow-artists-users/)
 
 #### Arguments
-* `$type` **mixed**
-* `$ids` **mixed**
+* `$type` **string** - The type to check: either &#039;artist&#039; or &#039;user&#039;.
+* `$ids` **string\|array** - ID(s) of the user(s) or artist(s) to unfollow.
 
 
 #### Return values
@@ -785,15 +785,15 @@ Requires a valid access token.<br>
 
 ### updateUserPlaylist
 
-    boolean SpotifyWebAPI\SpotifyWebAPI::updateUserPlaylist($userId, $playlistId, array|object $options)
+    boolean SpotifyWebAPI\SpotifyWebAPI::updateUserPlaylist(string $userId, string $playlistId, array|object $options)
 
 Update the details of a user's playlist.<br>
 Requires a valid access token.<br>
 [https://developer.spotify.com/web-api/change-playlist-details/](https://developer.spotify.com/web-api/change-playlist-details/)
 
 #### Arguments
-* `$userId` **mixed**
-* `$playlistId` **mixed**
+* `$userId` **string** - ID of the user who owns the playlist.
+* `$playlistId` **string** - ID of the playlist to update.
 * `$options` **array\|object** - Options for the playlist.
     * name string Optional. Name of the playlist.
     * public bool Optional. Whether the playlist should be public or not.
