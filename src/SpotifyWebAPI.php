@@ -1060,7 +1060,7 @@ class SpotifyWebAPI
      *
      * @param string $ownerId User ID of the playlist owner.
      * @param string $playlistId ID of the playlist.
-     * @param $options array|object Options for the check.
+     * @param array|object $options Options for the check.
      * - ids string|array Required. ID(s) of the user(s) to check for.
      *
      * @return array Whether each user is following the playlist.
