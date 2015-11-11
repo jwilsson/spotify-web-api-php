@@ -147,8 +147,8 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/check-current-user-follows/
      *
-     * @param string The type to check: either 'artist' or 'user'.
-     * @param string|array ID(s) of the user(s) or artist(s) to check for.
+     * @param string $type The type to check: either 'artist' or 'user'.
+     * @param string|array $ids ID(s) of the user(s) or artist(s) to check for.
      *
      * @return array Whether each user or artist is followed.
      */
@@ -248,8 +248,8 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/follow-artists-users/
      *
-     * @param string The type to check: either 'artist' or 'user'.
-     * @param string|array ID(s) of the user(s) or artist(s) to follow.
+     * @param string $type The type to check: either 'artist' or 'user'.
+     * @param string|array $ids ID(s) of the user(s) or artist(s) to follow.
      *
      * @return bool Whether the artist or user was successfully followed.
      */
@@ -982,8 +982,8 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/unfollow-artists-users/
      *
-     * @param string The type to check: either 'artist' or 'user'.
-     * @param string|array ID(s) of the user(s) or artist(s) to unfollow.
+     * @param string $type The type to check: either 'artist' or 'user'.
+     * @param string|array $ids ID(s) of the user(s) or artist(s) to unfollow.
      *
      * @return bool Whether the artist(s) or user(s) were successfully unfollowed.
      */
@@ -1031,6 +1031,8 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/change-playlist-details/
      *
+     * @param string $userId ID of the user who owns the playlist.
+     * @param string $playlistId ID of the playlist to update.
      * @param array|object $options Options for the playlist.
      * - name string Optional. Name of the playlist.
      * - public bool Optional. Whether the playlist should be public or not.
