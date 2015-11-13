@@ -180,14 +180,16 @@ class SpotifyWebAPI
      */
     public function deleteMyTracks($tracks)
     {
-        $tracks = implode(',', (array) $tracks);
-        $tracks = urlencode($tracks);
+        $tracks = json_encode(
+            (array) $tracks
+        );
 
         $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
 
-        $uri = '/v1/me/tracks?ids=' . $tracks;
+        $uri = '/v1/me/tracks';
 
-        $this->lastResponse = $this->request->api('DELETE', $uri, array(), $headers);
+        $this->lastResponse = $this->request->api('DELETE', $uri, $tracks, $headers);
 
         return $this->lastResponse['status'] == 200;
     }

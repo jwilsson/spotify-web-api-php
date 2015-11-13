@@ -181,8 +181,11 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
             '3mqRLlD9j92BBv1ueFhJ1l',
         );
 
+        $expected = json_encode($tracks);
+
         $headers = array(
             'Authorization' => 'Bearer ' . $this->accessToken,
+            'Content-Type' => 'application/json',
         );
 
         $return = array(
@@ -191,8 +194,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $stub = $this->setupStub(
             'DELETE',
-            '/v1/me/tracks?ids=1id6H6vcwSB9GGv9NXh5cl%2C3mqRLlD9j92BBv1ueFhJ1l',
-            array(),
+            '/v1/me/tracks',
+            $expected,
             $headers,
             $return
         );
