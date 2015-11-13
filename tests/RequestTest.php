@@ -58,6 +58,39 @@ class RequestTest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('id', $response['body']);
     }
 
+    public function testSendDelete()
+    {
+        $parameters = array(
+            'foo' => 'bar',
+        );
+
+        $response = $this->request->send('DELETE', 'https://httpbin.org/delete', $parameters);
+
+        $this->assertObjectHasAttribute('foo', $response['body']->form);
+    }
+
+    public function testSendPost()
+    {
+        $parameters = array(
+            'foo' => 'bar',
+        );
+
+        $response = $this->request->send('POST', 'https://httpbin.org/post', $parameters);
+
+        $this->assertObjectHasAttribute('foo', $response['body']->form);
+    }
+
+    public function testSendPut()
+    {
+        $parameters = array(
+            'foo' => 'bar',
+        );
+
+        $response = $this->request->send('PUT', 'https://httpbin.org/put', $parameters);
+
+        $this->assertObjectHasAttribute('foo', $response['body']->form);
+    }
+
     public function testSendParameters()
     {
         $response = $this->request->send('GET', 'https://api.spotify.com/v1/albums', array(
