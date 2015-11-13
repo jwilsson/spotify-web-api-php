@@ -25,6 +25,32 @@ class RequestTest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('id', $response['body']->albums[1]);
     }
 
+    public function testApiMalformed()
+    {
+        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
+
+        $response = $this->request->api('GET', '/v1/albums/NON_EXISTING_ALBUM');
+    }
+
+    public function testAccountMalformed()
+    {
+        $clientID = 'INVALID_ID';
+        $clientSecret = 'INVALID_SECRET';
+        $payload = base64_encode($clientID . ':' . $clientSecret);
+
+        $parameters = array(
+            'grant_type' => 'client_credentials'
+        );
+
+        $headers = array(
+            'Authorization' => 'Basic ' . $payload,
+        );
+
+        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
+
+        $response = $this->request->account('POST', '/api/token', $parameters, $headers);
+    }
+
     public function testSend()
     {
         $response = $this->request->send('GET', 'https://api.spotify.com/v1/albums/7u6zL7kqpgLPISZYXNTgYk');
@@ -68,13 +94,6 @@ class RequestTest extends PHPUnit_Framework_TestCase
         $response = $this->request->send('GET', 'https://api.spotify.com/v1/albums/7u6zL7kqpgLPISZYXNTgYk');
 
         $this->assertEquals(200, $response['status']);
-    }
-
-    public function testSendMalformed()
-    {
-        $this->setExpectedException('SpotifyWebAPI\SpotifyWebAPIException');
-
-        $response = $this->request->send('GET', 'https://api.spotify.com/v1/albums/NON_EXISTING_ALBUM');
     }
 
     public function testSetReturnAssoc()
