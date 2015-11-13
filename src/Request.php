@@ -116,18 +116,14 @@ class Request
         $method = strtoupper($method);
 
         switch ($method) {
-            case 'DELETE':
+            case 'DELETE': // No break
+            case 'PUT':
                 $options[CURLOPT_CUSTOMREQUEST] = $method;
                 $options[CURLOPT_POSTFIELDS] = $parameters;
 
                 break;
             case 'POST':
                 $options[CURLOPT_POST] = true;
-                $options[CURLOPT_POSTFIELDS] = $parameters;
-
-                break;
-            case 'PUT':
-                $options[CURLOPT_CUSTOMREQUEST] = 'PUT';
                 $options[CURLOPT_POSTFIELDS] = $parameters;
 
                 break;
