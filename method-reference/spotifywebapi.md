@@ -20,6 +20,23 @@ Set up Request object.
 
 
 
+### addMyAlbums
+
+    boolean SpotifyWebAPI\SpotifyWebAPI::addMyAlbums(string|array $albums)
+
+Add albums to the current user's Spotify library.<br>
+Requires a valid access token.<br>
+[https://developer.spotify.com/web-api/save-albums-user/](https://developer.spotify.com/web-api/save-albums-user/)
+
+#### Arguments
+* `$albums` **string\|array** - ID(s) of the album(s) to add.
+
+
+#### Return values
+* **boolean** Whether the albums was successfully added.
+
+
+
 ### addMyTracks
 
     boolean SpotifyWebAPI\SpotifyWebAPI::addMyTracks(string|array $tracks)
@@ -95,6 +112,23 @@ Requires a valid access token.<br>
 
 #### Return values
 * **array** Whether each user or artist is followed.
+
+
+
+### deleteMyAlbums
+
+    boolean SpotifyWebAPI\SpotifyWebAPI::deleteMyAlbums(string|array $albums)
+
+Delete albums from current user's Spotify library.<br>
+Requires a valid access token.<br>
+[https://developer.spotify.com/web-api/remove-albums-user/](https://developer.spotify.com/web-api/remove-albums-user/)
+
+#### Arguments
+* `$albums` **string\|array** - ID(s) of the album(s) to delete.
+
+
+#### Return values
+* **boolean** Whether the albums was successfully deleted.
 
 
 
@@ -446,6 +480,27 @@ Requires a valid access token.<br>
 
 
 
+### getMySavedAlbums
+
+    array|object SpotifyWebAPI\SpotifyWebAPI::getMySavedAlbums(array|object $options)
+
+Get the current user’s saved albums.<br>
+Requires a valid access token.<br>
+[https://developer.spotify.com/web-api/get-users-saved-albums/](https://developer.spotify.com/web-api/get-users-saved-albums/)
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options for the albums.
+    * int limit Optional. Limit the number of albums.
+    * int offset Optional. Number of albums to skip.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+
+
+
+#### Return values
+* **array\|object** The user&#039;s saved albums. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+
+
+
 ### getMySavedTracks
 
     array|object SpotifyWebAPI\SpotifyWebAPI::getMySavedTracks(array|object $options)
@@ -634,11 +689,28 @@ Requires a valid access token.<br>
 
 
 
+### myAlbumsContains
+
+    array SpotifyWebAPI\SpotifyWebAPI::myAlbumsContains(string|array $albums)
+
+Check if albums are saved in the current user's Spotify library.<br>
+Requires a valid access token.<br>
+[https://developer.spotify.com/web-api/check-users-saved-albums/](https://developer.spotify.com/web-api/check-users-saved-albums/)
+
+#### Arguments
+* `$albums` **string\|array** - ID(s) of the album(s) to check for.
+
+
+#### Return values
+* **array** Whether each album is saved.
+
+
+
 ### myTracksContains
 
     array SpotifyWebAPI\SpotifyWebAPI::myTracksContains(string|array $tracks)
 
-Check if tracks is saved in the current user's Spotify library.<br>
+Check if tracks are saved in the current user's Spotify library.<br>
 Requires a valid access token.<br>
 [https://developer.spotify.com/web-api/check-users-saved-tracks/](https://developer.spotify.com/web-api/check-users-saved-tracks/)
 
