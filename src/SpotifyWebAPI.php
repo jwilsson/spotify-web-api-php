@@ -909,7 +909,32 @@ class SpotifyWebAPI
     }
 
     /**
-     * Check if tracks is saved in the current user's Spotify library.
+     * Check if albums are saved in the current user's Spotify library.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/check-users-saved-albums/
+     *
+     * @param string|array $albums ID(s) of the album(s) to check for.
+     *
+     * @return array Whether each album is saved.
+     */
+    public function myAlbumsContains($albums)
+    {
+        $albums = implode(',', (array) $albums);
+        $options = array(
+            'ids' => $albums,
+        );
+
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/me/albums/contains';
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
+     * Check if tracks are saved in the current user's Spotify library.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/check-users-saved-tracks/
      *

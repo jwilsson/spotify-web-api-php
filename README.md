@@ -309,6 +309,17 @@ $user = $api->me();
 print_r($user);
 ```
 
+See if a user's albums contains the specified ones
+
+```php
+$contains = $api->myAlbumsContains(array(
+    '1oR3KrPIp4CbagPa3PhtPp',
+    '6lPb7Eoon6QPbscWbMsk6a'
+));
+
+var_dump($contains);
+```
+
 See if a user's tracks contains the specified tracks
 
 ```php

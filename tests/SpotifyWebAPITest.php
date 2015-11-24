@@ -1200,6 +1200,40 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('id', $response);
     }
 
+    public function testMyAlbumsContains()
+    {
+        $albums = array(
+            '1oR3KrPIp4CbagPa3PhtPp',
+            '6lPb7Eoon6QPbscWbMsk6a',
+        );
+
+        $expected = array(
+            'ids' => '1oR3KrPIp4CbagPa3PhtPp,6lPb7Eoon6QPbscWbMsk6a',
+        );
+
+        $headers = array(
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        );
+
+        $return = array(
+            'body' => get_fixture('user-albums-contains'),
+        );
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/me/albums/contains',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->myAlbumsContains($albums);
+
+        $this->assertTrue($response[0]);
+    }
+
     public function testMyTracksContains()
     {
         $tracks = array(
