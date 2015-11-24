@@ -634,6 +634,29 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the current user’s saved albums.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-users-saved-albums/
+     *
+     * @param array|object $options Optional. Options for the albums.
+     * - int limit Optional. Limit the number of albums.
+     * - int offset Optional. Number of albums to skip.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+     *
+     * @return array|object The user's saved albums. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+     */
+    public function getMySavedAlbums($options = array())
+    {
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/me/albums';
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get the current user’s saved tracks.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-users-saved-tracks/

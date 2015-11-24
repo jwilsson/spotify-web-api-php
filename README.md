@@ -227,6 +227,13 @@ $items = $api->getNewReleases(array(
 print_r($items);
 ```
 
+Get a user's saved albums
+```php
+$albums = $api->getMySavedAlbums();
+
+print_r($albums);
+```
+
 Get a user's saved tracks
 ```php
 $tracks = $api->getMySavedTracks();
