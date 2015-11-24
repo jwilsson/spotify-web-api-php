@@ -63,6 +63,29 @@ class SpotifyWebAPI
     }
 
     /**
+     * Add albums to the current user's Spotify library.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/save-albums-user/
+     *
+     * @param string|array $albums ID(s) of the album(s) to add.
+     *
+     * @return bool Whether the albums was successfully added.
+     */
+    public function addMyAlbums($albums)
+    {
+        $albums = json_encode((array) $albums);
+
+        $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
+
+        $uri = '/v1/me/albums';
+
+        $this->lastResponse = $this->request->api('PUT', $uri, $albums, $headers);
+
+        return $this->lastResponse['status'] == 200;
+    }
+
+    /**
      * Add tracks to the current user's Spotify library.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/save-tracks-user/

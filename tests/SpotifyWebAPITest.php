@@ -22,6 +22,39 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         return $stub;
     }
 
+    public function testAddMyAlbums()
+    {
+        $albums = array(
+            '1oR3KrPIp4CbagPa3PhtPp',
+            '6lPb7Eoon6QPbscWbMsk6a',
+        );
+
+        $expected = json_encode($albums);
+
+        $headers = array(
+            'Authorization' => 'Bearer ' . $this->accessToken,
+            'Content-Type' => 'application/json',
+        );
+
+        $return = array(
+            'status' => 200,
+        );
+
+        $stub = $this->setupStub(
+            'PUT',
+            '/v1/me/albums',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->addMyAlbums($albums);
+
+        $this->assertTrue($response);
+    }
+
     public function testAddMyTracks()
     {
         $tracks = array(

@@ -31,6 +31,15 @@ For more instructions, please refer to the [documentation](http://jwilsson.githu
 
 ## Examples
 
+Add albums to a user's library
+
+```php
+$api->addMyAlbums(array(
+    '1oR3KrPIp4CbagPa3PhtPp',
+    '6lPb7Eoon6QPbscWbMsk6a',
+));
+```
+
 Add tracks to a user's library
 
 ```php
