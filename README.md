@@ -34,15 +34,18 @@ For more instructions, please refer to the [documentation](http://jwilsson.githu
 Add tracks to a user's library
 
 ```php
-$api->addMyTracks(array('1oR3KrPIp4CbagPa3PhtPp', '6lPb7Eoon6QPbscWbMsk6a'));
+$api->addMyTracks(array(
+    '1id6H6vcwSB9GGv9NXh5cl',
+    '3mqRLlD9j92BBv1ueFhJ1l',
+));
 ```
 
 Add tracks to a user's playlist
 
 ```php
 $api->addUserPlaylistTracks('username', 'playlist_id', array(
-    '1oR3KrPIp4CbagPa3PhtPp',
-    '6lPb7Eoon6QPbscWbMsk6a'
+    '1id6H6vcwSB9GGv9NXh5cl',
+    '3mqRLlD9j92BBv1ueFhJ1l',
 ));
 ```
 
@@ -50,7 +53,7 @@ Create a new playlist for a user
 
 ```php
 $api->createUserPlaylist('username', array(
-    'name' => 'My shiny playlist'
+    'name' => 'My shiny playlist',
 ));
 ```
 
@@ -59,7 +62,7 @@ Check if the current user follows a user or artist
 ```php
 $follows = $api->currentUserFollows('user', array(
     'spotify',
-    'spotify_france'
+    'spotify_france',
 ));
 
 var_dump($follows);
@@ -69,8 +72,8 @@ Delete tracks from a user's library
 
 ```php
 $api->deleteMyTracks(array(
-    '1oR3KrPIp4CbagPa3PhtPp',
-    '6lPb7Eoon6QPbscWbMsk6a'
+    '1id6H6vcwSB9GGv9NXh5cl',
+    '3mqRLlD9j92BBv1ueFhJ1l',
 ));
 ```
 
@@ -78,8 +81,8 @@ Delete tracks from a user's playlist
 
 ```php
 $tracks = array(
-    array('id' => '1oR3KrPIp4CbagPa3PhtPp'),
-    array('id' => '6lPb7Eoon6QPbscWbMsk6a')
+    array('id' => '1id6H6vcwSB9GGv9NXh5cl'),
+    array('id' => '3mqRLlD9j92BBv1ueFhJ1l'),
 );
 
 $api->deleteUserPlaylistTracks('username', 'playlist_id', $tracks, 'snapshot_id');
@@ -90,7 +93,7 @@ Follow an artist or user
 ```php
 $api->followArtistsOrUsers('artist', array(
     '74ASZWbe4lXaubB36ztrGX',
-    '2t9yJDJIEtvPmr2iRIdqBf'
+    '2t9yJDJIEtvPmr2iRIdqBf',
 ));
 ```
 
@@ -113,7 +116,7 @@ Get multiple albums
 ```php
 $albums = $api->getAlbums(array(
     '1oR3KrPIp4CbagPa3PhtPp',
-    '6lPb7Eoon6QPbscWbMsk6a'
+    '6lPb7Eoon6QPbscWbMsk6a',
 ));
 
 print_r($albums);
@@ -148,7 +151,7 @@ Get multiple artists
 ```php
 $artists = $api->getArtists(array(
     '6v8FB84lnmJs434UJf2Mrm',
-    '6olE6TJLqED3rqDCT0FyPh'
+    '6olE6TJLqED3rqDCT0FyPh',
 ));
 
 print_r($artists);
@@ -166,7 +169,7 @@ Get an artist's top tracks in a country
 
 ```php
 $tracks = $api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', array(
-    'country' => 'se'
+    'country' => 'se',
 ));
 
 print_r($tracks);
@@ -182,7 +185,7 @@ print_r($playlists);
 Get Spotify list of categories
 ```php
 $categories = $api->getCategoriesList(array(
-    'country' => 'se'
+    'country' => 'se',
 ));
 
 print_r($categories);
@@ -191,7 +194,7 @@ print_r($categories);
 Get Spotify category
 ```php
 $category = $api->getCategory('dinner', array(
-    'country' => 'se'
+    'country' => 'se',
 ));
 
 print_r($category);
@@ -200,7 +203,7 @@ print_r($category);
 Get playlists of a Spotify category
 ```php
 $playlists = $api->getCategoryPlaylists('dinner', array(
-    'country' => 'se'
+    'country' => 'se',
 ));
 
 print_r($playlists);
@@ -209,7 +212,7 @@ print_r($playlists);
 Get new releases
 ```php
 $items = $api->getNewReleases(array(
-    'country' => 'se'
+    'country' => 'se',
 ));
 
 print_r($items);
@@ -235,7 +238,7 @@ Get multiple tracks
 ```php
 $tracks = $api->getTracks(array(
     '0eGsygTp906u18L0Oimnem',
-    '1lDWb6b6ieDQ2xT7ewTC3G'
+    '1lDWb6b6ieDQ2xT7ewTC3G',
 ));
 
 print_r($tracks);
@@ -286,7 +289,7 @@ See if a user's tracks contains the specified tracks
 ```php
 $contains = $api->myTracksContains(array(
     '0eGsygTp906u18L0Oimnem',
-    '1lDWb6b6ieDQ2xT7ewTC3G'
+    '1lDWb6b6ieDQ2xT7ewTC3G',
 ));
 
 var_dump($contains);
@@ -299,7 +302,7 @@ $api->reorderUserPlaylistTracks('username', 'playlist_id', array(
     'range_start' => 1,
     'range_length' => 5,
     'insert_before' => 10,
-    'snapshot_id' => 'GLiKqjND5IDWQCO9PwtLvHVjRXYYjEvpoliIQ5/gK7M5BMcxJ7rnGMGTKbmDRgU3'
+    'snapshot_id' => 'GLiKqjND5IDWQCO9PwtLvHVjRXYYjEvpoliIQ5/gK7M5BMcxJ7rnGMGTKbmDRgU3',
 ));
 ```
 
@@ -308,7 +311,7 @@ Replace all tracks in a user's playlist with new ones
 ```php
 $api->replaceUserPlaylistTracks('username', 'playlist_id', array(
     '0eGsygTp906u18L0Oimnem',
-    '1lDWb6b6ieDQ2xT7ewTC3G'
+    '1lDWb6b6ieDQ2xT7ewTC3G',
 ));
 ```
 
@@ -340,7 +343,7 @@ Search with a limit
 
 ```php
 $tracks = $api->search('song 2', 'track', array(
-    'limit' => 5
+    'limit' => 5,
 ));
 
 print_r($tracks);
@@ -350,7 +353,7 @@ Search for tracks in a specific market
 
 ```php
 $tracks = $api->search('song 2', 'track', array(
-    'market' => 'se'
+    'market' => 'se',
 ));
 
 print_r($tracks);
@@ -360,7 +363,7 @@ Update a user's playlist
 
 ```php
 $api->updateUserPlaylist('username', 'playlist_id', array(
-    'name' => 'New name'
+    'name' => 'New name',
 ));
 ```
 
@@ -369,7 +372,7 @@ Unfollow an artist or user
 ```php
 $api->unfollowArtistsOrUsers('user', array(
     'spotify',
-    'spotify_france'
+    'spotify_france',
 ));
 ```
 
@@ -384,11 +387,11 @@ Check if a user is following a playlist
 ```php
 $users = array(
     'user1',
-    'user2'
+    'user2',
 );
 
 $api->userFollowsPlaylist('owner_id', 'playlist_id', array(
-    'ids' => $users
+    'ids' => $users,
 ));
 ```
 
