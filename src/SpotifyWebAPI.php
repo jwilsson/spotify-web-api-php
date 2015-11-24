@@ -193,6 +193,31 @@ class SpotifyWebAPI
     }
 
     /**
+     * Delete albums from current user's Spotify library.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/remove-albums-user/
+     *
+     * @param string|array $albums ID(s) of the album(s) to delete.
+     *
+     * @return bool Whether the albums was successfully deleted.
+     */
+    public function deleteMyAlbums($albums)
+    {
+        $albums = json_encode(
+            (array) $albums
+        );
+
+        $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
+
+        $uri = '/v1/me/albums';
+
+        $this->lastResponse = $this->request->api('DELETE', $uri, $albums, $headers);
+
+        return $this->lastResponse['status'] == 200;
+    }
+
+    /**
      * Delete tracks from current user's Spotify library.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/remove-tracks-user/

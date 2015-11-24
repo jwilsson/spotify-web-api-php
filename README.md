@@ -77,6 +77,15 @@ $follows = $api->currentUserFollows('user', array(
 var_dump($follows);
 ```
 
+Delete albums from a user's library
+
+```php
+$api->deleteMyAlbums(array(
+    '1oR3KrPIp4CbagPa3PhtPp',
+    '6lPb7Eoon6QPbscWbMsk6a'
+));
+```
+
 Delete tracks from a user's library
 
 ```php
