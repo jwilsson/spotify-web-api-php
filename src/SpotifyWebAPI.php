@@ -659,6 +659,28 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the current user’s playlists.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-a-list-of-current-users-playlists/
+     *
+     * @param array|object $options Optional. Options for the playlists.
+     * - int limit Optional. Limit the number of playlists.
+     * - int offset Optional. Number of playlists to skip.
+     *
+     * @return array|object The user's playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+     */
+    public function getMyPlaylists($options = array())
+    {
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/me/playlists';
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get the current user’s saved albums.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-users-saved-albums/

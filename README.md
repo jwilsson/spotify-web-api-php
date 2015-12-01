@@ -218,6 +218,13 @@ $items = $api->getNewReleases(array(
 print_r($items);
 ```
 
+Get the current user's playlists
+```php
+$playlists = $api->getMyPlaylists();
+
+print_r($playlists);
+```
+
 Get the current user's saved albums
 ```php
 $albums = $api->getMySavedAlbums();
