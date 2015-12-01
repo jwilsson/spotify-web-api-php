@@ -480,6 +480,26 @@ Requires a valid access token.<br>
 
 
 
+### getMyPlaylists
+
+    array|object SpotifyWebAPI\SpotifyWebAPI::getMyPlaylists(array|object $options)
+
+Get the current user’s playlists.<br>
+Requires a valid access token.<br>
+[https://developer.spotify.com/web-api/get-a-list-of-current-users-playlists/](https://developer.spotify.com/web-api/get-a-list-of-current-users-playlists/)
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options for the playlists.
+    * int limit Optional. Limit the number of playlists.
+    * int offset Optional. Number of playlists to skip.
+
+
+
+#### Return values
+* **array\|object** The user&#039;s playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+
+
+
 ### getMySavedAlbums
 
     array|object SpotifyWebAPI\SpotifyWebAPI::getMySavedAlbums(array|object $options)
