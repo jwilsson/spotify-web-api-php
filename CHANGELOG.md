@@ -1,4 +1,9 @@
 # Changelog
+### 1.2.0 (2015-12-01)
+* The following methods have been added:
+  `SpotifyWebAPI::getMyPlaylists()` ([ea8f0a2](https://github.com/jwilsson/spotify-web-api-php/commit/ea8f0a2c23fb6bc4e496b6fb6885b5517626860f))
+* Updated CA bundle. ([e6161fd](https://github.com/jwilsson/spotify-web-api-php/commit/e6161fd81d9851799315eb175a95ca8c001f31d3))
+
 ### 1.1.0 (2015-11-24)
 * The following methods have been added:
     * `SpotifyWebAPI::addMyAlbums()` ([0027122](https://github.com/jwilsson/spotify-web-api-php/commit/0027122fe543ec9c3df9db3543be86683c7cd0d1))
