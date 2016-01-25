@@ -86,6 +86,8 @@ class Request
      * @param string $url The URL to request.
      * @param array $parameters Optional. Query parameters.
      * @param array $headers Optional. HTTP headers.
+     * 
+     * @throws SpotifyWebAPIException
      *
      * @return array Response data.
      * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
