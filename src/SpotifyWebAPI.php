@@ -12,8 +12,6 @@ class SpotifyWebAPI
      * Set up Request object.
      *
      * @param Request $request Optional. The Request object to use.
-     *
-     * @return void
      */
     public function __construct($request = null)
     {
