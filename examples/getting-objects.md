@@ -60,7 +60,7 @@ Of course, `getAlbums` and `getTracks` also exist and work in the same way.
 ### Getting an artist’s top tracks
 
     <?php
-    $tracks = $api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', 'se');
+    $tracks = $api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', array('country' => 'se'));
 
     foreach ($tracks->tracks as $track) {
         echo '<b>' . $track->name . '</b> <br>';
