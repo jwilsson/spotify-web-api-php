@@ -800,6 +800,31 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('playlists', $response);
     }
 
+    public function testGetGenreSeeds()
+    {
+        $headers = array(
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        );
+
+        $return = array(
+            'body' => get_fixture('available-genre-seeds'),
+        );
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/recommendations/available-genre-seeds',
+            array(),
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getGenreSeeds();
+
+        $this->assertObjectHasAttribute('genres', $response);
+    }
+
     public function testGetLastResponse()
     {
         $return = array(

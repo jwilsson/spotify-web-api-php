@@ -621,6 +621,24 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get a list of possible seed genres.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-recommendations/#available-genre-seeds
+     *
+     * @return array|object All possible seed genres. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+     */
+    public function getGenreSeeds()
+    {
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/recommendations/available-genre-seeds';
+
+        $this->lastResponse = $this->request->api('GET', $uri, array(), $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get the latest full response from the Spotify API.
      *
      * @return array Response data.
