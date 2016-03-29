@@ -523,6 +523,30 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get track audio features.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-several-audio-features/
+     *
+     * @param array $trackIds IDs of the tracks.
+     *
+     * @return array|object The tracks' audio features. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+     */
+    public function getAudioFeatures($trackIds)
+    {
+        $options = array(
+            'ids' => implode(',', $trackIds),
+        );
+
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/audio-features';
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s "Browse" tab).
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-list-categories/
