@@ -2,7 +2,7 @@
 ## 1.3.0 (2016-03-29)
 * The following methods have been added:
     * `SpotifyWebAPI::getGenreSeeds()` ([88b750d](https://github.com/jwilsson/spotify-web-api-php/commit/88b750d7ec0879e54c37020f93310dccbdeec421))
-    * `SpotifyWebAPI::getRecommendations()` ([beeed01](https://github.com/jwilsson/spotify-web-api-php/commit/beeed01cad8737cd2e5058dcb1c946b19cb8c029))
+    * `SpotifyWebAPI::getRecommendations()` ([28b7897](https://github.com/jwilsson/spotify-web-api-php/commit/28b7897820dd360a682a60b15426290137b9719f))
     * `SpotifyWebAPI::getMyTop()` ([edcafff](https://github.com/jwilsson/spotify-web-api-php/commit/edcafff3e1e465be5cccde477e97a4c4da49c643))
     * `SpotifyWebAPI::getAudioFeatures()` ([0759b29](https://github.com/jwilsson/spotify-web-api-php/commit/0759b2942b515d56dff5ab674e5564cae018234d))
 * Minor inline docs updates ([745f117](https://github.com/jwilsson/spotify-web-api-php/commit/745f117e9163ee04634e0d5e1fa065cc1102108e), [35e9f57](https://github.com/jwilsson/spotify-web-api-php/commit/35e9f5755ffb889f00bf2ce414c14c8e077aee23), [50f040c](https://github.com/jwilsson/spotify-web-api-php/commit/50f040ce73644896578a698e4a968f8b5494949f))
