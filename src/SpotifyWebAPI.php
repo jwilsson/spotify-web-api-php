@@ -767,6 +767,30 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the current user's top tracks or artists.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-users-top-artists-and-tracks/
+     *
+     * @param string $type The type of entity to fetch.
+     * @param array $options. Optional. Options for the results.
+     * - int limit Optional. Limit the number of tracks.
+     * - int offset Optional. Number of tracks to skip.
+     * - mixed time_range Optional. Over what time frame the data is calculated. See Spotify API docs for more info.
+     *
+     * @return array|object A list with the requested top entity. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+     */
+    public function getMyTop($type, $options = array())
+    {
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/me/top/' . $type;
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get the return type for the Request body element.
      *
      * @return bool Whether an associative array or an stdClass is returned.
