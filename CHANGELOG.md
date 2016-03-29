@@ -1,17 +1,17 @@
 # Changelog
-### 1.2.0 (2015-12-01)
+## 1.2.0 (2015-12-01)
 * The following methods have been added:
-  `SpotifyWebAPI::getMyPlaylists()` ([ea8f0a2](https://github.com/jwilsson/spotify-web-api-php/commit/ea8f0a2c23fb6bc4e496b6fb6885b5517626860f))
+    * `SpotifyWebAPI::getMyPlaylists()` ([ea8f0a2](https://github.com/jwilsson/spotify-web-api-php/commit/ea8f0a2c23fb6bc4e496b6fb6885b5517626860f))
 * Updated CA bundle. ([e6161fd](https://github.com/jwilsson/spotify-web-api-php/commit/e6161fd81d9851799315eb175a95ca8c001f31d3))
 
-### 1.1.0 (2015-11-24)
+## 1.1.0 (2015-11-24)
 * The following methods have been added:
     * `SpotifyWebAPI::addMyAlbums()` ([0027122](https://github.com/jwilsson/spotify-web-api-php/commit/0027122fe543ec9c3df9db3543be86683c7cd0d1))
     * `SpotifyWebAPI::deleteMyAlbums()` ([1d52172](https://github.com/jwilsson/spotify-web-api-php/commit/1d5217219095e0dded3f3afe300f72b91443d510))
     * `SpotifyWebAPI::getMySavedAlbums()` ([1bea486](https://github.com/jwilsson/spotify-web-api-php/commit/1bea4865d8323fa49d5b9f4ba4edc4cb68299115))
     * `SpotifyWebAPI::myAlbumsContains()` ([6f4ecfc](https://github.com/jwilsson/spotify-web-api-php/commit/6f4ecfc5ae929768f235367cf6deb259c8e75561))
 
-### 1.0.0 (2015-10-13)
+## 1.0.0 (2015-10-13)
 * **This release contains breaking changes, read through this list before updating.**
 * The following, deprecated, methods have been removed:
     * `Session::refreshToken()` ([4d46e8c](https://github.com/jwilsson/spotify-web-api-php/commit/4d46e8ce5cda30924fb7afaa9886434a9a6e5c3c))
@@ -40,11 +40,11 @@
 * Fixed an issue where `SpotifyWebAPI::reorderUserPlaylistTracks()` couldn't reorder the first track. ([748592e](https://github.com/jwilsson/spotify-web-api-php/commit/748592ee7cc5a59f992d0ed0d49c1937931643cd))
 * Better tests and coverage. ([09f2636](https://github.com/jwilsson/spotify-web-api-php/commit/09f26369dc4c5f22ba8aee81cd858b9eb3584209))
 
-### 0.10.0 (2015-09-05)
+## 0.10.0 (2015-09-05)
 * The following methods have been added:
     * `SpotifyWebAPI::getUserFollowedArtists()` ([b7142fa](https://github.com/jwilsson/spotify-web-api-php/commit/b7142fa466c307b56f285ab2aef546ecb8f998e2))
 
-### 0.9.0 (2015-07-06)
+## 0.9.0 (2015-07-06)
 * **This release contains breaking changes, read through this list before updating.**
 * As we're moving closer to 1.0 the work to make the API more consistent and stable is continuing. This time with an effort to make method names and signatures more consistent.
 * Thus, the following methods have been renamed and the old names are deprecated:
@@ -60,13 +60,13 @@
 * Lots of internal changes to increase code consistency and ensure full PSR-2 compatibility. ([2b8fda3](https://github.com/jwilsson/spotify-web-api-php/commit/2b8fda341176dddb8c9d4ef8ec808071efc54f49))
 * Better handling of errors from cURL. ([c7b5529](https://github.com/jwilsson/spotify-web-api-php/commit/c7b5529cdac854de81fe87c79da5b318af15ca6a))
 
-### 0.8.2 (2015-05-02)
+## 0.8.2 (2015-05-02)
 * CA Root Certificates are now included with the library, allowing cURL to always find it. ([4ebee9b](https://github.com/jwilsson/spotify-web-api-php/commit/4ebee9b1b2ce53e622ace071f319e882d7c94cef))
 
-### 0.8.1 (2015-03-29)
+## 0.8.1 (2015-03-29)
 * Fixed an issue where `SpotifyWebAPI::updateUserPlaylist()` would fail without `name` set. ([39232f5](https://github.com/jwilsson/spotify-web-api-php/commit/39232f52c7efe090695dbf26e7dff1e1841db035))
 
-### 0.8.0 (2015-03-22)
+## 0.8.0 (2015-03-22)
 * **This release contains breaking changes, read through this list before updating.**
 * The following methods have been renamed:
     * `Session::refreshToken()` -> `Session::refreshAccessToken()` ([7b6f31a](https://github.com/jwilsson/spotify-web-api-php/commit/7b6f31af4db435f1d3a94bef5758bdf3e864c65a))
