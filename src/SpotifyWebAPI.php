@@ -523,31 +523,6 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get Spotify featured playlists.
-     * Requires a valid access token.
-     * https://developer.spotify.com/web-api/get-list-featured-playlists/
-     *
-     * @param array|object $options Optional. Options for the playlists.
-     * - string locale Optional. Language to show playlists in, for example sv_SE.
-     * - string country Optional. An ISO 3166-1 alpha-2 country code. Show playlists from this country.
-     * - string timestamp Optional. A ISO 8601 timestamp. Show playlists relevant to this date and time.
-     * - int limit Optional. Limit the number of playlists.
-     * - int offset Optional. Number of playlists to skip.
-     *
-     * @return array|object The featured playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
-     */
-    public function getFeaturedPlaylists($options = array())
-    {
-        $headers = $this->authHeaders();
-
-        $uri = '/v1/browse/featured-playlists';
-
-        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
-
-        return $this->lastResponse['body'];
-    }
-
-    /**
      * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s "Browse" tab).
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-list-categories/
@@ -614,6 +589,31 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
 
         $uri = '/v1/browse/categories/' . $categoryId . '/playlists';
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
+     * Get Spotify featured playlists.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-list-featured-playlists/
+     *
+     * @param array|object $options Optional. Options for the playlists.
+     * - string locale Optional. Language to show playlists in, for example sv_SE.
+     * - string country Optional. An ISO 3166-1 alpha-2 country code. Show playlists from this country.
+     * - string timestamp Optional. A ISO 8601 timestamp. Show playlists relevant to this date and time.
+     * - int limit Optional. Limit the number of playlists.
+     * - int offset Optional. Number of playlists to skip.
+     *
+     * @return array|object The featured playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+     */
+    public function getFeaturedPlaylists($options = array())
+    {
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/browse/featured-playlists';
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
 

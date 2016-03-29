@@ -665,41 +665,6 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('tracks', $response);
     }
 
-    public function testGetFeaturedPlaylists()
-    {
-        $options = array(
-            'country' => 'SE',
-            'limit' => 10,
-        );
-
-        $expected = array(
-            'country' => 'SE',
-            'limit' => 10,
-        );
-
-        $headers = array(
-            'Authorization' => 'Bearer ' . $this->accessToken,
-        );
-
-        $return = array(
-            'body' => get_fixture('featured-playlists'),
-        );
-
-        $stub = $this->setupStub(
-            'GET',
-            '/v1/browse/featured-playlists',
-            $expected,
-            $headers,
-            $return
-        );
-
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
-        $api->setAccessToken($this->accessToken);
-        $response = $api->getFeaturedPlaylists($options);
-
-        $this->assertObjectHasAttribute('playlists', $response);
-    }
-
     public function testGetCategoriesList()
     {
         $options = array(
@@ -796,6 +761,41 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getCategoryPlaylists('party', $options);
+
+        $this->assertObjectHasAttribute('playlists', $response);
+    }
+
+    public function testGetFeaturedPlaylists()
+    {
+        $options = array(
+            'country' => 'SE',
+            'limit' => 10,
+        );
+
+        $expected = array(
+            'country' => 'SE',
+            'limit' => 10,
+        );
+
+        $headers = array(
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        );
+
+        $return = array(
+            'body' => get_fixture('featured-playlists'),
+        );
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/browse/featured-playlists',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getFeaturedPlaylists($options);
 
         $this->assertObjectHasAttribute('playlists', $response);
     }
