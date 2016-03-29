@@ -791,6 +791,42 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get recommendations based on artists, tracks, or genres.
+     * Requires a valid access token.
+     * https://developer.spotify.com/web-api/get-recommendations/
+     *
+     * @param array|object $options Optional. Options for the recommendations.
+     * - int limit Optional. Limit the number of recommendations.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+     * - mixed max_* Optional. Max value for one of the tunable track attributes.
+     * - mixed min_* Optional. Min value for one of the tunable track attributes.
+     * - array seed_artists Artist IDs to seed by.
+     * - array seed_genres Genres to seed by. Call SpotifyWebAPI::getGenreSeeds() for a complete list.
+     * - array seed_tracks Track IDs to seed by.
+     * - mixed target_* Optional. Target value for one of the tunable track attributes.
+     *
+     * @return array|object The requested recommendations. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+     */
+    public function getRecommendations($options = array())
+    {
+        $options = (array) $options;
+
+        array_walk($options, function (&$value, $key) {
+            if (strpos($key, 'seed_') !== false) {
+                $value = implode(',', $value);
+            }
+        });
+
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/recommendations';
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get the return type for the Request body element.
      *
      * @return bool Whether an associative array or an stdClass is returned.

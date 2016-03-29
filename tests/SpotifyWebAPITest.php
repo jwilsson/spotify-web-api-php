@@ -1054,6 +1054,41 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('items', $response);
     }
 
+    public function testGetRecommendations()
+    {
+        $options = array(
+            'limit' => 10,
+            'seed_tracks' => array('0eGsygTp906u18L0Oimnem', '1lDWb6b6ieDQ2xT7ewTC3G'),
+        );
+
+        $expected = array(
+            'limit' => 10,
+            'seed_tracks' => '0eGsygTp906u18L0Oimnem,1lDWb6b6ieDQ2xT7ewTC3G',
+        );
+
+        $headers = array(
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        );
+
+        $return = array(
+            'body' => get_fixture('recommendations'),
+        );
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/recommendations',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getRecommendations($options);
+
+        $this->assertObjectHasAttribute('seeds', $response);
+    }
+
     public function testGetReturnAssoc()
     {
         $stub = $this->getMock('SpotifyWebAPI\Request');
