@@ -1,4 +1,8 @@
 # Changelog
+## 1.3.1 (2016-04-03)
+* Fixed an issue where empty error responses weren't correctly handled. ([5f87cc5](https://github.com/jwilsson/spotify-web-api-php/commit/5f87cc56e4d6ae0c722c514423af5ee2c9c42b26))
+* Fixed an issue where auth call exceptions would sometimes use the wrong message value. ([1b7951c](https://github.com/jwilsson/spotify-web-api-php/commit/1b7951c3aeb56dc83b84b0aac95a8ea0598ea8ec))
+
 ## 1.3.0 (2016-03-29)
 * The following methods have been added:
     * `SpotifyWebAPI::getGenreSeeds()` ([88b750d](https://github.com/jwilsson/spotify-web-api-php/commit/88b750d7ec0879e54c37020f93310dccbdeec421))
