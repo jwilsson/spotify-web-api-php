@@ -167,7 +167,7 @@ class Request
                 throw new SpotifyWebAPIException($error->message, $error->status);
             } elseif (isset($errorBody->error_description)) {
                 // Auth call error
-                throw new SpotifyWebAPIException($body->error_description, $status);
+                throw new SpotifyWebAPIException($errorBody->error_description, $status);
             } else {
                 // Something went really wrong
                 throw new SpotifyWebAPIException('An unknown error occurred.', $status);
