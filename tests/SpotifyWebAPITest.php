@@ -12,11 +12,11 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $stub->expects($this->once())
                  ->method('api')
                  ->with(
-                    $this->equalTo($expectedMethod),
-                    $this->equalTo($expectedUri),
-                    $this->equalTo($expectedParameters),
-                    $this->equalTo($expectedHeaders)
-                )
+                     $this->equalTo($expectedMethod),
+                     $this->equalTo($expectedUri),
+                     $this->equalTo($expectedParameters),
+                     $this->equalTo($expectedHeaders)
+                 )
                 ->willReturn($expectedReturn);
 
         return $stub;

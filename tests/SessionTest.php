@@ -15,19 +15,20 @@ class SessionTest extends PHPUnit_Framework_TestCase
         $stub->expects($this->once())
                  ->method('account')
                  ->with(
-                    $this->equalTo($expectedMethod),
-                    $this->equalTo($expectedUri),
-                    $this->equalTo($expectedParameters),
-                    $this->equalTo($expectedHeaders)
-                )
-                ->willReturn($expectedReturn);
+                     $this->equalTo($expectedMethod),
+                     $this->equalTo($expectedUri),
+                     $this->equalTo($expectedParameters),
+                     $this->equalTo($expectedHeaders)
+                 )
+                 ->willReturn($expectedReturn);
 
         return $stub;
     }
 
     public function testGetAuthorizeUrl()
     {
-        $expected = sprintf('https://accounts.spotify.com/authorize/?client_id=%s&redirect_uri=%s&response_type=%s&show_dialog=%s',
+        $expected = sprintf(
+            'https://accounts.spotify.com/authorize/?client_id=%s&redirect_uri=%s&response_type=%s&show_dialog=%s',
             $this->clientID,
             urlencode($this->redirectURI),
             'code',
@@ -44,7 +45,8 @@ class SessionTest extends PHPUnit_Framework_TestCase
 
     public function testGetAuthorizeUrlScope()
     {
-        $expected = sprintf('https://accounts.spotify.com/authorize/?client_id=%s&redirect_uri=%s&response_type=%s&scope=%s',
+        $expected = sprintf(
+            'https://accounts.spotify.com/authorize/?client_id=%s&redirect_uri=%s&response_type=%s&scope=%s',
             $this->clientID,
             urlencode($this->redirectURI),
             'code',
@@ -62,7 +64,8 @@ class SessionTest extends PHPUnit_Framework_TestCase
     public function testGetAuthorizeUrlState()
     {
         $state = 'foobar';
-        $expected = sprintf('https://accounts.spotify.com/authorize/?client_id=%s&redirect_uri=%s&response_type=%s&state=%s',
+        $expected = sprintf(
+            'https://accounts.spotify.com/authorize/?client_id=%s&redirect_uri=%s&response_type=%s&state=%s',
             $this->clientID,
             urlencode($this->redirectURI),
             'code',
