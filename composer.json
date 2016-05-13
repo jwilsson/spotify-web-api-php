@@ -26,6 +26,6 @@
         }
     },
     "scripts": {
-        "test": "phpcs src -v --standard=PSR2 && phpunit"
+        "test": "phpcs src -v && phpunit"
     }
 }
