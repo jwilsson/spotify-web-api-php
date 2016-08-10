@@ -9,6 +9,37 @@ class Request
     const API_URL = 'https://api.spotify.com';
 
     /**
+     * Parse the response body and handle API errors.
+     *
+     * @param string $body The raw, unparsed response body.
+     * @param int $status The HTTP status code, used to see if additional error handling is needed.
+     *
+     * @throws SpotifyWebAPIException
+     *
+     * @return array|object The parsed response body. Type is controlled by Request::setReturnAssoc().
+     */
+    protected function parseBody($body, $status)
+    {
+        if ($status >= 200 && $status <= 299) {
+            return json_decode($body, $this->returnAssoc);
+        }
+
+        $body = json_decode($body);
+        $error = (isset($errorBody->error)) ? $errorBody->error : null;
+
+        if (isset($error->message) && isset($error->status)) {
+            // API call error
+            throw new SpotifyWebAPIException($error->message, $error->status);
+        } elseif (isset($errorBody->error_description)) {
+            // Auth call error
+            throw new SpotifyWebAPIException($errorBody->error_description, $status);
+        } else {
+            // Something went really wrong
+            throw new SpotifyWebAPIException('An unknown error occurred.', $status);
+        }
+    }
+
+    /**
      * Parse HTTP response headers.
      *
      * @param string $headers Raw string of HTTP headers.
@@ -87,8 +118,6 @@ class Request
      * @param array $parameters Optional. Query parameters.
      * @param array $headers Optional. HTTP headers.
      *
-     * @throws SpotifyWebAPIException
-     *
      * @return array Response data.
      * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
      * - array headers Response headers.
@@ -150,29 +179,13 @@ class Request
             throw new SpotifyWebAPIException('cURL transport error: ' . curl_errno($ch) . ' ' .  curl_error($ch));
         }
 
-        list($headers, $rawBody) = explode("\r\n\r\n", $response, 2);
+        list($headers, $body) = explode("\r\n\r\n", $response, 2);
 
-        $headers = $this->parseHeaders($headers);
         $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $body = json_decode($rawBody, $this->returnAssoc);
+        $headers = $this->parseHeaders($headers);
+        $body = $this->parseBody($body, $status);
 
         curl_close($ch);
-
-        if ($status < 200 || $status > 299) {
-            $errorBody = json_decode($rawBody);
-            $error = (isset($errorBody->error)) ? $errorBody->error : null;
-
-            if (isset($error->message) && isset($error->status)) {
-                // API call error
-                throw new SpotifyWebAPIException($error->message, $error->status);
-            } elseif (isset($errorBody->error_description)) {
-                // Auth call error
-                throw new SpotifyWebAPIException($errorBody->error_description, $status);
-            } else {
-                // Something went really wrong
-                throw new SpotifyWebAPIException('An unknown error occurred.', $status);
-            }
-        }
 
         return array(
             'body' => $body,
