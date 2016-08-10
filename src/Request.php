@@ -42,7 +42,7 @@ class Request
     /**
      * Parse HTTP response headers.
      *
-     * @param string $headers Raw string of HTTP headers.
+     * @param string $headers The raw, unparsed response headers.
      *
      * @return array Headers as key–value pairs.
      */
@@ -75,6 +75,7 @@ class Request
      * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
      * - string headers Response headers.
      * - int status HTTP status code.
+     * - string url The requested URL.
      */
     public function account($method, $uri, $parameters = array(), $headers = array())
     {
@@ -93,6 +94,7 @@ class Request
      * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
      * - string headers Response headers.
      * - int status HTTP status code.
+     * - string url The requested URL.
      */
     public function api($method, $uri, $parameters = array(), $headers = array())
     {
