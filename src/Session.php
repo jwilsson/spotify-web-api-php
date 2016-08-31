@@ -26,11 +26,7 @@ class Session
         $this->setClientSecret($clientSecret);
         $this->setRedirectUri($redirectUri);
 
-        if (is_null($request)) {
-            $request = new Request();
-        }
-
-        $this->request = $request;
+        $this->request = $request ?: new Request();
     }
 
     /**
