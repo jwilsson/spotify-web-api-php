@@ -53,7 +53,7 @@ class Request
 
         array_shift($headers);
 
-        $parsedHeaders = array();
+        $parsedHeaders = [];
         foreach ($headers as $header) {
             list($key, $value) = explode(':', $header, 2);
 
@@ -77,7 +77,7 @@ class Request
      * - int status HTTP status code.
      * - string url The requested URL.
      */
-    public function account($method, $uri, $parameters = array(), $headers = array())
+    public function account($method, $uri, $parameters = [], $headers = [])
     {
         return $this->send($method, self::ACCOUNT_URL . $uri, $parameters, $headers);
     }
@@ -96,7 +96,7 @@ class Request
      * - int status HTTP status code.
      * - string url The requested URL.
      */
-    public function api($method, $uri, $parameters = array(), $headers = array())
+    public function api($method, $uri, $parameters = [], $headers = [])
     {
         return $this->send($method, self::API_URL . $uri, $parameters, $headers);
     }
@@ -126,24 +126,24 @@ class Request
      * - int status HTTP status code.
      * - string url The requested URL.
      */
-    public function send($method, $url, $parameters = array(), $headers = array())
+    public function send($method, $url, $parameters = [], $headers = [])
     {
         // Sometimes a JSON object is passed
         if (is_array($parameters) || is_object($parameters)) {
             $parameters = http_build_query($parameters);
         }
 
-        $mergedHeaders = array();
+        $mergedHeaders = [];
         foreach ($headers as $key => $val) {
             $mergedHeaders[] = "$key: $val";
         }
 
-        $options = array(
+        $options = [
             CURLOPT_CAINFO => __DIR__ . '/cacert.pem',
             CURLOPT_HEADER => true,
             CURLOPT_HTTPHEADER => $mergedHeaders,
             CURLOPT_RETURNTRANSFER => true,
-        );
+        ];
 
         $url = rtrim($url, '/');
         $method = strtoupper($method);
@@ -189,12 +189,12 @@ class Request
 
         curl_close($ch);
 
-        return array(
+        return [
             'body' => $body,
             'headers' => $headers,
             'status' => $status,
             'url' => $url,
-        );
+        ];
     }
 
     /**
