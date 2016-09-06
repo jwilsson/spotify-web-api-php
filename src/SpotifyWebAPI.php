@@ -4,7 +4,7 @@ namespace SpotifyWebAPI;
 class SpotifyWebAPI
 {
     private $accessToken = '';
-    private $lastResponse = array();
+    private $lastResponse = [];
     private $request = null;
 
     /**
@@ -25,7 +25,7 @@ class SpotifyWebAPI
      */
     protected function authHeaders()
     {
-        $headers = array();
+        $headers = [];
 
         if ($this->accessToken) {
             $headers['Authorization'] = 'Bearer ' . $this->accessToken;
@@ -115,7 +115,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the tracks was successfully added.
      */
-    public function addUserPlaylistTracks($userId, $playlistId, $tracks, $options = array())
+    public function addUserPlaylistTracks($userId, $playlistId, $tracks, $options = [])
     {
         $options = http_build_query($options);
 
@@ -172,10 +172,10 @@ class SpotifyWebAPI
     public function currentUserFollows($type, $ids)
     {
         $ids = implode(',', (array) $ids);
-        $options = array(
+        $options = [
             'ids' => $ids,
             'type' => $type,
-        );
+        ];
 
         $headers = $this->authHeaders();
 
@@ -252,14 +252,14 @@ class SpotifyWebAPI
      */
     public function deleteUserPlaylistTracks($userId, $playlistId, $tracks, $snapshotId = '')
     {
-        $options = array();
+        $options = [];
         if ($snapshotId) {
             $options['snapshot_id'] = $snapshotId;
         }
 
-        $options['tracks'] = array();
+        $options['tracks'] = [];
         for ($i = 0; $i < count($tracks); $i++) {
-            $track = array();
+            $track = [];
 
             if (isset($tracks[$i]['positions'])) {
                 $track['positions'] = (array) $tracks[$i]['positions'];
@@ -299,9 +299,9 @@ class SpotifyWebAPI
      */
     public function followArtistsOrUsers($type, $ids)
     {
-        $ids = json_encode(array(
+        $ids = json_encode([
             'ids' => (array) $ids,
-        ));
+        ]);
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
@@ -326,7 +326,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playlist was successfully followed.
      */
-    public function followPlaylist($userId, $playlistId, $options = array())
+    public function followPlaylist($userId, $playlistId, $options = [])
     {
         $options = json_encode($options);
 
@@ -354,7 +354,7 @@ class SpotifyWebAPI
 
         $uri = '/v1/albums/' . $albumId;
 
-        $this->lastResponse = $this->request->api('GET', $uri, array(), $headers);
+        $this->lastResponse = $this->request->api('GET', $uri, [], $headers);
 
         return $this->lastResponse['body'];
     }
@@ -369,7 +369,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested albums. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getAlbums($albumIds, $options = array())
+    public function getAlbums($albumIds, $options = [])
     {
         $options['ids'] = implode(',', $albumIds);
 
@@ -394,7 +394,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested album tracks. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getAlbumTracks($albumId, $options = array())
+    public function getAlbumTracks($albumId, $options = [])
     {
         $headers = $this->authHeaders();
 
@@ -419,7 +419,7 @@ class SpotifyWebAPI
 
         $uri = '/v1/artists/' . $artistId;
 
-        $this->lastResponse = $this->request->api('GET', $uri, array(), $headers);
+        $this->lastResponse = $this->request->api('GET', $uri, [], $headers);
 
         return $this->lastResponse['body'];
     }
@@ -435,9 +435,9 @@ class SpotifyWebAPI
     public function getArtists($artistIds)
     {
         $artistIds = implode(',', $artistIds);
-        $options = array(
+        $options = [
             'ids' => $artistIds,
-        );
+        ];
 
         $headers = $this->authHeaders();
 
@@ -462,7 +462,7 @@ class SpotifyWebAPI
 
         $uri = '/v1/artists/' . $artistId . '/related-artists';
 
-        $this->lastResponse = $this->request->api('GET', $uri, array(), $headers);
+        $this->lastResponse = $this->request->api('GET', $uri, [], $headers);
 
         return $this->lastResponse['body'];
     }
@@ -480,7 +480,7 @@ class SpotifyWebAPI
      *
      * @return array|object The artist's albums. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getArtistAlbums($artistId, $options = array())
+    public function getArtistAlbums($artistId, $options = [])
     {
         $options = (array) $options;
 
@@ -529,9 +529,9 @@ class SpotifyWebAPI
      */
     public function getAudioFeatures($trackIds)
     {
-        $options = array(
+        $options = [
             'ids' => implode(',', $trackIds),
-        );
+        ];
 
         $headers = $this->authHeaders();
 
@@ -555,7 +555,7 @@ class SpotifyWebAPI
      *
      * @return array|object The list of categories. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getCategoriesList($options = array())
+    public function getCategoriesList($options = [])
     {
         $headers = $this->authHeaders();
 
@@ -579,7 +579,7 @@ class SpotifyWebAPI
      *
      * @return array|object The category. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getCategory($categoryId, $options = array())
+    public function getCategory($categoryId, $options = [])
     {
         $headers = $this->authHeaders();
 
@@ -604,7 +604,7 @@ class SpotifyWebAPI
      *
      * @return array|object The list of playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getCategoryPlaylists($categoryId, $options = array())
+    public function getCategoryPlaylists($categoryId, $options = [])
     {
         $headers = $this->authHeaders();
 
@@ -629,7 +629,7 @@ class SpotifyWebAPI
      *
      * @return array|object The featured playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getFeaturedPlaylists($options = array())
+    public function getFeaturedPlaylists($options = [])
     {
         $headers = $this->authHeaders();
 
@@ -653,7 +653,7 @@ class SpotifyWebAPI
 
         $uri = '/v1/recommendations/available-genre-seeds';
 
-        $this->lastResponse = $this->request->api('GET', $uri, array(), $headers);
+        $this->lastResponse = $this->request->api('GET', $uri, [], $headers);
 
         return $this->lastResponse['body'];
     }
@@ -683,7 +683,7 @@ class SpotifyWebAPI
      *
      * @return array|object The new releases. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getNewReleases($options = array())
+    public function getNewReleases($options = [])
     {
         $headers = $this->authHeaders();
 
@@ -705,7 +705,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getMyPlaylists($options = array())
+    public function getMyPlaylists($options = [])
     {
         $headers = $this->authHeaders();
 
@@ -728,7 +728,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's saved albums. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getMySavedAlbums($options = array())
+    public function getMySavedAlbums($options = [])
     {
         $headers = $this->authHeaders();
 
@@ -751,7 +751,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's saved tracks. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getMySavedTracks($options = array())
+    public function getMySavedTracks($options = [])
     {
         $headers = $this->authHeaders();
 
@@ -775,7 +775,7 @@ class SpotifyWebAPI
      *
      * @return array|object A list with the requested top entity. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getMyTop($type, $options = array())
+    public function getMyTop($type, $options = [])
     {
         $headers = $this->authHeaders();
 
@@ -803,7 +803,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested recommendations. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getRecommendations($options = array())
+    public function getRecommendations($options = [])
     {
         $options = (array) $options;
 
@@ -842,7 +842,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested track. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getTrack($trackId, $options = array())
+    public function getTrack($trackId, $options = [])
     {
         $headers = $this->authHeaders();
 
@@ -863,7 +863,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested tracks. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getTracks($trackIds, $options = array())
+    public function getTracks($trackIds, $options = [])
     {
         $options['ids'] = implode(',', $trackIds);
 
@@ -890,7 +890,7 @@ class SpotifyWebAPI
 
         $uri = '/v1/users/' . $userId;
 
-        $this->lastResponse = $this->request->api('GET', $uri, array(), $headers);
+        $this->lastResponse = $this->request->api('GET', $uri, [], $headers);
 
         return $this->lastResponse['body'];
     }
@@ -906,7 +906,7 @@ class SpotifyWebAPI
      *
      * @return array|object A list of artists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getUserFollowedArtists($options = array())
+    public function getUserFollowedArtists($options = [])
     {
         $options = (array) $options;
 
@@ -936,7 +936,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's playlist. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getUserPlaylist($userId, $playlistId, $options = array())
+    public function getUserPlaylist($userId, $playlistId, $options = [])
     {
         $options = (array) $options;
 
@@ -965,7 +965,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's playlists. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getUserPlaylists($userId, $options = array())
+    public function getUserPlaylists($userId, $options = [])
     {
         $headers = $this->authHeaders();
 
@@ -991,7 +991,7 @@ class SpotifyWebAPI
      *
      * @return array|object The tracks in the playlist. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function getUserPlaylistTracks($userId, $playlistId, $options = array())
+    public function getUserPlaylistTracks($userId, $playlistId, $options = [])
     {
         $options = (array) $options;
 
@@ -1021,7 +1021,7 @@ class SpotifyWebAPI
 
         $uri = '/v1/me';
 
-        $this->lastResponse = $this->request->api('GET', $uri, array(), $headers);
+        $this->lastResponse = $this->request->api('GET', $uri, [], $headers);
 
         return $this->lastResponse['body'];
     }
@@ -1038,9 +1038,9 @@ class SpotifyWebAPI
     public function myAlbumsContains($albums)
     {
         $albums = implode(',', (array) $albums);
-        $options = array(
+        $options = [
             'ids' => $albums,
-        );
+        ];
 
         $headers = $this->authHeaders();
 
@@ -1063,9 +1063,9 @@ class SpotifyWebAPI
     public function myTracksContains($tracks)
     {
         $tracks = implode(',', (array) $tracks);
-        $options = array(
+        $options = [
             'ids' => $tracks,
-        );
+        ];
 
         $headers = $this->authHeaders();
 
@@ -1124,9 +1124,9 @@ class SpotifyWebAPI
     public function replaceUserPlaylistTracks($userId, $playlistId, $tracks)
     {
         $tracks = $this->idToUri($tracks);
-        $tracks = json_encode(array(
+        $tracks = json_encode([
             'uris' => (array) $tracks,
-        ));
+        ]);
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
@@ -1152,13 +1152,13 @@ class SpotifyWebAPI
      *
      * @return array|object The search results. Type is controlled by SpotifyWebAPI::setReturnAssoc().
      */
-    public function search($query, $type, $options = array())
+    public function search($query, $type, $options = [])
     {
         $type = implode(',', (array) $type);
-        $options = array_merge((array) $options, array(
+        $options = array_merge((array) $options, [
             'q' => $query,
             'type' => $type,
-        ));
+        ]);
 
         $headers = $this->authHeaders();
 
@@ -1205,9 +1205,9 @@ class SpotifyWebAPI
      */
     public function unfollowArtistsOrUsers($type, $ids)
     {
-        $ids = json_encode(array(
+        $ids = json_encode([
             'ids' => (array) $ids,
-        ));
+        ]);
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
@@ -1237,7 +1237,7 @@ class SpotifyWebAPI
 
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/followers';
 
-        $this->lastResponse = $this->request->api('DELETE', $uri, array(), $headers);
+        $this->lastResponse = $this->request->api('DELETE', $uri, [], $headers);
 
         return $this->lastResponse['status'] == 200;
     }
