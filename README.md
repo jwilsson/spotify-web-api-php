@@ -33,77 +33,77 @@ For more instructions, please refer to the [documentation](http://jwilsson.githu
 
 Add albums to the current user's library
 ```php
-$api->addMyAlbums(array(
+$api->addMyAlbums([
     '1oR3KrPIp4CbagPa3PhtPp',
     '6lPb7Eoon6QPbscWbMsk6a',
-));
+]);
 ```
 
 Add tracks to the current user's library
 ```php
-$api->addMyTracks(array(
+$api->addMyTracks([
     '1id6H6vcwSB9GGv9NXh5cl',
     '3mqRLlD9j92BBv1ueFhJ1l',
-));
+]);
 ```
 
 Add tracks to a user's playlist
 ```php
-$api->addUserPlaylistTracks('username', 'playlist_id', array(
+$api->addUserPlaylistTracks('username', 'playlist_id', [
     '1id6H6vcwSB9GGv9NXh5cl',
     '3mqRLlD9j92BBv1ueFhJ1l',
-));
+]);
 ```
 
 Create a new playlist for a user
 ```php
-$api->createUserPlaylist('username', array(
+$api->createUserPlaylist('username', [
     'name' => 'My shiny playlist',
-));
+]);
 ```
 
 Check if the current user follows a user or artist
 ```php
-$follows = $api->currentUserFollows('user', array(
+$follows = $api->currentUserFollows('user', [
     'spotify',
     'spotify_france',
-));
+]);
 
 var_dump($follows);
 ```
 
 Delete albums from the current user's library
 ```php
-$api->deleteMyAlbums(array(
+$api->deleteMyAlbums([
     '1oR3KrPIp4CbagPa3PhtPp',
     '6lPb7Eoon6QPbscWbMsk6a'
-));
+]);
 ```
 
 Delete tracks from the current user's library
 ```php
-$api->deleteMyTracks(array(
+$api->deleteMyTracks([
     '1id6H6vcwSB9GGv9NXh5cl',
     '3mqRLlD9j92BBv1ueFhJ1l',
-));
+]);
 ```
 
 Delete tracks from a user's playlist
 ```php
-$tracks = array(
-    array('id' => '1id6H6vcwSB9GGv9NXh5cl'),
-    array('id' => '3mqRLlD9j92BBv1ueFhJ1l'),
-);
+$tracks = [
+    ['id' => '1id6H6vcwSB9GGv9NXh5cl'],
+    ['id' => '3mqRLlD9j92BBv1ueFhJ1l'],
+];
 
 $api->deleteUserPlaylistTracks('username', 'playlist_id', $tracks, 'snapshot_id');
 ```
 
 Follow an artist or user
 ```php
-$api->followArtistsOrUsers('artist', array(
+$api->followArtistsOrUsers('artist', [
     '74ASZWbe4lXaubB36ztrGX',
     '2t9yJDJIEtvPmr2iRIdqBf',
-));
+]);
 ```
 
 Follow a playlist
@@ -120,10 +120,10 @@ print_r($album);
 
 Get multiple albums
 ```php
-$albums = $api->getAlbums(array(
+$albums = $api->getAlbums([
     '1oR3KrPIp4CbagPa3PhtPp',
     '6lPb7Eoon6QPbscWbMsk6a',
-));
+]);
 
 print_r($albums);
 ```
@@ -151,10 +151,10 @@ print_r($artists);
 
 Get multiple artists
 ```php
-$artists = $api->getArtists(array(
+$artists = $api->getArtists([
     '6v8FB84lnmJs434UJf2Mrm',
     '6olE6TJLqED3rqDCT0FyPh',
-));
+]);
 
 print_r($artists);
 ```
@@ -168,46 +168,46 @@ print_r($albums);
 
 Get an artist's top tracks in a country
 ```php
-$tracks = $api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', array(
+$tracks = $api->getArtistTopTracks('6v8FB84lnmJs434UJf2Mrm', [
     'country' => 'se',
-));
+]);
 
 print_r($tracks);
 ```
 
 Get track audio features
 ```php
-$features = $api->getAudioFeatures(array(
+$features = $api->getAudioFeatures([
     '0eGsygTp906u18L0Oimnem',
     '1lDWb6b6ieDQ2xT7ewTC3G',
-));
+]);
 
 print_r($features);
 ```
 
 Get Spotify list of categories
 ```php
-$categories = $api->getCategoriesList(array(
+$categories = $api->getCategoriesList([
     'country' => 'se',
-));
+]);
 
 print_r($categories);
 ```
 
 Get Spotify category
 ```php
-$category = $api->getCategory('dinner', array(
+$category = $api->getCategory('dinner', [
     'country' => 'se',
-));
+]);
 
 print_r($category);
 ```
 
 Get playlists of a Spotify category
 ```php
-$playlists = $api->getCategoryPlaylists('dinner', array(
+$playlists = $api->getCategoryPlaylists('dinner', [
     'country' => 'se',
-));
+]);
 
 print_r($playlists);
 ```
@@ -228,9 +228,9 @@ print_r($genres);
 
 Get new releases
 ```php
-$items = $api->getNewReleases(array(
+$items = $api->getNewReleases([
     'country' => 'se',
-));
+]);
 
 print_r($items);
 ```
@@ -251,18 +251,18 @@ print_r($albums);
 
 Get the current user's top tracks or artists
 ```php
-$tracks = $api->getMyTop('tracks', array(
+$tracks = $api->getMyTop('tracks', [
     'limit' => 10,
-));
+]);
 
 print_r($tracks);
 ```
 
 Get recommendations based on artists, tracks, or genres
 ```php
-$recommendations = $api->getRecommendations(array(
-    'seed_tracks' => array('0eGsygTp906u18L0Oimnem', '1lDWb6b6ieDQ2xT7ewTC3G'),
-));
+$recommendations = $api->getRecommendations([
+    'seed_tracks' => ['0eGsygTp906u18L0Oimnem', '1lDWb6b6ieDQ2xT7ewTC3G'],
+]);
 
 print_r($recommendations);
 ```
@@ -283,10 +283,10 @@ print_r($track);
 
 Get multiple tracks
 ```php
-$tracks = $api->getTracks(array(
+$tracks = $api->getTracks([
     '0eGsygTp906u18L0Oimnem',
     '1lDWb6b6ieDQ2xT7ewTC3G',
-));
+]);
 
 print_r($tracks);
 ```
@@ -328,44 +328,44 @@ print_r($user);
 
 See if the current user's albums contains the specified ones
 ```php
-$contains = $api->myAlbumsContains(array(
+$contains = $api->myAlbumsContains([
     '1oR3KrPIp4CbagPa3PhtPp',
     '6lPb7Eoon6QPbscWbMsk6a'
-));
+]);
 
 var_dump($contains);
 ```
 
 See if the current user's tracks contains the specified tracks
 ```php
-$contains = $api->myTracksContains(array(
+$contains = $api->myTracksContains([
     '0eGsygTp906u18L0Oimnem',
     '1lDWb6b6ieDQ2xT7ewTC3G',
-));
+]);
 
 var_dump($contains);
 ```
 
 Reorder the tracks in a user's playlist
 ```php
-$api->reorderUserPlaylistTracks('username', 'playlist_id', array(
+$api->reorderUserPlaylistTracks('username', 'playlist_id', [
     'range_start' => 1,
     'range_length' => 5,
     'insert_before' => 10,
     'snapshot_id' => 'GLiKqjND5IDWQCO9PwtLvHVjRXYYjEvpoliIQ5/gK7M5BMcxJ7rnGMGTKbmDRgU3',
-));
+]);
 ```
 
 Replace all tracks in a user's playlist with new ones
 ```php
-$api->replaceUserPlaylistTracks('username', 'playlist_id', array(
+$api->replaceUserPlaylistTracks('username', 'playlist_id', [
     '0eGsygTp906u18L0Oimnem',
     '1lDWb6b6ieDQ2xT7ewTC3G',
-));
+]);
 ```
 
 Search for an album
-```ph
+```php
 $albums = $api->search('blur', 'album');
 
 print_r($albums);
@@ -387,35 +387,35 @@ print_r($tracks);
 
 Search with a limit
 ```php
-$tracks = $api->search('song 2', 'track', array(
+$tracks = $api->search('song 2', 'track', [
     'limit' => 5,
-));
+]);
 
 print_r($tracks);
 ```
 
 Search for tracks in a specific market
 ```php
-$tracks = $api->search('song 2', 'track', array(
+$tracks = $api->search('song 2', 'track', [
     'market' => 'se',
-));
+]);
 
 print_r($tracks);
 ```
 
 Update a user's playlist
 ```php
-$api->updateUserPlaylist('username', 'playlist_id', array(
+$api->updateUserPlaylist('username', 'playlist_id', [
     'name' => 'New name',
-));
+]);
 ```
 
 Unfollow an artist or user
 ```php
-$api->unfollowArtistsOrUsers('user', array(
+$api->unfollowArtistsOrUsers('user', [
     'spotify',
     'spotify_france',
-));
+]);
 ```
 
 Unfollow a playlist
@@ -425,14 +425,14 @@ $api->unfollowPlaylist('username', 'playlist_id');
 
 Check if a user is following a playlist
 ```php
-$users = array(
+$users = [
     'user1',
     'user2',
-);
+];
 
-$api->userFollowsPlaylist('owner_id', 'playlist_id', array(
+$api->userFollowsPlaylist('owner_id', 'playlist_id', [
     'ids' => $users,
-));
+]);
 ```
 
 For more examples, please see the [homepage](http://jwilsson.github.io/spotify-web-api-php/examples/).
