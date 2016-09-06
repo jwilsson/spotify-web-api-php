@@ -1,4 +1,10 @@
 # Changelog
+## 1.3.3 (2016-09-06)
+* Moved the `Request` body parsing to its own method. ([ef60829](https://github.com/jwilsson/spotify-web-api-php/commit/ef608297271f0734a3a18b7a5e6ba40c1f41aa7a))
+* All arrays are now using the short array syntax. ([Full diff](https://github.com/jwilsson/spotify-web-api-php/compare/5aa7ad833cf3bb7f0632e4cbe31d1d7898e6ca55...edfb711ec51ec9e76665f3e1bd53259ab9ea5a0e))
+* Travis tests are now running on PHP nightlies as well. ([0cb8420](https://github.com/jwilsson/spotify-web-api-php/commit/0cb84209f0a7168392ace79db9ca68770f3f8c6d))
+* Updated the inline `Request` docs for consistency. ([cf09e09](https://github.com/jwilsson/spotify-web-api-php/commit/cf09e0914aea66f6be192e1bc5fd3639dafcc399))
+
 ## 1.3.2 (2016-05-30)
 * Improved the handling of `seed_*` parameters in `SpotifyWebAPI::getRecommendations()`. ([e6603dc](https://github.com/jwilsson/spotify-web-api-php/commit/e6603dc700c1105d10a25b3496b4e95f7238213f))
 * Specified better Composer PHP version ranges so we don't break when a new major PHP versions is released. ([8dd7749](https://github.com/jwilsson/spotify-web-api-php/commit/8dd7749c331e0f035bbd9c5b7a2231875a0d6266))
