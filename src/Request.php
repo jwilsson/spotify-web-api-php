@@ -25,14 +25,14 @@ class Request
         }
 
         $body = json_decode($body);
-        $error = (isset($errorBody->error)) ? $errorBody->error : null;
+        $error = (isset($body->error)) ? $body->error : null;
 
         if (isset($error->message) && isset($error->status)) {
             // API call error
             throw new SpotifyWebAPIException($error->message, $error->status);
-        } elseif (isset($errorBody->error_description)) {
+        } elseif (isset($body->error_description)) {
             // Auth call error
-            throw new SpotifyWebAPIException($errorBody->error_description, $status);
+            throw new SpotifyWebAPIException($body->error_description, $status);
         } else {
             // Something went really wrong
             throw new SpotifyWebAPIException('An unknown error occurred.', $status);
