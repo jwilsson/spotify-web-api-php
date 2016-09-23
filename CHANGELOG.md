@@ -1,4 +1,7 @@
 # Changelog
+## 1.3.4 (2016-09-23)
+* Fixed a typo in the `Request::parseBody()` method added in `1.3.3`. ([13d3b94](https://github.com/jwilsson/spotify-web-api-php/commit/13d3b9417f0dc6de959867281ae0e4c9392f9c8d))
+
 ## 1.3.3 (2016-09-06)
 * Moved the `Request` body parsing to its own method. ([ef60829](https://github.com/jwilsson/spotify-web-api-php/commit/ef608297271f0734a3a18b7a5e6ba40c1f41aa7a))
 * All arrays are now using the short array syntax. ([Full diff](https://github.com/jwilsson/spotify-web-api-php/compare/5aa7ad833cf3bb7f0632e4cbe31d1d7898e6ca55...edfb711ec51ec9e76665f3e1bd53259ab9ea5a0e))
