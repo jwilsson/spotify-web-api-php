@@ -3,9 +3,9 @@ namespace SpotifyWebAPI;
 
 class SpotifyWebAPI
 {
-    private $accessToken = '';
-    private $lastResponse = [];
-    private $request = null;
+    protected $accessToken = '';
+    protected $lastResponse = [];
+    protected $request = null;
 
     /**
      * Constructor
