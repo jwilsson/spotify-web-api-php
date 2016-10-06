@@ -1,4 +1,10 @@
 # Changelog
+## 1.4.0 (2016-10-06)
+* Marked `SpotifyWebAPI` class properties as `protected` instead of `private` to allow extending. ([f52468a](https://github.com/jwilsson/spotify-web-api-php/commit/f52468a7f68895dfad264675bf4274b0c272cfb2))
+* Marked `Session` class properties as `protected` instead of `private` to allow extending. ([13e6d53](https://github.com/jwilsson/spotify-web-api-php/commit/13e6d536416717f999346caa96510183a5b82020))
+* Marked `Request` class properties as `protected` instead of `private` to allow extending. ([be2b3f6](https://github.com/jwilsson/spotify-web-api-php/commit/be2b3f618b3a4aab7e6b12fa329c87d936675bb8))
+* Moved docs from the `gh-pages` branch into `master`. ([7f638a1](https://github.com/jwilsson/spotify-web-api-php/commit/7f638a107c214c8b30319a230f7e16d2ac2a64a3))
+
 ## 1.3.4 (2016-09-23)
 * Fixed a typo in the `Request::parseBody()` method added in `1.3.3`. ([13d3b94](https://github.com/jwilsson/spotify-web-api-php/commit/13d3b9417f0dc6de959867281ae0e4c9392f9c8d))
 
