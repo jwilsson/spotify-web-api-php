@@ -1,4 +1,7 @@
 # Changelog
+## 1.4.1 (2016-10-25)
+* All requests will now be compressed using gzip. ([5eeabde](https://github.com/jwilsson/spotify-web-api-php/commit/5eeabde90d1c21832384f42d96c1208ce6fda287))
+
 ## 1.4.0 (2016-10-06)
 * Marked `SpotifyWebAPI` class properties as `protected` instead of `private` to allow extending. ([f52468a](https://github.com/jwilsson/spotify-web-api-php/commit/f52468a7f68895dfad264675bf4274b0c272cfb2))
 * Marked `Session` class properties as `protected` instead of `private` to allow extending. ([13e6d53](https://github.com/jwilsson/spotify-web-api-php/commit/13e6d536416717f999346caa96510183a5b82020))
