@@ -43,7 +43,8 @@ class SpotifyWebAPI
      */
     protected function idToUri($ids)
     {
-        $ids = (array) $ids;
+        // Always reset the indexes
+        $ids = array_values((array) $ids);
 
         for ($i = 0; $i < count($ids); $i++) {
             if (strpos($ids[$i], 'spotify:track:') !== false) {
