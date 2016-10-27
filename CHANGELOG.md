@@ -1,4 +1,7 @@
 # Changelog
+## 1.4.2 (2016-10-27)
+* Array indexes in SpotifyWebAPI::idToUri() are now always reset to prevent undefined offset errors. ([ae8bd96](https://github.com/jwilsson/spotify-web-api-php/commit/ae8bd9673795747fad40ff4caf6b12f17c045fc5))
+
 ## 1.4.1 (2016-10-25)
 * All requests will now be compressed using gzip. ([5eeabde](https://github.com/jwilsson/spotify-web-api-php/commit/5eeabde90d1c21832384f42d96c1208ce6fda287))
 
