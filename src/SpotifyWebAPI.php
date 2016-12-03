@@ -369,6 +369,7 @@ class SpotifyWebAPI
      */
     public function getAlbums($albumIds, $options = [])
     {
+        $options = (array) $options;
         $options['ids'] = implode(',', $albumIds);
 
         $headers = $this->authHeaders();
