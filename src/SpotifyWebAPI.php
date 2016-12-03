@@ -241,7 +241,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to delete tracks from.
-     * @param array $tracks Array of arrays with tracks to delete.
+     * @param array $tracks Array of arrays or objects with tracks to delete.
      * - id string Required. Spotify track ID.
      * - positions int|array Optional. The track's position(s) in the playlist.
      * @param string $snapshotId Optional. The playlist's snapshot ID.
@@ -257,6 +257,8 @@ class SpotifyWebAPI
         }
 
         $options['tracks'] = array_map(function ($track) {
+            $track = (array) $track;
+
             if (isset($track['positions'])) {
                 $track['positions'] = (array) $track['positions'];
             }
