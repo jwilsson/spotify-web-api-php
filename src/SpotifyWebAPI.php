@@ -43,16 +43,13 @@ class SpotifyWebAPI
      */
     protected function idToUri($ids)
     {
-        // Always reset the indexes
-        $ids = array_values((array) $ids);
-
-        for ($i = 0; $i < count($ids); $i++) {
-            if (strpos($ids[$i], 'spotify:track:') !== false) {
-                continue;
+        $ids = array_map(function ($id) {
+            if (substr($id, 0, 14) != 'spotify:track:') {
+                $id = 'spotify:track:' . $id;
             }
 
-            $ids[$i] = 'spotify:track:' . $ids[$i];
-        }
+            return $id;
+        }, (array) $ids);
 
         return (count($ids) == 1) ? $ids[0] : $ids;
     }
@@ -254,22 +251,22 @@ class SpotifyWebAPI
     public function deleteUserPlaylistTracks($userId, $playlistId, $tracks, $snapshotId = '')
     {
         $options = [];
+
         if ($snapshotId) {
             $options['snapshot_id'] = $snapshotId;
         }
 
-        $options['tracks'] = [];
-        for ($i = 0; $i < count($tracks); $i++) {
-            $track = [];
-
-            if (isset($tracks[$i]['positions'])) {
-                $track['positions'] = (array) $tracks[$i]['positions'];
+        $options['tracks'] = array_map(function ($track) {
+            if (isset($track['positions'])) {
+                $track['positions'] = (array) $track['positions'];
             }
 
-            $track['uri'] = $this->idToUri($tracks[$i]['id']);
+            $track['uri'] = $this->idToUri($track['id']);
 
-            $options['tracks'][] = $track;
-        }
+            unset($track['id']);
+
+            return $track;
+        }, $tracks);
 
         $options = json_encode($options);
 
