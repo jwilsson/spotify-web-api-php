@@ -1084,7 +1084,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user.
      * @param string $playlistId ID of the playlist.
-     * @param array|object $options Options for the new .
+     * @param array|object $options Options for the new tracks.
      * - int range_start Required. Position of the first track to be reordered.
      * - int range_length Optional. The amount of tracks to be reordered.
      * - int insert_before Required. Position where the tracks should be inserted.

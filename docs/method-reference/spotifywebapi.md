@@ -826,7 +826,7 @@ Requires a valid access token.<br>
 #### Arguments
 * `$userId` **string** - ID of the user.
 * `$playlistId` **string** - ID of the playlist.
-* `$options` **array\|object** - Options for the new .
+* `$options` **array\|object** - Options for the new tracks.
     * int range_start Required. Position of the first track to be reordered.
     * int range_length Optional. The amount of tracks to be reordered.
     * int insert_before Required. Position where the tracks should be inserted.
@@ -892,7 +892,7 @@ Set the access token to use.
 
 
 #### Return values
-* **void** 
+* **void**
 
 
 
@@ -907,7 +907,7 @@ Set the return type for the Request body element.
 
 
 #### Return values
-* **void** 
+* **void**
 
 
 
@@ -987,5 +987,3 @@ Requires a valid access token.<br>
 
 #### Return values
 * **array** Whether each user is following the playlist.
-
-
