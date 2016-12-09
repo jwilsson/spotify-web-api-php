@@ -1195,6 +1195,19 @@ class SpotifyWebAPI
     }
 
     /**
+     * Set the paramater to decide if Request should throw an exception when it encounters an invalid response
+     *
+     * @param bool $throwExceptions
+     *
+     * @return void
+     */
+    public function setThrowExceptions($throwExceptions)
+    {
+        $this->request->setThrowExceptions($throwExceptions);
+    }
+
+
+    /**
      * Remove the current user as a follower of one or more artists or other Spotify users.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/unfollow-artists-users/

@@ -3,6 +3,8 @@ namespace SpotifyWebAPI;
 
 class Request
 {
+    protected $throwExceptions = false;
+
     protected $returnAssoc = false;
 
     const ACCOUNT_URL = 'https://accounts.spotify.com';
@@ -20,7 +22,7 @@ class Request
      */
     protected function parseBody($body, $status)
     {
-        if ($status >= 200 && $status <= 299) {
+        if (($status >= 200 && $status <= 299) || !$this->throwExceptions)  {
             return json_decode($body, $this->returnAssoc);
         }
 
@@ -208,5 +210,16 @@ class Request
     public function setReturnAssoc($returnAssoc)
     {
         $this->returnAssoc = $returnAssoc;
+    }
+
+    /**
+     * @param bool $throwExceptions
+     * @return \SpotifyWebAPI\Request
+     */
+    public function setThrowExceptions($throwExceptions)
+    {
+        $this->throwExceptions = $throwExceptions;
+
+        return $this;
     }
 }
