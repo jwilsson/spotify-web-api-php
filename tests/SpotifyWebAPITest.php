@@ -1712,4 +1712,12 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($response[0]);
     }
+
+    public function testSetThrowExceptions()
+    {
+        $result = (new SpotifyWebAPI\SpotifyWebAPI())
+            ->setThrowExceptions(true);
+
+        $this->assertNull($result);
+    }
 }
