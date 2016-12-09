@@ -22,7 +22,7 @@ class Request
      */
     protected function parseBody($body, $status)
     {
-        if (($status >= 200 && $status <= 299) || !$this->throwExceptions)  {
+        if (($status >= 200 && $status <= 299) || !$this->throwExceptions) {
             return json_decode($body, $this->returnAssoc);
         }
 
