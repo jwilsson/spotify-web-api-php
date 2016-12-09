@@ -3,7 +3,7 @@ namespace SpotifyWebAPI;
 
 class Request
 {
-    protected $throwExceptions = false;
+    protected $throwExceptions = true;
 
     protected $returnAssoc = false;
 
