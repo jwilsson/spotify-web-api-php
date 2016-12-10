@@ -663,9 +663,10 @@ class SpotifyWebAPI
      * Get the latest full response from the Spotify API.
      *
      * @return array Response data.
-     * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
-     * - string headers Response headers.
+     * - array|object body The response body. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+     * - array headers Response headers.
      * - int status HTTP status code.
+     * - string url The requested URL.
      */
     public function getLastResponse()
     {
