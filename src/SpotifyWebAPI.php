@@ -835,6 +835,16 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the Request object in use.
+     *
+     * @return Request The Request object in use.
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
      * Get a track.
      * https://developer.spotify.com/web-api/get-track/
      *
