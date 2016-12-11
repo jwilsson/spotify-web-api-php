@@ -1,5 +1,5 @@
 # Changelog
-## 1.4.2 (2016-12-11)
+## 1.5.0 (2016-12-11)
 * Added a `Request::getLastResponse()` method. ([21b72b0](https://github.com/jwilsson/spotify-web-api-php/commit/21b72b040ec10550649ded9050a431f890081f08))
 * Added a `SpotifyWebAPI::getRequest` method.
 ([bab8924](https://github.com/jwilsson/spotify-web-api-php/commit/bab8924b1636e7d19f45722add8a0b769818983d))
