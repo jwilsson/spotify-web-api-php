@@ -149,4 +149,14 @@ class RequestTest extends PHPUnit_Framework_TestCase
         $response = $request->send('GET', 'https://api.spotify.com/v1/albums/7u6zL7kqpgLPISZYXNTgYk');
         $this->assertArrayHasKey('id', $response['body']);
     }
+
+    public function testSetThrowExceptions()
+    {
+        $request = new SpotifyWebAPI\Request();
+
+        // The actual functionality of this cannot be unit tested in the current implementation
+        $result = $request->setThrowExceptions(true);
+
+        $this->assertEquals($request, $result);
+    }
 }
