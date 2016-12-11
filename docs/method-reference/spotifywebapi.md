@@ -157,7 +157,7 @@ Requires a valid access token.<br>
 #### Arguments
 * `$userId` **string** - ID of the user who owns the playlist.
 * `$playlistId` **string** - ID of the playlist to delete tracks from.
-* `$tracks` **array** - Array of arrays with tracks to delete.
+* `$tracks` **array** - Array of arrays or objects with tracks to delete.
     * id string Required. Spotify track ID.
     * positions int\|array Optional. The track&#039;s position(s) in the playlist.
 
@@ -481,9 +481,10 @@ Get the latest full response from the Spotify API.
 
 #### Return values
 * **array** Response data.
-    * array\|object body The response body. Type is controlled by Request::setReturnAssoc().
-    * string headers Response headers.
+    * array\|object body The response body. Type is controlled by SpotifyWebAPI::setReturnAssoc().
+    * array headers Response headers.
     * int status HTTP status code.
+    * string url The requested URL.
 
 
 
@@ -623,6 +624,18 @@ Get the return type for the Request body element.
 
 #### Return values
 * **boolean** Whether an associative array or an stdClass is returned.
+
+
+
+### getRequest
+
+    \SpotifyWebAPI\Request SpotifyWebAPI\SpotifyWebAPI::getRequest()
+
+Get the Request object in use.
+
+
+#### Return values
+* **\SpotifyWebAPI\Request** The Request object in use.
 
 
 
@@ -892,7 +905,7 @@ Set the access token to use.
 
 
 #### Return values
-* **void**
+* **void** 
 
 
 
@@ -907,7 +920,7 @@ Set the return type for the Request body element.
 
 
 #### Return values
-* **void**
+* **void** 
 
 
 
@@ -987,3 +1000,5 @@ Requires a valid access token.<br>
 
 #### Return values
 * **array** Whether each user is following the playlist.
+
+
