@@ -10,20 +10,6 @@ class Request
     const API_URL = 'https://api.spotify.com';
 
     /**
-     * Get the latest full response from the Spotify API.
-     *
-     * @return array Response data.
-     * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
-     * - array headers Response headers.
-     * - int status HTTP status code.
-     * - string url The requested URL.
-     */
-    public function getLastResponse()
-    {
-        return $this->lastResponse;
-    }
-
-    /**
      * Parse the response body and handle API errors.
      *
      * @param string $body The raw, unparsed response body.
@@ -116,6 +102,20 @@ class Request
     public function api($method, $uri, $parameters = [], $headers = [])
     {
         return $this->send($method, self::API_URL . $uri, $parameters, $headers);
+    }
+
+    /**
+     * Get the latest full response from the Spotify API.
+     *
+     * @return array Response data.
+     * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
+     * - array headers Response headers.
+     * - int status HTTP status code.
+     * - string url The requested URL.
+     */
+    public function getLastResponse()
+    {
+        return $this->lastResponse;
     }
 
     /**
