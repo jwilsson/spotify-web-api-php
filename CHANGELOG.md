@@ -1,4 +1,7 @@
 # Changelog
+## 1.6.1 (2016-01-28)
+* Bump for bad `1.6.0`.
+
 ## 1.6.0 (2016-01-28)
 * Deprecated the following methods and replaced them with ([6aac5c6](https://github.com/jwilsson/spotify-web-api-php/commit/6aac5c6880017e0fadf7a48c5ba740dad2d9e617)):
     * `Request::getReturnAssoc()` -> `Request::getReturnType()`
