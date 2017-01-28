@@ -778,7 +778,7 @@ class SpotifyWebAPI
      * - int offset Optional. Number of tracks to skip.
      * - mixed time_range Optional. Over what time frame the data is calculated. See Spotify API docs for more info.
      *
-     * @return array|object A list with the requested top entity. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+     * @return array|object A list of the requested top entity. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getMyTop($type, $options = [])
     {
