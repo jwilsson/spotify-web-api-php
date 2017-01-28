@@ -21,7 +21,7 @@ class Request
      *
      * @throws SpotifyWebAPIException
      *
-     * @return array|object The parsed response body. Type is controlled by Request::setReturnAssoc().
+     * @return array|object The parsed response body. Type is controlled by `Request::setReturnType()`.
      */
     protected function parseBody($body, $status)
     {
@@ -79,7 +79,7 @@ class Request
      * @param array $headers Optional. HTTP headers.
      *
      * @return array Response data.
-     * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
+     * - array|object body The response body. Type is controlled by `Request::setReturnType()`.
      * - string headers Response headers.
      * - int status HTTP status code.
      * - string url The requested URL.
@@ -98,7 +98,7 @@ class Request
      * @param array $headers Optional. HTTP headers.
      *
      * @return array Response data.
-     * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
+     * - array|object body The response body. Type is controlled by `Request::setReturnType()`.
      * - string headers Response headers.
      * - int status HTTP status code.
      * - string url The requested URL.
@@ -112,7 +112,7 @@ class Request
      * Get the latest full response from the Spotify API.
      *
      * @return array Response data.
-     * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
+     * - array|object body The response body. Type is controlled by `Request::setReturnType()`.
      * - array headers Response headers.
      * - int status HTTP status code.
      * - string url The requested URL.
@@ -125,7 +125,7 @@ class Request
     /**
      * Get a value indicating the response body type.
      *
-     * @deprecated Use Request::getReturnType() instead.
+     * @deprecated Use `Request::getReturnType()` instead.
      *
      * @return bool Whether the body is returned as an associative array or an stdClass.
      */
@@ -158,8 +158,10 @@ class Request
      * @param array $parameters Optional. Query parameters.
      * @param array $headers Optional. HTTP headers.
      *
+     * @throws SpotifyWebAPIException
+     *
      * @return array Response data.
-     * - array|object body The response body. Type is controlled by Request::setReturnAssoc().
+     * - array|object body The response body. Type is controlled by `Request::setReturnType()`.
      * - array headers Response headers.
      * - int status HTTP status code.
      * - string url The requested URL.
@@ -245,7 +247,7 @@ class Request
     /**
      * Set the return type for the response body.
      *
-     * @deprecated Use Request::setReturnType() instead.
+     * @deprecated Use `Request::setReturnType()` instead.
      *
      * @param bool $returnAssoc Whether to return an associative array or an stdClass.
      *
@@ -254,7 +256,7 @@ class Request
     public function setReturnAssoc($returnAssoc)
     {
         trigger_error(
-            'Request::setReturnAssoc() is deprecated. Use Request::setReturnType() instead.',
+            'Request::setReturnType() is deprecated. Use Request::setReturnType() instead.',
             E_USER_DEPRECATED
         );
 
@@ -265,7 +267,7 @@ class Request
     /**
      * Set the return type for the response body.
      *
-     * @param string $returnType One of the Request::RETURN_* constants.
+     * @param string $returnType One of the `Request::RETURN_*` constants.
      *
      * @return void
      */

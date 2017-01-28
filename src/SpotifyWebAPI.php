@@ -144,7 +144,7 @@ class SpotifyWebAPI
      * - name string Required. Name of the playlist.
      * - public bool Optional. Whether the playlist should be public or not.
      *
-     * @return array|object The new playlist. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The new playlist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function createUserPlaylist($userId, $options)
     {
@@ -349,7 +349,7 @@ class SpotifyWebAPI
      *
      * @param string $albumId ID of the album.
      *
-     * @return array|object The requested album. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The requested album. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getAlbum($albumId)
     {
@@ -370,7 +370,7 @@ class SpotifyWebAPI
      * @param array|object $options Optional. Options for the albums.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
-     * @return array|object The requested albums. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The requested albums. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getAlbums($albumIds, $options = [])
     {
@@ -396,7 +396,7 @@ class SpotifyWebAPI
      * - int offset Optional. Number of tracks to skip.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
-     * @return array|object The requested album tracks. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The requested album tracks. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getAlbumTracks($albumId, $options = [])
     {
@@ -415,7 +415,7 @@ class SpotifyWebAPI
      *
      * @param string $artistId ID of the artist.
      *
-     * @return array|object The requested artist. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The requested artist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getArtist($artistId)
     {
@@ -434,7 +434,7 @@ class SpotifyWebAPI
      *
      * @param array $artistIds IDs of the artists.
      *
-     * @return array|object The requested artists. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The requested artists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getArtists($artistIds)
     {
@@ -458,7 +458,7 @@ class SpotifyWebAPI
      *
      * @param string $artistId ID of the artist.
      *
-     * @return array|object The artist's related artists. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The artist's related artists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getArtistRelatedArtists($artistId)
     {
@@ -482,7 +482,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of albums.
      * - int offset Optional. Number of albums to skip.
      *
-     * @return array|object The artist's albums. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The artist's albums. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getArtistAlbums($artistId, $options = [])
     {
@@ -509,7 +509,7 @@ class SpotifyWebAPI
      * @param array|object $options Options for the tracks.
      * - string $country Required. An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
      *
-     * @return array|object The artist's top tracks. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The artist's top tracks. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getArtistTopTracks($artistId, $options)
     {
@@ -529,7 +529,7 @@ class SpotifyWebAPI
      *
      * @param array $trackIds IDs of the tracks.
      *
-     * @return array|object The tracks' audio features. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The tracks' audio features. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getAudioFeatures($trackIds)
     {
@@ -557,7 +557,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of categories.
      * - int offset Optional. Number of categories to skip.
      *
-     * @return array|object The list of categories. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The list of categories. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getCategoriesList($options = [])
     {
@@ -581,7 +581,7 @@ class SpotifyWebAPI
      * - string locale Optional. Language to show category in, for example sv_SE.
      * - string country Optional. An ISO 3166-1 alpha-2 country code. Show category from this country.
      *
-     * @return array|object The category. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The category. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getCategory($categoryId, $options = [])
     {
@@ -606,7 +606,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of playlists.
      * - int offset Optional. Number of playlists to skip.
      *
-     * @return array|object The list of playlists. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The list of playlists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getCategoryPlaylists($categoryId, $options = [])
     {
@@ -631,7 +631,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of playlists.
      * - int offset Optional. Number of playlists to skip.
      *
-     * @return array|object The featured playlists. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The featured playlists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getFeaturedPlaylists($options = [])
     {
@@ -649,7 +649,7 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-recommendations/#available-genre-seeds
      *
-     * @return array|object All possible seed genres. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object All possible seed genres. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getGenreSeeds()
     {
@@ -666,7 +666,7 @@ class SpotifyWebAPI
      * Get the latest full response from the Spotify API.
      *
      * @return array Response data.
-     * - array|object body The response body. Type is controlled by SpotifyWebAPI::setReturnType().
+     * - array|object body The response body. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      * - array headers Response headers.
      * - int status HTTP status code.
      * - string url The requested URL.
@@ -686,7 +686,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of items.
      * - int offset Optional. Number of items to skip.
      *
-     * @return array|object The new releases. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The new releases. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getNewReleases($options = [])
     {
@@ -708,7 +708,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of playlists.
      * - int offset Optional. Number of playlists to skip.
      *
-     * @return array|object The user's playlists. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The user's playlists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getMyPlaylists($options = [])
     {
@@ -731,7 +731,7 @@ class SpotifyWebAPI
      * - int offset Optional. Number of albums to skip.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
-     * @return array|object The user's saved albums. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The user's saved albums. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getMySavedAlbums($options = [])
     {
@@ -754,7 +754,7 @@ class SpotifyWebAPI
      * - int offset Optional. Number of tracks to skip.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
-     * @return array|object The user's saved tracks. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The user's saved tracks. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getMySavedTracks($options = [])
     {
@@ -778,7 +778,7 @@ class SpotifyWebAPI
      * - int offset Optional. Number of tracks to skip.
      * - mixed time_range Optional. Over what time frame the data is calculated. See Spotify API docs for more info.
      *
-     * @return array|object A list with the requested top entity. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object A list with the requested top entity. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getMyTop($type, $options = [])
     {
@@ -806,7 +806,7 @@ class SpotifyWebAPI
      * - array seed_tracks Track IDs to seed by.
      * - mixed target_* Optional. Target value for one of the tunable track attributes.
      *
-     * @return array|object The requested recommendations. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The requested recommendations. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getRecommendations($options = [])
     {
@@ -830,7 +830,7 @@ class SpotifyWebAPI
     /**
      * Get the return type for the response body.
      *
-     * @deprecated Use SpotifyWebAPI::getReturnType() instead.
+     * @deprecated Use `SpotifyWebAPI::getReturnType()` instead.
      *
      * @return bool Whether an associative array or an stdClass is returned.
      */
@@ -872,7 +872,7 @@ class SpotifyWebAPI
      * @param array|object $options Optional. Options for the track.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
-     * @return array|object The requested track. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The requested track. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getTrack($trackId, $options = [])
     {
@@ -893,7 +893,7 @@ class SpotifyWebAPI
      * @param array|object $options Optional. Options for the albums.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
-     * @return array|object The requested tracks. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The requested tracks. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getTracks($trackIds, $options = [])
     {
@@ -914,7 +914,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user.
      *
-     * @return array|object The requested user. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The requested user. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getUser($userId)
     {
@@ -936,7 +936,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of artists returned.
      * - string after Optional. The last artist ID retrieved from the previous request.
      *
-     * @return array|object A list of artists. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object A list of artists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getUserFollowedArtists($options = [])
     {
@@ -966,7 +966,7 @@ class SpotifyWebAPI
      * - string|array fields Optional. A list of fields to return. See Spotify docs for more info.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
-     * @return array|object The user's playlist. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The user's playlist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getUserPlaylist($userId, $playlistId, $options = [])
     {
@@ -995,7 +995,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of tracks.
      * - int offset Optional. Number of tracks to skip.
      *
-     * @return array|object The user's playlists. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The user's playlists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getUserPlaylists($userId, $options = [])
     {
@@ -1021,7 +1021,7 @@ class SpotifyWebAPI
      * - int offset Optional. Number of tracks to skip.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
-     * @return array|object The tracks in the playlist. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The tracks in the playlist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getUserPlaylistTracks($userId, $playlistId, $options = [])
     {
@@ -1045,7 +1045,7 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-current-users-profile/
      *
-     * @return array|object The currently authenticated user. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The currently authenticated user. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function me()
     {
@@ -1182,7 +1182,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of items.
      * - int offset Optional. Number of items to skip.
      *
-     * @return array|object The search results. Type is controlled by SpotifyWebAPI::setReturnType().
+     * @return array|object The search results. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function search($query, $type, $options = [])
     {
@@ -1216,7 +1216,7 @@ class SpotifyWebAPI
     /**
      * Set the return type for the response body.
      *
-     * @deprecated Use SpotifyWebAPI::setReturnType() instead.
+     * @deprecated Use `SpotifyWebAPI::setReturnType()` instead.
      *
      * @param bool $returnAssoc Whether to return an associative array or an stdClass.
      *
@@ -1237,7 +1237,7 @@ class SpotifyWebAPI
     /**
      * Set the return type for the response body.
      *
-     * @param string $returnType One of the SpotifyWebAPI::RETURN_* constants.
+     * @param string $returnType One of the `SpotifyWebAPI::RETURN_*` constants.
      *
      * @return void
      */
