@@ -4,6 +4,7 @@ title: Method Reference - SpotifyWebAPI
 ---
 
 ## Constants
+
 **RETURN_ASSOC**
 **RETURN_OBJECT**
 
@@ -460,7 +461,7 @@ Requires a valid access token.<br>
 
 
 #### Return values
-* **array\|object** A list with the requested top entity. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+* **array\|object** A list of the requested top entity. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
 

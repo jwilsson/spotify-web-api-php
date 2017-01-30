@@ -5,6 +5,7 @@ title: Method Reference - Session
 
 ## Constants
 
+
 ## Methods
 
 ### __construct
