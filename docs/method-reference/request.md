@@ -5,10 +5,10 @@ title: Method Reference - Request
 
 ## Constants
 
-**ACCOUNT_URL**
-**API_URL**
-**RETURN_ASSOC**
-**RETURN_OBJECT**
+* **ACCOUNT_URL**
+* **API_URL**
+* **RETURN_ASSOC**
+* **RETURN_OBJECT**
 
 ## Methods
 

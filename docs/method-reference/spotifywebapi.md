@@ -5,8 +5,8 @@ title: Method Reference - SpotifyWebAPI
 
 ## Constants
 
-**RETURN_ASSOC**
-**RETURN_OBJECT**
+* **RETURN_ASSOC**
+* **RETURN_OBJECT**
 
 ## Methods
 
