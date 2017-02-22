@@ -41,14 +41,17 @@ class SpotifyWebAPI
      * Convert Spotify object IDs to Spotify URIs.
      *
      * @param array|string $ids ID(s) to convert.
+     * @param string $type Optional. Spotify object type. Default is 'track'.
      *
      * @return array|string Spotify URI(s).
      */
-    protected function idToUri($ids)
+    protected function idToUri($ids, $type = 'track')
     {
-        $ids = array_map(function ($id) {
-            if (substr($id, 0, 14) != 'spotify:track:') {
-                $id = 'spotify:track:' . $id;
+        $type = 'spotify:' . $type . ':';
+
+        $ids = array_map(function ($id) use ($type) {
+            if (substr($id, 0, 14) != $type) {
+                $id = $type . $id;
             }
 
             return $id;
