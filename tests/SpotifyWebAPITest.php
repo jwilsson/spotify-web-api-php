@@ -60,9 +60,16 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $tracks = [
             '1id6H6vcwSB9GGv9NXh5cl',
             '3mqRLlD9j92BBv1ueFhJ1l',
+            'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
         ];
 
-        $expected = json_encode($tracks);
+        $expectedTracks = [
+            '1id6H6vcwSB9GGv9NXh5cl',
+            '3mqRLlD9j92BBv1ueFhJ1l',
+            '1id6H6vcwSB9GGv9NXh5cl',
+        ];
+
+        $expected = json_encode($expectedTracks);
 
         $headers = [
             'Authorization' => 'Bearer ' . $this->accessToken,

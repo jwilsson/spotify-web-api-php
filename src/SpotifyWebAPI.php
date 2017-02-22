@@ -58,6 +58,22 @@ class SpotifyWebAPI
     }
 
     /**
+     * Convert Spotify URIs to Spotify object IDs
+     *
+     * @param array|string $uriIds URI(s) to convert.
+     *
+     * @return array|string Spotify ID(s).
+     */
+    protected function uriToId($uriIds)
+    {
+        $uriIds = array_map(function ($id) {
+            return str_replace('spotify:track:', '', $id);
+        }, (array) $uriIds);
+
+        return (count($uriIds) == 1) ? $uriIds[0] : $uriIds;
+    }
+
+    /**
      * Add albums to the current user's Spotify library.
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/save-albums-user/
@@ -91,6 +107,7 @@ class SpotifyWebAPI
      */
     public function addMyTracks($tracks)
     {
+        $tracks = $this->uriToId($tracks);
         $tracks = json_encode((array) $tracks);
 
         $headers = $this->authHeaders();
