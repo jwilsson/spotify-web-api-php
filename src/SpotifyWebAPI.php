@@ -50,7 +50,7 @@ class SpotifyWebAPI
         $type = 'spotify:' . $type . ':';
 
         $ids = array_map(function ($id) use ($type) {
-            if (substr($id, 0, 14) != $type) {
+            if (substr($id, 0, strlen($type)) != $type) {
                 $id = $type . $id;
             }
 
@@ -64,13 +64,16 @@ class SpotifyWebAPI
      * Convert Spotify URIs to Spotify object IDs
      *
      * @param array|string $uriIds URI(s) to convert.
+     * @param string $type Optional. Spotify object type. Default is 'track'.
      *
      * @return array|string Spotify ID(s).
      */
-    protected function uriToId($uriIds)
+    protected function uriToId($uriIds, $type = 'track')
     {
-        $uriIds = array_map(function ($id) {
-            return str_replace('spotify:track:', '', $id);
+        $type = 'spotify:' . $type . ':';
+
+        $uriIds = array_map(function ($id) use ($type) {
+            return str_replace($type, '', $id);
         }, (array) $uriIds);
 
         return (count($uriIds) == 1) ? $uriIds[0] : $uriIds;
@@ -87,6 +90,7 @@ class SpotifyWebAPI
      */
     public function addMyAlbums($albums)
     {
+        $albums = $this->uriToId($albums, 'album');
         $albums = json_encode((array) $albums);
 
         $headers = $this->authHeaders();
@@ -218,6 +222,7 @@ class SpotifyWebAPI
      */
     public function deleteMyAlbums($albums)
     {
+        $albums = $this->uriToId($albums, 'album');
         $albums = json_encode(
             (array) $albums
         );
@@ -243,6 +248,7 @@ class SpotifyWebAPI
      */
     public function deleteMyTracks($tracks)
     {
+        $tracks = $this->uriToId($tracks);
         $tracks = json_encode(
             (array) $tracks
         );

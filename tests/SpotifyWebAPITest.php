@@ -27,9 +27,16 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $albums = [
             '1oR3KrPIp4CbagPa3PhtPp',
             '6lPb7Eoon6QPbscWbMsk6a',
+            'spotify:album:1oR3KrPIp4CbagPa3PhtPp',
         ];
 
-        $expected = json_encode($albums);
+        $expectedAlbums = [
+            '1oR3KrPIp4CbagPa3PhtPp',
+            '6lPb7Eoon6QPbscWbMsk6a',
+            '1oR3KrPIp4CbagPa3PhtPp',
+        ];
+
+        $expected = json_encode($expectedAlbums);
 
         $headers = [
             'Authorization' => 'Bearer ' . $this->accessToken,
@@ -219,9 +226,16 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $albums = [
             '1oR3KrPIp4CbagPa3PhtPp',
             '6lPb7Eoon6QPbscWbMsk6a',
+            'spotify:album:1oR3KrPIp4CbagPa3PhtPp'
         ];
 
-        $expected = json_encode($albums);
+        $expectedAlbums = [
+            '1oR3KrPIp4CbagPa3PhtPp',
+            '6lPb7Eoon6QPbscWbMsk6a',
+            '1oR3KrPIp4CbagPa3PhtPp'
+        ];
+
+        $expected = json_encode($expectedAlbums);
 
         $headers = [
             'Authorization' => 'Bearer ' . $this->accessToken,
@@ -252,9 +266,16 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $tracks = [
             '1id6H6vcwSB9GGv9NXh5cl',
             '3mqRLlD9j92BBv1ueFhJ1l',
+            'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
         ];
 
-        $expected = json_encode($tracks);
+        $expectedTracks = [
+            '1id6H6vcwSB9GGv9NXh5cl',
+            '3mqRLlD9j92BBv1ueFhJ1l',
+            '1id6H6vcwSB9GGv9NXh5cl',
+        ];
+
+        $expected = json_encode($expectedTracks);
 
         $headers = [
             'Authorization' => 'Bearer ' . $this->accessToken,
