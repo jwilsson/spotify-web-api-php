@@ -1,8 +1,8 @@
 # Changelog
-## 1.6.1 (2016-01-28)
+## 1.6.1 (2017-01-28)
 * Bump for bad `1.6.0`.
 
-## 1.6.0 (2016-01-28)
+## 1.6.0 (2017-01-28)
 * Deprecated the following methods and replaced them with ([6aac5c6](https://github.com/jwilsson/spotify-web-api-php/commit/6aac5c6880017e0fadf7a48c5ba740dad2d9e617)):
     * `Request::getReturnAssoc()` -> `Request::getReturnType()`
     * `Request::setReturnAssoc()` -> `Request::setReturnType(Request::RETURN_ASSOC)`
@@ -29,7 +29,7 @@
 * Fixed a typo in the `SpotifyWebAPI::getLastResponse()` docs. ([bdd3ecc](https://github.com/jwilsson/spotify-web-api-php/commit/bdd3ecc393ff83bc2d4af983c363cdaddb1b544b))
 
 ## 1.4.2 (2016-10-27)
-* Array indexes in SpotifyWebAPI::idToUri() are now always reset to prevent undefined offset errors. ([ae8bd96](https://github.com/jwilsson/spotify-web-api-php/commit/ae8bd9673795747fad40ff4caf6b12f17c045fc5))
+* Array indexes in `SpotifyWebAPI::idToUri()` are now always reset to prevent undefined offset errors. ([ae8bd96](https://github.com/jwilsson/spotify-web-api-php/commit/ae8bd9673795747fad40ff4caf6b12f17c045fc5))
 
 ## 1.4.1 (2016-10-25)
 * All requests will now be compressed using gzip. ([5eeabde](https://github.com/jwilsson/spotify-web-api-php/commit/5eeabde90d1c21832384f42d96c1208ce6fda287))
