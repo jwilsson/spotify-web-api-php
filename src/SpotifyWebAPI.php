@@ -1122,7 +1122,9 @@ class SpotifyWebAPI
      */
     public function myTracksContains($tracks)
     {
+        $tracks = $this->uriToId($tracks);
         $tracks = implode(',', (array) $tracks);
+
         $options = [
             'ids' => $tracks,
         ];
