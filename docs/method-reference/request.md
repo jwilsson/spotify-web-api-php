@@ -19,6 +19,12 @@ title: Method Reference - Request
 
 Make a request to the "account" endpoint.
 
+#### Arguments
+* `$method` **string** - The HTTP method to use.
+* `$uri` **string** - The URI to request.
+* `$parameters` **array** - Optional. Query parameters.
+* `$headers` **array** - Optional. HTTP headers.
+
 
 #### Return values
 * **array** Response data.
@@ -35,6 +41,12 @@ Make a request to the "account" endpoint.
     array SpotifyWebAPI\Request::api(string $method, string $uri, array $parameters, array $headers)
 
 Make a request to the "api" endpoint.
+
+#### Arguments
+* `$method` **string** - The HTTP method to use.
+* `$uri` **string** - The URI to request.
+* `$parameters` **array** - Optional. Query parameters.
+* `$headers` **array** - Optional. HTTP headers.
 
 
 #### Return values
@@ -98,6 +110,12 @@ Get a value indicating the response body type.
 Make a request to Spotify.<br>
 You'll probably want to use one of the convenience methods instead.
 
+#### Arguments
+* `$method` **string** - The HTTP method to use.
+* `$url` **string** - The URL to request.
+* `$parameters` **array** - Optional. Query parameters.
+* `$headers` **array** - Optional. HTTP headers.
+
 
 #### Return values
 * **array** Response data.
@@ -116,6 +134,9 @@ _Deprecated: Use `Request::setReturnType()` instead._
 
 Use `Request::setReturnType()` instead.
 
+#### Arguments
+* `$returnAssoc` **boolean** - Whether to return an associative array or an stdClass.
+
 
 #### Return values
 * **void** 
@@ -128,6 +149,9 @@ Use `Request::setReturnType()` instead.
     void SpotifyWebAPI\Request::setReturnType(string $returnType)
 
 Set the return type for the response body.
+
+#### Arguments
+* `$returnType` **string** - One of the Request::RETURN_* constants.
 
 
 #### Return values
