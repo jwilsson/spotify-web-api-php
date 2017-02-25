@@ -1418,10 +1418,11 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $albums = [
             '1oR3KrPIp4CbagPa3PhtPp',
             '6lPb7Eoon6QPbscWbMsk6a',
+            'spotify:album:1oR3KrPIp4CbagPa3PhtPp',
         ];
 
         $expected = [
-            'ids' => '1oR3KrPIp4CbagPa3PhtPp,6lPb7Eoon6QPbscWbMsk6a',
+            'ids' => '1oR3KrPIp4CbagPa3PhtPp,6lPb7Eoon6QPbscWbMsk6a,1oR3KrPIp4CbagPa3PhtPp',
         ];
 
         $headers = [

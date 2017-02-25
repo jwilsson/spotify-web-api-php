@@ -1095,7 +1095,9 @@ class SpotifyWebAPI
      */
     public function myAlbumsContains($albums)
     {
+        $albums = $this->uriToId($albums, 'album');
         $albums = implode(',', (array) $albums);
+
         $options = [
             'ids' => $albums,
         ];
