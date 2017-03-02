@@ -1780,4 +1780,37 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($response[0]);
     }
+
+    public function testGetMyHistory()
+    {
+        $options = [
+            'limit' => '4'
+        ];
+
+        $expected = [
+            'limit' => '4'
+        ];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('recently-played'),
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/me/player/recently-played',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getFeaturedPlaylists($options);
+
+        $this->assertObjectHasAttribute('items', $response);
+    }        
 }
