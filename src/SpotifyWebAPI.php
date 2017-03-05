@@ -1380,4 +1380,24 @@ class SpotifyWebAPI
 
         return $this->lastResponse['body'];
     }
+    
+   /**
+     * Get tracks from the current user’s recent play history.
+     * https://developer.spotify.com/web-api/web-api-personalization-endpoints/get-recently-played/
+     *
+     * @param array|object $options Optional. Options to get tracks history.
+     * - int limit Optional. Maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50
+     * - string after Optional. Unix timestamp in ms (13 digits). Returns all items after this cursor position.
+     * - string before Optional. Unix timestamp in ms (13 digits). Returns all items before this cursor position.
+     *
+     * @return array|object Most recent tracks played by a user. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+     */
+    public function getMyRecentTracks($options = [])
+    {
+        $options = (array) $options;
+        $headers = $this->authHeaders();
+        $uri = '/v1/me/player/recently-played';
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+        return $this->lastResponse['body'];
+    }
 }
