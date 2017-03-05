@@ -1121,10 +1121,13 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         PHPUnit_Framework_Error_Deprecated::$enabled = false;
 
-        $stub = $this->getMock('SpotifyWebAPI\Request');
+        $stub = $this->getMockBuilder('Request')
+                ->setMethods(['getReturnAssoc'])
+                ->getMock();
+
         $stub->expects($this->once())
-            ->method('getReturnAssoc')
-            ->willReturn(true);
+                ->method('getReturnAssoc')
+                ->willReturn(true);
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
 
@@ -1135,10 +1138,13 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetReturnType()
     {
-        $stub = $this->getMock('SpotifyWebAPI\Request');
+        $stub = $this->getMockBuilder('Request')
+                ->setMethods(['getReturnType'])
+                ->getMock();
+
         $stub->expects($this->once())
-            ->method('getReturnType')
-            ->willReturn(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
+                ->method('getReturnType')
+                ->willReturn(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
 
@@ -1615,10 +1621,13 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         PHPUnit_Framework_Error_Deprecated::$enabled = false;
 
-        $stub = $this->getMock('SpotifyWebAPI\Request');
+        $stub = $this->getMockBuilder('Request')
+                ->setMethods(['setReturnType'])
+                ->getMock();
+
         $stub->expects($this->once())
-            ->method('setReturnType')
-            ->with(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
+                ->method('setReturnType')
+                ->willReturn(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setReturnAssoc(true);
@@ -1628,10 +1637,13 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testSetReturnType()
     {
-        $stub = $this->getMock('SpotifyWebAPI\Request');
+        $stub = $this->getMockBuilder('Request')
+                ->setMethods(['setReturnType'])
+                ->getMock();
+
         $stub->expects($this->once())
-            ->method('setReturnType')
-            ->with(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
+                ->method('setReturnType')
+                ->willReturn(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setReturnType(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
