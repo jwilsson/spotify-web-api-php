@@ -1092,3 +1092,24 @@ Requires a valid access token.<br>
 * **array** Whether each user is following the playlist.
 
 
+
+### getMyRecentTracks
+
+
+    array|object SpotifyWebAPI\SpotifyWebAPI::getMyRecentTracks(array|object $options)
+
+Get tracks from the current user’s recent play history.<br>
+[https://developer.spotify.com/web-api/web-api-personalization-endpoints/get-recently-played/](https://developer.spotify.com/web-api/web-api-personalization-endpoints/get-recently-played/)
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options to get tracks history.
+    * int limit Optional. Maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50
+    * string after Optional. Unix timestamp in ms (13 digits). Returns all items after this cursor position.
+    * string before Optional. Unix timestamp in ms (13 digits). Returns all items before this cursor position.
+
+
+
+#### Return values
+* **array\|object** Most recent tracks played by a user. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+
+
