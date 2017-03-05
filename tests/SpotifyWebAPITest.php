@@ -1781,14 +1781,14 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertTrue($response[0]);
     }
 
-    public function testGetMyHistory()
+    public function testGetMyRecentTracks()
     {
         $options = [
-            'limit' => '4'
+            'limit' => '2'
         ];
 
         $expected = [
-            'limit' => '4'
+            'limit' => '2'
         ];
 
         $headers = [
@@ -1809,7 +1809,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getFeaturedPlaylists($options);
+        $response = $api->getMyRecentTracks($options);
 
         $this->assertObjectHasAttribute('items', $response);
     }        
