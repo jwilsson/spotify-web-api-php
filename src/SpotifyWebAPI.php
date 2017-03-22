@@ -577,9 +577,9 @@ class SpotifyWebAPI
      * Requires a valid access token.
      * https://developer.spotify.com/web-api/get-audio-analysis/
      *
-     * @param array $trackIds IDs of the tracks.
+     * @param array $trackId ID of the tracks.
      *
-     * @return array|object The tracks' audio features. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+     * @return object The track's audio analysis. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
     public function getAudioAnalysis($trackId)
     {
