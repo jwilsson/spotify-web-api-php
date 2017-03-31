@@ -728,6 +728,26 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the current user’s currently playing track.
+     * https://developer.spotify.com/web-api/get-the-users-currently-playing-track/
+     *
+     * @param array|object $options Optional. Options for the track.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+     *
+     * @return array|object The user's currently playing track. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+     */
+    public function getMyCurrentTrack($options = [])
+    {
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/me/player/currently-playing';
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get the current user’s devices.
      * https://developer.spotify.com/web-api/get-a-users-available-devices/
      *
