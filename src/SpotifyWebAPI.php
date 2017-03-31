@@ -765,6 +765,27 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the current user’s current playback information.
+     * https://developer.spotify.com/web-api/get-information-about-the-users-current-playback/
+     *
+     * @param array|object $options Optional. Options for the info.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+     *
+     * @return array|object The user's playback information. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+     */
+    public function getMyCurrentPlaybackInfo($options = [])
+    {
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/me/player';
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+
+    /**
      * Get the current user’s playlists.
      * https://developer.spotify.com/web-api/get-a-list-of-current-users-playlists/
      *

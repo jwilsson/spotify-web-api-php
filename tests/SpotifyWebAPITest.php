@@ -1029,6 +1029,39 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('devices', $response);
     }
 
+    public function testGetMyCurrentPlaybackInfo()
+    {
+        $options = [
+            'market' => 'SE',
+        ];
+
+        $expected = [
+            'market' => 'SE',
+        ];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('user-current-playback-info'),
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/me/player',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getMyCurrentPlaybackInfo($options);
+
+        $this->assertObjectHasAttribute('item', $response);
+    }
+
     public function testGetMyPlaylists()
     {
         $options = [
