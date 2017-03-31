@@ -971,6 +971,31 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('albums', $response);
     }
 
+    public function testGetMyDevices()
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('user-devices'),
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/me/player/devices',
+            [],
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getMyDevices();
+
+        $this->assertObjectHasAttribute('devices', $response);
+    }
+
     public function testGetMyPlaylists()
     {
         $options = [
@@ -1851,5 +1876,5 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $response = $api->getMyRecentTracks($options);
 
         $this->assertObjectHasAttribute('items', $response);
-    }        
+    }
 }

@@ -728,6 +728,23 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the current user’s devices.
+     * https://developer.spotify.com/web-api/get-a-users-available-devices/
+     *
+     * @return array|object The user's devices. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+     */
+    public function getMyDevices()
+    {
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/me/player/devices';
+
+        $this->lastResponse = $this->request->api('GET', $uri, [], $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get the current user’s playlists.
      * https://developer.spotify.com/web-api/get-a-list-of-current-users-playlists/
      *
