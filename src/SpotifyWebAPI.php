@@ -1211,6 +1211,37 @@ class SpotifyWebAPI
     }
 
     /**
+     * Start playback for the current user.
+     * https://developer.spotify.com/web-api/start-a-users-playback/
+     *
+     * @param string $deviceId Optional. ID of the device to play on.
+     * @param array|object $options Optional. Options for the playback.
+     * - string context_uri Optional. Spotify URI of the context to play, for example an album.
+     * - array uris Optional. Spotify track URIs to play.
+     * - object offset Optional. Indicates from where in the context playback should start.
+     *
+     * @return array Whether the playback was successfully started.
+     */
+    public function play($deviceId = '', $options = [])
+    {
+        $options = json_encode($options);
+
+        $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
+
+        $uri = '/v1/me/player/play';
+
+        // We need to manually append data to the URI since it's a PUT request
+        if ($deviceId) {
+            $uri = $uri . '?device_id=' . $deviceId;
+        }
+
+        $this->lastResponse = $this->request->api('PUT', $uri, $options, $headers);
+
+        return $this->lastResponse['status'] == 204;
+    }
+
+    /**
      * Reorder the tracks in a user's playlist.
      * https://developer.spotify.com/web-api/reorder-playlists-tracks/
      *
