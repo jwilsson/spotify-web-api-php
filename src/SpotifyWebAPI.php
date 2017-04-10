@@ -156,6 +156,32 @@ class SpotifyWebAPI
     }
 
     /**
+     * Change the current user's playback device.
+     * https://developer.spotify.com/web-api/transfer-a-users-playback/
+     *
+     * * @param array|object $options Options for the playback transfer.
+     * - device_ids string|array Required. ID of the device to switch to.
+     * - play boolean. Optional. Whether to start playing on the new device
+     *
+     * @return bool Whether the playback device was successfully changed.
+     */
+    public function changeMyDevice($options)
+    {
+        $options = (array) $options;
+        $options['device_ids'] = (array) $options['device_ids'];
+        $options = json_encode($options);
+
+        $headers = $this->authHeaders();
+        $headers['Content-Type'] = 'application/json';
+
+        $uri = '/v1/me/player';
+
+        $this->lastResponse = $this->request->api('PUT', $uri, $options, $headers);
+
+        return $this->lastResponse['status'] == 204;
+    }
+
+    /**
      * Create a new playlist for a user.
      * https://developer.spotify.com/web-api/create-playlist/
      *
