@@ -1211,6 +1211,30 @@ class SpotifyWebAPI
     }
 
     /**
+     * Pause playback for the current user.
+     * https://developer.spotify.com/web-api/pause-a-users-playback/
+     *
+     * @param string $deviceId Optional. ID of the device to pause on.
+     *
+     * @return array Whether the playback was successfully paused.
+     */
+    public function pause($deviceId = '')
+    {
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/me/player/pause';
+
+        // We need to manually append data to the URI since it's a PUT request
+        if ($deviceId) {
+            $uri = $uri . '?device_id=' . $deviceId;
+        }
+
+        $this->lastResponse = $this->request->api('PUT', $uri, [], $headers);
+
+        return $this->lastResponse['status'] == 204;
+    }
+
+    /**
      * Start playback for the current user.
      * https://developer.spotify.com/web-api/start-a-users-playback/
      *
