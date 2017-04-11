@@ -1431,6 +1431,30 @@ class SpotifyWebAPI
     }
 
     /**
+     * Change playback position for the current user.
+     * https://developer.spotify.com/web-api/seek-to-position-in-currently-playing-track/
+     *
+     * @param array|object $options Optional. Options for the playback seeking.
+     * - string position_ms Required. The position in milliseconds to seek to.
+     * - string device_id Optional. ID of the device to target.
+     *
+     * @return array Whether the playback position was successfully changed.
+     */
+    public function seek($options)
+    {
+        $options = http_build_query($options);
+
+        $headers = $this->authHeaders();
+
+        // We need to manually append data to the URI since it's a PUT request
+        $uri = '/v1/me/player/seek?' . $options;
+
+        $this->lastResponse = $this->request->api('PUT', $uri, [], $headers);
+
+        return $this->lastResponse['status'] == 204;
+    }
+
+    /**
      * Set the access token to use.
      *
      * @param string $accessToken The access token.
