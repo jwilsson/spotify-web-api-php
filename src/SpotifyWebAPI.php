@@ -1373,6 +1373,30 @@ class SpotifyWebAPI
     }
 
     /**
+     * Set repeat mode for the current user’s playback.
+     * https://developer.spotify.com/web-api/set-repeat-mode-on-users-playback/
+     *
+     * @param array|object $options Optional. Options for the playback repeat mode.
+     * - string state Required. The repeat mode. See Spotify docs for possible values.
+     * - string device_id Optional. ID of the device to target.
+     *
+     * @return array Whether the playback repeat mode was successfully changed.
+     */
+    public function repeat($options)
+    {
+        $options = http_build_query($options);
+
+        $headers = $this->authHeaders();
+
+        // We need to manually append data to the URI since it's a PUT request
+        $uri = '/v1/me/player/repeat?' . $options;
+
+        $this->lastResponse = $this->request->api('PUT', $uri, [], $headers);
+
+        return $this->lastResponse['status'] == 204;
+    }
+
+    /**
      * Replace all tracks in a user's playlist with new ones.
      * https://developer.spotify.com/web-api/replace-playlists-tracks/
      *
