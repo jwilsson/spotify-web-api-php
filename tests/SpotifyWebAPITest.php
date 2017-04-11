@@ -970,41 +970,6 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('body', $response);
     }
 
-    public function testGetNewReleases()
-    {
-        $options = [
-            'country' => 'SE',
-            'limit' => 10,
-        ];
-
-        $expected = [
-            'country' => 'SE',
-            'limit' => 10,
-        ];
-
-        $headers = [
-            'Authorization' => 'Bearer ' . $this->accessToken,
-        ];
-
-        $return = [
-            'body' => get_fixture('albums'),
-        ];
-
-        $stub = $this->setupStub(
-            'GET',
-            '/v1/browse/new-releases',
-            $expected,
-            $headers,
-            $return
-        );
-
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
-        $api->setAccessToken($this->accessToken);
-        $response = $api->getNewReleases($options);
-
-        $this->assertObjectHasAttribute('albums', $response);
-    }
-
     public function testGetMyCurrentTrack()
     {
         $options = [
@@ -1129,6 +1094,39 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('items', $response);
     }
 
+    public function testGetMyRecentTracks()
+    {
+        $options = [
+            'limit' => '2'
+        ];
+
+        $expected = [
+            'limit' => '2'
+        ];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('recently-played'),
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/me/player/recently-played',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getMyRecentTracks($options);
+
+        $this->assertObjectHasAttribute('items', $response);
+    }
+
     public function testGetMySavedAlbums()
     {
         $options = [
@@ -1232,6 +1230,41 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $response = $api->getMyTop('artists', $options);
 
         $this->assertObjectHasAttribute('items', $response);
+    }
+
+    public function testGetNewReleases()
+    {
+        $options = [
+            'country' => 'SE',
+            'limit' => 10,
+        ];
+
+        $expected = [
+            'country' => 'SE',
+            'limit' => 10,
+        ];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('albums'),
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/browse/new-releases',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getNewReleases($options);
+
+        $this->assertObjectHasAttribute('albums', $response);
     }
 
     public function testGetRecommendations()
@@ -2000,38 +2033,5 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         );
 
         $this->assertTrue($response[0]);
-    }
-
-    public function testGetMyRecentTracks()
-    {
-        $options = [
-            'limit' => '2'
-        ];
-
-        $expected = [
-            'limit' => '2'
-        ];
-
-        $headers = [
-            'Authorization' => 'Bearer ' . $this->accessToken,
-        ];
-
-        $return = [
-            'body' => get_fixture('recently-played'),
-        ];
-
-        $stub = $this->setupStub(
-            'GET',
-            '/v1/me/player/recently-played',
-            $expected,
-            $headers,
-            $return
-        );
-
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
-        $api->setAccessToken($this->accessToken);
-        $response = $api->getMyRecentTracks($options);
-
-        $this->assertObjectHasAttribute('items', $response);
     }
 }

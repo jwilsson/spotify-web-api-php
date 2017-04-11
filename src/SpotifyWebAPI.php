@@ -732,28 +732,6 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get new releases.
-     * https://developer.spotify.com/web-api/get-list-new-releases/
-     *
-     * @param array|object $options Optional. Options for the items.
-     * - string country Optional. An ISO 3166-1 alpha-2 country code. Show items relevant to this country.
-     * - int limit Optional. Limit the number of items.
-     * - int offset Optional. Number of items to skip.
-     *
-     * @return array|object The new releases. Type is controlled by `SpotifyWebAPI::setReturnType()`.
-     */
-    public function getNewReleases($options = [])
-    {
-        $headers = $this->authHeaders();
-
-        $uri = '/v1/browse/new-releases';
-
-        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
-
-        return $this->lastResponse['body'];
-    }
-
-    /**
      * Get the current user’s currently playing track.
      * https://developer.spotify.com/web-api/get-the-users-currently-playing-track/
      *
@@ -917,6 +895,28 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
 
         $uri = '/v1/me/top/' . $type;
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
+     * Get new releases.
+     * https://developer.spotify.com/web-api/get-list-new-releases/
+     *
+     * @param array|object $options Optional. Options for the items.
+     * - string country Optional. An ISO 3166-1 alpha-2 country code. Show items relevant to this country.
+     * - int limit Optional. Limit the number of items.
+     * - int offset Optional. Number of items to skip.
+     *
+     * @return array|object The new releases. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+     */
+    public function getNewReleases($options = [])
+    {
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/browse/new-releases';
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
 
