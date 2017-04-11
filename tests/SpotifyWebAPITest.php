@@ -1909,6 +1909,33 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertNotEmpty($response->albums);
     }
 
+    public function testSeek()
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'status' => 204,
+        ];
+
+        $stub = $this->setupStub(
+            'PUT',
+            '/v1/me/player/seek?position_ms=5000',
+            [],
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->seek([
+            'position_ms' => 5000,
+        ]);
+
+        $this->assertTrue($response);
+    }
+
     public function testSetReturnAssoc()
     {
         PHPUnit_Framework_Error_Deprecated::$enabled = false;
