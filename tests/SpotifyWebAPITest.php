@@ -2022,6 +2022,33 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api->setReturnType(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
     }
 
+    public function testShuffle()
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'status' => 204,
+        ];
+
+        $stub = $this->setupStub(
+            'PUT',
+            '/v1/me/player/shuffle?state=false',
+            [],
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->shuffle([
+            'state' => false,
+        ]);
+
+        $this->assertTrue($response);
+    }
+
     public function testUnfollowArtistsOrUsers()
     {
         $options = [
