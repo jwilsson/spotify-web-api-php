@@ -1316,6 +1316,30 @@ class SpotifyWebAPI
     }
 
     /**
+     * Play the previous track in the current users's queue.
+     * https://developer.spotify.com/web-api/skip-users-playback-to-previous-track/
+     *
+     * @param string $deviceId Optional. ID of the device to target.
+     *
+     * @return array Whether the track was successfully skipped.
+     */
+    public function previous($deviceId = '')
+    {
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/me/player/previous';
+
+        // We need to manually append data to the URI since it's a POST request
+        if ($deviceId) {
+            $uri = $uri . '?device_id=' . $deviceId;
+        }
+
+        $this->lastResponse = $this->request->api('POST', $uri, [], $headers);
+
+        return $this->lastResponse['status'] == 204;
+    }
+
+    /**
      * Reorder the tracks in a user's playlist.
      * https://developer.spotify.com/web-api/reorder-playlists-tracks/
      *
