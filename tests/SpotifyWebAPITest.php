@@ -1823,6 +1823,33 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertNotFalse($response);
     }
 
+    public function testRepeat()
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'status' => 204,
+        ];
+
+        $stub = $this->setupStub(
+            'PUT',
+            '/v1/me/player/repeat?state=track',
+            [],
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->repeat([
+            'state' => 'track',
+        ]);
+
+        $this->assertTrue($response);
+    }
+
     public function testReplaceUserPlaylistTracks()
     {
         $tracks = [
