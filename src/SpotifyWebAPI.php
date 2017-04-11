@@ -1237,6 +1237,30 @@ class SpotifyWebAPI
     }
 
     /**
+     * Play the next track in the current users's queue.
+     * https://developer.spotify.com/web-api/skip-users-playback-to-next-track/
+     *
+     * @param string $deviceId Optional. ID of the device to target.
+     *
+     * @return array Whether the track was successfully skipped.
+     */
+    public function next($deviceId = '')
+    {
+        $headers = $this->authHeaders();
+
+        $uri = '/v1/me/player/next';
+
+        // We need to manually append data to the URI since it's a POST request
+        if ($deviceId) {
+            $uri = $uri . '?device_id=' . $deviceId;
+        }
+
+        $this->lastResponse = $this->request->api('POST', $uri, [], $headers);
+
+        return $this->lastResponse['status'] == 204;
+    }
+
+    /**
      * Pause playback for the current user.
      * https://developer.spotify.com/web-api/pause-a-users-playback/
      *
