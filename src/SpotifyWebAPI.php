@@ -182,6 +182,30 @@ class SpotifyWebAPI
     }
 
     /**
+     * Change playback volume for the current user.
+     * https://developer.spotify.com/web-api/set-volume-for-users-playback/
+     *
+     * @param array|object $options Optional. Options for the playback volume.
+     * - string volume_percent Required. The volume to set.
+     * - string device_id Optional. ID of the device to target.
+     *
+     * @return array Whether the playback volume was successfully changed.
+     */
+    public function changeVolume($options)
+    {
+        $options = http_build_query($options);
+
+        $headers = $this->authHeaders();
+
+        // We need to manually append data to the URI since it's a PUT request
+        $uri = '/v1/me/player/volume?' . $options;
+
+        $this->lastResponse = $this->request->api('PUT', $uri, [], $headers);
+
+        return $this->lastResponse['status'] == 204;
+    }
+
+    /**
      * Create a new playlist for a user.
      * https://developer.spotify.com/web-api/create-playlist/
      *
