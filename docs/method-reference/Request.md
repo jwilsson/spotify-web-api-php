@@ -1,8 +1,3 @@
----
-layout: default
-title: Method Reference - Request
----
-
 ## Constants
 
 * **ACCOUNT_URL**
@@ -34,6 +29,8 @@ Make a request to the "account" endpoint.
     * string url The requested URL.
 
 
+---
+
 
 ### api
 
@@ -57,6 +54,8 @@ Make a request to the "api" endpoint.
     * string url The requested URL.
 
 
+---
+
 
 ### getLastResponse
 
@@ -74,6 +73,8 @@ Get the latest full response from the Spotify API.
     * string url The requested URL.
 
 
+---
+
 
 ### getReturnAssoc
 
@@ -88,6 +89,8 @@ Use `Request::getReturnType()` instead.
 * **boolean** Whether the body is returned as an associative array or an stdClass.
 
 
+---
+
 
 ### getReturnType
 
@@ -100,6 +103,8 @@ Get a value indicating the response body type.
 #### Return values
 * **string** A value indicating if the response body is an object or associative array.
 
+
+---
 
 
 ### send
@@ -125,6 +130,8 @@ You'll probably want to use one of the convenience methods instead.
     * string url The requested URL.
 
 
+---
+
 
 ### setReturnAssoc
 
@@ -142,6 +149,8 @@ Use `Request::setReturnType()` instead.
 * **void** 
 
 
+---
+
 
 ### setReturnType
 
@@ -157,4 +166,6 @@ Set the return type for the response body.
 #### Return values
 * **void** 
 
+
+---
 

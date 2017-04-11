@@ -1,8 +1,3 @@
----
-layout: default
-title: Method Reference - SpotifyWebAPI
----
-
 ## Constants
 
 * **RETURN_ASSOC**
@@ -23,6 +18,8 @@ Set up Request object.
 
 
 
+---
+
 
 ### addMyAlbums
 
@@ -40,6 +37,8 @@ Add albums to the current user's Spotify library.<br>
 * **boolean** Whether the albums was successfully added.
 
 
+---
+
 
 ### addMyTracks
 
@@ -56,6 +55,8 @@ Add tracks to the current user's Spotify library.<br>
 #### Return values
 * **boolean** Whether the tracks was successfully added.
 
+
+---
 
 
 ### addUserPlaylistTracks
@@ -79,6 +80,53 @@ Add tracks to a user's playlist.<br>
 * **boolean** Whether the tracks was successfully added.
 
 
+---
+
+
+### changeMyDevice
+
+
+    boolean SpotifyWebAPI\SpotifyWebAPI::changeMyDevice($options)
+
+Change the current user's playback device.<br>
+[https://developer.spotify.com/web-api/transfer-a-users-playback/](https://developer.spotify.com/web-api/transfer-a-users-playback/)<br>
+<br>
+* @param array|object $options Options for the playback transfer.<br>
+- device_ids string|array Required. ID of the device to switch to.<br>
+- play boolean. Optional. Whether to start playing on the new device
+
+#### Arguments
+* `$options` **mixed**
+
+
+#### Return values
+* **boolean** Whether the playback device was successfully changed.
+
+
+---
+
+
+### changeVolume
+
+
+    array SpotifyWebAPI\SpotifyWebAPI::changeVolume(array|object $options)
+
+Change playback volume for the current user.<br>
+[https://developer.spotify.com/web-api/set-volume-for-users-playback/](https://developer.spotify.com/web-api/set-volume-for-users-playback/)
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options for the playback volume.
+    * string volume_percent Required. The volume to set.
+    * string device_id Optional. ID of the device to target.
+
+
+
+#### Return values
+* **array** Whether the playback volume was successfully changed.
+
+
+---
+
 
 ### createUserPlaylist
 
@@ -100,6 +148,8 @@ Create a new playlist for a user.<br>
 * **array\|object** The new playlist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### currentUserFollows
 
@@ -118,6 +168,8 @@ Check to see if the current user is following one or more artists or other Spoti
 * **array** Whether each user or artist is followed.
 
 
+---
+
 
 ### deleteMyAlbums
 
@@ -135,6 +187,8 @@ Delete albums from current user's Spotify library.<br>
 * **boolean** Whether the albums was successfully deleted.
 
 
+---
+
 
 ### deleteMyTracks
 
@@ -151,6 +205,8 @@ Delete tracks from current user's Spotify library.<br>
 #### Return values
 * **boolean** Whether the tracks was successfully deleted.
 
+
+---
 
 
 ### deleteUserPlaylistTracks
@@ -175,6 +231,8 @@ Delete tracks from a playlist and retrieve a new snapshot ID.<br>
 * **string\|boolean** A new snapshot ID or false if the tracks weren&#039;t successfully deleted.
 
 
+---
+
 
 ### followArtistsOrUsers
 
@@ -192,6 +250,8 @@ Add the current user as a follower of one or more artists or other Spotify users
 #### Return values
 * **boolean** Whether the artist or user was successfully followed.
 
+
+---
 
 
 ### followPlaylist
@@ -214,6 +274,8 @@ Add the current user as a follower of a playlist.<br>
 * **boolean** Whether the playlist was successfully followed.
 
 
+---
+
 
 ### getAlbum
 
@@ -230,6 +292,8 @@ Get a album.<br>
 #### Return values
 * **array\|object** The requested album. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
 
 
 ### getAlbums
@@ -250,6 +314,8 @@ Get multiple albums.<br>
 #### Return values
 * **array\|object** The requested albums. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
 
 
 ### getAlbumTracks
@@ -273,6 +339,8 @@ Get a album's tracks.<br>
 * **array\|object** The requested album tracks. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### getArtist
 
@@ -289,6 +357,8 @@ Get an artist.<br>
 #### Return values
 * **array\|object** The requested artist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
 
 
 ### getArtists
@@ -307,6 +377,8 @@ Get multiple artists.<br>
 * **array\|object** The requested artists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### getArtistRelatedArtists
 
@@ -323,6 +395,8 @@ Get an artist's related artists.<br>
 #### Return values
 * **array\|object** The artist&#039;s related artists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
 
 
 ### getArtistAlbums
@@ -347,6 +421,8 @@ Get an artist's albums.<br>
 * **array\|object** The artist&#039;s albums. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### getArtistTopTracks
 
@@ -367,6 +443,8 @@ Get an artist's top tracks in a country.<br>
 * **array\|object** The artist&#039;s top tracks. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### getAudioFeatures
 
@@ -384,6 +462,8 @@ Get track audio features.<br>
 * **array\|object** The tracks&#039; audio features. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### getAudioAnalysis
 
@@ -400,6 +480,8 @@ Get audio analysis for track.<br>
 #### Return values
 * **object** The track&#039;s audio analysis. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
 
 
 ### getCategoriesList
@@ -423,6 +505,8 @@ Get a list of categories used to tag items in Spotify (on, for example, the Spot
 * **array\|object** The list of categories. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### getCategory
 
@@ -443,6 +527,8 @@ Get a single category used to tag items in Spotify (on, for example, the Spotify
 #### Return values
 * **array\|object** The category. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
 
 
 ### getCategoryPlaylists
@@ -465,6 +551,8 @@ Get a list of Spotify playlists tagged with a particular category.<br>
 #### Return values
 * **array\|object** The list of playlists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
 
 
 ### getFeaturedPlaylists
@@ -489,6 +577,8 @@ Get Spotify featured playlists.<br>
 * **array\|object** The featured playlists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### getGenreSeeds
 
@@ -502,6 +592,8 @@ Get a list of possible seed genres.<br>
 #### Return values
 * **array\|object** All possible seed genres. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
 
 
 ### getLastResponse
@@ -520,26 +612,65 @@ Get the latest full response from the Spotify API.
     * string url The requested URL.
 
 
+---
 
-### getNewReleases
+
+### getMyCurrentTrack
 
 
-    array|object SpotifyWebAPI\SpotifyWebAPI::getNewReleases(array|object $options)
+    array|object SpotifyWebAPI\SpotifyWebAPI::getMyCurrentTrack(array|object $options)
 
-Get new releases.<br>
-[https://developer.spotify.com/web-api/get-list-new-releases/](https://developer.spotify.com/web-api/get-list-new-releases/)
+Get the current user’s currently playing track.<br>
+[https://developer.spotify.com/web-api/get-the-users-currently-playing-track/](https://developer.spotify.com/web-api/get-the-users-currently-playing-track/)
 
 #### Arguments
-* `$options` **array\|object** - Optional. Options for the items.
-    * string country Optional. An ISO 3166-1 alpha-2 country code. Show items relevant to this country.
-    * int limit Optional. Limit the number of items.
-    * int offset Optional. Number of items to skip.
+* `$options` **array\|object** - Optional. Options for the track.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
 
 
 #### Return values
-* **array\|object** The new releases. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+* **array\|object** The user&#039;s currently playing track. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
+
+
+### getMyDevices
+
+
+    array|object SpotifyWebAPI\SpotifyWebAPI::getMyDevices()
+
+Get the current user’s devices.<br>
+[https://developer.spotify.com/web-api/get-a-users-available-devices/](https://developer.spotify.com/web-api/get-a-users-available-devices/)
+
+
+#### Return values
+* **array\|object** The user&#039;s devices. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+
+
+---
+
+
+### getMyCurrentPlaybackInfo
+
+
+    array|object SpotifyWebAPI\SpotifyWebAPI::getMyCurrentPlaybackInfo(array|object $options)
+
+Get the current user’s current playback information.<br>
+[https://developer.spotify.com/web-api/get-information-about-the-users-current-playback/](https://developer.spotify.com/web-api/get-information-about-the-users-current-playback/)
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options for the info.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+
+
+
+#### Return values
+* **array\|object** The user&#039;s playback information. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+
+
+---
 
 
 ### getMyPlaylists
@@ -561,6 +692,31 @@ Get the current user’s playlists.<br>
 * **array\|object** The user&#039;s playlists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
+
+### getMyRecentTracks
+
+
+    array|object SpotifyWebAPI\SpotifyWebAPI::getMyRecentTracks(array|object $options)
+
+Get the current user’s recently played tracks.<br>
+[https://developer.spotify.com/web-api/web-api-personalization-endpoints/get-recently-played/](https://developer.spotify.com/web-api/web-api-personalization-endpoints/get-recently-played/)
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options for the tracks.
+    * int limit Optional. Number of tracks to return.
+    * string after Optional. Unix timestamp in ms (13 digits). Returns all items after this position.
+    * string before Optional. Unix timestamp in ms (13 digits). Returns all items before this position.
+
+
+
+#### Return values
+* **array\|object** The most recently played tracks. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+
+
+---
+
 
 ### getMySavedAlbums
 
@@ -572,7 +728,7 @@ Get the current user’s saved albums.<br>
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the albums.
-    * int limit Optional. Limit the number of albums.
+    * int limit Optional. Number of albums to return.
     * int offset Optional. Number of albums to skip.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
@@ -581,6 +737,8 @@ Get the current user’s saved albums.<br>
 #### Return values
 * **array\|object** The user&#039;s saved albums. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
 
 
 ### getMySavedTracks
@@ -603,6 +761,8 @@ Get the current user’s saved tracks.<br>
 * **array\|object** The user&#039;s saved tracks. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### getMyTop
 
@@ -620,6 +780,31 @@ Get the current user's top tracks or artists.<br>
 #### Return values
 * **array\|object** A list of the requested top entity. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
+
+
+### getNewReleases
+
+
+    array|object SpotifyWebAPI\SpotifyWebAPI::getNewReleases(array|object $options)
+
+Get new releases.<br>
+[https://developer.spotify.com/web-api/get-list-new-releases/](https://developer.spotify.com/web-api/get-list-new-releases/)
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options for the items.
+    * string country Optional. An ISO 3166-1 alpha-2 country code. Show items relevant to this country.
+    * int limit Optional. Limit the number of items.
+    * int offset Optional. Number of items to skip.
+
+
+
+#### Return values
+* **array\|object** The new releases. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+
+
+---
 
 
 ### getRecommendations
@@ -647,6 +832,8 @@ Get recommendations based on artists, tracks, or genres.<br>
 * **array\|object** The requested recommendations. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### getReturnAssoc
 
@@ -661,6 +848,8 @@ Use `SpotifyWebAPI::getReturnType()` instead.
 * **boolean** Whether an associative array or an stdClass is returned.
 
 
+---
+
 
 ### getReturnType
 
@@ -674,6 +863,8 @@ Get a value indicating the response body type.
 * **string** A value indicating if the response body is an object or associative array.
 
 
+---
+
 
 ### getRequest
 
@@ -686,6 +877,8 @@ Get the Request object in use.
 #### Return values
 * **\SpotifyWebAPI\Request** The Request object in use.
 
+
+---
 
 
 ### getTrack
@@ -707,6 +900,8 @@ Get a track.<br>
 * **array\|object** The requested track. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### getTracks
 
@@ -727,6 +922,8 @@ Get multiple tracks.<br>
 * **array\|object** The requested tracks. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### getUser
 
@@ -743,6 +940,8 @@ Get a user.<br>
 #### Return values
 * **array\|object** The requested user. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
 
 
 ### getUserFollowedArtists
@@ -763,6 +962,8 @@ Get the artists followed by the current user.<br>
 #### Return values
 * **array\|object** A list of artists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
 
 
 ### getUserPlaylist
@@ -786,6 +987,8 @@ Get a user's specific playlist.<br>
 * **array\|object** The user&#039;s playlist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### getUserPlaylists
 
@@ -806,6 +1009,8 @@ Get a user's playlists.<br>
 #### Return values
 * **array\|object** The user&#039;s playlists. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
 
 
 ### getUserPlaylistTracks
@@ -831,6 +1036,8 @@ Get the tracks in a user's playlist.<br>
 * **array\|object** The tracks in the playlist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
 
 ### me
 
@@ -844,6 +1051,8 @@ Get the currently authenticated user.<br>
 #### Return values
 * **array\|object** The currently authenticated user. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
+
+---
 
 
 ### myAlbumsContains
@@ -862,6 +1071,8 @@ Check if albums are saved in the current user's Spotify library.<br>
 * **array** Whether each album is saved.
 
 
+---
+
 
 ### myTracksContains
 
@@ -878,6 +1089,89 @@ Check if tracks are saved in the current user's Spotify library.<br>
 #### Return values
 * **array** Whether each track is saved.
 
+
+---
+
+
+### next
+
+
+    array SpotifyWebAPI\SpotifyWebAPI::next(string $deviceId)
+
+Play the next track in the current users's queue.<br>
+[https://developer.spotify.com/web-api/skip-users-playback-to-next-track/](https://developer.spotify.com/web-api/skip-users-playback-to-next-track/)
+
+#### Arguments
+* `$deviceId` **string** - Optional. ID of the device to target.
+
+
+#### Return values
+* **array** Whether the track was successfully skipped.
+
+
+---
+
+
+### pause
+
+
+    array SpotifyWebAPI\SpotifyWebAPI::pause(string $deviceId)
+
+Pause playback for the current user.<br>
+[https://developer.spotify.com/web-api/pause-a-users-playback/](https://developer.spotify.com/web-api/pause-a-users-playback/)
+
+#### Arguments
+* `$deviceId` **string** - Optional. ID of the device to pause on.
+
+
+#### Return values
+* **array** Whether the playback was successfully paused.
+
+
+---
+
+
+### play
+
+
+    array SpotifyWebAPI\SpotifyWebAPI::play(string $deviceId, array|object $options)
+
+Start playback for the current user.<br>
+[https://developer.spotify.com/web-api/start-a-users-playback/](https://developer.spotify.com/web-api/start-a-users-playback/)
+
+#### Arguments
+* `$deviceId` **string** - Optional. ID of the device to play on.
+* `$options` **array\|object** - Optional. Options for the playback.
+    * string context_uri Optional. Spotify URI of the context to play, for example an album.
+    * array uris Optional. Spotify track URIs to play.
+    * object offset Optional. Indicates from where in the context playback should start.
+
+
+
+#### Return values
+* **array** Whether the playback was successfully started.
+
+
+---
+
+
+### previous
+
+
+    array SpotifyWebAPI\SpotifyWebAPI::previous(string $deviceId)
+
+Play the previous track in the current users's queue.<br>
+[https://developer.spotify.com/web-api/skip-users-playback-to-previous-track/](https://developer.spotify.com/web-api/skip-users-playback-to-previous-track/)
+
+#### Arguments
+* `$deviceId` **string** - Optional. ID of the device to target.
+
+
+#### Return values
+* **array** Whether the track was successfully skipped.
+
+
+---
 
 
 ### reorderUserPlaylistTracks
@@ -903,6 +1197,30 @@ Reorder the tracks in a user's playlist.<br>
 * **string\|boolean** A new snapshot ID or false if the tracks weren&#039;t successfully reordered.
 
 
+---
+
+
+### repeat
+
+
+    array SpotifyWebAPI\SpotifyWebAPI::repeat(array|object $options)
+
+Set repeat mode for the current user’s playback.<br>
+[https://developer.spotify.com/web-api/set-repeat-mode-on-users-playback/](https://developer.spotify.com/web-api/set-repeat-mode-on-users-playback/)
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options for the playback repeat mode.
+    * string state Required. The repeat mode. See Spotify docs for possible values.
+    * string device_id Optional. ID of the device to target.
+
+
+
+#### Return values
+* **array** Whether the playback repeat mode was successfully changed.
+
+
+---
+
 
 ### replaceUserPlaylistTracks
 
@@ -921,6 +1239,8 @@ Replace all tracks in a user's playlist with new ones.<br>
 #### Return values
 * **boolean** Whether the tracks was successfully replaced.
 
+
+---
 
 
 ### search
@@ -946,6 +1266,30 @@ Requires a valid access token if market=from_token is used.<br>
 * **array\|object** The search results. Type is controlled by `SpotifyWebAPI::setReturnType()`.
 
 
+---
+
+
+### seek
+
+
+    array SpotifyWebAPI\SpotifyWebAPI::seek(array|object $options)
+
+Change playback position for the current user.<br>
+[https://developer.spotify.com/web-api/seek-to-position-in-currently-playing-track/](https://developer.spotify.com/web-api/seek-to-position-in-currently-playing-track/)
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options for the playback seeking.
+    * string position_ms Required. The position in milliseconds to seek to.
+    * string device_id Optional. ID of the device to target.
+
+
+
+#### Return values
+* **array** Whether the playback position was successfully changed.
+
+
+---
+
 
 ### setAccessToken
 
@@ -961,6 +1305,8 @@ Set the access token to use.
 #### Return values
 * **void** 
 
+
+---
 
 
 ### setReturnAssoc
@@ -979,6 +1325,8 @@ Use `SpotifyWebAPI::setReturnType()` instead.
 * **void** 
 
 
+---
+
 
 ### setReturnType
 
@@ -994,6 +1342,30 @@ Set the return type for the response body.
 #### Return values
 * **void** 
 
+
+---
+
+
+### shuffle
+
+
+    array SpotifyWebAPI\SpotifyWebAPI::shuffle(array|object $options)
+
+Set shuffle mode for the current user’s playback.<br>
+[https://developer.spotify.com/web-api/toggle-shuffle-for-users-playback/](https://developer.spotify.com/web-api/toggle-shuffle-for-users-playback/)
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options for the playback shuffle mode.
+    * bool state Required. The shuffle mode. See Spotify docs for possible values.
+    * string device_id Optional. ID of the device to target.
+
+
+
+#### Return values
+* **array** Whether the playback shuffle mode was successfully changed.
+
+
+---
 
 
 ### unfollowArtistsOrUsers
@@ -1013,6 +1385,8 @@ Remove the current user as a follower of one or more artists or other Spotify us
 * **boolean** Whether the artist(s) or user(s) were successfully unfollowed.
 
 
+---
+
 
 ### unfollowPlaylist
 
@@ -1030,6 +1404,8 @@ Remove the current user as a follower of a playlist.<br>
 #### Return values
 * **boolean** Whether the playlist was successfully unfollowed.
 
+
+---
 
 
 ### updateUserPlaylist
@@ -1053,6 +1429,8 @@ Update the details of a user's playlist.<br>
 * **boolean** Whether the playlist was successfully updated.
 
 
+---
+
 
 ### userFollowsPlaylist
 
@@ -1074,24 +1452,5 @@ Check if a user is following a playlist.<br>
 * **array** Whether each user is following the playlist.
 
 
-
-### getMyRecentTracks
-
-
-    array|object SpotifyWebAPI\SpotifyWebAPI::getMyRecentTracks(array|object $options)
-
-Get tracks from the current user’s recent play history.<br>
-[https://developer.spotify.com/web-api/web-api-personalization-endpoints/get-recently-played/](https://developer.spotify.com/web-api/web-api-personalization-endpoints/get-recently-played/)
-
-#### Arguments
-* `$options` **array\|object** - Optional. Options to get tracks history.
-    * int limit Optional. Maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50
-    * string after Optional. Unix timestamp in ms (13 digits). Returns all items after this cursor position.
-    * string before Optional. Unix timestamp in ms (13 digits). Returns all items before this cursor position.
-
-
-
-#### Return values
-* **array\|object** Most recent tracks played by a user. Type is controlled by `SpotifyWebAPI::setReturnType()`.
-
+---
 
