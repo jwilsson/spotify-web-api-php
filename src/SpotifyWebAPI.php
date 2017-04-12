@@ -267,9 +267,7 @@ class SpotifyWebAPI
     public function deleteMyAlbums($albums)
     {
         $albums = $this->uriToId($albums, 'album');
-        $albums = json_encode(
-            (array) $albums
-        );
+        $albums = json_encode((array) $albums);
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
@@ -292,9 +290,7 @@ class SpotifyWebAPI
     public function deleteMyTracks($tracks)
     {
         $tracks = $this->uriToId($tracks);
-        $tracks = json_encode(
-            (array) $tracks
-        );
+        $tracks = json_encode((array) $tracks);
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
@@ -397,7 +393,7 @@ class SpotifyWebAPI
      */
     public function followPlaylist($userId, $playlistId, $options = [])
     {
-        $options = json_encode($options);
+        $options = json_encode((object) $options);
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
@@ -1322,7 +1318,7 @@ class SpotifyWebAPI
      */
     public function play($deviceId = '', $options = [])
     {
-        $options = json_encode($options);
+        $options = json_encode((object) $options);
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
