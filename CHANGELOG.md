@@ -1,4 +1,20 @@
 # Changelog
+## 1.10.0 (2017-04-12)
+* Added Spotify Connect endpoints:
+    * `SpotifyWebAPI::changeMyDevice()` ([21dd887](https://github.com/jwilsson/spotify-web-api-php/commit/21dd887271ba7c905fd2df0ea0f600421ef74baf))
+    * `SpotifyWebAPI::changeVolume()` ([e9cdd79](https://github.com/jwilsson/spotify-web-api-php/commit/e9cdd797384559f83734626076cddecb15a195db))
+    * `SpotifyWebAPI::getMyCurrentPlaybackInfo()` ([61f4cbd](https://github.com/jwilsson/spotify-web-api-php/commit/61f4cbd282cf3d89c8b135ad9a4eef6a07b9d5ff))
+    * `SpotifyWebAPI::getMyCurrentTrack()` ([0f30a6b](https://github.com/jwilsson/spotify-web-api-php/commit/0f30a6b725f8f538e5eae8c893904e2045554881))
+    * `SpotifyWebAPI::getMyDevices()` ([8b33f9d](https://github.com/jwilsson/spotify-web-api-php/commit/8b33f9d64f29aabb7ffd910ce8e09b46e043e2e4))
+    * `SpotifyWebAPI::next()` ([9950c51](https://github.com/jwilsson/spotify-web-api-php/commit/9950c51790ba2ff05d0fb4e7360d6d745fd9ae1b))
+    * `SpotifyWebAPI::pause()` ([b724c4a](https://github.com/jwilsson/spotify-web-api-php/commit/b724c4aefa6db88b397d7d19e24dae902f0d287c))
+    * `SpotifyWebAPI::play()` ([825a632](https://github.com/jwilsson/spotify-web-api-php/commit/825a632fda5a8dadfe5ce5e782d768f0e7044c08))
+    * `SpotifyWebAPI::previous()` ([90a97e1](https://github.com/jwilsson/spotify-web-api-php/commit/90a97e1d1b294d53a3a629febea78ba9eafb373a))
+    * `SpotifyWebAPI::repeat()` ([1feebfe](https://github.com/jwilsson/spotify-web-api-php/commit/1feebfe365a140475f12d22151ec9fe5c4a11fe9))
+    * `SpotifyWebAPI::seek()` ([0641a07](https://github.com/jwilsson/spotify-web-api-php/commit/0641a07cd79451681882273b630ff6313c570dbe))
+    * `SpotifyWebAPI::shuffle()` ([d43268c](https://github.com/jwilsson/spotify-web-api-php/commit/d43268c4178cf1131eeed6de521f7bdf29a4b560))
+* Complete documentation revamp. ([82d9fab](https://github.com/jwilsson/spotify-web-api-php/commit/82d9fabfc3f620068a114f55eff3a0e0803ff1a3))
+* Made sure empty objects are correctly serialized to JSON objects instead of JSON arrays. ([b17682e](https://github.com/jwilsson/spotify-web-api-php/commit/b17682e6a1cf25c25c87a2a900cf6858a9c038b7))
 ## 1.9.0 (2017-03-24)
 * Added the `SpotifyWebAPI::getMyRecentTracks()` method. ([4df889f](https://github.com/jwilsson/spotify-web-api-php/commit/4df889f2aa44c171d492f2784b45fd1155429b57))
 
