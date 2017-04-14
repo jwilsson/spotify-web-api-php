@@ -159,9 +159,9 @@ class SpotifyWebAPI
      * Change the current user's playback device.
      * https://developer.spotify.com/web-api/transfer-a-users-playback/
      *
-     * * @param array|object $options Options for the playback transfer.
-     * - device_ids string|array Required. ID of the device to switch to.
-     * - play boolean. Optional. Whether to start playing on the new device
+     * @param array|object $options Options for the playback transfer.
+     * - string|array device_ids Required. ID of the device to switch to.
+     * - bool play Optional. Whether to start playing on the new device
      *
      * @return bool Whether the playback device was successfully changed.
      */
@@ -186,10 +186,10 @@ class SpotifyWebAPI
      * https://developer.spotify.com/web-api/set-volume-for-users-playback/
      *
      * @param array|object $options Optional. Options for the playback volume.
-     * - string volume_percent Required. The volume to set.
+     * - int volume_percent Required. The volume to set.
      * - string device_id Optional. ID of the device to target.
      *
-     * @return array Whether the playback volume was successfully changed.
+     * @return bool Whether the playback volume was successfully changed.
      */
     public function changeVolume($options)
     {
@@ -211,8 +211,8 @@ class SpotifyWebAPI
      *
      * @param string $userId ID of the user to create the playlist for.
      * @param array|object $options Options for the new playlist.
-     * - name string Required. Name of the playlist.
-     * - public bool Optional. Whether the playlist should be public or not.
+     * - string name Required. Name of the playlist.
+     * - bool public Optional. Whether the playlist should be public or not.
      *
      * @return array|object The new playlist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
@@ -309,8 +309,8 @@ class SpotifyWebAPI
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to delete tracks from.
      * @param array $tracks Array of arrays or objects with tracks to delete.
-     * - id string Required. Spotify track ID.
-     * - positions int|array Optional. The track's position(s) in the playlist.
+     * - string id Required. Spotify track ID.
+     * - int|array positions Optional. The track's position(s) in the playlist.
      * @param string $snapshotId Optional. The playlist's snapshot ID.
      *
      * @return string|bool A new snapshot ID or false if the tracks weren't successfully deleted.
@@ -387,7 +387,7 @@ class SpotifyWebAPI
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to follow.
      * @param array|object $options Optional. Options for the followed playlist.
-     * - public bool Optional. Whether the playlist should be followed publicly or not.
+     * - bool public Optional. Whether the playlist should be followed publicly or not.
      *
      * @return bool Whether the playlist was successfully followed.
      */
@@ -1262,7 +1262,7 @@ class SpotifyWebAPI
      *
      * @param string $deviceId Optional. ID of the device to target.
      *
-     * @return array Whether the track was successfully skipped.
+     * @return bool Whether the track was successfully skipped.
      */
     public function next($deviceId = '')
     {
@@ -1286,7 +1286,7 @@ class SpotifyWebAPI
      *
      * @param string $deviceId Optional. ID of the device to pause on.
      *
-     * @return array Whether the playback was successfully paused.
+     * @return bool Whether the playback was successfully paused.
      */
     public function pause($deviceId = '')
     {
@@ -1314,7 +1314,7 @@ class SpotifyWebAPI
      * - array uris Optional. Spotify track URIs to play.
      * - object offset Optional. Indicates from where in the context playback should start.
      *
-     * @return array Whether the playback was successfully started.
+     * @return bool Whether the playback was successfully started.
      */
     public function play($deviceId = '', $options = [])
     {
@@ -1341,7 +1341,7 @@ class SpotifyWebAPI
      *
      * @param string $deviceId Optional. ID of the device to target.
      *
-     * @return array Whether the track was successfully skipped.
+     * @return bool Whether the track was successfully skipped.
      */
     public function previous($deviceId = '')
     {
@@ -1400,7 +1400,7 @@ class SpotifyWebAPI
      * - string state Required. The repeat mode. See Spotify docs for possible values.
      * - string device_id Optional. ID of the device to target.
      *
-     * @return array Whether the playback repeat mode was successfully changed.
+     * @return bool Whether the playback repeat mode was successfully changed.
      */
     public function repeat($options)
     {
@@ -1482,7 +1482,7 @@ class SpotifyWebAPI
      * - string position_ms Required. The position in milliseconds to seek to.
      * - string device_id Optional. ID of the device to target.
      *
-     * @return array Whether the playback position was successfully changed.
+     * @return bool Whether the playback position was successfully changed.
      */
     public function seek($options)
     {
@@ -1551,7 +1551,7 @@ class SpotifyWebAPI
      * - bool state Required. The shuffle mode. See Spotify docs for possible values.
      * - string device_id Optional. ID of the device to target.
      *
-     * @return array Whether the playback shuffle mode was successfully changed.
+     * @return bool Whether the playback shuffle mode was successfully changed.
      */
     public function shuffle($options)
     {

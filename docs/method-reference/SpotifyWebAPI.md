@@ -86,17 +86,16 @@ Add tracks to a user's playlist.<br>
 ### changeMyDevice
 
 
-    boolean SpotifyWebAPI\SpotifyWebAPI::changeMyDevice($options)
+    boolean SpotifyWebAPI\SpotifyWebAPI::changeMyDevice(array|object $options)
 
 Change the current user's playback device.<br>
-[https://developer.spotify.com/web-api/transfer-a-users-playback/](https://developer.spotify.com/web-api/transfer-a-users-playback/)<br>
-<br>
-* @param array|object $options Options for the playback transfer.<br>
-- device_ids string|array Required. ID of the device to switch to.<br>
-- play boolean. Optional. Whether to start playing on the new device
+[https://developer.spotify.com/web-api/transfer-a-users-playback/](https://developer.spotify.com/web-api/transfer-a-users-playback/)
 
 #### Arguments
-* `$options` **mixed**
+* `$options` **array\|object** - Options for the playback transfer.
+    * string\|array device_ids Required. ID of the device to switch to.
+    * bool play Optional. Whether to start playing on the new device
+
 
 
 #### Return values
@@ -109,20 +108,20 @@ Change the current user's playback device.<br>
 ### changeVolume
 
 
-    array SpotifyWebAPI\SpotifyWebAPI::changeVolume(array|object $options)
+    boolean SpotifyWebAPI\SpotifyWebAPI::changeVolume(array|object $options)
 
 Change playback volume for the current user.<br>
 [https://developer.spotify.com/web-api/set-volume-for-users-playback/](https://developer.spotify.com/web-api/set-volume-for-users-playback/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the playback volume.
-    * string volume_percent Required. The volume to set.
+    * int volume_percent Required. The volume to set.
     * string device_id Optional. ID of the device to target.
 
 
 
 #### Return values
-* **array** Whether the playback volume was successfully changed.
+* **boolean** Whether the playback volume was successfully changed.
 
 
 ---
@@ -139,8 +138,8 @@ Create a new playlist for a user.<br>
 #### Arguments
 * `$userId` **string** - ID of the user to create the playlist for.
 * `$options` **array\|object** - Options for the new playlist.
-    * name string Required. Name of the playlist.
-    * public bool Optional. Whether the playlist should be public or not.
+    * string name Required. Name of the playlist.
+    * bool public Optional. Whether the playlist should be public or not.
 
 
 
@@ -221,8 +220,8 @@ Delete tracks from a playlist and retrieve a new snapshot ID.<br>
 * `$userId` **string** - ID of the user who owns the playlist.
 * `$playlistId` **string** - ID of the playlist to delete tracks from.
 * `$tracks` **array** - Array of arrays or objects with tracks to delete.
-    * id string Required. Spotify track ID.
-    * positions int\|array Optional. The track&#039;s position(s) in the playlist.
+    * string id Required. Spotify track ID.
+    * int\|array positions Optional. The track&#039;s position(s) in the playlist.
 
 * `$snapshotId` **string** - Optional. The playlist&#039;s snapshot ID.
 
@@ -266,7 +265,7 @@ Add the current user as a follower of a playlist.<br>
 * `$userId` **string** - ID of the user who owns the playlist.
 * `$playlistId` **string** - ID of the playlist to follow.
 * `$options` **array\|object** - Optional. Options for the followed playlist.
-    * public bool Optional. Whether the playlist should be followed publicly or not.
+    * bool public Optional. Whether the playlist should be followed publicly or not.
 
 
 
@@ -1096,7 +1095,7 @@ Check if tracks are saved in the current user's Spotify library.<br>
 ### next
 
 
-    array SpotifyWebAPI\SpotifyWebAPI::next(string $deviceId)
+    boolean SpotifyWebAPI\SpotifyWebAPI::next(string $deviceId)
 
 Play the next track in the current users's queue.<br>
 [https://developer.spotify.com/web-api/skip-users-playback-to-next-track/](https://developer.spotify.com/web-api/skip-users-playback-to-next-track/)
@@ -1106,7 +1105,7 @@ Play the next track in the current users's queue.<br>
 
 
 #### Return values
-* **array** Whether the track was successfully skipped.
+* **boolean** Whether the track was successfully skipped.
 
 
 ---
@@ -1115,7 +1114,7 @@ Play the next track in the current users's queue.<br>
 ### pause
 
 
-    array SpotifyWebAPI\SpotifyWebAPI::pause(string $deviceId)
+    boolean SpotifyWebAPI\SpotifyWebAPI::pause(string $deviceId)
 
 Pause playback for the current user.<br>
 [https://developer.spotify.com/web-api/pause-a-users-playback/](https://developer.spotify.com/web-api/pause-a-users-playback/)
@@ -1125,7 +1124,7 @@ Pause playback for the current user.<br>
 
 
 #### Return values
-* **array** Whether the playback was successfully paused.
+* **boolean** Whether the playback was successfully paused.
 
 
 ---
@@ -1134,7 +1133,7 @@ Pause playback for the current user.<br>
 ### play
 
 
-    array SpotifyWebAPI\SpotifyWebAPI::play(string $deviceId, array|object $options)
+    boolean SpotifyWebAPI\SpotifyWebAPI::play(string $deviceId, array|object $options)
 
 Start playback for the current user.<br>
 [https://developer.spotify.com/web-api/start-a-users-playback/](https://developer.spotify.com/web-api/start-a-users-playback/)
@@ -1149,7 +1148,7 @@ Start playback for the current user.<br>
 
 
 #### Return values
-* **array** Whether the playback was successfully started.
+* **boolean** Whether the playback was successfully started.
 
 
 ---
@@ -1158,7 +1157,7 @@ Start playback for the current user.<br>
 ### previous
 
 
-    array SpotifyWebAPI\SpotifyWebAPI::previous(string $deviceId)
+    boolean SpotifyWebAPI\SpotifyWebAPI::previous(string $deviceId)
 
 Play the previous track in the current users's queue.<br>
 [https://developer.spotify.com/web-api/skip-users-playback-to-previous-track/](https://developer.spotify.com/web-api/skip-users-playback-to-previous-track/)
@@ -1168,7 +1167,7 @@ Play the previous track in the current users's queue.<br>
 
 
 #### Return values
-* **array** Whether the track was successfully skipped.
+* **boolean** Whether the track was successfully skipped.
 
 
 ---
@@ -1203,7 +1202,7 @@ Reorder the tracks in a user's playlist.<br>
 ### repeat
 
 
-    array SpotifyWebAPI\SpotifyWebAPI::repeat(array|object $options)
+    boolean SpotifyWebAPI\SpotifyWebAPI::repeat(array|object $options)
 
 Set repeat mode for the current user’s playback.<br>
 [https://developer.spotify.com/web-api/set-repeat-mode-on-users-playback/](https://developer.spotify.com/web-api/set-repeat-mode-on-users-playback/)
@@ -1216,7 +1215,7 @@ Set repeat mode for the current user’s playback.<br>
 
 
 #### Return values
-* **array** Whether the playback repeat mode was successfully changed.
+* **boolean** Whether the playback repeat mode was successfully changed.
 
 
 ---
@@ -1272,7 +1271,7 @@ Requires a valid access token if market=from_token is used.<br>
 ### seek
 
 
-    array SpotifyWebAPI\SpotifyWebAPI::seek(array|object $options)
+    boolean SpotifyWebAPI\SpotifyWebAPI::seek(array|object $options)
 
 Change playback position for the current user.<br>
 [https://developer.spotify.com/web-api/seek-to-position-in-currently-playing-track/](https://developer.spotify.com/web-api/seek-to-position-in-currently-playing-track/)
@@ -1285,7 +1284,7 @@ Change playback position for the current user.<br>
 
 
 #### Return values
-* **array** Whether the playback position was successfully changed.
+* **boolean** Whether the playback position was successfully changed.
 
 
 ---
@@ -1349,7 +1348,7 @@ Set the return type for the response body.
 ### shuffle
 
 
-    array SpotifyWebAPI\SpotifyWebAPI::shuffle(array|object $options)
+    boolean SpotifyWebAPI\SpotifyWebAPI::shuffle(array|object $options)
 
 Set shuffle mode for the current user’s playback.<br>
 [https://developer.spotify.com/web-api/toggle-shuffle-for-users-playback/](https://developer.spotify.com/web-api/toggle-shuffle-for-users-playback/)
@@ -1362,7 +1361,7 @@ Set shuffle mode for the current user’s playback.<br>
 
 
 #### Return values
-* **array** Whether the playback shuffle mode was successfully changed.
+* **boolean** Whether the playback shuffle mode was successfully changed.
 
 
 ---

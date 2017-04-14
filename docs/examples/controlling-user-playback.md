@@ -54,7 +54,7 @@ Sometimes, a API call might return a `202 Accepted` response code. When this occ
             $lastResponse = $api->getLastResponse();
 
             if ($lastResponse['status'] == 202) {
-                // Perform some logic to retry the request after s few seconds
+                // Perform some logic to retry the request after a few seconds
             }
         }
     } catch (Exception $e) {
