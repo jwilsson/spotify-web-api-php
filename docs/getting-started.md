@@ -79,8 +79,6 @@ $session = new SpotifyWebAPI\Session(
     'REDIRECT_URI'
 );
 
-$api = new SpotifyWebAPI\SpotifyWebAPI();
-
 // Request a access token using the code from Spotify
 $session->requestAccessToken($_GET['code']);
 
@@ -105,8 +103,6 @@ $session = new SpotifyWebAPI\Session(
     'CLIENT_SECRET',
     'REDIRECT_URI'
 );
-
-$api = new SpotifyWebAPI\SpotifyWebAPI();
 
 $session->requestCredentialsToken();
 $accessToken = $session->getAccessToken();
