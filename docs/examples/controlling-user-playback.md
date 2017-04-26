@@ -4,7 +4,13 @@ Using Spotify Connect, it's possible to control the playback of the currently au
 
 ## Start and stop playback
 ```php
-$api->play([
+// With Device ID
+$api->play($deviceId, [
+    'uris' => ['TRACK_URI'],
+]);
+
+// Without Device ID
+$api->play(false, [
     'uris' => ['TRACK_URI'],
 ]);
 
