@@ -5,8 +5,8 @@ First, start by checking out the [Getting started guide](/docs/getting-started.m
 
 ## Examples
 * **Authorization**
-    * [Obtaining an access token using the Authorization Code Flow](/docs/examples/access-token-with-authorization-code-flow.md.md)
-    * [Obtaining an access token using the Client Credentials Flow](/docs/examples/access-token-with-client-credentials-flow.md.md)
+    * [Obtaining an access token using the Authorization Code Flow](/docs/examples/access-token-with-authorization-code-flow.md)
+    * [Obtaining an access token using the Client Credentials Flow](/docs/examples/access-token-with-client-credentials-flow.md)
     * [Working with scopes](/docs/examples/working-with-scopes.md)
 * **Fetching data**
     * [Fetching catalog information](/docs/examples/fetching-catalog-information.md)
