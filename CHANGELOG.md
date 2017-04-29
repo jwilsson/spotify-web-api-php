@@ -1,4 +1,11 @@
 # Changelog
+## 1.10.1 (2017-04-29)
+* Updated CA bundle. ([ff8d87e](https://github.com/jwilsson/spotify-web-api-php/commit/ff8d87eabbffc3e3c1e4e5d9145faf2ef1ef4932))
+* Corrected the name of some Markdown example files. ([d6425f6](https://github.com/jwilsson/spotify-web-api-php/commit/d6425f610bfd377a4156a421f1246b50e57690ae))
+* Corrected `SpotifyWebAPI::play()` example. ([ce2c08c](https://github.com/jwilsson/spotify-web-api-php/commit/ce2c08c90ca8d0fa420d15790dceb40ebb9f1297))
+* Corrected inline method docs. ([d725d16](https://github.com/jwilsson/spotify-web-api-php/commit/d725d16a8726b19cc51da42557b97d00f4f52395))
+* Removed stray `SpotifyWebApi` object in examples. ([7ef922b](https://github.com/jwilsson/spotify-web-api-php/commit/7ef922bf2fca35b0601578c51f870d481f5762d5))
+
 ## 1.10.0 (2017-04-12)
 * Added Spotify Connect endpoints:
     * `SpotifyWebAPI::changeMyDevice()` ([21dd887](https://github.com/jwilsson/spotify-web-api-php/commit/21dd887271ba7c905fd2df0ea0f600421ef74baf))
