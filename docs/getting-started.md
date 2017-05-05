@@ -100,8 +100,7 @@ require 'vendor/autoload.php';
 
 $session = new SpotifyWebAPI\Session(
     'CLIENT_ID',
-    'CLIENT_SECRET',
-    'REDIRECT_URI'
+    'CLIENT_SECRET'
 );
 
 $session->requestCredentialsToken();
@@ -112,6 +111,8 @@ $accessToken = $session->getAccessToken();
 header('Location: some-other-file.php');
 die();
 ```
+
+You'll notice the missing redirect URI when initializing the `Session`. When using the Client Credentials Flow, it isn't needed and can simply be omitted from the constructor call.
 
 ## Making requests to the Spotify API
 Once you have a access token, it's time to start making some requests to the API!

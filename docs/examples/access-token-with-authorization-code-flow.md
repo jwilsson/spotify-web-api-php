@@ -66,4 +66,4 @@ $accessToken = $session->getAccessToken();
 $api->setAccessToken($accessToken);
 ```
 
-For more in-depth technical information, see the [Spotify Web API documentation](https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow).
+For more in-depth technical information about the Authorization Code Flow, please refer to the [Spotify Web API documentation](https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow).
