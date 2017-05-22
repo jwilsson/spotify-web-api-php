@@ -1,8 +1,3 @@
----
-layout: default
-title: Method Reference - Request
----
-
 ## Constants
 
 * **ACCOUNT_URL**
@@ -19,6 +14,12 @@ title: Method Reference - Request
 
 Make a request to the "account" endpoint.
 
+#### Arguments
+* `$method` **string** - The HTTP method to use.
+* `$uri` **string** - The URI to request.
+* `$parameters` **array** - Optional. Query parameters.
+* `$headers` **array** - Optional. HTTP headers.
+
 
 #### Return values
 * **array** Response data.
@@ -27,6 +28,8 @@ Make a request to the "account" endpoint.
     * int status HTTP status code.
     * string url The requested URL.
 
+
+---
 
 
 ### api
@@ -36,6 +39,12 @@ Make a request to the "account" endpoint.
 
 Make a request to the "api" endpoint.
 
+#### Arguments
+* `$method` **string** - The HTTP method to use.
+* `$uri` **string** - The URI to request.
+* `$parameters` **array** - Optional. Query parameters.
+* `$headers` **array** - Optional. HTTP headers.
+
 
 #### Return values
 * **array** Response data.
@@ -44,6 +53,8 @@ Make a request to the "api" endpoint.
     * int status HTTP status code.
     * string url The requested URL.
 
+
+---
 
 
 ### getLastResponse
@@ -62,6 +73,8 @@ Get the latest full response from the Spotify API.
     * string url The requested URL.
 
 
+---
+
 
 ### getReturnAssoc
 
@@ -76,6 +89,8 @@ Use `Request::getReturnType()` instead.
 * **boolean** Whether the body is returned as an associative array or an stdClass.
 
 
+---
+
 
 ### getReturnType
 
@@ -89,6 +104,8 @@ Get a value indicating the response body type.
 * **string** A value indicating if the response body is an object or associative array.
 
 
+---
+
 
 ### send
 
@@ -97,6 +114,12 @@ Get a value indicating the response body type.
 
 Make a request to Spotify.<br>
 You'll probably want to use one of the convenience methods instead.
+
+#### Arguments
+* `$method` **string** - The HTTP method to use.
+* `$url` **string** - The URL to request.
+* `$parameters` **array** - Optional. Query parameters.
+* `$headers` **array** - Optional. HTTP headers.
 
 
 #### Return values
@@ -107,6 +130,8 @@ You'll probably want to use one of the convenience methods instead.
     * string url The requested URL.
 
 
+---
+
 
 ### setReturnAssoc
 
@@ -116,10 +141,15 @@ _Deprecated: Use `Request::setReturnType()` instead._
 
 Use `Request::setReturnType()` instead.
 
+#### Arguments
+* `$returnAssoc` **boolean** - Whether to return an associative array or an stdClass.
+
 
 #### Return values
 * **void** 
 
+
+---
 
 
 ### setReturnType
@@ -129,8 +159,13 @@ Use `Request::setReturnType()` instead.
 
 Set the return type for the response body.
 
+#### Arguments
+* `$returnType` **string** - One of the Request::RETURN_* constants.
+
 
 #### Return values
 * **void** 
 
+
+---
 
