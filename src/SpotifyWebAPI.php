@@ -594,6 +594,7 @@ class SpotifyWebAPI
      */
     public function getAudioFeatures($trackIds)
     {
+        $trackIds = $this->uriToId($trackIds);
         $options = [
             'ids' => implode(',', $trackIds),
         ];

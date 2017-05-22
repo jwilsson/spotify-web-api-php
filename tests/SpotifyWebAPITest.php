@@ -758,7 +758,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $tracks = [
             '0eGsygTp906u18L0Oimnem',
-            '1lDWb6b6ieDQ2xT7ewTC3G',
+            'spotify:track:1lDWb6b6ieDQ2xT7ewTC3G',
         ];
 
         $expected = [
