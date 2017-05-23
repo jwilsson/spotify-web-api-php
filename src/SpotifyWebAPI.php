@@ -594,6 +594,7 @@ class SpotifyWebAPI
      */
     public function getAudioFeatures($trackIds)
     {
+        $trackIds = $this->uriToId($trackIds);
         $options = [
             'ids' => implode(',', $trackIds),
         ];
@@ -1029,6 +1030,7 @@ class SpotifyWebAPI
     {
         $headers = $this->authHeaders();
 
+        $trackId = $this->uriToId($trackId);
         $uri = '/v1/tracks/' . $trackId;
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
@@ -1048,6 +1050,7 @@ class SpotifyWebAPI
      */
     public function getTracks($trackIds, $options = [])
     {
+        $trackIds = $this->uriToId($trackIds);
         $options['ids'] = implode(',', $trackIds);
 
         $headers = $this->authHeaders();

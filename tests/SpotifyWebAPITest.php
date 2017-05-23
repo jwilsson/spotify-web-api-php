@@ -758,7 +758,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $tracks = [
             '0eGsygTp906u18L0Oimnem',
-            '1lDWb6b6ieDQ2xT7ewTC3G',
+            'spotify:track:1lDWb6b6ieDQ2xT7ewTC3G',
         ];
 
         $expected = [
@@ -1398,7 +1398,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getTrack('0eGsygTp906u18L0Oimnem', $options);
+        $response = $api->getTrack('spotify:track:0eGsygTp906u18L0Oimnem', $options);
 
         $this->assertObjectHasAttribute('id', $response);
     }
@@ -1407,7 +1407,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $tracks = [
             '0eGsygTp906u18L0Oimnem',
-            '1lDWb6b6ieDQ2xT7ewTC3G',
+            'spotify:track:1lDWb6b6ieDQ2xT7ewTC3G',
         ];
 
         $options = [
