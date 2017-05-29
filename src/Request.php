@@ -157,6 +157,8 @@ class Request
      * @param string $url The URL to request.
      * @param array $parameters Optional. Query parameters.
      * @param array $headers Optional. HTTP headers.
+     * 
+     * @throws SpotifyWebAPIException
      *
      * @throws SpotifyWebAPIException
      *
