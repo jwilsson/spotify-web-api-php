@@ -5,7 +5,7 @@ There are lots of operations involving a user's library that can be performed. R
 ## Listing the tracks in a user's library
 
 ```php
-$tracks = $api->getMySavedTracks('USER_ID', [
+$tracks = $api->getMySavedTracks([
     'limit' => 5,
 ]);
 
