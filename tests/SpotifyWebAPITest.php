@@ -237,7 +237,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->createUserPlaylist(
-            'mcgurk',
+            'spotify:user:mcgurk',
             $options
         );
 
@@ -248,7 +248,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $options = [
             '74ASZWbe4lXaubB36ztrGX',
-            '36QJpDe2go2KgaRleHCDTp',
+            'spotify:artist:36QJpDe2go2KgaRleHCDTp',
         ];
 
         $expected = [
@@ -415,8 +415,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->deleteUserPlaylistTracks(
-            'mcgurk',
-            '0UZ0Ll4HJHR7yvURYbHJe9',
+            'spotify:user:mcgurk',
+            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
             $tracks,
             'snapshot_id'
         );
@@ -427,7 +427,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     public function testFollowArtistsOrUsers()
     {
         $options = [
-            '74ASZWbe4lXaubB36ztrGX',
+            'spotify:artist:74ASZWbe4lXaubB36ztrGX',
             '36QJpDe2go2KgaRleHCDTp'
         ];
 
@@ -493,8 +493,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->followPlaylist(
-            'mcgurk',
-            '0UZ0Ll4HJHR7yvURYbHJe9',
+            'spotify:user:mcgurk',
+            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
             $options
         );
 
@@ -521,7 +521,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getAlbum('7u6zL7kqpgLPISZYXNTgYk');
+        $response = $api->getAlbum('spotify:album:7u6zL7kqpgLPISZYXNTgYk');
 
         $this->assertObjectHasAttribute('id', $response);
     }
@@ -530,7 +530,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $albums = [
             '1oR3KrPIp4CbagPa3PhtPp',
-            '6lPb7Eoon6QPbscWbMsk6a',
+            'spotify:album:6lPb7Eoon6QPbscWbMsk6a',
         ];
 
         $options = [
@@ -595,7 +595,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getAlbumTracks('1oR3KrPIp4CbagPa3PhtPp', $options);
+        $response = $api->getAlbumTracks('spotify:album:1oR3KrPIp4CbagPa3PhtPp', $options);
 
         $this->assertObjectHasAttribute('items', $response);
     }
@@ -620,7 +620,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getArtist('36QJpDe2go2KgaRleHCDTp');
+        $response = $api->getArtist('spotify:artist:36QJpDe2go2KgaRleHCDTp');
 
         $this->assertObjectHasAttribute('id', $response);
     }
@@ -645,7 +645,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getArtistRelatedArtists('36QJpDe2go2KgaRleHCDTp');
+        $response = $api->getArtistRelatedArtists('spotify:artist:36QJpDe2go2KgaRleHCDTp');
 
         $this->assertNotEmpty($response->artists);
     }
@@ -654,7 +654,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $artists = [
             '6v8FB84lnmJs434UJf2Mrm',
-            '6olE6TJLqED3rqDCT0FyPh',
+            'spotify:artist:6olE6TJLqED3rqDCT0FyPh',
         ];
 
         $expected = [
@@ -716,7 +716,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getArtistAlbums('36QJpDe2go2KgaRleHCDTp', $options);
+        $response = $api->getArtistAlbums('spotify:artist:36QJpDe2go2KgaRleHCDTp', $options);
 
         $this->assertObjectHasAttribute('items', $response);
     }
@@ -749,7 +749,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getArtistTopTracks('36QJpDe2go2KgaRleHCDTp', $options);
+        $response = $api->getArtistTopTracks('spotify:artist:36QJpDe2go2KgaRleHCDTp', $options);
 
         $this->assertObjectHasAttribute('tracks', $response);
     }
@@ -790,8 +790,6 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
     public function testGetAudioAnalysis()
     {
-        $track = '0eGsygTp906u18L0Oimnem';
-
         $headers = [
             'Authorization' => 'Bearer ' . $this->accessToken,
         ];
@@ -802,7 +800,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $stub = $this->setupStub(
             'GET',
-            '/v1/audio-analysis/' . $track,
+            '/v1/audio-analysis/0eGsygTp906u18L0Oimnem',
             [],
             $headers,
             $return
@@ -810,7 +808,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getAudioAnalysis($track);
+        $response = $api->getAudioAnalysis('spotify:track:0eGsygTp906u18L0Oimnem');
 
         $this->assertObjectHasAttribute('audio_analysis', $response);
     }
@@ -1462,7 +1460,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getUser('mcgurk');
+        $response = $api->getUser('spotify:user:mcgurk');
 
         $this->assertObjectHasAttribute('id', $response);
     }
@@ -1531,7 +1529,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getUserPlaylist('mcgurk', '0UZ0Ll4HJHR7yvURYbHJe9', $options);
+        $response = $api->getUserPlaylist('spotify:user:mcgurk', 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9', $options);
 
         $this->assertObjectHasAttribute('id', $response);
     }
@@ -1564,7 +1562,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getUserPlaylists('mcgurk', $options);
+        $response = $api->getUserPlaylists('spotify:user:mcgurk', $options);
 
         $this->assertObjectHasAttribute('items', $response);
     }
@@ -1601,7 +1599,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getUserPlaylistTracks('mcgurk', '0UZ0Ll4HJHR7yvURYbHJe9', $options);
+        $response = $api->getUserPlaylistTracks('spotify:user:mcgurk', 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9', $options);
 
         $this->assertObjectHasAttribute('items', $response);
     }
@@ -1842,8 +1840,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->reorderUserPlaylistTracks(
-            'mcgurk',
-            '0UZ0Ll4HJHR7yvURYbHJe9',
+            'spotify:user:mcgurk',
+            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
             $options
         );
 
@@ -1881,7 +1879,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $tracks = [
             '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l',
+            'spotify:track:3mqRLlD9j92BBv1ueFhJ1l',
         ];
 
         $expected = json_encode([
@@ -1911,8 +1909,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->replaceUserPlaylistTracks(
-            'mcgurk',
-            '0UZ0Ll4HJHR7yvURYbHJe9',
+            'spotify:user:mcgurk',
+            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
             $tracks
         );
 
@@ -2081,7 +2079,7 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api->setAccessToken($this->accessToken);
         $response = $api->unFollowArtistsOrUsers(
             'artist',
-            ['74ASZWbe4lXaubB36ztrGX', '36QJpDe2go2KgaRleHCDTp']
+            ['74ASZWbe4lXaubB36ztrGX', 'spotify:artist:36QJpDe2go2KgaRleHCDTp']
         );
 
         $this->assertTrue($response);
@@ -2109,8 +2107,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->unFollowPlaylist(
-            'mcgurk',
-            '0UZ0Ll4HJHR7yvURYbHJe9'
+            'spotify:user:mcgurk',
+            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9'
         );
 
         $this->assertTrue($response);
@@ -2145,8 +2143,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->updateUserPlaylist(
-            'mcgurk',
-            '0UZ0Ll4HJHR7yvURYbHJe9',
+            'spotify:user:mcgurk',
+            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
             $options
         );
 
@@ -2185,8 +2183,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->userFollowsPlaylist(
-            'mcgurk',
-            '0UZ0Ll4HJHR7yvURYbHJe9',
+            'spotify:user:mcgurk',
+            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
             $options
         );
 
