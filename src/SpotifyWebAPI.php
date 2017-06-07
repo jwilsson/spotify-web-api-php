@@ -1321,7 +1321,7 @@ class SpotifyWebAPI
      */
     public function play($deviceId = '', $options = [])
     {
-        $options = json_encode((object) $options);
+        $options = (!empty($options)) ? json_encode((object) $options) : $options;
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
