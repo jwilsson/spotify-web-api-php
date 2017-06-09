@@ -1693,7 +1693,7 @@ class SpotifyWebAPI
      * @param string $userId User ID or Spotify URI of the playlist owner.
      * @param string $playlistId ID or Spotify URI of the playlist.
      * @param array|object $options Options for the check.
-     * - ids string|array Required. ID(s) of the user(s) to check for.
+     * - ids string|array Required. ID(s) or Spotify URI(s) of the user(s) to check for.
      *
      * @return array Whether each user is following the playlist.
      */
@@ -1702,6 +1702,7 @@ class SpotifyWebAPI
         $options = (array) $options;
 
         if (isset($options['ids'])) {
+            $options['ids'] = $this->uriToId($options['ids'], 'user');
             $options['ids'] = implode(',', (array) $options['ids']);
         }
 

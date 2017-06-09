@@ -2155,13 +2155,13 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $options = [
             'ids' => [
-                '74ASZWbe4lXaubB36ztrGX',
-                '36QJpDe2go2KgaRleHCDTp',
+                'possan',
+                'spotify:user:elogain',
             ],
         ];
 
         $expected = [
-            'ids' => '74ASZWbe4lXaubB36ztrGX,36QJpDe2go2KgaRleHCDTp',
+            'ids' => 'possan,elogain',
         ];
 
         $headers = [
