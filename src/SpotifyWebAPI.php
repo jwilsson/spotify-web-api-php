@@ -1483,7 +1483,6 @@ class SpotifyWebAPI
 
     /**
      * Search for an item.
-     * Requires a valid access token if market=from_token is used.
      * https://developer.spotify.com/web-api/search-item/
      *
      * @param string $query The term to search for.
