@@ -223,6 +223,7 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
+        $userId = $this->uriToId($userId, 'user');
         $uri = '/v1/users/' . $userId . '/playlists';
 
         $this->lastResponse = $this->request->api('POST', $uri, $options, $headers);
@@ -241,7 +242,9 @@ class SpotifyWebAPI
      */
     public function currentUserFollows($type, $ids)
     {
+        $ids = $this->uriToId($ids, $type);
         $ids = implode(',', (array) $ids);
+
         $options = [
             'ids' => $ids,
             'type' => $type,
@@ -342,6 +345,9 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
+        $userId = $this->uriToId($userId, 'user');
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
 
         $this->lastResponse = $this->request->api('DELETE', $uri, $options, $headers);
@@ -365,6 +371,7 @@ class SpotifyWebAPI
      */
     public function followArtistsOrUsers($type, $ids)
     {
+        $ids = $this->uriToId($ids, $type);
         $ids = json_encode([
             'ids' => (array) $ids,
         ]);
@@ -398,6 +405,9 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
+        $userId = $this->uriToId($userId, 'user');
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/followers';
 
         $this->lastResponse = $this->request->api('PUT', $uri, $options, $headers);
@@ -417,6 +427,7 @@ class SpotifyWebAPI
     {
         $headers = $this->authHeaders();
 
+        $albumId = $this->uriToId($albumId, 'album');
         $uri = '/v1/albums/' . $albumId;
 
         $this->lastResponse = $this->request->api('GET', $uri, [], $headers);
@@ -436,6 +447,8 @@ class SpotifyWebAPI
      */
     public function getAlbums($albumIds, $options = [])
     {
+        $albumIds = $this->uriToId($albumIds, 'album');
+
         $options = (array) $options;
         $options['ids'] = implode(',', $albumIds);
 
@@ -464,6 +477,7 @@ class SpotifyWebAPI
     {
         $headers = $this->authHeaders();
 
+        $albumId = $this->uriToId($albumId, 'album');
         $uri = '/v1/albums/' . $albumId . '/tracks';
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
@@ -483,6 +497,7 @@ class SpotifyWebAPI
     {
         $headers = $this->authHeaders();
 
+        $artistId = $this->uriToId($artistId, 'artist');
         $uri = '/v1/artists/' . $artistId;
 
         $this->lastResponse = $this->request->api('GET', $uri, [], $headers);
@@ -500,7 +515,9 @@ class SpotifyWebAPI
      */
     public function getArtists($artistIds)
     {
+        $artistIds = $this->uriToId($artistIds, 'artist');
         $artistIds = implode(',', $artistIds);
+
         $options = [
             'ids' => $artistIds,
         ];
@@ -526,6 +543,7 @@ class SpotifyWebAPI
     {
         $headers = $this->authHeaders();
 
+        $artistId = $this->uriToId($artistId, 'artist');
         $uri = '/v1/artists/' . $artistId . '/related-artists';
 
         $this->lastResponse = $this->request->api('GET', $uri, [], $headers);
@@ -556,6 +574,7 @@ class SpotifyWebAPI
 
         $headers = $this->authHeaders();
 
+        $artistId = $this->uriToId($artistId, 'artist');
         $uri = '/v1/artists/' . $artistId . '/albums';
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
@@ -577,6 +596,7 @@ class SpotifyWebAPI
     {
         $headers = $this->authHeaders();
 
+        $artistId = $this->uriToId($artistId, 'artist');
         $uri = '/v1/artists/' . $artistId . '/top-tracks';
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
@@ -620,6 +640,7 @@ class SpotifyWebAPI
     {
         $headers = $this->authHeaders();
 
+        $trackId = $this->uriToId($trackId, 'track');
         $uri = '/v1/audio-analysis/' . $trackId;
 
         $this->lastResponse = $this->request->api('GET', $uri, [], $headers);
@@ -1074,6 +1095,7 @@ class SpotifyWebAPI
     {
         $headers = $this->authHeaders();
 
+        $userId = $this->uriToId($userId, 'user');
         $uri = '/v1/users/' . $userId;
 
         $this->lastResponse = $this->request->api('GET', $uri, [], $headers);
@@ -1130,6 +1152,9 @@ class SpotifyWebAPI
 
         $headers = $this->authHeaders();
 
+        $userId = $this->uriToId($userId, 'user');
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId;
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
@@ -1152,6 +1177,7 @@ class SpotifyWebAPI
     {
         $headers = $this->authHeaders();
 
+        $userId = $this->uriToId($userId, 'user');
         $uri = '/v1/users/' . $userId . '/playlists';
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
@@ -1182,6 +1208,9 @@ class SpotifyWebAPI
         }
 
         $headers = $this->authHeaders();
+
+        $userId = $this->uriToId($userId, 'user');
+        $playlistId = $this->uriToId($playlistId, 'playlist');
 
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
 
@@ -1383,6 +1412,9 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
+        $userId = $this->uriToId($userId, 'user');
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
 
         $this->lastResponse = $this->request->api('PUT', $uri, $options, $headers);
@@ -1438,6 +1470,9 @@ class SpotifyWebAPI
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
+
+        $userId = $this->uriToId($userId, 'user');
+        $playlistId = $this->uriToId($playlistId, 'playlist');
 
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
 
@@ -1583,6 +1618,7 @@ class SpotifyWebAPI
      */
     public function unfollowArtistsOrUsers($type, $ids)
     {
+        $ids = $this->uriToId($ids, $type);
         $ids = json_encode([
             'ids' => (array) $ids,
         ]);
@@ -1612,6 +1648,9 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
+        $userId = $this->uriToId($userId, 'user');
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/followers';
 
         $this->lastResponse = $this->request->api('DELETE', $uri, [], $headers);
@@ -1638,6 +1677,9 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
+        $userId = $this->uriToId($userId, 'user');
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId;
 
         $this->lastResponse = $this->request->api('PUT', $uri, $options, $headers);
@@ -1649,14 +1691,14 @@ class SpotifyWebAPI
      * Check if a user is following a playlist.
      * https://developer.spotify.com/web-api/check-user-following-playlist/
      *
-     * @param string $ownerId User ID of the playlist owner.
+     * @param string $userId User ID of the playlist owner.
      * @param string $playlistId ID of the playlist.
      * @param array|object $options Options for the check.
      * - ids string|array Required. ID(s) of the user(s) to check for.
      *
      * @return array Whether each user is following the playlist.
      */
-    public function userFollowsPlaylist($ownerId, $playlistId, $options)
+    public function userFollowsPlaylist($userId, $playlistId, $options)
     {
         $options = (array) $options;
 
@@ -1666,7 +1708,10 @@ class SpotifyWebAPI
 
         $headers = $this->authHeaders();
 
-        $uri = '/v1/users/' . $ownerId . '/playlists/' . $playlistId . '/followers/contains';
+        $userId = $this->uriToId($userId, 'user');
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
+        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/followers/contains';
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
 
