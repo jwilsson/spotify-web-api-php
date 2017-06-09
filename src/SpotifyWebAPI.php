@@ -147,6 +147,9 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
+        $userId = $this->uriToId($userId, 'user');
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
         // We need to manually append data to the URI since it's a POST request
         $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks?' . $options;
 
