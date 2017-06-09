@@ -8,7 +8,7 @@
 )
 * Corrected `SpotifyWebAPI::getMySavedTracks` example. ([0eedf1c](https://github.com/jwilsson/spotify-web-api-php/commit/0eedf1cfbd6211eb41b99aedd71dabc9901d47b2))
 * Updated `PHP_CodeSniffer` to `3.x`. ([60adb2c](https://github.com/jwilsson/spotify-web-api-php/commit/60adb2cb05b7adeccc271faeb8d6cceb6f949288))
-
+* Travis builds now uses Trusty as the distribution. ([011524b](https://github.com/jwilsson/spotify-web-api-php/commit/011524b46c44c98b67bdd5930f534d40cc19804c))
 
 ## 1.10.1 (2017-04-29)
 * Updated CA bundle. ([ff8d87e](https://github.com/jwilsson/spotify-web-api-php/commit/ff8d87eabbffc3e3c1e4e5d9145faf2ef1ef4932))
