@@ -1,4 +1,7 @@
 # Changelog
+## 1.11.1 (2017-06-12)
+* Fixed an issue where some URI IDs would be properly cast to an array. ([713e8e7](https://github.com/jwilsson/spotify-web-api-php/commit/713e8e794cf1a7964ba0055f783516ac6f446715))
+
 ## 1.11.0 (2017-06-09)
 * All methods accepting Album, Artist, Playlist, Track, or User IDs can now also accept Spotify URIs. (
     [1a47fa1](https://github.com/jwilsson/spotify-web-api-php/commit/1a47fa143771d3148d6cda9b59a2d500ed540a1d),
