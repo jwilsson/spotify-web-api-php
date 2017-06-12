@@ -376,7 +376,7 @@ class SpotifyWebAPI
     {
         $ids = $this->uriToId($ids, $type);
         $ids = json_encode([
-            'ids' => (array) $this->uriToId($ids, $type),
+            'ids' => (array) $ids,
         ]);
 
         $headers = $this->authHeaders();
@@ -1622,7 +1622,7 @@ class SpotifyWebAPI
     {
         $ids = $this->uriToId($ids, $type);
         $ids = json_encode([
-            'ids' => (array) $this->uriToId($ids, $type),
+            'ids' => (array) $ids,
         ]);
 
         $headers = $this->authHeaders();
