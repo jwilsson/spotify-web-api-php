@@ -453,7 +453,7 @@ class SpotifyWebAPI
         $albumIds = $this->uriToId($albumIds, 'album');
 
         $options = (array) $options;
-        $options['ids'] = implode(',', $albumIds);
+        $options['ids'] = implode(',', (array) $albumIds);
 
         $headers = $this->authHeaders();
 
@@ -519,7 +519,7 @@ class SpotifyWebAPI
     public function getArtists($artistIds)
     {
         $artistIds = $this->uriToId($artistIds, 'artist');
-        $artistIds = implode(',', $artistIds);
+        $artistIds = implode(',', (array) $artistIds);
 
         $options = [
             'ids' => $artistIds,
@@ -619,7 +619,7 @@ class SpotifyWebAPI
     {
         $trackIds = $this->uriToId($trackIds);
         $options = [
-            'ids' => implode(',', $trackIds),
+            'ids' => implode(',', (array) $trackIds),
         ];
 
         $headers = $this->authHeaders();
@@ -1075,7 +1075,7 @@ class SpotifyWebAPI
     public function getTracks($trackIds, $options = [])
     {
         $trackIds = $this->uriToId($trackIds);
-        $options['ids'] = implode(',', $trackIds);
+        $options['ids'] = implode(',', (array) $trackIds);
 
         $headers = $this->authHeaders();
 
