@@ -30,7 +30,7 @@ Add albums to the current user's Spotify library.<br>
 [https://developer.spotify.com/web-api/save-albums-user/](https://developer.spotify.com/web-api/save-albums-user/)
 
 #### Arguments
-* `$albums` **string\|array** - ID(s) of the album(s) to add.
+* `$albums` **string\|array** - ID(s) or Spotify URI(s) of the album(s) to add.
 
 
 #### Return values
@@ -49,7 +49,7 @@ Add tracks to the current user's Spotify library.<br>
 [https://developer.spotify.com/web-api/save-tracks-user/](https://developer.spotify.com/web-api/save-tracks-user/)
 
 #### Arguments
-* `$tracks` **string\|array** - ID(s) of the track(s) to add.
+* `$tracks` **string\|array** - ID(s) or Spotify URI(s) of the track(s) to add.
 
 
 #### Return values
@@ -70,7 +70,7 @@ Add tracks to a user's playlist.<br>
 #### Arguments
 * `$userId` **string** - ID of the user who owns the playlist.
 * `$playlistId` **string** - ID of the playlist to add tracks to.
-* `$tracks` **string\|array** - ID(s) of the track(s) to add.
+* `$tracks` **string\|array** - ID(s) or Spotify URI(s) of the track(s) to add.
 * `$options` **array\|object** - Optional. Options for the new tracks.
     * int position Optional. Zero-based track position in playlist. Tracks will be appened if omitted or false.
 
@@ -136,7 +136,7 @@ Create a new playlist for a user.<br>
 [https://developer.spotify.com/web-api/create-playlist/](https://developer.spotify.com/web-api/create-playlist/)
 
 #### Arguments
-* `$userId` **string** - ID of the user to create the playlist for.
+* `$userId` **string** - ID or Spotify URI of the user to create the playlist for.
 * `$options` **array\|object** - Options for the new playlist.
     * string name Required. Name of the playlist.
     * bool public Optional. Whether the playlist should be public or not.
@@ -160,7 +160,7 @@ Check to see if the current user is following one or more artists or other Spoti
 
 #### Arguments
 * `$type` **string** - The type to check: either &#039;artist&#039; or &#039;user&#039;.
-* `$ids` **string\|array** - ID(s) of the user(s) or artist(s) to check for.
+* `$ids` **string\|array** - ID(s) or Spotify URI(s) of the user(s) or artist(s) to check for.
 
 
 #### Return values
@@ -179,7 +179,7 @@ Delete albums from current user's Spotify library.<br>
 [https://developer.spotify.com/web-api/remove-albums-user/](https://developer.spotify.com/web-api/remove-albums-user/)
 
 #### Arguments
-* `$albums` **string\|array** - ID(s) of the album(s) to delete.
+* `$albums` **string\|array** - ID(s) or Spotify URI(s) of the album(s) to delete.
 
 
 #### Return values
@@ -198,7 +198,7 @@ Delete tracks from current user's Spotify library.<br>
 [https://developer.spotify.com/web-api/remove-tracks-user/](https://developer.spotify.com/web-api/remove-tracks-user/)
 
 #### Arguments
-* `$tracks` **string\|array** - ID(s) of the track(s) to delete.
+* `$tracks` **string\|array** - ID(s) or Spotify URI(s) of the track(s) to delete.
 
 
 #### Return values
@@ -217,10 +217,10 @@ Delete tracks from a playlist and retrieve a new snapshot ID.<br>
 [https://developer.spotify.com/web-api/remove-tracks-playlist/](https://developer.spotify.com/web-api/remove-tracks-playlist/)
 
 #### Arguments
-* `$userId` **string** - ID of the user who owns the playlist.
-* `$playlistId` **string** - ID of the playlist to delete tracks from.
+* `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
+* `$playlistId` **string** - ID or Spotify URI of the playlist to delete tracks from.
 * `$tracks` **array** - Array of arrays or objects with tracks to delete.
-    * string id Required. Spotify track ID.
+    * string id Required. Track ID or Spotify URI.
     * int\|array positions Optional. The track&#039;s position(s) in the playlist.
 
 * `$snapshotId` **string** - Optional. The playlist&#039;s snapshot ID.
@@ -243,7 +243,7 @@ Add the current user as a follower of one or more artists or other Spotify users
 
 #### Arguments
 * `$type` **string** - The type to check: either &#039;artist&#039; or &#039;user&#039;.
-* `$ids` **string\|array** - ID(s) of the user(s) or artist(s) to follow.
+* `$ids` **string\|array** - ID(s) or Spotify URI(s) of the user(s) or artist(s) to follow.
 
 
 #### Return values
@@ -262,8 +262,8 @@ Add the current user as a follower of a playlist.<br>
 [https://developer.spotify.com/web-api/follow-playlist/](https://developer.spotify.com/web-api/follow-playlist/)
 
 #### Arguments
-* `$userId` **string** - ID of the user who owns the playlist.
-* `$playlistId` **string** - ID of the playlist to follow.
+* `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
+* `$playlistId` **string** - ID or Spotify URI of the playlist to follow.
 * `$options` **array\|object** - Optional. Options for the followed playlist.
     * bool public Optional. Whether the playlist should be followed publicly or not.
 
@@ -285,7 +285,7 @@ Get a album.<br>
 [https://developer.spotify.com/web-api/get-album/](https://developer.spotify.com/web-api/get-album/)
 
 #### Arguments
-* `$albumId` **string** - ID of the album.
+* `$albumId` **string** - ID or Spotify URI of the album.
 
 
 #### Return values
@@ -304,7 +304,7 @@ Get multiple albums.<br>
 [https://developer.spotify.com/web-api/get-several-albums/](https://developer.spotify.com/web-api/get-several-albums/)
 
 #### Arguments
-* `$albumIds` **array** - IDs of the albums.
+* `$albumIds` **array** - IDs or Spotify URIs of the albums.
 * `$options` **array\|object** - Optional. Options for the albums.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
@@ -326,7 +326,7 @@ Get a album's tracks.<br>
 [https://developer.spotify.com/web-api/get-albums-tracks/](https://developer.spotify.com/web-api/get-albums-tracks/)
 
 #### Arguments
-* `$albumId` **string** - ID of the album.
+* `$albumId` **string** - ID or Spotify URI of the album.
 * `$options` **array\|object** - Optional. Options for the tracks.
     * int limit Optional. Limit the number of tracks.
     * int offset Optional. Number of tracks to skip.
@@ -350,7 +350,7 @@ Get an artist.<br>
 [https://developer.spotify.com/web-api/get-artist/](https://developer.spotify.com/web-api/get-artist/)
 
 #### Arguments
-* `$artistId` **string** - ID of the artist.
+* `$artistId` **string** - ID or Spotify URI of the artist.
 
 
 #### Return values
@@ -369,7 +369,7 @@ Get multiple artists.<br>
 [https://developer.spotify.com/web-api/get-several-artists/](https://developer.spotify.com/web-api/get-several-artists/)
 
 #### Arguments
-* `$artistIds` **array** - IDs of the artists.
+* `$artistIds` **array** - IDs or Spotify URIs of the artists.
 
 
 #### Return values
@@ -388,7 +388,7 @@ Get an artist's related artists.<br>
 [https://developer.spotify.com/web-api/get-related-artists/](https://developer.spotify.com/web-api/get-related-artists/)
 
 #### Arguments
-* `$artistId` **string** - ID of the artist.
+* `$artistId` **string** - ID or Spotify URI of the artist.
 
 
 #### Return values
@@ -407,7 +407,7 @@ Get an artist's albums.<br>
 [https://developer.spotify.com/web-api/get-artists-albums/](https://developer.spotify.com/web-api/get-artists-albums/)
 
 #### Arguments
-* `$artistId` **string** - ID of the artist.
+* `$artistId` **string** - ID or Spotify URI of the artist.
 * `$options` **array\|object** - Optional. Options for the albums.
     * string\|array album_type Optional. Album type(s) to return. If omitted, all album types will be returned.
     * string market Optional. Limit the results to items that are playable in this market, for example SE.
@@ -432,7 +432,7 @@ Get an artist's top tracks in a country.<br>
 [https://developer.spotify.com/web-api/get-artists-top-tracks/](https://developer.spotify.com/web-api/get-artists-top-tracks/)
 
 #### Arguments
-* `$artistId` **string** - ID of the artist.
+* `$artistId` **string** - ID or Spotify URI of the artist.
 * `$options` **array\|object** - Options for the tracks.
     * string $country Required. An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
 
@@ -454,7 +454,7 @@ Get track audio features.<br>
 [https://developer.spotify.com/web-api/get-several-audio-features/](https://developer.spotify.com/web-api/get-several-audio-features/)
 
 #### Arguments
-* `$trackIds` **array** - IDs of the tracks.
+* `$trackIds` **array** - IDs or Spotify URIs of the tracks.
 
 
 #### Return values
@@ -473,7 +473,7 @@ Get audio analysis for track.<br>
 [https://developer.spotify.com/web-api/get-audio-analysis/](https://developer.spotify.com/web-api/get-audio-analysis/)
 
 #### Arguments
-* `$trackId` **string** - ID of the track.
+* `$trackId` **string** - ID or Spotify URI of the track.
 
 
 #### Return values
@@ -889,7 +889,7 @@ Get a track.<br>
 [https://developer.spotify.com/web-api/get-track/](https://developer.spotify.com/web-api/get-track/)
 
 #### Arguments
-* `$trackId` **string** - ID of the track.
+* `$trackId` **string** - ID or Spotify URI of the track.
 * `$options` **array\|object** - Optional. Options for the track.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
@@ -911,7 +911,7 @@ Get multiple tracks.<br>
 [https://developer.spotify.com/web-api/get-several-tracks/](https://developer.spotify.com/web-api/get-several-tracks/)
 
 #### Arguments
-* `$trackIds` **array** - IDs of the tracks.
+* `$trackIds` **array** - IDs or Spotify URIs of the tracks.
 * `$options` **array\|object** - Optional. Options for the albums.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
@@ -933,7 +933,7 @@ Get a user.<br>
 [https://developer.spotify.com/web-api/get-users-profile/](https://developer.spotify.com/web-api/get-users-profile/)
 
 #### Arguments
-* `$userId` **string** - ID of the user.
+* `$userId` **string** - ID or Spotify URI of the user.
 
 
 #### Return values
@@ -974,8 +974,8 @@ Get a user's specific playlist.<br>
 [https://developer.spotify.com/web-api/get-playlist/](https://developer.spotify.com/web-api/get-playlist/)
 
 #### Arguments
-* `$userId` **string** - ID of the user.
-* `$playlistId` **string** - ID of the playlist.
+* `$userId` **string** - ID or Spotify URI of the user.
+* `$playlistId` **string** - ID or Spotify URI of the playlist.
 * `$options` **array\|object** - Optional. Options for the playlist.
     * string\|array fields Optional. A list of fields to return. See Spotify docs for more info.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
@@ -998,7 +998,7 @@ Get a user's playlists.<br>
 [https://developer.spotify.com/web-api/get-list-users-playlists/](https://developer.spotify.com/web-api/get-list-users-playlists/)
 
 #### Arguments
-* `$userId` **string** - ID of the user.
+* `$userId` **string** - ID or Spotify URI of the user.
 * `$options` **array\|object** - Optional. Options for the tracks.
     * int limit Optional. Limit the number of tracks.
     * int offset Optional. Number of tracks to skip.
@@ -1021,8 +1021,8 @@ Get the tracks in a user's playlist.<br>
 [https://developer.spotify.com/web-api/get-playlists-tracks/](https://developer.spotify.com/web-api/get-playlists-tracks/)
 
 #### Arguments
-* `$userId` **string** - ID of the user.
-* `$playlistId` **string** - ID of the playlist.
+* `$userId` **string** - ID or Spotify URI of the user.
+* `$playlistId` **string** - ID or Spotify URI of the playlist.
 * `$options` **array\|object** - Optional. Options for the tracks.
     * string\|array fields Optional. A list of fields to return. See Spotify docs for more info.
     * int limit Optional. Limit the number of tracks.
@@ -1063,7 +1063,7 @@ Check if albums are saved in the current user's Spotify library.<br>
 [https://developer.spotify.com/web-api/check-users-saved-albums/](https://developer.spotify.com/web-api/check-users-saved-albums/)
 
 #### Arguments
-* `$albums` **string\|array** - ID(s) of the album(s) to check for.
+* `$albums` **string\|array** - ID(s) or Spotify URI(s) of the album(s) to check for.
 
 
 #### Return values
@@ -1082,7 +1082,7 @@ Check if tracks are saved in the current user's Spotify library.<br>
 [https://developer.spotify.com/web-api/check-users-saved-tracks/](https://developer.spotify.com/web-api/check-users-saved-tracks/)
 
 #### Arguments
-* `$tracks` **string\|array** - ID(s) of the track(s) to check for.
+* `$tracks` **string\|array** - ID(s) or Spotify URI(s) of the track(s) to check for.
 
 
 #### Return values
@@ -1182,8 +1182,8 @@ Reorder the tracks in a user's playlist.<br>
 [https://developer.spotify.com/web-api/reorder-playlists-tracks/](https://developer.spotify.com/web-api/reorder-playlists-tracks/)
 
 #### Arguments
-* `$userId` **string** - ID of the user.
-* `$playlistId` **string** - ID of the playlist.
+* `$userId` **string** - ID or Spotify URI of the user.
+* `$playlistId` **string** - ID or Spotify URI of the playlist.
 * `$options` **array\|object** - Options for the new tracks.
     * int range_start Required. Position of the first track to be reordered.
     * int range_length Optional. The amount of tracks to be reordered.
@@ -1230,9 +1230,9 @@ Replace all tracks in a user's playlist with new ones.<br>
 [https://developer.spotify.com/web-api/replace-playlists-tracks/](https://developer.spotify.com/web-api/replace-playlists-tracks/)
 
 #### Arguments
-* `$userId` **string** - ID of the user.
-* `$playlistId` **string** - ID of the playlist.
-* `$tracks` **string\|array** - ID(s) of the track(s) to add.
+* `$userId` **string** - ID or Spotify URI of the user.
+* `$playlistId` **string** - ID or Spotify URI of the playlist.
+* `$tracks` **string\|array** - ID(s) or Spotify URI(s) of the track(s) to add.
 
 
 #### Return values
@@ -1248,7 +1248,6 @@ Replace all tracks in a user's playlist with new ones.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::search(string $query, string|array $type, array|object $options)
 
 Search for an item.<br>
-Requires a valid access token if market=from_token is used.<br>
 [https://developer.spotify.com/web-api/search-item/](https://developer.spotify.com/web-api/search-item/)
 
 #### Arguments
@@ -1377,7 +1376,7 @@ Remove the current user as a follower of one or more artists or other Spotify us
 
 #### Arguments
 * `$type` **string** - The type to check: either &#039;artist&#039; or &#039;user&#039;.
-* `$ids` **string\|array** - ID(s) of the user(s) or artist(s) to unfollow.
+* `$ids` **string\|array** - ID(s) or Spotify URI(s) of the user(s) or artist(s) to unfollow.
 
 
 #### Return values
@@ -1396,8 +1395,8 @@ Remove the current user as a follower of a playlist.<br>
 [https://developer.spotify.com/web-api/unfollow-playlist/](https://developer.spotify.com/web-api/unfollow-playlist/)
 
 #### Arguments
-* `$userId` **string** - ID of the user who owns the playlist.
-* `$playlistId` **string** - ID of the playlist to unfollow
+* `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
+* `$playlistId` **string** - ID or Spotify URI of the playlist to unfollow
 
 
 #### Return values
@@ -1416,8 +1415,8 @@ Update the details of a user's playlist.<br>
 [https://developer.spotify.com/web-api/change-playlist-details/](https://developer.spotify.com/web-api/change-playlist-details/)
 
 #### Arguments
-* `$userId` **string** - ID of the user who owns the playlist.
-* `$playlistId` **string** - ID of the playlist to update.
+* `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
+* `$playlistId` **string** - ID or Spotify URI of the playlist to update.
 * `$options` **array\|object** - Options for the playlist.
     * name string Optional. Name of the playlist.
     * public bool Optional. Whether the playlist should be public or not.
@@ -1434,16 +1433,16 @@ Update the details of a user's playlist.<br>
 ### userFollowsPlaylist
 
 
-    array SpotifyWebAPI\SpotifyWebAPI::userFollowsPlaylist(string $ownerId, string $playlistId, array|object $options)
+    array SpotifyWebAPI\SpotifyWebAPI::userFollowsPlaylist(string $userId, string $playlistId, array|object $options)
 
 Check if a user is following a playlist.<br>
 [https://developer.spotify.com/web-api/check-user-following-playlist/](https://developer.spotify.com/web-api/check-user-following-playlist/)
 
 #### Arguments
-* `$ownerId` **string** - User ID of the playlist owner.
-* `$playlistId` **string** - ID of the playlist.
+* `$userId` **string** - User ID or Spotify URI of the playlist owner.
+* `$playlistId` **string** - ID or Spotify URI of the playlist.
 * `$options` **array\|object** - Options for the check.
-    * ids string\|array Required. ID(s) of the user(s) to check for.
+    * ids string\|array Required. ID(s) or Spotify URI(s) of the user(s) to check for.
 
 
 
