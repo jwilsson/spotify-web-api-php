@@ -138,8 +138,8 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->addUserPlaylistTracks(
-            'mcgurk',
-            '0UZ0Ll4HJHR7yvURYbHJe9',
+            'spotify:user:mcgurk',
+            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
             $tracks,
             $options
         );
@@ -2155,13 +2155,13 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
     {
         $options = [
             'ids' => [
-                '74ASZWbe4lXaubB36ztrGX',
-                '36QJpDe2go2KgaRleHCDTp',
+                'possan',
+                'spotify:user:elogain',
             ],
         ];
 
         $expected = [
-            'ids' => '74ASZWbe4lXaubB36ztrGX,36QJpDe2go2KgaRleHCDTp',
+            'ids' => 'possan,elogain',
         ];
 
         $headers = [

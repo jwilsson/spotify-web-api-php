@@ -17,7 +17,7 @@ Make a request to the "account" endpoint.
 #### Arguments
 * `$method` **string** - The HTTP method to use.
 * `$uri` **string** - The URI to request.
-* `$parameters` **array** - Optional. Query parameters.
+* `$parameters` **array** - Optional. Query string parameters or HTTP body, depending on $method.
 * `$headers` **array** - Optional. HTTP headers.
 
 
@@ -42,7 +42,7 @@ Make a request to the "api" endpoint.
 #### Arguments
 * `$method` **string** - The HTTP method to use.
 * `$uri` **string** - The URI to request.
-* `$parameters` **array** - Optional. Query parameters.
+* `$parameters` **array** - Optional. Query string parameters or HTTP body, depending on $method.
 * `$headers` **array** - Optional. HTTP headers.
 
 
@@ -118,7 +118,7 @@ You'll probably want to use one of the convenience methods instead.
 #### Arguments
 * `$method` **string** - The HTTP method to use.
 * `$url` **string** - The URL to request.
-* `$parameters` **array** - Optional. Query parameters.
+* `$parameters` **array** - Optional. Query string parameters or HTTP body, depending on $method.
 * `$headers` **array** - Optional. HTTP headers.
 
 
