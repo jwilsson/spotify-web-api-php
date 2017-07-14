@@ -1,3 +1,6 @@
+sudo: false
+dist: trusty
+
 language: php
 
 php:
@@ -8,8 +11,12 @@ php:
   - nightly
   - hhvm
 
-sudo: false
-dist: trusty
+git:
+  depth: 1
+
+branches:
+  only:
+    - master
 
 matrix:
   fast_finish: true
