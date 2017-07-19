@@ -1,5 +1,5 @@
 <?php
-class SessionTest extends PHPUnit_Framework_TestCase
+class SessionTest extends PHPUnit\Framework\TestCase
 {
     private $clientID = 'b777292af0def22f9257991fc770b520';
     private $clientSecret = '6a0419f43d0aa93b2ae881429b6b9bc2';
