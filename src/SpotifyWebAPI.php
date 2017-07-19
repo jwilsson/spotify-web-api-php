@@ -1004,23 +1004,6 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get the return type for the response body.
-     *
-     * @deprecated Use `SpotifyWebAPI::getReturnType()` instead.
-     *
-     * @return bool Whether an associative array or an stdClass is returned.
-     */
-    public function getReturnAssoc()
-    {
-        trigger_error(
-            'SpotifyWebAPI::getReturnAssoc() is deprecated. Use SpotifyWebAPI::getReturnType() instead.',
-            E_USER_DEPRECATED
-        );
-
-        return $this->request->getReturnAssoc();
-    }
-
-    /**
      * Get a value indicating the response body type.
      *
      * @return string A value indicating if the response body is an object or associative array.
@@ -1548,27 +1531,6 @@ class SpotifyWebAPI
     public function setAccessToken($accessToken)
     {
         $this->accessToken = $accessToken;
-    }
-
-    /**
-     * Set the return type for the response body.
-     *
-     * @deprecated Use `SpotifyWebAPI::setReturnType()` instead.
-     *
-     * @param bool $returnAssoc Whether to return an associative array or an stdClass.
-     *
-     * @return void
-     */
-    public function setReturnAssoc($returnAssoc)
-    {
-        trigger_error(
-            'SpotifyWebAPI::setReturnAssoc() is deprecated. Use SpotifyWebAPI::setReturnType() instead.',
-            E_USER_DEPRECATED
-        );
-
-        $returnType = $returnAssoc ? self::RETURN_ASSOC : self::RETURN_OBJECT;
-
-        $this->request->setReturnType($returnType);
     }
 
     /**

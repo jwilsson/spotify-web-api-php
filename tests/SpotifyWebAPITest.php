@@ -1327,25 +1327,6 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertObjectHasAttribute('seeds', $response);
     }
 
-    public function testGetReturnAssoc()
-    {
-        PHPUnit\Framework\Error\Deprecated::$enabled = false;
-
-        $stub = $this->getMockBuilder('Request')
-                ->setMethods(['getReturnAssoc'])
-                ->getMock();
-
-        $stub->expects($this->once())
-                ->method('getReturnAssoc')
-                ->willReturn(true);
-
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
-
-        $this->assertTrue($api->getReturnAssoc());
-
-        PHPUnit\Framework\Error\Deprecated::$enabled = true;
-    }
-
     public function testGetReturnType()
     {
         $stub = $this->getMockBuilder('Request')
@@ -1986,24 +1967,6 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         ]);
 
         $this->assertTrue($response);
-    }
-
-    public function testSetReturnAssoc()
-    {
-        PHPUnit\Framework\Error\Deprecated::$enabled = false;
-
-        $stub = $this->getMockBuilder('Request')
-                ->setMethods(['setReturnType'])
-                ->getMock();
-
-        $stub->expects($this->once())
-                ->method('setReturnType')
-                ->willReturn(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
-
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
-        $api->setReturnAssoc(true);
-
-        PHPUnit\Framework\Error\Deprecated::$enabled = true;
     }
 
     public function testSetReturnType()

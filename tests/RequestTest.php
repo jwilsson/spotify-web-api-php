@@ -209,39 +209,14 @@ class RequestTest extends PHPUnit\Framework\TestCase
         $this->assertArrayHasKey('url', $response['body']);
     }
 
-    public function testSetReturnAssoc()
-    {
-        PHPUnit\Framework\Error\Deprecated::$enabled = false;
-
-        $request = new SpotifyWebAPI\Request();
-        $this->assertFalse($request->getReturnAssoc());
-
-        $request->setReturnAssoc(true);
-        $this->assertTrue($request->getReturnAssoc());
-        $this->assertEquals(SpotifyWebAPI\Request::RETURN_ASSOC, $request->getReturnType());
-
-        $request->setReturnAssoc(false);
-        $this->assertFalse($request->getReturnAssoc());
-        $this->assertEquals(SpotifyWebAPI\Request::RETURN_OBJECT, $request->getReturnType());
-
-        PHPUnit\Framework\Error\Deprecated::$enabled = true;
-    }
-
     public function testSetReturnType()
     {
-        PHPUnit\Framework\Error\Deprecated::$enabled = false;
-
         $request = new SpotifyWebAPI\Request();
-        $this->assertFalse($request->getReturnAssoc());
 
         $request->setReturnType(SpotifyWebAPI\Request::RETURN_ASSOC);
-        $this->assertTrue($request->getReturnAssoc());
         $this->assertEquals(SpotifyWebAPI\Request::RETURN_ASSOC, $request->getReturnType());
 
         $request->setReturnType(SpotifyWebAPI\Request::RETURN_OBJECT);
-        $this->assertFalse($request->getReturnAssoc());
         $this->assertEquals(SpotifyWebAPI\Request::RETURN_OBJECT, $request->getReturnType());
-
-        PHPUnit\Framework\Error\Deprecated::$enabled = true;
     }
 }
