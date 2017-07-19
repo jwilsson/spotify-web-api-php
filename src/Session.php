@@ -49,7 +49,7 @@ class Session
             'response_type' => 'code',
             'scope' => isset($options['scope']) ? implode(' ', $options['scope']) : null,
             'show_dialog' => !empty($options['show_dialog']) ? 'true' : null,
-            'state' => isset($options['state']) ? $options['state'] : null,
+            'state' => $options['state'] ?? null,
         ];
 
         return Request::ACCOUNT_URL . '/authorize/?' . http_build_query($parameters);

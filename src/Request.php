@@ -32,7 +32,7 @@ class Request
         }
 
         $body = json_decode($body);
-        $error = (isset($body->error)) ? $body->error : null;
+        $error = $body->error ?? null;
 
         if (isset($error->message) && isset($error->status)) {
             // API call error
