@@ -151,17 +151,14 @@ class Session
     /**
      * Request an access token using the Client Credentials Flow.
      *
-     * @param array $scope Optional. Scope(s) to request from the user.
-     *
      * @return bool True when an access token was successfully granted, false otherwise.
      */
-    public function requestCredentialsToken($scope = [])
+    public function requestCredentialsToken()
     {
         $payload = base64_encode($this->getClientId() . ':' . $this->getClientSecret());
 
         $parameters = [
             'grant_type' => 'client_credentials',
-            'scope' => implode(' ', $scope),
         ];
 
         $headers = [

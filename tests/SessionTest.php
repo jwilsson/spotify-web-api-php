@@ -176,7 +176,6 @@ class SessionTest extends PHPUnit\Framework\TestCase
     {
         $expected = [
             'grant_type' => 'client_credentials',
-            'scope' => 'user-read-email',
         ];
 
         $headers = [
@@ -196,7 +195,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
         );
 
         $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI, $stub);
-        $result = $session->requestCredentialsToken(['user-read-email']);
+        $result = $session->requestCredentialsToken();
 
         $this->assertTrue($result);
         $this->assertNotEmpty($session->getAccessToken());
