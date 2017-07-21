@@ -41,11 +41,11 @@ class SpotifyWebAPI
      * Convert Spotify object IDs to Spotify URIs.
      *
      * @param array|string $ids ID(s) to convert.
-     * @param string $type Optional. Spotify object type. Default is 'track'.
+     * @param string $type Spotify object type.
      *
      * @return array|string Spotify URI(s).
      */
-    protected function idToUri($ids, $type = 'track')
+    protected function idToUri($ids, $type)
     {
         $type = 'spotify:' . $type . ':';
 
@@ -64,11 +64,11 @@ class SpotifyWebAPI
      * Convert Spotify URIs to Spotify object IDs
      *
      * @param array|string $uriIds URI(s) to convert.
-     * @param string $type Optional. Spotify object type. Default is 'track'.
+     * @param string $type Spotify object type.
      *
      * @return array|string Spotify ID(s).
      */
-    protected function uriToId($uriIds, $type = 'track')
+    protected function uriToId($uriIds, $type)
     {
         $type = 'spotify:' . $type . ':';
 
@@ -112,7 +112,7 @@ class SpotifyWebAPI
      */
     public function addMyTracks($tracks)
     {
-        $tracks = $this->uriToId($tracks);
+        $tracks = $this->uriToId($tracks, 'track');
         $tracks = json_encode((array) $tracks);
 
         $headers = $this->authHeaders();
@@ -141,7 +141,7 @@ class SpotifyWebAPI
     {
         $options = http_build_query($options);
 
-        $tracks = $this->idToUri($tracks);
+        $tracks = $this->idToUri($tracks, 'track');
         $tracks = json_encode((array) $tracks);
 
         $headers = $this->authHeaders();
@@ -295,7 +295,7 @@ class SpotifyWebAPI
      */
     public function deleteMyTracks($tracks)
     {
-        $tracks = $this->uriToId($tracks);
+        $tracks = $this->uriToId($tracks, 'track');
         $tracks = json_encode((array) $tracks);
 
         $headers = $this->authHeaders();
@@ -336,7 +336,7 @@ class SpotifyWebAPI
                 $track['positions'] = (array) $track['positions'];
             }
 
-            $track['uri'] = $this->idToUri($track['id']);
+            $track['uri'] = $this->idToUri($track['id'], 'track');
 
             unset($track['id']);
 
@@ -617,7 +617,7 @@ class SpotifyWebAPI
      */
     public function getAudioFeatures($trackIds)
     {
-        $trackIds = $this->uriToId($trackIds);
+        $trackIds = $this->uriToId($trackIds, 'track');
         $options = [
             'ids' => implode(',', (array) $trackIds),
         ];
@@ -1037,7 +1037,7 @@ class SpotifyWebAPI
     {
         $headers = $this->authHeaders();
 
-        $trackId = $this->uriToId($trackId);
+        $trackId = $this->uriToId($trackId, 'track');
         $uri = '/v1/tracks/' . $trackId;
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
@@ -1057,7 +1057,7 @@ class SpotifyWebAPI
      */
     public function getTracks($trackIds, $options = [])
     {
-        $trackIds = $this->uriToId($trackIds);
+        $trackIds = $this->uriToId($trackIds, 'track');
         $options['ids'] = implode(',', (array) $trackIds);
 
         $headers = $this->authHeaders();
@@ -1258,7 +1258,7 @@ class SpotifyWebAPI
      */
     public function myTracksContains($tracks)
     {
-        $tracks = $this->uriToId($tracks);
+        $tracks = $this->uriToId($tracks, 'track');
         $tracks = implode(',', (array) $tracks);
 
         $options = [
@@ -1449,7 +1449,7 @@ class SpotifyWebAPI
      */
     public function replaceUserPlaylistTracks($userId, $playlistId, $tracks)
     {
-        $tracks = $this->idToUri($tracks);
+        $tracks = $this->idToUri($tracks, 'track');
         $tracks = json_encode([
             'uris' => (array) $tracks,
         ]);
