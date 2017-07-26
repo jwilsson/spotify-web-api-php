@@ -54,7 +54,7 @@ $api->updateUserPlaylist('USER_ID', 'PLAYLIST_ID', [
 ```php
 $imageData = base64_encode(file_get_contents('image.jpg'));
 
-$api->updateUserPlaylist('USER_ID', 'PLAYLIST_ID', $imageData);
+$api->updateUserPlaylistImage('USER_ID', 'PLAYLIST_ID', $imageData);
 ```
 
 ## Adding tracks to a user's playlist
