@@ -1418,9 +1418,32 @@ Update the details of a user's playlist.<br>
 * `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
 * `$playlistId` **string** - ID or Spotify URI of the playlist to update.
 * `$options` **array\|object** - Options for the playlist.
+    * collaborative bool Optional. Whether the playlist should be collaborative or not.
+    * description string Optional. Description of the playlist.
     * name string Optional. Name of the playlist.
     * public bool Optional. Whether the playlist should be public or not.
 
+
+
+#### Return values
+* **boolean** Whether the playlist was successfully updated.
+
+
+---
+
+
+### updateUserPlaylistImage
+
+
+    boolean SpotifyWebAPI\SpotifyWebAPI::updateUserPlaylistImage(string $userId, string $playlistId, $imageData)
+
+Update the image of a user's playlist.<br>
+[https://developer.spotify.com/web-api/upload-a-custom-playlist-cover-image/](https://developer.spotify.com/web-api/upload-a-custom-playlist-cover-image/)
+
+#### Arguments
+* `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
+* `$playlistId` **string** - ID or Spotify URI of the playlist to update.
+* `$imageData` **mixed**
 
 
 #### Return values
