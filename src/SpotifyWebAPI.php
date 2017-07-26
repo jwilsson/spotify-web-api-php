@@ -1667,6 +1667,8 @@ class SpotifyWebAPI
      * @param string $userId ID or Spotify URI of the user who owns the playlist.
      * @param string $playlistId ID or Spotify URI of the playlist to update.
      * @param array|object $options Options for the playlist.
+     * - collaborative bool Optional. Whether the playlist should be collaborative or not.
+     * - description string Optional. Description of the playlist.
      * - name string Optional. Name of the playlist.
      * - public bool Optional. Whether the playlist should be public or not.
      *
