@@ -1692,6 +1692,30 @@ class SpotifyWebAPI
     }
 
     /**
+     * Update the image of a user's playlist.
+     * https://developer.spotify.com/web-api/upload-a-custom-playlist-cover-image/
+     *
+     * @param string $userId ID or Spotify URI of the user who owns the playlist.
+     * @param string $playlistId ID or Spotify URI of the playlist to update.
+     * @param string $imageData. Base64 encoded JPEG image data, maximum 256 KB in size.
+     *
+     * @return bool Whether the playlist was successfully updated.
+     */
+    public function updateUserPlaylistImage($userId, $playlistId, $imageData)
+    {
+        $headers = $this->authHeaders();
+
+        $userId = $this->uriToId($userId, 'user');
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
+        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/images';
+
+        $this->lastResponse = $this->request->api('PUT', $uri, $imageData, $headers);
+
+        return $this->lastResponse['status'] == 202;
+    }
+
+    /**
      * Check if a user is following a playlist.
      * https://developer.spotify.com/web-api/check-user-following-playlist/
      *

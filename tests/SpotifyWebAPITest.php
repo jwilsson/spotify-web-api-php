@@ -2151,6 +2151,37 @@ class SpotifyWebAPITest extends PHPUnit_Framework_TestCase
         $this->assertTrue($response);
     }
 
+    public function testUpdateUserPlaylistImage()
+    {
+        $imageData = 'dGVzdA==';
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'status' => 202,
+        ];
+
+        $stub = $this->setupStub(
+            'PUT',
+            '/v1/users/mcgurk/playlists/0UZ0Ll4HJHR7yvURYbHJe9/images',
+            $imageData,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->updateUserPlaylistImage(
+            'spotify:user:mcgurk',
+            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+            $imageData
+        );
+
+        $this->assertTrue($response);
+    }
+
     public function testUserFollowsPlaylist()
     {
         $options = [
