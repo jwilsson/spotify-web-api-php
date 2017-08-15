@@ -834,22 +834,6 @@ Get recommendations based on artists, tracks, or genres.<br>
 ---
 
 
-### getReturnAssoc
-
-_Deprecated: Use `SpotifyWebAPI::getReturnType()` instead._
-
-    boolean SpotifyWebAPI\SpotifyWebAPI::getReturnAssoc()
-
-Use `SpotifyWebAPI::getReturnType()` instead.
-
-
-#### Return values
-* **boolean** Whether an associative array or an stdClass is returned.
-
-
----
-
-
 ### getReturnType
 
 
@@ -1298,25 +1282,6 @@ Set the access token to use.
 
 #### Arguments
 * `$accessToken` **string** - The access token.
-
-
-#### Return values
-* **void** 
-
-
----
-
-
-### setReturnAssoc
-
-_Deprecated: Use `SpotifyWebAPI::setReturnType()` instead._
-
-    void SpotifyWebAPI\SpotifyWebAPI::setReturnAssoc(boolean $returnAssoc)
-
-Use `SpotifyWebAPI::setReturnType()` instead.
-
-#### Arguments
-* `$returnAssoc` **boolean** - Whether to return an associative array or an stdClass.
 
 
 #### Return values

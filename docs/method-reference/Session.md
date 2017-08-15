@@ -155,12 +155,9 @@ Refresh an access token.
 ### requestCredentialsToken
 
 
-    boolean SpotifyWebAPI\Session::requestCredentialsToken(array $scope)
+    boolean SpotifyWebAPI\Session::requestCredentialsToken()
 
 Request an access token using the Client Credentials Flow.
-
-#### Arguments
-* `$scope` **array** - Optional. Scope(s) to request from the user.
 
 
 #### Return values
