@@ -1,4 +1,17 @@
 # Changelog
+## 2.0.0 (2017-08-15)
+* **Breaking** The following, deprecated, methods have been removed ([fdaa1bd](https://github.com/jwilsson/spotify-web-api-php/commit/fdaa1bd2fea4e1831221e3ce5c0cac20d59d7ce2)):
+    * `Request::getReturnAssoc()` (use `Request::getReturnType()` instead)
+    * `Request::setReturnAssoc()` (use `Request::setReturnType(Request::RETURN_ASSOC)` instead)
+    * `SpotifyWebAPI::getReturnAssoc()` (use `SpotifyWebAPI::getReturnType()` instead)
+    * `SpotifyWebAPI::setReturnAssoc()` (use `SpotifyWebAPI::setReturnType(SpotifyWebAPI::RETURN_ASSOC)` instead)
+* **Breaking** The `$type` parameter in `SpotifyWebAPI::idToUri()` and `SpotifyWebAPI::uriToId()` no longer has a default value. ([fdcba71](https://github.com/jwilsson/spotify-web-api-php/commit/fdcba718b56f9fb2c84c41257bffa3d02680207f))
+* **Breaking** Dropped support for PHP versions less than 7. ([71de436](https://github.com/jwilsson/spotify-web-api-php/commit/71de436bab8f1a8f6159eac68b277bcd605aa5c1))
+* **Breaking** Tests are no longer run on HHVM, support for it was never documented anyway.  ([7b9ff5d](https://github.com/jwilsson/spotify-web-api-php/commit/7b9ff5d41021ceed509a47afb562018abb25fc93))
+* Removed unused `$scope` parameter in `Session::requestCredentialsToken()`. ([582f983](https://github.com/jwilsson/spotify-web-api-php/commit/582f98358996d936102fe238f8b0339b5bdb25d9))
+* Updated PHPUnit to `6.x`. ([49829ac](https://github.com/jwilsson/spotify-web-api-php/commit/49829acd6a16f949e59f071ad36eda8467f3f8b6))
+* Updated CA bundle. ([ac09f96](https://github.com/jwilsson/spotify-web-api-php/commit/ac09f9698b90570dec018f595f2415c015b4b3cd))
+
 ## 1.12.0 (2017-07-26)
 * Added the `SpotifyWebAPI::updateUserPlaylistImage()` method. ([14a9631](https://github.com/jwilsson/spotify-web-api-php/commit/14a9631b37ab45f6aaa7c819249e6d5529648940))
 
