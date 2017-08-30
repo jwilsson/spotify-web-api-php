@@ -24,6 +24,11 @@ $api->previous();
 $api->next();
 ```
 
+## Get the currently playing track
+```php
+$api->getMyCurrentTrack();
+```
+
 ## Move to a specific position in a track
 ```php
 $api->seek([
