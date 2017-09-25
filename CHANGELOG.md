@@ -1,4 +1,7 @@
 # Changelog
+## 2.0.1 (2017-09-25)
+* Updated CA bundle. ([d846e8c](https://github.com/jwilsson/spotify-web-api-php/commit/d846e8cded5822b87e3e6b3e0eb812aadf163554))
+
 ## 2.0.0 (2017-08-15)
 * **Breaking** The following, deprecated, methods have been removed ([fdaa1bd](https://github.com/jwilsson/spotify-web-api-php/commit/fdaa1bd2fea4e1831221e3ce5c0cac20d59d7ce2)):
     * `Request::getReturnAssoc()` (use `Request::getReturnType()` instead)
