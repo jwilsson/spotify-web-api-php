@@ -44,7 +44,7 @@ foreach ($tracks->items as $track) {
 ## Getting an artist's albums
 
 ```php
-$albums = $api->getArtistAlbums('ALBUM_ID');
+$albums = $api->getArtistAlbums('ARTIST_ID');
 
 foreach ($albums->items as $album) {
     echo '<b>' . $album->name . '</b> <br>';
