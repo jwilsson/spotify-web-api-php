@@ -1175,7 +1175,6 @@ class SpotifyWebAPI
      * Get the tracks in a user's playlist.
      * https://developer.spotify.com/web-api/get-playlists-tracks/
      *
-     * @param string $userId ID or Spotify URI of the user.
      * @param string $playlistId ID or Spotify URI of the playlist.
      * @param array|object $options Optional. Options for the tracks.
      * - string|array fields Optional. A list of fields to return. See Spotify docs for more info.
@@ -1185,7 +1184,7 @@ class SpotifyWebAPI
      *
      * @return array|object The tracks in the playlist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
-    public function getUserPlaylistTracks($userId, $playlistId, $options = [])
+    public function getUserPlaylistTracks($playlistId, $options = [])
     {
         $options = (array) $options;
 
@@ -1195,10 +1194,9 @@ class SpotifyWebAPI
 
         $headers = $this->authHeaders();
 
-        $userId = $this->uriToId($userId, 'user');
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
+        $uri = '/v1/users/spotify/playlists/' . $playlistId . '/tracks';
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
 
