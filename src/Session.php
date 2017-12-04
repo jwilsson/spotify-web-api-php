@@ -119,11 +119,11 @@ class Session
     /**
      * Get the scope for the current access token
      *
-     * @return string The scope for the current access token
+     * @return array The scope for the current access token
      */
     public function getScope()
     {
-        return $this->scope;
+        return explode(' ', $this->scope);
     }
 
     /**
