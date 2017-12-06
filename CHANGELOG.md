@@ -22,12 +22,11 @@
 * Fixed an issue where some URI IDs wouldn't be properly cast to an array. ([713e8e7](https://github.com/jwilsson/spotify-web-api-php/commit/713e8e794cf1a7964ba0055f783516ac6f446715))
 
 ## 1.11.0 (2017-06-09)
-* All methods accepting Album, Artist, Playlist, Track, or User IDs can now also accept Spotify URIs. (
-    [1a47fa1](https://github.com/jwilsson/spotify-web-api-php/commit/1a47fa143771d3148d6cda9b59a2d500ed540a1d),
+* All methods accepting Album, Artist, Playlist, Track, or User IDs can now also accept Spotify URIs.
+    ([1a47fa1](https://github.com/jwilsson/spotify-web-api-php/commit/1a47fa143771d3148d6cda9b59a2d500ed540a1d),
     [e71daeb](https://github.com/jwilsson/spotify-web-api-php/commit/e71daebdc7204ed9d2c704e2f5bfe0798ae3da60),
     [63dde40](https://github.com/jwilsson/spotify-web-api-php/commit/63dde405829e7894f2c0ce659ac5cc09cfa48bb7),
-    [4bf29b1](https://github.com/jwilsson/spotify-web-api-php/commit/4bf29b13f64819513cd573cd86ce19ccd321ac40),
-)
+    [4bf29b1](https://github.com/jwilsson/spotify-web-api-php/commit/4bf29b13f64819513cd573cd86ce19ccd321ac40))
 * Corrected `SpotifyWebAPI::getMySavedTracks` example. ([0eedf1c](https://github.com/jwilsson/spotify-web-api-php/commit/0eedf1cfbd6211eb41b99aedd71dabc9901d47b2))
 * Updated `PHP_CodeSniffer` to `3.x`. ([60adb2c](https://github.com/jwilsson/spotify-web-api-php/commit/60adb2cb05b7adeccc271faeb8d6cceb6f949288))
 * Travis builds now uses Trusty as the distribution. ([011524b](https://github.com/jwilsson/spotify-web-api-php/commit/011524b46c44c98b67bdd5930f534d40cc19804c))
