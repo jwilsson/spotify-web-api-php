@@ -138,6 +138,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
         $this->assertNotEmpty($session->getAccessToken());
         $this->assertEquals(time() + 3600, $session->getTokenExpiration());
+        $this->assertEquals(['user-follow-read', 'user-follow-modify'], $session->getScope());
     }
 
     public function testRequestAccessToken()
@@ -170,6 +171,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
         $this->assertNotEmpty($session->getAccessToken());
         $this->assertNotEmpty($session->getRefreshToken());
         $this->assertEquals(time() + 3600, $session->getTokenExpiration());
+        $this->assertEquals(['user-follow-read', 'user-follow-modify', 'user-library-read', 'user-library-modify'], $session->getScope());
     }
 
     public function testRequestCredentialsToken()
