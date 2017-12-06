@@ -134,6 +134,21 @@ Get the refresh token.
 ---
 
 
+### getScope
+
+
+    array SpotifyWebAPI\Session::getScope()
+
+Get the scope for the current access token
+
+
+#### Return values
+* **array** The scope for the current access token
+
+
+---
+
+
 ### refreshAccessToken
 
 
