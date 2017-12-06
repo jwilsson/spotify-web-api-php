@@ -1,4 +1,9 @@
 # Changelog
+## 2.1.0 (2017-12-06)
+* Added the `Session::getScope()` method to check which scopes that are granted by the current user. ([f741511](https://github.com/jwilsson/spotify-web-api-php/commit/f741511fab6856d0f5eec05b4861dc0979c62e03))
+* CI tests are now run on PHP `7.2`. ([3649e78](https://github.com/jwilsson/spotify-web-api-php/commit/3649e789ae89340b0de6b3050fca26a9ec6475c1))
+* Improved authorization docs. ([14bb6e6](https://github.com/jwilsson/spotify-web-api-php/commit/14bb6e6fbc8bc723af6a18a5e7af53fe9532237d))
+
 ## 2.0.1 (2017-09-25)
 * Updated CA bundle. ([d846e8c](https://github.com/jwilsson/spotify-web-api-php/commit/d846e8cded5822b87e3e6b3e0eb812aadf163554))
 
