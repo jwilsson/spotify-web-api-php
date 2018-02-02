@@ -1,4 +1,7 @@
 # Changelog
+## 2.1.1 (2018-02-02)
+* Fixed an issue where a new refresh token wouldn't be properly updated in the `Session` class when a new one was returned from Spotify. ([2bf18e0](https://github.com/jwilsson/spotify-web-api-php/commit/2bf18e08201464416408c2e94f56e81e7df6553c))
+
 ## 2.1.0 (2017-12-06)
 * Added the `Session::getScope()` method to check which scopes that are granted by the current user. ([f741511](https://github.com/jwilsson/spotify-web-api-php/commit/f741511fab6856d0f5eec05b4861dc0979c62e03))
 * CI tests are now run on PHP `7.2`. ([3649e78](https://github.com/jwilsson/spotify-web-api-php/commit/3649e789ae89340b0de6b3050fca26a9ec6475c1))
