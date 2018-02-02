@@ -137,6 +137,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
         $session->refreshAccessToken($this->refreshToken);
 
         $this->assertNotEmpty($session->getAccessToken());
+        $this->assertNotEmpty($session->getRefreshToken());
         $this->assertEquals(time() + 3600, $session->getTokenExpiration());
         $this->assertEquals(['user-follow-read', 'user-follow-modify'], $session->getScope());
     }
