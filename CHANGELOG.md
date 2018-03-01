@@ -1,4 +1,8 @@
 # Changelog
+## 2.2.0 (2018-03-01)
+* Added `positions` support to `SpotifyWebAPI::deleteUserPlaylistTracks()`. ([4dfa494](https://github.com/jwilsson/spotify-web-api-php/commit/4dfa49476ddc6fe8a17435782112e081f5becd5a))
+* Updated CA bundle. ([cd63d1a](https://github.com/jwilsson/spotify-web-api-php/commit/cd63d1adbc008d9e3d25360788dd139b5d0e8692))
+
 ## 2.1.1 (2018-02-02)
 * Fixed an issue where a new refresh token wouldn't be properly updated in the `Session` class when a new one was returned from Spotify. ([2bf18e0](https://github.com/jwilsson/spotify-web-api-php/commit/2bf18e08201464416408c2e94f56e81e7df6553c))
 
