@@ -66,15 +66,28 @@ $api->addUserPlaylistTracks('USER_ID', 'PLAYLIST_ID', [
 ]);
 ```
 
-## Delete tracks from a user's playlist
+## Delete tracks from a user's playlist based on IDs
 
 ```php
 $tracks = [
-    ['id' => 'TRACK_ID'],
-    ['id' => 'TRACK_ID'],
+    'tracks' => [
+        ['id' => 'TRACK_ID'],
+        ['id' => 'TRACK_ID'],
+    ],
 ];
 
 $api->deleteUserPlaylistTracks('USER_ID', 'PLAYLIST_ID', $tracks, 'SNAPSHOT_ID');
+```
+
+## Delete tracks from a user's playlist based on positions
+
+```php
+$trackPositions = [
+    5,
+    12,
+];
+
+$api->deleteUserPlaylistTracks('USER_ID', 'PLAYLIST_ID', $trackPositions, 'SNAPSHOT_ID');
 ```
 
 ## Replacing all tracks in a user's playlist with new ones

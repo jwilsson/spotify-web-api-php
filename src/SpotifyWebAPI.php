@@ -314,10 +314,13 @@ class SpotifyWebAPI
      *
      * @param string $userId ID or Spotify URI of the user who owns the playlist.
      * @param string $playlistId ID or Spotify URI of the playlist to delete tracks from.
-     * @param array $tracks Array of arrays or objects with tracks to delete.
+     * @param array $tracks An array with the key "tracks" containing arrays or objects with tracks to delete.
+     * For legacy reasons, the "tracks" key can be omitted but its use is deprecated.
      * - string id Required. Track ID or Spotify URI.
      * - int|array positions Optional. The track's position(s) in the playlist.
-     * @param string $snapshotId Optional. The playlist's snapshot ID.
+     * @param array $tracks An array with the key "positions" containing integer positions of the tracks to delete.
+     * @param string $snapshotId Required when $tracks['positions'] is used, optional otherwise.
+     * The playlist's snapshot ID.
      *
      * @return string|bool A new snapshot ID or false if the tracks weren't successfully deleted.
      */
@@ -329,19 +332,25 @@ class SpotifyWebAPI
             $options['snapshot_id'] = $snapshotId;
         }
 
-        $options['tracks'] = array_map(function ($track) {
-            $track = (array) $track;
+        if (isset($tracks['positions'])) {
+            $options['positions'] = $tracks['positions'];
+        } else {
+            $tracks = $tracks['tracks'] ?? $tracks;
 
-            if (isset($track['positions'])) {
-                $track['positions'] = (array) $track['positions'];
-            }
+            $options['tracks'] = array_map(function ($track) {
+                $track = (array) $track;
 
-            $track['uri'] = $this->idToUri($track['id'], 'track');
+                if (isset($track['positions'])) {
+                    $track['positions'] = (array) $track['positions'];
+                }
 
-            unset($track['id']);
+                $track['uri'] = $this->idToUri($track['id'], 'track');
 
-            return $track;
-        }, $tracks);
+                unset($track['id']);
+
+                return $track;
+            }, $tracks);
+        }
 
         $options = json_encode($options);
 
