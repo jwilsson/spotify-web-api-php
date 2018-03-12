@@ -314,12 +314,12 @@ class SpotifyWebAPI
      *
      * @param string $userId ID or Spotify URI of the user who owns the playlist.
      * @param string $playlistId ID or Spotify URI of the playlist to delete tracks from.
-     * @param array $tracks An array with the key "tracks" containing arrays or objects with tracks to delete.
+     * @param array $tracks An array with the key "tracks" containing arrays or objects with tracks to delete. Or
      * For legacy reasons, the "tracks" key can be omitted but its use is deprecated.
      * - string id Required. Track ID or Spotify URI.
      * - int|array positions Optional. The track's position(s) in the playlist.
-     * @param array $tracks An array with the key "positions" containing integer positions of the tracks to delete.
-     * @param string $snapshotId Required when $tracks['positions'] is used, optional otherwise.
+     * Or an array with the key "positions" containing integer positions of the tracks to delete.
+     * @param string $snapshotId Required when `$tracks['positions']` is used, optional otherwise.
      * The playlist's snapshot ID.
      *
      * @return string|bool A new snapshot ID or false if the tracks weren't successfully deleted.

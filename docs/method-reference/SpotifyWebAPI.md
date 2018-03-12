@@ -219,10 +219,11 @@ Delete tracks from a playlist and retrieve a new snapshot ID.<br>
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
 * `$playlistId` **string** - ID or Spotify URI of the playlist to delete tracks from.
-* `$tracks` **array** - An array with the key &quot;tracks&quot; containing arrays or objects with tracks to delete.
+* `$tracks` **array** - An array with the key &quot;tracks&quot; containing arrays or objects with tracks to delete. Or
 For legacy reasons, the &quot;tracks&quot; key can be omitted but its use is deprecated.
     * string id Required. Track ID or Spotify URI.
     * int\|array positions Optional. The track&#039;s position(s) in the playlist.
+Or an array with the key &quot;positions&quot; containing integer positions of the tracks to delete.
 
 * `$snapshotId` **string** - Required when $tracks[&#039;positions&#039;] is used, optional otherwise.
 The playlist&#039;s snapshot ID.
