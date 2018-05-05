@@ -1,4 +1,7 @@
 # Changelog
+## 2.2.1 (2018-05-05)
+* When running behind a proxy, the first set of proxy response headers are now stripped. ([a9dfa55](https://github.com/jwilsson/spotify-web-api-php/commit/a9dfa559ded1584001b30d4518fee1ce84e21dc2))
+
 ## 2.2.0 (2018-03-01)
 * Added `positions` support to `SpotifyWebAPI::deleteUserPlaylistTracks()`. ([4dfa494](https://github.com/jwilsson/spotify-web-api-php/commit/4dfa49476ddc6fe8a17435782112e081f5becd5a))
 * Updated CA bundle. ([cd63d1a](https://github.com/jwilsson/spotify-web-api-php/commit/cd63d1adbc008d9e3d25360788dd139b5d0e8692))
