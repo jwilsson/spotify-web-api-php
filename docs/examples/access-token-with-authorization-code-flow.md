@@ -90,8 +90,13 @@ When the access token has expired, request a new one using the refresh token:
 ```php
 // Fetch the refresh token from somewhere. A database for example.
 
-$session->refreshAccessToken($refreshToken);
+// Then use the setter (only if requestAccessToken() not called on same object already) 
+$session->setRefreshToken($refreshToken);
 
+// Call to refresh (uses clientId, clientSecret and refreshToken set earlier)
+$session->refreshAccessToken();
+
+// Retrieve the updated access token
 $accessToken = $session->getAccessToken();
 
 // Set our new access token on the API wrapper and continue to use the API as usual
