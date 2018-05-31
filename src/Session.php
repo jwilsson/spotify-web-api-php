@@ -153,7 +153,7 @@ class Session
             $this->accessToken = $response->access_token;
             $this->expirationTime = time() + $response->expires_in;
             $this->scope = $response->scope ?? $this->scope;
-            $this->refreshToken = $response->refresh_token ?? $this->refreshToken;
+            $this->refreshToken = $response->refresh_token ?? $this->refreshToken ?? $refreshToken;
 
             return true;
         }
