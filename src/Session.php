@@ -259,4 +259,16 @@ class Session
     {
         $this->redirectUri = $redirectUri;
     }
+
+    /**
+     * Set the session's refresh token.
+     *
+     * @param string $refreshToken The refresh token.
+     *
+     * @return void
+     */
+    public function setRefreshToken($refreshToken)
+    {
+        $this->refreshToken = $refreshToken;
+    }
 }
