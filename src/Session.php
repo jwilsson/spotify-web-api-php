@@ -153,7 +153,7 @@ class Session
             $this->accessToken = $response->access_token;
             $this->expirationTime = time() + $response->expires_in;
             $this->scope = $response->scope ?? $this->scope;
-            $this->refreshToken = $response->refresh_token ?? $this->refreshToken;
+            $this->refreshToken = $response->refresh_token ?? $this->refreshToken ?? $refreshToken;
 
             return true;
         }
@@ -258,5 +258,17 @@ class Session
     public function setRedirectUri($redirectUri)
     {
         $this->redirectUri = $redirectUri;
+    }
+
+    /**
+     * Set the session's refresh token.
+     *
+     * @param string $refreshToken The refresh token.
+     *
+     * @return void
+     */
+    public function setRefreshToken($refreshToken)
+    {
+        $this->refreshToken = $refreshToken;
     }
 }
