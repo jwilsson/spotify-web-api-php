@@ -336,7 +336,7 @@ class SpotifyWebAPI
         if (isset($tracks['positions'])) {
             $options['positions'] = $tracks['positions'];
         } else {
-            $tracks = $tracks['tracks'] ?? $tracks;
+            $tracks = isset($tracks['tracks']) ? $tracks['tracks'] : $tracks;
 
             $options['tracks'] = array_map(function ($track) {
                 $track = (array) $track;
