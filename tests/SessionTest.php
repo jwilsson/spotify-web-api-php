@@ -234,4 +234,14 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals($expected, $session->getRedirectUri());
     }
+
+    public function testSetRefreshToken()
+    {
+        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
+        $expected = $this->refreshToken;
+
+        $session->setRefreshToken($expected);
+
+        $this->assertEquals($expected, $session->getRefreshToken());
+    }
 }
