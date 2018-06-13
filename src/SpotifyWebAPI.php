@@ -126,10 +126,9 @@ class SpotifyWebAPI
     }
 
     /**
-     * Add tracks to a user's playlist.
+     * Add tracks to a playlist.
      * https://developer.spotify.com/web-api/add-tracks-to-playlist/
      *
-     * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to add tracks to.
      * @param string|array $tracks ID(s) or Spotify URI(s) of the track(s) to add.
      * @param array|object $options Optional. Options for the new tracks.
@@ -137,7 +136,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the tracks was successfully added.
      */
-    public function addUserPlaylistTracks($userId, $playlistId, $tracks, $options = [])
+    public function addPlaylistTracks($playlistId, $tracks, $options = [])
     {
         $options = http_build_query($options);
 
@@ -155,6 +154,25 @@ class SpotifyWebAPI
         $this->lastResponse = $this->request->api('POST', $uri, $tracks, $headers);
 
         return $this->lastResponse['status'] == 201;
+    }
+
+    /**
+     * Add tracks to a user's playlist.
+     * https://developer.spotify.com/web-api/add-tracks-to-playlist/
+     *
+     * @deprecated
+     *
+     * @param string $userId ID of the user who owns the playlist.
+     * @param string $playlistId ID of the playlist to add tracks to.
+     * @param string|array $tracks ID(s) or Spotify URI(s) of the track(s) to add.
+     * @param array|object $options Optional. Options for the new tracks.
+     * - int position Optional. Zero-based track position in playlist. Tracks will be appened if omitted or false.
+     *
+     * @return bool Whether the tracks was successfully added.
+     */
+    public function addUserPlaylistTracks($userId, $playlistId, $tracks, $options = [])
+    {
+        return $this->addPlaylistTracks($playlistId, $tracks, $options);
     }
 
     /**
@@ -208,17 +226,16 @@ class SpotifyWebAPI
     }
 
     /**
-     * Create a new playlist for a user.
+     * Create a new playlist.
      * https://developer.spotify.com/web-api/create-playlist/
      *
-     * @param string $userId ID or Spotify URI of the user to create the playlist for.
      * @param array|object $options Options for the new playlist.
      * - string name Required. Name of the playlist.
      * - bool public Optional. Whether the playlist should be public or not.
      *
      * @return array|object The new playlist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
-    public function createUserPlaylist($userId, $options)
+    public function createPlaylist($options)
     {
         $options = json_encode($options);
 
@@ -230,6 +247,24 @@ class SpotifyWebAPI
         $this->lastResponse = $this->request->api('POST', $uri, $options, $headers);
 
         return $this->lastResponse['body'];
+    }
+
+    /**
+     * Create a new playlist for a user.
+     * https://developer.spotify.com/web-api/create-playlist/
+     *
+     * @deprecated
+     *
+     * @param string $userId ID or Spotify URI of the user to create the playlist for.
+     * @param array|object $options Options for the new playlist.
+     * - string name Required. Name of the playlist.
+     * - bool public Optional. Whether the playlist should be public or not.
+     *
+     * @return array|object The new playlist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+     */
+    public function createUserPlaylist($userId, $options)
+    {
+        return $this->createPlaylist($options);
     }
 
     /**
@@ -310,7 +345,6 @@ class SpotifyWebAPI
      * Delete tracks from a playlist and retrieve a new snapshot ID.
      * https://developer.spotify.com/web-api/remove-tracks-playlist/
      *
-     * @param string $userId ID or Spotify URI of the user who owns the playlist.
      * @param string $playlistId ID or Spotify URI of the playlist to delete tracks from.
      * @param array $tracks An array with the key "tracks" containing arrays or objects with tracks to delete.
      * Or an array with the key "positions" containing integer positions of the tracks to delete.
@@ -323,7 +357,7 @@ class SpotifyWebAPI
      *
      * @return string|bool A new snapshot ID or false if the tracks weren't successfully deleted.
      */
-    public function deleteUserPlaylistTracks($userId, $playlistId, $tracks, $snapshotId = '')
+    public function deletePlaylistTracks($playlistId, $tracks, $snapshotId = '')
     {
         $options = [];
 
@@ -369,6 +403,30 @@ class SpotifyWebAPI
         }
 
         return false;
+    }
+
+    /**
+     * Delete tracks from a playlist and retrieve a new snapshot ID.
+     * https://developer.spotify.com/web-api/remove-tracks-playlist/
+     *
+     * @deprecated
+     *
+     * @param string $userId ID or Spotify URI of the user who owns the playlist.
+     * @param string $playlistId ID or Spotify URI of the playlist to delete tracks from.
+     * @param array $tracks An array with the key "tracks" containing arrays or objects with tracks to delete.
+     * Or an array with the key "positions" containing integer positions of the tracks to delete.
+     * For legacy reasons, the "tracks" key can be omitted but its use is deprecated.
+     * If the "tracks" key is used, the following fields are also available:
+     * - string id Required. Track ID or Spotify URI.
+     * - int|array positions Optional. The track's position(s) in the playlist.
+     * @param string $snapshotId Required when `$tracks['positions']` is used, optional otherwise.
+     * The playlist's snapshot ID.
+     *
+     * @return string|bool A new snapshot ID or false if the tracks weren't successfully deleted.
+     */
+    public function deleteUserPlaylistTracks($userId, $playlistId, $tracks, $snapshotId = '')
+    {
+        return $this->deletePlaylistTracks($playlistId, $tracks, $snapshotId);
     }
 
     /**
@@ -977,6 +1035,68 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get a specific playlist.
+     * https://developer.spotify.com/web-api/get-playlist/
+     *
+     * @param string $playlistId ID or Spotify URI of the playlist.
+     * @param array|object $options Optional. Options for the playlist.
+     * - string|array fields Optional. A list of fields to return. See Spotify docs for more info.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+     *
+     * @return array|object The user's playlist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+     */
+    public function getPlaylist($playlistId, $options = [])
+    {
+        $options = (array) $options;
+
+        if (isset($options['fields'])) {
+            $options['fields'] = implode(',', (array) $options['fields']);
+        }
+
+        $headers = $this->authHeaders();
+
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
+        $uri = '/v1/playlists/' . $playlistId;
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
+     * Get the tracks in a playlist.
+     * https://developer.spotify.com/web-api/get-playlists-tracks/
+     *
+     * @param string $playlistId ID or Spotify URI of the playlist.
+     * @param array|object $options Optional. Options for the tracks.
+     * - string|array fields Optional. A list of fields to return. See Spotify docs for more info.
+     * - int limit Optional. Limit the number of tracks.
+     * - int offset Optional. Number of tracks to skip.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+     *
+     * @return array|object The tracks in the playlist. Type is controlled by `SpotifyWebAPI::setReturnType()`.
+     */
+    public function getPlaylistTracks($playlistId, $options = [])
+    {
+        $options = (array) $options;
+
+        if (isset($options['fields'])) {
+            $options['fields'] = implode(',', (array) $options['fields']);
+        }
+
+        $headers = $this->authHeaders();
+
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
+        $uri = '/v1/playlists/' . $playlistId . '/tracks';
+
+        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get recommendations based on artists, tracks, or genres.
      * https://developer.spotify.com/web-api/get-recommendations/
      *
@@ -1128,6 +1248,8 @@ class SpotifyWebAPI
      * Get a user's specific playlist.
      * https://developer.spotify.com/web-api/get-playlist/
      *
+     * @deprecated
+     *
      * @param string $userId ID or Spotify URI of the user.
      * @param string $playlistId ID or Spotify URI of the playlist.
      * @param array|object $options Optional. Options for the playlist.
@@ -1138,21 +1260,7 @@ class SpotifyWebAPI
      */
     public function getUserPlaylist($userId, $playlistId, $options = [])
     {
-        $options = (array) $options;
-
-        if (isset($options['fields'])) {
-            $options['fields'] = implode(',', (array) $options['fields']);
-        }
-
-        $headers = $this->authHeaders();
-
-        $playlistId = $this->uriToId($playlistId, 'playlist');
-
-        $uri = '/v1/playlists/' . $playlistId;
-
-        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
-
-        return $this->lastResponse['body'];
+        return $this->getPlaylist($playlistId, $options);
     }
 
     /**
@@ -1182,6 +1290,8 @@ class SpotifyWebAPI
      * Get the tracks in a user's playlist.
      * https://developer.spotify.com/web-api/get-playlists-tracks/
      *
+     * @deprecated
+     *
      * @param string $userId ID or Spotify URI of the user.
      * @param string $playlistId ID or Spotify URI of the playlist.
      * @param array|object $options Optional. Options for the tracks.
@@ -1194,21 +1304,7 @@ class SpotifyWebAPI
      */
     public function getUserPlaylistTracks($userId, $playlistId, $options = [])
     {
-        $options = (array) $options;
-
-        if (isset($options['fields'])) {
-            $options['fields'] = implode(',', (array) $options['fields']);
-        }
-
-        $headers = $this->authHeaders();
-
-        $playlistId = $this->uriToId($playlistId, 'playlist');
-
-        $uri = '/v1/playlists/' . $playlistId . '/tracks';
-
-        $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
-
-        return $this->lastResponse['body'];
+        return $this->getPlaylistTracks($playlistId, $options);
     }
 
     /**
@@ -1384,10 +1480,9 @@ class SpotifyWebAPI
     }
 
     /**
-     * Reorder the tracks in a user's playlist.
+     * Reorder the tracks in a playlist.
      * https://developer.spotify.com/web-api/reorder-playlists-tracks/
      *
-     * @param string $userId ID or Spotify URI of the user.
      * @param string $playlistId ID or Spotify URI of the playlist.
      * @param array|object $options Options for the new tracks.
      * - int range_start Required. Position of the first track to be reordered.
@@ -1397,7 +1492,7 @@ class SpotifyWebAPI
      *
      * @return string|bool A new snapshot ID or false if the tracks weren't successfully reordered.
      */
-    public function reorderUserPlaylistTracks($userId, $playlistId, $options)
+    public function reorderPlaylistTracks($playlistId, $options)
     {
         $options = json_encode($options);
 
@@ -1416,6 +1511,27 @@ class SpotifyWebAPI
         }
 
         return false;
+    }
+
+    /**
+     * Reorder the tracks in a user's playlist.
+     * https://developer.spotify.com/web-api/reorder-playlists-tracks/
+     *
+     * @deprecated
+     *
+     * @param string $userId ID or Spotify URI of the user.
+     * @param string $playlistId ID or Spotify URI of the playlist.
+     * @param array|object $options Options for the new tracks.
+     * - int range_start Required. Position of the first track to be reordered.
+     * - int range_length Optional. The amount of tracks to be reordered.
+     * - int insert_before Required. Position where the tracks should be inserted.
+     * - string snapshot_id Optional. The playlist's snapshot ID.
+     *
+     * @return string|bool A new snapshot ID or false if the tracks weren't successfully reordered.
+     */
+    public function reorderUserPlaylistTracks($userId, $playlistId, $options)
+    {
+        return $this->reorderPlaylistTracks($playlistId, $options);
     }
 
     /**
@@ -1443,16 +1559,15 @@ class SpotifyWebAPI
     }
 
     /**
-     * Replace all tracks in a user's playlist with new ones.
+     * Replace all tracks in a playlist with new ones.
      * https://developer.spotify.com/web-api/replace-playlists-tracks/
      *
-     * @param string $userId ID or Spotify URI of the user.
      * @param string $playlistId ID or Spotify URI of the playlist.
      * @param string|array $tracks ID(s) or Spotify URI(s) of the track(s) to add.
      *
      * @return bool Whether the tracks was successfully replaced.
      */
-    public function replaceUserPlaylistTracks($userId, $playlistId, $tracks)
+    public function replacePlaylistTracks($playlistId, $tracks)
     {
         $tracks = $this->idToUri($tracks, 'track');
         $tracks = json_encode([
@@ -1469,6 +1584,23 @@ class SpotifyWebAPI
         $this->lastResponse = $this->request->api('PUT', $uri, $tracks, $headers);
 
         return $this->lastResponse['status'] == 201;
+    }
+
+    /**
+     * Replace all tracks in a user's playlist with new ones.
+     * https://developer.spotify.com/web-api/replace-playlists-tracks/
+     *
+     * @deprecated
+     *
+     * @param string $userId ID or Spotify URI of the user.
+     * @param string $playlistId ID or Spotify URI of the playlist.
+     * @param string|array $tracks ID(s) or Spotify URI(s) of the track(s) to add.
+     *
+     * @return bool Whether the tracks was successfully replaced.
+     */
+    public function replaceUserPlaylistTracks($userId, $playlistId, $tracks)
+    {
+        return $this->replacePlaylistTracks($playlistId, $tracks);
     }
 
     /**
@@ -1627,10 +1759,9 @@ class SpotifyWebAPI
     }
 
     /**
-     * Update the details of a user's playlist.
+     * Update the details of a playlist.
      * https://developer.spotify.com/web-api/change-playlist-details/
      *
-     * @param string $userId ID or Spotify URI of the user who owns the playlist.
      * @param string $playlistId ID or Spotify URI of the playlist to update.
      * @param array|object $options Options for the playlist.
      * - collaborative bool Optional. Whether the playlist should be collaborative or not.
@@ -1640,7 +1771,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playlist was successfully updated.
      */
-    public function updateUserPlaylist($userId, $playlistId, $options)
+    public function updatePlaylist($playlistId, $options)
     {
         $options = json_encode($options);
 
@@ -1657,16 +1788,34 @@ class SpotifyWebAPI
     }
 
     /**
-     * Update the image of a user's playlist.
-     * https://developer.spotify.com/web-api/upload-a-custom-playlist-cover-image/
+     * Update the details of a user's playlist.
+     * https://developer.spotify.com/web-api/change-playlist-details/
      *
      * @param string $userId ID or Spotify URI of the user who owns the playlist.
+     * @param string $playlistId ID or Spotify URI of the playlist to update.
+     * @param array|object $options Options for the playlist.
+     * - collaborative bool Optional. Whether the playlist should be collaborative or not.
+     * - description string Optional. Description of the playlist.
+     * - name string Optional. Name of the playlist.
+     * - public bool Optional. Whether the playlist should be public or not.
+     *
+     * @return bool Whether the playlist was successfully updated.
+     */
+    public function updateUserPlaylist($userId, $playlistId, $options)
+    {
+        return $this->updatePlaylist($playlistId, $options);
+    }
+
+    /**
+     * Update the image of a playlist.
+     * https://developer.spotify.com/web-api/upload-a-custom-playlist-cover-image/
+     *
      * @param string $playlistId ID or Spotify URI of the playlist to update.
      * @param string $imageData. Base64 encoded JPEG image data, maximum 256 KB in size.
      *
      * @return bool Whether the playlist was successfully updated.
      */
-    public function updateUserPlaylistImage($userId, $playlistId, $imageData)
+    public function updatePlaylistImage($playlistId, $imageData)
     {
         $headers = $this->authHeaders();
 
@@ -1677,6 +1826,23 @@ class SpotifyWebAPI
         $this->lastResponse = $this->request->api('PUT', $uri, $imageData, $headers);
 
         return $this->lastResponse['status'] == 202;
+    }
+
+    /**
+     * Update the image of a user's playlist.
+     * https://developer.spotify.com/web-api/upload-a-custom-playlist-cover-image/
+     *
+     * @deprecated
+     *
+     * @param string $userId ID or Spotify URI of the user who owns the playlist.
+     * @param string $playlistId ID or Spotify URI of the playlist to update.
+     * @param string $imageData. Base64 encoded JPEG image data, maximum 256 KB in size.
+     *
+     * @return bool Whether the playlist was successfully updated.
+     */
+    public function updateUserPlaylistImage($userId, $playlistId, $imageData)
+    {
+        return $this->updatePlaylistImage($playlistId, $imageData);
     }
 
     /**
