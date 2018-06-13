@@ -147,11 +147,10 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
-        $userId = $this->uriToId($userId, 'user');
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
         // We need to manually append data to the URI since it's a POST request
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks?' . $options;
+        $uri = '/v1/playlists/' . $playlistId . '/tracks?' . $options;
 
         $this->lastResponse = $this->request->api('POST', $uri, $tracks, $headers);
 
@@ -226,8 +225,7 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
-        $userId = $this->uriToId($userId, 'user');
-        $uri = '/v1/users/' . $userId . '/playlists';
+        $uri = '/v1/playlists';
 
         $this->lastResponse = $this->request->api('POST', $uri, $options, $headers);
 
@@ -358,12 +356,12 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
-        $userId = $this->uriToId($userId, 'user');
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
+        $uri = '/v1/playlists/' . $playlistId . '/tracks';
 
         $this->lastResponse = $this->request->api('DELETE', $uri, $options, $headers);
+
         $body = $this->lastResponse['body'];
 
         if (isset($body->snapshot_id)) {
@@ -1148,10 +1146,9 @@ class SpotifyWebAPI
 
         $headers = $this->authHeaders();
 
-        $userId = $this->uriToId($userId, 'user');
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId;
+        $uri = '/v1/playlists/' . $playlistId;
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
 
@@ -1205,10 +1202,9 @@ class SpotifyWebAPI
 
         $headers = $this->authHeaders();
 
-        $userId = $this->uriToId($userId, 'user');
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
+        $uri = '/v1/playlists/' . $playlistId . '/tracks';
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
 
@@ -1408,10 +1404,9 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
-        $userId = $this->uriToId($userId, 'user');
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
+        $uri = '/v1/playlists/' . $playlistId . '/tracks';
 
         $this->lastResponse = $this->request->api('PUT', $uri, $options, $headers);
         $body = $this->lastResponse['body'];
@@ -1467,10 +1462,9 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
-        $userId = $this->uriToId($userId, 'user');
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/tracks';
+        $uri = '/v1/playlists/' . $playlistId . '/tracks';
 
         $this->lastResponse = $this->request->api('PUT', $uri, $tracks, $headers);
 
@@ -1653,10 +1647,9 @@ class SpotifyWebAPI
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
-        $userId = $this->uriToId($userId, 'user');
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId;
+        $uri = '/v1/playlists/' . $playlistId;
 
         $this->lastResponse = $this->request->api('PUT', $uri, $options, $headers);
 
@@ -1677,10 +1670,9 @@ class SpotifyWebAPI
     {
         $headers = $this->authHeaders();
 
-        $userId = $this->uriToId($userId, 'user');
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/images';
+        $uri = '/v1/playlists/' . $playlistId . '/images';
 
         $this->lastResponse = $this->request->api('PUT', $uri, $imageData, $headers);
 
