@@ -208,7 +208,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertTrue($response);
     }
 
-    public function testCreatePlaylist()
+    public function testCreateUserPlaylist()
     {
         $options = [
             'name' => 'Test playlist',
@@ -236,7 +236,8 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->createPlaylist(
+        $response = $api->createUserPlaylist(
+            'mcgurk',
             $options
         );
 
