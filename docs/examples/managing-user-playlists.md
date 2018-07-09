@@ -83,8 +83,10 @@ $api->deletePlaylistTracks('USER_ID', 'PLAYLIST_ID', $tracks, 'SNAPSHOT_ID');
 
 ```php
 $trackPositions = [
-    5,
-    12,
+    'positions' => [
+        5,
+        12,
+    ],
 ];
 
 $api->deletePlaylistTracks('USER_ID', 'PLAYLIST_ID', $trackPositions, 'SNAPSHOT_ID');
