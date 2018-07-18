@@ -228,7 +228,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $stub = $this->setupStub(
             'POST',
-            '/v1/playlists',
+            '/v1/me/playlists',
             $expected,
             $headers,
             $return
