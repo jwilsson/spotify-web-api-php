@@ -1,4 +1,7 @@
 # Changelog
+## 2.5.1 (2018-07-18)
+* Corrected the URI in `SpotifyWebAPI::createUserPlaylist()`. ([d8a59eb](https://github.com/jwilsson/spotify-web-api-php/commit/d8a59eb878b5a785bc9c84887f86ba43cf50b13b))
+
 ## 2.5.0 (2018-07-03)
 * Because of [recent changes](https://developer.spotify.com/community/news/2018/06/12/changes-to-playlist-uris/) in the handling of playlist related calls, the following methods are deprecated ([a05db96](https://github.com/jwilsson/spotify-web-api-php/commit/a05db96755928d914ceae83c20cc8c72fe5f1568)):
     * `SpotifyWebAPI::addUserPlaylistTracks()`
