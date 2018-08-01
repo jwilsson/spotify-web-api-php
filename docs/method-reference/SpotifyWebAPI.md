@@ -27,7 +27,7 @@ Set up Request object.
     boolean SpotifyWebAPI\SpotifyWebAPI::addMyAlbums(string|array $albums)
 
 Add albums to the current user's Spotify library.<br>
-[https://developer.spotify.com/web-api/save-albums-user/](https://developer.spotify.com/web-api/save-albums-user/)
+[https://developer.spotify.com/documentation/web-api/reference/library/save-albums-user/](https://developer.spotify.com/documentation/web-api/reference/library/save-albums-user/)
 
 #### Arguments
 * `$albums` **string\|array** - ID(s) or Spotify URI(s) of the album(s) to add.
@@ -46,7 +46,7 @@ Add albums to the current user's Spotify library.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::addMyTracks(string|array $tracks)
 
 Add tracks to the current user's Spotify library.<br>
-[https://developer.spotify.com/web-api/save-tracks-user/](https://developer.spotify.com/web-api/save-tracks-user/)
+[https://developer.spotify.com/documentation/web-api/reference/library/save-tracks-user/](https://developer.spotify.com/documentation/web-api/reference/library/save-tracks-user/)
 
 #### Arguments
 * `$tracks` **string\|array** - ID(s) or Spotify URI(s) of the track(s) to add.
@@ -65,7 +65,7 @@ Add tracks to the current user's Spotify library.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::addPlaylistTracks(string $playlistId, string|array $tracks, array|object $options)
 
 Add tracks to a playlist.<br>
-[https://developer.spotify.com/web-api/add-tracks-to-playlist/](https://developer.spotify.com/web-api/add-tracks-to-playlist/)
+[https://developer.spotify.com/documentation/web-api/reference/playlists/add-tracks-to-playlist/](https://developer.spotify.com/documentation/web-api/reference/playlists/add-tracks-to-playlist/)
 
 #### Arguments
 * `$playlistId` **string** - ID of the playlist to add tracks to.
@@ -112,7 +112,7 @@ _Deprecated: _
     boolean SpotifyWebAPI\SpotifyWebAPI::changeMyDevice(array|object $options)
 
 Change the current user's playback device.<br>
-[https://developer.spotify.com/web-api/transfer-a-users-playback/](https://developer.spotify.com/web-api/transfer-a-users-playback/)
+[https://developer.spotify.com/documentation/web-api/reference/player/transfer-a-users-playback/](https://developer.spotify.com/documentation/web-api/reference/player/transfer-a-users-playback/)
 
 #### Arguments
 * `$options` **array\|object** - Options for the playback transfer.
@@ -134,7 +134,7 @@ Change the current user's playback device.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::changeVolume(array|object $options)
 
 Change playback volume for the current user.<br>
-[https://developer.spotify.com/web-api/set-volume-for-users-playback/](https://developer.spotify.com/web-api/set-volume-for-users-playback/)
+[https://developer.spotify.com/documentation/web-api/reference/player/set-volume-for-users-playback/](https://developer.spotify.com/documentation/web-api/reference/player/set-volume-for-users-playback/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the playback volume.
@@ -156,7 +156,7 @@ Change playback volume for the current user.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::createPlaylist(array|object $options)
 
 Create a new playlist.<br>
-[https://developer.spotify.com/web-api/create-playlist/](https://developer.spotify.com/web-api/create-playlist/)
+[https://developer.spotify.com/documentation/web-api/reference/playlists/create-playlist/](https://developer.spotify.com/documentation/web-api/reference/playlists/create-playlist/)
 
 #### Arguments
 * `$options` **array\|object** - Options for the new playlist.
@@ -201,7 +201,7 @@ _Deprecated: _
     array SpotifyWebAPI\SpotifyWebAPI::currentUserFollows(string $type, string|array $ids)
 
 Check to see if the current user is following one or more artists or other Spotify users.<br>
-[https://developer.spotify.com/web-api/check-current-user-follows/](https://developer.spotify.com/web-api/check-current-user-follows/)
+[https://developer.spotify.com/documentation/web-api/reference/follow/check-current-user-follows/](https://developer.spotify.com/documentation/web-api/reference/follow/check-current-user-follows/)
 
 #### Arguments
 * `$type` **string** - The type to check: either &#039;artist&#039; or &#039;user&#039;.
@@ -221,7 +221,7 @@ Check to see if the current user is following one or more artists or other Spoti
     boolean SpotifyWebAPI\SpotifyWebAPI::deleteMyAlbums(string|array $albums)
 
 Delete albums from current user's Spotify library.<br>
-[https://developer.spotify.com/web-api/remove-albums-user/](https://developer.spotify.com/web-api/remove-albums-user/)
+[https://developer.spotify.com/documentation/web-api/reference/library/remove-albums-user/](https://developer.spotify.com/documentation/web-api/reference/library/remove-albums-user/)
 
 #### Arguments
 * `$albums` **string\|array** - ID(s) or Spotify URI(s) of the album(s) to delete.
@@ -240,7 +240,7 @@ Delete albums from current user's Spotify library.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::deleteMyTracks(string|array $tracks)
 
 Delete tracks from current user's Spotify library.<br>
-[https://developer.spotify.com/web-api/remove-tracks-user/](https://developer.spotify.com/web-api/remove-tracks-user/)
+[https://developer.spotify.com/documentation/web-api/reference/library/remove-tracks-user/](https://developer.spotify.com/documentation/web-api/reference/library/remove-tracks-user/)
 
 #### Arguments
 * `$tracks` **string\|array** - ID(s) or Spotify URI(s) of the track(s) to delete.
@@ -259,7 +259,7 @@ Delete tracks from current user's Spotify library.<br>
     string|boolean SpotifyWebAPI\SpotifyWebAPI::deletePlaylistTracks(string $playlistId, array $tracks, string $snapshotId)
 
 Delete tracks from a playlist and retrieve a new snapshot ID.<br>
-[https://developer.spotify.com/web-api/remove-tracks-playlist/](https://developer.spotify.com/web-api/remove-tracks-playlist/)
+[https://developer.spotify.com/documentation/web-api/reference/playlists/remove-tracks-playlist/](https://developer.spotify.com/documentation/web-api/reference/playlists/remove-tracks-playlist/)
 
 #### Arguments
 * `$playlistId` **string** - ID or Spotify URI of the playlist to delete tracks from.
@@ -316,7 +316,7 @@ The playlist&#039;s snapshot ID.
     boolean SpotifyWebAPI\SpotifyWebAPI::followArtistsOrUsers(string $type, string|array $ids)
 
 Add the current user as a follower of one or more artists or other Spotify users.<br>
-[https://developer.spotify.com/web-api/follow-artists-users/](https://developer.spotify.com/web-api/follow-artists-users/)
+[https://developer.spotify.com/documentation/web-api/reference/follow/follow-artists-users/](https://developer.spotify.com/documentation/web-api/reference/follow/follow-artists-users/)
 
 #### Arguments
 * `$type` **string** - The type to check: either &#039;artist&#039; or &#039;user&#039;.
@@ -336,7 +336,7 @@ Add the current user as a follower of one or more artists or other Spotify users
     boolean SpotifyWebAPI\SpotifyWebAPI::followPlaylist(string $userId, string $playlistId, array|object $options)
 
 Add the current user as a follower of a playlist.<br>
-[https://developer.spotify.com/web-api/follow-playlist/](https://developer.spotify.com/web-api/follow-playlist/)
+[https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/](https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/)
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
@@ -359,7 +359,7 @@ Add the current user as a follower of a playlist.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getAlbum(string $albumId)
 
 Get a album.<br>
-[https://developer.spotify.com/web-api/get-album/](https://developer.spotify.com/web-api/get-album/)
+[https://developer.spotify.com/documentation/web-api/reference/albums/get-album/](https://developer.spotify.com/documentation/web-api/reference/albums/get-album/)
 
 #### Arguments
 * `$albumId` **string** - ID or Spotify URI of the album.
@@ -378,7 +378,7 @@ Get a album.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getAlbums(array $albumIds, array|object $options)
 
 Get multiple albums.<br>
-[https://developer.spotify.com/web-api/get-several-albums/](https://developer.spotify.com/web-api/get-several-albums/)
+[https://developer.spotify.com/documentation/web-api/reference/albums/get-several-albums/](https://developer.spotify.com/documentation/web-api/reference/albums/get-several-albums/)
 
 #### Arguments
 * `$albumIds` **array** - IDs or Spotify URIs of the albums.
@@ -399,8 +399,8 @@ Get multiple albums.<br>
 
     array|object SpotifyWebAPI\SpotifyWebAPI::getAlbumTracks(string $albumId, array|object $options)
 
-Get a album's tracks.<br>
-[https://developer.spotify.com/web-api/get-albums-tracks/](https://developer.spotify.com/web-api/get-albums-tracks/)
+Get an album's tracks.<br>
+[https://developer.spotify.com/documentation/web-api/reference/albums/get-albums-tracks/](https://developer.spotify.com/documentation/web-api/reference/albums/get-albums-tracks/)
 
 #### Arguments
 * `$albumId` **string** - ID or Spotify URI of the album.
@@ -424,7 +424,7 @@ Get a album's tracks.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getArtist(string $artistId)
 
 Get an artist.<br>
-[https://developer.spotify.com/web-api/get-artist/](https://developer.spotify.com/web-api/get-artist/)
+[https://developer.spotify.com/documentation/web-api/reference/artists/get-artist/](https://developer.spotify.com/documentation/web-api/reference/artists/get-artist/)
 
 #### Arguments
 * `$artistId` **string** - ID or Spotify URI of the artist.
@@ -443,7 +443,7 @@ Get an artist.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getArtists(array $artistIds)
 
 Get multiple artists.<br>
-[https://developer.spotify.com/web-api/get-several-artists/](https://developer.spotify.com/web-api/get-several-artists/)
+[https://developer.spotify.com/documentation/web-api/reference/artists/get-several-artists/](https://developer.spotify.com/documentation/web-api/reference/artists/get-several-artists/)
 
 #### Arguments
 * `$artistIds` **array** - IDs or Spotify URIs of the artists.
@@ -462,7 +462,7 @@ Get multiple artists.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getArtistRelatedArtists(string $artistId)
 
 Get an artist's related artists.<br>
-[https://developer.spotify.com/web-api/get-related-artists/](https://developer.spotify.com/web-api/get-related-artists/)
+[https://developer.spotify.com/documentation/web-api/reference/artists/get-related-artists/](https://developer.spotify.com/documentation/web-api/reference/artists/get-related-artists/)
 
 #### Arguments
 * `$artistId` **string** - ID or Spotify URI of the artist.
@@ -481,7 +481,7 @@ Get an artist's related artists.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getArtistAlbums(string $artistId, array|object $options)
 
 Get an artist's albums.<br>
-[https://developer.spotify.com/web-api/get-artists-albums/](https://developer.spotify.com/web-api/get-artists-albums/)
+[https://developer.spotify.com/documentation/web-api/reference/artists/get-artists-albums/](https://developer.spotify.com/documentation/web-api/reference/artists/get-artists-albums/)
 
 #### Arguments
 * `$artistId` **string** - ID or Spotify URI of the artist.
@@ -506,7 +506,7 @@ Get an artist's albums.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getArtistTopTracks(string $artistId, array|object $options)
 
 Get an artist's top tracks in a country.<br>
-[https://developer.spotify.com/web-api/get-artists-top-tracks/](https://developer.spotify.com/web-api/get-artists-top-tracks/)
+[https://developer.spotify.com/documentation/web-api/reference/artists/get-artists-top-tracks/](https://developer.spotify.com/documentation/web-api/reference/artists/get-artists-top-tracks/)
 
 #### Arguments
 * `$artistId` **string** - ID or Spotify URI of the artist.
@@ -528,7 +528,7 @@ Get an artist's top tracks in a country.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getAudioFeatures(array $trackIds)
 
 Get track audio features.<br>
-[https://developer.spotify.com/web-api/get-several-audio-features/](https://developer.spotify.com/web-api/get-several-audio-features/)
+[https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-audio-features/](https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-audio-features/)
 
 #### Arguments
 * `$trackIds` **array** - IDs or Spotify URIs of the tracks.
@@ -547,7 +547,7 @@ Get track audio features.<br>
     object SpotifyWebAPI\SpotifyWebAPI::getAudioAnalysis(string $trackId)
 
 Get audio analysis for track.<br>
-[https://developer.spotify.com/web-api/get-audio-analysis/](https://developer.spotify.com/web-api/get-audio-analysis/)
+[https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-analysis/](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-analysis/)
 
 #### Arguments
 * `$trackId` **string** - ID or Spotify URI of the track.
@@ -566,7 +566,7 @@ Get audio analysis for track.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getCategoriesList(array|object $options)
 
 Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s "Browse" tab).<br>
-[https://developer.spotify.com/web-api/get-list-categories/](https://developer.spotify.com/web-api/get-list-categories/)
+[https://developer.spotify.com/documentation/web-api/reference/browse/get-list-categories/](https://developer.spotify.com/documentation/web-api/reference/browse/get-list-categories/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the categories.
@@ -590,7 +590,7 @@ Get a list of categories used to tag items in Spotify (on, for example, the Spot
     array|object SpotifyWebAPI\SpotifyWebAPI::getCategory(string $categoryId, array|object $options)
 
 Get a single category used to tag items in Spotify (on, for example, the Spotify player’s "Browse" tab).<br>
-[https://developer.spotify.com/web-api/get-category/](https://developer.spotify.com/web-api/get-category/)
+[https://developer.spotify.com/documentation/web-api/reference/browse/get-category/](https://developer.spotify.com/documentation/web-api/reference/browse/get-category/)
 
 #### Arguments
 * `$categoryId` **string** - The Spotify ID of the category.
@@ -613,7 +613,7 @@ Get a single category used to tag items in Spotify (on, for example, the Spotify
     array|object SpotifyWebAPI\SpotifyWebAPI::getCategoryPlaylists(string $categoryId, array|object $options)
 
 Get a list of Spotify playlists tagged with a particular category.<br>
-[https://developer.spotify.com/web-api/get-categorys-playlists/](https://developer.spotify.com/web-api/get-categorys-playlists/)
+[https://developer.spotify.com/documentation/web-api/reference/browse/get-categorys-playlists/](https://developer.spotify.com/documentation/web-api/reference/browse/get-categorys-playlists/)
 
 #### Arguments
 * `$categoryId` **string** - The Spotify ID of the category.
@@ -637,7 +637,7 @@ Get a list of Spotify playlists tagged with a particular category.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getFeaturedPlaylists(array|object $options)
 
 Get Spotify featured playlists.<br>
-[https://developer.spotify.com/web-api/get-list-featured-playlists/](https://developer.spotify.com/web-api/get-list-featured-playlists/)
+[https://developer.spotify.com/documentation/web-api/reference/browse/get-list-featured-playlists/](https://developer.spotify.com/documentation/web-api/reference/browse/get-list-featured-playlists/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the playlists.
@@ -662,7 +662,7 @@ Get Spotify featured playlists.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getGenreSeeds()
 
 Get a list of possible seed genres.<br>
-[https://developer.spotify.com/web-api/get-recommendations/](https://developer.spotify.com/web-api/get-recommendations/)#available-genre-seeds
+[https://developer.spotify.com/documentation/web-api/reference/browse/get-recommendations/](https://developer.spotify.com/documentation/web-api/reference/browse/get-recommendations/)
 
 
 #### Return values
@@ -697,7 +697,7 @@ Get the latest full response from the Spotify API.
     array|object SpotifyWebAPI\SpotifyWebAPI::getMyCurrentTrack(array|object $options)
 
 Get the current user’s currently playing track.<br>
-[https://developer.spotify.com/web-api/get-the-users-currently-playing-track/](https://developer.spotify.com/web-api/get-the-users-currently-playing-track/)
+[https://developer.spotify.com/documentation/web-api/reference/player/get-the-users-currently-playing-track/](https://developer.spotify.com/documentation/web-api/reference/player/get-the-users-currently-playing-track/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the track.
@@ -718,7 +718,7 @@ Get the current user’s currently playing track.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getMyDevices()
 
 Get the current user’s devices.<br>
-[https://developer.spotify.com/web-api/get-a-users-available-devices/](https://developer.spotify.com/web-api/get-a-users-available-devices/)
+[https://developer.spotify.com/documentation/web-api/reference/player/get-a-users-available-devices/](https://developer.spotify.com/documentation/web-api/reference/player/get-a-users-available-devices/)
 
 
 #### Return values
@@ -734,7 +734,7 @@ Get the current user’s devices.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getMyCurrentPlaybackInfo(array|object $options)
 
 Get the current user’s current playback information.<br>
-[https://developer.spotify.com/web-api/get-information-about-the-users-current-playback/](https://developer.spotify.com/web-api/get-information-about-the-users-current-playback/)
+[https://developer.spotify.com/documentation/web-api/reference/player/get-information-about-the-users-current-playback/](https://developer.spotify.com/documentation/web-api/reference/player/get-information-about-the-users-current-playback/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the info.
@@ -755,7 +755,7 @@ Get the current user’s current playback information.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getMyPlaylists(array|object $options)
 
 Get the current user’s playlists.<br>
-[https://developer.spotify.com/web-api/get-a-list-of-current-users-playlists/](https://developer.spotify.com/web-api/get-a-list-of-current-users-playlists/)
+[https://developer.spotify.com/documentation/web-api/reference/playlists/get-a-list-of-current-users-playlists/](https://developer.spotify.com/documentation/web-api/reference/playlists/get-a-list-of-current-users-playlists/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the playlists.
@@ -777,7 +777,7 @@ Get the current user’s playlists.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getMyRecentTracks(array|object $options)
 
 Get the current user’s recently played tracks.<br>
-[https://developer.spotify.com/web-api/web-api-personalization-endpoints/get-recently-played/](https://developer.spotify.com/web-api/web-api-personalization-endpoints/get-recently-played/)
+[https://developer.spotify.com/documentation/web-api/reference/player/get-recently-played/](https://developer.spotify.com/documentation/web-api/reference/player/get-recently-played/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the tracks.
@@ -800,7 +800,7 @@ Get the current user’s recently played tracks.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getMySavedAlbums(array|object $options)
 
 Get the current user’s saved albums.<br>
-[https://developer.spotify.com/web-api/get-users-saved-albums/](https://developer.spotify.com/web-api/get-users-saved-albums/)
+[https://developer.spotify.com/documentation/web-api/reference/library/get-users-saved-albums/](https://developer.spotify.com/documentation/web-api/reference/library/get-users-saved-albums/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the albums.
@@ -823,7 +823,7 @@ Get the current user’s saved albums.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getMySavedTracks(array|object $options)
 
 Get the current user’s saved tracks.<br>
-[https://developer.spotify.com/web-api/get-users-saved-tracks/](https://developer.spotify.com/web-api/get-users-saved-tracks/)
+[https://developer.spotify.com/documentation/web-api/reference/library/get-users-saved-tracks/](https://developer.spotify.com/documentation/web-api/reference/library/get-users-saved-tracks/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the tracks.
@@ -846,7 +846,7 @@ Get the current user’s saved tracks.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getMyTop(string $type, $options)
 
 Get the current user's top tracks or artists.<br>
-[https://developer.spotify.com/web-api/get-users-top-artists-and-tracks/](https://developer.spotify.com/web-api/get-users-top-artists-and-tracks/)
+[https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/](https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/)
 
 #### Arguments
 * `$type` **string** - The type of entity to fetch.
@@ -866,7 +866,7 @@ Get the current user's top tracks or artists.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getNewReleases(array|object $options)
 
 Get new releases.<br>
-[https://developer.spotify.com/web-api/get-list-new-releases/](https://developer.spotify.com/web-api/get-list-new-releases/)
+[https://developer.spotify.com/documentation/web-api/reference/browse/get-list-new-releases/](https://developer.spotify.com/documentation/web-api/reference/browse/get-list-new-releases/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the items.
@@ -889,7 +889,7 @@ Get new releases.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getPlaylist(string $playlistId, array|object $options)
 
 Get a specific playlist.<br>
-[https://developer.spotify.com/web-api/get-playlist/](https://developer.spotify.com/web-api/get-playlist/)
+[https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlist/](https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlist/)
 
 #### Arguments
 * `$playlistId` **string** - ID or Spotify URI of the playlist.
@@ -912,7 +912,7 @@ Get a specific playlist.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getPlaylistTracks(string $playlistId, array|object $options)
 
 Get the tracks in a playlist.<br>
-[https://developer.spotify.com/web-api/get-playlists-tracks/](https://developer.spotify.com/web-api/get-playlists-tracks/)
+[https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlists-tracks/](https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlists-tracks/)
 
 #### Arguments
 * `$playlistId` **string** - ID or Spotify URI of the playlist.
@@ -937,7 +937,7 @@ Get the tracks in a playlist.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getRecommendations(array|object $options)
 
 Get recommendations based on artists, tracks, or genres.<br>
-[https://developer.spotify.com/web-api/get-recommendations/](https://developer.spotify.com/web-api/get-recommendations/)
+[https://developer.spotify.com/documentation/web-api/reference/browse/get-recommendations/](https://developer.spotify.com/documentation/web-api/reference/browse/get-recommendations/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the recommendations.
@@ -995,7 +995,7 @@ Get the Request object in use.
     array|object SpotifyWebAPI\SpotifyWebAPI::getTrack(string $trackId, array|object $options)
 
 Get a track.<br>
-[https://developer.spotify.com/web-api/get-track/](https://developer.spotify.com/web-api/get-track/)
+[https://developer.spotify.com/documentation/web-api/reference/tracks/get-track/](https://developer.spotify.com/documentation/web-api/reference/tracks/get-track/)
 
 #### Arguments
 * `$trackId` **string** - ID or Spotify URI of the track.
@@ -1017,7 +1017,7 @@ Get a track.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getTracks(array $trackIds, array|object $options)
 
 Get multiple tracks.<br>
-[https://developer.spotify.com/web-api/get-several-tracks/](https://developer.spotify.com/web-api/get-several-tracks/)
+[https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-tracks/](https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-tracks/)
 
 #### Arguments
 * `$trackIds` **array** - IDs or Spotify URIs of the tracks.
@@ -1039,7 +1039,7 @@ Get multiple tracks.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getUser(string $userId)
 
 Get a user.<br>
-[https://developer.spotify.com/web-api/get-users-profile/](https://developer.spotify.com/web-api/get-users-profile/)
+[https://developer.spotify.com/documentation/web-api/reference/users-profile/get-users-profile/](https://developer.spotify.com/documentation/web-api/reference/users-profile/get-users-profile/)
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user.
@@ -1058,7 +1058,7 @@ Get a user.<br>
     array|object SpotifyWebAPI\SpotifyWebAPI::getUserFollowedArtists(array|object $options)
 
 Get the artists followed by the current user.<br>
-[https://developer.spotify.com/web-api/get-followed-artists/](https://developer.spotify.com/web-api/get-followed-artists/)
+[https://developer.spotify.com/documentation/web-api/reference/follow/get-followed/](https://developer.spotify.com/documentation/web-api/reference/follow/get-followed/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the artists.
@@ -1104,7 +1104,7 @@ _Deprecated: _
     array|object SpotifyWebAPI\SpotifyWebAPI::getUserPlaylists(string $userId, array|object $options)
 
 Get a user's playlists.<br>
-[https://developer.spotify.com/web-api/get-list-users-playlists/](https://developer.spotify.com/web-api/get-list-users-playlists/)
+[https://developer.spotify.com/documentation/web-api/reference/playlists/get-list-users-playlists/](https://developer.spotify.com/documentation/web-api/reference/playlists/get-list-users-playlists/)
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user.
@@ -1153,7 +1153,7 @@ _Deprecated: _
     array|object SpotifyWebAPI\SpotifyWebAPI::me()
 
 Get the currently authenticated user.<br>
-[https://developer.spotify.com/web-api/get-current-users-profile/](https://developer.spotify.com/web-api/get-current-users-profile/)
+[https://developer.spotify.com/documentation/web-api/reference/users-profile/get-current-users-profile/](https://developer.spotify.com/documentation/web-api/reference/users-profile/get-current-users-profile/)
 
 
 #### Return values
@@ -1169,7 +1169,7 @@ Get the currently authenticated user.<br>
     array SpotifyWebAPI\SpotifyWebAPI::myAlbumsContains(string|array $albums)
 
 Check if albums are saved in the current user's Spotify library.<br>
-[https://developer.spotify.com/web-api/check-users-saved-albums/](https://developer.spotify.com/web-api/check-users-saved-albums/)
+[https://developer.spotify.com/documentation/web-api/reference/library/check-users-saved-albums/](https://developer.spotify.com/documentation/web-api/reference/library/check-users-saved-albums/)
 
 #### Arguments
 * `$albums` **string\|array** - ID(s) or Spotify URI(s) of the album(s) to check for.
@@ -1188,7 +1188,7 @@ Check if albums are saved in the current user's Spotify library.<br>
     array SpotifyWebAPI\SpotifyWebAPI::myTracksContains(string|array $tracks)
 
 Check if tracks are saved in the current user's Spotify library.<br>
-[https://developer.spotify.com/web-api/check-users-saved-tracks/](https://developer.spotify.com/web-api/check-users-saved-tracks/)
+[https://developer.spotify.com/documentation/web-api/reference/library/check-users-saved-tracks/](https://developer.spotify.com/documentation/web-api/reference/library/check-users-saved-tracks/)
 
 #### Arguments
 * `$tracks` **string\|array** - ID(s) or Spotify URI(s) of the track(s) to check for.
@@ -1207,7 +1207,7 @@ Check if tracks are saved in the current user's Spotify library.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::next(string $deviceId)
 
 Play the next track in the current users's queue.<br>
-[https://developer.spotify.com/web-api/skip-users-playback-to-next-track/](https://developer.spotify.com/web-api/skip-users-playback-to-next-track/)
+[https://developer.spotify.com/documentation/web-api/reference/player/skip-users-playback-to-next-track/](https://developer.spotify.com/documentation/web-api/reference/player/skip-users-playback-to-next-track/)
 
 #### Arguments
 * `$deviceId` **string** - Optional. ID of the device to target.
@@ -1226,7 +1226,7 @@ Play the next track in the current users's queue.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::pause(string $deviceId)
 
 Pause playback for the current user.<br>
-[https://developer.spotify.com/web-api/pause-a-users-playback/](https://developer.spotify.com/web-api/pause-a-users-playback/)
+[https://developer.spotify.com/documentation/web-api/reference/player/pause-a-users-playback/](https://developer.spotify.com/documentation/web-api/reference/player/pause-a-users-playback/)
 
 #### Arguments
 * `$deviceId` **string** - Optional. ID of the device to pause on.
@@ -1245,7 +1245,7 @@ Pause playback for the current user.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::play(string $deviceId, array|object $options)
 
 Start playback for the current user.<br>
-[https://developer.spotify.com/web-api/start-a-users-playback/](https://developer.spotify.com/web-api/start-a-users-playback/)
+[https://developer.spotify.com/documentation/web-api/reference/player/start-a-users-playback/](https://developer.spotify.com/documentation/web-api/reference/player/start-a-users-playback/)
 
 #### Arguments
 * `$deviceId` **string** - Optional. ID of the device to play on.
@@ -1269,7 +1269,7 @@ Start playback for the current user.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::previous(string $deviceId)
 
 Play the previous track in the current users's queue.<br>
-[https://developer.spotify.com/web-api/skip-users-playback-to-previous-track/](https://developer.spotify.com/web-api/skip-users-playback-to-previous-track/)
+[https://developer.spotify.com/documentation/web-api/reference/player/skip-users-playback-to-previous-track/](https://developer.spotify.com/documentation/web-api/reference/player/skip-users-playback-to-previous-track/)
 
 #### Arguments
 * `$deviceId` **string** - Optional. ID of the device to target.
@@ -1288,7 +1288,7 @@ Play the previous track in the current users's queue.<br>
     string|boolean SpotifyWebAPI\SpotifyWebAPI::reorderPlaylistTracks(string $playlistId, array|object $options)
 
 Reorder the tracks in a playlist.<br>
-[https://developer.spotify.com/web-api/reorder-playlists-tracks/](https://developer.spotify.com/web-api/reorder-playlists-tracks/)
+[https://developer.spotify.com/documentation/web-api/reference/playlists/reorder-playlists-tracks/](https://developer.spotify.com/documentation/web-api/reference/playlists/reorder-playlists-tracks/)
 
 #### Arguments
 * `$playlistId` **string** - ID or Spotify URI of the playlist.
@@ -1339,7 +1339,7 @@ _Deprecated: _
     boolean SpotifyWebAPI\SpotifyWebAPI::repeat(array|object $options)
 
 Set repeat mode for the current user’s playback.<br>
-[https://developer.spotify.com/web-api/set-repeat-mode-on-users-playback/](https://developer.spotify.com/web-api/set-repeat-mode-on-users-playback/)
+[https://developer.spotify.com/documentation/web-api/reference/player/set-repeat-mode-on-users-playback/](https://developer.spotify.com/documentation/web-api/reference/player/set-repeat-mode-on-users-playback/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the playback repeat mode.
@@ -1361,7 +1361,7 @@ Set repeat mode for the current user’s playback.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::replacePlaylistTracks(string $playlistId, string|array $tracks)
 
 Replace all tracks in a playlist with new ones.<br>
-[https://developer.spotify.com/web-api/replace-playlists-tracks/](https://developer.spotify.com/web-api/replace-playlists-tracks/)
+[https://developer.spotify.com/documentation/web-api/reference/playlists/replace-playlists-tracks/](https://developer.spotify.com/documentation/web-api/reference/playlists/replace-playlists-tracks/)
 
 #### Arguments
 * `$playlistId` **string** - ID or Spotify URI of the playlist.
@@ -1402,7 +1402,7 @@ _Deprecated: _
     array|object SpotifyWebAPI\SpotifyWebAPI::search(string $query, string|array $type, array|object $options)
 
 Search for an item.<br>
-[https://developer.spotify.com/web-api/search-item/](https://developer.spotify.com/web-api/search-item/)
+[https://developer.spotify.com/documentation/web-api/reference/search/search/](https://developer.spotify.com/documentation/web-api/reference/search/search/)
 
 #### Arguments
 * `$query` **string** - The term to search for.
@@ -1427,7 +1427,7 @@ Search for an item.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::seek(array|object $options)
 
 Change playback position for the current user.<br>
-[https://developer.spotify.com/web-api/seek-to-position-in-currently-playing-track/](https://developer.spotify.com/web-api/seek-to-position-in-currently-playing-track/)
+[https://developer.spotify.com/documentation/web-api/reference/player/seek-to-position-in-currently-playing-track/](https://developer.spotify.com/documentation/web-api/reference/player/seek-to-position-in-currently-playing-track/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the playback seeking.
@@ -1485,7 +1485,7 @@ Set the return type for the response body.
     boolean SpotifyWebAPI\SpotifyWebAPI::shuffle(array|object $options)
 
 Set shuffle mode for the current user’s playback.<br>
-[https://developer.spotify.com/web-api/toggle-shuffle-for-users-playback/](https://developer.spotify.com/web-api/toggle-shuffle-for-users-playback/)
+[https://developer.spotify.com/documentation/web-api/reference/player/toggle-shuffle-for-users-playback/](https://developer.spotify.com/documentation/web-api/reference/player/toggle-shuffle-for-users-playback/)
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the playback shuffle mode.
@@ -1507,7 +1507,7 @@ Set shuffle mode for the current user’s playback.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::unfollowArtistsOrUsers(string $type, string|array $ids)
 
 Remove the current user as a follower of one or more artists or other Spotify users.<br>
-[https://developer.spotify.com/web-api/unfollow-artists-users/](https://developer.spotify.com/web-api/unfollow-artists-users/)
+[https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-artists-users/](https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-artists-users/)
 
 #### Arguments
 * `$type` **string** - The type to check: either &#039;artist&#039; or &#039;user&#039;.
@@ -1527,7 +1527,7 @@ Remove the current user as a follower of one or more artists or other Spotify us
     boolean SpotifyWebAPI\SpotifyWebAPI::unfollowPlaylist(string $userId, string $playlistId)
 
 Remove the current user as a follower of a playlist.<br>
-[https://developer.spotify.com/web-api/unfollow-playlist/](https://developer.spotify.com/web-api/unfollow-playlist/)
+[https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/](https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/)
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
@@ -1547,7 +1547,7 @@ Remove the current user as a follower of a playlist.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::updatePlaylist(string $playlistId, array|object $options)
 
 Update the details of a playlist.<br>
-[https://developer.spotify.com/web-api/change-playlist-details/](https://developer.spotify.com/web-api/change-playlist-details/)
+[https://developer.spotify.com/documentation/web-api/reference/playlists/change-playlist-details/](https://developer.spotify.com/documentation/web-api/reference/playlists/change-playlist-details/)
 
 #### Arguments
 * `$playlistId` **string** - ID or Spotify URI of the playlist to update.
@@ -1572,7 +1572,7 @@ Update the details of a playlist.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::updateUserPlaylist(string $userId, string $playlistId, array|object $options)
 
 Update the details of a user's playlist.<br>
-[https://developer.spotify.com/web-api/change-playlist-details/](https://developer.spotify.com/web-api/change-playlist-details/)
+[https://developer.spotify.com/documentation/web-api/reference/playlists/change-playlist-details/](https://developer.spotify.com/documentation/web-api/reference/playlists/change-playlist-details/)
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
@@ -1598,7 +1598,7 @@ Update the details of a user's playlist.<br>
     boolean SpotifyWebAPI\SpotifyWebAPI::updatePlaylistImage(string $playlistId, $imageData)
 
 Update the image of a playlist.<br>
-[https://developer.spotify.com/web-api/upload-a-custom-playlist-cover-image/](https://developer.spotify.com/web-api/upload-a-custom-playlist-cover-image/)
+[https://developer.spotify.com/documentation/web-api/reference/playlists/upload-custom-playlist-cover/](https://developer.spotify.com/documentation/web-api/reference/playlists/upload-custom-playlist-cover/)
 
 #### Arguments
 * `$playlistId` **string** - ID or Spotify URI of the playlist to update.
@@ -1639,7 +1639,7 @@ _Deprecated: _
     array SpotifyWebAPI\SpotifyWebAPI::userFollowsPlaylist(string $userId, string $playlistId, array|object $options)
 
 Check if a user is following a playlist.<br>
-[https://developer.spotify.com/web-api/check-user-following-playlist/](https://developer.spotify.com/web-api/check-user-following-playlist/)
+[https://developer.spotify.com/documentation/web-api/reference/follow/check-user-following-playlist/](https://developer.spotify.com/documentation/web-api/reference/follow/check-user-following-playlist/)
 
 #### Arguments
 * `$userId` **string** - User ID or Spotify URI of the playlist owner.
