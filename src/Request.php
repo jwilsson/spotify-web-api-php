@@ -19,6 +19,7 @@ class Request
      * @param int $status The HTTP status code, used to see if additional error handling is needed.
      *
      * @throws SpotifyWebAPIException
+     * @throws SpotifyWebAPIAuthException
      *
      * @return array|object The parsed response body. Type is controlled by `Request::setReturnType()`.
      */
@@ -31,14 +32,14 @@ class Request
         }
 
         $body = json_decode($body);
-        $error = $body->error ?? null;
+        $error = isset($body->error) ? $body->error : null;
 
         if (isset($error->message) && isset($error->status)) {
             // API call error
             throw new SpotifyWebAPIException($error->message, $error->status);
         } elseif (isset($body->error_description)) {
             // Auth call error
-            throw new SpotifyWebAPIException($body->error_description, $status);
+            throw new SpotifyWebAPIAuthException($body->error_description, $status);
         } else {
             // Something went really wrong
             throw new SpotifyWebAPIException('An unknown error occurred.', $status);
@@ -77,9 +78,12 @@ class Request
      * @param array $parameters Optional. Query string parameters or HTTP body, depending on $method.
      * @param array $headers Optional. HTTP headers.
      *
+     * @throws SpotifyWebAPIException
+     * @throws SpotifyWebAPIAuthException
+     *
      * @return array Response data.
      * - array|object body The response body. Type is controlled by `Request::setReturnType()`.
-     * - string headers Response headers.
+     * - array headers Response headers.
      * - int status HTTP status code.
      * - string url The requested URL.
      */
@@ -96,9 +100,12 @@ class Request
      * @param array $parameters Optional. Query string parameters or HTTP body, depending on $method.
      * @param array $headers Optional. HTTP headers.
      *
+     * @throws SpotifyWebAPIException
+     * @throws SpotifyWebAPIAuthException
+     *
      * @return array Response data.
      * - array|object body The response body. Type is controlled by `Request::setReturnType()`.
-     * - string headers Response headers.
+     * - array headers Response headers.
      * - int status HTTP status code.
      * - string url The requested URL.
      */
@@ -141,6 +148,7 @@ class Request
      * @param array $headers Optional. HTTP headers.
      *
      * @throws SpotifyWebAPIException
+     * @throws SpotifyWebAPIAuthException
      *
      * @return array Response data.
      * - array|object body The response body. Type is controlled by `Request::setReturnType()`.
@@ -208,6 +216,11 @@ class Request
         }
 
         list($headers, $body) = explode("\r\n\r\n", $response, 2);
+
+        // Skip the first set of headers for proxied requests
+        if (preg_match('/^HTTP\/1\.\d 200 Connection established$/', $headers) === 1) {
+            list($headers, $body) = explode("\r\n\r\n", $body, 2);
+        }
 
         $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $headers = $this->parseHeaders($headers);

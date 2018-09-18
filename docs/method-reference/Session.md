@@ -134,6 +134,21 @@ Get the refresh token.
 ---
 
 
+### getScope
+
+
+    array SpotifyWebAPI\Session::getScope()
+
+Get the scope for the current access token
+
+
+#### Return values
+* **array** The scope for the current access token
+
+
+---
+
+
 ### refreshAccessToken
 
 
@@ -230,6 +245,24 @@ Set the client's redirect URI.
 
 #### Arguments
 * `$redirectUri` **string** - The redirect URI.
+
+
+#### Return values
+* **void** 
+
+
+---
+
+
+### setRefreshToken
+
+
+    void SpotifyWebAPI\Session::setRefreshToken(string $refreshToken)
+
+Set the session's refresh token.
+
+#### Arguments
+* `$refreshToken` **string** - The refresh token.
 
 
 #### Return values
