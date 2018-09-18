@@ -9,18 +9,18 @@ class SessionTest extends PHPUnit\Framework\TestCase
     private function setupStub($expectedMethod, $expectedUri, $expectedParameters, $expectedHeaders, $expectedReturn)
     {
         $stub = $this->getMockBuilder('Request')
-            ->setMethods(['account'])
-            ->getMock();
+                ->setMethods(['account'])
+                ->getMock();
 
         $stub->expects($this->once())
-            ->method('account')
-            ->with(
-                $this->equalTo($expectedMethod),
-                $this->equalTo($expectedUri),
-                $this->equalTo($expectedParameters),
-                $this->equalTo($expectedHeaders)
-            )
-            ->willReturn($expectedReturn);
+                 ->method('account')
+                 ->with(
+                     $this->equalTo($expectedMethod),
+                     $this->equalTo($expectedUri),
+                     $this->equalTo($expectedParameters),
+                     $this->equalTo($expectedHeaders)
+                 )
+                 ->willReturn($expectedReturn);
 
         return $stub;
     }
