@@ -460,6 +460,8 @@ class SpotifyWebAPI
      * Add the current user as a follower of a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/
      *
+     * @deprecated
+     *
      * @param string $userId ID or Spotify URI of the user who owns the playlist.
      * @param string $playlistId ID or Spotify URI of the playlist to follow.
      * @param array|object $options Optional. Options for the followed playlist.
@@ -469,15 +471,29 @@ class SpotifyWebAPI
      */
     public function followPlaylist($userId, $playlistId, $options = [])
     {
+        return $this->followPlaylistForCurrentUser($playlistId, $options);
+    }
+
+    /**
+     * Add the current user as a follower of a playlist.
+     * https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/
+     *
+     * @param string $playlistId ID or Spotify URI of the playlist to follow.
+     * @param array|object $options Optional. Options for the followed playlist.
+     * - bool public Optional. Whether the playlist should be followed publicly or not.
+     *
+     * @return bool Whether the playlist was successfully followed.
+     */
+    public function followPlaylistForCurrentUser($playlistId, $options = [])
+    {
         $options = json_encode((object) $options);
 
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
-        $userId = $this->uriToId($userId, 'user');
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/followers';
+        $uri = '/v1/playlists/' . $playlistId . '/followers';
 
         $this->lastResponse = $this->request->api('PUT', $uri, $options, $headers);
 
@@ -1738,6 +1754,8 @@ class SpotifyWebAPI
      * Remove the current user as a follower of a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/
      *
+     * @deprecated
+     *
      * @param string $userId ID or Spotify URI of the user who owns the playlist.
      * @param string $playlistId ID or Spotify URI of the playlist to unfollow
      *
@@ -1745,13 +1763,24 @@ class SpotifyWebAPI
      */
     public function unfollowPlaylist($userId, $playlistId)
     {
+        return $this->unfollowPlaylistForCurrentUser($playlistId);
+    }
+
+    /**
+     * Remove the current user as a follower of a playlist.
+     * https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/
+     *
+     * @param string $playlistId ID or Spotify URI of the playlist to unfollow
+     *
+     * @return bool Whether the playlist was successfully unfollowed.
+     */
+    public function unfollowPlaylistForCurrentUser($playlistId)
+    {
         $headers = $this->authHeaders();
         $headers['Content-Type'] = 'application/json';
 
-        $userId = $this->uriToId($userId, 'user');
         $playlistId = $this->uriToId($playlistId, 'playlist');
-
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/followers';
+        $uri = '/v1/playlists/' . $playlistId . '/followers';
 
         $this->lastResponse = $this->request->api('DELETE', $uri, [], $headers);
 
@@ -1849,6 +1878,8 @@ class SpotifyWebAPI
      * Check if a user is following a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/follow/check-user-following-playlist/
      *
+     * @deprecated
+     *
      * @param string $userId User ID or Spotify URI of the playlist owner.
      * @param string $playlistId ID or Spotify URI of the playlist.
      * @param array|object $options Options for the check.
@@ -1858,6 +1889,21 @@ class SpotifyWebAPI
      */
     public function userFollowsPlaylist($userId, $playlistId, $options)
     {
+        return $this->usersFollowPlaylist($playlistId, $options);
+    }
+
+    /**
+     * Check if a users are following a playlist.
+     * https://developer.spotify.com/documentation/web-api/reference/follow/check-user-following-playlist/
+     *
+     * @param string $playlistId ID or Spotify URI of the playlist.
+     * @param array|object $options Options for the check.
+     * - ids string|array Required. ID(s) or Spotify URI(s) of the user(s) to check for.
+     *
+     * @return array Whether each user is following the playlist.
+     */
+    public function usersFollowPlaylist($playlistId, $options)
+    {
         $options = (array) $options;
 
         if (isset($options['ids'])) {
@@ -1866,11 +1912,9 @@ class SpotifyWebAPI
         }
 
         $headers = $this->authHeaders();
-
-        $userId = $this->uriToId($userId, 'user');
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
-        $uri = '/v1/users/' . $userId . '/playlists/' . $playlistId . '/followers/contains';
+        $uri = '/v1/playlists/' . $playlistId . '/followers/contains';
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
 
