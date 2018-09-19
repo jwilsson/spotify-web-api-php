@@ -1,4 +1,14 @@
 # Changelog
+## 2.6.0 (2018-09-19)
+* Added new methods for handling following of playlists, no longer requiring `$userId` ([6f1bb6b](https://github.com/jwilsson/spotify-web-api-php/commit/6f1bb6b01e253e5b44e02333d6dbd4815773552b)):
+    * `SpotifyWebAPI::followPlaylistForCurrentUser()`
+    * `SpotifyWebAPI::unfollowPlaylistForCurrentUser()`
+    * `SpotifyWebAPI::usersFollowPlaylist`
+* Deprecated the following methods ([6f1bb6b](https://github.com/jwilsson/spotify-web-api-php/commit/6f1bb6b01e253e5b44e02333d6dbd4815773552b)):
+    * `SpotifyWebAPI::followPlaylist()`
+    * `SpotifyWebAPI::unfollowPlaylist()`
+    * `SpotifyWebAPI::userFollowPlaylist`
+
 ## 2.5.1 (2018-07-18)
 * Corrected the URI in `SpotifyWebAPI::createUserPlaylist()`. ([d8a59eb](https://github.com/jwilsson/spotify-web-api-php/commit/d8a59eb878b5a785bc9c84887f86ba43cf50b13b))
 
