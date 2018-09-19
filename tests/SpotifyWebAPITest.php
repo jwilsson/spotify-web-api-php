@@ -594,7 +594,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $stub = $this->setupStub(
             'PUT',
-            '/v1/users/mcgurk/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers',
             $expected,
             $headers,
             $return
@@ -2171,7 +2171,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $stub = $this->setupStub(
             'DELETE',
-            '/v1/users/mcgurk/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers',
             [],
             $headers,
             $return
@@ -2278,7 +2278,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $stub = $this->setupStub(
             'GET',
-            '/v1/users/mcgurk/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers/contains',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers/contains',
             $expected,
             $headers,
             $return
