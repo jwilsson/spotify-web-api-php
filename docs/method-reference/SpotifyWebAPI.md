@@ -332,14 +332,36 @@ Add the current user as a follower of one or more artists or other Spotify users
 
 ### followPlaylist
 
+_Deprecated: _
 
     boolean SpotifyWebAPI\SpotifyWebAPI::followPlaylist(string $userId, string $playlistId, array|object $options)
+
+
+
+#### Arguments
+* `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
+* `$playlistId` **string** - ID or Spotify URI of the playlist to follow.
+* `$options` **array\|object** - Optional. Options for the followed playlist.
+    * bool public Optional. Whether the playlist should be followed publicly or not.
+
+
+
+#### Return values
+* **boolean** Whether the playlist was successfully followed.
+
+
+---
+
+
+### followPlaylistForCurrentUser
+
+
+    boolean SpotifyWebAPI\SpotifyWebAPI::followPlaylistForCurrentUser(string $playlistId, array|object $options)
 
 Add the current user as a follower of a playlist.<br>
 [https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/](https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/)
 
 #### Arguments
-* `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
 * `$playlistId` **string** - ID or Spotify URI of the playlist to follow.
 * `$options` **array\|object** - Optional. Options for the followed playlist.
     * bool public Optional. Whether the playlist should be followed publicly or not.
@@ -1523,14 +1545,33 @@ Remove the current user as a follower of one or more artists or other Spotify us
 
 ### unfollowPlaylist
 
+_Deprecated: _
 
     boolean SpotifyWebAPI\SpotifyWebAPI::unfollowPlaylist(string $userId, string $playlistId)
+
+
+
+#### Arguments
+* `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
+* `$playlistId` **string** - ID or Spotify URI of the playlist to unfollow
+
+
+#### Return values
+* **boolean** Whether the playlist was successfully unfollowed.
+
+
+---
+
+
+### unfollowPlaylistForCurrentUser
+
+
+    boolean SpotifyWebAPI\SpotifyWebAPI::unfollowPlaylistForCurrentUser(string $playlistId)
 
 Remove the current user as a follower of a playlist.<br>
 [https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/](https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/)
 
 #### Arguments
-* `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
 * `$playlistId` **string** - ID or Spotify URI of the playlist to unfollow
 
 
@@ -1635,14 +1676,36 @@ _Deprecated: _
 
 ### userFollowsPlaylist
 
+_Deprecated: _
 
     array SpotifyWebAPI\SpotifyWebAPI::userFollowsPlaylist(string $userId, string $playlistId, array|object $options)
 
-Check if a user is following a playlist.<br>
-[https://developer.spotify.com/documentation/web-api/reference/follow/check-user-following-playlist/](https://developer.spotify.com/documentation/web-api/reference/follow/check-user-following-playlist/)
+
 
 #### Arguments
 * `$userId` **string** - User ID or Spotify URI of the playlist owner.
+* `$playlistId` **string** - ID or Spotify URI of the playlist.
+* `$options` **array\|object** - Options for the check.
+    * ids string\|array Required. ID(s) or Spotify URI(s) of the user(s) to check for.
+
+
+
+#### Return values
+* **array** Whether each user is following the playlist.
+
+
+---
+
+
+### usersFollowPlaylist
+
+
+    array SpotifyWebAPI\SpotifyWebAPI::usersFollowPlaylist(string $playlistId, array|object $options)
+
+Check if a set of users are following a playlist.<br>
+[https://developer.spotify.com/documentation/web-api/reference/follow/check-user-following-playlist/](https://developer.spotify.com/documentation/web-api/reference/follow/check-user-following-playlist/)
+
+#### Arguments
 * `$playlistId` **string** - ID or Spotify URI of the playlist.
 * `$options` **array\|object** - Options for the check.
     * ids string\|array Required. ID(s) or Spotify URI(s) of the user(s) to check for.

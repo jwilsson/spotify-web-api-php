@@ -1893,7 +1893,7 @@ class SpotifyWebAPI
     }
 
     /**
-     * Check if a users are following a playlist.
+     * Check if a set of users are following a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/follow/check-user-following-playlist/
      *
      * @param string $playlistId ID or Spotify URI of the playlist.
