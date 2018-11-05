@@ -88,9 +88,14 @@ class RequestTest extends PHPUnit\Framework\TestCase
         ];
 
         $this->expectException(SpotifyWebAPI\SpotifyWebAPIAuthException::class);
-
         $request = new SpotifyWebAPI\Request();
-        $response = $request->account('POST', '/api/token', $parameters, $headers);
+        try {
+            $response = $request->account('POST', '/api/token', $parameters, $headers);
+        } catch (Exception $e) {
+            $this->assertInstanceOf(SpotifyWebAPI\SpotifyWebAPIAuthException::class, $e);
+            $this->assertTrue($e->hasInvalidCredentials());
+            throw $e; // throw again for last test
+        }
     }
 
     public function testGetLastResponse()
