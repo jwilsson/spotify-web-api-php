@@ -3,7 +3,7 @@ namespace SpotifyWebAPI;
 
 class SpotifyWebAPIException extends \Exception
 {
-    const TOKEN_EXPIRED = "The access token expired";
+    const TOKEN_EXPIRED = 'The access token expired';
 
     /**
      * Returns if the exception was thrown because of an expired token.

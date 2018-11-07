@@ -5,9 +5,9 @@ namespace SpotifyWebAPI;
 class SpotifyWebAPIAuthException extends SpotifyWebAPIException
 {
     // extends from SpotifyWebApiException for backwards compatibility
-    const INVALID_CLIENT = "Invalid client";
-    const INVALID_CLIENT_SECRET = "Invalid client secret";
-    const INVALID_REFRESH_TOKEN = "Invalid refresh token";
+    const INVALID_CLIENT = 'Invalid client';
+    const INVALID_CLIENT_SECRET = 'Invalid client secret';
+    const INVALID_REFRESH_TOKEN = 'Invalid refresh token';
 
     /**
      * Returns if the exception was thrown because of invalid credentials.
