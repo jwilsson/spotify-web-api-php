@@ -36,7 +36,13 @@ class Request
 
         if (isset($error->message) && isset($error->status)) {
             // API call error
-            throw new SpotifyWebAPIException($error->message, $error->status);
+            $exception = new SpotifyWebAPIException($error->message, $error->status);
+
+            if (isset($error->reason)) {
+                $exception->setReason($error->reason);
+            }
+
+            throw $exception;
         } elseif (isset($body->error_description)) {
             // Auth call error
             throw new SpotifyWebAPIAuthException($body->error_description, $status);
