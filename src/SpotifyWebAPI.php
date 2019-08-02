@@ -378,7 +378,14 @@ class SpotifyWebAPI
         if (isset($tracks['positions'])) {
             $options['positions'] = $tracks['positions'];
         } else {
-            $tracks = isset($tracks['tracks']) ? $tracks['tracks'] : $tracks;
+            if (isset($tracks['tracks'])) {
+                $tracks = $tracks['tracks'];
+            } else {
+                trigger_error(
+                    'Passing tracks without a "tracks" or "positions" key to deletePlaylistTracks() is deprecated',
+                    E_USER_DEPRECATED
+                );
+            }
 
             $options['tracks'] = array_map(function ($track) {
                 $track = (array) $track;
