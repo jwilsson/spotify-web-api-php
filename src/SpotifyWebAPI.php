@@ -160,7 +160,7 @@ class SpotifyWebAPI
      * Add tracks to a user's playlist.
      * https://developer.spotify.com/documentation/web-api/reference/playlists/add-tracks-to-playlist/
      *
-     * @deprecated
+     * @deprecated This method is deprecated. Use SpotifyWebAPI::addPlaylistTracks() instead.
      *
      * @param string $userId ID of the user who owns the playlist.
      * @param string $playlistId ID of the playlist to add tracks to.
@@ -172,6 +172,11 @@ class SpotifyWebAPI
      */
     public function addUserPlaylistTracks($userId, $playlistId, $tracks, $options = [])
     {
+        trigger_error(
+            'SpotifyWebAPI::addUserPlaylistTracks() is deprecated. Use addPlaylistTracks() instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->addPlaylistTracks($playlistId, $tracks, $options);
     }
 
@@ -253,7 +258,7 @@ class SpotifyWebAPI
      * Create a new playlist for a user.
      * https://developer.spotify.com/documentation/web-api/reference/playlists/create-playlist/
      *
-     * @deprecated
+     * @deprecated This method is deprecated. Use SpotifyWebAPI::createPlaylist() instead.
      *
      * @param string $userId ID or Spotify URI of the user to create the playlist for.
      * @param array|object $options Options for the new playlist.
@@ -264,6 +269,11 @@ class SpotifyWebAPI
      */
     public function createUserPlaylist($userId, $options)
     {
+        trigger_error(
+            'SpotifyWebAPI::createUserPlaylist() is deprecated. Use createPlaylist() instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->createPlaylist($options);
     }
 
@@ -409,7 +419,7 @@ class SpotifyWebAPI
      * Delete tracks from a playlist and retrieve a new snapshot ID.
      * https://developer.spotify.com/documentation/web-api/reference/playlists/remove-tracks-playlist/
      *
-     * @deprecated
+     * @deprecated This method is deprecated. Use SpotifyWebAPI::deletePlaylistTracks() instead.
      *
      * @param string $userId ID or Spotify URI of the user who owns the playlist.
      * @param string $playlistId ID or Spotify URI of the playlist to delete tracks from.
@@ -426,6 +436,11 @@ class SpotifyWebAPI
      */
     public function deleteUserPlaylistTracks($userId, $playlistId, $tracks, $snapshotId = '')
     {
+        trigger_error(
+            'SpotifyWebAPI::deleteUserPlaylistTracks() is deprecated. Use deletePlaylistTracks() instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->deletePlaylistTracks($playlistId, $tracks, $snapshotId);
     }
 
@@ -460,7 +475,7 @@ class SpotifyWebAPI
      * Add the current user as a follower of a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/
      *
-     * @deprecated
+     * @deprecated This method is deprecated. Use SpotifyWebAPI::followPlaylistForCurrentUser() instead.
      *
      * @param string $userId ID or Spotify URI of the user who owns the playlist.
      * @param string $playlistId ID or Spotify URI of the playlist to follow.
@@ -471,6 +486,11 @@ class SpotifyWebAPI
      */
     public function followPlaylist($userId, $playlistId, $options = [])
     {
+        trigger_error(
+            'SpotifyWebAPI::followPlaylist() is deprecated. Use followPlaylistForCurrentUser() instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->followPlaylistForCurrentUser($playlistId, $options);
     }
 
@@ -1264,7 +1284,7 @@ class SpotifyWebAPI
      * Get a user's specific playlist.
      * https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlist/
      *
-     * @deprecated
+     * @deprecated This method is deprecated. Use SpotifyWebAPI::getPlaylist() instead.
      *
      * @param string $userId ID or Spotify URI of the user.
      * @param string $playlistId ID or Spotify URI of the playlist.
@@ -1276,6 +1296,11 @@ class SpotifyWebAPI
      */
     public function getUserPlaylist($userId, $playlistId, $options = [])
     {
+        trigger_error(
+            'SpotifyWebAPI::getUserPlaylist( is deprecated. Use getPlaylist( instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->getPlaylist($playlistId, $options);
     }
 
@@ -1306,7 +1331,7 @@ class SpotifyWebAPI
      * Get the tracks in a user's playlist.
      * https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlists-tracks/
      *
-     * @deprecated
+     * @deprecated This method is deprecated. Use SpotifyWebAPI::getPlaylistTracks() instead.
      *
      * @param string $userId ID or Spotify URI of the user.
      * @param string $playlistId ID or Spotify URI of the playlist.
@@ -1320,6 +1345,11 @@ class SpotifyWebAPI
      */
     public function getUserPlaylistTracks($userId, $playlistId, $options = [])
     {
+        trigger_error(
+            'SpotifyWebAPI::getUserPlaylistTracks() is deprecated. Use getPlaylistTracks() instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->getPlaylistTracks($playlistId, $options);
     }
 
@@ -1533,7 +1563,7 @@ class SpotifyWebAPI
      * Reorder the tracks in a user's playlist.
      * https://developer.spotify.com/documentation/web-api/reference/playlists/reorder-playlists-tracks/
      *
-     * @deprecated
+     * @deprecated This method is deprecated. Use SpotifyWebAPI::reorderPlaylistTracks() instead.
      *
      * @param string $userId ID or Spotify URI of the user.
      * @param string $playlistId ID or Spotify URI of the playlist.
@@ -1547,6 +1577,11 @@ class SpotifyWebAPI
      */
     public function reorderUserPlaylistTracks($userId, $playlistId, $options)
     {
+        trigger_error(
+            'SpotifyWebAPI::reorderUserPlaylistTracks() is deprecated. Use reorderPlaylistTracks() instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->reorderPlaylistTracks($playlistId, $options);
     }
 
@@ -1606,7 +1641,7 @@ class SpotifyWebAPI
      * Replace all tracks in a user's playlist with new ones.
      * https://developer.spotify.com/documentation/web-api/reference/playlists/replace-playlists-tracks/
      *
-     * @deprecated
+     * @deprecated This method is deprecated. Use SpotifyWebAPI::replacePlaylistTracks() instead.
      *
      * @param string $userId ID or Spotify URI of the user.
      * @param string $playlistId ID or Spotify URI of the playlist.
@@ -1616,6 +1651,11 @@ class SpotifyWebAPI
      */
     public function replaceUserPlaylistTracks($userId, $playlistId, $tracks)
     {
+        trigger_error(
+            'SpotifyWebAPI::replaceUserPlaylistTracks() is deprecated. Use replacePlaylistTracks() instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->replacePlaylistTracks($playlistId, $tracks);
     }
 
@@ -1754,7 +1794,7 @@ class SpotifyWebAPI
      * Remove the current user as a follower of a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/
      *
-     * @deprecated
+     * @deprecated This method is deprecated. Use SpotifyWebAPI::unfollowPlaylistForCurrentUser() instead.
      *
      * @param string $userId ID or Spotify URI of the user who owns the playlist.
      * @param string $playlistId ID or Spotify URI of the playlist to unfollow
@@ -1763,6 +1803,11 @@ class SpotifyWebAPI
      */
     public function unfollowPlaylist($userId, $playlistId)
     {
+        trigger_error(
+            'SpotifyWebAPI::unfollowPlaylist() is deprecated. Use unfollowPlaylistForCurrentUser() instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->unfollowPlaylistForCurrentUser($playlistId);
     }
 
@@ -1820,6 +1865,8 @@ class SpotifyWebAPI
      * Update the details of a user's playlist.
      * https://developer.spotify.com/documentation/web-api/reference/playlists/change-playlist-details/
      *
+     * @deprecated This method is deprecated. Use SpotifyWebAPI::updatePlaylist() instead.
+     *
      * @param string $userId ID or Spotify URI of the user who owns the playlist.
      * @param string $playlistId ID or Spotify URI of the playlist to update.
      * @param array|object $options Options for the playlist.
@@ -1832,6 +1879,11 @@ class SpotifyWebAPI
      */
     public function updateUserPlaylist($userId, $playlistId, $options)
     {
+        trigger_error(
+            'SpotifyWebAPI::updateUserPlaylist() is deprecated. Use updatePlaylist() instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->updatePlaylist($playlistId, $options);
     }
 
@@ -1861,7 +1913,7 @@ class SpotifyWebAPI
      * Update the image of a user's playlist.
      * https://developer.spotify.com/documentation/web-api/reference/playlists/upload-custom-playlist-cover/
      *
-     * @deprecated
+     * @deprecated This method is deprecated. Use SpotifyWebAPI::updatePlaylistImage() instead.
      *
      * @param string $userId ID or Spotify URI of the user who owns the playlist.
      * @param string $playlistId ID or Spotify URI of the playlist to update.
@@ -1871,6 +1923,11 @@ class SpotifyWebAPI
      */
     public function updateUserPlaylistImage($userId, $playlistId, $imageData)
     {
+        trigger_error(
+            'SpotifyWebAPI::updateUserPlaylistImage() is deprecated. Use updatePlaylistImage() instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->updatePlaylistImage($playlistId, $imageData);
     }
 
@@ -1878,7 +1935,7 @@ class SpotifyWebAPI
      * Check if a user is following a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/follow/check-user-following-playlist/
      *
-     * @deprecated
+     * @deprecated This method is deprecated. Use SpotifyWebAPI::usersFollowPlaylist() instead.
      *
      * @param string $userId User ID or Spotify URI of the playlist owner.
      * @param string $playlistId ID or Spotify URI of the playlist.
@@ -1889,6 +1946,11 @@ class SpotifyWebAPI
      */
     public function userFollowsPlaylist($userId, $playlistId, $options)
     {
+        trigger_error(
+            'SpotifyWebAPI::userFollowsPlaylist() is deprecated. Use usersFollowPlaylist() instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->usersFollowPlaylist($playlistId, $options);
     }
 

@@ -77,13 +77,13 @@ Add tracks to a playlist.<br>
 ---
 ### addUserPlaylistTracks
 
-_Deprecated: _
+_Deprecated_
 
 ```php
 SpotifyWebAPI::addUserPlaylistTracks($userId, $playlistId, $tracks, $options)
 ```
 
-
+This method is deprecated. Use SpotifyWebAPI::addPlaylistTracks() instead.
 
 #### Arguments
 * `$userId` **string** - ID of the user who owns the playlist.
@@ -159,13 +159,13 @@ Create a new playlist.<br>
 ---
 ### createUserPlaylist
 
-_Deprecated: _
+_Deprecated_
 
 ```php
 SpotifyWebAPI::createUserPlaylist($userId, $options)
 ```
 
-
+This method is deprecated. Use SpotifyWebAPI::createPlaylist() instead.
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user to create the playlist for.
@@ -258,13 +258,13 @@ The playlist&#039;s snapshot ID.
 ---
 ### deleteUserPlaylistTracks
 
-_Deprecated: _
+_Deprecated_
 
 ```php
 SpotifyWebAPI::deleteUserPlaylistTracks($userId, $playlistId, $tracks, $snapshotId)
 ```
 
-
+This method is deprecated. Use SpotifyWebAPI::deletePlaylistTracks() instead.
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
@@ -303,13 +303,13 @@ Add the current user as a follower of one or more artists or other Spotify users
 ---
 ### followPlaylist
 
-_Deprecated: _
+_Deprecated_
 
 ```php
 SpotifyWebAPI::followPlaylist($userId, $playlistId, $options)
 ```
 
-
+This method is deprecated. Use SpotifyWebAPI::followPlaylistForCurrentUser() instead.
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
@@ -801,7 +801,7 @@ Get the current user's top tracks or artists.<br>
 * `$options` **array** - Optional. Options for the results.
     * int limit Optional. Limit the number of tracks.
     * int offset Optional. Number of tracks to skip.
-    * mixed time_range Optional. Over what time frame the data is calculated. See Spotify API docs for more info.
+    * string time_range Optional. Over what time frame the data is calculated. See Spotify API docs for more info.
 
 
 #### Return values
@@ -1006,13 +1006,13 @@ Get the artists followed by the current user.<br>
 ---
 ### getUserPlaylist
 
-_Deprecated: _
+_Deprecated_
 
 ```php
 SpotifyWebAPI::getUserPlaylist($userId, $playlistId, $options)
 ```
 
-
+This method is deprecated. Use SpotifyWebAPI::getPlaylist() instead.
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user.
@@ -1049,13 +1049,13 @@ Get a user's playlists.<br>
 ---
 ### getUserPlaylistTracks
 
-_Deprecated: _
+_Deprecated_
 
 ```php
 SpotifyWebAPI::getUserPlaylistTracks($userId, $playlistId, $options)
 ```
 
-
+This method is deprecated. Use SpotifyWebAPI::getPlaylistTracks() instead.
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user.
@@ -1218,13 +1218,13 @@ Reorder the tracks in a playlist.<br>
 ---
 ### reorderUserPlaylistTracks
 
-_Deprecated: _
+_Deprecated_
 
 ```php
 SpotifyWebAPI::reorderUserPlaylistTracks($userId, $playlistId, $options)
 ```
 
-
+This method is deprecated. Use SpotifyWebAPI::reorderPlaylistTracks() instead.
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user.
@@ -1280,13 +1280,13 @@ Replace all tracks in a playlist with new ones.<br>
 ---
 ### replaceUserPlaylistTracks
 
-_Deprecated: _
+_Deprecated_
 
 ```php
 SpotifyWebAPI::replaceUserPlaylistTracks($userId, $playlistId, $tracks)
 ```
 
-
+This method is deprecated. Use SpotifyWebAPI::replacePlaylistTracks() instead.
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user.
@@ -1412,13 +1412,13 @@ Remove the current user as a follower of one or more artists or other Spotify us
 ---
 ### unfollowPlaylist
 
-_Deprecated: _
+_Deprecated_
 
 ```php
 SpotifyWebAPI::unfollowPlaylist($userId, $playlistId)
 ```
 
-
+This method is deprecated. Use SpotifyWebAPI::unfollowPlaylistForCurrentUser() instead.
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
@@ -1470,13 +1470,13 @@ Update the details of a playlist.<br>
 ---
 ### updateUserPlaylist
 
+_Deprecated_
 
 ```php
 SpotifyWebAPI::updateUserPlaylist($userId, $playlistId, $options)
 ```
 
-Update the details of a user's playlist.<br>
-[https://developer.spotify.com/documentation/web-api/reference/playlists/change-playlist-details/](https://developer.spotify.com/documentation/web-api/reference/playlists/change-playlist-details/)
+This method is deprecated. Use SpotifyWebAPI::updatePlaylist() instead.
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
@@ -1512,13 +1512,13 @@ Update the image of a playlist.<br>
 ---
 ### updateUserPlaylistImage
 
-_Deprecated: _
+_Deprecated_
 
 ```php
 SpotifyWebAPI::updateUserPlaylistImage($userId, $playlistId, $imageData)
 ```
 
-
+This method is deprecated. Use SpotifyWebAPI::updatePlaylistImage() instead.
 
 #### Arguments
 * `$userId` **string** - ID or Spotify URI of the user who owns the playlist.
@@ -1531,13 +1531,13 @@ SpotifyWebAPI::updateUserPlaylistImage($userId, $playlistId, $imageData)
 ---
 ### userFollowsPlaylist
 
-_Deprecated: _
+_Deprecated_
 
 ```php
 SpotifyWebAPI::userFollowsPlaylist($userId, $playlistId, $options)
 ```
 
-
+This method is deprecated. Use SpotifyWebAPI::usersFollowPlaylist() instead.
 
 #### Arguments
 * `$userId` **string** - User ID or Spotify URI of the playlist owner.
