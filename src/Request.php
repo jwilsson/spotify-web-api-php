@@ -251,7 +251,7 @@ class Request
      *
      * Any options passed here will be merged with the defaults, overriding existing ones.
      *
-     * @param array $options One of the `Request::RETURN_*` constants.
+     * @param array $options Any available cURL option.
      *
      * @return void
      */

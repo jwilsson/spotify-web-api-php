@@ -1,12 +1,14 @@
+# Session
+
 ## Constants
 
-
 ## Methods
-
 ### __construct
 
 
-     SpotifyWebAPI\Session::__construct(string $clientId, string $clientSecret, string $redirectUri, \SpotifyWebAPI\Request $request)
+```php
+Session::__construct($clientId, $clientSecret, $redirectUri, $request)
+```
 
 Constructor<br>
 Set up client credentials.
@@ -18,14 +20,13 @@ Set up client credentials.
 * `$request` **\SpotifyWebAPI\Request** - Optional. The Request object to use.
 
 
-
 ---
-
-
 ### getAuthorizeUrl
 
 
-    string SpotifyWebAPI\Session::getAuthorizeUrl(array|object $options)
+```php
+Session::getAuthorizeUrl($options)
+```
 
 Get the authorization URL.
 
@@ -36,18 +37,16 @@ Get the authorization URL.
     * string state Optional. A CSRF token.
 
 
-
 #### Return values
 * **string** The authorization URL.
 
-
 ---
-
-
 ### getAccessToken
 
 
-    string SpotifyWebAPI\Session::getAccessToken()
+```php
+Session::getAccessToken()
+```
 
 Get the access token.
 
@@ -55,14 +54,13 @@ Get the access token.
 #### Return values
 * **string** The access token.
 
-
 ---
-
-
 ### getClientId
 
 
-    string SpotifyWebAPI\Session::getClientId()
+```php
+Session::getClientId()
+```
 
 Get the client ID.
 
@@ -70,14 +68,13 @@ Get the client ID.
 #### Return values
 * **string** The client ID.
 
-
 ---
-
-
 ### getClientSecret
 
 
-    string SpotifyWebAPI\Session::getClientSecret()
+```php
+Session::getClientSecret()
+```
 
 Get the client secret.
 
@@ -85,14 +82,13 @@ Get the client secret.
 #### Return values
 * **string** The client secret.
 
-
 ---
-
-
 ### getTokenExpiration
 
 
-    integer SpotifyWebAPI\Session::getTokenExpiration()
+```php
+Session::getTokenExpiration()
+```
 
 Get the access token expiration time.
 
@@ -100,14 +96,13 @@ Get the access token expiration time.
 #### Return values
 * **integer** A Unix timestamp indicating the token expiration time.
 
-
 ---
-
-
 ### getRedirectUri
 
 
-    string SpotifyWebAPI\Session::getRedirectUri()
+```php
+Session::getRedirectUri()
+```
 
 Get the client's redirect URI.
 
@@ -115,14 +110,13 @@ Get the client's redirect URI.
 #### Return values
 * **string** The redirect URI.
 
-
 ---
-
-
 ### getRefreshToken
 
 
-    string SpotifyWebAPI\Session::getRefreshToken()
+```php
+Session::getRefreshToken()
+```
 
 Get the refresh token.
 
@@ -130,14 +124,13 @@ Get the refresh token.
 #### Return values
 * **string** The refresh token.
 
-
 ---
-
-
 ### getScope
 
 
-    array SpotifyWebAPI\Session::getScope()
+```php
+Session::getScope()
+```
 
 Get the scope for the current access token
 
@@ -145,32 +138,29 @@ Get the scope for the current access token
 #### Return values
 * **array** The scope for the current access token
 
-
 ---
-
-
 ### refreshAccessToken
 
 
-    boolean SpotifyWebAPI\Session::refreshAccessToken(string $refreshToken)
+```php
+Session::refreshAccessToken($refreshToken)
+```
 
 Refresh an access token.
 
 #### Arguments
 * `$refreshToken` **string** - The refresh token to use.
 
-
 #### Return values
 * **boolean** Whether the access token was successfully refreshed.
 
-
 ---
-
-
 ### requestCredentialsToken
 
 
-    boolean SpotifyWebAPI\Session::requestCredentialsToken()
+```php
+Session::requestCredentialsToken()
+```
 
 Request an access token using the Client Credentials Flow.
 
@@ -178,96 +168,84 @@ Request an access token using the Client Credentials Flow.
 #### Return values
 * **boolean** True when an access token was successfully granted, false otherwise.
 
-
 ---
-
-
 ### requestAccessToken
 
 
-    boolean SpotifyWebAPI\Session::requestAccessToken(string $authorizationCode)
+```php
+Session::requestAccessToken($authorizationCode)
+```
 
 Request an access token given an authorization code.
 
 #### Arguments
 * `$authorizationCode` **string** - The authorization code from Spotify.
 
-
 #### Return values
 * **boolean** True when the access token was successfully granted, false otherwise.
 
-
 ---
-
-
 ### setClientId
 
 
-    void SpotifyWebAPI\Session::setClientId(string $clientId)
+```php
+Session::setClientId($clientId)
+```
 
 Set the client ID.
 
 #### Arguments
 * `$clientId` **string** - The client ID.
 
-
 #### Return values
 * **void** 
 
-
 ---
-
-
 ### setClientSecret
 
 
-    void SpotifyWebAPI\Session::setClientSecret(string $clientSecret)
+```php
+Session::setClientSecret($clientSecret)
+```
 
 Set the client secret.
 
 #### Arguments
 * `$clientSecret` **string** - The client secret.
 
-
 #### Return values
 * **void** 
 
-
 ---
-
-
 ### setRedirectUri
 
 
-    void SpotifyWebAPI\Session::setRedirectUri(string $redirectUri)
+```php
+Session::setRedirectUri($redirectUri)
+```
 
 Set the client's redirect URI.
 
 #### Arguments
 * `$redirectUri` **string** - The redirect URI.
 
-
 #### Return values
 * **void** 
 
-
 ---
-
-
 ### setRefreshToken
 
 
-    void SpotifyWebAPI\Session::setRefreshToken(string $refreshToken)
+```php
+Session::setRefreshToken($refreshToken)
+```
 
 Set the session's refresh token.
 
 #### Arguments
 * `$refreshToken` **string** - The refresh token.
 
-
 #### Return values
 * **void** 
 
-
 ---
-

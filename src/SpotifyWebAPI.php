@@ -1010,10 +1010,10 @@ class SpotifyWebAPI
      * https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
      *
      * @param string $type The type of entity to fetch.
-     * @param array $options. Optional. Options for the results.
+     * @param array $options Optional. Options for the results.
      * - int limit Optional. Limit the number of tracks.
      * - int offset Optional. Number of tracks to skip.
-     * - mixed time_range Optional. Over what time frame the data is calculated. See Spotify API docs for more info.
+     * - string time_range Optional. Over what time frame the data is calculated. See Spotify API docs for more info.
      *
      * @return array|object A list of the requested top entity. Type is controlled by `SpotifyWebAPI::setReturnType()`.
      */
@@ -1840,7 +1840,7 @@ class SpotifyWebAPI
      * https://developer.spotify.com/documentation/web-api/reference/playlists/upload-custom-playlist-cover/
      *
      * @param string $playlistId ID or Spotify URI of the playlist to update.
-     * @param string $imageData. Base64 encoded JPEG image data, maximum 256 KB in size.
+     * @param string $imageData Base64 encoded JPEG image data, maximum 256 KB in size.
      *
      * @return bool Whether the playlist was successfully updated.
      */
@@ -1865,7 +1865,7 @@ class SpotifyWebAPI
      *
      * @param string $userId ID or Spotify URI of the user who owns the playlist.
      * @param string $playlistId ID or Spotify URI of the playlist to update.
-     * @param string $imageData. Base64 encoded JPEG image data, maximum 256 KB in size.
+     * @param string $imageData Base64 encoded JPEG image data, maximum 256 KB in size.
      *
      * @return bool Whether the playlist was successfully updated.
      */
