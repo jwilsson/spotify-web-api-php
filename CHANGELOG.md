@@ -1,4 +1,20 @@
 # Changelog
+## 2.9.0 (2019-08-03)
+* The following deprecated methods will now emit a run time notice when used ([fc1e535](https://github.com/jwilsson/spotify-web-api-php/commit/fc1e5351bfd1ab395b14bf0981420c199d6cce76)):
+    * `SpotifyWebAPI::addUserPlaylistTracks()`
+    * `SpotifyWebAPI::createUserPlaylist()`
+    * `SpotifyWebAPI::deleteUserPlaylistTracks()`
+    * `SpotifyWebAPI::followPlaylistForCurrentUser()`
+    * `SpotifyWebAPI::getUserPlaylist()`
+    * `SpotifyWebAPI::getUserPlaylistTracks()`
+    * `SpotifyWebAPI::reorderUserPlaylistTracks()`
+    * `SpotifyWebAPI::replaceUserPlaylistTracks()`
+    * `SpotifyWebAPI::unfollowPlaylistForCurrentUser()`
+    * `SpotifyWebAPI::updateUserPlaylist()`
+    * `SpotifyWebAPI::updateUserPlaylistImage()`
+    * `SpotifyWebAPI::usersFollowPlaylist`
+* When passing `$tracks` without a `tracks` or `positions` key to `SpotifyWebAPI::deletePlaylistTracks` a run time notice will be emitted. ([2f457bd](https://github.com/jwilsson/spotify-web-api-php/commit/2f457bd8bd1ab86a64e51942a637fdd07a2ce350))
+
 ## 2.8.0 (2019-06-29)
 * Added a `Request::setCurlOptions()` method to make it possible to set custom cURL options. ([5a8b1e5](https://github.com/jwilsson/spotify-web-api-php/commit/5a8b1e5cd7cc3b4969ea615e55ac3dd66b12a872))
 
