@@ -346,7 +346,7 @@ Add the current user as a follower of a playlist.<br>
 
 
 ```php
-SpotifyWebAPI::getAlbum($albumId)
+SpotifyWebAPI::getAlbum($albumId, $options)
 ```
 
 Get a album.<br>
@@ -354,6 +354,9 @@ Get a album.<br>
 
 #### Arguments
 * `$albumId` **string** - ID or Spotify URI of the album.
+* `$options` **array\|object** - Optional. Options for the album.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+
 
 #### Return values
 * **array\|object** The requested album. Type is controlled by `SpotifyWebAPI::setReturnType()`.
