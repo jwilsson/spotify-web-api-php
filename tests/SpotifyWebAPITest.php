@@ -617,6 +617,14 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             'Authorization' => 'Bearer ' . $this->accessToken,
         ];
 
+        $options = [
+            'market' => 'SE'
+        ];
+
+        $expected = [
+            'market' => 'SE',
+        ];
+
         $return = [
             'body' => get_fixture('album'),
         ];
@@ -624,14 +632,14 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $stub = $this->setupStub(
             'GET',
             '/v1/albums/7u6zL7kqpgLPISZYXNTgYk',
-            [],
+            $expected,
             $headers,
             $return
         );
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->getAlbum('spotify:album:7u6zL7kqpgLPISZYXNTgYk');
+        $response = $api->getAlbum('spotify:album:7u6zL7kqpgLPISZYXNTgYk', $options);
 
         $this->assertObjectHasAttribute('id', $response);
     }

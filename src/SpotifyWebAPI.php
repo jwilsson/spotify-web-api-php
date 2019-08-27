@@ -532,7 +532,7 @@ class SpotifyWebAPI
      * https://developer.spotify.com/documentation/web-api/reference/albums/get-album/
      *
      * @param string $albumId ID or Spotify URI of the album.
-     * @param array|object $options Optional. Options for the albums.
+     * @param array|object $options Optional. Options for the album.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
      * @return array|object The requested album. Type is controlled by `SpotifyWebAPI::setReturnType()`.
