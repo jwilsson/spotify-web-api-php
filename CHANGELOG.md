@@ -1,4 +1,7 @@
 # Changelog
+## 2.10.0 (2019-08-27)
+* Added a `$options` argument to `SpotifyWebAPI::getAlbum()`. ([e92121f](https://github.com/jwilsson/spotify-web-api-php/commit/e92121fd26da920cade7b8c79ccd1debc6581407))
+
 ## 2.9.0 (2019-08-03)
 * The following deprecated methods will now emit a run time notice when used ([fc1e535](https://github.com/jwilsson/spotify-web-api-php/commit/fc1e5351bfd1ab395b14bf0981420c199d6cce76)):
     * `SpotifyWebAPI::addUserPlaylistTracks()`
