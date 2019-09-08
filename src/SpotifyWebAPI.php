@@ -6,6 +6,17 @@ class SpotifyWebAPI
     const RETURN_ASSOC = 'assoc';
     const RETURN_OBJECT = 'object';
 
+    const TYPE_TRACK = 'track';
+    const TYPE_ALBUM = 'album';
+    const TYPE_PLAYLIST = 'playlist';
+    const TYPE_ARTIST = 'artist';
+    const TYPE_ANY = [
+        self::TYPE_ARTIST,
+        self::TYPE_ALBUM,
+        self::TYPE_TRACK,
+        self::TYPE_PLAYLIST
+    ];
+
     protected $accessToken = '';
     protected $lastResponse = [];
     protected $request = null;
@@ -2029,7 +2040,7 @@ class SpotifyWebAPI
      *          ]
      */
 
-    public function lastBody($requestedTypes)
+    public function lastBody(string $requestedTypes)
     {
         if (!$this->filterDownResponse) {
             return $this->lastResponse['body'];
@@ -2039,7 +2050,6 @@ class SpotifyWebAPI
 
         foreach (explode(',', $requestedTypes) as $requestedType) {
             $requestedType = trim($requestedType);
-
             switch ($this->returnType) {
                     case self::RETURN_OBJECT:
                         $response[$requestedType . 's'] = $this->lastResponse['body']->{$requestedType . 's'}->items;
@@ -2051,9 +2061,21 @@ class SpotifyWebAPI
                 }
         }
 
+        /* Check if there was only one type returned */
         if (count($response) === 1) {
-            return array_shift($response);
+            /* Return the one type */
+            $response = array_shift($response);
+
+            /* Check if there is only one item in that resource type */
+            if (count($response) === 1) {
+                /* Return that one resource */
+                return array_shift($response);
+            }
+
+            /* Return only that resource type response */
+            return $response;
         }
+
 
         return $this->returnType === self::RETURN_OBJECT ? (object) $response : $response;
     }
