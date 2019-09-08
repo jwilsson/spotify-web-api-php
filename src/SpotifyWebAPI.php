@@ -9,6 +9,7 @@ class SpotifyWebAPI
     protected $accessToken = '';
     protected $lastResponse = [];
     protected $request = null;
+    protected $filterDownResponse = false;
 
     /**
      * Constructor
@@ -1695,7 +1696,7 @@ class SpotifyWebAPI
 
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
 
-        return $this->lastResponse['body'];
+        return $this->lastBody($type);
     }
 
     /**
@@ -1743,6 +1744,7 @@ class SpotifyWebAPI
      */
     public function setReturnType($returnType)
     {
+        $this->returnType = $returnType;
         $this->request->setReturnType($returnType);
     }
 
@@ -1990,5 +1992,69 @@ class SpotifyWebAPI
         $this->lastResponse = $this->request->api('GET', $uri, $options, $headers);
 
         return $this->lastResponse['body'];
+    }
+
+    /**
+     * Activates or deactivates the response filter
+     *
+     * @param boolean $on       If you want to filter the response
+     * @return SpotifyWebApi    Returns it self
+     */
+    public function setResponseFilter(bool $on = false)
+    {
+        $this->filterDownResponse = $on;
+        return $this;
+    }
+
+    /**
+     * Returns the last body and preforms a filter to enhance the UX
+     *
+     * @param string $requestedTypes    The requested types
+     *  - Can be string of single type
+     *  - Can be comma separated list of types
+     *
+     * @return array|StdClass           The original or filtered response object/array
+     *  - If filtering is active:
+     *      - Case: One type is requested:
+     *          Returns an array of those items
+     *
+     *      - Case: Multiple types are provided:
+     *          Returns an Array or Object (as set by: `SpotifyWebAPI::setReturnType()`)
+     *          with only the items for the requested resources: E.g.:
+     *
+     *          [
+     *              'playlists' => [Playlist_Item, ...],
+     *              'artists' => [Artist_Item, ...]
+     *              ...
+     *          ]
+     */
+
+    public function lastBody($requestedTypes)
+    {
+        if (!$this->filterDownResponse) {
+            return $this->lastResponse['body'];
+        }
+        
+        $response = [];
+
+        foreach (explode(',', $requestedTypes) as $requestedType) {
+            $requestedType = trim($requestedType);
+
+            switch ($this->returnType) {
+                    case 'object':
+                        $response[$requestedType . 's'] = $this->lastResponse['body']->{$requestedType . 's'}->items;
+                        break;
+                    
+                    case 'assoc':
+                        $response[$requestedType . 's'] = $this->lastResponse['body'][$requestedType . 's']['items'];
+                        break;
+                }
+        }
+
+        if (count($response) === 1) {
+            return array_shift($response);
+        }
+
+        return $this->returnType === 'object' ? (object) $response : $response;
     }
 }
