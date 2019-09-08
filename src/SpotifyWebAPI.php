@@ -2041,11 +2041,11 @@ class SpotifyWebAPI
             $requestedType = trim($requestedType);
 
             switch ($this->returnType) {
-                    case 'object':
+                    case self::RETURN_OBJECT:
                         $response[$requestedType . 's'] = $this->lastResponse['body']->{$requestedType . 's'}->items;
                         break;
                     
-                    case 'assoc':
+                    case self::RETURN_ASSOC:
                         $response[$requestedType . 's'] = $this->lastResponse['body'][$requestedType . 's']['items'];
                         break;
                 }
@@ -2055,6 +2055,6 @@ class SpotifyWebAPI
             return array_shift($response);
         }
 
-        return $this->returnType === 'object' ? (object) $response : $response;
+        return $this->returnType === self::RETURN_OBJECT ? (object) $response : $response;
     }
 }
