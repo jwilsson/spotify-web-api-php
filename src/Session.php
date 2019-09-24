@@ -129,17 +129,17 @@ class Session
     /**
      * Refresh an access token.
      *
-     * @param string $refreshToken The refresh token to use.
+     * @param string $refreshToken Optional. The refresh token to use.
      *
      * @return bool Whether the access token was successfully refreshed.
      */
-    public function refreshAccessToken($refreshToken)
+    public function refreshAccessToken($refreshToken = '')
     {
         $payload = base64_encode($this->getClientId() . ':' . $this->getClientSecret());
 
         $parameters = [
             'grant_type' => 'refresh_token',
-            'refresh_token' => $refreshToken,
+            'refresh_token' => $refreshToken ?: $this->refreshToken,
         ];
 
         $headers = [
@@ -227,6 +227,18 @@ class Session
         }
 
         return false;
+    }
+
+    /**
+     * Set the access token.
+     *
+     * @param string $accessToken The access token
+     *
+     * @return void
+     */
+    public function setAccessToken($accessToken)
+    {
+        $this->accessToken = $accessToken;
     }
 
     /**
