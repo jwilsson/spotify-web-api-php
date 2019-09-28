@@ -9,6 +9,7 @@ class SpotifyWebAPI
     protected $accessToken = '';
     protected $lastResponse = [];
     protected $request = null;
+    protected $session = null;
 
     /**
      * Constructor
@@ -30,9 +31,15 @@ class SpotifyWebAPI
      */
     protected function authHeaders($headers = [])
     {
-        if ($this->accessToken) {
+        if ($this->session) {
+            $accessToken = $this->session->getAccessToken();
+        } else {
+            $accessToken = $this->accessToken;
+        }
+
+        if ($accessToken) {
             $headers = array_merge($headers, [
-                'Authorization' => 'Bearer ' . $this->accessToken,
+                'Authorization' => 'Bearer ' . $accessToken,
             ]);
         }
 
@@ -1759,6 +1766,18 @@ class SpotifyWebAPI
     public function setReturnType($returnType)
     {
         $this->request->setReturnType($returnType);
+    }
+
+    /**
+     * Set the Session object to use.
+     *
+     * @param Session $session The Session object.
+     *
+     * @return void
+     */
+    public function setSession($session)
+    {
+        $this->session = $session;
     }
 
     /**
