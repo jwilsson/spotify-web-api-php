@@ -1,4 +1,8 @@
 # Changelog
+## 2.10.1 (2019-10-02)
+* Fixed an issue where `SpotifyWebAPI::deletePlaylistTracks()` wouldn't return the snapshot ID when return type was set to `SpotifyWebAPI::RETURN_ASSOC`. ([f9d580f](https://github.com/jwilsson/spotify-web-api-php/commit/f9d580f322fb39512c3886872213322bf9dc66b2))
+* Fixed an issue where `SpotifyWebAPI::reorderPlaylistTracks()` wouldn't return the snapshot ID when return type was set to `SpotifyWebAPI::RETURN_ASSOC`. ([89fe613](https://github.com/jwilsson/spotify-web-api-php/commit/89fe613bf649533ee173234776cc2c28991ee5c0))
+
 ## 2.10.0 (2019-08-27)
 * Added a `$options` argument to `SpotifyWebAPI::getAlbum()`. ([e92121f](https://github.com/jwilsson/spotify-web-api-php/commit/e92121fd26da920cade7b8c79ccd1debc6581407))
 
