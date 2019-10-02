@@ -417,6 +417,8 @@ class SpotifyWebAPI
 
         if (isset($body->snapshot_id)) {
             return $body->snapshot_id;
+        } elseif (isset($body['snapshot_id'])) {
+            return $body['snapshot_id'];
         }
 
         return false;
