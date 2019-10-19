@@ -1,4 +1,7 @@
 # Changelog
+## 2.11.1 (2019-10-19)
+* Remove unfinished code that accidentally snuck into `2.11.0`. ([eb3f51c](https://github.com/jwilsson/spotify-web-api-php/commit/eb3f51c5cf5fa1b7629a59376ee54294f3aa02b7))
+
 ## 2.11.0 (2019-10-19)
 * Added support for automatically refreshing access tokens. ([5ec5fd4](https://github.com/jwilsson/spotify-web-api-php/commit/5ec5fd49b0d6c79db54ce78953e0598809350e84))
 
