@@ -24,14 +24,16 @@ class SpotifyWebAPI
     /**
      * Add authorization headers.
      *
-     * @return array Authorization headers.
+     * @param $headers array. Optional. Additional headers to merge with the authorization headers.
+     *
+     * @return array Authorization headers, optionally merged with the passed ones.
      */
-    protected function authHeaders()
+    protected function authHeaders($headers = [])
     {
-        $headers = [];
-
         if ($this->accessToken) {
-            $headers['Authorization'] = 'Bearer ' . $this->accessToken;
+            $headers = array_merge($headers, [
+                'Authorization' => 'Bearer ' . $this->accessToken,
+            ]);
         }
 
         return $headers;
@@ -92,8 +94,9 @@ class SpotifyWebAPI
         $albums = $this->uriToId($albums, 'album');
         $albums = json_encode((array) $albums);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $uri = '/v1/me/albums';
 
@@ -115,8 +118,9 @@ class SpotifyWebAPI
         $tracks = $this->uriToId($tracks, 'track');
         $tracks = json_encode((array) $tracks);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $uri = '/v1/me/tracks';
 
@@ -143,8 +147,9 @@ class SpotifyWebAPI
         $tracks = $this->idToUri($tracks, 'track');
         $tracks = json_encode((array) $tracks);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
@@ -196,8 +201,9 @@ class SpotifyWebAPI
         $options['device_ids'] = (array) $options['device_ids'];
         $options = json_encode($options);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $uri = '/v1/me/player';
 
@@ -244,8 +250,9 @@ class SpotifyWebAPI
     {
         $options = json_encode($options);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $uri = '/v1/me/playlists';
 
@@ -318,8 +325,9 @@ class SpotifyWebAPI
         $albums = $this->uriToId($albums, 'album');
         $albums = json_encode((array) $albums);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $uri = '/v1/me/albums';
 
@@ -341,8 +349,9 @@ class SpotifyWebAPI
         $tracks = $this->uriToId($tracks, 'track');
         $tracks = json_encode((array) $tracks);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $uri = '/v1/me/tracks';
 
@@ -404,8 +413,9 @@ class SpotifyWebAPI
 
         $options = json_encode($options);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
@@ -469,8 +479,9 @@ class SpotifyWebAPI
             'ids' => (array) $ids,
         ]);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         // We need to manually append data to the URI since it's a PUT request
         $uri = '/v1/me/following?type=' . $type;
@@ -517,8 +528,9 @@ class SpotifyWebAPI
     {
         $options = json_encode((object) $options);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
@@ -1497,8 +1509,9 @@ class SpotifyWebAPI
     {
         $options = json_encode((object) $options);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $uri = '/v1/me/player/play';
 
@@ -1553,8 +1566,9 @@ class SpotifyWebAPI
     {
         $options = json_encode($options);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
@@ -1638,8 +1652,9 @@ class SpotifyWebAPI
             'uris' => (array) $tracks,
         ]);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
@@ -1792,8 +1807,9 @@ class SpotifyWebAPI
             'ids' => (array) $ids,
         ]);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         // We need to manually append data to the URI since it's a DELETE request
         $uri = '/v1/me/following?type=' . $type;
@@ -1834,8 +1850,9 @@ class SpotifyWebAPI
      */
     public function unfollowPlaylistForCurrentUser($playlistId)
     {
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
         $uri = '/v1/playlists/' . $playlistId . '/followers';
@@ -1862,8 +1879,9 @@ class SpotifyWebAPI
     {
         $options = json_encode($options);
 
-        $headers = $this->authHeaders();
-        $headers['Content-Type'] = 'application/json';
+        $headers = $this->authHeaders([
+            'Content-Type' => 'application/json',
+        ]);
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
