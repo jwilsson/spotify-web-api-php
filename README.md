@@ -13,6 +13,7 @@ This is a PHP wrapper for [Spotify's Web API](https://developer.spotify.com/web-
     * Spotify catalog search.
     * User playback control.
 * Authorization flow helpers.
+* Automatic refreshing of access tokens.
 * PSR-4 autoloading support.
 
 ## Requirements

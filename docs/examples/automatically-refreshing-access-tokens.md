@@ -24,9 +24,10 @@ $newAccessToken = $session->getAccessToken();
 $newRefreshToken = $session->getRefreshToken(); // Sometimes, a new refresh token will be returned
 ```
 
+## With an existing refresh token
+
 When you already have existing access and refresh tokens, add them to the `Session` instance and call the API.
 
-## With an existing refresh token
 ```php
 // $api have already been initialized, options set, etc.
 
