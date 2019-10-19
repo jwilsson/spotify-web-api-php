@@ -1,4 +1,7 @@
 # Changelog
+## 2.11.0 (2019-10-19)
+* Added support for automatically refreshing access tokens. ([5ec5fd4](https://github.com/jwilsson/spotify-web-api-php/commit/5ec5fd49b0d6c79db54ce78953e0598809350e84))
+
 ## 2.10.1 (2019-10-02)
 * Fixed an issue where `SpotifyWebAPI::deletePlaylistTracks()` wouldn't return the snapshot ID when return type was set to `SpotifyWebAPI::RETURN_ASSOC`. ([f9d580f](https://github.com/jwilsson/spotify-web-api-php/commit/f9d580f322fb39512c3886872213322bf9dc66b2))
 * Fixed an issue where `SpotifyWebAPI::reorderPlaylistTracks()` wouldn't return the snapshot ID when return type was set to `SpotifyWebAPI::RETURN_ASSOC`. ([89fe613](https://github.com/jwilsson/spotify-web-api-php/commit/89fe613bf649533ee173234776cc2c28991ee5c0))
