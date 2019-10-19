@@ -9,7 +9,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
                 ->setMethods(['api'])
                 ->getMock();
 
-        $stub->expects($this->once())
+        $stub->expects($this->any())
                  ->method('api')
                  ->with(
                      $this->equalTo($expectedMethod),
@@ -20,6 +20,56 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
                 ->willReturn($expectedReturn);
 
         return $stub;
+    }
+
+    private function setupSessionStub()
+    {
+        $stub = $this->createMock(SpotifyWebAPI\Session::class);
+
+        $stub->method('getAccessToken')
+            ->willReturn($this->accessToken);
+
+        $stub->method('refreshAccessToken')
+            ->willReturn(true);
+
+        return $stub;
+    }
+
+    public function testAutoRefreshOption()
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('track'),
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/tracks/0eGsygTp906u18L0Oimnem',
+            [],
+            $headers,
+            $return
+        );
+
+        $sessionStub = $this->setupSessionStub();
+
+        $stub->expects($this->at(0))
+            ->method('api')
+            ->willThrowException(
+                new SpotifyWebAPI\SpotifyWebAPIException('The access token expired', 401)
+            );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setSession($sessionStub);
+        $api->setOptions([
+            'auto_refresh' => true,
+        ]);
+
+        $response = $api->getTrack('0eGsygTp906u18L0Oimnem');
+
+        $this->assertObjectHasAttribute('id', $response);
     }
 
     public function testAddMyAlbums()
