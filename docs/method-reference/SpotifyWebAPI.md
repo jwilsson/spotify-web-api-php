@@ -1359,6 +1359,22 @@ Set the access token to use.
 * **void** 
 
 ---
+### setOptions
+
+
+```php
+SpotifyWebAPI::setOptions($options)
+```
+
+Set options
+
+#### Arguments
+* `$options` **array\|object** - Options to set.
+
+#### Return values
+* **void** 
+
+---
 ### setReturnType
 
 
@@ -1370,6 +1386,22 @@ Set the return type for the response body.
 
 #### Arguments
 * `$returnType` **string** - One of the SpotifyWebAPI::RETURN_* constants.
+
+#### Return values
+* **void** 
+
+---
+### setSession
+
+
+```php
+SpotifyWebAPI::setSession($session)
+```
+
+Set the Session object to use.
+
+#### Arguments
+* `$session` **\SpotifyWebAPI\Session** - The Session object.
 
 #### Return values
 * **void** 

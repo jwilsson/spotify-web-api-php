@@ -19,6 +19,7 @@ First, start by checking out the [Getting started guide](/docs/getting-started.m
     * [Managing a user's playlists](/docs/examples/managing-user-playlists.md)
     * [Managing a user's profile](/docs/examples/managing-user-profiles.md)
 * **Working with the API**
+    * [Automatically refreshing access tokens](/docs/examples/automatically-refreshing-access-tokens.md)
     * [Changing return type](/docs/examples/changing-return-type.md)
     * [Handling errors](/docs/examples/handling-errors.md)
     * [Setting custom cURL options](/docs/examples/setting-custom-curl-options.md)

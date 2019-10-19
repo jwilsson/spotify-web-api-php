@@ -149,7 +149,7 @@ Session::refreshAccessToken($refreshToken)
 Refresh an access token.
 
 #### Arguments
-* `$refreshToken` **string** - The refresh token to use.
+* `$refreshToken` **string** - Optional. The refresh token to use.
 
 #### Return values
 * **boolean** Whether the access token was successfully refreshed.
@@ -183,6 +183,22 @@ Request an access token given an authorization code.
 
 #### Return values
 * **boolean** True when the access token was successfully granted, false otherwise.
+
+---
+### setAccessToken
+
+
+```php
+Session::setAccessToken($accessToken)
+```
+
+Set the access token.
+
+#### Arguments
+* `$accessToken` **string** - The access token
+
+#### Return values
+* **void** 
 
 ---
 ### setClientId

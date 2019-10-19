@@ -83,6 +83,8 @@ print_r(
 ```
 
 ## Refreshing an access token
+_As of version `2.11.0` it's possible to automatically refresh the access token, see [Automatically Refreshing Access Token](automatically-refreshing-access-token.md) for more info._
+
 When the access token has expired, request a new one using the refresh token:
 
 ```php
