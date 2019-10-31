@@ -1,4 +1,5 @@
 # Following Artists, Playlists, and Users
+
 A Spotify user can follow artists, playlists, and users. The API contains methods for all of this functionality.
 
 ## Following an artist or user

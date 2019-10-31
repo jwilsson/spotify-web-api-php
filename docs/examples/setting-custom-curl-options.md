@@ -1,6 +1,6 @@
 # Setting custom cURL options
 
-Sometimes, you need to override the default cURL options. For example incresing the timeout or setting some proxy setting.
+Sometimes, you need to override the default cURL options. For example increasing the timeout or setting some proxy setting.
 
 In order to set custom cURL options, you'll need to instantiate a `Request` object yourself and passing it to `SpotifyWebAPI` instead of letting it set it up itself.
 

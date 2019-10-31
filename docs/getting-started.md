@@ -27,7 +27,7 @@ require_once 'vendor/autoload.php';
 Download the latest release from the [releases page](https://github.com/jwilsson/spotify-web-api-php/releases). Unzip the files somewhere in your project and include a [PSR-4 compatible autoloader](http://www.php-fig.org/psr/psr-4/examples/) in your project.
 
 ## Configuration and setup
-First off, make sure you've created an app on [Spotify's developer site](https://developer.spotify.com/web-api/).
+First off, make sure you've created an app on [Spotify's developer site](https://developer.spotify.com/documentation/web-api/).
 
 Now, before sending requests to Spotify, we need to create a session using your app info:
 

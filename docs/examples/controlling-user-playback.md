@@ -58,6 +58,7 @@ $api->changeVolume([
     'volume_percent' => 78,
 ]);
 ```
+
 ## Retrying API calls
 Sometimes, a API call might return a `202 Accepted` response code. When this occurs, you should retry the request after a few seconds. For example:
 
@@ -79,4 +80,4 @@ try {
 }
 ```
 
-Read more about working with Spotify Connect in the [Spotify API docs](https://developer.spotify.com/web-api/working-with-connect/).
+Read more about working with Spotify Connect in the [Spotify API docs](https://developer.spotify.com/documentation/web-api/guides/using-connect-web-api/).
