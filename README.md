@@ -14,6 +14,7 @@ This is a PHP wrapper for [Spotify's Web API](https://developer.spotify.com/web-
     * User playback control.
 * Authorization flow helpers.
 * Automatic refreshing of access tokens.
+* Automatic retry of rate limited requests.
 * PSR-4 autoloading support.
 
 ## Requirements

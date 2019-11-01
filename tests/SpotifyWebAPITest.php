@@ -6,7 +6,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
     private function setupStub($expectedMethod, $expectedUri, $expectedParameters, $expectedHeaders, $expectedReturn)
     {
         $stub = $this->getMockBuilder('Request')
-                ->setMethods(['api'])
+                ->setMethods(['api', 'getLastResponse'])
                 ->getMock();
 
         $stub->expects($this->any())
@@ -65,6 +65,45 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $api->setSession($sessionStub);
         $api->setOptions([
             'auto_refresh' => true,
+        ]);
+
+        $response = $api->getTrack('0eGsygTp906u18L0Oimnem');
+
+        $this->assertObjectHasAttribute('id', $response);
+    }
+
+    public function testAutoRetryOption()
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('track'),
+            'headers' => [
+                'Retry-After' => 3,
+            ],
+            'status' => 429,
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/tracks/0eGsygTp906u18L0Oimnem',
+            [],
+            $headers,
+            $return
+        );
+
+        $stub->expects($this->at(0))
+            ->method('api')
+            ->willThrowException(
+                new SpotifyWebAPI\SpotifyWebAPIException('API rate limit exceeded', 429)
+            );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $api->setOptions([
+            'auto_retry' => true,
         ]);
 
         $response = $api->getTrack('0eGsygTp906u18L0Oimnem');

@@ -15,6 +15,8 @@ try {
 When an authentication error occurs, a `SpotifyWebAPIAuthException` will be thrown. This will contain the same properties as above.
 
 ## Handling rate limit errors
+_As of version `2.12.0` it's possible to automatically retry rate limited requests by setting the `auto_retry` option to `true`._
+
 If your application should hit the Spotify API rate limit, you will get an error back and the number of seconds you need to wait before sending another request.
 
 Here's an example of how to handle this:
@@ -24,7 +26,7 @@ try {
     $track = $api->getTrack('7EjyzZcbLxW7PaaLua9Ksb');
 } catch (SpotifyWebAPIException $e) {
     if ($e->getCode() == 429) { // 429 is Too Many Requests
-        $lastResponse = $api->getRequest()->getLastResponse(); // Note "getRequest()" since $api->getLastResponse() won't be set
+        $lastResponse = $api->getRequest()->getLastResponse();
 
         $retryAfter = $lastResponse['headers']['Retry-After']; // Number of seconds to wait before sending another request
     } else {
@@ -33,4 +35,4 @@ try {
 }
 ```
 
-Read more about the exact mechanics of rate limiting in the [Spotify API docs](https://developer.spotify.com/web-api/user-guide/#rate-limiting).
+Read more about the exact mechanics of rate limiting in the [Spotify API docs](https://developer.spotify.com/documentation/web-api/#rate-limiting).
