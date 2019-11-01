@@ -23,6 +23,7 @@ First, start by checking out the [Getting started guide](/docs/getting-started.m
     * [Changing return type](/docs/examples/changing-return-type.md)
     * [Handling errors](/docs/examples/handling-errors.md)
     * [Setting custom cURL options](/docs/examples/setting-custom-curl-options.md)
+    * [Setting options](/docs/examples/setting-options.md)
 
 ## Method Reference
 A full method reference listing all public methods is [available here](/docs/method-reference/).
