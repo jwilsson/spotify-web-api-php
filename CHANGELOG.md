@@ -1,4 +1,8 @@
 # Changelog
+## 2.12.0 (2019-11-01)
+* * Added support for automatically retrying rate limited requests. ([5fe8903](https://github.com/jwilsson/spotify-web-api-php/commit/5fe8903ea598d558639b35055ce9d32073ded634))
+* Updated CA bundle. ([19df152](https://github.com/jwilsson/spotify-web-api-php/commit/19df152302fc6ad8fc7b887d5d909e11745ca035))
+
 ## 2.11.1 (2019-10-19)
 * Remove unfinished code that accidentally snuck into `2.11.0`. ([eb3f51c](https://github.com/jwilsson/spotify-web-api-php/commit/eb3f51c5cf5fa1b7629a59376ee54294f3aa02b7))
 
