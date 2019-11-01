@@ -5,6 +5,7 @@
 * **INVALID_CLIENT_SECRET**
 * **INVALID_REFRESH_TOKEN**
 * **TOKEN_EXPIRED**
+* **RATE_LIMIT_STATUS**
 
 ## Methods
 ### hasInvalidCredentials
@@ -14,7 +15,7 @@
 SpotifyWebAPIAuthException::hasInvalidCredentials()
 ```
 
-Returns if the exception was thrown because of invalid credentials.
+Returns whether the exception was thrown because of invalid credentials.
 
 
 #### Return values
@@ -28,7 +29,7 @@ Returns if the exception was thrown because of invalid credentials.
 SpotifyWebAPIAuthException::hasInvalidRefreshToken()
 ```
 
-Returns if the exception was thrown because of invalid refresh token.
+Returns whether the exception was thrown because of an invalid refresh token.
 
 
 #### Return values
@@ -42,7 +43,7 @@ Returns if the exception was thrown because of invalid refresh token.
 SpotifyWebAPIAuthException::getReason()
 ```
 
-Returns the reason string from the requests error object
+Returns the reason string from the request's error object.
 
 
 #### Return values
@@ -56,7 +57,21 @@ Returns the reason string from the requests error object
 SpotifyWebAPIAuthException::hasExpiredToken()
 ```
 
-Returns if the exception was thrown because of an expired token.
+Returns whether the exception was thrown because of an expired access token.
+
+
+#### Return values
+* **boolean** 
+
+---
+### isRateLimited
+
+
+```php
+SpotifyWebAPIAuthException::isRateLimited()
+```
+
+Returns whether the exception was thrown because of rate limiting.
 
 
 #### Return values
@@ -70,10 +85,12 @@ Returns if the exception was thrown because of an expired token.
 SpotifyWebAPIAuthException::setReason($reason)
 ```
 
-Set the reason string
+Set the reason string.
 
 #### Arguments
 * `$reason` **string**
 
+#### Return values
+* **void** 
 
 ---
