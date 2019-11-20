@@ -35,11 +35,7 @@ class SpotifyWebAPI
      */
     protected function authHeaders($headers = [])
     {
-        if ($this->session) {
-            $accessToken = $this->session->getAccessToken();
-        } else {
-            $accessToken = $this->accessToken;
-        }
+        $accessToken = $this->session ? $this->session->getAccessToken() : $this->accessToken;
 
         if ($accessToken) {
             $headers = array_merge($headers, [
@@ -115,7 +111,7 @@ class SpotifyWebAPI
             return $id;
         }, (array) $ids);
 
-        return (count($ids) == 1) ? $ids[0] : $ids;
+        return count($ids) == 1 ? $ids[0] : $ids;
     }
 
     /**
@@ -134,7 +130,7 @@ class SpotifyWebAPI
             return str_replace($type, '', $id);
         }, (array) $uriIds);
 
-        return (count($uriIds) == 1) ? $uriIds[0] : $uriIds;
+        return count($uriIds) == 1 ? $uriIds[0] : $uriIds;
     }
 
     /**

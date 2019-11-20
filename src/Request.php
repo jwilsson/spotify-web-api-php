@@ -238,8 +238,8 @@ class Request
             'url' => $url,
         ];
 
-        // Run this here since we might throw
-        $body = $this->parseBody($body, $status);
+        // Run this separately since it might throw
+        $this->parseBody($body, $status);
 
         curl_close($ch);
 
