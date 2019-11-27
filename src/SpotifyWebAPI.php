@@ -372,7 +372,6 @@ class SpotifyWebAPI
      * @param string $playlistId ID or Spotify URI of the playlist to delete tracks from.
      * @param array $tracks An array with the key "tracks" containing arrays or objects with tracks to delete.
      * Or an array with the key "positions" containing integer positions of the tracks to delete.
-     * For legacy reasons, the "tracks" key can be omitted but its use is deprecated.
      * If the "tracks" key is used, the following fields are also available:
      * - string id Required. Track ID or Spotify URI.
      * - int|array positions Optional. The track's position(s) in the playlist.
@@ -392,15 +391,6 @@ class SpotifyWebAPI
         if (isset($tracks['positions'])) {
             $options['positions'] = $tracks['positions'];
         } else {
-            if (isset($tracks['tracks'])) {
-                $tracks = $tracks['tracks'];
-            } else {
-                trigger_error(
-                    'Passing tracks without a "tracks" or "positions" key to deletePlaylistTracks() is deprecated',
-                    E_USER_DEPRECATED
-                );
-            }
-
             $options['tracks'] = array_map(function ($track) {
                 $track = (array) $track;
 
@@ -413,7 +403,7 @@ class SpotifyWebAPI
                 unset($track['id']);
 
                 return $track;
-            }, $tracks);
+            }, $tracks['tracks']);
         }
 
         $options = json_encode($options);
