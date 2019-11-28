@@ -50,7 +50,7 @@ class Session
             'response_type' => 'code',
             'scope' => isset($options['scope']) ? implode(' ', $options['scope']) : null,
             'show_dialog' => !empty($options['show_dialog']) ? 'true' : null,
-            'state' => isset($options['state']) ? $options['state'] : null,
+            'state' => $options['state'] ?? null,
         ];
 
         return Request::ACCOUNT_URL . '/authorize?' . http_build_query($parameters);
@@ -152,7 +152,7 @@ class Session
         if (isset($response->access_token)) {
             $this->accessToken = $response->access_token;
             $this->expirationTime = time() + $response->expires_in;
-            $this->scope = isset($response->scope) ? $response->scope : $this->scope;
+            $this->scope = $response->scope ?? $this->scope;
 
             if (isset($response->refresh_token)) {
                 $this->refreshToken = $response->refresh_token;
@@ -189,7 +189,7 @@ class Session
         if (isset($response->access_token)) {
             $this->accessToken = $response->access_token;
             $this->expirationTime = time() + $response->expires_in;
-            $this->scope = isset($response->scope) ? $response->scope : $this->scope;
+            $this->scope = $response->scope ?? $this->scope;
 
             return true;
         }
@@ -221,7 +221,7 @@ class Session
             $this->refreshToken = $response->refresh_token;
             $this->accessToken = $response->access_token;
             $this->expirationTime = time() + $response->expires_in;
-            $this->scope = isset($response->scope) ? $response->scope : $this->scope;
+            $this->scope = $response->scope ?? $this->scope;
 
             return true;
         }
