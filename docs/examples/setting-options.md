@@ -21,3 +21,9 @@ Used to control [automatic refresh of access tokens](automatically-refreshing-ac
 * Possible values: `true`/`false` (default)
 
 Used to control automatic retries of [rate limited requests](https://developer.spotify.com/documentation/web-api/#rate-limiting).
+
+### `return_assoc`
+
+* Possible values: `true`/`false` (default)
+
+Used to control return type of API calls. Setting it to `true` will return associative arrays instead of objects.

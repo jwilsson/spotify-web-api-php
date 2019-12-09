@@ -11,6 +11,9 @@ class Request
 
     protected $curlOptions = [];
     protected $lastResponse = [];
+    protected $options = [
+        'return_assoc' => false,
+    ];
     protected $returnType = self::RETURN_OBJECT;
 
     /**
@@ -22,11 +25,12 @@ class Request
      * @throws SpotifyWebAPIException
      * @throws SpotifyWebAPIAuthException
      *
-     * @return array|object The parsed response body. Type is controlled by `Request::setReturnType()`.
+     * @return array|object The parsed response body. Type is controlled by the `return_assoc` option.
      */
     protected function parseBody($body, $status)
     {
-        $this->lastResponse['body'] = json_decode($body, $this->returnType == self::RETURN_ASSOC);
+        $returnAssoc = $this->options['return_assoc'] || $this->returnType == self::RETURN_ASSOC;
+        $this->lastResponse['body'] = json_decode($body, $returnAssoc);
 
         if ($status >= 200 && $status <= 299) {
             return $this->lastResponse['body'];
@@ -89,7 +93,7 @@ class Request
      * @throws SpotifyWebAPIAuthException
      *
      * @return array Response data.
-     * - array|object body The response body. Type is controlled by `Request::setReturnType()`.
+     * - array|object body The response body. Type is controlled by the `return_assoc` option.
      * - array headers Response headers.
      * - int status HTTP status code.
      * - string url The requested URL.
@@ -111,7 +115,7 @@ class Request
      * @throws SpotifyWebAPIAuthException
      *
      * @return array Response data.
-     * - array|object body The response body. Type is controlled by `Request::setReturnType()`.
+     * - array|object body The response body. Type is controlled by the `return_assoc` option.
      * - array headers Response headers.
      * - int status HTTP status code.
      * - string url The requested URL.
@@ -125,7 +129,7 @@ class Request
      * Get the latest full response from the Spotify API.
      *
      * @return array Response data.
-     * - array|object body The response body. Type is controlled by `Request::setReturnType()`.
+     * - array|object body The response body. Type is controlled by the `return_assoc` option.
      * - array headers Response headers.
      * - int status HTTP status code.
      * - string url The requested URL.
@@ -137,6 +141,8 @@ class Request
 
     /**
      * Get a value indicating the response body type.
+     *
+     * @deprecated Use the `return_assoc` option instead.
      *
      * @return string A value indicating if the response body is an object or associative array.
      */
@@ -158,7 +164,7 @@ class Request
      * @throws SpotifyWebAPIAuthException
      *
      * @return array Response data.
-     * - array|object body The response body. Type is controlled by `Request::setReturnType()`.
+     * - array|object body The response body. Type is controlled by the `return_assoc` option.
      * - array headers Response headers.
      * - int status HTTP status code.
      * - string url The requested URL.
@@ -261,7 +267,21 @@ class Request
     }
 
     /**
+     * Set options
+     *
+     * @param array|object $options Options to set.
+     *
+     * @return void
+     */
+    public function setOptions($options)
+    {
+        $this->options = array_merge($this->options, (array) $options);
+    }
+
+    /**
      * Set the return type for the response body.
+     *
+     * @deprecated Use the `return_assoc` option instead.
      *
      * @param string $returnType One of the `Request::RETURN_*` constants.
      *
