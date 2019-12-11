@@ -7,8 +7,7 @@ Using Spotify Connect, it's possible to control the playback of the currently au
 The `SpotifyWebAPI::getMyDevices()` method can be used to list out a user's devices.
 
 ```php
-$api = new SpotifyWebAPI\SpotifyWebAPI();
-$api->setAccessToken($token)
+// Get the Devices
 $api->getMyDevices();
 ```
 
