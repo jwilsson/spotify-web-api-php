@@ -2,6 +2,17 @@
 
 Using Spotify Connect, it's possible to control the playback of the currently authenticated user.
 
+## Getting user devices
+
+The `SpotifyWebAPI::getMyDevices()` method can be used to list out a user's devices.
+
+```php
+// Get the Devices
+$api->getMyDevices();
+```
+
+It is worth noting that if all devices have `is_active` set to `false` then using `SpotifyWebApi::play()` will fail.
+
 ## Start and stop playback
 ```php
 // With Device ID
