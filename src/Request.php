@@ -12,6 +12,7 @@ class Request
     protected $curlOptions = [];
     protected $lastResponse = [];
     protected $options = [
+        'curl_options' => [],
         'return_assoc' => false,
     ];
     protected $returnType = self::RETURN_OBJECT;
@@ -29,7 +30,7 @@ class Request
      */
     protected function parseBody($body, $status)
     {
-        $returnAssoc = $this->options['return_assoc'] || $this->returnType == self::RETURN_ASSOC;
+        $returnAssoc = $this->returnType == self::RETURN_ASSOC || $this->options['return_assoc'];
         $this->lastResponse['body'] = json_decode($body, $returnAssoc);
 
         if ($status >= 200 && $status <= 299) {
@@ -220,7 +221,12 @@ class Request
         $options[CURLOPT_URL] = $url;
 
         $ch = curl_init();
-        curl_setopt_array($ch, array_replace($options, $this->curlOptions));
+
+        if ($this->curlOptions) {
+            curl_setopt_array($ch, array_replace($options, $this->curlOptions));
+        } else {
+            curl_setopt_array($ch, array_replace($options, $this->options['curl_options']));
+        }
 
         $response = curl_exec($ch);
 
@@ -254,6 +260,8 @@ class Request
 
     /**
      * Set custom cURL options.
+     *
+     * @deprecated Use the `curl_options` option instead.
      *
      * Any options passed here will be merged with the defaults, overriding existing ones.
      *

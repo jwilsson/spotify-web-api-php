@@ -283,6 +283,30 @@ class RequestTest extends PHPUnit\Framework\TestCase
         $this->assertArrayHasKey('url', $response['body']);
     }
 
+    public function testSendCurlOptions()
+    {
+        $request = new SpotifyWebAPI\Request();
+        $request->setCurlOptions([
+            CURLOPT_HTTPHEADER => ['Accept: applicaton/json'],
+        ]);
+
+        $response = $request->send('GET', 'https://httpbin.org/headers');
+
+        $this->assertEquals('applicaton/json', $response['body']->headers->Accept);
+    }
+
+    public function testSetOptions()
+    {
+        $request = new SpotifyWebAPI\Request();
+        $request->setOptions([
+            'return_assoc' => true,
+        ]);
+
+        $response = $request->send('GET', 'https://httpbin.org/get');
+
+        $this->assertArrayHasKey('url', $response['body']);
+    }
+
     public function testSetReturnType()
     {
         $request = new SpotifyWebAPI\Request();
