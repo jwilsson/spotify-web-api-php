@@ -71,6 +71,8 @@ class SpotifyWebAPI
         ]);
 
         try {
+            $headers = $this->authHeaders($headers);
+
             return $this->request->api($method, $uri, $parameters, $headers);
         } catch (SpotifyWebAPIException $e) {
             if ($this->options['auto_refresh'] && $e->hasExpiredToken()) {
@@ -79,8 +81,6 @@ class SpotifyWebAPI
                 if (!$result) {
                     throw new SpotifyWebAPIException('Could not refresh access token.');
                 }
-
-                $headers = $this->authHeaders($headers);
 
                 return $this->sendRequest($method, $uri, $parameters, $headers);
             } elseif ($this->options['auto_retry'] && $e->isRateLimited()) {
@@ -151,9 +151,9 @@ class SpotifyWebAPI
         $albums = $this->uriToId($albums, 'album');
         $albums = json_encode((array) $albums);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $uri = '/v1/me/albums';
 
@@ -175,9 +175,9 @@ class SpotifyWebAPI
         $tracks = $this->uriToId($tracks, 'track');
         $tracks = json_encode((array) $tracks);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $uri = '/v1/me/tracks';
 
@@ -204,9 +204,9 @@ class SpotifyWebAPI
         $tracks = $this->idToUri($tracks, 'track');
         $tracks = json_encode((array) $tracks);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
@@ -234,9 +234,9 @@ class SpotifyWebAPI
         $options['device_ids'] = (array) $options['device_ids'];
         $options = json_encode($options);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $uri = '/v1/me/player';
 
@@ -259,12 +259,10 @@ class SpotifyWebAPI
     {
         $options = http_build_query($options);
 
-        $headers = $this->authHeaders();
-
         // We need to manually append data to the URI since it's a PUT request
         $uri = '/v1/me/player/volume?' . $options;
 
-        $this->lastResponse = $this->sendRequest('PUT', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('PUT', $uri);
 
         return $this->lastResponse['status'] == 204;
     }
@@ -283,9 +281,9 @@ class SpotifyWebAPI
     {
         $options = json_encode($options);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $uri = '/v1/me/playlists';
 
@@ -313,11 +311,9 @@ class SpotifyWebAPI
             'type' => $type,
         ];
 
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/following/contains';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -335,9 +331,9 @@ class SpotifyWebAPI
         $albums = $this->uriToId($albums, 'album');
         $albums = json_encode((array) $albums);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $uri = '/v1/me/albums';
 
@@ -359,9 +355,9 @@ class SpotifyWebAPI
         $tracks = $this->uriToId($tracks, 'track');
         $tracks = json_encode((array) $tracks);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $uri = '/v1/me/tracks';
 
@@ -413,9 +409,9 @@ class SpotifyWebAPI
 
         $options = json_encode($options);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
@@ -450,9 +446,9 @@ class SpotifyWebAPI
             'ids' => (array) $ids,
         ]);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         // We need to manually append data to the URI since it's a PUT request
         $uri = '/v1/me/following?type=' . $type;
@@ -476,9 +472,9 @@ class SpotifyWebAPI
     {
         $options = json_encode((object) $options);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
@@ -501,12 +497,10 @@ class SpotifyWebAPI
      */
     public function getAlbum($albumId, $options = [])
     {
-        $headers = $this->authHeaders();
-
         $albumId = $this->uriToId($albumId, 'album');
         $uri = '/v1/albums/' . $albumId;
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -528,11 +522,9 @@ class SpotifyWebAPI
         $options = (array) $options;
         $options['ids'] = implode(',', (array) $albumIds);
 
-        $headers = $this->authHeaders();
-
         $uri = '/v1/albums/';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -551,12 +543,10 @@ class SpotifyWebAPI
      */
     public function getAlbumTracks($albumId, $options = [])
     {
-        $headers = $this->authHeaders();
-
         $albumId = $this->uriToId($albumId, 'album');
         $uri = '/v1/albums/' . $albumId . '/tracks';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -571,12 +561,10 @@ class SpotifyWebAPI
      */
     public function getArtist($artistId)
     {
-        $headers = $this->authHeaders();
-
         $artistId = $this->uriToId($artistId, 'artist');
         $uri = '/v1/artists/' . $artistId;
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri);
 
         return $this->lastResponse['body'];
     }
@@ -598,11 +586,9 @@ class SpotifyWebAPI
             'ids' => $artistIds,
         ];
 
-        $headers = $this->authHeaders();
-
         $uri = '/v1/artists/';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -617,12 +603,10 @@ class SpotifyWebAPI
      */
     public function getArtistRelatedArtists($artistId)
     {
-        $headers = $this->authHeaders();
-
         $artistId = $this->uriToId($artistId, 'artist');
         $uri = '/v1/artists/' . $artistId . '/related-artists';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri);
 
         return $this->lastResponse['body'];
     }
@@ -648,12 +632,10 @@ class SpotifyWebAPI
             $options['album_type'] = implode(',', (array) $options['album_type']);
         }
 
-        $headers = $this->authHeaders();
-
         $artistId = $this->uriToId($artistId, 'artist');
         $uri = '/v1/artists/' . $artistId . '/albums';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -670,12 +652,10 @@ class SpotifyWebAPI
      */
     public function getArtistTopTracks($artistId, $options)
     {
-        $headers = $this->authHeaders();
-
         $artistId = $this->uriToId($artistId, 'artist');
         $uri = '/v1/artists/' . $artistId . '/top-tracks';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -695,11 +675,9 @@ class SpotifyWebAPI
             'ids' => implode(',', (array) $trackIds),
         ];
 
-        $headers = $this->authHeaders();
-
         $uri = '/v1/audio-features';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -714,12 +692,10 @@ class SpotifyWebAPI
      */
     public function getAudioAnalysis($trackId)
     {
-        $headers = $this->authHeaders();
-
         $trackId = $this->uriToId($trackId, 'track');
         $uri = '/v1/audio-analysis/' . $trackId;
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri);
 
         return $this->lastResponse['body'];
     }
@@ -738,11 +714,9 @@ class SpotifyWebAPI
      */
     public function getCategoriesList($options = [])
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/browse/categories';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -761,11 +735,9 @@ class SpotifyWebAPI
      */
     public function getCategory($categoryId, $options = [])
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/browse/categories/' . $categoryId;
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -785,11 +757,9 @@ class SpotifyWebAPI
      */
     public function getCategoryPlaylists($categoryId, $options = [])
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/browse/categories/' . $categoryId . '/playlists';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -809,11 +779,9 @@ class SpotifyWebAPI
      */
     public function getFeaturedPlaylists($options = [])
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/browse/featured-playlists';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -826,11 +794,9 @@ class SpotifyWebAPI
      */
     public function getGenreSeeds()
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/recommendations/available-genre-seeds';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri);
 
         return $this->lastResponse['body'];
     }
@@ -860,11 +826,9 @@ class SpotifyWebAPI
      */
     public function getMyCurrentTrack($options = [])
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/player/currently-playing';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -877,11 +841,9 @@ class SpotifyWebAPI
      */
     public function getMyDevices()
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/player/devices';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri);
 
         return $this->lastResponse['body'];
     }
@@ -897,11 +859,9 @@ class SpotifyWebAPI
      */
     public function getMyCurrentPlaybackInfo($options = [])
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/player';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -919,11 +879,9 @@ class SpotifyWebAPI
      */
     public function getMyPlaylists($options = [])
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/playlists';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -943,11 +901,9 @@ class SpotifyWebAPI
     {
         $options = (array) $options;
 
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/player/recently-played';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -965,11 +921,9 @@ class SpotifyWebAPI
      */
     public function getMySavedAlbums($options = [])
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/albums';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -987,11 +941,9 @@ class SpotifyWebAPI
      */
     public function getMySavedTracks($options = [])
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/tracks';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -1010,11 +962,9 @@ class SpotifyWebAPI
      */
     public function getMyTop($type, $options = [])
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/top/' . $type;
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -1032,11 +982,9 @@ class SpotifyWebAPI
      */
     public function getNewReleases($options = [])
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/browse/new-releases';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -1060,13 +1008,11 @@ class SpotifyWebAPI
             $options['fields'] = implode(',', (array) $options['fields']);
         }
 
-        $headers = $this->authHeaders();
-
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
         $uri = '/v1/playlists/' . $playlistId;
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -1092,13 +1038,11 @@ class SpotifyWebAPI
             $options['fields'] = implode(',', (array) $options['fields']);
         }
 
-        $headers = $this->authHeaders();
-
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
         $uri = '/v1/playlists/' . $playlistId . '/tracks';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -1129,11 +1073,9 @@ class SpotifyWebAPI
             }
         });
 
-        $headers = $this->authHeaders();
-
         $uri = '/v1/recommendations';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -1172,12 +1114,10 @@ class SpotifyWebAPI
      */
     public function getTrack($trackId, $options = [])
     {
-        $headers = $this->authHeaders();
-
         $trackId = $this->uriToId($trackId, 'track');
         $uri = '/v1/tracks/' . $trackId;
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -1197,11 +1137,9 @@ class SpotifyWebAPI
         $trackIds = $this->uriToId($trackIds, 'track');
         $options['ids'] = implode(',', (array) $trackIds);
 
-        $headers = $this->authHeaders();
-
         $uri = '/v1/tracks/';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -1216,12 +1154,10 @@ class SpotifyWebAPI
      */
     public function getUser($userId)
     {
-        $headers = $this->authHeaders();
-
         $userId = $this->uriToId($userId, 'user');
         $uri = '/v1/users/' . $userId;
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri);
 
         return $this->lastResponse['body'];
     }
@@ -1244,11 +1180,9 @@ class SpotifyWebAPI
             $options['type'] = 'artist'; // Undocumented until more values are supported.
         }
 
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/following';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -1266,12 +1200,10 @@ class SpotifyWebAPI
      */
     public function getUserPlaylists($userId, $options = [])
     {
-        $headers = $this->authHeaders();
-
         $userId = $this->uriToId($userId, 'user');
         $uri = '/v1/users/' . $userId . '/playlists';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -1284,11 +1216,9 @@ class SpotifyWebAPI
      */
     public function me()
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri);
 
         return $this->lastResponse['body'];
     }
@@ -1310,11 +1240,9 @@ class SpotifyWebAPI
             'ids' => $albums,
         ];
 
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/albums/contains';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -1336,11 +1264,9 @@ class SpotifyWebAPI
             'ids' => $tracks,
         ];
 
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/tracks/contains';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -1355,8 +1281,6 @@ class SpotifyWebAPI
      */
     public function next($deviceId = '')
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/player/next';
 
         // We need to manually append data to the URI since it's a POST request
@@ -1364,7 +1288,7 @@ class SpotifyWebAPI
             $uri = $uri . '?device_id=' . $deviceId;
         }
 
-        $this->lastResponse = $this->sendRequest('POST', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('POST', $uri);
 
         return $this->lastResponse['status'] == 204;
     }
@@ -1379,8 +1303,6 @@ class SpotifyWebAPI
      */
     public function pause($deviceId = '')
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/player/pause';
 
         // We need to manually append data to the URI since it's a PUT request
@@ -1388,7 +1310,7 @@ class SpotifyWebAPI
             $uri = $uri . '?device_id=' . $deviceId;
         }
 
-        $this->lastResponse = $this->sendRequest('PUT', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('PUT', $uri);
 
         return $this->lastResponse['status'] == 204;
     }
@@ -1409,9 +1331,9 @@ class SpotifyWebAPI
     {
         $options = json_encode((object) $options);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $uri = '/v1/me/player/play';
 
@@ -1435,8 +1357,6 @@ class SpotifyWebAPI
      */
     public function previous($deviceId = '')
     {
-        $headers = $this->authHeaders();
-
         $uri = '/v1/me/player/previous';
 
         // We need to manually append data to the URI since it's a POST request
@@ -1444,7 +1364,7 @@ class SpotifyWebAPI
             $uri = $uri . '?device_id=' . $deviceId;
         }
 
-        $this->lastResponse = $this->sendRequest('POST', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('POST', $uri);
 
         return $this->lastResponse['status'] == 204;
     }
@@ -1466,9 +1386,9 @@ class SpotifyWebAPI
     {
         $options = json_encode($options);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
@@ -1500,12 +1420,10 @@ class SpotifyWebAPI
     {
         $options = http_build_query($options);
 
-        $headers = $this->authHeaders();
-
         // We need to manually append data to the URI since it's a PUT request
         $uri = '/v1/me/player/repeat?' . $options;
 
-        $this->lastResponse = $this->sendRequest('PUT', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('PUT', $uri);
 
         return $this->lastResponse['status'] == 204;
     }
@@ -1526,9 +1444,9 @@ class SpotifyWebAPI
             'uris' => (array) $tracks,
         ]);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
@@ -1560,11 +1478,9 @@ class SpotifyWebAPI
             'type' => $type,
         ]);
 
-        $headers = $this->authHeaders();
-
         $uri = '/v1/search';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -1583,12 +1499,10 @@ class SpotifyWebAPI
     {
         $options = http_build_query($options);
 
-        $headers = $this->authHeaders();
-
         // We need to manually append data to the URI since it's a PUT request
         $uri = '/v1/me/player/seek?' . $options;
 
-        $this->lastResponse = $this->sendRequest('PUT', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('PUT', $uri);
 
         return $this->lastResponse['status'] == 204;
     }
@@ -1659,12 +1573,10 @@ class SpotifyWebAPI
         $options['state'] = $options['state'] ? 'true' : 'false';
         $options = http_build_query($options);
 
-        $headers = $this->authHeaders();
-
         // We need to manually append data to the URI since it's a PUT request
         $uri = '/v1/me/player/shuffle?' . $options;
 
-        $this->lastResponse = $this->sendRequest('PUT', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('PUT', $uri);
 
         return $this->lastResponse['status'] == 204;
     }
@@ -1685,9 +1597,9 @@ class SpotifyWebAPI
             'ids' => (array) $ids,
         ]);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         // We need to manually append data to the URI since it's a DELETE request
         $uri = '/v1/me/following?type=' . $type;
@@ -1707,9 +1619,9 @@ class SpotifyWebAPI
      */
     public function unfollowPlaylistForCurrentUser($playlistId)
     {
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
         $uri = '/v1/playlists/' . $playlistId . '/followers';
@@ -1736,9 +1648,9 @@ class SpotifyWebAPI
     {
         $options = json_encode($options);
 
-        $headers = $this->authHeaders([
+        $headers = [
             'Content-Type' => 'application/json',
-        ]);
+        ];
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
@@ -1760,13 +1672,11 @@ class SpotifyWebAPI
      */
     public function updatePlaylistImage($playlistId, $imageData)
     {
-        $headers = $this->authHeaders();
-
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
         $uri = '/v1/playlists/' . $playlistId . '/images';
 
-        $this->lastResponse = $this->sendRequest('PUT', $uri, $imageData, $headers);
+        $this->lastResponse = $this->sendRequest('PUT', $uri, $imageData);
 
         return $this->lastResponse['status'] == 202;
     }
@@ -1790,12 +1700,11 @@ class SpotifyWebAPI
             $options['ids'] = implode(',', (array) $options['ids']);
         }
 
-        $headers = $this->authHeaders();
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
         $uri = '/v1/playlists/' . $playlistId . '/followers/contains';
 
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options, $headers);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
