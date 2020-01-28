@@ -9,7 +9,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
                 ->setMethods(['api', 'getLastResponse', 'setOptions'])
                 ->getMock();
 
-        $stub->expects($this->any())
+        $stub->expects($this->atLeastOnce())
                  ->method('api')
                  ->with(
                      $this->equalTo($expectedMethod),
@@ -17,6 +17,10 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
                      $this->equalTo($expectedParameters),
                      $this->equalTo($expectedHeaders)
                  )
+                ->willReturn($expectedReturn);
+
+        $stub->expects($this->any())
+                ->method('getLastResponse')
                 ->willReturn($expectedReturn);
 
         return $stub;
