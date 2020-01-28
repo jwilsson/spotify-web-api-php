@@ -24,7 +24,7 @@ Make a request to the "account" endpoint.
 
 #### Return values
 * **array** Response data.
-    * array\|object body The response body. Type is controlled by `Request::setReturnType()`.
+    * array\|object body The response body. Type is controlled by the `return_assoc` option.
     * array headers Response headers.
     * int status HTTP status code.
     * string url The requested URL.
@@ -47,7 +47,7 @@ Make a request to the "api" endpoint.
 
 #### Return values
 * **array** Response data.
-    * array\|object body The response body. Type is controlled by `Request::setReturnType()`.
+    * array\|object body The response body. Type is controlled by the `return_assoc` option.
     * array headers Response headers.
     * int status HTTP status code.
     * string url The requested URL.
@@ -65,7 +65,7 @@ Get the latest full response from the Spotify API.
 
 #### Return values
 * **array** Response data.
-    * array\|object body The response body. Type is controlled by `Request::setReturnType()`.
+    * array\|object body The response body. Type is controlled by the `return_assoc` option.
     * array headers Response headers.
     * int status HTTP status code.
     * string url The requested URL.
@@ -73,12 +73,13 @@ Get the latest full response from the Spotify API.
 ---
 ### getReturnType
 
+_Deprecated_
 
 ```php
 Request::getReturnType()
 ```
 
-Get a value indicating the response body type.
+Use the `return_assoc` option instead.
 
 
 #### Return values
@@ -103,7 +104,7 @@ You'll probably want to use one of the convenience methods instead.
 
 #### Return values
 * **array** Response data.
-    * array\|object body The response body. Type is controlled by `Request::setReturnType()`.
+    * array\|object body The response body. Type is controlled by the `return_assoc` option.
     * array headers Response headers.
     * int status HTTP status code.
     * string url The requested URL.
@@ -111,12 +112,14 @@ You'll probably want to use one of the convenience methods instead.
 ---
 ### setCurlOptions
 
+_Deprecated_
 
 ```php
 Request::setCurlOptions($options)
 ```
 
-Set custom cURL options.<br>
+Use the `curl_options` option instead.<br>
+<br>
 Any options passed here will be merged with the defaults, overriding existing ones.
 
 #### Arguments
@@ -126,14 +129,31 @@ Any options passed here will be merged with the defaults, overriding existing on
 * **void** 
 
 ---
+### setOptions
+
+
+```php
+Request::setOptions($options)
+```
+
+Set options
+
+#### Arguments
+* `$options` **array\|object** - Options to set.
+
+#### Return values
+* **void** 
+
+---
 ### setReturnType
 
+_Deprecated_
 
 ```php
 Request::setReturnType($returnType)
 ```
 
-Set the return type for the response body.
+Use the `return_assoc` option instead.
 
 #### Arguments
 * `$returnType` **string** - One of the Request::RETURN_* constants.
