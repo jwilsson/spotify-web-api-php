@@ -195,7 +195,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertTrue($response);
     }
 
-    public function testUserPlaylistTracks()
+    public function testAddPlaylistTracks()
     {
         $tracks = [
             'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
@@ -207,8 +207,11 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         ];
 
         $expected = json_encode([
-            'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
-            'spotify:track:3mqRLlD9j92BBv1ueFhJ1l',
+            'position' => 0,
+            'uris' => [
+                'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
+                'spotify:track:3mqRLlD9j92BBv1ueFhJ1l',
+            ],
         ]);
 
         $headers = [
@@ -222,7 +225,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $stub = $this->setupStub(
             'POST',
-            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks?position=0',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
             $expected,
             $headers,
             $return

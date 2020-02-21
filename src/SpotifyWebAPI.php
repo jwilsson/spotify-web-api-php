@@ -199,10 +199,9 @@ class SpotifyWebAPI
      */
     public function addPlaylistTracks($playlistId, $tracks, $options = [])
     {
-        $options = http_build_query($options);
-
-        $tracks = $this->idToUri($tracks, 'track');
-        $tracks = json_encode((array) $tracks);
+        $options = (array) $options;
+        $options['uris'] = (array) $this->idToUri($tracks, 'track');
+        $options = json_encode($options);
 
         $headers = [
             'Content-Type' => 'application/json',
@@ -210,10 +209,9 @@ class SpotifyWebAPI
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
-        // We need to manually append data to the URI since it's a POST request
-        $uri = '/v1/playlists/' . $playlistId . '/tracks?' . $options;
+        $uri = '/v1/playlists/' . $playlistId . '/tracks';
 
-        $this->lastResponse = $this->sendRequest('POST', $uri, $tracks, $headers);
+        $this->lastResponse = $this->sendRequest('POST', $uri, $options, $headers);
 
         return $this->lastResponse['status'] == 201;
     }
