@@ -2212,7 +2212,6 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
     {
         $headers = [
             'Authorization' => 'Bearer ' . $this->accessToken,
-            'Content-Type' => 'application/json',
         ];
 
         $return = [

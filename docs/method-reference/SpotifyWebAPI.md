@@ -230,15 +230,35 @@ Add the current user as a follower of one or more artists or other Spotify users
 * **boolean** Whether the artist or user was successfully followed.
 
 ---
+### followPlaylist
+
+
+```php
+SpotifyWebAPI::followPlaylist($playlistId, $options)
+```
+
+Add the current user as a follower of a playlist.<br>
+[https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/](https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/)
+
+#### Arguments
+* `$playlistId` **string** - ID or Spotify URI of the playlist to follow.
+* `$options` **array\|object** - Optional. Options for the followed playlist.
+    * bool public Optional. Whether the playlist should be followed publicly or not.
+
+
+#### Return values
+* **boolean** Whether the playlist was successfully followed.
+
+---
 ### followPlaylistForCurrentUser
 
+_Deprecated_
 
 ```php
 SpotifyWebAPI::followPlaylistForCurrentUser($playlistId, $options)
 ```
 
-Add the current user as a follower of a playlist.<br>
-[https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/](https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/)
+Use SpotifyWebAPI::followPlaylist() instead.
 
 #### Arguments
 * `$playlistId` **string** - ID or Spotify URI of the playlist to follow.
@@ -1266,15 +1286,32 @@ Remove the current user as a follower of one or more artists or other Spotify us
 * **boolean** Whether the artist(s) or user(s) were successfully unfollowed.
 
 ---
+### unfollowPlaylist
+
+
+```php
+SpotifyWebAPI::unfollowPlaylist($playlistId)
+```
+
+Remove the current user as a follower of a playlist.<br>
+[https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/](https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/)
+
+#### Arguments
+* `$playlistId` **string** - ID or Spotify URI of the playlist to unfollow
+
+#### Return values
+* **boolean** Whether the playlist was successfully unfollowed.
+
+---
 ### unfollowPlaylistForCurrentUser
 
+_Deprecated_
 
 ```php
 SpotifyWebAPI::unfollowPlaylistForCurrentUser($playlistId)
 ```
 
-Remove the current user as a follower of a playlist.<br>
-[https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/](https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/)
+Use SpotifyWebAPI::unfollowPlaylist() instead.
 
 #### Arguments
 * `$playlistId` **string** - ID or Spotify URI of the playlist to unfollow

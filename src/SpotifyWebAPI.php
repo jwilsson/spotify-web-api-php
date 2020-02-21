@@ -466,7 +466,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playlist was successfully followed.
      */
-    public function followPlaylistForCurrentUser($playlistId, $options = [])
+    public function followPlaylist($playlistId, $options = [])
     {
         $options = json_encode((object) $options);
 
@@ -481,6 +481,23 @@ class SpotifyWebAPI
         $this->lastResponse = $this->sendRequest('PUT', $uri, $options, $headers);
 
         return $this->lastResponse['status'] == 200;
+    }
+
+    /**
+     * Add the current user as a follower of a playlist.
+     * https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/
+     *
+     * @deprecated Use SpotifyWebAPI::followPlaylist() instead.
+     *
+     * @param string $playlistId ID or Spotify URI of the playlist to follow.
+     * @param array|object $options Optional. Options for the followed playlist.
+     * - bool public Optional. Whether the playlist should be followed publicly or not.
+     *
+     * @return bool Whether the playlist was successfully followed.
+     */
+    public function followPlaylistForCurrentUser($playlistId, $options = [])
+    {
+        return $this->followPlaylist($playlistId, $options);
     }
 
     /**
@@ -1615,18 +1632,29 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playlist was successfully unfollowed.
      */
-    public function unfollowPlaylistForCurrentUser($playlistId)
+    public function unfollowPlaylist($playlistId)
     {
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
-
         $playlistId = $this->uriToId($playlistId, 'playlist');
         $uri = '/v1/playlists/' . $playlistId . '/followers';
 
-        $this->lastResponse = $this->sendRequest('DELETE', $uri, [], $headers);
+        $this->lastResponse = $this->sendRequest('DELETE', $uri);
 
         return $this->lastResponse['status'] == 200;
+    }
+
+    /**
+     * Remove the current user as a follower of a playlist.
+     * https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/
+     *
+     * @deprecated Use SpotifyWebAPI::unfollowPlaylist() instead.
+     *
+     * @param string $playlistId ID or Spotify URI of the playlist to unfollow
+     *
+     * @return bool Whether the playlist was successfully unfollowed.
+     */
+    public function unfollowPlaylistForCurrentUser($playlistId)
+    {
+        return $this->unfollowPlaylist($playlistId);
     }
 
     /**
