@@ -1,4 +1,11 @@
 # Changelog
+## 3.1.0 (2020-02-21)
+* Deprecated the following methods ([e643628](https://github.com/jwilsson/spotify-web-api-php/commit/e643628698e146371d1944099bb107e7a9165a19)):
+    * `SpotifyWebAPI::followPlaylistForCurrentUser()` (use `SpotifyWebAPI::followPlaylist()` instead)
+    * `SpotifyWebAPI::unfollowPlaylistForCurrentUser()` (use `SpotifyWebAPI::unfollowPlaylist()` instead)
+* Updated `SpotifyWebAPI::addPlaylistTracks()` to always send everything in request body. ([ac862ef](https://github.com/jwilsson/spotify-web-api-php/commit/ac862ef66548e49352c88e167b64bbfd86407c62))
+* Refactored calls to `SpotifyWebAPI::authHeaders()`. ([7d0badd](https://github.com/jwilsson/spotify-web-api-php/commit/7d0badd842ae9a4a2700dc8a2a29dd70bdad90fe))
+
 ## 3.0.0 (2019-12-14)
 * **Breaking** The following, deprecated, methods have been removed ([02d5598](https://github.com/jwilsson/spotify-web-api-php/commit/02d5598b9fb8c06615e67e31fc00cbca1a67af36)):
     * `SpotifyWebAPI::addUserPlaylistTracks()` (use `SpotifyWebAPI::addPlaylistTracks()` instead)
