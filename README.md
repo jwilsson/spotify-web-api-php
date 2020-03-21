@@ -7,7 +7,7 @@
 This is a PHP wrapper for [Spotify's Web API](https://developer.spotify.com/web-api/). It includes the following:
 
 * Helper methods for all API endpoints:
-    * Information about artists, albums, tracks, and users.
+    * Information about artists, albums, tracks, podcasts, and users.
     * List music featured by Spotify.
     * Playlist and user music library management.
     * Spotify catalog search.

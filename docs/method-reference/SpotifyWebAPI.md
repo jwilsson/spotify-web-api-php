@@ -37,6 +37,23 @@ Add albums to the current user's Spotify library.<br>
 * **boolean** Whether the albums was successfully added.
 
 ---
+### addMyShows
+
+
+```php
+SpotifyWebAPI::addMyShows($shows)
+```
+
+Add shows to the current user's Spotify library.<br>
+[https://developer.spotify.com/documentation/web-api/reference/library/save-shows-user/](https://developer.spotify.com/documentation/web-api/reference/library/save-shows-user/)
+
+#### Arguments
+* `$shows` **string\|array** - ID(s) or Spotify URI(s) of the show(s) to add.
+
+#### Return values
+* **boolean** Whether the shows was successfully added.
+
+---
 ### addMyTracks
 
 
@@ -168,6 +185,23 @@ Delete albums from current user's Spotify library.<br>
 
 #### Return values
 * **boolean** Whether the albums was successfully deleted.
+
+---
+### deleteMyShows
+
+
+```php
+SpotifyWebAPI::deleteMyShows($shows)
+```
+
+Delete shows from current user's Spotify library.<br>
+[https://developer.spotify.com/documentation/web-api/reference/library/remove-shows-user/](https://developer.spotify.com/documentation/web-api/reference/library/remove-shows-user/)
+
+#### Arguments
+* `$shows` **string\|array** - ID(s) or Spotify URI(s) of the show(s) to delete.
+
+#### Return values
+* **boolean** Whether the shows was successfully deleted.
 
 ---
 ### deleteMyTracks
@@ -525,6 +559,46 @@ Get a list of Spotify playlists tagged with a particular category.<br>
 * **array\|object** The list of playlists. Type is controlled by the `return_assoc` option.
 
 ---
+### getEpisode
+
+
+```php
+SpotifyWebAPI::getEpisode($episodeId, $options)
+```
+
+Get an episode.<br>
+[https://developer.spotify.com/documentation/web-api/reference/episodes/get-an-episode/](https://developer.spotify.com/documentation/web-api/reference/episodes/get-an-episode/)
+
+#### Arguments
+* `$episodeId` **string** - ID or Spotify URI of the episode.
+* `$options` **array\|object** - Optional. Options for the episode.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
+
+
+#### Return values
+* **array\|object** The requested episode. Type is controlled by the `return_assoc` option.
+
+---
+### getEpisodes
+
+
+```php
+SpotifyWebAPI::getEpisodes($episodeIds, $options)
+```
+
+Get multiple episodes.<br>
+[https://developer.spotify.com/documentation/web-api/reference/episodes/get-several-episodes/](https://developer.spotify.com/documentation/web-api/reference/episodes/get-several-episodes/)
+
+#### Arguments
+* `$episodeIds` **array** - IDs or Spotify URIs of the episodes.
+* `$options` **array\|object** - Optional. Options for the episodes.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
+
+
+#### Return values
+* **array\|object** The requested episodes. Type is controlled by the `return_assoc` option.
+
+---
 ### getFeaturedPlaylists
 
 
@@ -594,6 +668,7 @@ Get the current user’s currently playing track.<br>
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the track.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+    * string\|array additional_types Optional. Types of media to return info about.
 
 
 #### Return values
@@ -628,6 +703,7 @@ Get the current user’s current playback information.<br>
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the info.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+    * string\|array additional_types Optional. Types of media to return info about.
 
 
 #### Return values
@@ -715,6 +791,26 @@ Get the current user’s saved tracks.<br>
 
 #### Return values
 * **array\|object** The user&#039;s saved tracks. Type is controlled by the `return_assoc` option.
+
+---
+### getMySavedShows
+
+
+```php
+SpotifyWebAPI::getMySavedShows($options)
+```
+
+Get the current user’s saved shows.<br>
+[https://developer.spotify.com/documentation/web-api/reference/library/get-users-saved-shows/](https://developer.spotify.com/documentation/web-api/reference/library/get-users-saved-shows/)
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options for the shows.
+    * int limit Optional. Limit the number of shows.
+    * int offset Optional. Number of shows to skip.
+
+
+#### Return values
+* **array\|object** The user&#039;s saved shows. Type is controlled by the `return_assoc` option.
 
 ---
 ### getMyTop
@@ -859,6 +955,68 @@ Get the Request object in use.
 * **\SpotifyWebAPI\Request** The Request object in use.
 
 ---
+### getShow
+
+
+```php
+SpotifyWebAPI::getShow($showId, $options)
+```
+
+Get a show.<br>
+[https://developer.spotify.com/documentation/web-api/reference/shows/get-a-show/](https://developer.spotify.com/documentation/web-api/reference/shows/get-a-show/)
+
+#### Arguments
+* `$showId` **string** - ID or Spotify URI of the show.
+* `$options` **array\|object** - Optional. Options for the show.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, limit results to shows available in that market.
+
+
+#### Return values
+* **array\|object** The requested show. Type is controlled by the `return_assoc` option.
+
+---
+### getShowEpisodes
+
+
+```php
+SpotifyWebAPI::getShowEpisodes($showId, $options)
+```
+
+Get a show's episodes.<br>
+[https://developer.spotify.com/documentation/web-api/reference/shows/get-shows-episodes/](https://developer.spotify.com/documentation/web-api/reference/shows/get-shows-episodes/)
+
+#### Arguments
+* `$showId` **mixed**
+* `$options` **array\|object** - Optional. Options for the episodes.
+    * int limit Optional. Limit the number of episodes.
+    * int offset Optional. Number of episodes to skip.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
+
+
+#### Return values
+* **array\|object** The requested show episodes. Type is controlled by the `return_assoc` option.
+
+---
+### getShows
+
+
+```php
+SpotifyWebAPI::getShows($showIds, $options)
+```
+
+Get multiple shows.<br>
+[https://developer.spotify.com/documentation/web-api/reference/shows/get-several-shows/](https://developer.spotify.com/documentation/web-api/reference/shows/get-several-shows/)
+
+#### Arguments
+* `$showIds` **array** - IDs or Spotify URIs of the shows.
+* `$options` **array\|object** - Optional. Options for the shows.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, limit results to shows available in that market.
+
+
+#### Return values
+* **array\|object** The requested shows. Type is controlled by the `return_assoc` option.
+
+---
 ### getTrack
 
 
@@ -891,7 +1049,7 @@ Get multiple tracks.<br>
 
 #### Arguments
 * `$trackIds` **array** - IDs or Spotify URIs of the tracks.
-* `$options` **array\|object** - Optional. Options for the albums.
+* `$options` **array\|object** - Optional. Options for the tracks.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
 
@@ -987,6 +1145,23 @@ Check if albums are saved in the current user's Spotify library.<br>
 
 #### Return values
 * **array** Whether each album is saved.
+
+---
+### myShowsContains
+
+
+```php
+SpotifyWebAPI::myShowsContains($shows)
+```
+
+Check if shows are saved in the current user's Spotify library.<br>
+[https://developer.spotify.com/documentation/web-api/reference/library/check-users-saved-shows/](https://developer.spotify.com/documentation/web-api/reference/library/check-users-saved-shows/)
+
+#### Arguments
+* `$shows` **string\|array** - ID(s) or Spotify URI(s) of the show(s) to check for.
+
+#### Return values
+* **array** Whether each show is saved.
 
 ---
 ### myTracksContains

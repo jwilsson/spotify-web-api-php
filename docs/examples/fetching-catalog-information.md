@@ -11,7 +11,7 @@ $track = $api->getTrack('TRACK_ID');
 echo '<b>' . $track->name . '</b> by <b>' . $track->artists[0]->name . '</b>';
 ```
 
-Fetching artists or albums is extremely similar, simply change `getTrack` to `getArtist` or `getAlbum`.
+Fetching artists, albums, podcast shows or episodes is extremely similar, simply change `getTrack` to `getArtist`, `getAlbum`, `getShow`, or `getEpisode`.
 
 ## Fetching multiple objects
 
@@ -29,7 +29,7 @@ foreach ($artists->artists as $artist) {
 }
 ```
 
-Of course, `getAlbums` and `getTracks` also exist and work in the same way.
+Of course, `getAlbums`, `getTracks`, `getShows`, and `getEpisodes` also exist and work in the same way.
 
 ## Getting all tracks on an album
 
@@ -91,6 +91,16 @@ $recommendations = $api->getRecommendations([
 ]);
 
 print_r($recommendations);
+```
+
+## Getting a podcast show's episodes
+
+```php
+$episodes = $api->getShowEpisodes('SHOW_ID');
+
+foreach ($episodes->items as $episode) {
+    echo '<b>' . $episode->name . '</b> <br>';
+}
 ```
 
 Please see the [method reference](/docs/method-reference/SpotifyWebAPI.md) for more available options for each method.

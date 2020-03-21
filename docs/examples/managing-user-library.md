@@ -16,7 +16,7 @@ foreach ($tracks->items as $track) {
 }
 ```
 
-It's also possible to list the albums in a user's library using `getMySavedAlbums`.
+It's also possible to list the albums or podcast shows in a user's library using `getMySavedAlbums` or `getMySavedShows`.
 
 ## Adding tracks to a user's library
 
@@ -27,7 +27,7 @@ $api->addMyTracks([
 ]);
 ```
 
-It's also possible to add a whole album to a user's library using `addMyAlbums`.
+It's also possible to add a album or a podcast show to a user's library using `addMyAlbums` or `addMyShows`.
 
 ## Deleting tracks from a user's library
 
@@ -38,7 +38,7 @@ $api->deleteMyTracks([
 ]);
 ```
 
-It's also possible to delete a whole album from a user's library using `deleteMyAlbums`.
+It's also possible to delete a album or a podcast show from a user's library using `deleteMyAlbums` or `deleteMyShows`.
 
 ## Checking if tracks are present in a user's library
 
@@ -51,6 +51,6 @@ $contains = $api->myTracksContains([
 var_dump($contains);
 ```
 
-It's also possible to check if a whole album is present in a user's library using `myAlbumsContains`.
+It's also possible to check if a album or podcast show is present in a user's library using `myAlbumsContains` or `myShowsContains`.
 
 Please see the [method reference](/docs/method-reference/SpotifyWebAPI.md) for more available options for each method.
