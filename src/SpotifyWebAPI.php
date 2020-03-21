@@ -163,6 +163,30 @@ class SpotifyWebAPI
     }
 
     /**
+     * Add shows to the current user's Spotify library.
+     * https://developer.spotify.com/documentation/web-api/reference/library/save-shows-user/
+     *
+     * @param string|array $shows ID(s) or Spotify URI(s) of the show(s) to add.
+     *
+     * @return bool Whether the shows was successfully added.
+     */
+    public function addMyShows($shows)
+    {
+        $shows = $this->uriToId($shows, 'show');
+        $shows = json_encode((array) $shows);
+
+        $headers = [
+            'Content-Type' => 'application/json',
+        ];
+
+        $uri = '/v1/me/shows';
+
+        $this->lastResponse = $this->sendRequest('PUT', $uri, $shows, $headers);
+
+        return $this->lastResponse['status'] == 200;
+    }
+
+    /**
      * Add tracks to the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/library/save-tracks-user/
      *
@@ -336,6 +360,30 @@ class SpotifyWebAPI
         $uri = '/v1/me/albums';
 
         $this->lastResponse = $this->sendRequest('DELETE', $uri, $albums, $headers);
+
+        return $this->lastResponse['status'] == 200;
+    }
+
+    /**
+     * Delete shows from current user's Spotify library.
+     * https://developer.spotify.com/documentation/web-api/reference/library/remove-shows-user/
+     *
+     * @param string|array $shows ID(s) or Spotify URI(s) of the show(s) to delete.
+     *
+     * @return bool Whether the shows was successfully deleted.
+     */
+    public function deleteMyShows($shows)
+    {
+        $shows = $this->uriToId($shows, 'show');
+        $shows = json_encode((array) $shows);
+
+        $headers = [
+            'Content-Type' => 'application/json',
+        ];
+
+        $uri = '/v1/me/shows';
+
+        $this->lastResponse = $this->sendRequest('DELETE', $uri, $shows, $headers);
 
         return $this->lastResponse['status'] == 200;
     }
@@ -780,6 +828,48 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get an episode.
+     * https://developer.spotify.com/documentation/web-api/reference/episodes/get-an-episode/
+     *
+     * @param string $episodeId ID or Spotify URI of the episode.
+     * @param array|object $options Optional. Options for the episode.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
+     *
+     * @return array|object The requested episode. Type is controlled by the `return_assoc` option.
+     */
+    public function getEpisode($episodeId, $options = [])
+    {
+        $episodeId = $this->uriToId($episodeId, 'episode');
+        $uri = '/v1/episodes/' . $episodeId;
+
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
+     * Get multiple episodes.
+     * https://developer.spotify.com/documentation/web-api/reference/episodes/get-several-episodes/
+     *
+     * @param array $episodeIds IDs or Spotify URIs of the episodes.
+     * @param array|object $options Optional. Options for the episodes.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
+     *
+     * @return array|object The requested episodes. Type is controlled by the `return_assoc` option.
+     */
+    public function getEpisodes($episodeIds, $options = [])
+    {
+        $episodeIds = $this->uriToId($episodeIds, 'episode');
+        $options['ids'] = implode(',', (array) $episodeIds);
+
+        $uri = '/v1/episodes/';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get Spotify featured playlists.
      * https://developer.spotify.com/documentation/web-api/reference/browse/get-list-featured-playlists/
      *
@@ -964,6 +1054,25 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the current user’s saved shows.
+     * https://developer.spotify.com/documentation/web-api/reference/library/get-users-saved-shows/
+     *
+     * @param array|object $options Optional. Options for the shows.
+     * - int limit Optional. Limit the number of shows.
+     * - int offset Optional. Number of shows to skip.
+     *
+     * @return array|object The user's saved shows. Type is controlled by the `return_assoc` option.
+     */
+    public function getMySavedShows($options = [])
+    {
+        $uri = '/v1/me/shows';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get the current user's top tracks or artists.
      * https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
      *
@@ -1118,6 +1227,70 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get a show.
+     * https://developer.spotify.com/documentation/web-api/reference/shows/get-a-show/
+     *
+     * @param string $showId ID or Spotify URI of the show.
+     * @param array|object $options Optional. Options for the show.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, limit results to shows available in that market.
+     *
+     * @return array|object The requested show. Type is controlled by the `return_assoc` option.
+     */
+    public function getShow($showId, $options = [])
+    {
+        $showId = $this->uriToId($showId, 'show');
+        $uri = '/v1/shows/' . $showId;
+
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
+     * Get a show's episodes.
+     * https://developer.spotify.com/documentation/web-api/reference/shows/get-shows-episodes/
+     *
+     * @param string $albumId ID or Spotify URI of the album.
+     * @param array|object $options Optional. Options for the episodes.
+     * - int limit Optional. Limit the number of episodes.
+     * - int offset Optional. Number of episodes to skip.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
+     *
+     * @return array|object The requested show episodes. Type is controlled by the `return_assoc` option.
+     */
+    public function getShowEpisodes($showId, $options = [])
+    {
+        $showId = $this->uriToId($showId, 'show');
+        $uri = '/v1/shows/' . $showId . '/episodes';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
+     * Get multiple shows.
+     * https://developer.spotify.com/documentation/web-api/reference/shows/get-several-shows/
+     *
+     * @param array $showIds IDs or Spotify URIs of the shows.
+     * @param array|object $options Optional. Options for the shows.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, limit results to shows available in that market.
+     *
+     * @return array|object The requested shows. Type is controlled by the `return_assoc` option.
+     */
+    public function getShows($showIds, $options = [])
+    {
+        $showIds = $this->uriToId($showIds, 'show');
+        $options['ids'] = implode(',', (array) $showIds);
+
+        $uri = '/v1/shows/';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get a track.
      * https://developer.spotify.com/documentation/web-api/reference/tracks/get-track/
      *
@@ -1142,7 +1315,7 @@ class SpotifyWebAPI
      * https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-tracks/
      *
      * @param array $trackIds IDs or Spotify URIs of the tracks.
-     * @param array|object $options Optional. Options for the albums.
+     * @param array|object $options Optional. Options for the tracks.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      *
      * @return array|object The requested tracks. Type is controlled by the `return_assoc` option.
@@ -1256,6 +1429,30 @@ class SpotifyWebAPI
         ];
 
         $uri = '/v1/me/albums/contains';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
+     * Check if shows are saved in the current user's Spotify library.
+     * https://developer.spotify.com/documentation/web-api/reference/library/check-users-saved-shows/
+     *
+     * @param string|array $shows ID(s) or Spotify URI(s) of the show(s) to check for.
+     *
+     * @return array Whether each show is saved.
+     */
+    public function myShowsContains($shows)
+    {
+        $shows = $this->uriToId($shows, 'show');
+        $shows = implode(',', (array) $shows);
+
+        $options = [
+            'ids' => $shows,
+        ];
+
+        $uri = '/v1/me/shows/contains';
 
         $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 

@@ -155,6 +155,44 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertTrue($response);
     }
 
+    public function testAddMyShows()
+    {
+        $shows = [
+            '2C6ups0LMt1G8n81XLlkbsPo',
+            'spotify:show:5AvwZVawapvyhJUIx71pdJ',
+        ];
+
+        $expectedShows = [
+            '2C6ups0LMt1G8n81XLlkbsPo',
+            '5AvwZVawapvyhJUIx71pdJ',
+        ];
+
+        $expected = json_encode($expectedShows);
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+            'Content-Type' => 'application/json',
+        ];
+
+        $return = [
+            'status' => 200,
+        ];
+
+        $stub = $this->setupStub(
+            'PUT',
+            '/v1/me/shows',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->addMyShows($shows);
+
+        $this->assertTrue($response);
+    }
+
     public function testAddMyTracks()
     {
         $tracks = [
@@ -412,6 +450,46 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->deleteMyAlbums($albums);
+
+        $this->assertTrue($response);
+    }
+
+    public function testDeleteMyShows()
+    {
+        $shows = [
+            '1oR3KrPIp4CbagPa3PhtPp',
+            '6lPb7Eoon6QPbscWbMsk6a',
+            'spotify:show:1oR3KrPIp4CbagPa3PhtPp'
+        ];
+
+        $expectedShows = [
+            '1oR3KrPIp4CbagPa3PhtPp',
+            '6lPb7Eoon6QPbscWbMsk6a',
+            '1oR3KrPIp4CbagPa3PhtPp'
+        ];
+
+        $expected = json_encode($expectedShows);
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+            'Content-Type' => 'application/json',
+        ];
+
+        $return = [
+            'status' => 200,
+        ];
+
+        $stub = $this->setupStub(
+            'DELETE',
+            '/v1/me/shows',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->deleteMyShows($shows);
 
         $this->assertTrue($response);
     }
@@ -1060,6 +1138,78 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertObjectHasAttribute('playlists', $response);
     }
 
+    public function testGetEpisode()
+    {
+        $options = [
+            'market' => 'SE',
+        ];
+
+        $expected = [
+            'market' => 'SE',
+        ];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('episode'),
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/episodes/38bS44xjbVVZ3No3ByF1dJ',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getEpisode('spotify:episode:38bS44xjbVVZ3No3ByF1dJ', $options);
+
+        $this->assertObjectHasAttribute('id', $response);
+    }
+
+    public function testGetEpisodes()
+    {
+        $episodes = [
+            '0eGsygTp906u18L0Oimnem',
+            'spotify:episode:1lDWb6b6ieDQ2xT7ewTC3G',
+        ];
+
+        $options = [
+            'market' => 'SE',
+        ];
+
+        $expected = [
+            'ids' => '0eGsygTp906u18L0Oimnem,1lDWb6b6ieDQ2xT7ewTC3G',
+            'market' => 'SE',
+        ];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('episodes'),
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/episodes/',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getEpisodes($episodes, $options);
+
+        $this->assertNotEmpty($response->episodes);
+    }
+
     public function testGetFeaturedPlaylists()
     {
         $options = [
@@ -1334,6 +1484,39 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertObjectHasAttribute('items', $response);
     }
 
+    public function testGetMySavedShows()
+    {
+        $options = [
+            'limit' => 10,
+        ];
+
+        $expected = [
+            'limit' => 10,
+        ];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('user-shows'),
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/me/shows',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getMySavedShows($options);
+
+        $this->assertObjectHasAttribute('items', $response);
+    }
+
     public function testGetMySavedTracks()
     {
         $options = [
@@ -1494,6 +1677,113 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI();
 
         $this->assertInstanceOf(SpotifyWebAPI\Request::class, $api->getRequest());
+    }
+
+    public function testGetShow()
+    {
+        $options = [
+            'market' => 'SE',
+        ];
+
+        $expected = [
+            'market' => 'SE',
+        ];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('show'),
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/shows/38bS44xjbVVZ3No3ByF1dJ',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getShow('spotify:show:38bS44xjbVVZ3No3ByF1dJ', $options);
+
+        $this->assertObjectHasAttribute('id', $response);
+    }
+
+    public function testGetShowEpisodes()
+    {
+        $options = [
+            'limit' => 10,
+            'market' => 'SE',
+        ];
+
+        $expected = [
+            'limit' => 10,
+            'market' => 'SE',
+        ];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('show-episodes'),
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/shows/38bS44xjbVVZ3No3ByF1dJ/episodes',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getShowEpisodes('spotify:show:38bS44xjbVVZ3No3ByF1dJ', $options);
+
+        $this->assertObjectHasAttribute('items', $response);
+    }
+
+    public function testGetShows()
+    {
+        $shows = [
+            '5CfCWKI5pZ28U0uOzXkDHe',
+            'spotify:show:5as3aKmN2k11yfDDDSrvaZ',
+        ];
+
+        $options = [
+            'market' => 'SE',
+        ];
+
+        $expected = [
+            'ids' => '5CfCWKI5pZ28U0uOzXkDHe,5as3aKmN2k11yfDDDSrvaZ',
+            'market' => 'SE',
+        ];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('shows'),
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/shows/',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->getShows($shows, $options);
+
+        $this->assertNotEmpty($response->shows);
     }
 
     public function testGetTrack()
@@ -1794,6 +2084,41 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->myAlbumsContains($albums);
+
+        $this->assertTrue($response[0]);
+    }
+
+    public function testMyShowsContains()
+    {
+        $shows = [
+            '5AvwZVawapvyhJUIx71pdJ',
+            '2C6ups0LMt1G8n81XLlkbsPo',
+            'spotify:show:2C5AvwZVawapvyhJUIx71pdJ',
+        ];
+
+        $expected = [
+            'ids' => '5AvwZVawapvyhJUIx71pdJ,2C6ups0LMt1G8n81XLlkbsPo,2C5AvwZVawapvyhJUIx71pdJ',
+        ];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('user-shows-contains'),
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/me/shows/contains',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->myShowsContains($shows);
 
         $this->assertTrue($response[0]);
     }
