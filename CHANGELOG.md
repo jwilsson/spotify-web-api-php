@@ -1,4 +1,20 @@
 # Changelog
+## 3.2.0 (2020-03-21)
+* Added support for new Podcast endpoints ([eba5971](https://github.com/jwilsson/spotify-web-api-php/commit/eba597182b0d9a05aec80153da4b152d50c66d41)):
+    * `SpotifyWebAPI::addMyShows()`
+    * `SpotifyWebAPI::getMySavedShows()`
+    * `SpotifyWebAPI::getShow()`
+    * `SpotifyWebAPI::getShows()`
+    * `SpotifyWebAPI::getShowEpisodes()`
+    * `SpotifyWebAPI::getEpisode()`
+    * `SpotifyWebAPI::getEpisodes()`
+    * `SpotifyWebAPI::myShowsContains()`
+    * `SpotifyWebAPI::deleteMyShows()`
+* Added support for the new `additional_types` option to ([b04e06e](https://github.com/jwilsson/spotify-web-api-php/commit/b04e06eb72b8876611108eca94b740eeb1156a25)):
+    * `SpotifyWebAPI::getMyCurrentTrack()`
+    * `SpotifyWebAPI::getMyCurrentPlaybackInfo()`
+* Updated CA bundle. ([4359fc3](https://github.com/jwilsson/spotify-web-api-php/commit/4359fc3697e6a7408ed978bb850d1d033ca6753c))
+
 ## 3.1.0 (2020-02-21)
 * Deprecated the following methods ([e643628](https://github.com/jwilsson/spotify-web-api-php/commit/e643628698e146371d1944099bb107e7a9165a19)):
     * `SpotifyWebAPI::followPlaylistForCurrentUser()` (use `SpotifyWebAPI::followPlaylist()` instead)
