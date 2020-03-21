@@ -1296,10 +1296,12 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
     {
         $options = [
             'market' => 'SE',
+            'additional_types' => ['track', 'episode'],
         ];
 
         $expected = [
             'market' => 'SE',
+            'additional_types' => 'track,episode',
         ];
 
         $headers = [
@@ -1354,10 +1356,12 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
     {
         $options = [
             'market' => 'SE',
+            'additional_types' => ['track', 'episode'],
         ];
 
         $expected = [
             'market' => 'SE',
+            'additional_types' => 'track,episode',
         ];
 
         $headers = [

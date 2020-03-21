@@ -926,12 +926,17 @@ class SpotifyWebAPI
      *
      * @param array|object $options Optional. Options for the track.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+     * - string|array additional_types Optional. Types of media to return info about.
      *
      * @return array|object The user's currently playing track. Type is controlled by the `return_assoc` option.
      */
     public function getMyCurrentTrack($options = [])
     {
         $uri = '/v1/me/player/currently-playing';
+
+        if (isset($options['additional_types']) && is_array($options['additional_types'])) {
+            $options['additional_types'] = implode(',', $options['additional_types']);
+        }
 
         $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
@@ -959,12 +964,17 @@ class SpotifyWebAPI
      *
      * @param array|object $options Optional. Options for the info.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+     * - string|array additional_types Optional. Types of media to return info about.
      *
      * @return array|object The user's playback information. Type is controlled by the `return_assoc` option.
      */
     public function getMyCurrentPlaybackInfo($options = [])
     {
         $uri = '/v1/me/player';
+
+        if (isset($options['additional_types']) && is_array($options['additional_types'])) {
+            $options['additional_types'] = implode(',', $options['additional_types']);
+        }
 
         $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
