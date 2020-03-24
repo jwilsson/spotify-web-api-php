@@ -33,40 +33,6 @@
       "release_date_precision" : "day",
       "type" : "episode",
       "uri" : "spotify:episode:4d237GqKH4NP1jtgwy6bP3"
-    }, {
-      "audio_preview_url" : "https://p.scdn.co/mp3-preview/99180ec43a984c61b079bd3e71443a1886d0290c",
-      "description" : "Tobias Svanelid besöker den svenska arkeologiska expeditionen på Cypern där man nu söker efter svaret på vad som drabbade bronsåldersstäderna för 3000 år sedan och orsakade bronsålderns kollaps.  - Det är som att jobba som Indiana Jones, berättar Alfred Sjelvgren som är en av arkeologerna som gräver på platsen. I Hala Sultan Tekke vid Larnaca på Cypern har svenska arkeologer under ledning av Peter Fischer grävt sedan 2010. Det de hittat är en av bronsålderns största och rikaste städer, där brons och purpurfärgade textilier en gång exporterades runt Medelhavet och ända upp till Sverige för drygt 3000 år sedan. Men den rika handelsstadens öde blev våldsamt. I likhet med så många andra Medelhavsstäder gick Hala Sultan Tekke under i en våldsam händelse som beskrivits som bronsålderns kollaps och kanske kan fynden från utgrävningen ge svar på vad som hände. - Jag tror att det är en kombination av bidragande orsaker som orsakade kollapsen, menar Peter Fischer, arkeologiprofessor vid Göteborgs universitet. Klimatförändringar, revolutioner och folkvandringar gjorde att många av bronsålderns högkulturer, inklusive den på Cypern, gick under.",
-      "duration_ms" : 2666659,
-      "explicit" : false,
-      "external_urls" : {
-        "spotify" : "https://open.spotify.com/episode/4nLBHCqEvCcRyWImnKo009"
-      },
-      "href" : "https://api.spotify.com/v1/episodes/4nLBHCqEvCcRyWImnKo009",
-      "id" : "4nLBHCqEvCcRyWImnKo009",
-      "images" : [ {
-        "height" : 640,
-        "url" : "https://i.scdn.co/image/80a842ffc3d0c5fc1ec69e3e4987a99052454f26",
-        "width" : 640
-      }, {
-        "height" : 300,
-        "url" : "https://i.scdn.co/image/3a2ca33937fcef64124f492b6bd67d3583f1278e",
-        "width" : 300
-      }, {
-        "height" : 64,
-        "url" : "https://i.scdn.co/image/fe428e98ad84732dff1ea73ae7f3fae5110e658c",
-        "width" : 64
-      } ],
-      "is_externally_hosted" : false,
-      "is_playable" : true,
-      "language" : "sv",
-      "languages" : [ "sv" ],
-      "name" : "Bronsåldersstadens kollaps",
-      "release_date" : "2018-06-12",
-      "release_date_precision" : "day",
-      "type" : "episode",
-      "uri" : "spotify:episode:4nLBHCqEvCcRyWImnKo009"
-    }, {
-      ...
     } ],
     "limit" : 50,
     "next" : "https://api.spotify.com/v1/shows/38bS44xjbVVZ3No3ByF1dJ/episodes?offset=50&limit=50",
