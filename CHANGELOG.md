@@ -1,4 +1,8 @@
 # Changelog
+## 3.3.0 (2020-03-28)
+* Options and `Session` instance can now be passed to the `SpotifyWebAPI` constructor. ([d178204](https://github.com/jwilsson/spotify-web-api-php/commit/d178204c23de1e5785f70cc70368d9e373999746))
+* Options can now be passed to the `Request` constructor. ([065a7fc](https://github.com/jwilsson/spotify-web-api-php/commit/065a7fcba61f472efe0ebb8e17821510c80a647e))
+
 ## 3.2.0 (2020-03-21)
 * Added support for new Podcast endpoints ([eba5971](https://github.com/jwilsson/spotify-web-api-php/commit/eba597182b0d9a05aec80153da4b152d50c66d41)):
     * `SpotifyWebAPI::addMyShows()`
