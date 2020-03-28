@@ -6,14 +6,18 @@ In order to set custom cURL options, you'll need to instantiate a `Request` obje
 
 For example:
 ```php
-$request = new SpotifyWebAPI\Request();
-$request->setOptions([
+$options = [
     'curl_options' => [
         CURLOPT_TIMEOUT => 60,
     ],
-]);
+];
 
-$api = SpotifyWebAPI\SpotifyWebAPI($request);
+$request = new SpotifyWebAPI\Request($options);
+
+// You can also call setOptions on an existing Request instance
+$request->setOptions($options);
+
+$api = SpotifyWebAPI\SpotifyWebAPI([], null, $request);
 
 // Continue as usual
 ```

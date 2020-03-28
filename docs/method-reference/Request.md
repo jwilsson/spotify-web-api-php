@@ -7,6 +7,21 @@
 * **RETURN_OBJECT**
 
 ## Methods
+### __construct
+
+
+```php
+Request::__construct($options)
+```
+
+Constructor<br>
+Set options.
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options to set.
+
+
+---
 ### account
 
 

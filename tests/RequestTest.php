@@ -26,6 +26,17 @@ class RequestTest extends PHPUnit\Framework\TestCase
         return $stub;
     }
 
+    public function testConstructorOptions()
+    {
+        $request = new SpotifyWebAPI\Request([
+            'return_assoc' => true,
+        ]);
+
+        $response = $request->send('GET', 'https://httpbin.org/get');
+
+        $this->assertArrayHasKey('url', $response['body']);
+    }
+
     public function testApi()
     {
         $return = [

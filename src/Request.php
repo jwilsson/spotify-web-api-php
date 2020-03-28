@@ -18,6 +18,17 @@ class Request
     protected $returnType = self::RETURN_OBJECT;
 
     /**
+     * Constructor
+     * Set options.
+     *
+     * @param array|object $options Optional. Options to set.
+     */
+    public function __construct($options = [])
+    {
+        $this->setOptions($options);
+    }
+
+    /**
      * Parse the response body and handle API errors.
      *
      * @param string $body The raw, unparsed response body.
