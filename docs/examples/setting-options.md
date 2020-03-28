@@ -1,11 +1,17 @@
 # Setting options
 
-There are a few options that can be used to control the behaviour of the API. All options are set using the `setOptions()` method which will then merge them with the defaults:
+There are a few options that can be used to control the behaviour of the API. All options can be set when initializing a new `SpotifyWebAPI` instance or by using the `setOptions()` method. Both approaches will merge the new options with the defaults and multiple calls to `setOptions()` will merge the new options with the ones already set.
 
 ```php
-$api->setOptions([
+$options = [
     'auto_refresh' => true,
-]);
+];
+
+// Options can be set using the SpotifyWebAPI constructor
+$api = new SpotifyWebAPI\SpotifyWebAPI($options);
+
+// Or by using the setOptions method
+$api->setOptions($options);
 ```
 
 ## Available options

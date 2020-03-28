@@ -18,12 +18,22 @@ class SpotifyWebAPI
 
     /**
      * Constructor
-     * Set up Request object.
+     * Set options and class instances to use.
      *
+     * @param array|object $options Optional. Options to set.
+     * @param Session $session Optional. The Session object to use.
      * @param Request $request Optional. The Request object to use.
      */
-    public function __construct($request = null)
+    public function __construct($options = [], $session = null, $request = null)
     {
+        if ($options instanceof Request) {
+            $request = $options;
+        } else {
+            $this->setOptions($options);
+        }
+
+        $this->setSession($session);
+
         $this->request = $request ?: new Request();
     }
 

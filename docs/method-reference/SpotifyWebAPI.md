@@ -9,13 +9,15 @@
 
 
 ```php
-SpotifyWebAPI::__construct($request)
+SpotifyWebAPI::__construct($options, $session, $request)
 ```
 
 Constructor<br>
-Set up Request object.
+Set options and class instances to use.
 
 #### Arguments
+* `$options` **array\|object** - Optional. Options to set.
+* `$session` **\SpotifyWebAPI\Session** - Optional. The Session object to use.
 * `$request` **\SpotifyWebAPI\Request** - Optional. The Request object to use.
 
 

@@ -39,6 +39,14 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         return $stub;
     }
 
+    public function testConstructorRequest()
+    {
+        $request = new SpotifyWebAPI\Request();
+        $api = new SpotifyWebAPI\SpotifyWebAPI($request);
+
+        $this->assertSame($request, $api->getRequest());
+    }
+
     public function testAutoRefreshOption()
     {
         $headers = [
@@ -59,17 +67,17 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $sessionStub = $this->setupSessionStub();
 
+        $options = [
+            'auto_refresh' => true,
+        ];
+
         $stub->expects($this->at(1))
             ->method('api')
             ->willThrowException(
                 new SpotifyWebAPI\SpotifyWebAPIException('The access token expired', 401)
             );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
-        $api->setSession($sessionStub);
-        $api->setOptions([
-            'auto_refresh' => true,
-        ]);
+        $api = new SpotifyWebAPI\SpotifyWebAPI($options, $sessionStub, $stub);
 
         $response = $api->getTrack('0eGsygTp906u18L0Oimnem');
 
@@ -98,17 +106,18 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
+        $options = [
+            'auto_retry' => true,
+        ];
+
         $stub->expects($this->at(1))
             ->method('api')
             ->willThrowException(
                 new SpotifyWebAPI\SpotifyWebAPIException('API rate limit exceeded', 429)
             );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI($options, null, $stub);
         $api->setAccessToken($this->accessToken);
-        $api->setOptions([
-            'auto_retry' => true,
-        ]);
 
         $response = $api->getTrack('0eGsygTp906u18L0Oimnem');
 
@@ -148,7 +157,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->addMyAlbums($albums);
 
@@ -186,7 +195,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->addMyShows($shows);
 
@@ -226,7 +235,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->addMyTracks($tracks);
 
@@ -269,7 +278,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->addPlaylistTracks(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
@@ -307,7 +316,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->changeMyDevice($options);
 
@@ -332,7 +341,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->changeVolume([
             'volume_percent' => 100,
@@ -367,7 +376,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->createPlaylist(
             $options
@@ -404,7 +413,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->currentUserFollows(
             'artist',
@@ -447,7 +456,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->deleteMyAlbums($albums);
 
@@ -487,7 +496,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->deleteMyShows($shows);
 
@@ -527,7 +536,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->deleteMyTracks($tracks);
 
@@ -586,7 +595,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->deletePlaylistTracks(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
@@ -631,7 +640,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->deletePlaylistTracks(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
@@ -673,7 +682,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->followArtistsOrUsers(
             'artist',
@@ -708,7 +717,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->followPlaylistForCurrentUser(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
@@ -744,7 +753,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getAlbum('spotify:album:7u6zL7kqpgLPISZYXNTgYk', $options);
 
@@ -783,7 +792,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getAlbums($albums, $options);
 
@@ -818,7 +827,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getAlbumTracks('spotify:album:1oR3KrPIp4CbagPa3PhtPp', $options);
 
@@ -843,7 +852,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getArtist('spotify:artist:36QJpDe2go2KgaRleHCDTp');
 
@@ -868,7 +877,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getArtistRelatedArtists('spotify:artist:36QJpDe2go2KgaRleHCDTp');
 
@@ -902,7 +911,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getArtists($artists);
 
@@ -939,7 +948,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getArtistAlbums('spotify:artist:36QJpDe2go2KgaRleHCDTp', $options);
 
@@ -972,7 +981,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getArtistTopTracks('spotify:artist:36QJpDe2go2KgaRleHCDTp', $options);
 
@@ -1006,7 +1015,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getAudioFeatures($tracks);
 
@@ -1031,7 +1040,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getAudioAnalysis('spotify:track:0eGsygTp906u18L0Oimnem');
 
@@ -1066,7 +1075,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getCategoriesList($options);
 
@@ -1096,7 +1105,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getCategory('party', $options);
 
@@ -1131,7 +1140,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getCategoryPlaylists('party', $options);
 
@@ -1164,7 +1173,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getEpisode('spotify:episode:38bS44xjbVVZ3No3ByF1dJ', $options);
 
@@ -1203,7 +1212,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getEpisodes($episodes, $options);
 
@@ -1238,7 +1247,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getFeaturedPlaylists($options);
 
@@ -1263,7 +1272,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getGenreSeeds();
 
@@ -1284,7 +1293,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->getTrack('7EjyzZcbLxW7PaaLua9Ksb');
 
         $response = $api->getLastResponse();
@@ -1320,7 +1329,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getMyCurrentTrack($options);
 
@@ -1345,7 +1354,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getMyDevices();
 
@@ -1380,7 +1389,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getMyCurrentPlaybackInfo($options);
 
@@ -1413,7 +1422,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getMyPlaylists($options);
 
@@ -1446,7 +1455,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getMyRecentTracks($options);
 
@@ -1481,7 +1490,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getMySavedAlbums($options);
 
@@ -1514,7 +1523,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getMySavedShows($options);
 
@@ -1549,7 +1558,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getMySavedTracks($options);
 
@@ -1584,7 +1593,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getMyTop('artists', $options);
 
@@ -1619,7 +1628,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getNewReleases($options);
 
@@ -1654,7 +1663,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getRecommendations($options);
 
@@ -1671,7 +1680,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
                 ->method('getReturnType')
                 ->willReturn(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
 
         $this->assertEquals(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC, $api->getReturnType());
     }
@@ -1709,7 +1718,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getShow('spotify:show:38bS44xjbVVZ3No3ByF1dJ', $options);
 
@@ -1744,7 +1753,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getShowEpisodes('spotify:show:38bS44xjbVVZ3No3ByF1dJ', $options);
 
@@ -1783,7 +1792,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getShows($shows, $options);
 
@@ -1816,7 +1825,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getTrack('spotify:track:0eGsygTp906u18L0Oimnem', $options);
 
@@ -1855,7 +1864,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getTracks($tracks, $options);
 
@@ -1880,7 +1889,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getUser('spotify:user:mcgurk');
 
@@ -1914,7 +1923,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getUserFollowedArtists($options);
 
@@ -1949,7 +1958,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getPlaylist(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
@@ -1985,7 +1994,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getUserPlaylists('spotify:user:mcgurk', $options);
 
@@ -2022,7 +2031,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->getPlaylistTracks(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
@@ -2050,7 +2059,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->me();
 
@@ -2085,7 +2094,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->myAlbumsContains($albums);
 
@@ -2120,7 +2129,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->myShowsContains($shows);
 
@@ -2155,7 +2164,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->myTracksContains($tracks);
 
@@ -2180,7 +2189,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->next('abc123');
 
@@ -2205,7 +2214,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->pause('abc123');
 
@@ -2237,7 +2246,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->play('abc123', $options);
 
@@ -2262,7 +2271,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->previous('abc123');
 
@@ -2300,7 +2309,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->reorderPlaylistTracks(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
@@ -2328,7 +2337,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->repeat([
             'state' => 'track',
@@ -2368,7 +2377,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->replacePlaylistTracks(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
@@ -2411,7 +2420,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->search(
             'blur',
@@ -2440,7 +2449,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->seek([
             'position_ms' => 5000,
@@ -2468,7 +2477,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
                 ->method('setReturnType')
                 ->willReturn(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setReturnType(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
     }
 
@@ -2490,7 +2499,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->shuffle([
             'state' => false,
@@ -2527,7 +2536,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->unFollowArtistsOrUsers(
             'artist',
@@ -2555,7 +2564,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->unfollowPlaylistForCurrentUser(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9'
@@ -2590,7 +2599,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->updatePlaylist(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
@@ -2620,7 +2629,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->updatePlaylistImage(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
@@ -2659,7 +2668,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
         $response = $api->usersFollowPlaylist(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',

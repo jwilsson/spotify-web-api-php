@@ -1,20 +1,22 @@
 # Automatically Refreshing Access Tokens
 
-Start off by requesting an access token using the [Authorization Code Flow](access-token-with-authorization-code-flow.md). But instead of setting the access token on a `SpotifyWebAPI` instance, set the complete `Session` instance using the `setSession()` method. Remember to also set the `auto_refresh` option to `true`. For example:
+Start off by requesting an access token using the [Authorization Code Flow](access-token-with-authorization-code-flow.md). But instead of setting the access token on a `SpotifyWebAPI` instance, pass the complete `Session` instance when initializing a new `SpotifyWebAPI` instance or by using the `setSession()` method. Remember to also set the `auto_refresh` option to `true`. For example:
 
 ```php
 $session = new SpotifyWebAPI\Session(
     'CLIENT_ID',
-    'CLIENT_SECRET'
+    'CLIENT_SECRET',
+    'REDIRECT_URI'
 );
 
-$api = new SpotifyWebAPI\SpotifyWebAPI();
-
-// When setting a complete Session instance, it's not necessary to set the access token. It'll be fetched automatically from the Session instance
-$api->setSession($session);
-$api->setOptions([
+$options = [
     'auto_refresh' => true,
-]);
+];
+
+$api = new SpotifyWebAPI\SpotifyWebAPI($options, $session);
+
+// You can also call setSession on an existing SpotifyWebAPI instance
+$api->setSession($session);
 
 // Call the API as usual
 $api->me();
@@ -43,12 +45,14 @@ if ($accessToken) {
     $session->refreshAccessToken($refreshToken);
 }
 
-$api = new SpotifyWebAPI\SpotifyWebAPI();
-
-$api->setSession($session);
-$api->setOptions([
+$options = [
     'auto_refresh' => true,
-]);
+];
+
+$api = new SpotifyWebAPI\SpotifyWebAPI($options, $session);
+
+// You can also call setSession on an existing SpotifyWebAPI instance
+$api->setSession($session);
 
 // Call the API as usual
 $api->me();
