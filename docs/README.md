@@ -9,7 +9,10 @@ First, start by checking out the [Getting started guide](/docs/getting-started.m
     * [Obtaining an access token using the Client Credentials Flow](/docs/examples/access-token-with-client-credentials-flow.md)
     * [Working with scopes](/docs/examples/working-with-scopes.md)
 * **Fetching data**
-    * [Fetching catalog information](/docs/examples/fetching-catalog-information.md)
+    * [Fetching information about artists](/docs/examples/fetching-artist-information.md)
+    * [Fetching information about albums](/docs/examples/fetching-album-information.md)
+    * [Fetching information about tracks](/docs/examples/fetching-track-information.md)
+    * [Fetching information about podcasts](/docs/examples/fetching-podcast-information.md)
     * [Fetching Spotify featured content](/docs/examples/fetching-spotify-featured-content.md)
     * [Searching the Spotify catalog](/docs/examples/searching-the-spotify-catalog.md)
 * **Managing users**
