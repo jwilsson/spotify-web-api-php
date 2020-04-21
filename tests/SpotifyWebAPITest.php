@@ -2278,6 +2278,31 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertTrue($response);
     }
 
+    public function testQueue()
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'status' => 204,
+        ];
+
+        $stub = $this->setupStub(
+            'POST',
+            '/v1/me/player/queue',
+            [],
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->queue('spotify:track:6ek0XS2AUbzrHS0B5wPNcU');
+
+        $this->assertTrue($response);
+    }
+
     public function testReorderPlaylistTracks()
     {
         $options = [
