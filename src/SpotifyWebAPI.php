@@ -1614,9 +1614,11 @@ class SpotifyWebAPI
     {
         $uri = '/v1/me/player/queue';
 
+        $uri = $uri . '?uri=' . $trackUri;
+
         // We need to manually append data to the URI since it's a POST request
         if ($deviceId) {
-            $uri = $uri . '?device_id=' . $deviceId . '&uri=' . $trackUri;
+            $uri = $uri . '&device_id=' . $deviceId;
         }
 
         $this->lastResponse = $this->sendRequest('POST', $uri);
