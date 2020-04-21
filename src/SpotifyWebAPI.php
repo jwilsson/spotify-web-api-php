@@ -1620,7 +1620,7 @@ class SpotifyWebAPI
         }
 
         $this->lastResponse = $this->sendRequest('POST', $uri, [
-            'uri' => $trackUri',    
+            'uri' => $trackUri,    
         ]);
 
         return $this->lastResponse['status'] == 204;
