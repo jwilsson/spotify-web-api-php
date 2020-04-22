@@ -1,4 +1,7 @@
 # Changelog
+## 3.4.0 (2020-04-22)
+* Added the `SpotifyWebAPI::queue()` method to add tracks to the user's playback queue. ([d6859a5](https://github.com/jwilsson/spotify-web-api-php/commit/d6859a5ad8509eee2685a3b779ff8cf639b56d4e))
+
 ## 3.3.0 (2020-03-28)
 * Options and `Session` instance can now be passed to the `SpotifyWebAPI` constructor. ([d178204](https://github.com/jwilsson/spotify-web-api-php/commit/d178204c23de1e5785f70cc70368d9e373999746))
 * Options can now be passed to the `Request` constructor. ([065a7fc](https://github.com/jwilsson/spotify-web-api-php/commit/065a7fcba61f472efe0ebb8e17821510c80a647e))
