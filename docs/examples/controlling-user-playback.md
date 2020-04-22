@@ -35,6 +35,11 @@ $api->previous();
 $api->next();
 ```
 
+## Adding a track to the queue
+```php
+$api->queue();
+```
+
 ## Get the currently playing track
 ```php
 $api->getMyCurrentTrack();

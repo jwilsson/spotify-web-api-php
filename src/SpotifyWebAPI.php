@@ -1608,7 +1608,7 @@ class SpotifyWebAPI
      * @param string $trackUri Required. The uri of the item to add to the queue. Must be a track or an episode uri.
      * @param string $deviceId Optional. ID of the device to target.
      *
-     * @return bool Whether the track was successfully skipped.
+     * @return bool Whether the track was successfully queued.
      */
     public function queue($trackUri, $deviceId = '')
     {

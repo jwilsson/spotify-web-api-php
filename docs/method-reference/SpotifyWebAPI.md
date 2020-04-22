@@ -1263,7 +1263,7 @@ Play the previous track in the current users's queue.<br>
 SpotifyWebAPI::queue($trackUri, $deviceId)
 ```
 
-Add an item to the end of the user's current playback queue.<br>
+Add a song to the queue.<br>
 [https://developer.spotify.com/documentation/web-api/reference/player/add-to-queue/](https://developer.spotify.com/documentation/web-api/reference/player/add-to-queue/)
 
 #### Arguments
@@ -1271,7 +1271,7 @@ Add an item to the end of the user's current playback queue.<br>
 * `$deviceId` **string** - Optional. ID of the device to target.
 
 #### Return values
-* **boolean** Whether the track was successfully added to the queue.
+* **boolean** Whether the track was successfully queued.
 
 ---
 ### reorderPlaylistTracks
