@@ -2290,7 +2290,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $stub = $this->setupStub(
             'POST',
-            '/v1/me/player/queue',
+            '/v1/me/player/queue?uri=spotify:track:6ek0XS2AUbzrHS0B5wPNcU&device_id=abc123',
             [],
             $headers,
             $return
@@ -2298,7 +2298,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->queue('spotify:track:6ek0XS2AUbzrHS0B5wPNcU');
+        $response = $api->queue('spotify:track:6ek0XS2AUbzrHS0B5wPNcU', 'abc123');
 
         $this->assertTrue($response);
     }
