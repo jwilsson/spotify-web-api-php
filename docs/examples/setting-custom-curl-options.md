@@ -17,9 +17,17 @@ $request = new SpotifyWebAPI\Request($options);
 // You can also call setOptions on an existing Request instance
 $request->setOptions($options);
 
-$api = SpotifyWebAPI\SpotifyWebAPI([], null, $request);
+// Then, pass the $request when instantiating Session and SpotifyWebAPI
+$session = new SpotifyWebAPI\Session(
+    'CLIENT_ID',
+    'CLIENT_SECRET',
+    'REDIRECT_URI',
+    $request
+);
 
-// Continue as usual
+$api = new SpotifyWebAPI\SpotifyWebAPI([], null, $request);
+
+// And continue as usual
 ```
 
 The options you pass in `curl_options` will be merged with the default ones and existing options with the same key will be overwritten by the ones passed by you.
