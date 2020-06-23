@@ -17,11 +17,11 @@ class Session
      * Set up client credentials.
      *
      * @param string $clientId The client ID.
-     * @param string $clientSecret The client secret.
+     * @param string $clientSecret Optional. The client secret.
      * @param string $redirectUri Optional. The redirect URI.
      * @param Request $request Optional. The Request object to use.
      */
-    public function __construct($clientId, $clientSecret, $redirectUri = '', $request = null)
+    public function __construct($clientId, $clientSecret = '', $redirectUri = '', $request = null)
     {
         $this->setClientId($clientId);
         $this->setClientSecret($clientSecret);
@@ -31,9 +31,43 @@ class Session
     }
 
     /**
+     * Generate a code challenge from a code verifier for use with the PKCE flow.
+     *
+     * @param string $codeVerifier The code verifier to create a challenge from.
+     * @param string $hashAlgo Optional. The hash algorithm to use. Defaults to "sha256".
+     *
+     * @return string The code challenge.
+     */
+    public function generateCodeChallenge($codeVerifier, $hashAlgo = 'sha256')
+    {
+        $challenge = hash($hashAlgo, $codeVerifier, true);
+        $challenge = base64_encode($challenge);
+        $challenge = strtr($challenge, '+/', '-_');
+        $challenge = rtrim($challenge, '=');
+
+        return $challenge;
+    }
+
+    /**
+     * Generate a code verifier for use with the PKCE flow.
+     *
+     * @param int $length Optional. Code verifier length. Must be between 43 and 128 characters long, default is 128.
+     *
+     * @return string A code verifier string.
+     */
+    public function generateCodeVerifier($length = 128)
+    {
+        // Length will be doubled when converting to hex
+        return bin2hex(
+            random_bytes($length / 2)
+        );
+    }
+
+    /**
      * Get the authorization URL.
      *
      * @param array|object $options Optional. Options for the authorization URL.
+     * - string code_challenge Optional. A PKCE code challenge.
      * - array scope Optional. Scope(s) to request from the user.
      * - boolean show_dialog Optional. Whether or not to force the user to always approve the app. Default is false.
      * - string state Optional. A CSRF token.
@@ -52,6 +86,14 @@ class Session
             'show_dialog' => !empty($options['show_dialog']) ? 'true' : null,
             'state' => $options['state'] ?? null,
         ];
+
+        // Set some extra parameters for PKCE flows
+        if (isset($options['code_challenge'])) {
+            $challengeMethod = isset($options['code_challenge_method']) ? $options['code_challenge_method'] : 'S256';
+
+            $parameters['code_challenge'] = $options['code_challenge'];
+            $parameters['code_challenge_method'] = $challengeMethod;
+        }
 
         return Request::ACCOUNT_URL . '/authorize?' . http_build_query($parameters);
     }
@@ -167,6 +209,45 @@ class Session
     }
 
     /**
+     * Request an access token given an authorization code.
+     *
+     * @param string $authorizationCode The authorization code from Spotify.
+     * @param string $codeVerifier Optional. A previously generated code verifier. Will assume a PKCE flow if passed.
+     *
+     * @return bool True when the access token was successfully granted, false otherwise.
+     */
+    public function requestAccessToken($authorizationCode, $codeVerifier = '')
+    {
+        $parameters = [
+            'client_id' => $this->getClientId(),
+            'code' => $authorizationCode,
+            'grant_type' => 'authorization_code',
+            'redirect_uri' => $this->getRedirectUri(),
+        ];
+
+        // Send a code verifier when PKCE, client secret otherwise
+        if ($codeVerifier) {
+            $parameters['code_verifier'] = $codeVerifier;
+        } else {
+            $parameters['client_secret'] = $this->getClientSecret();
+        }
+
+        $response = $this->request->account('POST', '/api/token', $parameters, []);
+        $response = $response['body'];
+
+        if (isset($response->refresh_token) && isset($response->access_token)) {
+            $this->refreshToken = $response->refresh_token;
+            $this->accessToken = $response->access_token;
+            $this->expirationTime = time() + $response->expires_in;
+            $this->scope = $response->scope ?? $this->scope;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Request an access token using the Client Credentials Flow.
      *
      * @return bool True when an access token was successfully granted, false otherwise.
@@ -187,38 +268,6 @@ class Session
         $response = $response['body'];
 
         if (isset($response->access_token)) {
-            $this->accessToken = $response->access_token;
-            $this->expirationTime = time() + $response->expires_in;
-            $this->scope = $response->scope ?? $this->scope;
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Request an access token given an authorization code.
-     *
-     * @param string $authorizationCode The authorization code from Spotify.
-     *
-     * @return bool True when the access token was successfully granted, false otherwise.
-     */
-    public function requestAccessToken($authorizationCode)
-    {
-        $parameters = [
-            'client_id' => $this->getClientId(),
-            'client_secret' => $this->getClientSecret(),
-            'code' => $authorizationCode,
-            'grant_type' => 'authorization_code',
-            'redirect_uri' => $this->getRedirectUri(),
-        ];
-
-        $response = $this->request->account('POST', '/api/token', $parameters, []);
-        $response = $response['body'];
-
-        if (isset($response->refresh_token) && isset($response->access_token)) {
-            $this->refreshToken = $response->refresh_token;
             $this->accessToken = $response->access_token;
             $this->expirationTime = time() + $response->expires_in;
             $this->scope = $response->scope ?? $this->scope;

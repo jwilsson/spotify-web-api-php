@@ -15,10 +15,43 @@ Set up client credentials.
 
 #### Arguments
 * `$clientId` **string** - The client ID.
-* `$clientSecret` **string** - The client secret.
+* `$clientSecret` **string** - Optional. The client secret.
 * `$redirectUri` **string** - Optional. The redirect URI.
 * `$request` **\SpotifyWebAPI\Request** - Optional. The Request object to use.
 
+
+---
+### generateCodeChallenge
+
+
+```php
+Session::generateCodeChallenge($codeVerifier, $hashAlgo)
+```
+
+Generate a code challenge from a code verifier for use with the PKCE flow.
+
+#### Arguments
+* `$codeVerifier` **string** - The code verifier to create a challenge from.
+* `$hashAlgo` **string** - Optional. The hash algorithm to use. Defaults to &quot;sha256&quot;.
+
+#### Return values
+* **string** The code challenge.
+
+---
+### generateCodeVerifier
+
+
+```php
+Session::generateCodeVerifier($length)
+```
+
+Generate a code verifier for use with the PKCE flow.
+
+#### Arguments
+* `$length` **integer** - Optional. Code verifier length. Must be between 43 and 128 characters long, default is 128.
+
+#### Return values
+* **string** A code verifier string.
 
 ---
 ### getAuthorizeUrl
@@ -32,6 +65,7 @@ Get the authorization URL.
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the authorization URL.
+    * string code_challenge Optional. A PKCE code challenge.
     * array scope Optional. Scope(s) to request from the user.
     * boolean show_dialog Optional. Whether or not to force the user to always approve the app. Default is false.
     * string state Optional. A CSRF token.
@@ -155,6 +189,23 @@ Refresh an access token.
 * **boolean** Whether the access token was successfully refreshed.
 
 ---
+### requestAccessToken
+
+
+```php
+Session::requestAccessToken($authorizationCode, $codeVerifier)
+```
+
+Request an access token given an authorization code.
+
+#### Arguments
+* `$authorizationCode` **string** - The authorization code from Spotify.
+* `$codeVerifier` **string** - Optional. A previously generated code verifier. Will assume a PKCE flow if passed.
+
+#### Return values
+* **boolean** True when the access token was successfully granted, false otherwise.
+
+---
 ### requestCredentialsToken
 
 
@@ -167,22 +218,6 @@ Request an access token using the Client Credentials Flow.
 
 #### Return values
 * **boolean** True when an access token was successfully granted, false otherwise.
-
----
-### requestAccessToken
-
-
-```php
-Session::requestAccessToken($authorizationCode)
-```
-
-Request an access token given an authorization code.
-
-#### Arguments
-* `$authorizationCode` **string** - The authorization code from Spotify.
-
-#### Return values
-* **boolean** True when the access token was successfully granted, false otherwise.
 
 ---
 ### setAccessToken

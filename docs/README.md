@@ -7,6 +7,7 @@ First, start by checking out the [Getting started guide](/docs/getting-started.m
 * **Authorization**
     * [Obtaining an access token using the Authorization Code Flow](/docs/examples/access-token-with-authorization-code-flow.md)
     * [Obtaining an access token using the Client Credentials Flow](/docs/examples/access-token-with-client-credentials-flow.md)
+    * [Obtaining an access token using the Proof Key for Code Exchange (PKCE) Flow](/docs/examples/access-token-with-pkce-flow.md)
     * [Working with scopes](/docs/examples/working-with-scopes.md)
 * **Fetching data**
     * [Fetching information about artists](/docs/examples/fetching-artist-information.md)
