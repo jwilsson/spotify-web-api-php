@@ -1,4 +1,7 @@
 # Changelog
+## 3.5.0 (2020-06-23)
+* Added support for the PKCE authorization flow. ([88e4cad](https://github.com/jwilsson/spotify-web-api-php/commit/88e4cad251c0155f73093373ed92542ee6ef7266))
+
 ## 3.4.0 (2020-04-22)
 * Added the `SpotifyWebAPI::queue()` method to add tracks to the user's playback queue. ([d6859a5](https://github.com/jwilsson/spotify-web-api-php/commit/d6859a5ad8509eee2685a3b779ff8cf639b56d4e))
 
