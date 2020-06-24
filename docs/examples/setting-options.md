@@ -20,7 +20,7 @@ $api->setOptions($options);
 
 * Possible values: `true`/`false` (default)
 
-Used to control [automatic refresh of access tokens](automatically-refreshing-access-tokens.md).
+Used to control [automatic refresh of access tokens](refreshing-access-tokens.md#automatically-refreshing-access-tokens).
 
 ### `auto_retry`
 

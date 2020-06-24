@@ -2,7 +2,7 @@
 
 All API methods require authorization. Before using these methods you'll need to create an app at [Spotify's developer site](https://developer.spotify.com/documentation/web-api/).
 
-The Authorization Code Flow method requires some interaction from the user but in turn allows access to user information. There are two steps required to authenticate the user. The first step is to request access to the user's account and data (known as *scopes*) and redirecting them to your app's authorize URL (also known as the callback URL).
+The Authorization Code flow method requires some interaction from the user but in turn allows access to user information. There are two steps required to authenticate the user. The first step is to request access to the user's account and data (known as *scopes*) and redirecting them to your app's authorize URL (also known as the callback URL).
 
 ### Step 1
 Put the following code in its own file, lets call it `auth.php`. Replace `CLIENT_ID` and `CLIENT_SECRET` with the values given to you by Spotify. The `REDIRECT_URI` is the one you entered when creating the Spotify app, make sure it's an exact match.
@@ -58,7 +58,7 @@ header('Location: app.php');
 die();
 ```
 
-When requesting a access token, a **refresh token** will also be included. This can be used to extend the validity of access tokens. It's recommended to also store this somewhere persistent, in a database for example. Read more about refresh tokens below.
+When requesting a access token, a **refresh token** will also be included. This can be used to extend the validity of access tokens. It's recommended to also store this somewhere persistent, in a database for example. [Read more about refresh tokens here](refreshing-access-tokens.md).
 
 ### Step 3
 In a third file, `app.php`, tell the API wrapper which access token to use, and then make some API calls!
@@ -82,20 +82,4 @@ print_r(
 );
 ```
 
-## Refreshing an access token
-_As of version `2.11.0` it's possible to automatically refresh the access token, see [Automatically Refreshing Access Tokens](automatically-refreshing-access-tokens.md) for more info._
-
-When the access token has expired, request a new one using the refresh token:
-
-```php
-// Fetch the refresh token from somewhere. A database for example.
-
-$session->refreshAccessToken($refreshToken);
-
-$accessToken = $session->getAccessToken();
-
-// Set our new access token on the API wrapper and continue to use the API as usual
-$api->setAccessToken($accessToken);
-```
-
-For more in-depth technical information about the Authorization Code Flow, please refer to the [Spotify Web API documentation](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow).
+For more in-depth technical information about the Authorization Code flow, please refer to the [Spotify Web API documentation](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow).

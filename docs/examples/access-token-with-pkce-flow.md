@@ -64,7 +64,7 @@ header('Location: app.php');
 die();
 ```
 
-When requesting a access token, a **refresh token** will also be included. This can be used to extend the validity of access tokens. It's recommended to also store this somewhere persistent, in a database for example. Read more about refresh tokens below.
+When requesting a access token, a **refresh token** will also be included. This can be used to extend the validity of access tokens. It's recommended to also store this somewhere persistent, in a database for example. [Read more about refresh tokens here](refreshing-access-tokens.md).
 
 ### Step 3
 In a third file, `app.php`, tell the API wrapper which access token to use, and then make some API calls!
@@ -88,20 +88,4 @@ print_r(
 );
 ```
 
-## Refreshing an access token
-_As of version `2.11.0` it's possible to automatically refresh the access token, see [Automatically Refreshing Access Tokens](automatically-refreshing-access-tokens.md) for more info._
-
-When the access token has expired, request a new one using the refresh token:
-
-```php
-// Fetch the refresh token from somewhere. A database for example.
-
-$session->refreshAccessToken($refreshToken);
-
-$accessToken = $session->getAccessToken();
-
-// Set our new access token on the API wrapper and continue to use the API as usual
-$api->setAccessToken($accessToken);
-```
-
-For more in-depth technical information about the Authorization Code Flow, please refer to the [Spotify Web API documentation](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow).
+For more in-depth technical information about the Proof Key for Code Exchange flow, please refer to the [Spotify Web API documentation](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce).

@@ -8,6 +8,7 @@ First, start by checking out the [Getting started guide](/docs/getting-started.m
     * [Obtaining an access token using the Authorization Code Flow](/docs/examples/access-token-with-authorization-code-flow.md)
     * [Obtaining an access token using the Client Credentials Flow](/docs/examples/access-token-with-client-credentials-flow.md)
     * [Obtaining an access token using the Proof Key for Code Exchange (PKCE) Flow](/docs/examples/access-token-with-pkce-flow.md)
+    * [Refreshing access tokens](/docs/examples/refreshing-access-tokens.md)
     * [Working with scopes](/docs/examples/working-with-scopes.md)
 * **Fetching data**
     * [Fetching information about artists](/docs/examples/fetching-artist-information.md)
@@ -23,7 +24,6 @@ First, start by checking out the [Getting started guide](/docs/getting-started.m
     * [Managing a user's playlists](/docs/examples/managing-user-playlists.md)
     * [Managing a user's profile](/docs/examples/managing-user-profiles.md)
 * **Working with the API**
-    * [Automatically refreshing access tokens](/docs/examples/automatically-refreshing-access-tokens.md)
     * [Handling errors](/docs/examples/handling-errors.md)
     * [Setting custom cURL options](/docs/examples/setting-custom-curl-options.md)
     * [Setting options](/docs/examples/setting-options.md)
