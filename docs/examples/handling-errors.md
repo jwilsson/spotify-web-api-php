@@ -7,12 +7,31 @@ The `message` property will be set to the error message returned by the Spotify 
 ```php
 try {
     $track = $api->getTrack('non-existing-track');
-} catch (Exception $e) {
+} catch (SpotifyWebAPIException $e) {
     echo 'Spotify API Error: ' . $e->getCode(); // Will be 404
 }
 ```
 
 When an authentication error occurs, a `SpotifyWebAPIAuthException` will be thrown. This will contain the same properties as above.
+
+## Handling expired access tokens
+_As of version `2.11.0` it's possible to automatically refresh expired access tokens. [Read more here](refreshing-access-tokens.md#automatically-refreshing-access-tokens)._
+
+When the access token has expired you'll get an error back. The `SpotifyWebAPIException` class supplies a helper method to easily check if an expired access token is the issue.
+
+```php
+try {
+    $track = $api->me();
+} catch (SpotifyWebAPIException $e) {
+    if ($e->hasExpiredToken()) {
+        // Refresh the access token
+    } else {
+        // Some other kind of error
+    }
+}
+```
+
+Read more about how to [refresh access tokens](refreshing-access-tokens.md).
 
 ## Handling rate limit errors
 _As of version `2.12.0` it's possible to automatically retry rate limited requests by setting the `auto_retry` option to `true`._
