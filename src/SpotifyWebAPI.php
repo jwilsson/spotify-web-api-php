@@ -455,9 +455,13 @@ class SpotifyWebAPI
                     $track['positions'] = (array) $track['positions'];
                 }
 
-                $track['uri'] = $this->idToUri($track['id'], 'track');
+                if (isset($track['id'])) {
+                    $track['uri'] = $track['id'];
 
-                unset($track['id']);
+                    unset($track['id']);
+                }
+
+                $track['uri'] = $this->idToUri($track['uri'], 'track');
 
                 return $track;
             }, $tracks['tracks']);

@@ -558,6 +558,12 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
                 [
                     'id' => '4iV5W9uYEdYUVa79Axb7Rh',
                 ],
+                [
+                    'uri' => 'spotify:track:1hChLdk0hBQbapbpVUVlNa',
+                ],
+                [
+                    'uri' => 'spotify:episode:0Q86acNRm6V9GYx55SXKwf',
+                ],
             ],
         ];
 
@@ -574,6 +580,12 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
                 ],
                 [
                     'uri' => 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh',
+                ],
+                [
+                    'uri' => 'spotify:track:1hChLdk0hBQbapbpVUVlNa',
+                ],
+                [
+                    'uri' => 'spotify:episode:0Q86acNRm6V9GYx55SXKwf',
                 ],
             ],
         ]);
