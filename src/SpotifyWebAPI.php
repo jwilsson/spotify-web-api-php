@@ -119,7 +119,7 @@ class SpotifyWebAPI
         $type = 'spotify:' . $type . ':';
 
         $ids = array_map(function ($id) use ($type) {
-            if (substr($id, 0, strlen($type)) != $type) {
+            if (substr($id, 0, strlen($type)) != $type && substr($id, 0, 7) != 'spotify') {
                 $id = $type . $id;
             }
 
