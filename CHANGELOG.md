@@ -1,7 +1,7 @@
 # Changelog
 ## 3.5.1 (2020-06-23)
-* Fixed an issue where URIs couldn't be passed in `SpotifyWebAPI::deletePlaylistTracks()`. ([70a49d2](https://github.com/jwilsson/spotify-web-api-php/commit/70a49d2cac451d1413d472654a3e5033b47543e2))
-* Hardened check before replacing in `SpotifyWebAPI::idToUri()`. ([3a46f89](https://github.com/jwilsson/spotify-web-api-php/commit/3a46f89a97f2547dd27014833712260ace80413e))
+* Fixed an issue where URIs couldn't be passed in `SpotifyWebAPI::deletePlaylistTracks()`. ([f6e61e5](https://github.com/jwilsson/spotify-web-api-php/commit/f6e61e54bbe56548f75cd5ba68c5f4683505c4f7))
+* Hardened check before replacing in `SpotifyWebAPI::idToUri()`. ([299062a](https://github.com/jwilsson/spotify-web-api-php/commit/299062ac0aa73c66d319b4d9fdde7295866a6719))
 
 ## 3.5.0 (2020-06-23)
 * Added support for the PKCE authorization flow. ([88e4cad](https://github.com/jwilsson/spotify-web-api-php/commit/88e4cad251c0155f73093373ed92542ee6ef7266))
