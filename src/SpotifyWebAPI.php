@@ -456,6 +456,11 @@ class SpotifyWebAPI
                 }
 
                 if (isset($track['id'])) {
+                    trigger_error(
+                        'Using `id` in SpotifyWebAPI::deletePlaylistTracks() is deprecated. Use `uri` instead.',
+                        E_USER_DEPRECATED
+                    );
+
                     $track['uri'] = $track['id'];
 
                     unset($track['id']);
@@ -559,6 +564,11 @@ class SpotifyWebAPI
      */
     public function followPlaylistForCurrentUser($playlistId, $options = [])
     {
+        trigger_error(
+            'SpotifyWebAPI::followPlaylistForCurrentUser() is deprecated. Use followPlaylist() instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->followPlaylist($playlistId, $options);
     }
 
@@ -1237,6 +1247,11 @@ class SpotifyWebAPI
      */
     public function getReturnType()
     {
+        trigger_error(
+            'SpotifyWebAPI::getReturnType() is deprecated. Use the `return_assoc` option instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->request->getReturnType();
     }
 
@@ -1801,6 +1816,11 @@ class SpotifyWebAPI
      */
     public function setReturnType($returnType)
     {
+        trigger_error(
+            'SpotifyWebAPI::setReturnType() is deprecated. Use the `return_assoc` option instead.',
+            E_USER_DEPRECATED
+        );
+
         $this->request->setReturnType($returnType);
     }
 
@@ -1898,6 +1918,11 @@ class SpotifyWebAPI
      */
     public function unfollowPlaylistForCurrentUser($playlistId)
     {
+        trigger_error(
+            'SpotifyWebAPI::unfollowPlaylistForCurrentUser() is deprecated. Use unfollowPlaylist() instead.',
+            E_USER_DEPRECATED
+        );
+
         return $this->unfollowPlaylist($playlistId);
     }
 
