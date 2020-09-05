@@ -62,7 +62,7 @@ $api->updatePlaylistImage('PLAYLIST_ID', $imageData);
 ```php
 $api->addPlaylistTracks('PLAYLIST_ID', [
     'TRACK_ID',
-    'TRACK_ID'
+    'EPISODE_URI'
 ]);
 ```
 
@@ -71,8 +71,8 @@ $api->addPlaylistTracks('PLAYLIST_ID', [
 ```php
 $tracks = [
     'tracks' => [
-        ['id' => 'TRACK_ID'],
-        ['id' => 'TRACK_ID'],
+        ['uri' => 'TRACK_ID'],
+        ['uri' => 'EPISODE_URI'],
     ],
 ];
 
@@ -97,7 +97,7 @@ $api->deletePlaylistTracks('PLAYLIST_ID', $trackOptions, 'SNAPSHOT_ID');
 ```php
 $api->replacePlaylistTracks('PLAYLIST_ID', [
     'TRACK_ID',
-    'TRACK_ID'
+    'EPISODE_URI'
 ]);
 ```
 
