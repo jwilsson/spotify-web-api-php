@@ -2290,7 +2290,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertTrue($response);
     }
 
-    public function testQueue()
+    public function testQueueId()
     {
         $headers = [
             'Authorization' => 'Bearer ' . $this->accessToken,
@@ -2310,7 +2310,32 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
         $api->setAccessToken($this->accessToken);
-        $response = $api->queue('spotify:track:6ek0XS2AUbzrHS0B5wPNcU', 'abc123');
+        $response = $api->queue('6ek0XS2AUbzrHS0B5wPNcU', 'abc123');
+
+        $this->assertTrue($response);
+    }
+
+    public function testQueueUri()
+    {
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->accessToken,
+        ];
+
+        $return = [
+            'status' => 204,
+        ];
+
+        $stub = $this->setupStub(
+            'POST',
+            '/v1/me/player/queue?uri=spotify:episode:0Q86acNRm6V9GYx55SXKwf&device_id=abc123',
+            [],
+            $headers,
+            $return
+        );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
+        $api->setAccessToken($this->accessToken);
+        $response = $api->queue('spotify:episode:0Q86acNRm6V9GYx55SXKwf', 'abc123');
 
         $this->assertTrue($response);
     }

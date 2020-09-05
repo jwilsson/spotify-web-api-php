@@ -1609,16 +1609,14 @@ class SpotifyWebAPI
      * Add a song to the queue.
      * https://developer.spotify.com/documentation/web-api/reference/player/add-to-queue/
      *
-     * @param string $trackUri Required. The uri of the item to add to the queue. Must be a track or an episode uri.
+     * @param string $trackUri Required. Track ID, track URI or episode URI to queue.
      * @param string $deviceId Optional. ID of the device to target.
      *
      * @return bool Whether the track was successfully queued.
      */
     public function queue($trackUri, $deviceId = '')
     {
-        $uri = '/v1/me/player/queue';
-
-        $uri = $uri . '?uri=' . $trackUri;
+        $uri = '/v1/me/player/queue?uri=' . $this->idToUri($trackUri, 'track');
 
         // We need to manually append data to the URI since it's a POST request
         if ($deviceId) {
