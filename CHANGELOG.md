@@ -1,4 +1,9 @@
 # Changelog
+## 3.6.0 (2020-09-19)
+* Methods deprecated in `3.x` releases will now print deprecation warnings. ([fe67153](https://github.com/jwilsson/spotify-web-api-php/commit/fe6715358cb12e8fbb600c528a1ea2534bd39c2b))
+* `SpotifyWebAPI::queue()` can now also accept track IDs. ([a3aee78](https://github.com/jwilsson/spotify-web-api-php/commit/a3aee782e1aa0ee7d88a201a70d00263f31c84f8))
+* Updated CA bundle. ([dfa4edc](https://github.com/jwilsson/spotify-web-api-php/commit/dfa4edc0891767799f54b214d9ade77168a4148b))
+
 ## 3.5.1 (2020-08-15)
 * Fixed an issue where URIs couldn't be passed in `SpotifyWebAPI::deletePlaylistTracks()`. ([f6e61e5](https://github.com/jwilsson/spotify-web-api-php/commit/f6e61e54bbe56548f75cd5ba68c5f4683505c4f7))
 * Hardened check before replacing in `SpotifyWebAPI::idToUri()`. ([299062a](https://github.com/jwilsson/spotify-web-api-php/commit/299062ac0aa73c66d319b4d9fdde7295866a6719))
