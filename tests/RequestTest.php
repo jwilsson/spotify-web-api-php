@@ -282,28 +282,6 @@ class RequestTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(200, $response['status']);
     }
 
-    public function testSendReturnType()
-    {
-        $request = new SpotifyWebAPI\Request();
-        $request->setReturnType(SpotifyWebAPI\Request::RETURN_ASSOC);
-
-        $response = $request->send('GET', 'https://httpbin.org/get');
-
-        $this->assertArrayHasKey('url', $response['body']);
-    }
-
-    public function testSendCurlOptions()
-    {
-        $request = new SpotifyWebAPI\Request();
-        $request->setCurlOptions([
-            CURLOPT_HTTPHEADER => ['Accept: applicaton/json'],
-        ]);
-
-        $response = $request->send('GET', 'https://httpbin.org/headers');
-
-        $this->assertEquals('applicaton/json', $response['body']->headers->Accept);
-    }
-
     public function testSetOptions()
     {
         $request = new SpotifyWebAPI\Request();
@@ -314,16 +292,5 @@ class RequestTest extends PHPUnit\Framework\TestCase
         $response = $request->send('GET', 'https://httpbin.org/get');
 
         $this->assertArrayHasKey('url', $response['body']);
-    }
-
-    public function testSetReturnType()
-    {
-        $request = new SpotifyWebAPI\Request();
-
-        $request->setReturnType(SpotifyWebAPI\Request::RETURN_ASSOC);
-        $this->assertEquals(SpotifyWebAPI\Request::RETURN_ASSOC, $request->getReturnType());
-
-        $request->setReturnType(SpotifyWebAPI\Request::RETURN_OBJECT);
-        $this->assertEquals(SpotifyWebAPI\Request::RETURN_OBJECT, $request->getReturnType());
     }
 }

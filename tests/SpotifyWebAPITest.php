@@ -646,27 +646,6 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         ));
     }
 
-    public function testFollowPlaylistForCurrentUser()
-    {
-        $options = ['public' => false];
-        $expected = json_encode($options);
-
-        $headers = ['Content-Type' => 'application/json'];
-        $return = ['status' => 200];
-        $api = $this->setupApi(
-            'PUT',
-            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers',
-            $expected,
-            $headers,
-            $return
-        );
-
-        $this->assertTrue($api->followPlaylistForCurrentUser(
-            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
-            $options
-        ));
-    }
-
     public function testGetAlbum()
     {
         $options = ['market' => 'SE'];
@@ -1408,21 +1387,6 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertObjectHasAttribute('seeds', $response);
     }
 
-    public function testGetReturnType()
-    {
-        $stub = $this->getMockBuilder('Request')
-                ->setMethods(['getReturnType'])
-                ->getMock();
-
-        $stub->expects($this->once())
-                ->method('getReturnType')
-                ->willReturn(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
-
-        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
-
-        $this->assertEquals(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC, $api->getReturnType());
-    }
-
     public function testGetRequest()
     {
         $api = new SpotifyWebAPI\SpotifyWebAPI();
@@ -2059,20 +2023,6 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertEquals($expectedReason, $exception->getReason());
     }
 
-    public function testSetReturnType()
-    {
-        $stub = $this->getMockBuilder('Request')
-                ->setMethods(['setReturnType'])
-                ->getMock();
-
-        $stub->expects($this->once())
-                ->method('setReturnType')
-                ->willReturn(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
-
-        $api = new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
-        $api->setReturnType(SpotifyWebAPI\SpotifyWebAPI::RETURN_ASSOC);
-    }
-
     public function testShuffle()
     {
         $return = ['status' => 204];
@@ -2116,24 +2066,6 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $api->unFollowArtistsOrUsers(
                 'artist',
                 ['74ASZWbe4lXaubB36ztrGX', 'spotify:artist:36QJpDe2go2KgaRleHCDTp']
-            )
-        );
-    }
-
-    public function testUnfollowPlaylistForCurrentUser()
-    {
-        $return = ['status' => 200];
-        $api = $this->setupApi(
-            'DELETE',
-            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers',
-            [],
-            [],
-            $return
-        );
-
-        $this->assertTrue(
-            $api->unfollowPlaylistForCurrentUser(
-                'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9'
             )
         );
     }

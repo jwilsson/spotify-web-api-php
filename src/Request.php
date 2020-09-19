@@ -7,16 +7,11 @@ class Request
     public const ACCOUNT_URL = 'https://accounts.spotify.com';
     public const API_URL = 'https://api.spotify.com';
 
-    public const RETURN_ASSOC = 'assoc';
-    public const RETURN_OBJECT = 'object';
-
-    protected $curlOptions = [];
     protected $lastResponse = [];
     protected $options = [
         'curl_options' => [],
         'return_assoc' => false,
     ];
-    protected $returnType = self::RETURN_OBJECT;
 
     /**
      * Constructor
@@ -42,8 +37,7 @@ class Request
      */
     protected function parseBody($body, $status)
     {
-        $returnAssoc = $this->returnType == self::RETURN_ASSOC || $this->options['return_assoc'];
-        $this->lastResponse['body'] = json_decode($body, $returnAssoc);
+        $this->lastResponse['body'] = json_decode($body, $this->options['return_assoc']);
 
         if ($status >= 200 && $status <= 299) {
             return $this->lastResponse['body'];
@@ -153,23 +147,6 @@ class Request
     }
 
     /**
-     * Get a value indicating the response body type.
-     *
-     * @deprecated Use the `return_assoc` option instead.
-     *
-     * @return string A value indicating if the response body is an object or associative array.
-     */
-    public function getReturnType()
-    {
-        trigger_error(
-            'Request::setReturnType() is deprecated. Use the `return_assoc` option instead.',
-            E_USER_DEPRECATED
-        );
-
-        return $this->returnType;
-    }
-
-    /**
      * Make a request to Spotify.
      * You'll probably want to use one of the convenience methods instead.
      *
@@ -236,11 +213,7 @@ class Request
 
         $ch = curl_init();
 
-        if ($this->curlOptions) {
-            curl_setopt_array($ch, array_replace($options, $this->curlOptions));
-        } else {
-            curl_setopt_array($ch, array_replace($options, $this->options['curl_options']));
-        }
+        curl_setopt_array($ch, array_replace($options, $this->options['curl_options']));
 
         $response = curl_exec($ch);
 
@@ -268,26 +241,6 @@ class Request
     }
 
     /**
-     * Set custom cURL options.
-     * Any options passed here will be merged with the defaults, overriding existing ones.
-     *
-     * @deprecated Use the `curl_options` option instead.
-     *
-     * @param array $options Any available cURL option.
-     *
-     * @return void
-     */
-    public function setCurlOptions($options)
-    {
-        trigger_error(
-            'Request::setCurlOptions() is deprecated. Use the `curl_options` option instead.',
-            E_USER_DEPRECATED
-        );
-
-        $this->curlOptions = $options;
-    }
-
-    /**
      * Set options
      *
      * @param array|object $options Options to set.
@@ -297,25 +250,6 @@ class Request
     public function setOptions($options)
     {
         $this->options = array_merge($this->options, (array) $options);
-    }
-
-    /**
-     * Set the return type for the response body.
-     *
-     * @deprecated Use the `return_assoc` option instead.
-     *
-     * @param string $returnType One of the `Request::RETURN_*` constants.
-     *
-     * @return void
-     */
-    public function setReturnType($returnType)
-    {
-        trigger_error(
-            'Request::setReturnType() is deprecated. Use the `return_assoc` option instead.',
-            E_USER_DEPRECATED
-        );
-
-        $this->returnType = $returnType;
     }
 
     /**

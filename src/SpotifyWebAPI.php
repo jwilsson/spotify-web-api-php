@@ -4,9 +4,6 @@ namespace SpotifyWebAPI;
 
 class SpotifyWebAPI
 {
-    public const RETURN_ASSOC = 'assoc';
-    public const RETURN_OBJECT = 'object';
-
     protected $accessToken = '';
     protected $lastResponse = [];
     protected $options = [
@@ -635,28 +632,6 @@ class SpotifyWebAPI
         $this->lastResponse = $this->sendRequest('PUT', $uri, $options, $headers);
 
         return $this->lastResponse['status'] == 200;
-    }
-
-    /**
-     * Add the current user as a follower of a playlist.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-follow-playlist
-     *
-     * @deprecated Use SpotifyWebAPI::followPlaylist() instead.
-     *
-     * @param string $playlistId ID or URI of the playlist to follow.
-     * @param array|object $options Optional. Options for the followed playlist.
-     * - bool public Optional. Whether the playlist should be followed publicly or not.
-     *
-     * @return bool Whether the playlist was successfully followed.
-     */
-    public function followPlaylistForCurrentUser($playlistId, $options = [])
-    {
-        trigger_error(
-            'SpotifyWebAPI::followPlaylistForCurrentUser() is deprecated. Use followPlaylist() instead.',
-            E_USER_DEPRECATED
-        );
-
-        return $this->followPlaylist($playlistId, $options);
     }
 
     /**
@@ -1416,23 +1391,6 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get a value indicating the response body type.
-     *
-     * @deprecated Use the `return_assoc` option instead.
-     *
-     * @return string A value indicating if the response body is an object or associative array.
-     */
-    public function getReturnType()
-    {
-        trigger_error(
-            'SpotifyWebAPI::getReturnType() is deprecated. Use the `return_assoc` option instead.',
-            E_USER_DEPRECATED
-        );
-
-        return $this->request->getReturnType();
-    }
-
-    /**
      * Get the Request object in use.
      *
      * @return Request The Request object in use.
@@ -2004,25 +1962,6 @@ class SpotifyWebAPI
     }
 
     /**
-     * Set the return type for the response body.
-     *
-     * @deprecated Use the `return_assoc` option instead.
-     *
-     * @param string $returnType One of the `SpotifyWebAPI::RETURN_*` constants.
-     *
-     * @return void
-     */
-    public function setReturnType($returnType)
-    {
-        trigger_error(
-            'SpotifyWebAPI::setReturnType() is deprecated. Use the `return_assoc` option instead.',
-            E_USER_DEPRECATED
-        );
-
-        $this->request->setReturnType($returnType);
-    }
-
-    /**
      * Set the Session object to use.
      *
      * @param Session $session The Session object.
@@ -2104,26 +2043,6 @@ class SpotifyWebAPI
         $this->lastResponse = $this->sendRequest('DELETE', $uri);
 
         return $this->lastResponse['status'] == 200;
-    }
-
-    /**
-     * Remove the current user as a follower of a playlist.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-unfollow-playlist
-     *
-     * @deprecated Use SpotifyWebAPI::unfollowPlaylist() instead.
-     *
-     * @param string $playlistId ID or URI of the playlist to unfollow.
-     *
-     * @return bool Whether the playlist was successfully unfollowed.
-     */
-    public function unfollowPlaylistForCurrentUser($playlistId)
-    {
-        trigger_error(
-            'SpotifyWebAPI::unfollowPlaylistForCurrentUser() is deprecated. Use unfollowPlaylist() instead.',
-            E_USER_DEPRECATED
-        );
-
-        return $this->unfollowPlaylist($playlistId);
     }
 
     /**
