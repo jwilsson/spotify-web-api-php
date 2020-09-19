@@ -1,4 +1,5 @@
 <?php
+
 class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 {
     private $accessToken = 'access_token';
