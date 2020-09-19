@@ -74,10 +74,14 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $stub->expects($this->at(0))
-            ->method('api')
-            ->willThrowException(
-                new SpotifyWebAPI\SpotifyWebAPIException('The access token expired', 401)
+        $stub->method('api')
+            ->will(
+                $this->onConsecutiveCalls(
+                    $this->throwException(
+                        new SpotifyWebAPI\SpotifyWebAPIException('The access token expired', 401)
+                    ),
+                    $this->returnValue($return)
+                )
             );
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($options, $sessionStub, $stub);
@@ -107,10 +111,14 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $stub->expects($this->at(0))
-            ->method('api')
-            ->willThrowException(
-                new SpotifyWebAPI\SpotifyWebAPIException('API rate limit exceeded', 429)
+        $stub->method('api')
+            ->will(
+                $this->onConsecutiveCalls(
+                    $this->throwException(
+                        new SpotifyWebAPI\SpotifyWebAPIException('API rate limit exceeded', 429)
+                    ),
+                    $this->returnValue($return)
+                )
             );
 
         $api = new SpotifyWebAPI\SpotifyWebAPI($options, null, $stub);

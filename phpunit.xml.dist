@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit backupGlobals="false"
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+    backupGlobals="false"
     backupStaticAttributes="false"
     bootstrap="./phpunit.php"
     cacheResult="false"
@@ -12,21 +15,21 @@
     stopOnFailure="false"
     verbose="true"
 >
-    <testsuites>
-        <testsuite name="Spotify Web API Test Suite">
-            <directory>./tests/</directory>
-        </testsuite>
-    </testsuites>
+  <coverage>
+    <include>
+      <directory>./src/</directory>
+    </include>
 
-    <filter>
-        <whitelist>
-            <directory>./src/</directory>
-        </whitelist>
-    </filter>
+    <report>
+      <clover outputFile="build/logs/clover.xml"/>
+      <html outputDirectory="build/logs/html"/>
+      <text outputFile="php://stdout"/>
+    </report>
+  </coverage>
 
-    <logging>
-        <log type="coverage-clover" target="build/logs/clover.xml" />
-        <log type="coverage-html" target="build/logs/html" />
-        <log type="coverage-text" target="php://stdout" />
-    </logging>
+  <testsuites>
+    <testsuite name="Spotify Web API Test Suite">
+      <directory>./tests/</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>

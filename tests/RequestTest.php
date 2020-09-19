@@ -5,7 +5,6 @@ class RequestTest extends PHPUnit\Framework\TestCase
     private function setupStub($expectedMethod, $expectedUri, $expectedParameters, $expectedHeaders, $expectedReturn)
     {
         $stub = $this->createPartialMock(SpotifyWebAPI\Request::class, ['send']);
-
         $invocation = $stub->expects($this->once())
             ->method('send')
             ->with(
