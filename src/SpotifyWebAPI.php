@@ -547,17 +547,6 @@ class SpotifyWebAPI
                     $track['positions'] = (array) $track['positions'];
                 }
 
-                if (isset($track['id'])) {
-                    trigger_error(
-                        'Using `id` in SpotifyWebAPI::deletePlaylistTracks() is deprecated. Use `uri` instead.',
-                        E_USER_DEPRECATED
-                    );
-
-                    $track['uri'] = $track['id'];
-
-                    unset($track['id']);
-                }
-
                 $track['uri'] = $this->idToUri($track['uri'], 'track');
 
                 return $track;

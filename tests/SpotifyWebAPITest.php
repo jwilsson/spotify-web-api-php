@@ -519,15 +519,15 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $tracks = [
             'tracks' => [
                 [
-                    'id' => '1id6H6vcwSB9GGv9NXh5cl',
+                    'uri' => '1id6H6vcwSB9GGv9NXh5cl',
                     'positions' => 0,
                 ],
                 [
-                    'id' => '3mqRLlD9j92BBv1ueFhJ1l',
+                    'uri' => '3mqRLlD9j92BBv1ueFhJ1l',
                     'positions' => [1, 2],
                 ],
                 [
-                    'id' => '4iV5W9uYEdYUVa79Axb7Rh',
+                    'uri' => '4iV5W9uYEdYUVa79Axb7Rh',
                 ],
                 [
                     'uri' => 'spotify:track:1hChLdk0hBQbapbpVUVlNa',
@@ -542,12 +542,12 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             'snapshot_id' => 'snapshot_id',
             'tracks' => [
                 [
-                    'positions' => [0],
                     'uri' => 'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
+                    'positions' => [0],
                 ],
                 [
-                    'positions' => [1, 2],
                     'uri' => 'spotify:track:3mqRLlD9j92BBv1ueFhJ1l',
+                    'positions' => [1, 2],
                 ],
                 [
                     'uri' => 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh',
