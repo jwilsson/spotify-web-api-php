@@ -1,5 +1,5 @@
 # Changelog
-## 3.5.1 (2020-06-23)
+## 3.5.1 (2020-08-15)
 * Fixed an issue where URIs couldn't be passed in `SpotifyWebAPI::deletePlaylistTracks()`. ([f6e61e5](https://github.com/jwilsson/spotify-web-api-php/commit/f6e61e54bbe56548f75cd5ba68c5f4683505c4f7))
 * Hardened check before replacing in `SpotifyWebAPI::idToUri()`. ([299062a](https://github.com/jwilsson/spotify-web-api-php/commit/299062ac0aa73c66d319b4d9fdde7295866a6719))
 
