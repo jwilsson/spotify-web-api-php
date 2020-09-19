@@ -64,6 +64,26 @@ class SpotifyWebAPI
     }
 
     /**
+     * Try to fetch a snapshot ID from a response.
+     *
+     * @param string object|array The parsed response body.
+     *
+     * @return string|bool A snapshot ID or false if none exists.
+     */
+    protected function getSnapshotId($body)
+    {
+        if (isset($body->snapshot_id)) {
+            return $body->snapshot_id;
+        }
+
+        if (isset($body['snapshot_id'])) {
+            return $body['snapshot_id'];
+        }
+
+        return false;
+    }
+
+    /**
      * Convert Spotify object IDs to URIs.
      *
      * @param array|string $ids ID(s) to convert.
@@ -137,6 +157,22 @@ class SpotifyWebAPI
     }
 
     /**
+     * Convert an array to a comma-separated string. If it's already a string, do nothing.
+     *
+     * @param array|string The value to convert.
+     *
+     * @return string A comma-separated string.
+     */
+    protected function toCommaString($value)
+    {
+        if (is_array($value)) {
+            return implode(',', $value);
+        }
+
+        return $value;
+    }
+
+    /**
      * Convert URIs to Spotify object IDs.
      *
      * @param array|string $uriIds URI(s) to convert.
@@ -153,22 +189,6 @@ class SpotifyWebAPI
         }, (array) $uriIds);
 
         return count($uriIds) == 1 ? $uriIds[0] : $uriIds;
-    }
-
-    /**
-     * Convert an array to a comma-separated string. If it's already a string, do nothing.
-     *
-     * @param array|string The value to convert.
-     *
-     * @return string A comma-separated string.
-     */
-    protected function toCommaString($value)
-    {
-        if (is_array($value)) {
-            return implode(',', $value);
-        }
-
-        return $value;
     }
 
     /**
@@ -276,7 +296,7 @@ class SpotifyWebAPI
      * @param array|object $options Optional. Options for the new tracks.
      * - int position Optional. Zero-based track position in playlist. Tracks will be appened if omitted or false.
      *
-     * @return bool Whether the tracks was successfully added.
+     * @return string|bool A new snapshot ID or false if the tracks weren't successfully added.
      */
     public function addPlaylistTracks($playlistId, $tracks, $options = [])
     {
@@ -296,7 +316,7 @@ class SpotifyWebAPI
 
         $this->lastResponse = $this->sendRequest('POST', $uri, $options, $headers);
 
-        return $this->lastResponse['status'] == 201;
+        return $this->getSnapshotId($this->lastResponse['body']);
     }
 
     /**
@@ -559,15 +579,7 @@ class SpotifyWebAPI
 
         $this->lastResponse = $this->sendRequest('DELETE', $uri, $options, $headers);
 
-        $body = $this->lastResponse['body'];
-
-        if (isset($body->snapshot_id)) {
-            return $body->snapshot_id;
-        } elseif (isset($body['snapshot_id'])) {
-            return $body['snapshot_id'];
-        }
-
-        return false;
+        return $this->getSnapshotId($this->lastResponse['body']);
     }
 
     /**
@@ -1863,15 +1875,8 @@ class SpotifyWebAPI
         $uri = '/v1/playlists/' . $playlistId . '/tracks';
 
         $this->lastResponse = $this->sendRequest('PUT', $uri, $options, $headers);
-        $body = $this->lastResponse['body'];
 
-        if (isset($body->snapshot_id)) {
-            return $body->snapshot_id;
-        } elseif (isset($body['snapshot_id'])) {
-            return $body['snapshot_id'];
-        }
-
-        return false;
+        return $this->getSnapshotId($this->lastResponse['body']);
     }
 
     /**

@@ -289,7 +289,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         ]);
 
         $headers = ['Content-Type' => 'application/json'];
-        $return = ['status' => 201];
+        $return = ['body' => get_fixture('snapshot-id')];
         $api = $this->setupApi(
             'POST',
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
@@ -298,7 +298,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $this->assertTrue(
+        $this->assertNotFalse(
             $api->addPlaylistTracks(
                 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
                 $tracks,
