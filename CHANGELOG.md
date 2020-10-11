@@ -1,4 +1,7 @@
 # Changelog
+## 3.6.1 (2020-10-11)
+* Fixed an issue with the auto retry feature sometimes not working correctly due to lowercased header names. ([28c7b1d](https://github.com/jwilsson/spotify-web-api-php/commit/28c7b1da3ac18a82b0b74aadfb7da47024ddb6e5))
+
 ## 3.6.0 (2020-09-19)
 * Methods deprecated in `3.x` releases will now print deprecation warnings. ([fe67153](https://github.com/jwilsson/spotify-web-api-php/commit/fe6715358cb12e8fbb600c528a1ea2534bd39c2b))
 * `SpotifyWebAPI::queue()` can now also accept track IDs. ([a3aee78](https://github.com/jwilsson/spotify-web-api-php/commit/a3aee782e1aa0ee7d88a201a70d00263f31c84f8))
