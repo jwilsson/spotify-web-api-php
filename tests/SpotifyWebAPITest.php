@@ -122,6 +122,41 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertObjectHasAttribute('id', $response);
     }
 
+    public function testAutoRetryOptionFallback()
+    {
+        $options = ['auto_retry' => true];
+
+        $headers = ['Authorization' => 'Bearer ' . $this->accessToken];
+        $return = [
+            'body' => get_fixture('track'),
+            'headers' => [
+                'retry-after' => 3,
+            ],
+            'status' => 429,
+        ];
+
+        $stub = $this->setupStub(
+            'GET',
+            '/v1/tracks/0eGsygTp906u18L0Oimnem',
+            [],
+            $headers,
+            $return
+        );
+
+        $stub->expects($this->at(1))
+            ->method('api')
+            ->willThrowException(
+                new SpotifyWebAPI\SpotifyWebAPIException('API rate limit exceeded', 429)
+            );
+
+        $api = new SpotifyWebAPI\SpotifyWebAPI($options, null, $stub);
+        $api->setAccessToken($this->accessToken);
+
+        $response = $api->getTrack('0eGsygTp906u18L0Oimnem');
+
+        $this->assertObjectHasAttribute('id', $response);
+    }
+
     public function testAddMyAlbums()
     {
         $albums = [

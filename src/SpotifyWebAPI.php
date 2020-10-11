@@ -95,9 +95,10 @@ class SpotifyWebAPI
                 return $this->sendRequest($method, $uri, $parameters, $headers);
             } elseif ($this->options['auto_retry'] && $e->isRateLimited()) {
                 $lastResponse = $this->request->getLastResponse();
-                $retryAfter = (int) $lastResponse['headers']['Retry-After'];
+                // TODO: Remove check in 4.0 when header normalization is in place
+                $retryAfter = $lastResponse['headers']['Retry-After'] ?? $lastResponse['headers']['retry-after'];
 
-                sleep($retryAfter);
+                sleep((int) $retryAfter);
 
                 return $this->sendRequest($method, $uri, $parameters, $headers);
             }
