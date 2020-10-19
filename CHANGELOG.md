@@ -1,4 +1,8 @@
 # Changelog
+## 3.6.2 (2020-10-19)
+* Made sure `&` is always passed to all `http_build_query()` calls. ([e2f0c26](https://github.com/jwilsson/spotify-web-api-php/commit/e2f0c26daef517dd507da80799c8821c677e660d))
+* Updated CA bundle. ([4b824c3](https://github.com/jwilsson/spotify-web-api-php/commit/4b824c3b639b1702569b3ec7f2a95e79e96577a6))
+
 ## 3.6.1 (2020-10-11)
 * Fixed an issue with the auto retry feature sometimes not working correctly due to lowercased header names. ([28c7b1d](https://github.com/jwilsson/spotify-web-api-php/commit/28c7b1da3ac18a82b0b74aadfb7da47024ddb6e5))
 
