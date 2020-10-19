@@ -95,7 +95,7 @@ class Session
             $parameters['code_challenge_method'] = $challengeMethod;
         }
 
-        return Request::ACCOUNT_URL . '/authorize?' . http_build_query($parameters);
+        return Request::ACCOUNT_URL . '/authorize?' . http_build_query($parameters, null, '&');
     }
 
     /**

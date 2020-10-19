@@ -193,7 +193,7 @@ class Request
 
         // Sometimes a stringified JSON object is passed
         if (is_array($parameters) || is_object($parameters)) {
-            $parameters = http_build_query($parameters);
+            $parameters = http_build_query($parameters, null, '&');
         }
 
         $mergedHeaders = [];
