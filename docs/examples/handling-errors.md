@@ -47,7 +47,7 @@ try {
     if ($e->getCode() == 429) { // 429 is Too Many Requests
         $lastResponse = $api->getRequest()->getLastResponse();
 
-        $retryAfter = $lastResponse['headers']['Retry-After']; // Number of seconds to wait before sending another request
+        $retryAfter = $lastResponse['headers']['retry-after']; // Number of seconds to wait before sending another request
     } else {
         // Some other kind of error
     }
