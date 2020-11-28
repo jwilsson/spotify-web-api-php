@@ -39,6 +39,11 @@
             "vendor/phpunit/phpunit-mock-objects/src/InvocationMocker.php"
         ]
     },
+    "config": {
+        "platform": {
+            "php": "7.0"
+        }
+    },
     "scripts": {
         "test": "phpcs src -v && phpunit"
     }
