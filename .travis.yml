@@ -1,0 +1,39 @@
+language: php
+
+php:
+  - 8.0
+  - 7.4
+  - 7.3
+  - 7.2
+  - 7.1
+  - 7.0
+  - nightly
+
+git:
+  depth: 1
+
+branches:
+  only:
+    - master
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: nightly
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+before_script:
+  - travis_retry composer self-update
+  # TODO: Remove --ignore-platform-reqs when we're on newer PHPUnit versions
+  - travis_retry composer install --prefer-dist --no-interaction --ignore-platform-reqs
+
+script:
+  - mkdir -p build/logs
+  - vendor/bin/phpcs src -v --standard=PSR2
+  - vendor/bin/phpunit
+
+after_script:
+ - travis_retry php vendor/bin/php-coveralls -v
