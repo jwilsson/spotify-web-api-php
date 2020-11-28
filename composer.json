@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "php": "^7.0 || ^8.0",
+        "php": "^7.0",
         "ext-curl": "*"
     },
     "require-dev": {
@@ -23,25 +23,6 @@
     "autoload": {
         "psr-4": {
             "SpotifyWebAPI\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "files": [
-            "tests/phpunit/MockObject/Builder/LegacyMatch.php",
-            "tests/phpunit/MockObject/Builder/NamespaceMatch.php",
-            "tests/phpunit/MockObject/Builder/ParametersMatch.php",
-            "tests/phpunit/MockObject/InvocationMocker.php"
-        ],
-        "exclude-from-classmap": [
-            "vendor/phpunit/phpunit-mock-objects/src/Builder/Match.php",
-            "vendor/phpunit/phpunit-mock-objects/src/Builder/NamespaceMatch.php",
-            "vendor/phpunit/phpunit-mock-objects/src/Builder/ParametersMatch.php",
-            "vendor/phpunit/phpunit-mock-objects/src/InvocationMocker.php"
-        ]
-    },
-    "config": {
-        "platform": {
-            "php": "7.0"
         }
     },
     "scripts": {
