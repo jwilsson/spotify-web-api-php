@@ -1,3 +1,5 @@
+dist: bionic
+
 language: php
 
 php:
@@ -36,4 +38,4 @@ script:
   - vendor/bin/phpunit
 
 after_script:
- - travis_retry php vendor/bin/php-coveralls -v
+  - travis_retry php vendor/bin/php-coveralls -v
