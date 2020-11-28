@@ -20,7 +20,6 @@ jobs:
         php-version: ${{ matrix.php-versions }}
         coverage: xdebug
 
-    # TODO: Remove --ignore-platform-reqs when we're on newer PHPUnit versions
-    - run: composer install --ignore-platform-reqs
+    - run: composer install
     - run: composer test
     - run: php vendor/bin/php-coveralls -v
