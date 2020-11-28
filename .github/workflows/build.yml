@@ -20,6 +20,7 @@ jobs:
         php-version: ${{ matrix.php-versions }}
         coverage: pcov
 
-    - run: composer install
+    # TODO: Remove --ignore-platform-reqs when we're on newer PHPUnit versions
+    - run: composer install --ignore-platform-reqs
     - run: composer test
     - run: php vendor/bin/php-coveralls -v

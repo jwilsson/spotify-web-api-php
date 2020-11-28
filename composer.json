@@ -25,6 +25,20 @@
             "SpotifyWebAPI\\": "src/"
         }
     },
+    "autoload-dev": {
+        "files": [
+            "tests/phpunit/MockObject/Builder/LegacyMatch.php",
+            "tests/phpunit/MockObject/Builder/NamespaceMatch.php",
+            "tests/phpunit/MockObject/Builder/ParametersMatch.php",
+            "tests/phpunit/MockObject/InvocationMocker.php"
+        ],
+        "exclude-from-classmap": [
+            "vendor/phpunit/phpunit-mock-objects/src/Builder/Match.php",
+            "vendor/phpunit/phpunit-mock-objects/src/Builder/NamespaceMatch.php",
+            "vendor/phpunit/phpunit-mock-objects/src/Builder/ParametersMatch.php",
+            "vendor/phpunit/phpunit-mock-objects/src/InvocationMocker.php"
+        ]
+    },
     "scripts": {
         "test": "phpcs src -v && phpunit"
     }
