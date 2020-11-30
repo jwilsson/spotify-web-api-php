@@ -1,4 +1,8 @@
 # Changelog
+## 4.0.0 (2020-11-30)
+* **Breaking** Dropped support for PHP versions less than 7.2. ([2bbefc7](https://github.com/jwilsson/spotify-web-api-php/commit/2bbefc731a3cd58669823209014ca657da422d83))
+* Added PHP 8 support. ([3e37d76](https://github.com/jwilsson/spotify-web-api-php/commit/3e37d7649f845dc6504fde8917d0789f4758a1c7))
+
 ## 3.6.2 (2020-10-19)
 * Made sure `&` is always passed to all `http_build_query()` calls. ([e2f0c26](https://github.com/jwilsson/spotify-web-api-php/commit/e2f0c26daef517dd507da80799c8821c677e660d))
 * Updated CA bundle. ([4b824c3](https://github.com/jwilsson/spotify-web-api-php/commit/4b824c3b639b1702569b3ec7f2a95e79e96577a6))
