@@ -20,8 +20,10 @@ jobs:
         php-version: ${{ matrix.php-versions }}
         coverage: pcov
 
-    - name: Composer actions
+    - name: Composer install
       run: composer install
+
+    - name: Composer test
       run: composer test
 
     - name: Upload coverage
