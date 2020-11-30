@@ -20,6 +20,11 @@ jobs:
         php-version: ${{ matrix.php-versions }}
         coverage: pcov
 
-    - run: composer install
-    - run: composer test
-    - run: php vendor/bin/php-coveralls -v
+    - name: Composer actions
+      run: composer install
+      run: composer test
+
+    - name: Upload coverage
+      # PHPUnit 8 doesn't support coverage on PHP 8
+      if: startsWith(matrix.php-versions, '7')
+      run: php vendor/bin/php-coveralls -v
