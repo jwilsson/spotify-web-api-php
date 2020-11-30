@@ -4,18 +4,16 @@ class RequestTest extends PHPUnit\Framework\TestCase
 {
     private function setupStub($expectedMethod, $expectedUri, $expectedParameters, $expectedHeaders, $expectedReturn)
     {
-        $stub = $this->getMockBuilder('SpotifyWebAPI\Request')
-                ->setMethods(['send'])
-                ->getMock();
+        $stub = $this->createPartialMock(SpotifyWebAPI\Request::class, ['send']);
 
         $invocation = $stub->expects($this->once())
-                 ->method('send')
-                 ->with(
-                     $this->equalTo($expectedMethod),
-                     $this->equalTo($expectedUri),
-                     $this->equalTo($expectedParameters),
-                     $this->equalTo($expectedHeaders)
-                 );
+            ->method('send')
+            ->with(
+                $this->equalTo($expectedMethod),
+                $this->equalTo($expectedUri),
+                $this->equalTo($expectedParameters),
+                $this->equalTo($expectedHeaders)
+            );
 
         if ($expectedReturn instanceof Exception) {
             $invocation->willThrowException($expectedReturn);
@@ -257,7 +255,7 @@ class RequestTest extends PHPUnit\Framework\TestCase
         $request = new SpotifyWebAPI\Request();
         $response = $request->send('GET', 'https://httpbin.org/get');
 
-        $this->assertInternalType('array', $response['headers']);
+        $this->assertIsArray($response['headers']);
     }
 
     public function testSendHeadersParsingKey()

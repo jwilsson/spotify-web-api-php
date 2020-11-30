@@ -9,19 +9,17 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
     private function setupStub($expectedMethod, $expectedUri, $expectedParameters, $expectedHeaders, $expectedReturn)
     {
-        $stub = $this->getMockBuilder('Request')
-                ->setMethods(['account'])
-                ->getMock();
+        $stub = $this->createPartialMock(SpotifyWebAPI\Request::class, ['account']);
 
         $stub->expects($this->once())
-                 ->method('account')
-                 ->with(
-                     $this->equalTo($expectedMethod),
-                     $this->equalTo($expectedUri),
-                     $this->equalTo($expectedParameters),
-                     $this->equalTo($expectedHeaders)
-                 )
-                 ->willReturn($expectedReturn);
+            ->method('account')
+            ->with(
+                $this->equalTo($expectedMethod),
+                $this->equalTo($expectedUri),
+                $this->equalTo($expectedParameters),
+                $this->equalTo($expectedHeaders)
+            )
+            ->willReturn($expectedReturn);
 
         return $stub;
     }
@@ -36,12 +34,12 @@ class SessionTest extends PHPUnit\Framework\TestCase
             'state' => $state,
         ]);
 
-        $this->assertContains('client_id=' . $this->clientID, $url);
-        $this->assertContains('redirect_uri=' . urlencode($this->redirectURI), $url);
-        $this->assertContains('response_type=code', $url);
-        $this->assertContains('scope=playlist-modify-public+user-read-email', $url);
-        $this->assertContains('state=' . $state, $url);
-        $this->assertContains('https://accounts.spotify.com/authorize', $url);
+        $this->assertStringContainsString('client_id=' . $this->clientID, $url);
+        $this->assertStringContainsString('redirect_uri=' . urlencode($this->redirectURI), $url);
+        $this->assertStringContainsString('response_type=code', $url);
+        $this->assertStringContainsString('scope=playlist-modify-public+user-read-email', $url);
+        $this->assertStringContainsString('state=' . $state, $url);
+        $this->assertStringContainsString('https://accounts.spotify.com/authorize', $url);
     }
 
     public function testGetAuthorizeUrlPkce()
@@ -58,16 +56,16 @@ class SessionTest extends PHPUnit\Framework\TestCase
         ]);
 
         $this->assertEquals(64, strlen($verifier));
-        $this->assertInternalType('string', $challenge);
+        $this->assertIsString($challenge);
 
-        $this->assertContains('client_id=' . $this->clientID, $url);
-        $this->assertContains('redirect_uri=' . urlencode($this->redirectURI), $url);
-        $this->assertContains('response_type=code', $url);
-        $this->assertContains('scope=playlist-modify-public+user-read-email', $url);
-        $this->assertContains('state=' . $state, $url);
-        $this->assertContains('https://accounts.spotify.com/authorize', $url);
-        $this->assertContains('code_challenge=' . $challenge, $url);
-        $this->assertContains('code_challenge_method=S256', $url);
+        $this->assertStringContainsString('client_id=' . $this->clientID, $url);
+        $this->assertStringContainsString('redirect_uri=' . urlencode($this->redirectURI), $url);
+        $this->assertStringContainsString('response_type=code', $url);
+        $this->assertStringContainsString('scope=playlist-modify-public+user-read-email', $url);
+        $this->assertStringContainsString('state=' . $state, $url);
+        $this->assertStringContainsString('https://accounts.spotify.com/authorize', $url);
+        $this->assertStringContainsString('code_challenge=' . $challenge, $url);
+        $this->assertStringContainsString('code_challenge_method=S256', $url);
     }
 
     public function testGetClientId()

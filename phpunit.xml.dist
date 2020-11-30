@@ -2,17 +2,16 @@
 
 <phpunit backupGlobals="false"
     backupStaticAttributes="false"
+    bootstrap="./phpunit.php"
+    cacheResult="false"
     colors="true"
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
     convertWarningsToExceptions="true"
     processIsolation="false"
     stopOnFailure="false"
-    syntaxCheck="false"
-    bootstrap="./phpunit.php"
     verbose="true"
 >
-
     <testsuites>
         <testsuite name="Spotify Web API Test Suite">
             <directory>./tests/</directory>
@@ -30,5 +29,4 @@
         <log type="coverage-html" target="build/logs/html" />
         <log type="coverage-text" target="php://stdout" />
     </logging>
-
 </phpunit>

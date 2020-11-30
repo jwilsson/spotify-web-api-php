@@ -5,19 +5,17 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
     private function setupStub($expectedMethod, $expectedUri, $expectedParameters, $expectedHeaders, $expectedReturn)
     {
-        $stub = $this->getMockBuilder('Request')
-                ->setMethods(['api', 'getLastResponse', 'setOptions'])
-                ->getMock();
+        $stub = $this->createPartialMock(SpotifyWebAPI\Request::class, ['api', 'getLastResponse']);
 
         $stub->expects($this->any())
-                 ->method('api')
-                 ->with(
-                     $this->equalTo($expectedMethod),
-                     $this->equalTo($expectedUri),
-                     $this->equalTo($expectedParameters),
-                     $this->equalTo($expectedHeaders)
-                 )
-                ->willReturn($expectedReturn);
+            ->method('api')
+            ->with(
+                $this->equalTo($expectedMethod),
+                $this->equalTo($expectedUri),
+                $this->equalTo($expectedParameters),
+                $this->equalTo($expectedHeaders)
+            )
+            ->willReturn($expectedReturn);
 
         $stub->expects($this->any())
                 ->method('getLastResponse')
@@ -28,7 +26,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
     private function setupSessionStub()
     {
-        $stub = $this->createMock(SpotifyWebAPI\Session::class);
+        $stub = $this->createPartialMock(SpotifyWebAPI\Session::class, ['getAccessToken', 'refreshAccessToken']);
 
         $stub->method('getAccessToken')
             ->willReturn($this->accessToken);
@@ -75,7 +73,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $stub->expects($this->at(1))
+        $stub->expects($this->at(0))
             ->method('api')
             ->willThrowException(
                 new SpotifyWebAPI\SpotifyWebAPIException('The access token expired', 401)
@@ -108,7 +106,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $stub->expects($this->at(1))
+        $stub->expects($this->at(0))
             ->method('api')
             ->willThrowException(
                 new SpotifyWebAPI\SpotifyWebAPIException('API rate limit exceeded', 429)
@@ -143,7 +141,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $stub->expects($this->at(1))
+        $stub->expects($this->at(0))
             ->method('api')
             ->willThrowException(
                 new SpotifyWebAPI\SpotifyWebAPIException('API rate limit exceeded', 429)
