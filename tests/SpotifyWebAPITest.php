@@ -1482,6 +1482,24 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertObjectHasAttribute('id', $response);
     }
 
+    public function testGetPlaylistImage()
+    {
+        $return = ['body' => get_fixture('playlist-cover-image')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/playlists/3cEYpjA9oz9GiPac4AsH4n/images',
+            [],
+            [],
+            $return
+        );
+
+        $response = $api->getPlaylistImage(
+            'spotify:playlist:3cEYpjA9oz9GiPac4AsH4n'
+        );
+
+        $this->assertObjectHasAttribute('url', $response);
+    }
+
     public function testGetUserPlaylists()
     {
         $options = ['limit' => 10];
