@@ -22,6 +22,11 @@ $playlist = $api->getPlaylist('PLAYLIST_ID');
 echo $playlist->name;
 ```
 
+## Getting the image of a user's playlist
+```php
+$playlistImage = $api->getPlaylistImage('PLAYLIST_ID');
+```
+
 ## Getting all tracks in a playlist
 
 ```php
