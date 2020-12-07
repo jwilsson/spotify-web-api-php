@@ -30,7 +30,7 @@ Returns whether the exception was thrown because of an expired access token.
 
 
 #### Return values
-* **boolean** 
+* **bool** 
 
 ---
 ### isRateLimited
@@ -44,7 +44,7 @@ Returns whether the exception was thrown because of rate limiting.
 
 
 #### Return values
-* **boolean** 
+* **bool** 
 
 ---
 ### setReason

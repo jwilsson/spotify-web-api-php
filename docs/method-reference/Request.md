@@ -88,13 +88,13 @@ Get the latest full response from the Spotify API.
 ---
 ### getReturnType
 
-_Deprecated_
+_Deprecated. Use the `return_assoc` option instead._
 
 ```php
 Request::getReturnType()
 ```
 
-Use the `return_assoc` option instead.
+Get a value indicating the response body type.
 
 
 #### Return values
@@ -127,14 +127,13 @@ You'll probably want to use one of the convenience methods instead.
 ---
 ### setCurlOptions
 
-_Deprecated_
+_Deprecated. Use the `curl_options` option instead._
 
 ```php
 Request::setCurlOptions($options)
 ```
 
-Use the `curl_options` option instead.<br>
-<br>
+Set custom cURL options.<br>
 Any options passed here will be merged with the defaults, overriding existing ones.
 
 #### Arguments
@@ -162,16 +161,16 @@ Set options
 ---
 ### setReturnType
 
-_Deprecated_
+_Deprecated. Use the `return_assoc` option instead._
 
 ```php
 Request::setReturnType($returnType)
 ```
 
-Use the `return_assoc` option instead.
+Set the return type for the response body.
 
 #### Arguments
-* `$returnType` **string** - One of the Request::RETURN_* constants.
+* `$returnType` **string** - One of the `Request::RETURN_*` constants.
 
 #### Return values
 * **void** 

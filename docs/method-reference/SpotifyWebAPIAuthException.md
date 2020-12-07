@@ -19,7 +19,7 @@ Returns whether the exception was thrown because of invalid credentials.
 
 
 #### Return values
-* **boolean** 
+* **bool** 
 
 ---
 ### hasInvalidRefreshToken
@@ -33,7 +33,7 @@ Returns whether the exception was thrown because of an invalid refresh token.
 
 
 #### Return values
-* **boolean** 
+* **bool** 
 
 ---
 ### getReason
@@ -61,7 +61,7 @@ Returns whether the exception was thrown because of an expired access token.
 
 
 #### Return values
-* **boolean** 
+* **bool** 
 
 ---
 ### isRateLimited
@@ -75,7 +75,7 @@ Returns whether the exception was thrown because of rate limiting.
 
 
 #### Return values
-* **boolean** 
+* **bool** 
 
 ---
 ### setReason

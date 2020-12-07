@@ -276,10 +276,9 @@ class Request
 
     /**
      * Set custom cURL options.
+     * Any options passed here will be merged with the defaults, overriding existing ones.
      *
      * @deprecated Use the `curl_options` option instead.
-     *
-     * Any options passed here will be merged with the defaults, overriding existing ones.
      *
      * @param array $options Any available cURL option.
      *

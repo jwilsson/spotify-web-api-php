@@ -32,7 +32,7 @@ Generate a code challenge from a code verifier for use with the PKCE flow.
 
 #### Arguments
 * `$codeVerifier` **string** - The code verifier to create a challenge from.
-* `$hashAlgo` **string** - Optional. The hash algorithm to use. Defaults to &quot;sha256&quot;.
+* `$hashAlgo` **string** - Optional. The hash algorithm to use. Defaults to "sha256".
 
 #### Return values
 * **string** The code challenge.
@@ -48,7 +48,7 @@ Session::generateCodeVerifier($length)
 Generate a code verifier for use with the PKCE flow.
 
 #### Arguments
-* `$length` **integer** - Optional. Code verifier length. Must be between 43 and 128 characters long, default is 128.
+* `$length` **int** - Optional. Code verifier length. Must be between 43 and 128 characters long, default is 128.
 
 #### Return values
 * **string** A code verifier string.
@@ -69,7 +69,6 @@ Get the authorization URL.
     * array scope Optional. Scope(s) to request from the user.
     * boolean show_dialog Optional. Whether or not to force the user to always approve the app. Default is false.
     * string state Optional. A CSRF token.
-
 
 #### Return values
 * **string** The authorization URL.
@@ -128,7 +127,7 @@ Get the access token expiration time.
 
 
 #### Return values
-* **integer** A Unix timestamp indicating the token expiration time.
+* **int** A Unix timestamp indicating the token expiration time.
 
 ---
 ### getRedirectUri
@@ -186,7 +185,7 @@ Refresh an access token.
 * `$refreshToken` **string** - Optional. The refresh token to use.
 
 #### Return values
-* **boolean** Whether the access token was successfully refreshed.
+* **bool** Whether the access token was successfully refreshed.
 
 ---
 ### requestAccessToken
@@ -203,7 +202,7 @@ Request an access token given an authorization code.
 * `$codeVerifier` **string** - Optional. A previously generated code verifier. Will assume a PKCE flow if passed.
 
 #### Return values
-* **boolean** True when the access token was successfully granted, false otherwise.
+* **bool** True when the access token was successfully granted, false otherwise.
 
 ---
 ### requestCredentialsToken
@@ -217,7 +216,7 @@ Request an access token using the Client Credentials Flow.
 
 
 #### Return values
-* **boolean** True when an access token was successfully granted, false otherwise.
+* **bool** True when an access token was successfully granted, false otherwise.
 
 ---
 ### setAccessToken

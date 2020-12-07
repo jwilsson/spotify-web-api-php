@@ -36,7 +36,7 @@ Add albums to the current user's Spotify library.<br>
 * `$albums` **string\|array** - Album IDs or URIs to add.
 
 #### Return values
-* **boolean** Whether the albums was successfully added.
+* **bool** Whether the albums was successfully added.
 
 ---
 ### addMyShows
@@ -53,7 +53,7 @@ Add shows to the current user's Spotify library.<br>
 * `$shows` **string\|array** - Show IDs or URIs to add.
 
 #### Return values
-* **boolean** Whether the shows was successfully added.
+* **bool** Whether the shows was successfully added.
 
 ---
 ### addMyTracks
@@ -70,7 +70,7 @@ Add tracks to the current user's Spotify library.<br>
 * `$tracks` **string\|array** - Track IDs or URIs to add.
 
 #### Return values
-* **boolean** Whether the tracks was successfully added.
+* **bool** Whether the tracks was successfully added.
 
 ---
 ### addPlaylistTracks
@@ -89,9 +89,8 @@ Add tracks to a playlist.<br>
 * `$options` **array\|object** - Optional. Options for the new tracks.
     * int position Optional. Zero-based track position in playlist. Tracks will be appened if omitted or false.
 
-
 #### Return values
-* **boolean** Whether the tracks was successfully added.
+* **bool** Whether the tracks was successfully added.
 
 ---
 ### changeMyDevice
@@ -109,9 +108,8 @@ Change the current user's playback device.<br>
     * string\|array device_ids Required. ID of the device to switch to.
     * bool play Optional. Whether to start playing on the new device
 
-
 #### Return values
-* **boolean** Whether the playback device was successfully changed.
+* **bool** Whether the playback device was successfully changed.
 
 ---
 ### changeVolume
@@ -129,9 +127,8 @@ Change playback volume for the current user.<br>
     * int volume_percent Required. The volume to set.
     * string device_id Optional. ID of the device to target.
 
-
 #### Return values
-* **boolean** Whether the playback volume was successfully changed.
+* **bool** Whether the playback volume was successfully changed.
 
 ---
 ### createPlaylist
@@ -149,7 +146,6 @@ Create a new playlist.<br>
     * string name Required. Name of the playlist.
     * bool public Optional. Whether the playlist should be public or not.
 
-
 #### Return values
 * **array\|object** The new playlist. Type is controlled by the `return_assoc` option.
 
@@ -165,7 +161,7 @@ Check to see if the current user is following one or more artists or other Spoti
 [https://developer.spotify.com/documentation/web-api/reference/follow/check-current-user-follows/](https://developer.spotify.com/documentation/web-api/reference/follow/check-current-user-follows/)
 
 #### Arguments
-* `$type` **string** - The type to check: either &#039;artist&#039; or &#039;user&#039;.
+* `$type` **string** - The type to check: either 'artist' or 'user'.
 * `$ids` **string\|array** - IDs or URIs of the users or artists to check for.
 
 #### Return values
@@ -186,7 +182,7 @@ Delete albums from the current user's Spotify library.<br>
 * `$albums` **string\|array** - Album IDs or URIs to delete.
 
 #### Return values
-* **boolean** Whether the albums was successfully deleted.
+* **bool** Whether the albums was successfully deleted.
 
 ---
 ### deleteMyShows
@@ -203,7 +199,7 @@ Delete shows from the current user's Spotify library.<br>
 * `$shows` **string\|array** - Show IDs or URIs to delete.
 
 #### Return values
-* **boolean** Whether the shows was successfully deleted.
+* **bool** Whether the shows was successfully deleted.
 
 ---
 ### deleteMyTracks
@@ -220,7 +216,7 @@ Delete tracks from the current user's Spotify library.<br>
 * `$tracks` **string\|array** - Track IDs or URIs to delete.
 
 #### Return values
-* **boolean** Whether the tracks was successfully deleted.
+* **bool** Whether the tracks was successfully deleted.
 
 ---
 ### deletePlaylistTracks
@@ -235,17 +231,13 @@ Delete tracks from a playlist and retrieve a new snapshot ID.<br>
 
 #### Arguments
 * `$playlistId` **string** - ID or URI of the playlist to delete tracks from.
-* `$tracks` **array** - An array with the key &quot;tracks&quot; containing arrays or objects with tracks to delete.
-Or an array with the key &quot;positions&quot; containing integer positions of the tracks to delete.
-If the &quot;tracks&quot; key is used, the following fields are also available:
+* `$tracks` **array** - An array with the key "tracks" containing arrays or objects with tracks to delete. Or an array with the key "positions" containing integer positions of the tracks to delete. If the "tracks" key is used, the following fields are also available:
     * string uri Required. Track ID, track URI, or episode URI.
-    * int\|array positions Optional. The track&#039;s positions in the playlist.
-
-* `$snapshotId` **string** - Required when $tracks[&#039;positions&#039;] is used, optional otherwise.
-The playlist&#039;s snapshot ID.
+    * int\|array positions Optional. The track's positions in the playlist.
+* `$snapshotId` **string** - Required when `$tracks['positions']` is used, optional otherwise. The playlist's snapshot ID.
 
 #### Return values
-* **string\|boolean** A new snapshot ID or false if the tracks weren&#039;t successfully deleted.
+* **string\|bool** A new snapshot ID or false if the tracks weren't successfully deleted.
 
 ---
 ### followArtistsOrUsers
@@ -259,11 +251,11 @@ Add the current user as a follower of one or more artists or other Spotify users
 [https://developer.spotify.com/documentation/web-api/reference/follow/follow-artists-users/](https://developer.spotify.com/documentation/web-api/reference/follow/follow-artists-users/)
 
 #### Arguments
-* `$type` **string** - The type of ID to follow: either &#039;artist&#039; or &#039;user&#039;.
+* `$type` **string** - The type of ID to follow: either 'artist' or 'user'.
 * `$ids` **string\|array** - IDs or URIs of the users or artists to follow.
 
 #### Return values
-* **boolean** Whether the artist or user was successfully followed.
+* **bool** Whether the artist or user was successfully followed.
 
 ---
 ### followPlaylist
@@ -281,29 +273,28 @@ Add the current user as a follower of a playlist.<br>
 * `$options` **array\|object** - Optional. Options for the followed playlist.
     * bool public Optional. Whether the playlist should be followed publicly or not.
 
-
 #### Return values
-* **boolean** Whether the playlist was successfully followed.
+* **bool** Whether the playlist was successfully followed.
 
 ---
 ### followPlaylistForCurrentUser
 
-_Deprecated_
+_Deprecated. Use SpotifyWebAPI::followPlaylist() instead._
 
 ```php
 SpotifyWebAPI::followPlaylistForCurrentUser($playlistId, $options)
 ```
 
-Use SpotifyWebAPI::followPlaylist() instead.
+Add the current user as a follower of a playlist.<br>
+[https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/](https://developer.spotify.com/documentation/web-api/reference/follow/follow-playlist/)
 
 #### Arguments
 * `$playlistId` **string** - ID or URI of the playlist to follow.
 * `$options` **array\|object** - Optional. Options for the followed playlist.
     * bool public Optional. Whether the playlist should be followed publicly or not.
 
-
 #### Return values
-* **boolean** Whether the playlist was successfully followed.
+* **bool** Whether the playlist was successfully followed.
 
 ---
 ### getAlbum
@@ -320,7 +311,6 @@ Get a album.<br>
 * `$albumId` **string** - ID or URI of the album.
 * `$options` **array\|object** - Optional. Options for the album.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
-
 
 #### Return values
 * **array\|object** The requested album. Type is controlled by the `return_assoc` option.
@@ -340,7 +330,6 @@ Get multiple albums.<br>
 * `$albumIds` **array** - IDs or URIs of the albums.
 * `$options` **array\|object** - Optional. Options for the albums.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
-
 
 #### Return values
 * **array\|object** The requested albums. Type is controlled by the `return_assoc` option.
@@ -362,7 +351,6 @@ Get an album's tracks.<br>
     * int limit Optional. Limit the number of tracks.
     * int offset Optional. Number of tracks to skip.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
-
 
 #### Return values
 * **array\|object** The requested album tracks. Type is controlled by the `return_assoc` option.
@@ -416,7 +404,7 @@ Get an artist's related artists.<br>
 * `$artistId` **string** - ID or URI of the artist.
 
 #### Return values
-* **array\|object** The artist&#039;s related artists. Type is controlled by the `return_assoc` option.
+* **array\|object** The artist's related artists. Type is controlled by the `return_assoc` option.
 
 ---
 ### getArtistAlbums
@@ -437,9 +425,8 @@ Get an artist's albums.<br>
     * int limit Optional. Limit the number of albums.
     * int offset Optional. Number of albums to skip.
 
-
 #### Return values
-* **array\|object** The artist&#039;s albums. Type is controlled by the `return_assoc` option.
+* **array\|object** The artist's albums. Type is controlled by the `return_assoc` option.
 
 ---
 ### getArtistTopTracks
@@ -457,9 +444,8 @@ Get an artist's top tracks in a country.<br>
 * `$options` **array\|object** - Options for the tracks.
     * string $country Required. An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
 
-
 #### Return values
-* **array\|object** The artist&#039;s top tracks. Type is controlled by the `return_assoc` option.
+* **array\|object** The artist's top tracks. Type is controlled by the `return_assoc` option.
 
 ---
 ### getAudioFeatures
@@ -476,7 +462,7 @@ Get track audio features.<br>
 * `$trackIds` **array** - IDs or URIs of the tracks.
 
 #### Return values
-* **array\|object** The tracks&#039; audio features. Type is controlled by the `return_assoc` option.
+* **array\|object** The tracks' audio features. Type is controlled by the `return_assoc` option.
 
 ---
 ### getAudioAnalysis
@@ -493,7 +479,7 @@ Get audio analysis for track.<br>
 * `$trackId` **string** - ID or URI of the track.
 
 #### Return values
-* **object** The track&#039;s audio analysis. Type is controlled by the `return_assoc` option.
+* **object** The track's audio analysis. Type is controlled by the `return_assoc` option.
 
 ---
 ### getCategoriesList
@@ -508,11 +494,10 @@ Get a list of categories used to tag items in Spotify (on, for example, the Spot
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the categories.
-    * string locale Optional. Language to show categories in, for example &#039;sv_SE&#039;.
+    * string locale Optional. Language to show categories in, for example 'sv_SE'.
     * string country Optional. An ISO 3166-1 alpha-2 country code. Show categories from this country.
     * int limit Optional. Limit the number of categories.
     * int offset Optional. Number of categories to skip.
-
 
 #### Return values
 * **array\|object** The list of categories. Type is controlled by the `return_assoc` option.
@@ -531,9 +516,8 @@ Get a single category used to tag items in Spotify (on, for example, the Spotify
 #### Arguments
 * `$categoryId` **string** - ID of the category.
 * `$options` **array\|object** - Optional. Options for the category.
-    * string locale Optional. Language to show category in, for example &#039;sv_SE&#039;.
+    * string locale Optional. Language to show category in, for example 'sv_SE'.
     * string country Optional. An ISO 3166-1 alpha-2 country code. Show category from this country.
-
 
 #### Return values
 * **array\|object** The category. Type is controlled by the `return_assoc` option.
@@ -551,11 +535,10 @@ Get a list of Spotify playlists tagged with a particular category.<br>
 
 #### Arguments
 * `$categoryId` **string** - ID of the category.
-* `$options` **array\|object** - Optional. Options for the category&#039;s playlists.
+* `$options` **array\|object** - Optional. Options for the category's playlists.
     * string country Optional. An ISO 3166-1 alpha-2 country code. Show category playlists from this country.
     * int limit Optional. Limit the number of playlists.
     * int offset Optional. Number of playlists to skip.
-
 
 #### Return values
 * **array\|object** The list of playlists. Type is controlled by the `return_assoc` option.
@@ -576,7 +559,6 @@ Get an episode.<br>
 * `$options` **array\|object** - Optional. Options for the episode.
     * string market Optional. An ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
 
-
 #### Return values
 * **array\|object** The requested episode. Type is controlled by the `return_assoc` option.
 
@@ -596,7 +578,6 @@ Get multiple episodes.<br>
 * `$options` **array\|object** - Optional. Options for the episodes.
     * string market Optional. An ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
 
-
 #### Return values
 * **array\|object** The requested episodes. Type is controlled by the `return_assoc` option.
 
@@ -613,12 +594,11 @@ Get Spotify featured playlists.<br>
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the playlists.
-    * string locale Optional. Language to show playlists in, for example &#039;sv_SE&#039;.
+    * string locale Optional. Language to show playlists in, for example 'sv_SE'.
     * string country Optional. An ISO 3166-1 alpha-2 country code. Show playlists from this country.
     * string timestamp Optional. A ISO 8601 timestamp. Show playlists relevant to this date and time.
     * int limit Optional. Limit the number of playlists.
     * int offset Optional. Number of playlists to skip.
-
 
 #### Return values
 * **array\|object** The featured playlists. Type is controlled by the `return_assoc` option.
@@ -672,9 +652,8 @@ Get the current user’s currently playing track.<br>
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
     * string\|array additional_types Optional. Types of media to return info about.
 
-
 #### Return values
-* **array\|object** The user&#039;s currently playing track. Type is controlled by the `return_assoc` option.
+* **array\|object** The user's currently playing track. Type is controlled by the `return_assoc` option.
 
 ---
 ### getMyDevices
@@ -689,7 +668,7 @@ Get the current user’s devices.<br>
 
 
 #### Return values
-* **array\|object** The user&#039;s devices. Type is controlled by the `return_assoc` option.
+* **array\|object** The user's devices. Type is controlled by the `return_assoc` option.
 
 ---
 ### getMyCurrentPlaybackInfo
@@ -707,9 +686,8 @@ Get the current user’s current playback information.<br>
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
     * string\|array additional_types Optional. Types of media to return info about.
 
-
 #### Return values
-* **array\|object** The user&#039;s playback information. Type is controlled by the `return_assoc` option.
+* **array\|object** The user's playback information. Type is controlled by the `return_assoc` option.
 
 ---
 ### getMyPlaylists
@@ -727,9 +705,8 @@ Get the current user’s playlists.<br>
     * int limit Optional. Limit the number of playlists.
     * int offset Optional. Number of playlists to skip.
 
-
 #### Return values
-* **array\|object** The user&#039;s playlists. Type is controlled by the `return_assoc` option.
+* **array\|object** The user's playlists. Type is controlled by the `return_assoc` option.
 
 ---
 ### getMyRecentTracks
@@ -747,7 +724,6 @@ Get the current user’s recently played tracks.<br>
     * int limit Optional. Number of tracks to return.
     * string after Optional. Unix timestamp in ms (13 digits). Returns all items after this position.
     * string before Optional. Unix timestamp in ms (13 digits). Returns all items before this position.
-
 
 #### Return values
 * **array\|object** The most recently played tracks. Type is controlled by the `return_assoc` option.
@@ -769,9 +745,8 @@ Get the current user’s saved albums.<br>
     * int offset Optional. Number of albums to skip.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
-
 #### Return values
-* **array\|object** The user&#039;s saved albums. Type is controlled by the `return_assoc` option.
+* **array\|object** The user's saved albums. Type is controlled by the `return_assoc` option.
 
 ---
 ### getMySavedTracks
@@ -790,9 +765,8 @@ Get the current user’s saved tracks.<br>
     * int offset Optional. Number of tracks to skip.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
-
 #### Return values
-* **array\|object** The user&#039;s saved tracks. Type is controlled by the `return_assoc` option.
+* **array\|object** The user's saved tracks. Type is controlled by the `return_assoc` option.
 
 ---
 ### getMySavedShows
@@ -810,9 +784,8 @@ Get the current user’s saved shows.<br>
     * int limit Optional. Limit the number of shows.
     * int offset Optional. Number of shows to skip.
 
-
 #### Return values
-* **array\|object** The user&#039;s saved shows. Type is controlled by the `return_assoc` option.
+* **array\|object** The user's saved shows. Type is controlled by the `return_assoc` option.
 
 ---
 ### getMyTop
@@ -826,12 +799,11 @@ Get the current user's top tracks or artists.<br>
 [https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/](https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/)
 
 #### Arguments
-* `$type` **string** - The type to fetch, either &#039;artists&#039; or &#039;tracks&#039;.
+* `$type` **string** - The type to fetch, either 'artists' or 'tracks'.
 * `$options` **array** - Optional. Options for the results.
     * int limit Optional. Limit the number of results.
     * int offset Optional. Number of results to skip.
     * string time_range Optional. Over what time frame the data is calculated. See Spotify API docs for more info.
-
 
 #### Return values
 * **array\|object** A list of the requested top entity. Type is controlled by the `return_assoc` option.
@@ -853,7 +825,6 @@ Get new releases.<br>
     * int limit Optional. Limit the number of items.
     * int offset Optional. Number of items to skip.
 
-
 #### Return values
 * **array\|object** The new releases. Type is controlled by the `return_assoc` option.
 
@@ -874,9 +845,8 @@ Get a specific playlist.<br>
     * string\|array fields Optional. A list of fields to return. See Spotify docs for more info.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
-
 #### Return values
-* **array\|object** The user&#039;s playlist. Type is controlled by the `return_assoc` option.
+* **array\|object** The user's playlist. Type is controlled by the `return_assoc` option.
 
 ---
 ### getPlaylistImage
@@ -914,7 +884,6 @@ Get the tracks in a playlist.<br>
     * int offset Optional. Number of tracks to skip.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
-
 #### Return values
 * **array\|object** The tracks in the playlist. Type is controlled by the `return_assoc` option.
 
@@ -940,20 +909,19 @@ Get recommendations based on artists, tracks, or genres.<br>
     * array seed_tracks Track IDs to seed by.
     * mixed target_* Optional. Target value for one of the tunable track attributes.
 
-
 #### Return values
 * **array\|object** The requested recommendations. Type is controlled by the `return_assoc` option.
 
 ---
 ### getReturnType
 
-_Deprecated_
+_Deprecated. Use the `return_assoc` option instead._
 
 ```php
 SpotifyWebAPI::getReturnType()
 ```
 
-Use the `return_assoc` option instead.
+Get a value indicating the response body type.
 
 
 #### Return values
@@ -989,7 +957,6 @@ Get a show.<br>
 * `$options` **array\|object** - Optional. Options for the show.
     * string market Optional. An ISO 3166-1 alpha-2 country code, limit results to shows available in that market.
 
-
 #### Return values
 * **array\|object** The requested show. Type is controlled by the `return_assoc` option.
 
@@ -1011,7 +978,6 @@ Get a show's episodes.<br>
     * int offset Optional. Number of episodes to skip.
     * string market Optional. An ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
 
-
 #### Return values
 * **array\|object** The requested show episodes. Type is controlled by the `return_assoc` option.
 
@@ -1030,7 +996,6 @@ Get multiple shows.<br>
 * `$showIds` **array** - IDs or URIs of the shows.
 * `$options` **array\|object** - Optional. Options for the shows.
     * string market Optional. An ISO 3166-1 alpha-2 country code, limit results to shows available in that market.
-
 
 #### Return values
 * **array\|object** The requested shows. Type is controlled by the `return_assoc` option.
@@ -1051,7 +1016,6 @@ Get a track.<br>
 * `$options` **array\|object** - Optional. Options for the track.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
 
-
 #### Return values
 * **array\|object** The requested track. Type is controlled by the `return_assoc` option.
 
@@ -1070,7 +1034,6 @@ Get multiple tracks.<br>
 * `$trackIds` **array** - IDs or URIs of the tracks.
 * `$options` **array\|object** - Optional. Options for the tracks.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
-
 
 #### Return values
 * **array\|object** The requested tracks. Type is controlled by the `return_assoc` option.
@@ -1108,7 +1071,6 @@ Get the artists followed by the current user.<br>
     * int limit Optional. Limit the number of artists returned.
     * string after Optional. The last artist ID retrieved from the previous request.
 
-
 #### Return values
 * **array\|object** A list of artists. Type is controlled by the `return_assoc` option.
 
@@ -1129,9 +1091,8 @@ Get a user's playlists.<br>
     * int limit Optional. Limit the number of tracks.
     * int offset Optional. Number of tracks to skip.
 
-
 #### Return values
-* **array\|object** The user&#039;s playlists. Type is controlled by the `return_assoc` option.
+* **array\|object** The user's playlists. Type is controlled by the `return_assoc` option.
 
 ---
 ### me
@@ -1214,7 +1175,7 @@ Play the next track in the current users's queue.<br>
 * `$deviceId` **string** - Optional. ID of the device to target.
 
 #### Return values
-* **boolean** Whether the track was successfully skipped.
+* **bool** Whether the track was successfully skipped.
 
 ---
 ### pause
@@ -1231,7 +1192,7 @@ Pause playback for the current user.<br>
 * `$deviceId` **string** - Optional. ID of the device to pause on.
 
 #### Return values
-* **boolean** Whether the playback was successfully paused.
+* **bool** Whether the playback was successfully paused.
 
 ---
 ### play
@@ -1251,9 +1212,8 @@ Start playback for the current user.<br>
     * array uris Optional. Spotify track URIs to play.
     * object offset Optional. Indicates from where in the context playback should start.
 
-
 #### Return values
-* **boolean** Whether the playback was successfully started.
+* **bool** Whether the playback was successfully started.
 
 ---
 ### previous
@@ -1270,7 +1230,7 @@ Play the previous track in the current users's queue.<br>
 * `$deviceId` **string** - Optional. ID of the device to target.
 
 #### Return values
-* **boolean** Whether the track was successfully skipped.
+* **bool** Whether the track was successfully skipped.
 
 ---
 ### queue
@@ -1288,7 +1248,7 @@ Add a song to the queue.<br>
 * `$deviceId` **string** - Optional. ID of the device to target.
 
 #### Return values
-* **boolean** Whether the track was successfully queued.
+* **bool** Whether the track was successfully queued.
 
 ---
 ### reorderPlaylistTracks
@@ -1307,11 +1267,10 @@ Reorder the tracks in a playlist.<br>
     * int range_start Required. Position of the first track to be reordered.
     * int range_length Optional. The amount of tracks to be reordered.
     * int insert_before Required. Position where the tracks should be inserted.
-    * string snapshot_id Optional. The playlist&#039;s snapshot ID.
-
+    * string snapshot_id Optional. The playlist's snapshot ID.
 
 #### Return values
-* **string\|boolean** A new snapshot ID or false if the tracks weren&#039;t successfully reordered.
+* **string\|bool** A new snapshot ID or false if the tracks weren't successfully reordered.
 
 ---
 ### repeat
@@ -1329,9 +1288,8 @@ Set repeat mode for the current user’s playback.<br>
     * string state Required. The repeat mode. See Spotify docs for possible values.
     * string device_id Optional. ID of the device to target.
 
-
 #### Return values
-* **boolean** Whether the playback repeat mode was successfully changed.
+* **bool** Whether the playback repeat mode was successfully changed.
 
 ---
 ### replacePlaylistTracks
@@ -1349,7 +1307,7 @@ Replace all tracks in a playlist with new ones.<br>
 * `$tracks` **string\|array** - IDs, track URIs, or episode URIs to replace with.
 
 #### Return values
-* **boolean** Whether the tracks was successfully replaced.
+* **bool** Whether the tracks was successfully replaced.
 
 ---
 ### search
@@ -1370,7 +1328,6 @@ Search for an item.<br>
     * int limit Optional. Limit the number of items.
     * int offset Optional. Number of items to skip.
 
-
 #### Return values
 * **array\|object** The search results. Type is controlled by the `return_assoc` option.
 
@@ -1390,9 +1347,8 @@ Change playback position for the current user.<br>
     * string position_ms Required. The position in milliseconds to seek to.
     * string device_id Optional. ID of the device to target.
 
-
 #### Return values
-* **boolean** Whether the playback position was successfully changed.
+* **bool** Whether the playback position was successfully changed.
 
 ---
 ### setAccessToken
@@ -1408,7 +1364,7 @@ Set the access token to use.
 * `$accessToken` **string** - The access token.
 
 #### Return values
-* **void**
+* **void** 
 
 ---
 ### setOptions
@@ -1424,24 +1380,24 @@ Set options
 * `$options` **array\|object** - Options to set.
 
 #### Return values
-* **void**
+* **void** 
 
 ---
 ### setReturnType
 
-_Deprecated_
+_Deprecated. Use the `return_assoc` option instead._
 
 ```php
 SpotifyWebAPI::setReturnType($returnType)
 ```
 
-Use the `return_assoc` option instead.
+Set the return type for the response body.
 
 #### Arguments
-* `$returnType` **string** - One of the SpotifyWebAPI::RETURN_* constants.
+* `$returnType` **string** - One of the `SpotifyWebAPI::RETURN_*` constants.
 
 #### Return values
-* **void**
+* **void** 
 
 ---
 ### setSession
@@ -1457,7 +1413,7 @@ Set the Session object to use.
 * `$session` **\SpotifyWebAPI\Session** - The Session object.
 
 #### Return values
-* **void**
+* **void** 
 
 ---
 ### shuffle
@@ -1475,9 +1431,8 @@ Set shuffle mode for the current user’s playback.<br>
     * bool state Required. The shuffle mode. See Spotify docs for possible values.
     * string device_id Optional. ID of the device to target.
 
-
 #### Return values
-* **boolean** Whether the playback shuffle mode was successfully changed.
+* **bool** Whether the playback shuffle mode was successfully changed.
 
 ---
 ### unfollowArtistsOrUsers
@@ -1491,11 +1446,11 @@ Remove the current user as a follower of one or more artists or other Spotify us
 [https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-artists-users/](https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-artists-users/)
 
 #### Arguments
-* `$type` **string** - The type to check: either &#039;artist&#039; or &#039;user&#039;.
+* `$type` **string** - The type to check: either 'artist' or 'user'.
 * `$ids` **string\|array** - IDs or URIs of the users or artists to unfollow.
 
 #### Return values
-* **boolean** Whether the artists or users were successfully unfollowed.
+* **bool** Whether the artists or users were successfully unfollowed.
 
 ---
 ### unfollowPlaylist
@@ -1512,24 +1467,25 @@ Remove the current user as a follower of a playlist.<br>
 * `$playlistId` **string** - ID or URI of the playlist to unfollow.
 
 #### Return values
-* **boolean** Whether the playlist was successfully unfollowed.
+* **bool** Whether the playlist was successfully unfollowed.
 
 ---
 ### unfollowPlaylistForCurrentUser
 
-_Deprecated_
+_Deprecated. Use SpotifyWebAPI::unfollowPlaylist() instead._
 
 ```php
 SpotifyWebAPI::unfollowPlaylistForCurrentUser($playlistId)
 ```
 
-Use SpotifyWebAPI::unfollowPlaylist() instead.
+Remove the current user as a follower of a playlist.<br>
+[https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/](https://developer.spotify.com/documentation/web-api/reference/follow/unfollow-playlist/)
 
 #### Arguments
 * `$playlistId` **string** - ID or URI of the playlist to unfollow.
 
 #### Return values
-* **boolean** Whether the playlist was successfully unfollowed.
+* **bool** Whether the playlist was successfully unfollowed.
 
 ---
 ### updatePlaylist
@@ -1550,9 +1506,8 @@ Update the details of a playlist.<br>
     * name string Optional. Name of the playlist.
     * public bool Optional. Whether the playlist should be public or not.
 
-
 #### Return values
-* **boolean** Whether the playlist was successfully updated.
+* **bool** Whether the playlist was successfully updated.
 
 ---
 ### updatePlaylistImage
@@ -1570,7 +1525,7 @@ Update the image of a playlist.<br>
 * `$imageData` **string** - Base64 encoded JPEG image data, maximum 256 KB in size.
 
 #### Return values
-* **boolean** Whether the playlist was successfully updated.
+* **bool** Whether the playlist was successfully updated.
 
 ---
 ### usersFollowPlaylist
@@ -1587,7 +1542,6 @@ Check if a set of users are following a playlist.<br>
 * `$playlistId` **string** - ID or URI of the playlist.
 * `$options` **array\|object** - Options for the check.
     * ids string\|array Required. IDs or URIs of the users to check for.
-
 
 #### Return values
 * **array** Whether each user is following the playlist.
