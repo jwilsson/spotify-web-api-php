@@ -1,4 +1,7 @@
 # Changelog
+## 4.1.0 (2020-12-07)
+* Added the `SpotifyWebAPI::getPlaylistImage()` method to get a playlist's cover image. ([7a4f0e6](https://github.com/jwilsson/spotify-web-api-php/commit/7a4f0e67ef8affa2010a429c45da2a51e32e04b1))
+
 ## 4.0.0 (2020-11-30)
 * **Breaking** Dropped support for PHP versions less than 7.2. ([2bbefc7](https://github.com/jwilsson/spotify-web-api-php/commit/2bbefc731a3cd58669823209014ca657da422d83))
 * Added PHP 8 support. ([3e37d76](https://github.com/jwilsson/spotify-web-api-php/commit/3e37d7649f845dc6504fde8917d0789f4758a1c7))
