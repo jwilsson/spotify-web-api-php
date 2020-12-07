@@ -879,6 +879,23 @@ Get a specific playlist.<br>
 * **array\|object** The user&#039;s playlist. Type is controlled by the `return_assoc` option.
 
 ---
+### getPlaylistImage
+
+
+```php
+SpotifyWebAPI::getPlaylistImage($playlistId)
+```
+
+Get a playlist's cover image.<br>
+[https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlist-cover/](https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlist-cover/)
+
+#### Arguments
+* `$playlistId` **string** - ID or URI of the playlist.
+
+#### Return values
+* **array\|object** The playlist cover image. Type is controlled by the `return_assoc` option.
+
+---
 ### getPlaylistTracks
 
 
@@ -1391,7 +1408,7 @@ Set the access token to use.
 * `$accessToken` **string** - The access token.
 
 #### Return values
-* **void** 
+* **void**
 
 ---
 ### setOptions
@@ -1407,7 +1424,7 @@ Set options
 * `$options` **array\|object** - Options to set.
 
 #### Return values
-* **void** 
+* **void**
 
 ---
 ### setReturnType
@@ -1424,7 +1441,7 @@ Use the `return_assoc` option instead.
 * `$returnType` **string** - One of the SpotifyWebAPI::RETURN_* constants.
 
 #### Return values
-* **void** 
+* **void**
 
 ---
 ### setSession
@@ -1440,7 +1457,7 @@ Set the Session object to use.
 * `$session` **\SpotifyWebAPI\Session** - The Session object.
 
 #### Return values
-* **void** 
+* **void**
 
 ---
 ### shuffle
