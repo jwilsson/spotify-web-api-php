@@ -1207,6 +1207,25 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get a playlist's cover image.
+     * https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlist-cover/
+     *
+     * @param string $playlistId ID or URI of the playlist.
+     *
+     * @return array|object The playlist cover image. Type is controlled by the `return_assoc` option.
+     */
+    public function getPlaylistCoverImage($playlistId)
+    {
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
+        $uri = '/v1/playlists/' . $playlistId . '/images';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri);
+
+        return $this->lastResponse['body'];
+    }
+    
+    /**
      * Get recommendations based on artists, tracks, or genres.
      * https://developer.spotify.com/documentation/web-api/reference/browse/get-recommendations/
      *
