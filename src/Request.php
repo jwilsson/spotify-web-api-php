@@ -256,6 +256,12 @@ class Request
         if (preg_match('/^HTTP\/1\.\d 200 Connection established$/', $headers) === 1) {
             list($headers, $body) = explode("\r\n\r\n", $body, 2);
         }
+        
+        // Skip the first set of headers for the informal Continue header
+        if (preg_match('/^HTTP\/1\.\d 100 Continue$/', $headers) === 1) {
+            list($headers, $body) = explode("\r\n\r\n", $body, 2);
+        }
+        
 
         $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $headers = $this->parseHeaders($headers);
