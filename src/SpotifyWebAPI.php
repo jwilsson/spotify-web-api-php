@@ -1,10 +1,11 @@
 <?php
+
 namespace SpotifyWebAPI;
 
 class SpotifyWebAPI
 {
-    const RETURN_ASSOC = 'assoc';
-    const RETURN_OBJECT = 'object';
+    public const RETURN_ASSOC = 'assoc';
+    public const RETURN_OBJECT = 'object';
 
     protected $accessToken = '';
     protected $lastResponse = [];
