@@ -1,4 +1,10 @@
 # Changelog
+## 4.2.0 (2020-01-06)
+* Added a `Session::generateState()` method. ([fa5ea56](https://github.com/jwilsson/spotify-web-api-php/commit/fa5ea561afc166a1ba0e9d555017379e2299af5a))
+* `SpotifyWebAPI::getArtistAlbums()` can now also accept the documented `include_groups` parameter. ([dc9a84](https://github.com/jwilsson/spotify-web-api-php/commit/dc9a841f9465bb6519b84b8c062bbb457995cd7e))
+* Fixed some cases where objects weren't always properly cast to arrays. ([31eae20](https://github.com/jwilsson/spotify-web-api-php/commit/31eae2091f1f214b900a1455b4ba6271731471c5))
+* PSR-12 coding style is now used. ([fed3aa6](https://github.com/jwilsson/spotify-web-api-php/commit/fed3aa611856a5964a8856b1ad80f9b4bfade332))
+
 ## 4.1.1 (2020-12-11)
 * `HTTP 100 Continue` headers which is sometimes returned are now stripped. ([375c64d](https://github.com/jwilsson/spotify-web-api-php/commit/375c64dac5603199c7234933a83d85da8f0aa816))
 * Updated CA bundle. ([ad29a9b](https://github.com/jwilsson/spotify-web-api-php/commit/ad29a9b53430829c4d6c8ef9247bdb8893430318))
