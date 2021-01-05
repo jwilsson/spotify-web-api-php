@@ -420,8 +420,8 @@ Get an artist's albums.<br>
 #### Arguments
 * `$artistId` **string** - ID or URI of the artist.
 * `$options` **array\|object** - Optional. Options for the albums.
-    * string\|array album_type Optional. Album types to return. If omitted, all album types will be returned.
-    * string market Optional. Limit the results to items that are playable in this market, for example SE.
+    * string country Optional. Limit the results to items that are playable in this country, for example SE.
+    * string\|array include_groups Optional. Album types to return. If omitted, all album types will be returned.
     * int limit Optional. Limit the number of albums.
     * int offset Optional. Number of albums to skip.
 
@@ -1211,6 +1211,7 @@ Start playback for the current user.<br>
     * string context_uri Optional. URI of the context to play, for example an album.
     * array uris Optional. Spotify track URIs to play.
     * object offset Optional. Indicates from where in the context playback should start.
+    * int position_ms. Optional. Indicates the position to start playback from.
 
 #### Return values
 * **bool** Whether the playback was successfully started.

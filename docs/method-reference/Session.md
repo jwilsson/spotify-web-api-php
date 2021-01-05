@@ -54,6 +54,22 @@ Generate a code verifier for use with the PKCE flow.
 * **string** A code verifier string.
 
 ---
+### generateState
+
+
+```php
+Session::generateState($length)
+```
+
+Generate a random state value.
+
+#### Arguments
+* `$length` **int** - Optional. Length of the state. Default is 16 characters.
+
+#### Return values
+* **string** A random state value.
+
+---
 ### getAuthorizeUrl
 
 
