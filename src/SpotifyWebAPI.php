@@ -151,6 +151,22 @@ class SpotifyWebAPI
     }
 
     /**
+     * Convert an array to a comma-separated string. If it's already a string, do nothing.
+     *
+     * @param array|string The value to convert.
+     *
+     * @return string A comma-separated string.
+     */
+    protected function toCommaString($value)
+    {
+        if (is_array($value)) {
+            return implode(',', $value);
+        }
+
+        return $value;
+    }
+
+    /**
      * Add albums to the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/library/save-albums-user/
      *
@@ -338,7 +354,7 @@ class SpotifyWebAPI
     public function currentUserFollows($type, $ids)
     {
         $ids = $this->uriToId($ids, $type);
-        $ids = implode(',', (array) $ids);
+        $ids = $this->toCommaString($ids);
 
         $options = [
             'ids' => $ids,
@@ -609,7 +625,7 @@ class SpotifyWebAPI
         $albumIds = $this->uriToId($albumIds, 'album');
 
         $options = (array) $options;
-        $options['ids'] = implode(',', (array) $albumIds);
+        $options['ids'] = $this->toCommaString($albumIds);
 
         $uri = '/v1/albums/';
 
@@ -669,7 +685,7 @@ class SpotifyWebAPI
     public function getArtists($artistIds)
     {
         $artistIds = $this->uriToId($artistIds, 'artist');
-        $artistIds = implode(',', (array) $artistIds);
+        $artistIds = $this->toCommaString($artistIds);
 
         $options = [
             'ids' => $artistIds,
@@ -718,7 +734,7 @@ class SpotifyWebAPI
         $options = (array) $options;
 
         if (isset($options['album_type'])) {
-            $options['album_type'] = implode(',', (array) $options['album_type']);
+            $options['album_type'] = $this->toCommaString($options['album_type']);
         }
 
         $artistId = $this->uriToId($artistId, 'artist');
@@ -761,7 +777,7 @@ class SpotifyWebAPI
     {
         $trackIds = $this->uriToId($trackIds, 'track');
         $options = [
-            'ids' => implode(',', (array) $trackIds),
+            'ids' => $this->toCommaString($trackIds),
         ];
 
         $uri = '/v1/audio-features';
@@ -886,7 +902,7 @@ class SpotifyWebAPI
     public function getEpisodes($episodeIds, $options = [])
     {
         $episodeIds = $this->uriToId($episodeIds, 'episode');
-        $options['ids'] = implode(',', (array) $episodeIds);
+        $options['ids'] = $this->toCommaString($episodeIds);
 
         $uri = '/v1/episodes/';
 
@@ -960,8 +976,8 @@ class SpotifyWebAPI
     {
         $uri = '/v1/me/player/currently-playing';
 
-        if (isset($options['additional_types']) && is_array($options['additional_types'])) {
-            $options['additional_types'] = implode(',', $options['additional_types']);
+        if (isset($options['additional_types'])) {
+            $options['additional_types'] = $this->toCommaString($options['additional_types']);
         }
 
         $this->lastResponse = $this->sendRequest('GET', $uri, $options);
@@ -998,8 +1014,8 @@ class SpotifyWebAPI
     {
         $uri = '/v1/me/player';
 
-        if (isset($options['additional_types']) && is_array($options['additional_types'])) {
-            $options['additional_types'] = implode(',', $options['additional_types']);
+        if (isset($options['additional_types'])) {
+            $options['additional_types'] = $this->toCommaString($options['additional_types']);
         }
 
         $this->lastResponse = $this->sendRequest('GET', $uri, $options);
@@ -1165,7 +1181,7 @@ class SpotifyWebAPI
         $options = (array) $options;
 
         if (isset($options['fields'])) {
-            $options['fields'] = implode(',', (array) $options['fields']);
+            $options['fields'] = $this->toCommaString($options['fields']);
         }
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
@@ -1214,7 +1230,7 @@ class SpotifyWebAPI
         $options = (array) $options;
 
         if (isset($options['fields'])) {
-            $options['fields'] = implode(',', (array) $options['fields']);
+            $options['fields'] = $this->toCommaString($options['fields']);
         }
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
@@ -1248,7 +1264,7 @@ class SpotifyWebAPI
 
         array_walk($options, function (&$value, $key) {
             if (substr($key, 0, 5) == 'seed_') {
-                $value = implode(',', $value);
+                $value = $this->toCommaString($value);
             }
         });
 
@@ -1341,7 +1357,7 @@ class SpotifyWebAPI
     public function getShows($showIds, $options = [])
     {
         $showIds = $this->uriToId($showIds, 'show');
-        $options['ids'] = implode(',', (array) $showIds);
+        $options['ids'] = $this->toCommaString($showIds);
 
         $uri = '/v1/shows/';
 
@@ -1383,7 +1399,7 @@ class SpotifyWebAPI
     public function getTracks($trackIds, $options = [])
     {
         $trackIds = $this->uriToId($trackIds, 'track');
-        $options['ids'] = implode(',', (array) $trackIds);
+        $options['ids'] = $this->toCommaString($trackIds);
 
         $uri = '/v1/tracks/';
 
@@ -1482,7 +1498,7 @@ class SpotifyWebAPI
     public function myAlbumsContains($albums)
     {
         $albums = $this->uriToId($albums, 'album');
-        $albums = implode(',', (array) $albums);
+        $albums = $this->toCommaString($albums);
 
         $options = [
             'ids' => $albums,
@@ -1506,7 +1522,7 @@ class SpotifyWebAPI
     public function myShowsContains($shows)
     {
         $shows = $this->uriToId($shows, 'show');
-        $shows = implode(',', (array) $shows);
+        $shows = $this->toCommaString($shows);
 
         $options = [
             'ids' => $shows,
@@ -1530,7 +1546,7 @@ class SpotifyWebAPI
     public function myTracksContains($tracks)
     {
         $tracks = $this->uriToId($tracks, 'track');
-        $tracks = implode(',', (array) $tracks);
+        $tracks = $this->toCommaString($tracks);
 
         $options = [
             'ids' => $tracks,
@@ -1768,10 +1784,9 @@ class SpotifyWebAPI
      */
     public function search($query, $type, $options = [])
     {
-        $type = implode(',', (array) $type);
         $options = array_merge((array) $options, [
             'q' => $query,
-            'type' => $type,
+            'type' => $this->toCommaString($type),
         ]);
 
         $uri = '/v1/search';
@@ -2014,7 +2029,7 @@ class SpotifyWebAPI
 
         if (isset($options['ids'])) {
             $options['ids'] = $this->uriToId($options['ids'], 'user');
-            $options['ids'] = implode(',', (array) $options['ids']);
+            $options['ids'] = $this->toCommaString($options['ids']);
         }
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
