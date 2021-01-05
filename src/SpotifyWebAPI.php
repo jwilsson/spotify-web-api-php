@@ -251,8 +251,10 @@ class SpotifyWebAPI
      */
     public function addPlaylistTracks($playlistId, $tracks, $options = [])
     {
-        $options = (array) $options;
-        $options['uris'] = (array) $this->idToUri($tracks, 'track');
+        $options = array_merge((array) $options, [
+            'uris' => (array) $this->idToUri($tracks, 'track')
+        ]);
+
         $options = json_encode($options);
 
         $headers = [
@@ -280,8 +282,10 @@ class SpotifyWebAPI
      */
     public function changeMyDevice($options)
     {
-        $options = (array) $options;
-        $options['device_ids'] = (array) $options['device_ids'];
+        $options = array_merge((array) $options, [
+            'device_ids' => (array) $options['device_ids'],
+        ]);
+
         $options = json_encode($options);
 
         $headers = [
@@ -553,7 +557,7 @@ class SpotifyWebAPI
      */
     public function followPlaylist($playlistId, $options = [])
     {
-        $options = json_encode((object) $options);
+        $options = json_encode($options);
 
         $headers = [
             'Content-Type' => 'application/json',
@@ -623,9 +627,9 @@ class SpotifyWebAPI
     public function getAlbums($albumIds, $options = [])
     {
         $albumIds = $this->uriToId($albumIds, 'album');
-
-        $options = (array) $options;
-        $options['ids'] = $this->toCommaString($albumIds);
+        $options = array_merge((array) $options, [
+            'ids' => $this->toCommaString($albumIds),
+        ]);
 
         $uri = '/v1/albums/';
 
@@ -907,7 +911,9 @@ class SpotifyWebAPI
     public function getEpisodes($episodeIds, $options = [])
     {
         $episodeIds = $this->uriToId($episodeIds, 'episode');
-        $options['ids'] = $this->toCommaString($episodeIds);
+        $options = array_merge((array) $options, [
+            'ids' => $this->toCommaString($episodeIds),
+        ]);
 
         $uri = '/v1/episodes/';
 
@@ -980,6 +986,7 @@ class SpotifyWebAPI
     public function getMyCurrentTrack($options = [])
     {
         $uri = '/v1/me/player/currently-playing';
+        $options = (array) $options;
 
         if (isset($options['additional_types'])) {
             $options['additional_types'] = $this->toCommaString($options['additional_types']);
@@ -1018,6 +1025,7 @@ class SpotifyWebAPI
     public function getMyCurrentPlaybackInfo($options = [])
     {
         $uri = '/v1/me/player';
+        $options = (array) $options;
 
         if (isset($options['additional_types'])) {
             $options['additional_types'] = $this->toCommaString($options['additional_types']);
@@ -1061,8 +1069,6 @@ class SpotifyWebAPI
       */
     public function getMyRecentTracks($options = [])
     {
-        $options = (array) $options;
-
         $uri = '/v1/me/player/recently-played';
 
         $this->lastResponse = $this->sendRequest('GET', $uri, $options);
@@ -1362,7 +1368,9 @@ class SpotifyWebAPI
     public function getShows($showIds, $options = [])
     {
         $showIds = $this->uriToId($showIds, 'show');
-        $options['ids'] = $this->toCommaString($showIds);
+        $options = array_merge((array) $options, [
+            'ids' => $this->toCommaString($showIds),
+        ]);
 
         $uri = '/v1/shows/';
 
@@ -1404,7 +1412,9 @@ class SpotifyWebAPI
     public function getTracks($trackIds, $options = [])
     {
         $trackIds = $this->uriToId($trackIds, 'track');
-        $options['ids'] = $this->toCommaString($trackIds);
+        $options = array_merge((array) $options, [
+            'ids' => $this->toCommaString($trackIds),
+        ]);
 
         $uri = '/v1/tracks/';
 
@@ -1623,7 +1633,7 @@ class SpotifyWebAPI
      */
     public function play($deviceId = '', $options = [])
     {
-        $options = json_encode((object) $options);
+        $options = json_encode($options);
 
         $headers = [
             'Content-Type' => 'application/json',
@@ -1890,8 +1900,10 @@ class SpotifyWebAPI
      */
     public function shuffle($options)
     {
-        $options = (array) $options;
-        $options['state'] = $options['state'] ? 'true' : 'false';
+        $options = array_merge((array) $options, [
+            'state' => $options['state'] ? 'true' : 'false',
+        ]);
+
         $options = http_build_query($options, null, '&');
 
         // We need to manually append data to the URI since it's a PUT request
