@@ -1596,6 +1596,7 @@ class SpotifyWebAPI
      * - string context_uri Optional. URI of the context to play, for example an album.
      * - array uris Optional. Spotify track URIs to play.
      * - object offset Optional. Indicates from where in the context playback should start.
+     * - int position_ms. Optional. Indicates the position to start playback from.
      *
      * @return bool Whether the playback was successfully started.
      */
