@@ -722,8 +722,8 @@ class SpotifyWebAPI
      *
      * @param string $artistId ID or URI of the artist.
      * @param array|object $options Optional. Options for the albums.
-     * - string|array album_type Optional. Album types to return. If omitted, all album types will be returned.
-     * - string market Optional. Limit the results to items that are playable in this market, for example SE.
+     * - string country Optional. Limit the results to items that are playable in this country, for example SE.
+     * - string|array include_groups Optional. Album types to return. If omitted, all album types will be returned.
      * - int limit Optional. Limit the number of albums.
      * - int offset Optional. Number of albums to skip.
      *
@@ -733,8 +733,13 @@ class SpotifyWebAPI
     {
         $options = (array) $options;
 
-        if (isset($options['album_type'])) {
-            $options['album_type'] = $this->toCommaString($options['album_type']);
+        if (isset($options['album_type']) || isset($options['include_groups'])) {
+            // TODO: Temp check, remove "album_type" in next major version
+            $values = $options['album_type'] ?? $options['include_groups'];
+
+            $options['include_groups'] = $this->toCommaString($values);
+
+            unset($options['album_type']);
         }
 
         $artistId = $this->uriToId($artistId, 'artist');

@@ -750,7 +750,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         ];
 
         $expected = [
-            'album_type' => 'album,single',
+            'include_groups' => 'album,single',
             'market' => 'SE',
             'limit' => 10,
         ];
