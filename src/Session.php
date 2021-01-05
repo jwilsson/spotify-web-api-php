@@ -58,6 +58,18 @@ class Session
      */
     public function generateCodeVerifier($length = 128)
     {
+        return $this->generateState($length);
+    }
+
+    /**
+     * Generate a random state value.
+     *
+     * @param int $length Optional. Length of the state. Default is 16 characters.
+     *
+     * @return string A random state value.
+     */
+    public function generateState($length = 16)
+    {
         // Length will be doubled when converting to hex
         return bin2hex(
             random_bytes($length / 2)

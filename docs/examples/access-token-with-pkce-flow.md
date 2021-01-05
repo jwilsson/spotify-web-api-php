@@ -20,6 +20,7 @@ $session = new SpotifyWebAPI\Session(
 
 $verifier = $session->generateCodeVerifier(); // Store this value somewhere, a session for example
 $challenge = $session->generateCodeChallenge($verifier);
+$state = $session->generateState();
 
 $options = [
     'code_challenge' => $challenge,
@@ -27,11 +28,14 @@ $options = [
         'playlist-read-private',
         'user-read-private',
     ],
+    'state' => $state,
 ];
 
 header('Location: ' . $session->getAuthorizeUrl($options));
 die();
 ```
+
+__Note:__ The `state` parameter is optional but highly recommended to prevent CSRF attacks. The value will need to be stored between requests and verfied when the user is redirected back to your application from Spotify.
 
 To read more about scopes, see [Working with Scopes](/docs/examples/working-with-scopes.md). To see all of the available options for `getAuthorizeUrl()`, refer to the [method reference](/docs/method-reference/Session.md#getauthorizeurl).
 
@@ -51,13 +55,22 @@ $session = new SpotifyWebAPI\Session(
     'REDIRECT_URI'
 );
 
+$state = $_GET['state'];
+
+// Fetch the stored state value from somewhere. A session for example
+
+if ($state !== $storedState) {
+    // The state returned isn't the same as the one we've stored, we shouldn't continue
+    die('State mismatch');
+}
+
 // Request a access token using the code from Spotify and the previously created code verifier
 $session->requestAccessToken($_GET['code'], $verifier);
 
 $accessToken = $session->getAccessToken();
 $refreshToken = $session->getRefreshToken();
 
-// Store the access and refresh tokens somewhere. In a database for example.
+// Store the access and refresh tokens somewhere. In a session for example
 
 // Send the user along and fetch some data!
 header('Location: app.php');
@@ -74,7 +87,7 @@ require 'vendor/autoload.php';
 
 $api = new SpotifyWebAPI\SpotifyWebAPI();
 
-// Fetch the saved access token from somewhere. A database for example.
+// Fetch the saved access token from somewhere. A session for example.
 $api->setAccessToken($accessToken);
 
 // It's now possible to request data about the currently authenticated user
