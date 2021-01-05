@@ -59,6 +59,29 @@ class SpotifyWebAPI
     }
 
     /**
+     * Convert Spotify object IDs to URIs.
+     *
+     * @param array|string $ids ID(s) to convert.
+     * @param string $type Spotify object type.
+     *
+     * @return array|string URI(s).
+     */
+    protected function idToUri($ids, $type)
+    {
+        $type = 'spotify:' . $type . ':';
+
+        $ids = array_map(function ($id) use ($type) {
+            if (substr($id, 0, strlen($type)) != $type && substr($id, 0, 7) != 'spotify') {
+                $id = $type . $id;
+            }
+
+            return $id;
+        }, (array) $ids);
+
+        return count($ids) == 1 ? $ids[0] : $ids;
+    }
+
+    /**
      * Send a request to the Spotify API, automatically refreshing the access token as needed.
      *
      * @param string $method The HTTP method to use.
@@ -106,29 +129,6 @@ class SpotifyWebAPI
 
             throw $e;
         }
-    }
-
-    /**
-     * Convert Spotify object IDs to URIs.
-     *
-     * @param array|string $ids ID(s) to convert.
-     * @param string $type Spotify object type.
-     *
-     * @return array|string URI(s).
-     */
-    protected function idToUri($ids, $type)
-    {
-        $type = 'spotify:' . $type . ':';
-
-        $ids = array_map(function ($id) use ($type) {
-            if (substr($id, 0, strlen($type)) != $type && substr($id, 0, 7) != 'spotify') {
-                $id = $type . $id;
-            }
-
-            return $id;
-        }, (array) $ids);
-
-        return count($ids) == 1 ? $ids[0] : $ids;
     }
 
     /**
