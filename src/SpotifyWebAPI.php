@@ -28,6 +28,11 @@ class SpotifyWebAPI
     public function __construct($options = [], $session = null, $request = null)
     {
         if ($options instanceof Request) {
+            trigger_error(
+                'Passing a Request instance as the first argument to new SpotifyWebAPI() is deprecated.',
+                E_USER_DEPRECATED
+            );
+
             $request = $options;
         } else {
             $this->setOptions($options);
@@ -738,7 +743,13 @@ class SpotifyWebAPI
         $options = (array) $options;
 
         if (isset($options['album_type']) || isset($options['include_groups'])) {
-            // TODO: Temp check, remove "album_type" in next major version
+            if (isset($options['album_type'])) {
+                $msg = 'The "album_type" option passed to SpotifyWebAPI::getArtistAlbums() is deprecated';
+                $msg .= ', use "include_groups" instead.';
+
+                trigger_error($msg, E_USER_DEPRECATED);
+            }
+
             $values = $options['album_type'] ?? $options['include_groups'];
 
             $options['include_groups'] = $this->toCommaString($values);
