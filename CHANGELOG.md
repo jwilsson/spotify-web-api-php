@@ -1,5 +1,9 @@
 # Changelog
-## 4.2.0 (2020-01-06)
+## 4.2.1 (2021-01-31)
+* Fixed `http_build_query` calls passing `null` instead of empty strings. ([e94593e](https://github.com/jwilsson/spotify-web-api-php/commit/e94593ecc0e64de4fa60a50ad9f365e3bda38737))
+* Updated CA bundle. ([00556f2](https://github.com/jwilsson/spotify-web-api-php/commit/00556f2c5bc3112d18c3a016a4297c0387ee1dc9))
+
+## 4.2.0 (2021-01-06)
 * Added a `Session::generateState()` method. ([fa5ea56](https://github.com/jwilsson/spotify-web-api-php/commit/fa5ea561afc166a1ba0e9d555017379e2299af5a))
 * `SpotifyWebAPI::getArtistAlbums()` can now also accept the documented `include_groups` parameter. ([dc9a84](https://github.com/jwilsson/spotify-web-api-php/commit/dc9a841f9465bb6519b84b8c062bbb457995cd7e))
 * Fixed some cases where objects weren't always properly cast to arrays. ([31eae20](https://github.com/jwilsson/spotify-web-api-php/commit/31eae2091f1f214b900a1455b4ba6271731471c5))
