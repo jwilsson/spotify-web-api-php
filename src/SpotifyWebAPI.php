@@ -316,7 +316,7 @@ class SpotifyWebAPI
      */
     public function changeVolume($options)
     {
-        $options = http_build_query($options, null, '&');
+        $options = http_build_query($options, '', '&');
 
         // We need to manually append data to the URI since it's a PUT request
         $uri = '/v1/me/player/volume?' . $options;
@@ -1756,7 +1756,7 @@ class SpotifyWebAPI
      */
     public function repeat($options)
     {
-        $options = http_build_query($options, null, '&');
+        $options = http_build_query($options, '', '&');
 
         // We need to manually append data to the URI since it's a PUT request
         $uri = '/v1/me/player/repeat?' . $options;
@@ -1834,7 +1834,7 @@ class SpotifyWebAPI
      */
     public function seek($options)
     {
-        $options = http_build_query($options, null, '&');
+        $options = http_build_query($options, '', '&');
 
         // We need to manually append data to the URI since it's a PUT request
         $uri = '/v1/me/player/seek?' . $options;
@@ -1915,7 +1915,7 @@ class SpotifyWebAPI
             'state' => $options['state'] ? 'true' : 'false',
         ]);
 
-        $options = http_build_query($options, null, '&');
+        $options = http_build_query($options, '', '&');
 
         // We need to manually append data to the URI since it's a PUT request
         $uri = '/v1/me/player/shuffle?' . $options;
