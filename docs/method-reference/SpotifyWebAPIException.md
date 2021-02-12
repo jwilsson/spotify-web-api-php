@@ -1,5 +1,11 @@
 # SpotifyWebAPIException
 
+## Table of Contents
+* [getReason](#getreason)
+* [hasExpiredToken](#hasexpiredtoken)
+* [isRateLimited](#isratelimited)
+* [setReason](#setreason)
+
 ## Constants
 * **TOKEN_EXPIRED**
 * **RATE_LIMIT_STATUS**

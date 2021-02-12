@@ -1,5 +1,16 @@
 # Request
 
+## Table of Contents
+* [__construct](#__construct)
+* [account](#account)
+* [api](#api)
+* [getLastResponse](#getlastresponse)
+* [getReturnType](#getreturntype)
+* [send](#send)
+* [setCurlOptions](#setcurloptions)
+* [setOptions](#setoptions)
+* [setReturnType](#setreturntype)
+
 ## Constants
 * **ACCOUNT_URL**
 * **API_URL**

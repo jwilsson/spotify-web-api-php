@@ -1,5 +1,13 @@
 # SpotifyWebAPIAuthException
 
+## Table of Contents
+* [hasInvalidCredentials](#hasinvalidcredentials)
+* [hasInvalidRefreshToken](#hasinvalidrefreshtoken)
+* [getReason](#getreason)
+* [hasExpiredToken](#hasexpiredtoken)
+* [isRateLimited](#isratelimited)
+* [setReason](#setreason)
+
 ## Constants
 * **INVALID_CLIENT**
 * **INVALID_CLIENT_SECRET**

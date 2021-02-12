@@ -1,5 +1,27 @@
 # Session
 
+## Table of Contents
+* [__construct](#__construct)
+* [generateCodeChallenge](#generatecodechallenge)
+* [generateCodeVerifier](#generatecodeverifier)
+* [generateState](#generatestate)
+* [getAuthorizeUrl](#getauthorizeurl)
+* [getAccessToken](#getaccesstoken)
+* [getClientId](#getclientid)
+* [getClientSecret](#getclientsecret)
+* [getTokenExpiration](#gettokenexpiration)
+* [getRedirectUri](#getredirecturi)
+* [getRefreshToken](#getrefreshtoken)
+* [getScope](#getscope)
+* [refreshAccessToken](#refreshaccesstoken)
+* [requestAccessToken](#requestaccesstoken)
+* [requestCredentialsToken](#requestcredentialstoken)
+* [setAccessToken](#setaccesstoken)
+* [setClientId](#setclientid)
+* [setClientSecret](#setclientsecret)
+* [setRedirectUri](#setredirecturi)
+* [setRefreshToken](#setrefreshtoken)
+
 ## Constants
 
 ## Methods
