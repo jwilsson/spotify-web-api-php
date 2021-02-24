@@ -755,19 +755,8 @@ class SpotifyWebAPI
     {
         $options = (array) $options;
 
-        if (isset($options['album_type']) || isset($options['include_groups'])) {
-            if (isset($options['album_type'])) {
-                $msg = 'The "album_type" option passed to SpotifyWebAPI::getArtistAlbums() is deprecated';
-                $msg .= ', use "include_groups" instead.';
-
-                trigger_error($msg, E_USER_DEPRECATED);
-            }
-
-            $values = $options['album_type'] ?? $options['include_groups'];
-
-            $options['include_groups'] = $this->toCommaString($values);
-
-            unset($options['album_type']);
+        if (isset($options['include_groups'])) {
+            $options['include_groups'] = $this->toCommaString($options['include_groups']);
         }
 
         $artistId = $this->uriToId($artistId, 'artist');

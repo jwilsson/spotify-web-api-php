@@ -747,7 +747,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
     public function testGetArtistAlbums()
     {
         $options = [
-            'album_type' => ['album', 'single'],
+            'include_groups' => ['album', 'single'],
             'limit' => 10,
             'market' => 'SE',
         ];
