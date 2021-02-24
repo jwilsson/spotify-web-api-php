@@ -24,17 +24,7 @@ class SpotifyWebAPI
      */
     public function __construct($options = [], $session = null, $request = null)
     {
-        if ($options instanceof Request) {
-            trigger_error(
-                'Passing a Request instance as the first argument to new SpotifyWebAPI() is deprecated.',
-                E_USER_DEPRECATED
-            );
-
-            $request = $options;
-        } else {
-            $this->setOptions($options);
-        }
-
+        $this->setOptions($options);
         $this->setSession($session);
 
         $this->request = $request ?: new Request();

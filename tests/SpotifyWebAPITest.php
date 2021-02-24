@@ -51,14 +51,6 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         return new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
     }
 
-    public function testConstructorRequest()
-    {
-        $request = new SpotifyWebAPI\Request();
-        $api = new SpotifyWebAPI\SpotifyWebAPI($request);
-
-        $this->assertSame($request, $api->getRequest());
-    }
-
     public function testAutoRefreshOption()
     {
         $options = ['auto_refresh' => true];
