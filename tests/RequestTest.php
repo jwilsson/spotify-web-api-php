@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class RequestTest extends PHPUnit\Framework\TestCase
 {
     private function setupStub($expectedMethod, $expectedUri, $expectedParameters, $expectedHeaders, $expectedReturn)

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class SessionTest extends PHPUnit\Framework\TestCase
 {
     private $clientID = 'b777292af0def22f9257991fc770b520';
