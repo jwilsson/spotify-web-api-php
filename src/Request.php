@@ -197,20 +197,19 @@ class Request
             $parameters = http_build_query($parameters, '', '&');
         }
 
-        $mergedHeaders = [];
-        foreach ($headers as $key => $val) {
-            $mergedHeaders[] = "$key: $val";
-        }
-
         $options = [
             CURLOPT_CAINFO => __DIR__ . '/cacert.pem',
             CURLOPT_ENCODING => '',
             CURLOPT_HEADER => true,
-            CURLOPT_HTTPHEADER => $mergedHeaders,
+            CURLOPT_HTTPHEADER => [],
             CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_URL => rtrim($url, '/'),
         ];
 
-        $url = rtrim($url, '/');
+        foreach ($headers as $key => $val) {
+            $options[CURLOPT_HTTPHEADER][] = "$key: $val";
+        }
+
         $method = strtoupper($method);
 
         switch ($method) {
@@ -229,13 +228,11 @@ class Request
                 $options[CURLOPT_CUSTOMREQUEST] = $method;
 
                 if ($parameters) {
-                    $url .= '/?' . $parameters;
+                    $options[CURLOPT_URL] .= '/?' . $parameters;
                 }
 
                 break;
         }
-
-        $options[CURLOPT_URL] = $url;
 
         $ch = curl_init();
 
@@ -248,7 +245,7 @@ class Request
         $response = curl_exec($ch);
 
         if (curl_error($ch)) {
-            throw new SpotifyWebAPIException('cURL transport error: ' . curl_errno($ch) . ' ' .  curl_error($ch));
+            throw new SpotifyWebAPIException('cURL transport error: ' . curl_errno($ch) . ' ' . curl_error($ch));
         }
 
         [$headers, $body] = explode("\r\n\r\n", $response, 2);
