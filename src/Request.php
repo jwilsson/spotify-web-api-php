@@ -27,25 +27,19 @@ class Request
     }
 
     /**
-     * Parse the response body and handle API errors.
+     * Handle response errors.
      *
-     * @param string $body The raw, unparsed response body.
-     * @param int $status The HTTP status code, used to see if additional error handling is needed.
+     * @param array|object $body The parsed response body.
+     * @param int $status The HTTP status code, passed along to any exceptions thrown.
      *
      * @throws SpotifyWebAPIException
      * @throws SpotifyWebAPIAuthException
      *
-     * @return array|object The parsed response body. Type is controlled by the `return_assoc` option.
+     * @return void
      */
-    protected function parseBody($body, $status)
+    protected function handleResponseError($body, $status)
     {
-        $this->lastResponse['body'] = json_decode($body, $this->options['return_assoc']);
-
-        if ($status >= 200 && $status <= 299) {
-            return $this->lastResponse['body'];
-        }
-
-        $body = json_decode($body);
+        $body = (object) $body;
         $error = $body->error ?? null;
 
         if (isset($error->message) && isset($error->status)) {
@@ -221,24 +215,29 @@ class Request
         $response = curl_exec($ch);
 
         if (curl_error($ch)) {
+            curl_close($ch);
+
             throw new SpotifyWebAPIException('cURL transport error: ' . curl_errno($ch) . ' ' . curl_error($ch));
         }
 
         [$headers, $body] = $this->splitResponse($response);
 
+        $body = json_decode($body, $this->options['return_assoc']);
         $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $headers = $this->parseHeaders($headers);
 
         $this->lastResponse = [
+            'body' => $body,
             'headers' => $headers,
             'status' => $status,
             'url' => $url,
         ];
 
-        // Run this separately since it might throw
-        $this->parseBody($body, $status);
-
         curl_close($ch);
+
+        if ($status >= 400) {
+            $this->handleResponseError($body, $status);
+        }
 
         return $this->lastResponse;
     }
