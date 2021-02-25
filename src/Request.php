@@ -248,17 +248,7 @@ class Request
             throw new SpotifyWebAPIException('cURL transport error: ' . curl_errno($ch) . ' ' . curl_error($ch));
         }
 
-        [$headers, $body] = explode("\r\n\r\n", $response, 2);
-
-        // Skip the first set of headers for proxied requests
-        if (preg_match('/^HTTP\/1\.\d 200 Connection established$/', $headers) === 1) {
-            [$headers, $body] = explode("\r\n\r\n", $body, 2);
-        }
-
-        // Skip the first set of headers for the informal Continue header
-        if (preg_match('/^HTTP\/1\.\d 100 Continue$/', $headers) === 1) {
-            [$headers, $body] = explode("\r\n\r\n", $body, 2);
-        }
+        [$headers, $body] = $this->splitResponse($response);
 
         $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $headers = $this->parseHeaders($headers);
@@ -326,5 +316,34 @@ class Request
         );
 
         $this->returnType = $returnType;
+    }
+
+    /**
+     * Split response into headers and body, taking proxy response headers etc. into account.
+     *
+     * @param string $response The complete response.
+     *
+     * @return array An array consisting of two elements, headers and body.
+     */
+    protected function splitResponse($response)
+    {
+        $parts = explode("\r\n\r\n", $response, 3);
+
+        // Skip first set of headers for proxied requests etc.
+        if (
+            preg_match('/^HTTP\/1.\d 100 Continue/', $parts[0]) ||
+            preg_match('/^HTTP\/1.\d 200 Connection established/', $parts[0]) ||
+            preg_match('/^HTTP\/1.\d 200 Tunnel established/', $parts[0])
+        ) {
+            return [
+                $parts[1],
+                $parts[2],
+            ];
+        }
+
+        return [
+            $parts[0],
+            $parts[1],
+        ];
     }
 }
