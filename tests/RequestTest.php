@@ -263,7 +263,7 @@ class RequestTest extends PHPUnit\Framework\TestCase
         $request = new SpotifyWebAPI\Request();
         $response = $request->send('GET', 'https://httpbin.org/get');
 
-        $this->assertArrayHasKey('Content-Type', $response['headers']);
+        $this->assertArrayHasKey('content-type', $response['headers']);
     }
 
     public function testSendHeadersParsingValue()
@@ -271,7 +271,7 @@ class RequestTest extends PHPUnit\Framework\TestCase
         $request = new SpotifyWebAPI\Request();
         $response = $request->send('GET', 'https://httpbin.org/get');
 
-        $this->assertEquals('application/json', $response['headers']['Content-Type']);
+        $this->assertEquals('application/json', $response['headers']['content-type']);
     }
 
     public function testSendStatus()
