@@ -1,4 +1,7 @@
 # Changelog
+## 4.2.2 (2021-03-02)
+* Fixed an issue where empty arrays would be passed to Spotify, causing errors. ([b350526](https://github.com/jwilsson/spotify-web-api-php/commit/b35052695edb7ff517714d48120ce29565036203))
+
 ## 4.2.1 (2021-01-31)
 * Fixed `http_build_query` calls passing `null` instead of empty strings. ([e94593e](https://github.com/jwilsson/spotify-web-api-php/commit/e94593ecc0e64de4fa60a50ad9f365e3bda38737))
 * Updated CA bundle. ([00556f2](https://github.com/jwilsson/spotify-web-api-php/commit/00556f2c5bc3112d18c3a016a4297c0387ee1dc9))
