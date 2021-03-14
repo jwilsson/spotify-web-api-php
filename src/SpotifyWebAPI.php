@@ -537,6 +537,7 @@ class SpotifyWebAPI
         $ids = json_encode([
             'ids' => (array) $ids,
         ]);
+        $ids = str_replace(',', '","', $ids);
 
         $headers = [
             'Content-Type' => 'application/json',
