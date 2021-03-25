@@ -31,6 +31,27 @@ $analysis = $api->getAudioAnalysis('TRACK_ID');
 print_r($analysis);
 ```
 
+## Getting the audio features of a track
+
+```php
+$features = $api->getAudioFeatures('TRACK_ID');
+
+print_r($features);
+```
+
+## Getting the audio features of multiple tracks
+
+```php
+$tracks = [
+    'TRACK_ID',
+    'TRACK_ID',
+];
+
+$features = $api->getMultipleAudioFeatures($tracks);
+
+print_r($features);
+```
+
 ## Getting recommendations based on tracks
 
 ```php

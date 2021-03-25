@@ -786,28 +786,6 @@ class SpotifyWebAPI
     }
 
     /**
-     * Get track audio features.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-several-audio-features
-     *
-     * @param array $trackIds IDs or URIs of the tracks.
-     *
-     * @return array|object The tracks' audio features. Type is controlled by the `return_assoc` option.
-     */
-    public function getAudioFeatures($trackIds)
-    {
-        $trackIds = $this->uriToId($trackIds, 'track');
-        $options = [
-            'ids' => $this->toCommaString($trackIds),
-        ];
-
-        $uri = '/v1/audio-features';
-
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
-
-        return $this->lastResponse['body'];
-    }
-
-    /**
      * Get audio analysis for track.
      * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-audio-analysis
      *
@@ -819,6 +797,29 @@ class SpotifyWebAPI
     {
         $trackId = $this->uriToId($trackId, 'track');
         $uri = '/v1/audio-analysis/' . $trackId;
+
+        $this->lastResponse = $this->sendRequest('GET', $uri);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
+     * Get audio features of a single track.
+     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-audio-features
+     *
+     * @param string $trackId ID or URI of the track.
+     *
+     * @return array|object The track's audio features. Type is controlled by the `return_assoc` option.
+     */
+    public function getAudioFeatures($trackId)
+    {
+        // Deprecated, but kept for legacy reasons for now
+        if (is_array($trackId)) {
+            return $this->getMultipleAudioFeatures($trackId);
+        }
+
+        $trackId = $this->uriToId($trackId, 'track');
+        $uri = '/v1/audio-features/' . $trackId;
 
         $this->lastResponse = $this->sendRequest('GET', $uri);
 
@@ -982,6 +983,28 @@ class SpotifyWebAPI
     public function getLastResponse()
     {
         return $this->lastResponse;
+    }
+
+    /**
+     * Get audio features of multiple tracks.
+     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-several-audio-features
+     *
+     * @param array $trackIds IDs or URIs of the tracks.
+     *
+     * @return array|object The tracks' audio features. Type is controlled by the `return_assoc` option.
+     */
+    public function getMultipleAudioFeatures($trackIds)
+    {
+        $trackIds = $this->uriToId($trackIds, 'track');
+        $options = [
+            'ids' => $this->toCommaString($trackIds),
+        ];
+
+        $uri = '/v1/audio-features';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
+
+        return $this->lastResponse['body'];
     }
 
     /**

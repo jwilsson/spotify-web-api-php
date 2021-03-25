@@ -788,31 +788,6 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertObjectHasAttribute('tracks', $response);
     }
 
-    public function testGetAudioFeatures()
-    {
-        $tracks = [
-            '0eGsygTp906u18L0Oimnem',
-            'spotify:track:1lDWb6b6ieDQ2xT7ewTC3G',
-        ];
-
-        $expected = [
-            'ids' => '0eGsygTp906u18L0Oimnem,1lDWb6b6ieDQ2xT7ewTC3G',
-        ];
-
-        $return = ['body' => get_fixture('audio-features')];
-        $api = $this->setupApi(
-            'GET',
-            '/v1/audio-features',
-            $expected,
-            [],
-            $return
-        );
-
-        $response = $api->getAudioFeatures($tracks);
-
-        $this->assertObjectHasAttribute('audio_features', $response);
-    }
-
     public function testGetAudioAnalysis()
     {
         $return = ['body' => get_fixture('audio-analysis')];
@@ -827,6 +802,24 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $response = $api->getAudioAnalysis('spotify:track:0eGsygTp906u18L0Oimnem');
 
         $this->assertObjectHasAttribute('audio_analysis', $response);
+    }
+
+    public function testGetAudioFeatures()
+    {
+        $track = '0eGsygTp906u18L0Oimnem';
+
+        $return = ['body' => get_fixture('audio-features')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/audio-features/0eGsygTp906u18L0Oimnem',
+            [],
+            [],
+            $return
+        );
+
+        $response = $api->getAudioFeatures($track);
+
+        $this->assertObjectHasAttribute('danceability', $response);
     }
 
     public function testGetCategoriesList()
@@ -1009,6 +1002,31 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $response = $api->getLastResponse();
 
         $this->assertArrayHasKey('body', $response);
+    }
+
+    public function testGetMultipleAudioFeatures()
+    {
+        $tracks = [
+            '0eGsygTp906u18L0Oimnem',
+            'spotify:track:1lDWb6b6ieDQ2xT7ewTC3G',
+        ];
+
+        $expected = [
+            'ids' => '0eGsygTp906u18L0Oimnem,1lDWb6b6ieDQ2xT7ewTC3G',
+        ];
+
+        $return = ['body' => get_fixture('multiple-audio-features')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/audio-features',
+            $expected,
+            [],
+            $return
+        );
+
+        $response = $api->getMultipleAudioFeatures($tracks);
+
+        $this->assertObjectHasAttribute('audio_features', $response);
     }
 
     public function testGetMyCurrentTrack()
