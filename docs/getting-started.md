@@ -42,85 +42,26 @@ $session = new SpotifyWebAPI\Session(
 Replace the values here with the ones given to you from Spotify.
 
 ## Authentication and authorization
-After creating a session it's time to request access to the Spotify Web API. There are two ways to request an access token. The first method is called the *Authorization Code Flow* and requires some interaction from the user, but in turn gives you some access to the user's account. The other method is called the *Client Credentials Flow* and doesn't require any user interaction but doesn't provide any user information. This method is the recommended one if you just need access to Spotify catalog data.
+After creating a session it's time to request access to the Spotify Web API. There are three ways to request an access token.
 
-### Requesting an access token using the Authorization Code Flow
-There are two steps required to authenticate the user. The first step is for your app to request access to the user's account and then redirecting them to the authorize URL.
+The first method is called *Proof Key for Code Exchange (PKCE)* and requires some interaction from the user, but in turn gives you some access to the user's account. This is the recommended method if you need access to a user's account.
 
-#### Step 1
-Put the following code in its own file:
+The second method is called the *Authorization Code Flow* and just like the PKCE method it requires some interaction from the user, but will also give you access to the user's account.
 
-```php
-require_once 'vendor/autoload.php';
+The last method is called the *Client Credentials Flow* and doesn't require any user interaction but also doesn't provide any user information. This method is the recommended one if you just need access to Spotify catalog data.
 
-$session = new SpotifyWebAPI\Session(
-    'CLIENT_ID',
-    'CLIENT_SECRET',
-    'REDIRECT_URI'
-);
-
-header('Location: ' . $session->getAuthorizeUrl());
-die();
-```
-
-#### Step 2
-When the user has approved your app, Spotify will redirect the user together with a `code` to the specifed redirect URI. This must match the one you entered when you created your app!
-
-You'll need to use this code to request a access token from Spotify and then tell the API wrapper about the access token to use.
-
-Create a new file, and put the following code in it:
-
-```php
-require 'vendor/autoload.php';
-
-$session = new SpotifyWebAPI\Session(
-    'CLIENT_ID',
-    'CLIENT_SECRET',
-    'REDIRECT_URI'
-);
-
-// Request a access token using the code from Spotify
-$session->requestAccessToken($_GET['code']);
-
-$accessToken = $session->getAccessToken();
-
-// Store the access token somewhere. In a database for example.
-
-header('Location: some-other-file.php');
-die();
-```
-
-After this step is completed, the user will be authenticated and you'll have a access token that's valid for approximately one hour. Read on to find out how to make requests to the API!
-
-### Requesting an access token using the Client Credentials Flow
-The second method doesn't require any user interaction and no access to user information is therefore granted.
-
-```php
-require 'vendor/autoload.php';
-
-$session = new SpotifyWebAPI\Session(
-    'CLIENT_ID',
-    'CLIENT_SECRET'
-);
-
-$session->requestCredentialsToken();
-$accessToken = $session->getAccessToken();
-
-// Store the access token somewhere. In a database for example.
-
-header('Location: some-other-file.php');
-die();
-```
-
-You'll notice the missing redirect URI when initializing the `Session`. When using the Client Credentials Flow, it isn't needed and can simply be omitted from the constructor call.
+For more info about each authorization method, checkout these examples:
+* [Obtaining an access token using the Proof Key for Code Exchange (PKCE) Flow](/docs/examples/access-token-with-pkce-flow.md)
+* [Obtaining an access token using the Authorization Code Flow](/docs/examples/access-token-with-authorization-code-flow.md)
+* [Obtaining an access token using the Client Credentials Flow](/docs/examples/access-token-with-client-credentials-flow.md)
 
 ## Making requests to the Spotify API
-Once you have a access token, it's time to start making some requests to the API!
+Assuming you've followed one of the authorization guides above and successfully requested an access token, now it's time to create a new file called `app.php`. In this file we'll tell the API wrapper about the access token to use and then request some data from Spotify!
 
 ```php
 require 'vendor/autoload.php';
 
-// Fetch your access token from somewhere. A database for example.
+// Fetch your access token from somewhere. A session for example.
 
 $api = new SpotifyWebAPI\SpotifyWebAPI();
 $api->setAccessToken($accessToken);
