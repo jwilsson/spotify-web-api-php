@@ -35,6 +35,7 @@
 * [getFeaturedPlaylists](#getfeaturedplaylists)
 * [getGenreSeeds](#getgenreseeds)
 * [getLastResponse](#getlastresponse)
+* [getMarkets](#getmarkets)
 * [getMultipleAudioFeatures](#getmultipleaudiofeatures)
 * [getMyCurrentTrack](#getmycurrenttrack)
 * [getMyDevices](#getmydevices)
@@ -721,6 +722,38 @@ Get the latest full response from the Spotify API.
     * array headers Response headers.
     * int status HTTP status code.
     * string url The requested URL.
+
+---
+### getMarkets
+
+
+```php
+SpotifyWebAPI::getMarkets()
+```
+
+Get all markets where Spotify is available.<br>
+[https://developer.spotify.com/documentation/web-api/reference/](https://developer.spotify.com/documentation/web-api/reference/)#endpoint-get-available-markets
+
+
+#### Return values
+* **array\|object** All markets where Spotify is available. Type is controlled by the `return_assoc` option.
+
+---
+### getMultipleAudioFeatures
+
+
+```php
+SpotifyWebAPI::getMultipleAudioFeatures($trackIds)
+```
+
+Get audio features of multiple tracks.<br>
+[https://developer.spotify.com/documentation/web-api/reference/](https://developer.spotify.com/documentation/web-api/reference/)#endpoint-get-several-audio-features
+
+#### Arguments
+* `$trackIds` **array** - IDs or URIs of the tracks.
+
+#### Return values
+* **array\|object** The tracks' audio features. Type is controlled by the `return_assoc` option.
 
 ---
 ### getMyCurrentTrack
@@ -1451,7 +1484,7 @@ Set the access token to use.
 * `$accessToken` **string** - The access token.
 
 #### Return values
-* **void**
+* **void** 
 
 ---
 ### setOptions
@@ -1467,7 +1500,7 @@ Set options
 * `$options` **array\|object** - Options to set.
 
 #### Return values
-* **void**
+* **void** 
 
 ---
 ### setReturnType
@@ -1484,7 +1517,7 @@ Set the return type for the response body.
 * `$returnType` **string** - One of the `SpotifyWebAPI::RETURN_*` constants.
 
 #### Return values
-* **void**
+* **void** 
 
 ---
 ### setSession
@@ -1500,7 +1533,7 @@ Set the Session object to use.
 * `$session` **\SpotifyWebAPI\Session** - The Session object.
 
 #### Return values
-* **void**
+* **void** 
 
 ---
 ### shuffle

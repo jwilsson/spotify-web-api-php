@@ -986,6 +986,21 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get all markets where Spotify is available.
+     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-available-markets
+     *
+     * @return array|object All markets where Spotify is available. Type is controlled by the `return_assoc` option.
+     */
+    public function getMarkets()
+    {
+        $uri = '/v1/markets';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get audio features of multiple tracks.
      * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-several-audio-features
      *

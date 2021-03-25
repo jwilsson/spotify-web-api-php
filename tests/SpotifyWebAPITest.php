@@ -1004,6 +1004,22 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertArrayHasKey('body', $response);
     }
 
+    public function testGetMarkets()
+    {
+        $return = ['body' => get_fixture('markets')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/markets',
+            [],
+            [],
+            $return
+        );
+
+        $response = $api->getMarkets();
+
+        $this->assertObjectHasAttribute('markets', $response);
+    }
+
     public function testGetMultipleAudioFeatures()
     {
         $tracks = [
