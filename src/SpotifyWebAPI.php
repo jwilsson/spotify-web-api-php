@@ -196,6 +196,30 @@ class SpotifyWebAPI
     }
 
     /**
+     * Add episodes to the current user's Spotify library.
+     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-save-episodes-user
+     *
+     * @param string|array $episodes Episode IDs or URIs to add.
+     *
+     * @return bool Whether the episodes was successfully added.
+     */
+    public function addMyEpisodes($episodes)
+    {
+        $episodes = $this->uriToId($episodes, 'episode');
+        $episodes = json_encode((array) $episodes);
+
+        $headers = [
+            'Content-Type' => 'application/json',
+        ];
+
+        $uri = '/v1/me/episodes';
+
+        $this->lastResponse = $this->sendRequest('PUT', $uri, $episodes, $headers);
+
+        return $this->lastResponse['status'] == 200;
+    }
+
+    /**
      * Add shows to the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/#endpoint-save-shows-user
      *
@@ -397,6 +421,30 @@ class SpotifyWebAPI
         $uri = '/v1/me/albums';
 
         $this->lastResponse = $this->sendRequest('DELETE', $uri, $albums, $headers);
+
+        return $this->lastResponse['status'] == 200;
+    }
+
+    /**
+     * Delete episodes from the current user's Spotify library.
+     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-remove-episodes-user
+     *
+     * @param string|array $episodes Episode IDs or URIs to delete.
+     *
+     * @return bool Whether the episodes was successfully deleted.
+     */
+    public function deleteMyEpisodes($episodes)
+    {
+        $episodes = $this->uriToId($episodes, 'episode');
+        $episodes = json_encode((array) $episodes);
+
+        $headers = [
+            'Content-Type' => 'application/json',
+        ];
+
+        $uri = '/v1/me/episodes';
+
+        $this->lastResponse = $this->sendRequest('DELETE', $uri, $episodes, $headers);
 
         return $this->lastResponse['status'] == 200;
     }
@@ -1146,6 +1194,26 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the current user’s saved episodes.
+     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-saved-episodes
+     *
+     * @param array|object $options Optional. Options for the episodes.
+     * - int limit Optional. Number of episodes to return.
+     * - int offset Optional. Number of episodes to skip.
+     * - string market Optional. An ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
+     *
+     * @return array|object The user's saved episodes. Type is controlled by the `return_assoc` option.
+     */
+    public function getMySavedEpisodes($options = [])
+    {
+        $uri = '/v1/me/episodes';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get the current user’s saved tracks.
      * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-saved-tracks
      *
@@ -1569,6 +1637,30 @@ class SpotifyWebAPI
         ];
 
         $uri = '/v1/me/albums/contains';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
+     * Check if episodes are saved in the current user's Spotify library.
+     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-check-users-saved-episodes
+     *
+     * @param string|array $episodes Episode IDs or URIs to check for.
+     *
+     * @return array Whether each episode is saved.
+     */
+    public function myEpisodesContains($episodes)
+    {
+        $episodes = $this->uriToId($episodes, 'episode');
+        $episodes = $this->toCommaString($episodes);
+
+        $options = [
+            'ids' => $episodes,
+        ];
+
+        $uri = '/v1/me/episodes/contains';
 
         $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 

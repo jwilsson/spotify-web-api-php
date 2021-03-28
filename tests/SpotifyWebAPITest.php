@@ -184,6 +184,35 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         );
     }
 
+    public function testAddMyEpisodes()
+    {
+        $episodes = [
+            '0zov0kd6MA3BqT1FKpOeYO',
+            '3pLx6LaVQbWl5IfW8nxq56',
+            'spotify:episode:6kSGLgKWhBg8AoCzylVfc2',
+        ];
+
+        $expected = json_encode([
+            '0zov0kd6MA3BqT1FKpOeYO',
+            '3pLx6LaVQbWl5IfW8nxq56',
+            '6kSGLgKWhBg8AoCzylVfc2',
+        ]);
+
+        $headers = ['Content-Type' => 'application/json'];
+        $return = ['status' => 200];
+        $api = $this->setupApi(
+            'PUT',
+            '/v1/me/episodes',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $this->assertTrue(
+            $api->addMyEpisodes($episodes)
+        );
+    }
+
     public function testAddMyShows()
     {
         $shows = [
@@ -395,6 +424,35 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $this->assertTrue(
             $api->deleteMyAlbums($albums)
+        );
+    }
+
+    public function testDeleteMyEpisodes()
+    {
+        $episodes = [
+            '0zov0kd6MA3BqT1FKpOeYO',
+            '3pLx6LaVQbWl5IfW8nxq56',
+            'spotify:episode:6kSGLgKWhBg8AoCzylVfc2',
+        ];
+
+        $expected = json_encode([
+            '0zov0kd6MA3BqT1FKpOeYO',
+            '3pLx6LaVQbWl5IfW8nxq56',
+            '6kSGLgKWhBg8AoCzylVfc2',
+        ]);
+
+        $headers = ['Content-Type' => 'application/json'];
+        $return = ['status' => 200];
+        $api = $this->setupApi(
+            'DELETE',
+            '/v1/me/episodes',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $this->assertTrue(
+            $api->deleteMyEpisodes($episodes)
         );
     }
 
@@ -1177,6 +1235,32 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertObjectHasAttribute('items', $response);
     }
 
+    public function testGetMySavedEpisodes()
+    {
+        $options = [
+            'limit' => 10,
+            'market' => 'SE',
+        ];
+
+        $expected = [
+            'limit' => 10,
+            'market' => 'SE',
+        ];
+
+        $return = ['body' => get_fixture('user-episodes')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/me/episodes',
+            $expected,
+            [],
+            $return
+        );
+
+        $response = $api->getMySavedEpisodes($options);
+
+        $this->assertObjectHasAttribute('items', $response);
+    }
+
     public function testGetMySavedShows()
     {
         $options = ['limit' => 10];
@@ -1622,6 +1706,32 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         );
 
         $response = $api->myAlbumsContains($albums);
+
+        $this->assertTrue($response[0]);
+    }
+
+    public function testMyEpisodesContains()
+    {
+        $episodes = [
+            '0zov0kd6MA3BqT1FKpOeYO',
+            '3pLx6LaVQbWl5IfW8nxq56',
+            'spotify:episode:6kSGLgKWhBg8AoCzylVfc2',
+        ];
+
+        $expected = [
+            'ids' => '0zov0kd6MA3BqT1FKpOeYO,3pLx6LaVQbWl5IfW8nxq56,6kSGLgKWhBg8AoCzylVfc2',
+        ];
+
+        $return = ['body' => get_fixture('user-episodes-contains')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/me/episodes/contains',
+            $expected,
+            [],
+            $return
+        );
+
+        $response = $api->myEpisodesContains($episodes);
 
         $this->assertTrue($response[0]);
     }

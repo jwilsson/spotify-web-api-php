@@ -3,6 +3,7 @@
 ## Table of Contents
 * [__construct](#__construct)
 * [addMyAlbums](#addmyalbums)
+* [addMyEpisodes](#addmyepisodes)
 * [addMyShows](#addmyshows)
 * [addMyTracks](#addmytracks)
 * [addPlaylistTracks](#addplaylisttracks)
@@ -11,6 +12,7 @@
 * [createPlaylist](#createplaylist)
 * [currentUserFollows](#currentuserfollows)
 * [deleteMyAlbums](#deletemyalbums)
+* [deleteMyEpisodes](#deletemyepisodes)
 * [deleteMyShows](#deletemyshows)
 * [deleteMyTracks](#deletemytracks)
 * [deletePlaylistTracks](#deleteplaylisttracks)
@@ -43,6 +45,7 @@
 * [getMyPlaylists](#getmyplaylists)
 * [getMyRecentTracks](#getmyrecenttracks)
 * [getMySavedAlbums](#getmysavedalbums)
+* [getMySavedEpisodes](#getmysavedepisodes)
 * [getMySavedTracks](#getmysavedtracks)
 * [getMySavedShows](#getmysavedshows)
 * [getMyTop](#getmytop)
@@ -63,6 +66,7 @@
 * [getUserPlaylists](#getuserplaylists)
 * [me](#me)
 * [myAlbumsContains](#myalbumscontains)
+* [myEpisodesContains](#myepisodescontains)
 * [myShowsContains](#myshowscontains)
 * [myTracksContains](#mytrackscontains)
 * [next](#next)
@@ -124,6 +128,23 @@ Add albums to the current user's Spotify library.<br>
 
 #### Return values
 * **bool** Whether the albums was successfully added.
+
+---
+### addMyEpisodes
+
+
+```php
+SpotifyWebAPI::addMyEpisodes($episodes)
+```
+
+Add episodes to the current user's Spotify library.<br>
+[https://developer.spotify.com/documentation/web-api/reference/](https://developer.spotify.com/documentation/web-api/reference/)#endpoint-save-episodes-user
+
+#### Arguments
+* `$episodes` **string\|array** - Episode IDs or URIs to add.
+
+#### Return values
+* **bool** Whether the episodes was successfully added.
 
 ---
 ### addMyShows
@@ -270,6 +291,23 @@ Delete albums from the current user's Spotify library.<br>
 
 #### Return values
 * **bool** Whether the albums was successfully deleted.
+
+---
+### deleteMyEpisodes
+
+
+```php
+SpotifyWebAPI::deleteMyEpisodes($episodes)
+```
+
+Delete episodes from the current user's Spotify library.<br>
+[https://developer.spotify.com/documentation/web-api/reference/](https://developer.spotify.com/documentation/web-api/reference/)#endpoint-remove-episodes-user
+
+#### Arguments
+* `$episodes` **string\|array** - Episode IDs or URIs to delete.
+
+#### Return values
+* **bool** Whether the episodes was successfully deleted.
 
 ---
 ### deleteMyShows
@@ -868,6 +906,26 @@ Get the current user’s saved albums.<br>
 * **array\|object** The user's saved albums. Type is controlled by the `return_assoc` option.
 
 ---
+### getMySavedEpisodes
+
+
+```php
+SpotifyWebAPI::getMySavedEpisodes($options)
+```
+
+Get the current user’s saved episodes.<br>
+[https://developer.spotify.com/documentation/web-api/reference/](https://developer.spotify.com/documentation/web-api/reference/)#endpoint-get-users-saved-episodes
+
+#### Arguments
+* `$options` **array\|object** - Optional. Options for the episodes.
+    * int limit Optional. Number of episodes to return.
+    * int offset Optional. Number of episodes to skip.
+    * string market Optional. An ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
+
+#### Return values
+* **array\|object** The user's saved episodes. Type is controlled by the `return_assoc` option.
+
+---
 ### getMySavedTracks
 
 
@@ -1244,6 +1302,23 @@ Check if albums are saved in the current user's Spotify library.<br>
 
 #### Return values
 * **array** Whether each album is saved.
+
+---
+### myEpisodesContains
+
+
+```php
+SpotifyWebAPI::myEpisodesContains($episodes)
+```
+
+Check if episodes are saved in the current user's Spotify library.<br>
+[https://developer.spotify.com/documentation/web-api/reference/](https://developer.spotify.com/documentation/web-api/reference/)#endpoint-check-users-saved-episodes
+
+#### Arguments
+* `$episodes` **string\|array** - Episode IDs or URIs to check for.
+
+#### Return values
+* **array** Whether each episode is saved.
 
 ---
 ### myShowsContains
