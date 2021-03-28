@@ -1,4 +1,15 @@
 # Changelog
+## 4.3.0 (2021-03-28)
+* Added methods to control the episodes in a user's library: ([b89299d](https://github.com/jwilsson/spotify-web-api-php/commit/b89299dfb3d60f2002bbe7d89a37618235f565f3)):
+    * `SpotifyWebAPI::addMyEpisodes()`
+    * `SpotifyWebAPI::deleteMyEpisodes()`
+    * `SpotifyWebAPI::getMySavedEpisodes()`
+    * `SpotifyWebAPI::myEpisodesContains()`
+* Added `SpotifyWebAPI::getMultipleAudioFeatures()` method to get the audio features of multiple tracks. `SpotifyWebAPI::getAudioFeatures()` will now return the audio features of a single track unless passed an array which will maintain the old behaviour. ([d282e9d](https://github.com/jwilsson/spotify-web-api-php/commit/d282e9d6444f636b825a1fce0c6e5fcdd3c28ba5))
+* Added `SpotifyWebAPI::getMarkets()` method to get the markets where Spotify is available. ([181cc28](https://github.com/jwilsson/spotify-web-api-php/commit/181cc280c6d5008bd4ba9eebd29f914245f35013))
+* Restructured Getting Started guide. ([2291a78](https://github.com/jwilsson/spotify-web-api-php/commit/2291a787c76850a8b4d6c6e3536256bedc4b2760))
+* Updated inline PHPDoc Spotify API links to their new format. ([8a2f870](https://github.com/jwilsson/spotify-web-api-php/commit/8a2f8704015474f9879c3c2dbb606f3d8dadea91))
+
 ## 4.2.2 (2021-03-02)
 * Fixed an issue where empty arrays would be passed to Spotify, causing errors. ([b350526](https://github.com/jwilsson/spotify-web-api-php/commit/b35052695edb7ff517714d48120ce29565036203))
 
