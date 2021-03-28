@@ -899,7 +899,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $response = $api->getMultipleAudioFeatures($tracks);
+        $response = $api->getAudioFeatures($tracks);
 
         $this->assertObjectHasAttribute('audio_features', $response);
     }
