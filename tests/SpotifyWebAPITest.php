@@ -880,6 +880,30 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertObjectHasAttribute('danceability', $response);
     }
 
+    public function testGetAudioFeaturesArray()
+    {
+        $tracks = [
+            '0eGsygTp906u18L0Oimnem',
+        ];
+
+        $expected = [
+            'ids' => '0eGsygTp906u18L0Oimnem',
+        ];
+
+        $return = ['body' => get_fixture('multiple-audio-features')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/audio-features',
+            $expected,
+            [],
+            $return
+        );
+
+        $response = $api->getMultipleAudioFeatures($tracks);
+
+        $this->assertObjectHasAttribute('audio_features', $response);
+    }
+
     public function testGetCategoriesList()
     {
         $options = [
