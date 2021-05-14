@@ -1,4 +1,21 @@
 # Changelog
+## 5.0.0 (2021-05-14)
+* **Breaking** Removed the following, deprecated methods: ([bd08fb8](https://github.com/jwilsson/spotify-web-api-php/commit/bd08fb8c6d4e99ad7898b320b1295a5987f5e566))
+    * `Request::getReturnType()` - Use the `return_assoc` option instead.
+    * `Request::setReturnType()` - Use the `return_assoc` option instead.
+    * `Request::setCurlOptions()` - Use the `curl_options` option instead.
+    * `SpotifyWebAPI::followPlaylistForCurrentUser()` - Use `SpotifyWebAPI::followPlaylist()` instead.
+    * `SpotifyWebAPI::unfollowPlaylistForCurrentUser()` - Use `SpotifyWebAPI::unfollowPlaylist()` instead.
+    * `SpotifyWebAPI::getReturnType()` - Use the `return_assoc` option instead.
+    * `SpotifyWebAPI::setReturnType()` - Use the `return_assoc` option instead.
+* **Breaking** `SpotifyWebAPI::deletePlaylistTracks()` no longer accepts the `id` key, the `uri` key should be used instead. ([403a8a2](https://github.com/jwilsson/spotify-web-api-php/commit/403a8a21985b4cbe775bfa8e175db3709ff067be))
+* **Breaking** `SpotifyWebAPI::getArtistAlbums()` no longer accepts the `album_type` option, the `include_groups` option should be used instead. ([4cf3301](https://github.com/jwilsson/spotify-web-api-php/commit/4cf3301ea0572c219d171cd69782ae406f2b3628))
+* **Breaking** `SpotifyWebAPI::__construct()` will no longer accept `Request` objects as the first argument. ([1f08d8](https://github.com/jwilsson/spotify-web-api-php/commit/1f08d8e6ce8d40fe77192d188ac369645a51883f))
+* **Breaking** Dropped support for PHP versions less than 7.3. [21776d6](https://github.com/jwilsson/spotify-web-api-php/commit/21776d6f9a00dd07e10b198457e32ab5dfb123b1))
+* **Possibly breaking** HTTP response header names are now always lowercased, previously they were returned as-is. ([f0140fa](https://github.com/jwilsson/spotify-web-api-php/commit/f0140faa7ae58d643fd9c7a3a4070be769bf33ba))
+* **Possibly breaking** `SpotifyWebAPI::addPlaylistTracks()` will now return snapshot IDs insteadd of a boolean. ([d6167a3](https://github.com/jwilsson/spotify-web-api-php/commit/d6167a3f5b7946b80abb4d5d5d103bd3b1cdf441))
+* Updated CA bundle. ([fb0c1a](https://github.com/jwilsson/spotify-web-api-php/commit/fb0c1a767b677e070d636176f4c7c993dc3493dc))
+
 ## 4.3.0 (2021-03-28)
 * Added methods to control the episodes in a user's library: ([b89299d](https://github.com/jwilsson/spotify-web-api-php/commit/b89299dfb3d60f2002bbe7d89a37618235f565f3)):
     * `SpotifyWebAPI::addMyEpisodes()`
