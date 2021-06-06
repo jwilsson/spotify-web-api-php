@@ -18,7 +18,6 @@
 * [deletePlaylistTracks](#deleteplaylisttracks)
 * [followArtistsOrUsers](#followartistsorusers)
 * [followPlaylist](#followplaylist)
-* [followPlaylistForCurrentUser](#followplaylistforcurrentuser)
 * [getAlbum](#getalbum)
 * [getAlbums](#getalbums)
 * [getAlbumTracks](#getalbumtracks)
@@ -54,7 +53,6 @@
 * [getPlaylistImage](#getplaylistimage)
 * [getPlaylistTracks](#getplaylisttracks)
 * [getRecommendations](#getrecommendations)
-* [getReturnType](#getreturntype)
 * [getRequest](#getrequest)
 * [getShow](#getshow)
 * [getShowEpisodes](#getshowepisodes)
@@ -81,19 +79,15 @@
 * [seek](#seek)
 * [setAccessToken](#setaccesstoken)
 * [setOptions](#setoptions)
-* [setReturnType](#setreturntype)
 * [setSession](#setsession)
 * [shuffle](#shuffle)
 * [unfollowArtistsOrUsers](#unfollowartistsorusers)
 * [unfollowPlaylist](#unfollowplaylist)
-* [unfollowPlaylistForCurrentUser](#unfollowplaylistforcurrentuser)
 * [updatePlaylist](#updateplaylist)
 * [updatePlaylistImage](#updateplaylistimage)
 * [usersFollowPlaylist](#usersfollowplaylist)
 
 ## Constants
-* **RETURN_ASSOC**
-* **RETURN_OBJECT**
 
 ## Methods
 ### __construct
@@ -198,7 +192,7 @@ Add tracks to a playlist.<br>
     * int position Optional. Zero-based track position in playlist. Tracks will be appened if omitted or false.
 
 #### Return values
-* **bool** Whether the tracks was successfully added.
+* **string\|bool** A new snapshot ID or false if the tracks weren't successfully added.
 
 ---
 ### changeMyDevice
@@ -388,26 +382,6 @@ Add the current user as a follower of one or more artists or other Spotify users
 
 ```php
 SpotifyWebAPI::followPlaylist($playlistId, $options)
-```
-
-Add the current user as a follower of a playlist.<br>
-[https://developer.spotify.com/documentation/web-api/reference/](https://developer.spotify.com/documentation/web-api/reference/)#endpoint-follow-playlist
-
-#### Arguments
-* `$playlistId` **string** - ID or URI of the playlist to follow.
-* `$options` **array\|object** - Optional. Options for the followed playlist.
-    * bool public Optional. Whether the playlist should be followed publicly or not.
-
-#### Return values
-* **bool** Whether the playlist was successfully followed.
-
----
-### followPlaylistForCurrentUser
-
-_Deprecated. Use SpotifyWebAPI::followPlaylist() instead._
-
-```php
-SpotifyWebAPI::followPlaylistForCurrentUser($playlistId, $options)
 ```
 
 Add the current user as a follower of a playlist.<br>
@@ -1090,21 +1064,6 @@ Get recommendations based on artists, tracks, or genres.<br>
 * **array\|object** The requested recommendations. Type is controlled by the `return_assoc` option.
 
 ---
-### getReturnType
-
-_Deprecated. Use the `return_assoc` option instead._
-
-```php
-SpotifyWebAPI::getReturnType()
-```
-
-Get a value indicating the response body type.
-
-
-#### Return values
-* **string** A value indicating if the response body is an object or associative array.
-
----
 ### getRequest
 
 
@@ -1578,23 +1537,6 @@ Set options
 * **void** 
 
 ---
-### setReturnType
-
-_Deprecated. Use the `return_assoc` option instead._
-
-```php
-SpotifyWebAPI::setReturnType($returnType)
-```
-
-Set the return type for the response body.
-
-#### Arguments
-* `$returnType` **string** - One of the `SpotifyWebAPI::RETURN_*` constants.
-
-#### Return values
-* **void** 
-
----
 ### setSession
 
 
@@ -1653,24 +1595,6 @@ Remove the current user as a follower of one or more artists or other Spotify us
 
 ```php
 SpotifyWebAPI::unfollowPlaylist($playlistId)
-```
-
-Remove the current user as a follower of a playlist.<br>
-[https://developer.spotify.com/documentation/web-api/reference/](https://developer.spotify.com/documentation/web-api/reference/)#endpoint-unfollow-playlist
-
-#### Arguments
-* `$playlistId` **string** - ID or URI of the playlist to unfollow.
-
-#### Return values
-* **bool** Whether the playlist was successfully unfollowed.
-
----
-### unfollowPlaylistForCurrentUser
-
-_Deprecated. Use SpotifyWebAPI::unfollowPlaylist() instead._
-
-```php
-SpotifyWebAPI::unfollowPlaylistForCurrentUser($playlistId)
 ```
 
 Remove the current user as a follower of a playlist.<br>

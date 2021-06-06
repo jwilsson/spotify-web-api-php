@@ -5,17 +5,12 @@
 * [account](#account)
 * [api](#api)
 * [getLastResponse](#getlastresponse)
-* [getReturnType](#getreturntype)
 * [send](#send)
-* [setCurlOptions](#setcurloptions)
 * [setOptions](#setoptions)
-* [setReturnType](#setreturntype)
 
 ## Constants
 * **ACCOUNT_URL**
 * **API_URL**
-* **RETURN_ASSOC**
-* **RETURN_OBJECT**
 
 ## Methods
 ### __construct
@@ -97,21 +92,6 @@ Get the latest full response from the Spotify API.
     * string url The requested URL.
 
 ---
-### getReturnType
-
-_Deprecated. Use the `return_assoc` option instead._
-
-```php
-Request::getReturnType()
-```
-
-Get a value indicating the response body type.
-
-
-#### Return values
-* **string** A value indicating if the response body is an object or associative array.
-
----
 ### send
 
 
@@ -136,24 +116,6 @@ You'll probably want to use one of the convenience methods instead.
     * string url The requested URL.
 
 ---
-### setCurlOptions
-
-_Deprecated. Use the `curl_options` option instead._
-
-```php
-Request::setCurlOptions($options)
-```
-
-Set custom cURL options.<br>
-Any options passed here will be merged with the defaults, overriding existing ones.
-
-#### Arguments
-* `$options` **array** - Any available cURL option.
-
-#### Return values
-* **void** 
-
----
 ### setOptions
 
 
@@ -165,23 +127,6 @@ Set options
 
 #### Arguments
 * `$options` **array\|object** - Options to set.
-
-#### Return values
-* **void** 
-
----
-### setReturnType
-
-_Deprecated. Use the `return_assoc` option instead._
-
-```php
-Request::setReturnType($returnType)
-```
-
-Set the return type for the response body.
-
-#### Arguments
-* `$returnType` **string** - One of the `Request::RETURN_*` constants.
 
 #### Return values
 * **void** 
