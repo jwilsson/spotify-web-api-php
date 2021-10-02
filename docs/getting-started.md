@@ -29,6 +29,8 @@ Download the latest release from the [releases page](https://github.com/jwilsson
 ## Configuration and setup
 First off, make sure you've created an app on [Spotify's developer site](https://developer.spotify.com/documentation/web-api/).
 
+*Note: Applications created after 2021-05-27 [might need to perform some extra steps](https://developer.spotify.com/community/news/2021/05/27/improving-the-developer-and-user-experience-for-third-party-apps/).*
+
 Now, before sending requests to Spotify, we need to create a session using your app info:
 
 ```php

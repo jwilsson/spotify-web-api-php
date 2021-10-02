@@ -31,6 +31,8 @@ composer require jwilsson/spotify-web-api-php
 ## Usage
 Before using the Spotify Web API, you'll need to create an app at [Spotify’s developer site](https://developer.spotify.com/web-api/).
 
+*Note: Applications created after 2021-05-27 [might need to perform some extra steps](https://developer.spotify.com/community/news/2021/05/27/improving-the-developer-and-user-experience-for-third-party-apps/).*
+
 Simple example displaying a user's profile:
 ```php
 require 'vendor/autoload.php';
