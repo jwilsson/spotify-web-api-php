@@ -29,7 +29,7 @@ class Request
     /**
      * Handle response errors.
      *
-     * @param array|object $body The parsed response body.
+     * @param string $body The raw, unparsed response body.
      * @param int $status The HTTP status code, passed along to any exceptions thrown.
      *
      * @throws SpotifyWebAPIException
@@ -39,11 +39,11 @@ class Request
      */
     protected function handleResponseError($body, $status)
     {
-        $body = (object) $body;
-        $error = $body->error ?? null;
+        $parsedBody = json_decode($body);
+        $error = $parsedBody->error ?? null;
 
         if (isset($error->message) && isset($error->status)) {
-            // API call error
+            // It's an API call error
             $exception = new SpotifyWebAPIException($error->message, $error->status);
 
             if (isset($error->reason)) {
@@ -51,11 +51,14 @@ class Request
             }
 
             throw $exception;
-        } elseif (isset($body->error_description)) {
-            // Auth call error
-            throw new SpotifyWebAPIAuthException($body->error_description, $status);
+        } elseif (isset($parsedBody->error_description)) {
+            // It's an auth call error
+            throw new SpotifyWebAPIAuthException($parsedBody->error_description, $status);
+        } elseif ($body) {
+            // Something else went wrong, try to give at least some info
+            throw new SpotifyWebAPIException($body, $status);
         } else {
-            // Something went really wrong
+            // Something went really wrong, we don't know what
             throw new SpotifyWebAPIException('An unknown error occurred.', $status);
         }
     }
@@ -222,13 +225,13 @@ class Request
 
         [$headers, $body] = $this->splitResponse($response);
 
-        $body = json_decode($body, $this->options['return_assoc']);
+        $parsedBody = json_decode($body, $this->options['return_assoc']);
         $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $headers = $this->parseHeaders($headers);
+        $parsedHeaders = $this->parseHeaders($headers);
 
         $this->lastResponse = [
-            'body' => $body,
-            'headers' => $headers,
+            'body' => $parsedBody,
+            'headers' => $parsedHeaders,
             'status' => $status,
             'url' => $url,
         ];
