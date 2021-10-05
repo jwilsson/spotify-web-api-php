@@ -1,4 +1,8 @@
 # Changelog
+## 5.0.1 (2021-10-05)
+* Exceptions thrown on failing requests will now try a bit harder to give a failure reason by falling back to the complete response body. ([e69dbea](https://github.com/jwilsson/spotify-web-api-php/commit/e69dbea553722c1ec59fd4fadb4d7a09889b6518))
+* Updated CA bundle. ([a43fd12](https://github.com/jwilsson/spotify-web-api-php/commit/a43fd125a331d08d87cefca0d6a7ff9ea4884cf8))
+
 ## 5.0.0 (2021-05-14)
 * **Breaking** Removed the following, deprecated methods: ([bd08fb8](https://github.com/jwilsson/spotify-web-api-php/commit/bd08fb8c6d4e99ad7898b320b1295a5987f5e566))
     * `Request::getReturnType()` - Use the `return_assoc` option instead.
