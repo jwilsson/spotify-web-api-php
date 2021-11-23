@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SpotifyWebAPI;
 
-class Session
+class Session implements SessionInterface
 {
     protected $accessToken = '';
     protected $clientId = '';
@@ -22,7 +22,7 @@ class Session
      * @param string $clientId The client ID.
      * @param string $clientSecret Optional. The client secret.
      * @param string $redirectUri Optional. The redirect URI.
-     * @param Request $request Optional. The Request object to use.
+     * @param RequestInterface $request Optional. The Request object to use.
      */
     public function __construct($clientId, $clientSecret = '', $redirectUri = '', $request = null)
     {

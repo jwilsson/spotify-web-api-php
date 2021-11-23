@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SpotifyWebAPI;
 
-class Request
+class Request implements RequestInterface
 {
     public const ACCOUNT_URL = 'https://accounts.spotify.com';
     public const API_URL = 'https://api.spotify.com';
