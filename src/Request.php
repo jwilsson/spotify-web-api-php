@@ -218,9 +218,11 @@ class Request
         $response = curl_exec($ch);
 
         if (curl_error($ch)) {
+            $error = curl_error($ch);
+            $errno = curl_errno($ch);
             curl_close($ch);
 
-            throw new SpotifyWebAPIException('cURL transport error: ' . curl_errno($ch) . ' ' . curl_error($ch));
+            throw new SpotifyWebAPIException('cURL transport error: ' . $errno . ' ' . $error);
         }
 
         [$headers, $body] = $this->splitResponse($response);
