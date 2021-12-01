@@ -283,6 +283,15 @@ class RequestTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(200, $response['status']);
     }
 
+    public function testSendTransportError()
+    {
+        $this->expectException(SpotifyWebAPI\SpotifyWebAPIException::class);
+        $this->expectExceptionMessage('cURL transport error: 6 Could not resolve host: non-existent');
+
+        $request = new SpotifyWebAPI\Request();
+        $request->send('GET', 'https://non-existent/get');
+    }
+
     public function testSetOptions()
     {
         $request = new SpotifyWebAPI\Request();
