@@ -1,4 +1,8 @@
 # Changelog
+## 5.0.2 (2021-12-01)
+* Fixed an issue where errors returned from cURL would not be read properly. ([177a808](https://github.com/jwilsson/spotify-web-api-php/commit/177a8087d7d83f47c9f5c1b9b717adb2e0a17ef2))
+* Updated CA bundle. ([44ca81a](https://github.com/jwilsson/spotify-web-api-php/commit/44ca81aa53b9941f662cbb905bdc448dadef7ae8))
+
 ## 5.0.1 (2021-10-05)
 * Exceptions thrown on failing requests will now try a bit harder to give a failure reason by falling back to the complete response body. ([e69dbea](https://github.com/jwilsson/spotify-web-api-php/commit/e69dbea553722c1ec59fd4fadb4d7a09889b6518))
 * Updated CA bundle. ([a43fd12](https://github.com/jwilsson/spotify-web-api-php/commit/a43fd125a331d08d87cefca0d6a7ff9ea4884cf8))
