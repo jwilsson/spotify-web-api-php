@@ -16,7 +16,7 @@
         "ext-curl": "*"
     },
     "require-dev": {
-        "php-coveralls/php-coveralls": "^2.0",
+        "php-coveralls/php-coveralls": "~2.4.0",
         "phpunit/phpunit": "^9.4",
         "squizlabs/php_codesniffer": "^3.0"
     },
