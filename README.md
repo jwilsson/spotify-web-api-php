@@ -2,7 +2,7 @@
 
 [![Packagist](https://img.shields.io/packagist/v/jwilsson/spotify-web-api-php.svg)](https://packagist.org/packages/jwilsson/spotify-web-api-php)
 ![build](https://github.com/jwilsson/spotify-web-api-php/workflows/build/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/jwilsson/spotify-web-api-php/badge.svg?branch=master)](https://coveralls.io/r/jwilsson/spotify-web-api-php?branch=master)
+[![Coverage Status](https://coveralls.io/repos/jwilsson/spotify-web-api-php/badge.svg?branch=main)](https://coveralls.io/r/jwilsson/spotify-web-api-php?branch=main)
 
 This is a PHP wrapper for [Spotify's Web API](https://developer.spotify.com/web-api/). It includes the following:
 
