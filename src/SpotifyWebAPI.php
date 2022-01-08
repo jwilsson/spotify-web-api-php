@@ -29,7 +29,7 @@ class SpotifyWebAPI
         $this->setOptions($options);
         $this->setSession($session);
 
-        $this->request = $request ?: new Request();
+        $this->request = $request ?? new Request();
     }
 
     /**
