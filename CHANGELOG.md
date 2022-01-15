@@ -1,4 +1,7 @@
 # Changelog
+## 5.0.3 (2022-01-15)
+* `Session::refreshAccessToken()` will no longer send client secret when none exists. ([7e35d41](https://github.com/jwilsson/spotify-web-api-php/commit/7e35d418dd051aeccff2d38d7258c5a8108885fb))
+
 ## 5.0.2 (2021-12-01)
 * Fixed an issue where errors returned from cURL would not be read properly. ([177a808](https://github.com/jwilsson/spotify-web-api-php/commit/177a8087d7d83f47c9f5c1b9b717adb2e0a17ef2))
 * Updated CA bundle. ([44ca81a](https://github.com/jwilsson/spotify-web-api-php/commit/44ca81aa53b9941f662cbb905bdc448dadef7ae8))
