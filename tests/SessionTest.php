@@ -143,6 +143,34 @@ class SessionTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(['user-follow-read', 'user-follow-modify'], $session->getScope());
     }
 
+    public function testRefreshAccessTokenNoClientSecret()
+    {
+        $expected = [
+            'grant_type' => 'refresh_token',
+            'refresh_token' => $this->refreshToken,
+        ];
+
+        $return = [
+            'body' => get_fixture('refresh-token'),
+        ];
+
+        $stub = $this->setupStub(
+            'POST',
+            '/api/token',
+            $expected,
+            [],
+            $return
+        );
+
+        $session = new SpotifyWebAPI\Session($this->clientID, null, $this->redirectURI, $stub);
+        $session->refreshAccessToken($this->refreshToken);
+
+        $this->assertNotEmpty($session->getAccessToken());
+        $this->assertNotEmpty($session->getRefreshToken());
+        $this->assertEquals(time() + 3600, $session->getTokenExpiration());
+        $this->assertEquals(['user-follow-read', 'user-follow-modify'], $session->getScope());
+    }
+
     public function testRefreshAccessTokenExistingToken()
     {
         $expected = [

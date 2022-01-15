@@ -190,16 +190,19 @@ class Session
      */
     public function refreshAccessToken($refreshToken = null)
     {
-        $payload = base64_encode($this->getClientId() . ':' . $this->getClientSecret());
-
         $parameters = [
             'grant_type' => 'refresh_token',
             'refresh_token' => $refreshToken ?? $this->refreshToken,
         ];
 
-        $headers = [
-            'Authorization' => 'Basic ' . $payload,
-        ];
+        $headers = [];
+        if ($this->getClientSecret()) {
+            $payload = base64_encode($this->getClientId() . ':' . $this->getClientSecret());
+
+            $headers = [
+                'Authorization' => 'Basic ' . $payload,
+            ];
+        }
 
         $response = $this->request->account('POST', '/api/token', $parameters, $headers);
         $response = $response['body'];
