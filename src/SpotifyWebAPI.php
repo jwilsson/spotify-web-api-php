@@ -181,7 +181,7 @@ class SpotifyWebAPI
 
     /**
      * Add albums to the current user's Spotify library.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-save-albums-user
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/save-albums-user
      *
      * @param string|array $albums Album IDs or URIs to add.
      *
@@ -205,7 +205,7 @@ class SpotifyWebAPI
 
     /**
      * Add episodes to the current user's Spotify library.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-save-episodes-user
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/save-episodes-user
      *
      * @param string|array $episodes Episode IDs or URIs to add.
      *
@@ -229,7 +229,7 @@ class SpotifyWebAPI
 
     /**
      * Add shows to the current user's Spotify library.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-save-shows-user
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/save-shows-user
      *
      * @param string|array $shows Show IDs or URIs to add.
      *
@@ -253,7 +253,7 @@ class SpotifyWebAPI
 
     /**
      * Add tracks to the current user's Spotify library.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-save-tracks-user
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/save-tracks-user
      *
      * @param string|array $tracks Track IDs or URIs to add.
      *
@@ -277,7 +277,7 @@ class SpotifyWebAPI
 
     /**
      * Add tracks to a playlist.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-add-tracks-to-playlist
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/add-tracks-to-playlist
      *
      * @param string $playlistId ID of the playlist to add tracks to.
      * @param string|array $tracks Track IDs, track URIs, and episode URIs to add.
@@ -309,7 +309,7 @@ class SpotifyWebAPI
 
     /**
      * Change the current user's playback device.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-transfer-a-users-playback
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/transfer-a-users-playback
      *
      * @param array|object $options Options for the playback transfer.
      * - string|array device_ids Required. ID of the device to switch to.
@@ -338,7 +338,7 @@ class SpotifyWebAPI
 
     /**
      * Change playback volume for the current user.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-set-volume-for-users-playback
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/set-volume-for-users-playback
      *
      * @param array|object $options Optional. Options for the playback volume.
      * - int volume_percent Required. The volume to set.
@@ -360,7 +360,7 @@ class SpotifyWebAPI
 
     /**
      * Create a new playlist.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-create-playlist
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/create-playlist
      *
      * @param array|object $options Options for the new playlist.
      * - string name Required. Name of the playlist.
@@ -385,7 +385,7 @@ class SpotifyWebAPI
 
     /**
      * Check to see if the current user is following one or more artists or other Spotify users.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-check-current-user-follows
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-current-user-follows
      *
      * @param string $type The type to check: either 'artist' or 'user'.
      * @param string|array $ids IDs or URIs of the users or artists to check for.
@@ -411,7 +411,7 @@ class SpotifyWebAPI
 
     /**
      * Delete albums from the current user's Spotify library.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-remove-albums-user
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/remove-albums-user
      *
      * @param string|array $albums Album IDs or URIs to delete.
      *
@@ -435,7 +435,7 @@ class SpotifyWebAPI
 
     /**
      * Delete episodes from the current user's Spotify library.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-remove-episodes-user
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/remove-episodes-user
      *
      * @param string|array $episodes Episode IDs or URIs to delete.
      *
@@ -459,7 +459,7 @@ class SpotifyWebAPI
 
     /**
      * Delete shows from the current user's Spotify library.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-remove-shows-user
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/remove-shows-user
      *
      * @param string|array $shows Show IDs or URIs to delete.
      *
@@ -483,7 +483,7 @@ class SpotifyWebAPI
 
     /**
      * Delete tracks from the current user's Spotify library.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-remove-tracks-user
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/remove-tracks-user
      *
      * @param string|array $tracks Track IDs or URIs to delete.
      *
@@ -507,7 +507,7 @@ class SpotifyWebAPI
 
     /**
      * Delete tracks from a playlist and retrieve a new snapshot ID.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-remove-tracks-playlist
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/remove-tracks-playlist
      *
      * @param string $playlistId ID or URI of the playlist to delete tracks from.
      * @param array $tracks An array with the key "tracks" containing arrays or objects with tracks to delete.
@@ -561,7 +561,7 @@ class SpotifyWebAPI
 
     /**
      * Add the current user as a follower of one or more artists or other Spotify users.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-follow-artists-users
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/follow-artists-users
      *
      * @param string $type The type of ID to follow: either 'artist' or 'user'.
      * @param string|array $ids IDs or URIs of the users or artists to follow.
@@ -589,7 +589,7 @@ class SpotifyWebAPI
 
     /**
      * Add the current user as a follower of a playlist.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-follow-playlist
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/follow-playlist
      *
      * @param string $playlistId ID or URI of the playlist to follow.
      * @param array|object $options Optional. Options for the followed playlist.
@@ -616,7 +616,7 @@ class SpotifyWebAPI
 
     /**
      * Get an album.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-an-album
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-album
      *
      * @param string $albumId ID or URI of the album.
      * @param array|object $options Optional. Options for the album.
@@ -636,7 +636,7 @@ class SpotifyWebAPI
 
     /**
      * Get multiple albums.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-multiple-albums
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-multiple-albums
      *
      * @param array $albumIds IDs or URIs of the albums.
      * @param array|object $options Optional. Options for the albums.
@@ -660,7 +660,7 @@ class SpotifyWebAPI
 
     /**
      * Get an album's tracks.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-an-albums-tracks
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-albums-tracks
      *
      * @param string $albumId ID or URI of the album.
      * @param array|object $options Optional. Options for the tracks.
@@ -682,7 +682,7 @@ class SpotifyWebAPI
 
     /**
      * Get an artist.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-an-artist
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-artist
      *
      * @param string $artistId ID or URI of the artist.
      *
@@ -700,7 +700,7 @@ class SpotifyWebAPI
 
     /**
      * Get multiple artists.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-multiple-artists
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-multiple-artists
      *
      * @param array $artistIds IDs or URIs of the artists.
      *
@@ -724,7 +724,7 @@ class SpotifyWebAPI
 
     /**
      * Get an artist's related artists.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-an-artists-related-artists
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-artists-related-artists
      *
      * @param string $artistId ID or URI of the artist.
      *
@@ -742,7 +742,7 @@ class SpotifyWebAPI
 
     /**
      * Get an artist's albums.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-an-artists-albums
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-artists-albums
      *
      * @param string $artistId ID or URI of the artist.
      * @param array|object $options Optional. Options for the albums.
@@ -771,7 +771,7 @@ class SpotifyWebAPI
 
     /**
      * Get an artist's top tracks in a country.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-an-artists-top-tracks
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-artists-top-tracks
      *
      * @param string $artistId ID or URI of the artist.
      * @param array|object $options Options for the tracks.
@@ -791,7 +791,7 @@ class SpotifyWebAPI
 
     /**
      * Get audio analysis for track.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-audio-analysis
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-audio-analysis
      *
      * @param string $trackId ID or URI of the track.
      *
@@ -809,7 +809,7 @@ class SpotifyWebAPI
 
     /**
      * Get audio features of a single track.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-audio-features
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-audio-features
      *
      * @param string $trackId ID or URI of the track.
      *
@@ -832,7 +832,7 @@ class SpotifyWebAPI
 
     /**
      * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s "Discover" tab).
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-categories
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-categories
      *
      * @param array|object $options Optional. Options for the categories.
      * - string locale Optional. Language to show categories in, for example 'sv_SE'.
@@ -853,7 +853,7 @@ class SpotifyWebAPI
 
     /**
      * Get a single category used to tag items in Spotify (on, for example, the Spotify player’s "Discover" tab).
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-category
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a-category
      *
      * @param string $categoryId ID of the category.
      *
@@ -874,7 +874,7 @@ class SpotifyWebAPI
 
     /**
      * Get a list of Spotify playlists tagged with a particular category.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-categories-playlists
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a-categories-playlists
      *
      * @param string $categoryId ID of the category.
      *
@@ -896,7 +896,7 @@ class SpotifyWebAPI
 
     /**
      * Get an episode.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-an-episode
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-episode
      *
      * @param string $episodeId ID or URI of the episode.
      * @param array|object $options Optional. Options for the episode.
@@ -916,7 +916,7 @@ class SpotifyWebAPI
 
     /**
      * Get multiple episodes.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-multiple-episodes
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-multiple-episodes
      *
      * @param array $episodeIds IDs or URIs of the episodes.
      * @param array|object $options Optional. Options for the episodes.
@@ -940,7 +940,7 @@ class SpotifyWebAPI
 
     /**
      * Get Spotify featured playlists.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-featured-playlists
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-featured-playlists
      *
      * @param array|object $options Optional. Options for the playlists.
      * - string locale Optional. Language to show playlists in, for example 'sv_SE'.
@@ -962,7 +962,7 @@ class SpotifyWebAPI
 
     /**
      * Get a list of possible seed genres.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-recommendation-genres
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recommendation-genres
      *
      * @return array|object All possible seed genres. Type is controlled by the `return_assoc` option.
      */
@@ -991,7 +991,7 @@ class SpotifyWebAPI
 
     /**
      * Get all markets where Spotify is available.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-available-markets
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-available-markets
      *
      * @return array|object All markets where Spotify is available. Type is controlled by the `return_assoc` option.
      */
@@ -1006,7 +1006,7 @@ class SpotifyWebAPI
 
     /**
      * Get audio features of multiple tracks.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-several-audio-features
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features
      *
      * @param array $trackIds IDs or URIs of the tracks.
      *
@@ -1028,7 +1028,7 @@ class SpotifyWebAPI
 
     /**
      * Get the current user’s currently playing track.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-recently-played
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recently-played
      *
      * @param array|object $options Optional. Options for the track.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
@@ -1052,7 +1052,7 @@ class SpotifyWebAPI
 
     /**
      * Get the current user’s devices.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-users-available-devices
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a-users-available-devices
      *
      * @return array|object The user's devices. Type is controlled by the `return_assoc` option.
      */
@@ -1067,7 +1067,7 @@ class SpotifyWebAPI
 
     /**
      * Get the current user’s current playback information.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-information-about-the-users-current-playback
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-information-about-the-users-current-playback
      *
      * @param array|object $options Optional. Options for the info.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
@@ -1092,7 +1092,7 @@ class SpotifyWebAPI
 
     /**
      * Get the current user’s playlists.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-list-of-current-users-playlists
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a-list-of-current-users-playlists
      *
      * @param array|object $options Optional. Options for the playlists.
      * - int limit Optional. Limit the number of playlists.
@@ -1111,7 +1111,7 @@ class SpotifyWebAPI
 
     /**
       * Get the current user’s recently played tracks.
-      * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-the-users-currently-playing-track
+      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-the-users-currently-playing-track
       *
       * @param array|object $options Optional. Options for the tracks.
       * - int limit Optional. Number of tracks to return.
@@ -1131,7 +1131,7 @@ class SpotifyWebAPI
 
     /**
      * Get the current user’s saved albums.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-saved-albums
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-saved-albums
      *
      * @param array|object $options Optional. Options for the albums.
      * - int limit Optional. Number of albums to return.
@@ -1151,7 +1151,7 @@ class SpotifyWebAPI
 
     /**
      * Get the current user’s saved episodes.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-saved-episodes
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-saved-episodes
      *
      * @param array|object $options Optional. Options for the episodes.
      * - int limit Optional. Number of episodes to return.
@@ -1171,7 +1171,7 @@ class SpotifyWebAPI
 
     /**
      * Get the current user’s saved tracks.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-saved-tracks
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-saved-tracks
      *
      * @param array|object $options Optional. Options for the tracks.
      * - int limit Optional. Limit the number of tracks.
@@ -1191,7 +1191,7 @@ class SpotifyWebAPI
 
     /**
      * Get the current user’s saved shows.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-saved-shows
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-saved-shows
      *
      * @param array|object $options Optional. Options for the shows.
      * - int limit Optional. Limit the number of shows.
@@ -1210,7 +1210,7 @@ class SpotifyWebAPI
 
     /**
      * Get the current user's top tracks or artists.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-top-artists-and-tracks
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-top-artists-and-tracks
      *
      * @param string $type The type to fetch, either 'artists' or 'tracks'.
      * @param array $options Optional. Options for the results.
@@ -1231,7 +1231,7 @@ class SpotifyWebAPI
 
     /**
      * Get new releases.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-new-releases
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-new-releases
      *
      * @param array|object $options Optional. Options for the items.
      * - string country Optional. An ISO 3166-1 alpha-2 country code. Show items relevant to this country.
@@ -1251,7 +1251,7 @@ class SpotifyWebAPI
 
     /**
      * Get a specific playlist.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-playlist
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-playlist
      *
      * @param string $playlistId ID or URI of the playlist.
      * @param array|object $options Optional. Options for the playlist.
@@ -1279,7 +1279,7 @@ class SpotifyWebAPI
 
     /**
      * Get a playlist's cover image.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-playlist-cover
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-playlist-cover
      *
      * @param string $playlistId ID or URI of the playlist.
      *
@@ -1298,7 +1298,7 @@ class SpotifyWebAPI
 
     /**
      * Get the tracks in a playlist.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-playlists-tracks
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-playlists-tracks
      *
      * @param string $playlistId ID or URI of the playlist.
      * @param array|object $options Optional. Options for the tracks.
@@ -1328,7 +1328,7 @@ class SpotifyWebAPI
 
     /**
      * Get recommendations based on artists, tracks, or genres.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-recommendations
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recommendations
      *
      * @param array|object $options Optional. Options for the recommendations.
      * - int limit Optional. Limit the number of recommendations.
@@ -1371,7 +1371,7 @@ class SpotifyWebAPI
 
     /**
      * Get a show.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-show
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a-show
      *
      * @param string $showId ID or URI of the show.
      * @param array|object $options Optional. Options for the show.
@@ -1391,7 +1391,7 @@ class SpotifyWebAPI
 
     /**
      * Get a show's episodes.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-shows-episodes
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a-shows-episodes
      *
      * @param string $albumId ID or URI of the album.
      * @param array|object $options Optional. Options for the episodes.
@@ -1413,7 +1413,7 @@ class SpotifyWebAPI
 
     /**
      * Get multiple shows.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-multiple-shows
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-multiple-shows
      *
      * @param array $showIds IDs or URIs of the shows.
      * @param array|object $options Optional. Options for the shows.
@@ -1437,7 +1437,7 @@ class SpotifyWebAPI
 
     /**
      * Get a track.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-track
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-track
      *
      * @param string $trackId ID or URI of the track.
      * @param array|object $options Optional. Options for the track.
@@ -1457,7 +1457,7 @@ class SpotifyWebAPI
 
     /**
      * Get multiple tracks.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-several-tracks
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-tracks
      *
      * @param array $trackIds IDs or URIs of the tracks.
      * @param array|object $options Optional. Options for the tracks.
@@ -1481,7 +1481,7 @@ class SpotifyWebAPI
 
     /**
      * Get a user.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-profile
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-profile
      *
      * @param string $userId ID or URI of the user.
      *
@@ -1499,7 +1499,7 @@ class SpotifyWebAPI
 
     /**
      * Get the artists followed by the current user.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-followed
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-followed
      *
      * @param array|object $options Optional. Options for the artists.
      * - int limit Optional. Limit the number of artists returned.
@@ -1524,7 +1524,7 @@ class SpotifyWebAPI
 
     /**
      * Get a user's playlists.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-list-users-playlists
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-list-users-playlists
      *
      * @param string $userId ID or URI of the user.
      * @param array|object $options Optional. Options for the tracks.
@@ -1545,7 +1545,7 @@ class SpotifyWebAPI
 
     /**
      * Get the currently authenticated user.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-current-users-profile
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-current-users-profile
      *
      * @return array|object The currently authenticated user. Type is controlled by the `return_assoc` option.
      */
@@ -1560,7 +1560,7 @@ class SpotifyWebAPI
 
     /**
      * Check if albums are saved in the current user's Spotify library.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-check-users-saved-albums
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-albums
      *
      * @param string|array $albums Album IDs or URIs to check for.
      *
@@ -1584,7 +1584,7 @@ class SpotifyWebAPI
 
     /**
      * Check if episodes are saved in the current user's Spotify library.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-check-users-saved-episodes
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-episodes
      *
      * @param string|array $episodes Episode IDs or URIs to check for.
      *
@@ -1608,7 +1608,7 @@ class SpotifyWebAPI
 
     /**
      * Check if shows are saved in the current user's Spotify library.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-check-users-saved-shows
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-shows
      *
      * @param string|array $albums Show IDs or URIs to check for.
      *
@@ -1632,7 +1632,7 @@ class SpotifyWebAPI
 
     /**
      * Check if tracks are saved in the current user's Spotify library.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-check-users-saved-tracks
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-tracks
      *
      * @param string|array $albums Track IDs or URIs to check for.
      *
@@ -1656,7 +1656,7 @@ class SpotifyWebAPI
 
     /**
      * Play the next track in the current users's queue.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-skip-users-playback-to-next-track
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/skip-users-playback-to-next-track
      *
      * @param string $deviceId Optional. ID of the device to target.
      *
@@ -1678,7 +1678,7 @@ class SpotifyWebAPI
 
     /**
      * Pause playback for the current user.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-pause-a-users-playback
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/pause-a-users-playback
      *
      * @param string $deviceId Optional. ID of the device to pause on.
      *
@@ -1700,7 +1700,7 @@ class SpotifyWebAPI
 
     /**
      * Start playback for the current user.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-start-a-users-playback
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/start-a-users-playback
      *
      * @param string $deviceId Optional. ID of the device to play on.
      * @param array|object $options Optional. Options for the playback.
@@ -1733,7 +1733,7 @@ class SpotifyWebAPI
 
     /**
      * Play the previous track in the current users's queue.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-skip-users-playback-to-previous-track
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/skip-users-playback-to-previous-track
      *
      * @param string $deviceId Optional. ID of the device to target.
      *
@@ -1755,7 +1755,7 @@ class SpotifyWebAPI
 
     /**
      * Add an item to the queue.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-add-to-queue
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/add-to-queue
      *
      * @param string $trackUri Required. Track ID, track URI or episode URI to queue.
      * @param string $deviceId Optional. ID of the device to target.
@@ -1778,7 +1778,7 @@ class SpotifyWebAPI
 
     /**
      * Reorder the tracks in a playlist.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-reorder-or-replace-playlists-tracks
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/reorder-or-replace-playlists-tracks
      *
      * @param string $playlistId ID or URI of the playlist.
      * @param array|object $options Options for the new tracks.
@@ -1808,7 +1808,7 @@ class SpotifyWebAPI
 
     /**
      * Set repeat mode for the current user’s playback.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-set-repeat-mode-on-users-playback
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/set-repeat-mode-on-users-playback
      *
      * @param array|object $options Optional. Options for the playback repeat mode.
      * - string state Required. The repeat mode. See Spotify docs for possible values.
@@ -1830,7 +1830,7 @@ class SpotifyWebAPI
 
     /**
      * Replace all tracks in a playlist with new ones.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-reorder-or-replace-playlists-tracks
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/reorder-or-replace-playlists-tracks
      *
      * @param string $playlistId ID or URI of the playlist.
      * @param string|array $tracks IDs, track URIs, or episode URIs to replace with.
@@ -1859,7 +1859,7 @@ class SpotifyWebAPI
 
     /**
      * Search for an item.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-search
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/search
      *
      * @param string $query The term to search for.
      * @param string|array $type The type of item to search for.
@@ -1886,7 +1886,7 @@ class SpotifyWebAPI
 
     /**
      * Change playback position for the current user.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-seek-to-position-in-currently-playing-track
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/seek-to-position-in-currently-playing-track
      *
      * @param array|object $options Optional. Options for the playback seeking.
      * - string position_ms Required. The position in milliseconds to seek to.
@@ -1944,7 +1944,7 @@ class SpotifyWebAPI
 
     /**
      * Set shuffle mode for the current user’s playback.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-toggle-shuffle-for-users-playback
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/toggle-shuffle-for-users-playback
      *
      * @param array|object $options Optional. Options for the playback shuffle mode.
      * - bool state Required. The shuffle mode. See Spotify docs for possible values.
@@ -1970,7 +1970,7 @@ class SpotifyWebAPI
 
     /**
      * Remove the current user as a follower of one or more artists or other Spotify users.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-unfollow-artists-users
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/unfollow-artists-users
      *
      * @param string $type The type to check: either 'artist' or 'user'.
      * @param string|array $ids IDs or URIs of the users or artists to unfollow.
@@ -1998,7 +1998,7 @@ class SpotifyWebAPI
 
     /**
      * Remove the current user as a follower of a playlist.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-unfollow-playlist
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/unfollow-playlist
      *
      * @param string $playlistId ID or URI of the playlist to unfollow.
      *
@@ -2016,7 +2016,7 @@ class SpotifyWebAPI
 
     /**
      * Update the details of a playlist.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-change-playlist-details
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/change-playlist-details
      *
      * @param string $playlistId ID or URI of the playlist to update.
      * @param array|object $options Options for the playlist.
@@ -2046,7 +2046,7 @@ class SpotifyWebAPI
 
     /**
      * Update the image of a playlist.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-upload-custom-playlist-cover
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/upload-custom-playlist-cover
      *
      * @param string $playlistId ID or URI of the playlist to update.
      * @param string $imageData Base64 encoded JPEG image data, maximum 256 KB in size.
@@ -2066,7 +2066,7 @@ class SpotifyWebAPI
 
     /**
      * Check if a set of users are following a playlist.
-     * https://developer.spotify.com/documentation/web-api/reference/#endpoint-check-if-user-follows-playlist
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-if-user-follows-playlist
      *
      * @param string $playlistId ID or URI of the playlist.
      * @param array|object $options Options for the check.
