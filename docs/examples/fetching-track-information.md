@@ -18,7 +18,7 @@ $tracks = $api->getTracks([
     'TRACK_ID',
 ]);
 
-foreach ($tracks->tracks as $tracks) {
+foreach ($tracks->tracks as $track) {
     echo '<b>' . $track->name . '</b> by <b>' . $track->artists[0]->name . '</b> <br>';
 }
 ```
