@@ -54,4 +54,4 @@ try {
 }
 ```
 
-Read more about the exact mechanics of rate limiting in the [Spotify API docs](https://developer.spotify.com/documentation/web-api/#rate-limiting).
+Read more about the exact mechanics of rate limiting in the [Spotify API docs](https://developer.spotify.com/documentation/web-api/guides/rate-limits/).

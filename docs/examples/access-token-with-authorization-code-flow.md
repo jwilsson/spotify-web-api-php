@@ -95,4 +95,4 @@ print_r(
 );
 ```
 
-For more in-depth technical information about the Authorization Code flow, please refer to the [Spotify Web API documentation](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow).
+For more in-depth technical information about the Authorization Code flow, please refer to the [Spotify Web API documentation](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/).

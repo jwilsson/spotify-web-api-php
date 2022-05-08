@@ -64,6 +64,6 @@ $recommendations = $api->getRecommendations([
 print_r($recommendations);
 ```
 
-It's also possible to fetch recommendations based on genres and artists, see the [Spotify docs](https://developer.spotify.com/documentation/web-api/reference/browse/get-recommendations/) for more info.
+It's also possible to fetch recommendations based on genres and artists, see the [Spotify docs](https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recommendations) for more info.
 
 Please see the [method reference](/docs/method-reference/SpotifyWebAPI.md) for more available options for each method.

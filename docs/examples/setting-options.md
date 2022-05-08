@@ -26,7 +26,7 @@ Used to control [automatic refresh of access tokens](refreshing-access-tokens.md
 
 * Possible values: `true`/`false` (default)
 
-Used to control automatic retries of [rate limited requests](https://developer.spotify.com/documentation/web-api/#rate-limiting).
+Used to control automatic retries of [rate limited requests](https://developer.spotify.com/documentation/web-api/guides/rate-limits/).
 
 ### `return_assoc`
 

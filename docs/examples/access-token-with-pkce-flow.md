@@ -101,4 +101,4 @@ print_r(
 );
 ```
 
-For more in-depth technical information about the Proof Key for Code Exchange flow, please refer to the [Spotify Web API documentation](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce).
+For more in-depth technical information about the Proof Key for Code Exchange flow, please refer to the [Spotify Web API documentation](https://developer.spotify.com/documentation/general/guides/authorization/code-flow/).

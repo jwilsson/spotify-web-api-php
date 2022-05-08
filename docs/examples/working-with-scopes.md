@@ -24,7 +24,7 @@ die();
 
 It's possible to request more scopes at any time, simply add new ones to the list. This will ask the user to approve your app again.
 
-Please refer to the Spotify docs for a full list of [all available scopes](https://developer.spotify.com/documentation/general/guides/scopes/).
+Please refer to the Spotify docs for a full list of [all available scopes](https://developer.spotify.com/documentation/general/guides/authorization/scopes/).
 
 ## Checking Requested Scopes
 If you wish to check which scopes are granted for an access token, the `Session::getScope()` method can be used. For example, put the following code in your callback where the user will be redirected to by Spotify:

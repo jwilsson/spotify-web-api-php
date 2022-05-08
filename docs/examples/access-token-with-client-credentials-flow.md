@@ -46,4 +46,4 @@ print_r(
 );
 ```
 
-For more in-depth technical information about the Client Credentials Flow, please refer to the [Spotify Web API documentation](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow).
+For more in-depth technical information about the Client Credentials Flow, please refer to the [Spotify Web API documentation](https://developer.spotify.com/documentation/general/guides/authorization/client-credentials/).
