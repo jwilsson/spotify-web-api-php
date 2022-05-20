@@ -865,16 +865,6 @@ class SpotifyWebAPI
      */
     public function getAudioFeatures($trackId)
     {
-        // Deprecated, but kept for legacy reasons for now
-        if (is_array($trackId)) {
-            trigger_error(
-                'Passing an array to getAudioFeatures() is deprecated, use getMultipleAudioFeatures() instead.',
-                E_USER_DEPRECATED
-            );
-
-            return $this->getMultipleAudioFeatures($trackId);
-        }
-
         $trackId = $this->uriToId($trackId, 'track');
         $uri = '/v1/audio-features/' . $trackId;
 
