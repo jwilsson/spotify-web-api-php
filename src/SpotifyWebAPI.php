@@ -6,15 +6,15 @@ namespace SpotifyWebAPI;
 
 class SpotifyWebAPI
 {
-    protected $accessToken = '';
-    protected $lastResponse = [];
-    protected $options = [
+    protected string $accessToken = '';
+    protected array $lastResponse = [];
+    protected array $options = [
         'auto_refresh' => false,
         'auto_retry' => false,
         'return_assoc' => false,
     ];
-    protected $request = null;
-    protected $session = null;
+    protected ?Request $request = null;
+    protected ?Session $session = null;
 
     /**
      * Constructor
@@ -24,7 +24,7 @@ class SpotifyWebAPI
      * @param Session $session Optional. The Session object to use.
      * @param Request $request Optional. The Request object to use.
      */
-    public function __construct($options = [], $session = null, $request = null)
+    public function __construct(array|object $options = [], ?Session $session = null, ?Request $request = null)
     {
         $this->setOptions($options);
         $this->setSession($session);
@@ -39,7 +39,7 @@ class SpotifyWebAPI
      *
      * @return array Authorization headers, optionally merged with the passed ones.
      */
-    protected function authHeaders($headers = [])
+    protected function authHeaders(array $headers = []): array
     {
         $accessToken = $this->session ? $this->session->getAccessToken() : $this->accessToken;
 
@@ -59,7 +59,7 @@ class SpotifyWebAPI
      *
      * @return string|bool A snapshot ID or false if none exists.
      */
-    protected function getSnapshotId($body)
+    protected function getSnapshotId(array|object $body): string|bool
     {
         $body = (array) $body;
 
@@ -69,12 +69,12 @@ class SpotifyWebAPI
     /**
      * Convert Spotify object IDs to URIs.
      *
-     * @param array|string $ids ID(s) to convert.
+     * @param string|array $ids ID(s) to convert.
      * @param string $type Spotify object type.
      *
-     * @return array|string URI(s).
+     * @return string|array URI(s).
      */
-    protected function idToUri($ids, $type)
+    protected function idToUri(string|array $ids, string $type): string|array
     {
         $type = 'spotify:' . $type . ':';
 
@@ -94,7 +94,7 @@ class SpotifyWebAPI
      *
      * @param string $method The HTTP method to use.
      * @param string $uri The URI to request.
-     * @param array $parameters Optional. Query string parameters or HTTP body, depending on $method.
+     * @param string|array $parameters Optional. Query string parameters or HTTP body, depending on $method.
      * @param array $headers Optional. HTTP headers.
      *
      * @throws SpotifyWebAPIException
@@ -106,8 +106,12 @@ class SpotifyWebAPI
      * - int status HTTP status code.
      * - string url The requested URL.
      */
-    protected function sendRequest($method, $uri, $parameters = [], $headers = [])
-    {
+    protected function sendRequest(
+        string $method,
+        string $uri,
+        string|array $parameters = [],
+        array $headers = []
+    ): array {
         $this->request->setOptions([
             'return_assoc' => $this->options['return_assoc'],
         ]);
@@ -144,7 +148,7 @@ class SpotifyWebAPI
      *
      * @return string A comma-separated string.
      */
-    protected function toCommaString($value)
+    protected function toCommaString(string|array $value): string
     {
         if (is_array($value)) {
             return implode(',', $value);
@@ -156,12 +160,12 @@ class SpotifyWebAPI
     /**
      * Convert URIs to Spotify object IDs.
      *
-     * @param array|string $uriIds URI(s) to convert.
+     * @param string|array $uriIds URI(s) to convert.
      * @param string $type Spotify object type.
      *
-     * @return array|string ID(s).
+     * @return string|array ID(s).
      */
-    protected function uriToId($uriIds, $type)
+    protected function uriToId(string|array $uriIds, string $type): string|array
     {
         $type = 'spotify:' . $type . ':';
 
@@ -180,7 +184,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the albums was successfully added.
      */
-    public function addMyAlbums($albums)
+    public function addMyAlbums(string|array $albums): bool
     {
         $albums = $this->uriToId($albums, 'album');
         $albums = json_encode((array) $albums);
@@ -204,7 +208,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the episodes was successfully added.
      */
-    public function addMyEpisodes($episodes)
+    public function addMyEpisodes(string|array $episodes): bool
     {
         $episodes = $this->uriToId($episodes, 'episode');
         $episodes = json_encode((array) $episodes);
@@ -228,7 +232,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the shows was successfully added.
      */
-    public function addMyShows($shows)
+    public function addMyShows(string|array $shows): bool
     {
         $shows = $this->uriToId($shows, 'show');
         $shows = json_encode((array) $shows);
@@ -252,7 +256,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the tracks was successfully added.
      */
-    public function addMyTracks($tracks)
+    public function addMyTracks(string|array $tracks): bool
     {
         $tracks = $this->uriToId($tracks, 'track');
         $tracks = json_encode((array) $tracks);
@@ -279,8 +283,11 @@ class SpotifyWebAPI
      *
      * @return string|bool A new snapshot ID or false if the tracks weren't successfully added.
      */
-    public function addPlaylistTracks($playlistId, $tracks, $options = [])
-    {
+    public function addPlaylistTracks(
+        string $playlistId,
+        string|array $tracks,
+        array|object $options = []
+    ): string|bool {
         $options = array_merge((array) $options, [
             'uris' => (array) $this->idToUri($tracks, 'track')
         ]);
@@ -310,7 +317,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playback device was successfully changed.
      */
-    public function changeMyDevice($options)
+    public function changeMyDevice(array|object $options): bool
     {
         $options = array_merge((array) $options, [
             'device_ids' => (array) $options['device_ids'],
@@ -339,7 +346,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playback volume was successfully changed.
      */
-    public function changeVolume($options)
+    public function changeVolume(array|object $options): bool
     {
         $options = http_build_query($options, '', '&');
 
@@ -364,7 +371,7 @@ class SpotifyWebAPI
      *
      * @return array|object The new playlist. Type is controlled by the `return_assoc` option.
      */
-    public function createPlaylist($userId, $options = [])
+    public function createPlaylist(string|array|object $userId, array|object $options = []): array|object
     {
         if (is_array($userId) || is_object($userId)) {
             $options = $userId;
@@ -394,7 +401,7 @@ class SpotifyWebAPI
      *
      * @return array Whether each user or artist is followed.
      */
-    public function currentUserFollows($type, $ids)
+    public function currentUserFollows(string $type, string|array $ids): array
     {
         $ids = $this->uriToId($ids, $type);
         $ids = $this->toCommaString($ids);
@@ -419,7 +426,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the albums was successfully deleted.
      */
-    public function deleteMyAlbums($albums)
+    public function deleteMyAlbums(string|array $albums): bool
     {
         $albums = $this->uriToId($albums, 'album');
         $albums = json_encode((array) $albums);
@@ -443,7 +450,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the episodes was successfully deleted.
      */
-    public function deleteMyEpisodes($episodes)
+    public function deleteMyEpisodes(string|array $episodes): bool
     {
         $episodes = $this->uriToId($episodes, 'episode');
         $episodes = json_encode((array) $episodes);
@@ -467,7 +474,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the shows was successfully deleted.
      */
-    public function deleteMyShows($shows)
+    public function deleteMyShows(string|array $shows): bool
     {
         $shows = $this->uriToId($shows, 'show');
         $shows = json_encode((array) $shows);
@@ -491,7 +498,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the tracks was successfully deleted.
      */
-    public function deleteMyTracks($tracks)
+    public function deleteMyTracks(string|array $tracks): bool
     {
         $tracks = $this->uriToId($tracks, 'track');
         $tracks = json_encode((array) $tracks);
@@ -522,7 +529,7 @@ class SpotifyWebAPI
      *
      * @return string|bool A new snapshot ID or false if the tracks weren't successfully deleted.
      */
-    public function deletePlaylistTracks($playlistId, $tracks, $snapshotId = '')
+    public function deletePlaylistTracks(string $playlistId, array $tracks, string $snapshotId = ''): string|bool
     {
         $options = [];
 
@@ -570,7 +577,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the artist or user was successfully followed.
      */
-    public function followArtistsOrUsers($type, $ids)
+    public function followArtistsOrUsers(string $type, string|array $ids): bool
     {
         $ids = $this->uriToId($ids, $type);
         $ids = json_encode([
@@ -599,7 +606,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playlist was successfully followed.
      */
-    public function followPlaylist($playlistId, $options = [])
+    public function followPlaylist(string $playlistId, array|object $options = []): bool
     {
         $options = $options ? json_encode($options) : null;
 
@@ -626,7 +633,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested album. Type is controlled by the `return_assoc` option.
      */
-    public function getAlbum($albumId, $options = [])
+    public function getAlbum(string $albumId, array|object $options = []): array|object
     {
         $albumId = $this->uriToId($albumId, 'album');
         $uri = '/v1/albums/' . $albumId;
@@ -646,7 +653,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested albums. Type is controlled by the `return_assoc` option.
      */
-    public function getAlbums($albumIds, $options = [])
+    public function getAlbums(array $albumIds, array|object $options = []): array|object
     {
         $albumIds = $this->uriToId($albumIds, 'album');
         $options = array_merge((array) $options, [
@@ -672,7 +679,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested album tracks. Type is controlled by the `return_assoc` option.
      */
-    public function getAlbumTracks($albumId, $options = [])
+    public function getAlbumTracks(string $albumId, array|object $options = []): array|object
     {
         $albumId = $this->uriToId($albumId, 'album');
         $uri = '/v1/albums/' . $albumId . '/tracks';
@@ -690,7 +697,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested artist. Type is controlled by the `return_assoc` option.
      */
-    public function getArtist($artistId)
+    public function getArtist(string $artistId): array|object
     {
         $artistId = $this->uriToId($artistId, 'artist');
         $uri = '/v1/artists/' . $artistId;
@@ -708,7 +715,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested artists. Type is controlled by the `return_assoc` option.
      */
-    public function getArtists($artistIds)
+    public function getArtists(array $artistIds): array|object
     {
         $artistIds = $this->uriToId($artistIds, 'artist');
         $artistIds = $this->toCommaString($artistIds);
@@ -732,7 +739,7 @@ class SpotifyWebAPI
      *
      * @return array|object The artist's related artists. Type is controlled by the `return_assoc` option.
      */
-    public function getArtistRelatedArtists($artistId)
+    public function getArtistRelatedArtists(string $artistId): array|object
     {
         $artistId = $this->uriToId($artistId, 'artist');
         $uri = '/v1/artists/' . $artistId . '/related-artists';
@@ -755,7 +762,7 @@ class SpotifyWebAPI
      *
      * @return array|object The artist's albums. Type is controlled by the `return_assoc` option.
      */
-    public function getArtistAlbums($artistId, $options = [])
+    public function getArtistAlbums(string $artistId, array|object $options = []): array|object
     {
         $options = (array) $options;
 
@@ -781,7 +788,7 @@ class SpotifyWebAPI
      *
      * @return array|object The artist's top tracks. Type is controlled by the `return_assoc` option.
      */
-    public function getArtistTopTracks($artistId, $options)
+    public function getArtistTopTracks(string $artistId, array|object $options): array|object
     {
         $artistId = $this->uriToId($artistId, 'artist');
         $uri = '/v1/artists/' . $artistId . '/top-tracks';
@@ -797,9 +804,9 @@ class SpotifyWebAPI
      *
      * @param string $trackId ID or URI of the track.
      *
-     * @return object The track's audio analysis. Type is controlled by the `return_assoc` option.
+     * @return array|object The track's audio analysis. Type is controlled by the `return_assoc` option.
      */
-    public function getAudioAnalysis($trackId)
+    public function getAudioAnalysis(string $trackId): array|object
     {
         $trackId = $this->uriToId($trackId, 'track');
         $uri = '/v1/audio-analysis/' . $trackId;
@@ -819,7 +826,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested audiobook. Type is controlled by the `return_assoc` option.
      */
-    public function getAudiobook($audiobookId, $options = [])
+    public function getAudiobook(string $audiobookId, array|object $options = [])
     {
         $audiobookId = $this->uriToId($audiobookId, 'show');
         $uri = '/v1/audiobooks/' . $audiobookId;
@@ -839,7 +846,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested audiobooks. Type is controlled by the `return_assoc` option.
      */
-    public function getAudiobooks($audiobookIds, $options = [])
+    public function getAudiobooks(array $audiobookIds, array|object $options = [])
     {
         $audiobookIds = $this->uriToId($audiobookIds, 'show');
         $audiobookIds = $this->toCommaString($audiobookIds);
@@ -863,7 +870,7 @@ class SpotifyWebAPI
      *
      * @return array|object The track's audio features. Type is controlled by the `return_assoc` option.
      */
-    public function getAudioFeatures($trackId)
+    public function getAudioFeatures(string $trackId): array|object
     {
         $trackId = $this->uriToId($trackId, 'track');
         $uri = '/v1/audio-features/' . $trackId;
@@ -885,7 +892,7 @@ class SpotifyWebAPI
      *
      * @return array|object The list of categories. Type is controlled by the `return_assoc` option.
      */
-    public function getCategoriesList($options = [])
+    public function getCategoriesList(array|object $options = []): array|object
     {
         $uri = '/v1/browse/categories';
 
@@ -906,7 +913,7 @@ class SpotifyWebAPI
      *
      * @return array|object The category. Type is controlled by the `return_assoc` option.
      */
-    public function getCategory($categoryId, $options = [])
+    public function getCategory(string $categoryId, array|object $options = []): array|object
     {
         $uri = '/v1/browse/categories/' . $categoryId;
 
@@ -928,7 +935,7 @@ class SpotifyWebAPI
      *
      * @return array|object The list of playlists. Type is controlled by the `return_assoc` option.
      */
-    public function getCategoryPlaylists($categoryId, $options = [])
+    public function getCategoryPlaylists(string $categoryId, array|object $options = []): array|object
     {
         $uri = '/v1/browse/categories/' . $categoryId . '/playlists';
 
@@ -947,7 +954,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested chapter. Type is controlled by the `return_assoc` option.
      */
-    public function getChapter($chapterId, $options = [])
+    public function getChapter(string $chapterId, array|object $options = [])
     {
         $chapterId = $this->uriToId($chapterId, 'episode');
         $uri = '/v1/chapters/' . $chapterId;
@@ -967,7 +974,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested chapters. Type is controlled by the `return_assoc` option.
      */
-    public function getChapters($chapterIds, $options = [])
+    public function getChapters(array $chapterIds, array|object $options = [])
     {
         $chapterIds = $this->uriToId($chapterIds, 'episode');
         $options = array_merge((array) $options, [
@@ -991,7 +998,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested episode. Type is controlled by the `return_assoc` option.
      */
-    public function getEpisode($episodeId, $options = [])
+    public function getEpisode(string $episodeId, array|object $options = []): array|object
     {
         $episodeId = $this->uriToId($episodeId, 'episode');
         $uri = '/v1/episodes/' . $episodeId;
@@ -1005,13 +1012,13 @@ class SpotifyWebAPI
      * Get multiple episodes.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-multiple-episodes
      *
-     * @param array $episodeIds IDs or URIs of the episodes.
+     * @param string|array $episodeIds IDs or URIs of the episodes.
      * @param array|object $options Optional. Options for the episodes.
      * - string market Optional. ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
      *
      * @return array|object The requested episodes. Type is controlled by the `return_assoc` option.
      */
-    public function getEpisodes($episodeIds, $options = [])
+    public function getEpisodes(string|array $episodeIds, array|object $options = []): array|object
     {
         $episodeIds = $this->uriToId($episodeIds, 'episode');
         $options = array_merge((array) $options, [
@@ -1038,7 +1045,7 @@ class SpotifyWebAPI
      *
      * @return array|object The featured playlists. Type is controlled by the `return_assoc` option.
      */
-    public function getFeaturedPlaylists($options = [])
+    public function getFeaturedPlaylists(array|object $options = []): array|object
     {
         $uri = '/v1/browse/featured-playlists';
 
@@ -1053,7 +1060,7 @@ class SpotifyWebAPI
      *
      * @return array|object All possible seed genres. Type is controlled by the `return_assoc` option.
      */
-    public function getGenreSeeds()
+    public function getGenreSeeds(): array|object
     {
         $uri = '/v1/recommendations/available-genre-seeds';
 
@@ -1071,7 +1078,7 @@ class SpotifyWebAPI
      * - int status HTTP status code.
      * - string url The requested URL.
      */
-    public function getLastResponse()
+    public function getLastResponse(): array
     {
         return $this->lastResponse;
     }
@@ -1082,7 +1089,7 @@ class SpotifyWebAPI
      *
      * @return array|object All markets where Spotify is available. Type is controlled by the `return_assoc` option.
      */
-    public function getMarkets()
+    public function getMarkets(): array|object
     {
         $uri = '/v1/markets';
 
@@ -1095,11 +1102,11 @@ class SpotifyWebAPI
      * Get audio features of multiple tracks.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features
      *
-     * @param array $trackIds IDs or URIs of the tracks.
+     * @param string|array $trackIds IDs or URIs of the tracks.
      *
      * @return array|object The tracks' audio features. Type is controlled by the `return_assoc` option.
      */
-    public function getMultipleAudioFeatures($trackIds)
+    public function getMultipleAudioFeatures(string|array $trackIds): array|object
     {
         $trackIds = $this->uriToId($trackIds, 'track');
         $options = [
@@ -1123,7 +1130,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's currently playing track. Type is controlled by the `return_assoc` option.
      */
-    public function getMyCurrentTrack($options = [])
+    public function getMyCurrentTrack(array|object $options = []): array|object
     {
         $uri = '/v1/me/player/currently-playing';
         $options = (array) $options;
@@ -1143,7 +1150,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's devices. Type is controlled by the `return_assoc` option.
      */
-    public function getMyDevices()
+    public function getMyDevices(): array|object
     {
         $uri = '/v1/me/player/devices';
 
@@ -1162,7 +1169,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's playback information. Type is controlled by the `return_assoc` option.
      */
-    public function getMyCurrentPlaybackInfo($options = [])
+    public function getMyCurrentPlaybackInfo(array|object $options = []): array|object
     {
         $uri = '/v1/me/player';
         $options = (array) $options;
@@ -1187,7 +1194,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's playlists. Type is controlled by the `return_assoc` option.
      */
-    public function getMyPlaylists($options = [])
+    public function getMyPlaylists(array|object $options = []): array|object
     {
         $uri = '/v1/me/playlists';
 
@@ -1223,7 +1230,7 @@ class SpotifyWebAPI
       *
       * @return array|object The most recently played tracks. Type is controlled by the `return_assoc` option.
       */
-    public function getMyRecentTracks($options = [])
+    public function getMyRecentTracks(array|object $options = []): array|object
     {
         $uri = '/v1/me/player/recently-played';
 
@@ -1243,7 +1250,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's saved albums. Type is controlled by the `return_assoc` option.
      */
-    public function getMySavedAlbums($options = [])
+    public function getMySavedAlbums(array|object $options = []): array|object
     {
         $uri = '/v1/me/albums';
 
@@ -1263,7 +1270,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's saved episodes. Type is controlled by the `return_assoc` option.
      */
-    public function getMySavedEpisodes($options = [])
+    public function getMySavedEpisodes(array|object $options = []): array|object
     {
         $uri = '/v1/me/episodes';
 
@@ -1283,7 +1290,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's saved tracks. Type is controlled by the `return_assoc` option.
      */
-    public function getMySavedTracks($options = [])
+    public function getMySavedTracks(array|object $options = []): array|object
     {
         $uri = '/v1/me/tracks';
 
@@ -1302,7 +1309,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's saved shows. Type is controlled by the `return_assoc` option.
      */
-    public function getMySavedShows($options = [])
+    public function getMySavedShows(array|object $options = []): array|object
     {
         $uri = '/v1/me/shows';
 
@@ -1323,7 +1330,7 @@ class SpotifyWebAPI
      *
      * @return array|object A list of the requested top entity. Type is controlled by the `return_assoc` option.
      */
-    public function getMyTop($type, $options = [])
+    public function getMyTop(string $type, array|object $options = []): array|object
     {
         $uri = '/v1/me/top/' . $type;
 
@@ -1343,7 +1350,7 @@ class SpotifyWebAPI
      *
      * @return array|object The new releases. Type is controlled by the `return_assoc` option.
      */
-    public function getNewReleases($options = [])
+    public function getNewReleases(array|object $options = []): array|object
     {
         $uri = '/v1/browse/new-releases';
 
@@ -1364,7 +1371,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's playlist. Type is controlled by the `return_assoc` option.
      */
-    public function getPlaylist($playlistId, $options = [])
+    public function getPlaylist(string $playlistId, array|object $options = []): array|object
     {
         $options = (array) $options;
 
@@ -1393,7 +1400,7 @@ class SpotifyWebAPI
      *
      * @return array|object The playlist cover image. Type is controlled by the `return_assoc` option.
      */
-    public function getPlaylistImage($playlistId)
+    public function getPlaylistImage(string $playlistId): array|object
     {
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
@@ -1418,7 +1425,7 @@ class SpotifyWebAPI
      *
      * @return array|object The tracks in the playlist. Type is controlled by the `return_assoc` option.
      */
-    public function getPlaylistTracks($playlistId, $options = [])
+    public function getPlaylistTracks(string $playlistId, array|object $options = []): array|object
     {
         $options = (array) $options;
 
@@ -1455,7 +1462,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested recommendations. Type is controlled by the `return_assoc` option.
      */
-    public function getRecommendations($options = [])
+    public function getRecommendations(array|object $options = []): array|object
     {
         $options = (array) $options;
 
@@ -1477,7 +1484,7 @@ class SpotifyWebAPI
      *
      * @return Request The Request object in use.
      */
-    public function getRequest()
+    public function getRequest(): Request
     {
         return $this->request;
     }
@@ -1492,7 +1499,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested show. Type is controlled by the `return_assoc` option.
      */
-    public function getShow($showId, $options = [])
+    public function getShow(string $showId, array|object $options = []): array|object
     {
         $showId = $this->uriToId($showId, 'show');
         $uri = '/v1/shows/' . $showId;
@@ -1514,7 +1521,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested show episodes. Type is controlled by the `return_assoc` option.
      */
-    public function getShowEpisodes($showId, $options = [])
+    public function getShowEpisodes(string $showId, array|object $options = []): array|object
     {
         $showId = $this->uriToId($showId, 'show');
         $uri = '/v1/shows/' . $showId . '/episodes';
@@ -1528,13 +1535,13 @@ class SpotifyWebAPI
      * Get multiple shows.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-multiple-shows
      *
-     * @param array $showIds IDs or URIs of the shows.
+     * @param string|array $showIds IDs or URIs of the shows.
      * @param array|object $options Optional. Options for the shows.
      * - string market Optional. ISO 3166-1 alpha-2 country code, limit results to shows available in that market.
      *
      * @return array|object The requested shows. Type is controlled by the `return_assoc` option.
      */
-    public function getShows($showIds, $options = [])
+    public function getShows(string|array $showIds, array|object $options = []): array|object
     {
         $showIds = $this->uriToId($showIds, 'show');
         $options = array_merge((array) $options, [
@@ -1558,7 +1565,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested track. Type is controlled by the `return_assoc` option.
      */
-    public function getTrack($trackId, $options = [])
+    public function getTrack(string $trackId, array|object $options = []): array|object
     {
         $trackId = $this->uriToId($trackId, 'track');
         $uri = '/v1/tracks/' . $trackId;
@@ -1578,7 +1585,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested tracks. Type is controlled by the `return_assoc` option.
      */
-    public function getTracks($trackIds, $options = [])
+    public function getTracks(array $trackIds, array|object $options = []): array|object
     {
         $trackIds = $this->uriToId($trackIds, 'track');
         $options = array_merge((array) $options, [
@@ -1600,7 +1607,7 @@ class SpotifyWebAPI
      *
      * @return array|object The requested user. Type is controlled by the `return_assoc` option.
      */
-    public function getUser($userId)
+    public function getUser(string $userId): array|object
     {
         $userId = $this->uriToId($userId, 'user');
         $uri = '/v1/users/' . $userId;
@@ -1620,7 +1627,7 @@ class SpotifyWebAPI
      *
      * @return array|object A list of artists. Type is controlled by the `return_assoc` option.
      */
-    public function getUserFollowedArtists($options = [])
+    public function getUserFollowedArtists(array|object $options = []): array|object
     {
         $options = (array) $options;
 
@@ -1646,7 +1653,7 @@ class SpotifyWebAPI
      *
      * @return array|object The user's playlists. Type is controlled by the `return_assoc` option.
      */
-    public function getUserPlaylists($userId, $options = [])
+    public function getUserPlaylists(string $userId, array|object $options = []): array|object
     {
         $userId = $this->uriToId($userId, 'user');
         $uri = '/v1/users/' . $userId . '/playlists';
@@ -1662,7 +1669,7 @@ class SpotifyWebAPI
      *
      * @return array|object The currently authenticated user. Type is controlled by the `return_assoc` option.
      */
-    public function me()
+    public function me(): array|object
     {
         $uri = '/v1/me';
 
@@ -1679,7 +1686,7 @@ class SpotifyWebAPI
      *
      * @return array Whether each album is saved.
      */
-    public function myAlbumsContains($albums)
+    public function myAlbumsContains(string|array $albums): array
     {
         $albums = $this->uriToId($albums, 'album');
         $albums = $this->toCommaString($albums);
@@ -1703,7 +1710,7 @@ class SpotifyWebAPI
      *
      * @return array Whether each episode is saved.
      */
-    public function myEpisodesContains($episodes)
+    public function myEpisodesContains(string|array $episodes): array
     {
         $episodes = $this->uriToId($episodes, 'episode');
         $episodes = $this->toCommaString($episodes);
@@ -1727,7 +1734,7 @@ class SpotifyWebAPI
      *
      * @return array Whether each show is saved.
      */
-    public function myShowsContains($shows)
+    public function myShowsContains(string|array $shows): array
     {
         $shows = $this->uriToId($shows, 'show');
         $shows = $this->toCommaString($shows);
@@ -1751,7 +1758,7 @@ class SpotifyWebAPI
      *
      * @return array Whether each track is saved.
      */
-    public function myTracksContains($tracks)
+    public function myTracksContains(string|array $tracks): array
     {
         $tracks = $this->uriToId($tracks, 'track');
         $tracks = $this->toCommaString($tracks);
@@ -1775,7 +1782,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the track was successfully skipped.
      */
-    public function next($deviceId = '')
+    public function next(string $deviceId = ''): bool
     {
         $uri = '/v1/me/player/next';
 
@@ -1797,7 +1804,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playback was successfully paused.
      */
-    public function pause($deviceId = '')
+    public function pause(string $deviceId = ''): bool
     {
         $uri = '/v1/me/player/pause';
 
@@ -1824,7 +1831,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playback was successfully started.
      */
-    public function play($deviceId = '', $options = [])
+    public function play(string $deviceId = '', array|object $options = []): bool
     {
         $options = $options ? json_encode($options) : null;
 
@@ -1852,7 +1859,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the track was successfully skipped.
      */
-    public function previous($deviceId = '')
+    public function previous(string $deviceId = ''): bool
     {
         $uri = '/v1/me/player/previous';
 
@@ -1875,7 +1882,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the track was successfully queued.
      */
-    public function queue($trackUri, $deviceId = '')
+    public function queue(string $trackUri, string $deviceId = ''): bool
     {
         $uri = '/v1/me/player/queue?uri=' . $this->idToUri($trackUri, 'track');
 
@@ -1902,7 +1909,7 @@ class SpotifyWebAPI
      *
      * @return string|bool A new snapshot ID or false if the tracks weren't successfully reordered.
      */
-    public function reorderPlaylistTracks($playlistId, $options)
+    public function reorderPlaylistTracks(string $playlistId, array|object $options): string|bool
     {
         $options = json_encode($options);
 
@@ -1929,7 +1936,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playback repeat mode was successfully changed.
      */
-    public function repeat($options)
+    public function repeat(array|object $options): bool
     {
         $options = http_build_query($options, '', '&');
 
@@ -1950,7 +1957,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the tracks was successfully replaced.
      */
-    public function replacePlaylistTracks($playlistId, $tracks)
+    public function replacePlaylistTracks(string $playlistId, string|array $tracks): bool
     {
         $tracks = $this->idToUri($tracks, 'track');
         $tracks = json_encode([
@@ -1984,7 +1991,7 @@ class SpotifyWebAPI
      *
      * @return array|object The search results. Type is controlled by the `return_assoc` option.
      */
-    public function search($query, $type, $options = [])
+    public function search(string $query, string|array $type, array|object $options = []): array|object
     {
         $options = array_merge((array) $options, [
             'q' => $query,
@@ -2008,7 +2015,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playback position was successfully changed.
      */
-    public function seek($options)
+    public function seek(array|object $options): bool
     {
         $options = http_build_query($options, '', '&');
 
@@ -2027,7 +2034,7 @@ class SpotifyWebAPI
      *
      * @return self
      */
-    public function setAccessToken($accessToken)
+    public function setAccessToken(string $accessToken): self
     {
         $this->accessToken = $accessToken;
 
@@ -2041,7 +2048,7 @@ class SpotifyWebAPI
      *
      * @return self
      */
-    public function setOptions($options)
+    public function setOptions(array|object $options): self
     {
         $this->options = array_merge($this->options, (array) $options);
 
@@ -2055,7 +2062,7 @@ class SpotifyWebAPI
      *
      * @return self
      */
-    public function setSession($session)
+    public function setSession(?Session $session): self
     {
         $this->session = $session;
 
@@ -2072,7 +2079,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playback shuffle mode was successfully changed.
      */
-    public function shuffle($options)
+    public function shuffle(array|object $options): bool
     {
         $options = array_merge((array) $options, [
             'state' => $options['state'] ? 'true' : 'false',
@@ -2097,7 +2104,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the artists or users were successfully unfollowed.
      */
-    public function unfollowArtistsOrUsers($type, $ids)
+    public function unfollowArtistsOrUsers(string $type, string|array $ids): bool
     {
         $ids = $this->uriToId($ids, $type);
         $ids = json_encode([
@@ -2124,7 +2131,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playlist was successfully unfollowed.
      */
-    public function unfollowPlaylist($playlistId)
+    public function unfollowPlaylist(string $playlistId): bool
     {
         $playlistId = $this->uriToId($playlistId, 'playlist');
         $uri = '/v1/playlists/' . $playlistId . '/followers';
@@ -2147,7 +2154,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playlist was successfully updated.
      */
-    public function updatePlaylist($playlistId, $options)
+    public function updatePlaylist(string $playlistId, array|object $options): bool
     {
         $options = json_encode($options);
 
@@ -2173,7 +2180,7 @@ class SpotifyWebAPI
      *
      * @return bool Whether the playlist was successfully updated.
      */
-    public function updatePlaylistImage($playlistId, $imageData)
+    public function updatePlaylistImage(string $playlistId, string $imageData): bool
     {
         $playlistId = $this->uriToId($playlistId, 'playlist');
 
@@ -2194,7 +2201,7 @@ class SpotifyWebAPI
      *
      * @return array Whether each user is following the playlist.
      */
-    public function usersFollowPlaylist($playlistId, $options)
+    public function usersFollowPlaylist(string $playlistId, array|object $options): array
     {
         $options = (array) $options;
 

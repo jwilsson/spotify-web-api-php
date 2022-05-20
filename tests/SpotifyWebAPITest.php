@@ -6,8 +6,13 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 {
     private $accessToken = 'access_token';
 
-    private function setupStub($expectedMethod, $expectedUri, $expectedParameters, $expectedHeaders, $expectedReturn)
-    {
+    private function setupStub(
+        string $expectedMethod,
+        string $expectedUri,
+        string|array $expectedParameters,
+        array $expectedHeaders,
+        mixed $expectedReturn
+    ) {
         $stub = $this->createPartialMock(SpotifyWebAPI\Request::class, ['api', 'getLastResponse']);
 
         $stub->expects($this->any())
@@ -40,8 +45,13 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         return $stub;
     }
 
-    private function setupApi($expectedMethod, $expectedUri, $expectedParameters, $expectedHeaders, $expectedReturn)
-    {
+    private function setupApi(
+        string $expectedMethod,
+        string $expectedUri,
+        mixed $expectedParameters,
+        array $expectedHeaders,
+        mixed $expectedReturn
+    ) {
         $stub = $this->setupStub(
             $expectedMethod,
             $expectedUri,

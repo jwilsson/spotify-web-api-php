@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 class SessionTest extends PHPUnit\Framework\TestCase
 {
-    private $clientID = 'b777292af0def22f9257991fc770b520';
-    private $clientSecret = '6a0419f43d0aa93b2ae881429b6b9bc2';
-    private $redirectURI = 'https://example.com/callback';
-    private $accessToken = 'd86c828583c5c6160e8acfee88ba1590';
-    private $refreshToken = '3692bfa45759a67d83aedf0045f6cb63';
+    private string $clientID = 'b777292af0def22f9257991fc770b520';
+    private string $clientSecret = '6a0419f43d0aa93b2ae881429b6b9bc2';
+    private string $redirectURI = 'https://example.com/callback';
+    private string $accessToken = 'd86c828583c5c6160e8acfee88ba1590';
+    private string $refreshToken = '3692bfa45759a67d83aedf0045f6cb63';
 
-    private function setupStub($expectedMethod, $expectedUri, $expectedParameters, $expectedHeaders, $expectedReturn)
-    {
+    private function setupStub(
+        string $expectedMethod,
+        string $expectedUri,
+        string|array $expectedParameters,
+        array $expectedHeaders,
+        array $expectedReturn
+    ) {
         $stub = $this->createPartialMock(SpotifyWebAPI\Request::class, ['account']);
 
         $stub->expects($this->once())
@@ -162,7 +167,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $session = new SpotifyWebAPI\Session($this->clientID, null, $this->redirectURI, $stub);
+        $session = new SpotifyWebAPI\Session($this->clientID, '', $this->redirectURI, $stub);
         $session->refreshAccessToken($this->refreshToken);
 
         $this->assertNotEmpty($session->getAccessToken());

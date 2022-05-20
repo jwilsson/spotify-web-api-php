@@ -16,7 +16,7 @@ class SpotifyWebAPIAuthException extends SpotifyWebAPIException
      *
      * @return bool
      */
-    public function hasInvalidCredentials()
+    public function hasInvalidCredentials(): bool
     {
         return in_array($this->getMessage(), [
             self::INVALID_CLIENT,
@@ -29,7 +29,7 @@ class SpotifyWebAPIAuthException extends SpotifyWebAPIException
      *
      * @return bool
      */
-    public function hasInvalidRefreshToken()
+    public function hasInvalidRefreshToken(): bool
     {
         return $this->getMessage() === self::INVALID_REFRESH_TOKEN;
     }

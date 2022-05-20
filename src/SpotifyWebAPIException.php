@@ -14,14 +14,14 @@ class SpotifyWebAPIException extends \Exception
      *
      * @var string
      */
-    private $reason;
+    private string $reason = '';
 
     /**
      * Returns the reason string from a player request's error object.
      *
      * @return string
      */
-    public function getReason()
+    public function getReason(): string
     {
         return $this->reason;
     }
@@ -31,7 +31,7 @@ class SpotifyWebAPIException extends \Exception
      *
      * @return bool
      */
-    public function hasExpiredToken()
+    public function hasExpiredToken(): bool
     {
         return $this->getMessage() === self::TOKEN_EXPIRED;
     }
@@ -41,7 +41,7 @@ class SpotifyWebAPIException extends \Exception
      *
      * @return bool
      */
-    public function isRateLimited()
+    public function isRateLimited(): bool
     {
         return $this->getCode() === self::RATE_LIMIT_STATUS;
     }
@@ -53,7 +53,7 @@ class SpotifyWebAPIException extends \Exception
      *
      * @return void
      */
-    public function setReason($reason)
+    public function setReason(string $reason): void
     {
         $this->reason = $reason;
     }

@@ -6,14 +6,14 @@ namespace SpotifyWebAPI;
 
 class Session
 {
-    protected $accessToken = '';
-    protected $clientId = '';
-    protected $clientSecret = '';
-    protected $expirationTime = 0;
-    protected $redirectUri = '';
-    protected $refreshToken = '';
-    protected $scope = '';
-    protected $request = null;
+    protected string $accessToken = '';
+    protected string $clientId = '';
+    protected string $clientSecret = '';
+    protected int $expirationTime = 0;
+    protected string $redirectUri = '';
+    protected string $refreshToken = '';
+    protected string $scope = '';
+    protected ?Request $request = null;
 
     /**
      * Constructor
@@ -24,8 +24,12 @@ class Session
      * @param string $redirectUri Optional. The redirect URI.
      * @param Request $request Optional. The Request object to use.
      */
-    public function __construct($clientId, $clientSecret = '', $redirectUri = '', $request = null)
-    {
+    public function __construct(
+        string $clientId,
+        string $clientSecret = '',
+        string $redirectUri = '',
+        ?Request $request = null
+    ) {
         $this->setClientId($clientId);
         $this->setClientSecret($clientSecret);
         $this->setRedirectUri($redirectUri);
@@ -41,7 +45,7 @@ class Session
      *
      * @return string The code challenge.
      */
-    public function generateCodeChallenge($codeVerifier, $hashAlgo = 'sha256')
+    public function generateCodeChallenge(string $codeVerifier, string $hashAlgo = 'sha256'): string
     {
         $challenge = hash($hashAlgo, $codeVerifier, true);
         $challenge = base64_encode($challenge);
@@ -58,7 +62,7 @@ class Session
      *
      * @return string A code verifier string.
      */
-    public function generateCodeVerifier($length = 128)
+    public function generateCodeVerifier(int $length = 128): string
     {
         return $this->generateState($length);
     }
@@ -70,7 +74,7 @@ class Session
      *
      * @return string A random state value.
      */
-    public function generateState($length = 16)
+    public function generateState(int $length = 16): string
     {
         // Length will be doubled when converting to hex
         return bin2hex(
@@ -89,7 +93,7 @@ class Session
      *
      * @return string The authorization URL.
      */
-    public function getAuthorizeUrl($options = [])
+    public function getAuthorizeUrl(array|object $options = []): string
     {
         $options = (array) $options;
 
@@ -116,7 +120,7 @@ class Session
      *
      * @return string The access token.
      */
-    public function getAccessToken()
+    public function getAccessToken(): string
     {
         return $this->accessToken;
     }
@@ -126,7 +130,7 @@ class Session
      *
      * @return string The client ID.
      */
-    public function getClientId()
+    public function getClientId(): string
     {
         return $this->clientId;
     }
@@ -136,7 +140,7 @@ class Session
      *
      * @return string The client secret.
      */
-    public function getClientSecret()
+    public function getClientSecret(): string
     {
         return $this->clientSecret;
     }
@@ -146,7 +150,7 @@ class Session
      *
      * @return int A Unix timestamp indicating the token expiration time.
      */
-    public function getTokenExpiration()
+    public function getTokenExpiration(): int
     {
         return $this->expirationTime;
     }
@@ -156,7 +160,7 @@ class Session
      *
      * @return string The redirect URI.
      */
-    public function getRedirectUri()
+    public function getRedirectUri(): string
     {
         return $this->redirectUri;
     }
@@ -166,7 +170,7 @@ class Session
      *
      * @return string The refresh token.
      */
-    public function getRefreshToken()
+    public function getRefreshToken(): string
     {
         return $this->refreshToken;
     }
@@ -176,7 +180,7 @@ class Session
      *
      * @return array The scope for the current access token
      */
-    public function getScope()
+    public function getScope(): array
     {
         return explode(' ', $this->scope);
     }
@@ -188,7 +192,7 @@ class Session
      *
      * @return bool Whether the access token was successfully refreshed.
      */
-    public function refreshAccessToken($refreshToken = null)
+    public function refreshAccessToken(?string $refreshToken = null): bool
     {
         $parameters = [
             'grant_type' => 'refresh_token',
@@ -231,7 +235,7 @@ class Session
      *
      * @return bool True when the access token was successfully granted, false otherwise.
      */
-    public function requestAccessToken($authorizationCode, $codeVerifier = '')
+    public function requestAccessToken(string $authorizationCode, string $codeVerifier = ''): bool
     {
         $parameters = [
             'client_id' => $this->getClientId(),
@@ -266,7 +270,7 @@ class Session
      *
      * @return bool True when an access token was successfully granted, false otherwise.
      */
-    public function requestCredentialsToken()
+    public function requestCredentialsToken(): bool
     {
         $payload = base64_encode($this->getClientId() . ':' . $this->getClientSecret());
 
@@ -298,7 +302,7 @@ class Session
      *
      * @return self
      */
-    public function setAccessToken($accessToken)
+    public function setAccessToken(string $accessToken): self
     {
         $this->accessToken = $accessToken;
 
@@ -312,7 +316,7 @@ class Session
      *
      * @return self
      */
-    public function setClientId($clientId)
+    public function setClientId(string $clientId): self
     {
         $this->clientId = $clientId;
 
@@ -326,7 +330,7 @@ class Session
      *
      * @return self
      */
-    public function setClientSecret($clientSecret)
+    public function setClientSecret(string $clientSecret): self
     {
         $this->clientSecret = $clientSecret;
 
@@ -340,7 +344,7 @@ class Session
      *
      * @return self
      */
-    public function setRedirectUri($redirectUri)
+    public function setRedirectUri(string $redirectUri): self
     {
         $this->redirectUri = $redirectUri;
 
@@ -354,7 +358,7 @@ class Session
      *
      * @return self
      */
-    public function setRefreshToken($refreshToken)
+    public function setRefreshToken(string $refreshToken): self
     {
         $this->refreshToken = $refreshToken;
 
