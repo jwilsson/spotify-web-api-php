@@ -204,8 +204,7 @@ class Session
             ];
         }
 
-        $response = $this->request->account('POST', '/api/token', $parameters, $headers);
-        $response = $response['body'];
+        ['body' => $response] = $this->request->account('POST', '/api/token', $parameters, $headers);
 
         if (isset($response->access_token)) {
             $this->accessToken = $response->access_token;
@@ -248,8 +247,7 @@ class Session
             $parameters['client_secret'] = $this->getClientSecret();
         }
 
-        $response = $this->request->account('POST', '/api/token', $parameters, []);
-        $response = $response['body'];
+        ['body' => $response] = $this->request->account('POST', '/api/token', $parameters, []);
 
         if (isset($response->refresh_token) && isset($response->access_token)) {
             $this->refreshToken = $response->refresh_token;
@@ -280,8 +278,7 @@ class Session
             'Authorization' => 'Basic ' . $payload,
         ];
 
-        $response = $this->request->account('POST', '/api/token', $parameters, $headers);
-        $response = $response['body'];
+        ['body' => $response] = $this->request->account('POST', '/api/token', $parameters, $headers);
 
         if (isset($response->access_token)) {
             $this->accessToken = $response->access_token;

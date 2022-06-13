@@ -126,10 +126,9 @@ class SpotifyWebAPI
 
                 return $this->sendRequest($method, $uri, $parameters, $headers);
             } elseif ($this->options['auto_retry'] && $e->isRateLimited()) {
-                $lastResponse = $this->request->getLastResponse();
-                $retryAfter = (int) $lastResponse['headers']['retry-after'];
+                ['headers' => $lastHeaders] = $this->request->getLastResponse();
 
-                sleep($retryAfter);
+                sleep((int) $lastHeaders['retry-after']);
 
                 return $this->sendRequest($method, $uri, $parameters, $headers);
             }
