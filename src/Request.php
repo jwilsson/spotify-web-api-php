@@ -228,7 +228,7 @@ class Request
         [$headers, $body] = $this->splitResponse($response);
 
         $parsedBody = json_decode($body, $this->options['return_assoc']);
-        $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $status = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
         $parsedHeaders = $this->parseHeaders($headers);
 
         $this->lastResponse = [
