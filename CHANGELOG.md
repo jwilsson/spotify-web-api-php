@@ -1,4 +1,9 @@
 # Changelog
+## 5.1.0 (2022-07-04)
+* The deprecated way of passing arrays to `SpotifyWebAPI::getAudioFeatures()` will now print run time warnings. ([a5071b0](https://github.com/jwilsson/spotify-web-api-php/commit/a5071b023da105c8628873d564c28f3013533936))
+* Replaced legacy `CURLINFO_HTTP_CODE` with `CURLINFO_RESPONSE_CODE` ([cdefdee](https://github.com/jwilsson/spotify-web-api-php/commit/cdefdee8dfadccb0735cc6756daca02d9809e58a))
+* Updated inline links to Spotify docs. ([04d2412](https://github.com/jwilsson/spotify-web-api-php/commit/04d2412ea76e78aa55b6904ddc06ec61eacbd071))
+
 ## 5.0.3 (2022-01-15)
 * `Session::refreshAccessToken()` will no longer send client secret when none exists. ([7e35d41](https://github.com/jwilsson/spotify-web-api-php/commit/7e35d418dd051aeccff2d38d7258c5a8108885fb))
 
