@@ -55,21 +55,15 @@ class SpotifyWebAPI
     /**
      * Try to fetch a snapshot ID from a response.
      *
-     * @param string object|array The parsed response body.
+     * @param object|array $body The parsed response body.
      *
      * @return string|bool A snapshot ID or false if none exists.
      */
     protected function getSnapshotId($body)
     {
-        if (isset($body->snapshot_id)) {
-            return $body->snapshot_id;
-        }
+        $body = (array) $body;
 
-        if (isset($body['snapshot_id'])) {
-            return $body['snapshot_id'];
-        }
-
-        return false;
+        return $body['snapshot_id'] ?? null;
     }
 
     /**
