@@ -1262,6 +1262,7 @@ class SpotifyWebAPI
      * @param array|object $options Optional. Options for the playlist.
      * - string|array fields Optional. A list of fields to return. See Spotify docs for more info.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+     * - string|array additional_types Optional. Types of media to return info about.
      *
      * @return array|object The user's playlist. Type is controlled by the `return_assoc` option.
      */
@@ -1271,6 +1272,10 @@ class SpotifyWebAPI
 
         if (isset($options['fields'])) {
             $options['fields'] = $this->toCommaString($options['fields']);
+        }
+
+        if (isset($options['additional_types'])) {
+            $options['additional_types'] = $this->toCommaString($options['additional_types']);
         }
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
@@ -1311,6 +1316,7 @@ class SpotifyWebAPI
      * - int limit Optional. Limit the number of tracks.
      * - int offset Optional. Number of tracks to skip.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+     * - string|array additional_types Optional. Types of media to return info about.
      *
      * @return array|object The tracks in the playlist. Type is controlled by the `return_assoc` option.
      */
@@ -1320,6 +1326,10 @@ class SpotifyWebAPI
 
         if (isset($options['fields'])) {
             $options['fields'] = $this->toCommaString($options['fields']);
+        }
+
+        if (isset($options['additional_types'])) {
+            $options['additional_types'] = $this->toCommaString($options['additional_types']);
         }
 
         $playlistId = $this->uriToId($playlistId, 'playlist');
