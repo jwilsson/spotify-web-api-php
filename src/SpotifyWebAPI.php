@@ -755,7 +755,7 @@ class SpotifyWebAPI
      *
      * @param string $artistId ID or URI of the artist.
      * @param array|object $options Optional. Options for the albums.
-     * - string country Optional. Limit the results to items that are playable in this country, for example SE.
+     * - string market Optional. Limit the results to items that are playable in this country, for example SE.
      * - string|array include_groups Optional. Album types to return. If omitted, all album types will be returned.
      * - int limit Optional. Limit the number of albums.
      * - int offset Optional. Number of albums to skip.
@@ -784,7 +784,7 @@ class SpotifyWebAPI
      *
      * @param string $artistId ID or URI of the artist.
      * @param array|object $options Options for the tracks.
-     * - string country Required. ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
+     * - string market Required. An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
      *
      * @return array|object The artist's top tracks. Type is controlled by the `return_assoc` option.
      */
