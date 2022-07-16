@@ -189,7 +189,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/add-t
 * `$playlistId` **string** - ID of the playlist to add tracks to.
 * `$tracks` **string\|array** - Track IDs, track URIs, and episode URIs to add.
 * `$options` **array\|object** - Optional. Options for the new tracks.
-    * int position Optional. Zero-based track position in playlist. Tracks will be appened if omitted or false.
+    * int position Optional. Zero-based track position in playlist. Tracks will be appended if omitted or false.
 
 #### Return values
 * **string\|bool** A new snapshot ID or false if the tracks weren't successfully added.
@@ -246,6 +246,8 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/creat
 #### Arguments
 * `$options` **array\|object** - Options for the new playlist.
     * string name Required. Name of the playlist.
+    * bool collaborative Optional. Whether the playlist should be collaborative or not.
+    * string description Optional. Description of the playlist.
     * bool public Optional. Whether the playlist should be public or not.
 
 #### Return values
@@ -541,7 +543,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a
 #### Arguments
 * `$artistId` **string** - ID or URI of the artist.
 * `$options` **array\|object** - Options for the tracks.
-    * string $country Required. An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
+    * string country Required. An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
 
 #### Return values
 * **array\|object** The artist's top tracks. Type is controlled by the `return_assoc` option.
@@ -776,7 +778,7 @@ SpotifyWebAPI::getMyCurrentTrack($options)
 ```
 
 Get the current user’s currently playing track.<br>
-https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recently-played
+https://developer.spotify.com/documentation/web-api/reference/#/operations/get-the-users-currently-playing-track
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the track.
@@ -848,7 +850,7 @@ SpotifyWebAPI::getMyRecentTracks($options)
 ```
 
 Get the current user’s recently played tracks.<br>
-https://developer.spotify.com/documentation/web-api/reference/#/operations/get-the-users-currently-playing-track
+https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recently-played
 
 #### Arguments
 * `$options` **array\|object** - Optional. Options for the tracks.
@@ -995,6 +997,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-p
 * `$options` **array\|object** - Optional. Options for the playlist.
     * string\|array fields Optional. A list of fields to return. See Spotify docs for more info.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+    * string\|array additional_types Optional. Types of media to return info about.
 
 #### Return values
 * **array\|object** The user's playlist. Type is controlled by the `return_assoc` option.
@@ -1034,6 +1037,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-p
     * int limit Optional. Limit the number of tracks.
     * int offset Optional. Number of tracks to skip.
     * string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+    * string\|array additional_types Optional. Types of media to return info about.
 
 #### Return values
 * **array\|object** The tracks in the playlist. Type is controlled by the `return_assoc` option.
@@ -1291,7 +1295,7 @@ Check if shows are saved in the current user's Spotify library.<br>
 https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-shows
 
 #### Arguments
-* `$shows` **mixed**
+* `$shows` **string\|array** - Show IDs or URIs to check for.
 
 #### Return values
 * **array** Whether each show is saved.
@@ -1308,7 +1312,7 @@ Check if tracks are saved in the current user's Spotify library.<br>
 https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-tracks
 
 #### Arguments
-* `$tracks` **mixed**
+* `$tracks` **string\|array** - Track IDs or URIs to check for.
 
 #### Return values
 * **array** Whether each track is saved.
@@ -1481,6 +1485,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/searc
     * string market Optional. Limit the results to items that are playable in this market, for example SE.
     * int limit Optional. Limit the number of items.
     * int offset Optional. Number of items to skip.
+    * string include_external Optional. Whether or not to mark externally hosted content as playable.
 
 #### Return values
 * **array\|object** The search results. Type is controlled by the `return_assoc` option.
@@ -1518,7 +1523,7 @@ Set the access token to use.
 * `$accessToken` **string** - The access token.
 
 #### Return values
-* **void** 
+* **void**
 
 ---
 ### setOptions
@@ -1534,7 +1539,7 @@ Set options
 * `$options` **array\|object** - Options to set.
 
 #### Return values
-* **void** 
+* **void**
 
 ---
 ### setSession
@@ -1550,7 +1555,7 @@ Set the Session object to use.
 * `$session` **\SpotifyWebAPI\Session** - The Session object.
 
 #### Return values
-* **void** 
+* **void**
 
 ---
 ### shuffle
@@ -1620,10 +1625,10 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/chang
 #### Arguments
 * `$playlistId` **string** - ID or URI of the playlist to update.
 * `$options` **array\|object** - Options for the playlist.
-    * collaborative bool Optional. Whether the playlist should be collaborative or not.
-    * description string Optional. Description of the playlist.
-    * name string Optional. Name of the playlist.
-    * public bool Optional. Whether the playlist should be public or not.
+    * bool collaborative Optional. Whether the playlist should be collaborative or not.
+    * string description Optional. Description of the playlist.
+    * string name Optional. Name of the playlist.
+    * bool public Optional. Whether the playlist should be public or not.
 
 #### Return values
 * **bool** Whether the playlist was successfully updated.

@@ -282,7 +282,7 @@ class SpotifyWebAPI
      * @param string $playlistId ID of the playlist to add tracks to.
      * @param string|array $tracks Track IDs, track URIs, and episode URIs to add.
      * @param array|object $options Optional. Options for the new tracks.
-     * - int position Optional. Zero-based track position in playlist. Tracks will be appened if omitted or false.
+     * - int position Optional. Zero-based track position in playlist. Tracks will be appended if omitted or false.
      *
      * @return string|bool A new snapshot ID or false if the tracks weren't successfully added.
      */
@@ -364,6 +364,8 @@ class SpotifyWebAPI
      *
      * @param array|object $options Options for the new playlist.
      * - string name Required. Name of the playlist.
+     * - bool collaborative Optional. Whether the playlist should be collaborative or not.
+     * - string description Optional. Description of the playlist.
      * - bool public Optional. Whether the playlist should be public or not.
      *
      * @return array|object The new playlist. Type is controlled by the `return_assoc` option.
@@ -775,7 +777,7 @@ class SpotifyWebAPI
      *
      * @param string $artistId ID or URI of the artist.
      * @param array|object $options Options for the tracks.
-     * - string $country Required. An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
+     * - string country Required. An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
      *
      * @return array|object The artist's top tracks. Type is controlled by the `return_assoc` option.
      */
@@ -1033,7 +1035,7 @@ class SpotifyWebAPI
 
     /**
      * Get the current user’s currently playing track.
-     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recently-played
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-the-users-currently-playing-track
      *
      * @param array|object $options Optional. Options for the track.
      * - string market Optional. An ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
@@ -1116,7 +1118,7 @@ class SpotifyWebAPI
 
     /**
       * Get the current user’s recently played tracks.
-      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-the-users-currently-playing-track
+      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recently-played
       *
       * @param array|object $options Optional. Options for the tracks.
       * - int limit Optional. Number of tracks to return.
@@ -1625,7 +1627,7 @@ class SpotifyWebAPI
      * Check if shows are saved in the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-shows
      *
-     * @param string|array $albums Show IDs or URIs to check for.
+     * @param string|array $shows Show IDs or URIs to check for.
      *
      * @return array Whether each show is saved.
      */
@@ -1649,7 +1651,7 @@ class SpotifyWebAPI
      * Check if tracks are saved in the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-tracks
      *
-     * @param string|array $albums Track IDs or URIs to check for.
+     * @param string|array $tracks Track IDs or URIs to check for.
      *
      * @return array Whether each track is saved.
      */
@@ -1882,6 +1884,7 @@ class SpotifyWebAPI
      * - string market Optional. Limit the results to items that are playable in this market, for example SE.
      * - int limit Optional. Limit the number of items.
      * - int offset Optional. Number of items to skip.
+     * - string include_external Optional. Whether or not to mark externally hosted content as playable.
      *
      * @return array|object The search results. Type is controlled by the `return_assoc` option.
      */
@@ -2035,10 +2038,10 @@ class SpotifyWebAPI
      *
      * @param string $playlistId ID or URI of the playlist to update.
      * @param array|object $options Options for the playlist.
-     * - collaborative bool Optional. Whether the playlist should be collaborative or not.
-     * - description string Optional. Description of the playlist.
-     * - name string Optional. Name of the playlist.
-     * - public bool Optional. Whether the playlist should be public or not.
+     * - bool collaborative Optional. Whether the playlist should be collaborative or not.
+     * - string description Optional. Description of the playlist.
+     * - string name Optional. Name of the playlist.
+     * - bool public Optional. Whether the playlist should be public or not.
      *
      * @return bool Whether the playlist was successfully updated.
      */

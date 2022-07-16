@@ -1,4 +1,8 @@
 # Changelog
+## 5.2.0 (2022-07-16)
+* Added `additional_types` option support to `SpotifyWebAPI::getPlaylist()` and `SpotifyWebAPI::getPlaylistTracks()`. ([9c3d117](https://github.com/jwilsson/spotify-web-api-php/commit/9c3d117a1c4cc86b0fe5ae7f84d490d2bf8d5758))
+* Updated inline docs with missing options on multiple methods. ([719ff7c](https://github.com/jwilsson/spotify-web-api-php/commit/719ff7c54044d980d6ffe545c25108d27b592cb6))
+
 ## 5.1.0 (2022-07-04)
 * The deprecated way of passing arrays to `SpotifyWebAPI::getAudioFeatures()` will now print run time warnings. ([a5071b0](https://github.com/jwilsson/spotify-web-api-php/commit/a5071b023da105c8628873d564c28f3013533936))
 * Replaced legacy `CURLINFO_HTTP_CODE` with `CURLINFO_RESPONSE_CODE` ([cdefdee](https://github.com/jwilsson/spotify-web-api-php/commit/cdefdee8dfadccb0735cc6756daca02d9809e58a))

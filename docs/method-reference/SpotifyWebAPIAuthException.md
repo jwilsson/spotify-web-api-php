@@ -51,7 +51,7 @@ Returns whether the exception was thrown because of an invalid refresh token.
 SpotifyWebAPIAuthException::getReason()
 ```
 
-Returns the reason string from the request's error object.
+Returns the reason string from a player request's error object.
 
 
 #### Return values

@@ -18,7 +18,7 @@
 SpotifyWebAPIException::getReason()
 ```
 
-Returns the reason string from the request's error object.
+Returns the reason string from a player request's error object.
 
 
 #### Return values
