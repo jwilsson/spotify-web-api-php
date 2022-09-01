@@ -1161,6 +1161,23 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertObjectHasAttribute('items', $response);
     }
 
+    public function testGetMyQueue()
+    {
+        $return = ['body' => get_fixture('my-queue')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/me/player/queue',
+            [],
+            [],
+            $return
+        );
+
+        $response = $api->getMyQueue();
+
+        $this->assertObjectHasAttribute('currently_playing', $response);
+        $this->assertObjectHasAttribute('queue', $response);
+    }
+
     public function testGetMyRecentTracks()
     {
         $options = ['limit' => '2'];
