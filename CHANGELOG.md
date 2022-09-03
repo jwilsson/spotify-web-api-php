@@ -1,4 +1,8 @@
 # Changelog
+## 5.3.0 (2022-09-03)
+* Added the `SpotifyWebAPI::getMyQueue()` method to get the current user's queue. ([710b70d](https://github.com/jwilsson/spotify-web-api-php/commit/710b70d13ce9ffabc3e01cfff847fdb1067111bf))
+* Updated CA bundle. ([7e4994b](https://github.com/jwilsson/spotify-web-api-php/commit/7e4994bf9ebc6c1efa22414a63068309c0cd5abe))
+
 ## 5.2.0 (2022-07-16)
 * Added `additional_types` option support to `SpotifyWebAPI::getPlaylist()` and `SpotifyWebAPI::getPlaylistTracks()`. ([9c3d117](https://github.com/jwilsson/spotify-web-api-php/commit/9c3d117a1c4cc86b0fe5ae7f84d490d2bf8d5758))
 * Updated inline docs with missing options on multiple methods. ([7b49453](https://github.com/jwilsson/spotify-web-api-php/commit/7b49453c412901bb78bda370e58098779a31d679))
