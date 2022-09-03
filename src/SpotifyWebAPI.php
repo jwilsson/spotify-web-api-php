@@ -1118,9 +1118,10 @@ class SpotifyWebAPI
 
     /**
      * Get the current user’s queue.
+     *
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-queue
      *
-     * @return object The user's currently playing song and queue.
+     * @return array|object The currently playing song and queue. Type is controlled by the `return_assoc` option.
      */
     public function getMyQueue()
     {

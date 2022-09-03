@@ -40,6 +40,11 @@ $api->next();
 $api->queue('TRACK_ID');
 ```
 
+## Get info about the queue
+```php
+$api->getMyQueue();
+```
+
 ## Get the currently playing track
 ```php
 $api->getMyCurrentTrack();

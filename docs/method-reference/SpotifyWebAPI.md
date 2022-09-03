@@ -853,12 +853,9 @@ SpotifyWebAPI::getMyQueue()
 Get the current user’s queue.<br>
 https://developer.spotify.com/documentation/web-api/reference/#/operations/get-queue
 
-#### Arguments
-* None
 
 #### Return values
-* `currently_playing` **object** The user's currently playing track
-* `queue` **array\|object**  The tracks or episodes in the queue. Can be empty. 
+* **array\|object** The currently playing song and queue. Type is controlled by the `return_assoc` option.
 
 ---
 ### getMyRecentTracks
@@ -1542,7 +1539,7 @@ Set the access token to use.
 * `$accessToken` **string** - The access token.
 
 #### Return values
-* **void**
+* **void** 
 
 ---
 ### setOptions
@@ -1558,7 +1555,7 @@ Set options
 * `$options` **array\|object** - Options to set.
 
 #### Return values
-* **void**
+* **void** 
 
 ---
 ### setSession
@@ -1574,7 +1571,7 @@ Set the Session object to use.
 * `$session` **\SpotifyWebAPI\Session** - The Session object.
 
 #### Return values
-* **void**
+* **void** 
 
 ---
 ### shuffle
