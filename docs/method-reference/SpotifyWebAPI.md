@@ -42,6 +42,7 @@
 * [getMyDevices](#getmydevices)
 * [getMyCurrentPlaybackInfo](#getmycurrentplaybackinfo)
 * [getMyPlaylists](#getmyplaylists)
+* [getMyQueue](#getmyqueue)
 * [getMyRecentTracks](#getmyrecenttracks)
 * [getMySavedAlbums](#getmysavedalbums)
 * [getMySavedEpisodes](#getmysavedepisodes)
@@ -840,6 +841,24 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a
 
 #### Return values
 * **array\|object** The user's playlists. Type is controlled by the `return_assoc` option.
+
+---
+### getMyQueue
+
+
+```php
+SpotifyWebAPI::getMyQueue()
+```
+
+Get the current user’s queue.<br>
+https://developer.spotify.com/documentation/web-api/reference/#/operations/get-queue
+
+#### Arguments
+* None
+
+#### Return values
+* `currently_playing` **object** The user's currently playing track
+* `queue` **array\|object**  The tracks or episodes in the queue. Can be empty. 
 
 ---
 ### getMyRecentTracks

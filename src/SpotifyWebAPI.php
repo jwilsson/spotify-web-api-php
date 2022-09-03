@@ -1117,6 +1117,21 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the current user’s queue.
+     * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-queue
+     *
+     * @return object The user's currently playing song and queue.
+     */
+    public function getMyQueue()
+    {
+        $uri = '/v1/me/player/queue';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri, []);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
       * Get the current user’s recently played tracks.
       * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recently-played
       *
