@@ -1,4 +1,12 @@
 # Changelog
+## 5.4.0 (2022-10-16)
+* Added methods to get info about audiobooks: ([f79b95e](https://github.com/jwilsson/spotify-web-api-php/commit/f79b95ec511e5c940d69569614d198082b7b8ad4)):
+    * `SpotifyWebAPI::getAudiobook()`
+    * `SpotifyWebAPI::getAudiobooks()`
+    * `SpotifyWebAPI::getChapter()`
+    * `SpotifyWebAPI::getChapters()`
+* Updated CA bundle. ([987e99a](https://github.com/jwilsson/spotify-web-api-php/commit/987e99a865fe1863b38ab631c354a7b430c77338))
+
 ## 5.3.0 (2022-09-03)
 * Added the `SpotifyWebAPI::getMyQueue()` method to get the current user's queue. ([710b70d](https://github.com/jwilsson/spotify-web-api-php/commit/710b70d13ce9ffabc3e01cfff847fdb1067111bf))
 * Updated CA bundle. ([7e4994b](https://github.com/jwilsson/spotify-web-api-php/commit/7e4994bf9ebc6c1efa22414a63068309c0cd5abe))
