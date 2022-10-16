@@ -809,6 +809,47 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $this->assertObjectHasAttribute('audio_analysis', $response);
     }
 
+    public function testGetAudiobook()
+    {
+        $return = ['body' => get_fixture('audiobook')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/audiobooks/6QYoIxxar5q4AfdTOGsZqE',
+            [],
+            [],
+            $return
+        );
+
+        $response = $api->getAudiobook('spotify:show:6QYoIxxar5q4AfdTOGsZqE');
+
+        $this->assertObjectHasAttribute('id', $response);
+    }
+
+    public function testGetAudiobooks()
+    {
+        $audiobooks = [
+            '6QYoIxxar5q4AfdTOGsZqE',
+            'spotify:show:4VqPOruhp5EdPBeR92t6lQ',
+        ];
+
+        $expected = [
+            'ids' => '6QYoIxxar5q4AfdTOGsZqE,4VqPOruhp5EdPBeR92t6lQ',
+        ];
+
+        $return = ['body' => get_fixture('audiobooks')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/audiobooks/',
+            $expected,
+            [],
+            $return
+        );
+
+        $response = $api->getAudiobooks($audiobooks);
+
+        $this->assertObjectHasAttribute('audiobooks', $response);
+    }
+
     public function testGetAudioFeatures()
     {
         $track = '0eGsygTp906u18L0Oimnem';
@@ -922,6 +963,47 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $response = $api->getCategoryPlaylists('party', $options);
 
         $this->assertObjectHasAttribute('playlists', $response);
+    }
+
+    public function testGetChapter()
+    {
+        $return = ['body' => get_fixture('chapter')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/chapters/2IEBhnu61ieYGFRPEJIO40',
+            [],
+            [],
+            $return
+        );
+
+        $response = $api->getChapter('spotify:episode:2IEBhnu61ieYGFRPEJIO40');
+
+        $this->assertObjectHasAttribute('id', $response);
+    }
+
+    public function testGetChapters()
+    {
+        $chapters = [
+            '2IEBhnu61ieYGFRPEJIO40',
+            'spotify:episode:7ouMYWpwJ422jRcDASZB7P',
+        ];
+
+        $expected = [
+            'ids' => '2IEBhnu61ieYGFRPEJIO40,7ouMYWpwJ422jRcDASZB7P',
+        ];
+
+        $return = ['body' => get_fixture('chapters')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/chapters/',
+            $expected,
+            [],
+            $return
+        );
+
+        $response = $api->getChapters($chapters);
+
+        $this->assertObjectHasAttribute('chapters', $response);
     }
 
     public function testGetEpisode()
