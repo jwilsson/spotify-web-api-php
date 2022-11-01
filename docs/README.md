@@ -11,11 +11,11 @@ First, start by checking out the [Getting started guide](/docs/getting-started.m
     * [Refreshing access tokens](/docs/examples/refreshing-access-tokens.md)
     * [Working with scopes](/docs/examples/working-with-scopes.md)
 * **Fetching data**
-    * [Fetching information about artists](/docs/examples/fetching-artist-information.md)
     * [Fetching information about albums](/docs/examples/fetching-album-information.md)
-    * [Fetching information about tracks](/docs/examples/fetching-track-information.md)
-    * [Fetching information about podcasts](/docs/examples/fetching-podcast-information.md)
+    * [Fetching information about artists](/docs/examples/fetching-artist-information.md)
     * [Fetching information about audiobooks](/docs/examples/fetching-audiobook-information.md)
+    * [Fetching information about podcasts](/docs/examples/fetching-podcast-information.md)
+    * [Fetching information about tracks](/docs/examples/fetching-track-information.md)
     * [Fetching Spotify featured content](/docs/examples/fetching-spotify-featured-content.md)
     * [Searching the Spotify catalog](/docs/examples/searching-the-spotify-catalog.md)
 * **Managing users**
