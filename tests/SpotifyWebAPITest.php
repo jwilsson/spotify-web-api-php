@@ -614,6 +614,27 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         ));
     }
 
+    public function testFollowPlaylistFor()
+    {
+        $options = ['public' => false];
+        $expected = json_encode($options);
+
+        $headers = ['Content-Type' => 'application/json'];
+        $return = ['status' => 200];
+        $api = $this->setupApi(
+            'PUT',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $this->assertTrue($api->followPlaylist(
+            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+            $options
+        ));
+    }
+
     public function testGetAlbum()
     {
         $options = ['market' => 'SE'];
@@ -1695,12 +1716,14 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
     public function testGetPlaylistTracks()
     {
         $options = [
+            'additional_types' => ['track', 'episode'],
             'fields' => ['id', 'uri'],
             'limit' => 10,
             'market' => 'SE',
         ];
 
         $expected = [
+            'additional_types' => 'track,episode',
             'fields' => 'id,uri',
             'limit' => 10,
             'market' => 'SE',
@@ -2133,6 +2156,24 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $api->unFollowArtistsOrUsers(
                 'artist',
                 ['74ASZWbe4lXaubB36ztrGX', 'spotify:artist:36QJpDe2go2KgaRleHCDTp']
+            )
+        );
+    }
+
+    public function testUnfollowPlaylist()
+    {
+        $return = ['status' => 200];
+        $api = $this->setupApi(
+            'DELETE',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers',
+            [],
+            [],
+            $return
+        );
+
+        $this->assertTrue(
+            $api->unfollowPlaylist(
+                'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9'
             )
         );
     }
