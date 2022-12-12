@@ -575,7 +575,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a
 
 
 ```php
-SpotifyWebAPI::getAudiobook($audiobookId)
+SpotifyWebAPI::getAudiobook($audiobookId, $options)
 ```
 
 Get an audiobook.<br>
@@ -583,6 +583,8 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a
 
 #### Arguments
 * `$audiobookId` **string** - ID or URI of the audiobook.
+* `$options` **array\|object** - Optional. Options for the audiobook.
+    * string market Optional. ISO 3166-1 alpha-2 country code, limit results to audiobooks available in that market.
 
 #### Return values
 * **array\|object** The requested audiobook. Type is controlled by the `return_assoc` option.
@@ -592,7 +594,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a
 
 
 ```php
-SpotifyWebAPI::getAudiobooks($audiobookIds)
+SpotifyWebAPI::getAudiobooks($audiobookIds, $options)
 ```
 
 Get multiple audiobooks.<br>
@@ -600,6 +602,8 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-m
 
 #### Arguments
 * `$audiobookIds` **array** - IDs or URIs of the audiobooks.
+* `$options` **array\|object** - Optional. Options for the audiobooks.
+    * string market Optional. ISO 3166-1 alpha-2 country code, limit results to audiobooks available in that market.
 
 #### Return values
 * **array\|object** The requested audiobooks. Type is controlled by the `return_assoc` option.
@@ -1204,7 +1208,7 @@ Get a show's episodes.<br>
 https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a-shows-episodes
 
 #### Arguments
-* `$showId` **mixed**
+* `$showId` **string** - ID or URI of the album.
 * `$options` **array\|object** - Optional. Options for the episodes.
     * int limit Optional. Limit the number of episodes.
     * int offset Optional. Number of episodes to skip.
