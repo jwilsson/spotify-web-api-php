@@ -832,22 +832,26 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
     public function testGetAudiobook()
     {
+        $options = ['market' => 'SE'];
+        $expected = ['market' => 'SE'];
+
         $return = ['body' => get_fixture('audiobook')];
         $api = $this->setupApi(
             'GET',
             '/v1/audiobooks/6QYoIxxar5q4AfdTOGsZqE',
-            [],
+            $expected,
             [],
             $return
         );
 
-        $response = $api->getAudiobook('spotify:show:6QYoIxxar5q4AfdTOGsZqE');
+        $response = $api->getAudiobook('spotify:show:6QYoIxxar5q4AfdTOGsZqE', $options);
 
         $this->assertObjectHasAttribute('id', $response);
     }
 
     public function testGetAudiobooks()
     {
+        $options = ['market' => 'SE'];
         $audiobooks = [
             '6QYoIxxar5q4AfdTOGsZqE',
             'spotify:show:4VqPOruhp5EdPBeR92t6lQ',
@@ -855,6 +859,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $expected = [
             'ids' => '6QYoIxxar5q4AfdTOGsZqE,4VqPOruhp5EdPBeR92t6lQ',
+            'market' => 'SE',
         ];
 
         $return = ['body' => get_fixture('audiobooks')];
@@ -866,7 +871,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $response = $api->getAudiobooks($audiobooks);
+        $response = $api->getAudiobooks($audiobooks, $options);
 
         $this->assertObjectHasAttribute('audiobooks', $response);
     }

@@ -813,12 +813,12 @@ class SpotifyWebAPI
      *
      * @return array|object The requested audiobook. Type is controlled by the `return_assoc` option.
      */
-    public function getAudiobook($audiobookId)
+    public function getAudiobook($audiobookId, $options = [])
     {
         $audiobookId = $this->uriToId($audiobookId, 'show');
         $uri = '/v1/audiobooks/' . $audiobookId;
 
-        $this->lastResponse = $this->sendRequest('GET', $uri);
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
     }
@@ -833,14 +833,14 @@ class SpotifyWebAPI
      *
      * @return array|object The requested audiobooks. Type is controlled by the `return_assoc` option.
      */
-    public function getAudiobooks($audiobookIds)
+    public function getAudiobooks($audiobookIds, $options = [])
     {
         $audiobookIds = $this->uriToId($audiobookIds, 'show');
         $audiobookIds = $this->toCommaString($audiobookIds);
 
-        $options = [
-            'ids' => $audiobookIds,
-        ];
+        $options = array_merge((array) $options, [
+            'ids' => $this->toCommaString($audiobookIds),
+        ]);
 
         $uri = '/v1/audiobooks/';
 
