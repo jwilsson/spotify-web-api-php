@@ -1,4 +1,7 @@
 # Changelog
+## 5.5.0 (2022-12-12)
+* Added missiing `$options` argument to `SpotifyWebAPI::getAudiobook()` and `SpotifyWebAPI::getAudiobooks()` methods. ([12293f1](https://github.com/jwilsson/spotify-web-api-php/commit/12293f137255188e42d238427cae3ed78e08d904))
+
 ## 5.4.0 (2022-10-16)
 * Added methods to get info about audiobooks: ([f79b95e](https://github.com/jwilsson/spotify-web-api-php/commit/f79b95ec511e5c940d69569614d198082b7b8ad4)):
     * `SpotifyWebAPI::getAudiobook()`
