@@ -141,7 +141,7 @@ class SpotifyWebAPI
     /**
      * Convert an array to a comma-separated string. If it's already a string, do nothing.
      *
-     * @param array|string The value to convert.
+     * @param array|string $value The value to convert.
      *
      * @return string A comma-separated string.
      */
@@ -1510,7 +1510,7 @@ class SpotifyWebAPI
      * Get a show's episodes.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a-shows-episodes
      *
-     * @param string $albumId ID or URI of the album.
+     * @param string $showId ID or URI of the album.
      * @param array|object $options Optional. Options for the episodes.
      * - int limit Optional. Limit the number of episodes.
      * - int offset Optional. Number of episodes to skip.
