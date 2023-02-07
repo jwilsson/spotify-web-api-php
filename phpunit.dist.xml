@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+  backupGlobals="false"
+  backupStaticProperties="false"
+  bootstrap="./phpunit.php"
+  cacheDirectory=".phpunit.cache"
+  cacheResult="false"
+  colors="true"
+  processIsolation="false"
+  stopOnFailure="false"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.2/phpunit.xsd"
+>
+  <coverage>
+    <report>
+      <clover outputFile="build/logs/clover.xml"/>
+      <html outputDirectory="build/logs/html"/>
+      <text outputFile="php://stdout"/>
+    </report>
+  </coverage>
+
+  <testsuites>
+    <testsuite name="Spotify Web API Test Suite">
+      <directory>./tests/</directory>
+    </testsuite>
+  </testsuites>
+
+  <source>
+    <include>
+      <directory>./src/</directory>
+    </include>
+  </source>
+</phpunit>

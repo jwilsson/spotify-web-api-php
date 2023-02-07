@@ -6,16 +6,18 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 {
     private $accessToken = 'access_token';
 
-    private function setupStub(
+    private function setupRequestMock(
         string $expectedMethod,
         string $expectedUri,
         string|array $expectedParameters,
         array $expectedHeaders,
         mixed $expectedReturn
     ) {
-        $stub = $this->createPartialMock(SpotifyWebAPI\Request::class, ['api', 'getLastResponse']);
+        $requestMock = $this->createConfiguredMock(SpotifyWebAPI\Request::class, [
+            'getLastResponse' => $expectedReturn,
+        ]);
 
-        $stub->expects($this->any())
+        $requestMock->expects($this->any())
             ->method('api')
             ->with(
                 $this->equalTo($expectedMethod),
@@ -25,24 +27,15 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             )
             ->willReturn($expectedReturn);
 
-        $stub->expects($this->any())
-                ->method('getLastResponse')
-                ->willReturn($expectedReturn);
-
-        return $stub;
+        return $requestMock;
     }
 
-    private function setupSessionStub()
+    private function setupSessionMock()
     {
-        $stub = $this->createPartialMock(SpotifyWebAPI\Session::class, ['getAccessToken', 'refreshAccessToken']);
-
-        $stub->method('getAccessToken')
-            ->willReturn($this->accessToken);
-
-        $stub->method('refreshAccessToken')
-            ->willReturn(true);
-
-        return $stub;
+        return $this->createConfiguredMock(SpotifyWebAPI\Session::class, [
+            'getAccessToken' => $this->accessToken,
+            'refreshAccessToken' => true,
+        ]);
     }
 
     private function setupApi(
@@ -52,7 +45,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         array $expectedHeaders,
         mixed $expectedReturn
     ) {
-        $stub = $this->setupStub(
+        $requestMock = $this->setupRequestMock(
             $expectedMethod,
             $expectedUri,
             $expectedParameters,
@@ -60,7 +53,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $expectedReturn
         );
 
-        return new SpotifyWebAPI\SpotifyWebAPI([], null, $stub);
+        return new SpotifyWebAPI\SpotifyWebAPI([], null, $requestMock);
     }
 
     public function testAutoRefreshOption()
@@ -69,8 +62,9 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $headers = ['Authorization' => 'Bearer ' . $this->accessToken];
         $return = ['body' => get_fixture('track')];
-        $sessionStub = $this->setupSessionStub();
-        $stub = $this->setupStub(
+
+        $sessionMock = $this->setupSessionMock();
+        $requestMock = $this->setupRequestMock(
             'GET',
             '/v1/tracks/0eGsygTp906u18L0Oimnem',
             [],
@@ -78,7 +72,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $stub->method('api')
+        $requestMock->method('api')
             ->will(
                 $this->onConsecutiveCalls(
                     $this->throwException(
@@ -88,10 +82,10 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
                 )
             );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($options, $sessionStub, $stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI($options, $sessionMock, $requestMock);
         $response = $api->getTrack('0eGsygTp906u18L0Oimnem');
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testAutoRetryOption()
@@ -107,7 +101,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             'status' => 429,
         ];
 
-        $stub = $this->setupStub(
+        $requestMock = $this->setupRequestMock(
             'GET',
             '/v1/tracks/0eGsygTp906u18L0Oimnem',
             [],
@@ -115,7 +109,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $stub->method('api')
+        $requestMock->method('api')
             ->will(
                 $this->onConsecutiveCalls(
                     $this->throwException(
@@ -125,12 +119,12 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
                 )
             );
 
-        $api = new SpotifyWebAPI\SpotifyWebAPI($options, null, $stub);
+        $api = new SpotifyWebAPI\SpotifyWebAPI($options, null, $requestMock);
         $api->setAccessToken($this->accessToken);
 
         $response = $api->getTrack('0eGsygTp906u18L0Oimnem');
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testAddMyAlbums()
@@ -348,7 +342,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->createPlaylist($userId, $options);
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testCreatePlaylistDeprecatedOptions()
@@ -372,7 +366,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->createPlaylist($options);
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testCurrentUserFollows()
@@ -686,7 +680,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getAlbum('spotify:album:7u6zL7kqpgLPISZYXNTgYk', $options);
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testGetAlbums()
@@ -716,7 +710,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getAlbums($albums, $options);
 
-        $this->assertObjectHasAttribute('albums', $response);
+        $this->assertObjectHasProperty('albums', $response);
     }
 
     public function testGetAlbumTracks()
@@ -742,7 +736,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getAlbumTracks('spotify:album:1oR3KrPIp4CbagPa3PhtPp', $options);
 
-        $this->assertObjectHasAttribute('items', $response);
+        $this->assertObjectHasProperty('items', $response);
     }
 
     public function testGetArtist()
@@ -758,7 +752,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getArtist('spotify:artist:36QJpDe2go2KgaRleHCDTp');
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testGetArtistRelatedArtists()
@@ -774,7 +768,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getArtistRelatedArtists('spotify:artist:36QJpDe2go2KgaRleHCDTp');
 
-        $this->assertObjectHasAttribute('artists', $response);
+        $this->assertObjectHasProperty('artists', $response);
     }
 
     public function testGetArtists()
@@ -799,7 +793,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getArtists($artists);
 
-        $this->assertObjectHasAttribute('artists', $response);
+        $this->assertObjectHasProperty('artists', $response);
     }
 
     public function testGetArtistAlbums()
@@ -827,7 +821,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getArtistAlbums('spotify:artist:36QJpDe2go2KgaRleHCDTp', $options);
 
-        $this->assertObjectHasAttribute('items', $response);
+        $this->assertObjectHasProperty('items', $response);
     }
 
     public function testGetArtistTopTracks()
@@ -846,7 +840,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getArtistTopTracks('spotify:artist:36QJpDe2go2KgaRleHCDTp', $options);
 
-        $this->assertObjectHasAttribute('tracks', $response);
+        $this->assertObjectHasProperty('tracks', $response);
     }
 
     public function testGetAudioAnalysis()
@@ -862,7 +856,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getAudioAnalysis('spotify:track:0eGsygTp906u18L0Oimnem');
 
-        $this->assertObjectHasAttribute('audio_analysis', $response);
+        $this->assertObjectHasProperty('audio_analysis', $response);
     }
 
     public function testGetAudiobook()
@@ -881,7 +875,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getAudiobook('spotify:show:6QYoIxxar5q4AfdTOGsZqE', $options);
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testGetAudiobooks()
@@ -908,7 +902,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getAudiobooks($audiobooks, $options);
 
-        $this->assertObjectHasAttribute('audiobooks', $response);
+        $this->assertObjectHasProperty('audiobooks', $response);
     }
 
     public function testGetAudioFeatures()
@@ -926,7 +920,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getAudioFeatures($track);
 
-        $this->assertObjectHasAttribute('danceability', $response);
+        $this->assertObjectHasProperty('danceability', $response);
     }
 
     public function testGetCategoriesList()
@@ -952,7 +946,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getCategoriesList($options);
 
-        $this->assertObjectHasAttribute('categories', $response);
+        $this->assertObjectHasProperty('categories', $response);
     }
 
     public function testGetCategory()
@@ -973,7 +967,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getCategory('party', $options);
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testGetCategoryPlaylists()
@@ -999,7 +993,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getCategoryPlaylists('party', $options);
 
-        $this->assertObjectHasAttribute('playlists', $response);
+        $this->assertObjectHasProperty('playlists', $response);
     }
 
     public function testGetChapter()
@@ -1015,7 +1009,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getChapter('spotify:episode:2IEBhnu61ieYGFRPEJIO40');
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testGetChapters()
@@ -1040,7 +1034,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getChapters($chapters);
 
-        $this->assertObjectHasAttribute('chapters', $response);
+        $this->assertObjectHasProperty('chapters', $response);
     }
 
     public function testGetEpisode()
@@ -1059,7 +1053,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getEpisode('spotify:episode:38bS44xjbVVZ3No3ByF1dJ', $options);
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testGetEpisodes()
@@ -1089,7 +1083,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getEpisodes($episodes, $options);
 
-        $this->assertObjectHasAttribute('episodes', $response);
+        $this->assertObjectHasProperty('episodes', $response);
     }
 
     public function testGetFeaturedPlaylists()
@@ -1115,7 +1109,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getFeaturedPlaylists($options);
 
-        $this->assertObjectHasAttribute('playlists', $response);
+        $this->assertObjectHasProperty('playlists', $response);
     }
 
     public function testGetGenreSeeds()
@@ -1131,7 +1125,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getGenreSeeds();
 
-        $this->assertObjectHasAttribute('genres', $response);
+        $this->assertObjectHasProperty('genres', $response);
     }
 
     public function testGetLastResponse()
@@ -1165,7 +1159,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getMarkets();
 
-        $this->assertObjectHasAttribute('markets', $response);
+        $this->assertObjectHasProperty('markets', $response);
     }
 
     public function testGetMultipleAudioFeatures()
@@ -1190,7 +1184,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getMultipleAudioFeatures($tracks);
 
-        $this->assertObjectHasAttribute('audio_features', $response);
+        $this->assertObjectHasProperty('audio_features', $response);
     }
 
     public function testGetMyCurrentTrack()
@@ -1216,7 +1210,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getMyCurrentTrack($options);
 
-        $this->assertObjectHasAttribute('item', $response);
+        $this->assertObjectHasProperty('item', $response);
     }
 
     public function testGetMyDevices()
@@ -1232,7 +1226,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getMyDevices();
 
-        $this->assertObjectHasAttribute('devices', $response);
+        $this->assertObjectHasProperty('devices', $response);
     }
 
     public function testGetMyCurrentPlaybackInfo()
@@ -1258,7 +1252,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getMyCurrentPlaybackInfo($options);
 
-        $this->assertObjectHasAttribute('item', $response);
+        $this->assertObjectHasProperty('item', $response);
     }
 
     public function testGetMyPlaylists()
@@ -1277,7 +1271,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getMyPlaylists($options);
 
-        $this->assertObjectHasAttribute('items', $response);
+        $this->assertObjectHasProperty('items', $response);
     }
 
     public function testGetMyQueue()
@@ -1293,8 +1287,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getMyQueue();
 
-        $this->assertObjectHasAttribute('currently_playing', $response);
-        $this->assertObjectHasAttribute('queue', $response);
+        $this->assertObjectHasProperty('queue', $response);
     }
 
     public function testGetMyRecentTracks()
@@ -1313,7 +1306,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getMyRecentTracks($options);
 
-        $this->assertObjectHasAttribute('items', $response);
+        $this->assertObjectHasProperty('items', $response);
     }
 
     public function testGetMySavedAlbums()
@@ -1339,7 +1332,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getMySavedAlbums($options);
 
-        $this->assertObjectHasAttribute('items', $response);
+        $this->assertObjectHasProperty('items', $response);
     }
 
     public function testGetMySavedEpisodes()
@@ -1365,7 +1358,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getMySavedEpisodes($options);
 
-        $this->assertObjectHasAttribute('items', $response);
+        $this->assertObjectHasProperty('items', $response);
     }
 
     public function testGetMySavedShows()
@@ -1384,7 +1377,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getMySavedShows($options);
 
-        $this->assertObjectHasAttribute('items', $response);
+        $this->assertObjectHasProperty('items', $response);
     }
 
     public function testGetMySavedTracks()
@@ -1410,7 +1403,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getMySavedTracks($options);
 
-        $this->assertObjectHasAttribute('items', $response);
+        $this->assertObjectHasProperty('items', $response);
     }
 
     public function testGetMyTop()
@@ -1436,7 +1429,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getMyTop('artists', $options);
 
-        $this->assertObjectHasAttribute('items', $response);
+        $this->assertObjectHasProperty('items', $response);
     }
 
     public function testGetNewReleases()
@@ -1462,7 +1455,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getNewReleases($options);
 
-        $this->assertObjectHasAttribute('albums', $response);
+        $this->assertObjectHasProperty('albums', $response);
     }
 
     public function testGetRecommendations()
@@ -1488,7 +1481,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getRecommendations($options);
 
-        $this->assertObjectHasAttribute('seeds', $response);
+        $this->assertObjectHasProperty('seeds', $response);
     }
 
     public function testGetRequest()
@@ -1514,7 +1507,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getShow('spotify:show:38bS44xjbVVZ3No3ByF1dJ', $options);
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testGetShowEpisodes()
@@ -1540,7 +1533,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getShowEpisodes('spotify:show:38bS44xjbVVZ3No3ByF1dJ', $options);
 
-        $this->assertObjectHasAttribute('items', $response);
+        $this->assertObjectHasProperty('items', $response);
     }
 
     public function testGetShows()
@@ -1570,7 +1563,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getShows($shows, $options);
 
-        $this->assertObjectHasAttribute('shows', $response);
+        $this->assertObjectHasProperty('shows', $response);
     }
 
     public function testGetTrack()
@@ -1589,7 +1582,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getTrack('spotify:track:0eGsygTp906u18L0Oimnem', $options);
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testGetTracks()
@@ -1619,7 +1612,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getTracks($tracks, $options);
 
-        $this->assertObjectHasAttribute('tracks', $response);
+        $this->assertObjectHasProperty('tracks', $response);
     }
 
     public function testGetUser()
@@ -1635,7 +1628,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getUser('spotify:user:mcgurk');
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testGetUserFollowedArtists()
@@ -1660,7 +1653,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getUserFollowedArtists($options);
 
-        $this->assertObjectHasAttribute('artists', $response);
+        $this->assertObjectHasProperty('artists', $response);
     }
 
     public function testGetPlaylist()
@@ -1689,7 +1682,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $options
         );
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testGetPlaylistImage()
@@ -1707,7 +1700,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             'spotify:playlist:3cEYpjA9oz9GiPac4AsH4n'
         );
 
-        $this->assertObjectHasAttribute('url', $response);
+        $this->assertObjectHasProperty('url', $response);
     }
 
     public function testGetUserPlaylists()
@@ -1726,7 +1719,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->getUserPlaylists('spotify:user:mcgurk', $options);
 
-        $this->assertObjectHasAttribute('items', $response);
+        $this->assertObjectHasProperty('items', $response);
     }
 
     public function testGetPlaylistTracks()
@@ -1759,7 +1752,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $options
         );
 
-        $this->assertObjectHasAttribute('items', $response);
+        $this->assertObjectHasProperty('items', $response);
     }
 
     public function testMe()
@@ -1775,7 +1768,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $response = $api->me();
 
-        $this->assertObjectHasAttribute('id', $response);
+        $this->assertObjectHasProperty('id', $response);
     }
 
     public function testMyAlbumsContains()
@@ -2099,7 +2092,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $options
         );
 
-        $this->assertObjectHasAttribute('albums', $response);
+        $this->assertObjectHasProperty('albums', $response);
     }
 
     public function testSeek()
@@ -2276,20 +2269,20 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI();
         $returnedValue = $api->setAccessToken($this->accessToken);
 
-        $this->assertEquals($api, $returnedValue);
+        $this->assertSame($api, $returnedValue);
     }
 
     public function testSetOptions() {
         $api = new SpotifyWebAPI\SpotifyWebAPI();
         $returnedValue = $api->setOptions([]);
 
-        $this->assertEquals($api, $returnedValue);
+        $this->assertSame($api, $returnedValue);
     }
 
     public function testSetSession() {
         $api = new SpotifyWebAPI\SpotifyWebAPI();
-        $returnedValue = $api->setSession($this->setupSessionStub());
+        $returnedValue = $api->setSession($this->setupSessionMock());
 
-        $this->assertEquals($api, $returnedValue);
+        $this->assertSame($api, $returnedValue);
     }
 }
