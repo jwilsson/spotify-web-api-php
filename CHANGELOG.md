@@ -1,4 +1,17 @@
 # Changelog
+## 5.6.0 (2023-02-11)
+* The following setters now returns `self`: ([fe2e90f](https://github.com/jwilsson/spotify-web-api-php/commit/fe2e90f355b1c699a6e27dacb3d2771e69e00223))
+    * `Request::setOptions()`
+    * `Session::setAccessToken()`
+    * `Session::setClientId()`
+    * `Session::setClientSecret()`
+    * `Session::setRedirectUri()`
+    * `Session::setRefreshToken()`
+    * `SpotifyWebAPI::setAccessToken()`
+    * `SpotifyWebAPI::setOptions()`
+    * `SpotifyWebAPI::setSession()`
+* Updated CA bundle. ([84bf7a2](https://github.com/jwilsson/spotify-web-api-php/commit/84bf7a26b41c2ef909de6219bb772c55449e67f0))
+
 ## 5.5.0 (2022-12-12)
 * Added missiing `$options` argument to `SpotifyWebAPI::getAudiobook()` and `SpotifyWebAPI::getAudiobooks()` methods. ([12293f1](https://github.com/jwilsson/spotify-web-api-php/commit/12293f137255188e42d238427cae3ed78e08d904))
 
