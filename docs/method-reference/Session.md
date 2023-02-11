@@ -270,7 +270,7 @@ Set the access token.
 * `$accessToken` **string** - The access token
 
 #### Return values
-* **void** 
+* **self** 
 
 ---
 ### setClientId
@@ -286,7 +286,7 @@ Set the client ID.
 * `$clientId` **string** - The client ID.
 
 #### Return values
-* **void** 
+* **self** 
 
 ---
 ### setClientSecret
@@ -302,7 +302,7 @@ Set the client secret.
 * `$clientSecret` **string** - The client secret.
 
 #### Return values
-* **void** 
+* **self** 
 
 ---
 ### setRedirectUri
@@ -318,7 +318,7 @@ Set the client's redirect URI.
 * `$redirectUri` **string** - The redirect URI.
 
 #### Return values
-* **void** 
+* **self** 
 
 ---
 ### setRefreshToken
@@ -334,6 +334,6 @@ Set the session's refresh token.
 * `$refreshToken` **string** - The refresh token.
 
 #### Return values
-* **void** 
+* **self** 
 
 ---

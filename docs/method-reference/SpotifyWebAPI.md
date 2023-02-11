@@ -1619,7 +1619,7 @@ Set the access token to use.
 * `$accessToken` **string** - The access token.
 
 #### Return values
-* **void** 
+* **self** 
 
 ---
 ### setOptions
@@ -1635,7 +1635,7 @@ Set options
 * `$options` **array\|object** - Options to set.
 
 #### Return values
-* **void** 
+* **self** 
 
 ---
 ### setSession
@@ -1651,7 +1651,7 @@ Set the Session object to use.
 * `$session` **\SpotifyWebAPI\Session** - The Session object.
 
 #### Return values
-* **void** 
+* **self** 
 
 ---
 ### shuffle

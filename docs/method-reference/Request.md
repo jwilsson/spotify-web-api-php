@@ -129,6 +129,6 @@ Set options
 * `$options` **array\|object** - Options to set.
 
 #### Return values
-* **void** 
+* **self** 
 
 ---
