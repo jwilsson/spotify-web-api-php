@@ -299,11 +299,13 @@ class Session
      *
      * @param string $accessToken The access token
      *
-     * @return void
+     * @return self
      */
     public function setAccessToken($accessToken)
     {
         $this->accessToken = $accessToken;
+
+        return $this;
     }
 
     /**
@@ -311,11 +313,13 @@ class Session
      *
      * @param string $clientId The client ID.
      *
-     * @return void
+     * @return self
      */
     public function setClientId($clientId)
     {
         $this->clientId = $clientId;
+
+        return $this;
     }
 
     /**
@@ -323,11 +327,13 @@ class Session
      *
      * @param string $clientSecret The client secret.
      *
-     * @return void
+     * @return self
      */
     public function setClientSecret($clientSecret)
     {
         $this->clientSecret = $clientSecret;
+
+        return $this;
     }
 
     /**
@@ -335,11 +341,13 @@ class Session
      *
      * @param string $redirectUri The redirect URI.
      *
-     * @return void
+     * @return self
      */
     public function setRedirectUri($redirectUri)
     {
         $this->redirectUri = $redirectUri;
+
+        return $this;
     }
 
     /**
@@ -347,10 +355,12 @@ class Session
      *
      * @param string $refreshToken The refresh token.
      *
-     * @return void
+     * @return self
      */
     public function setRefreshToken($refreshToken)
     {
         $this->refreshToken = $refreshToken;
+
+        return $this;
     }
 }

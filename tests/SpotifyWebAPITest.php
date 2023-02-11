@@ -2260,4 +2260,25 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
         $this->assertTrue($response[0]);
     }
+
+    public function testSetAccessToken() {
+        $api = new SpotifyWebAPI\SpotifyWebAPI();
+        $returnedValue = $api->setAccessToken($this->accessToken);
+
+        $this->assertEquals($api, $returnedValue);        
+    }
+
+    public function testSetOptions() {
+        $api = new SpotifyWebAPI\SpotifyWebAPI();
+        $returnedValue = $api->setOptions([]);
+
+        $this->assertEquals($api, $returnedValue);        
+    }
+
+    public function testSetSession() {
+        $api = new SpotifyWebAPI\SpotifyWebAPI();
+        $returnedValue = $api->setSession($this->setupSessionStub());
+
+        $this->assertEquals($api, $returnedValue);        
+    }
 }
