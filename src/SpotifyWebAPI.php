@@ -2029,11 +2029,13 @@ class SpotifyWebAPI
      *
      * @param string $accessToken The access token.
      *
-     * @return void
+     * @return self
      */
     public function setAccessToken($accessToken)
     {
         $this->accessToken = $accessToken;
+
+        return $this;
     }
 
     /**
@@ -2041,11 +2043,13 @@ class SpotifyWebAPI
      *
      * @param array|object $options Options to set.
      *
-     * @return void
+     * @return self
      */
     public function setOptions($options)
     {
         $this->options = array_merge($this->options, (array) $options);
+
+        return $this;
     }
 
     /**
@@ -2053,11 +2057,13 @@ class SpotifyWebAPI
      *
      * @param Session $session The Session object.
      *
-     * @return void
+     * @return self
      */
     public function setSession($session)
     {
         $this->session = $session;
+
+        return $this;
     }
 
     /**

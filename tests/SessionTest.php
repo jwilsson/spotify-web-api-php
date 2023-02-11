@@ -366,8 +366,9 @@ class SessionTest extends PHPUnit\Framework\TestCase
         $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
         $expected = $this->accessToken;
 
-        $session->setAccessToken($expected);
+        $returnedValue = $session->setAccessToken($expected);
 
+        $this->assertEquals($session, $returnedValue);
         $this->assertEquals($expected, $session->getAccessToken());
     }
 
@@ -376,8 +377,9 @@ class SessionTest extends PHPUnit\Framework\TestCase
         $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
         $expected = $this->clientID;
 
-        $session->setClientId($expected);
+        $returnedValue = $session->setClientId($expected);
 
+        $this->assertEquals($session, $returnedValue);
         $this->assertEquals($expected, $session->getClientId());
     }
 
@@ -386,8 +388,9 @@ class SessionTest extends PHPUnit\Framework\TestCase
         $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
         $expected = $this->clientSecret;
 
-        $session->setClientSecret($expected);
+        $returnedValue = $session->setClientSecret($expected);
 
+        $this->assertEquals($session, $returnedValue);
         $this->assertEquals($expected, $session->getClientSecret());
     }
 
@@ -396,8 +399,9 @@ class SessionTest extends PHPUnit\Framework\TestCase
         $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
         $expected = $this->redirectURI;
 
-        $session->setRedirectUri($expected);
+        $returnedValue = $session->setRedirectUri($expected);
 
+        $this->assertEquals($session, $returnedValue);
         $this->assertEquals($expected, $session->getRedirectUri());
     }
 
@@ -406,8 +410,9 @@ class SessionTest extends PHPUnit\Framework\TestCase
         $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
         $expected = $this->refreshToken;
 
-        $session->setRefreshToken($expected);
+        $returnedValue = $session->setRefreshToken($expected);
 
+        $this->assertEquals($session, $returnedValue);
         $this->assertEquals($expected, $session->getRefreshToken());
     }
 }

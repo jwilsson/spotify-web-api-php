@@ -252,11 +252,13 @@ class Request
      *
      * @param array|object $options Options to set.
      *
-     * @return void
+     * @return self
      */
     public function setOptions($options)
     {
         $this->options = array_merge($this->options, (array) $options);
+
+        return $this;
     }
 
     /**
