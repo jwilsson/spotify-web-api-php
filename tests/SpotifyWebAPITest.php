@@ -322,6 +322,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             'name' => 'Test playlist',
             'public' => false,
         ];
+        $userId = 'me';
 
         $expected = json_encode($options);
 
@@ -335,7 +336,7 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $response = $api->createPlaylist($options);
+        $response = $api->createPlaylist($userId, $options);
 
         $this->assertObjectHasAttribute('id', $response);
     }
