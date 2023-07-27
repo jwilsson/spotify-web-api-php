@@ -242,13 +242,14 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/set-v
 
 
 ```php
-SpotifyWebAPI::createPlaylist($options)
+SpotifyWebAPI::createPlaylist($userId, $options)
 ```
 
 Create a new playlist.<br>
 https://developer.spotify.com/documentation/web-api/reference/#/operations/create-playlist
 
 #### Arguments
+* `$userId` **string** - Spotify User Id
 * `$options` **array\|object** - Options for the new playlist.
     * string name Required. Name of the playlist.
     * bool collaborative Optional. Whether the playlist should be collaborative or not.
