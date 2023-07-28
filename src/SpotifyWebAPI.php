@@ -365,14 +365,20 @@ class SpotifyWebAPI
      *
      * @return array|object The new playlist. Type is controlled by the `return_assoc` option.
      */
-    public function createPlaylist($userId, $options)
+    public function createPlaylist($userId, $options = [])
     {
+        if (is_array($userId) || is_object($userId)) {
+            $options = $userId;
+            $userId = 'me';
+        }
+
         $options = json_encode($options);
 
         $headers = [
             'Content-Type' => 'application/json',
         ];
 
+        $userId = $this->uriToId($userId, 'user');
         $uri = '/v1/' . $userId . '/playlists';
 
         $this->lastResponse = $this->sendRequest('POST', $uri, $options, $headers);
