@@ -1,4 +1,8 @@
 # Changelog
+## 5.7.0 (2023-07-29)
+* Added support for passing a user ID to `SpotifyWebAPI::createPlaylist()`. ([b91f71](https://github.com/jwilsson/spotify-web-api-php/commit/b91f714dfab4f4499cf5079694c3c8bf8178ad55))
+* Updated CA bundle. ([b099498](https://github.com/jwilsson/spotify-web-api-php/commit/b099498d753e8571a2cd69f55c228dc67ebf5203))
+
 ## 5.6.0 (2023-02-11)
 * The following setters now returns `self`: ([fe2e90f](https://github.com/jwilsson/spotify-web-api-php/commit/fe2e90f355b1c699a6e27dacb3d2771e69e00223))
     * `Request::setOptions()`
