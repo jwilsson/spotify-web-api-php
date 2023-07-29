@@ -374,6 +374,11 @@ class SpotifyWebAPI
     public function createPlaylist(string|array|object $userId, array|object $options = []): array|object
     {
         if (is_array($userId) || is_object($userId)) {
+            trigger_error(
+                'Calling SpotifyWebAPI::createPlaylist() without a user ID is deprecated.',
+                E_USER_DEPRECATED
+            );
+
             $options = $userId;
             $userId = 'me';
         }
