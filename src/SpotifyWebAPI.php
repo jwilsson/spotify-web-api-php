@@ -356,7 +356,7 @@ class SpotifyWebAPI
      * Create a new playlist.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/create-playlist
      *
-     * @param string $userId Spotify user id
+     * @param string $userId ID or URI of the user to create the playlist for.
      * @param array|object $options Options for the new playlist.
      * - string name Required. Name of the playlist.
      * - bool collaborative Optional. Whether the playlist should be collaborative or not.

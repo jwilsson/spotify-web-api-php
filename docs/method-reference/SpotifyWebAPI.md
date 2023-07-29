@@ -249,7 +249,7 @@ Create a new playlist.<br>
 https://developer.spotify.com/documentation/web-api/reference/#/operations/create-playlist
 
 #### Arguments
-* `$userId` **string** - Spotify User Id
+* `$userId` **string** - ID or URI of the user to create the playlist for.
 * `$options` **array\|object** - Options for the new playlist.
     * string name Required. Name of the playlist.
     * bool collaborative Optional. Whether the playlist should be collaborative or not.
