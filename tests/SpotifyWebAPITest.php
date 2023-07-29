@@ -318,6 +318,31 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
 
     public function testCreatePlaylist()
     {
+        $userId = 'mcgurk';
+        $options = [
+            'name' => 'Test playlist',
+            'public' => false,
+        ];
+
+        $expected = json_encode($options);
+
+        $headers = ['Content-Type' => 'application/json'];
+        $return = ['body' => get_fixture('user-playlist')];
+        $api = $this->setupApi(
+            'POST',
+            '/v1/mcgurk/playlists',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $response = $api->createPlaylist($userId, $options);
+
+        $this->assertObjectHasAttribute('id', $response);
+    }
+
+    public function testCreatePlaylistDeprecatedOptions()
+    {
         $options = [
             'name' => 'Test playlist',
             'public' => false,
@@ -2265,20 +2290,20 @@ class SpotifyWebAPITest extends PHPUnit\Framework\TestCase
         $api = new SpotifyWebAPI\SpotifyWebAPI();
         $returnedValue = $api->setAccessToken($this->accessToken);
 
-        $this->assertEquals($api, $returnedValue);        
+        $this->assertEquals($api, $returnedValue);
     }
 
     public function testSetOptions() {
         $api = new SpotifyWebAPI\SpotifyWebAPI();
         $returnedValue = $api->setOptions([]);
 
-        $this->assertEquals($api, $returnedValue);        
+        $this->assertEquals($api, $returnedValue);
     }
 
     public function testSetSession() {
         $api = new SpotifyWebAPI\SpotifyWebAPI();
         $returnedValue = $api->setSession($this->setupSessionStub());
 
-        $this->assertEquals($api, $returnedValue);        
+        $this->assertEquals($api, $returnedValue);
     }
 }

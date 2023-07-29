@@ -42,7 +42,7 @@ foreach ($playlistTracks->items as $track) {
 ## Creating a new playlist
 
 ```php
-$api->createPlaylist([
+$api->createPlaylist('USER_ID', [
     'name' => 'My shiny playlist'
 ]);
 ```

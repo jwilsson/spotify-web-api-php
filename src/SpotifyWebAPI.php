@@ -356,6 +356,7 @@ class SpotifyWebAPI
      * Create a new playlist.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/create-playlist
      *
+     * @param string $userId ID or URI of the user to create the playlist for.
      * @param array|object $options Options for the new playlist.
      * - string name Required. Name of the playlist.
      * - bool collaborative Optional. Whether the playlist should be collaborative or not.
@@ -364,15 +365,21 @@ class SpotifyWebAPI
      *
      * @return array|object The new playlist. Type is controlled by the `return_assoc` option.
      */
-    public function createPlaylist($options)
+    public function createPlaylist($userId, $options = [])
     {
+        if (is_array($userId) || is_object($userId)) {
+            $options = $userId;
+            $userId = 'me';
+        }
+
         $options = json_encode($options);
 
         $headers = [
             'Content-Type' => 'application/json',
         ];
 
-        $uri = '/v1/me/playlists';
+        $userId = $this->uriToId($userId, 'user');
+        $uri = '/v1/' . $userId . '/playlists';
 
         $this->lastResponse = $this->sendRequest('POST', $uri, $options, $headers);
 
