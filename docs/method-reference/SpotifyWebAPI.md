@@ -527,7 +527,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a
 #### Arguments
 * `$artistId` **string** - ID or URI of the artist.
 * `$options` **array\|object** - Optional. Options for the albums.
-    * string country Optional. Limit the results to items that are playable in this country, for example SE.
+    * string market Optional. Limit the results to items that are playable in this country, for example SE.
     * string\|array include_groups Optional. Album types to return. If omitted, all album types will be returned.
     * int limit Optional. Limit the number of albums.
     * int offset Optional. Number of albums to skip.
@@ -549,7 +549,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a
 #### Arguments
 * `$artistId` **string** - ID or URI of the artist.
 * `$options` **array\|object** - Options for the tracks.
-    * string country Required. ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
+    * string market Required. An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
 
 #### Return values
 * **array\|object** The artist's top tracks. Type is controlled by the `return_assoc` option.
@@ -569,7 +569,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a
 * `$trackId` **string** - ID or URI of the track.
 
 #### Return values
-* **object** The track's audio analysis. Type is controlled by the `return_assoc` option.
+* **array\|object** The track's audio analysis. Type is controlled by the `return_assoc` option.
 
 ---
 ### getAudiobook
@@ -757,7 +757,7 @@ Get multiple episodes.<br>
 https://developer.spotify.com/documentation/web-api/reference/#/operations/get-multiple-episodes
 
 #### Arguments
-* `$episodeIds` **array** - IDs or URIs of the episodes.
+* `$episodeIds` **string\|array** - IDs or URIs of the episodes.
 * `$options` **array\|object** - Optional. Options for the episodes.
     * string market Optional. ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
 
@@ -846,7 +846,7 @@ Get audio features of multiple tracks.<br>
 https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features
 
 #### Arguments
-* `$trackIds` **array** - IDs or URIs of the tracks.
+* `$trackIds` **string\|array** - IDs or URIs of the tracks.
 
 #### Return values
 * **array\|object** The tracks' audio features. Type is controlled by the `return_assoc` option.
@@ -1230,7 +1230,7 @@ Get multiple shows.<br>
 https://developer.spotify.com/documentation/web-api/reference/#/operations/get-multiple-shows
 
 #### Arguments
-* `$showIds` **array** - IDs or URIs of the shows.
+* `$showIds` **string\|array** - IDs or URIs of the shows.
 * `$options` **array\|object** - Optional. Options for the shows.
     * string market Optional. ISO 3166-1 alpha-2 country code, limit results to shows available in that market.
 
