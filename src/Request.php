@@ -72,7 +72,6 @@ class Request
      */
     protected function parseHeaders(string $headers): array
     {
-        $headers = str_replace("\r\n", "\n", $headers);
         $headers = explode("\n", $headers);
 
         array_shift($headers);
@@ -270,7 +269,8 @@ class Request
      */
     protected function splitResponse(string $response): array
     {
-        $parts = explode("\r\n\r\n", $response, 3);
+        $response = str_replace("\r\n", "\n", $response);
+        $parts = explode("\n\n", $response, 3);
 
         // Skip first set of headers for proxied requests etc.
         if (
