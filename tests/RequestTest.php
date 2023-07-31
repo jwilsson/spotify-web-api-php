@@ -2,190 +2,157 @@
 
 declare(strict_types=1);
 
-class RequestTest extends PHPUnit\Framework\TestCase
+namespace SpotifyWebAPI;
+
+use \phpmock\phpunit\PHPMock;
+use \PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use \PHPUnit\Framework\TestCase;
+
+#[RunTestsInSeparateProcesses]
+class RequestTest extends TestCase
 {
-    private function setupStub(
-        string $expectedMethod,
-        string $expectedUri,
-        string|array $expectedParameters,
-        array $expectedHeaders,
-        mixed $expectedReturn
-    ) {
-        $stub = $this->createMock(SpotifyWebAPI\Request::class);
-        $invocation = $stub->expects($this->once())
-            ->method('send')
-            ->with(
-                $this->equalTo($expectedMethod),
-                $this->equalTo($expectedUri),
-                $this->equalTo($expectedParameters),
-                $this->equalTo($expectedHeaders)
-            );
+    use PHPMock;
 
-        if ($expectedReturn instanceof Exception) {
-            $invocation->willThrowException($expectedReturn);
-        } else {
-            $invocation->willReturn($expectedReturn);
-        }
+    private function setupFunctionMock(string $function)
+    {
+        $mockFunction = $this->getFunctionMock(__NAMESPACE__, $function);
 
-        return $stub;
+        return $mockFunction->expects($this->once());
     }
 
     public function testConstructorOptions()
     {
-        $request = new SpotifyWebAPI\Request([
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response(load_fixture('album')));
+
+        $request = new Request([
             'return_assoc' => true,
         ]);
 
-        $response = $request->send('GET', 'https://httpbin.org/get');
+        $response = $request->send('GET', 'https://www.example.com');
 
         $this->assertIsArray($response['body']);
     }
 
     public function testApi()
     {
-        $return = [
-            'body' => get_fixture('album'),
-            'url' => 'https://api.spotify.com/v1/albums/7u6zL7kqpgLPISZYXNTgYk',
-        ];
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response(load_fixture('album')));
 
-        $request = $this->setupStub(
-            'GET',
-            'https://api.spotify.com/v1/albums/7u6zL7kqpgLPISZYXNTgYk',
-            [],
-            [],
-            $return
-        );
-
+        $request = new Request();
         $response = $request->api('GET', '/v1/albums/7u6zL7kqpgLPISZYXNTgYk');
 
-        $this->assertNotEmpty($response['body']->id);
+        $this->assertObjectHasProperty('id', $response['body']);
     }
 
     public function testApiParameters()
     {
-        $return = [
-            'body' => get_fixture('albums'),
-            'url' => 'https://api.spotify.com/v1/albums?ids=1oR3KrPIp4CbagPa3PhtPp,6lPb7Eoon6QPbscWbMsk6a',
-        ];
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response(load_fixture('albums')));
 
-        $request = $this->setupStub(
-            'GET',
-            'https://api.spotify.com/v1/albums',
-            [
-                'ids' => '1oR3KrPIp4CbagPa3PhtPp,6lPb7Eoon6QPbscWbMsk6a',
-            ],
-            [],
-            $return
-        );
-
+        $request = new Request();
         $response = $request->api('GET', '/v1/albums', [
             'ids' => '1oR3KrPIp4CbagPa3PhtPp,6lPb7Eoon6QPbscWbMsk6a',
         ]);
 
-        $this->assertNotEmpty($response['body']->albums);
+        $this->assertObjectHasProperty('albums', $response['body']);
     }
 
     public function testApiMalformed()
     {
-        $this->expectException(SpotifyWebAPI\SpotifyWebAPIException::class);
+        $this->expectException(SpotifyWebAPIException::class);
 
-        $request = new SpotifyWebAPI\Request();
-
+        $request = new Request();
         $request->api('GET', '/v1/albums/NON_EXISTING_ALBUM');
     }
 
     public function testAccountMalformed()
     {
-        $clientID = 'INVALID_ID';
-        $clientSecret = 'INVALID_SECRET';
-        $payload = base64_encode($clientID . ':' . $clientSecret);
+        $this->setupFunctionMock('curl_exec')->willReturnCallback(function () {
+            $body = json_encode([
+                'error_description' => 'Invalid client secret',
+            ]);
+
+            return create_http_response($body, 400);
+        });
+        $this->setupFunctionMock('curl_getinfo')->willReturn(400);
 
         $parameters = [
             'grant_type' => 'client_credentials'
         ];
 
         $headers = [
-            'Authorization' => 'Basic ' . $payload,
+            'Authorization' => 'Basic ' . base64_encode('INVALID_ID:INVALID_SECRET'),
         ];
 
-        $this->expectException(SpotifyWebAPI\SpotifyWebAPIAuthException::class);
-        $request = new SpotifyWebAPI\Request();
         try {
+            $request = new Request();
             $request->account('POST', '/api/token', $parameters, $headers);
-        } catch (Exception $e) {
-            $this->assertInstanceOf(SpotifyWebAPI\SpotifyWebAPIAuthException::class, $e);
+        } catch (SpotifyWebAPIAuthException $e) {
             $this->assertTrue($e->hasInvalidCredentials());
-            throw $e; // throw again for last test
+        } catch (\Exception) {
+            $this->fail('No exception of type SpotifyWebAPIAuthException thrown');
         }
     }
 
     public function testExpiredToken()
     {
+        $this->setupFunctionMock('curl_exec')->willReturnCallback(function () {
+            $body = json_encode([
+                'error_description' => 'The access token expired',
+            ]);
+
+            return create_http_response($body, 401);
+        });
+        $this->setupFunctionMock('curl_getinfo')->willReturn(401);
+
         $headers = [
-            'Authorization' => 'Bearer Expired token',
+            'Authorization' => 'Bearer expired_token',
         ];
 
-        $return = new SpotifyWebAPI\SpotifyWebAPIException('The access token expired', 401);
-
-        $request = $this->setupStub(
-            'GET',
-            'https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V',
-            [],
-            $headers,
-            $return
-        );
-
-        $this->expectException(SpotifyWebAPI\SpotifyWebAPIException::class);
-
         try {
+            $request = new Request();
             $request->api('GET', '/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V', [], $headers);
-        } catch (Exception $e) {
-            $this->assertInstanceOf(SpotifyWebAPI\SpotifyWebAPIException::class, $e);
+        } catch (SpotifyWebAPIAuthException $e) {
             $this->assertTrue($e->hasExpiredToken());
-            throw $e;
+        } catch (\Exception) {
+            $this->fail('No exception of type SpotifyWebAPIAuthException thrown');
         }
     }
 
     public function testInvalidRefreshToken()
     {
-        $clientID = 'VALID_ID';
-        $clientSecret = 'VALID_ID';
-        $payload = base64_encode($clientID . ':' . $clientSecret);
+        $this->setupFunctionMock('curl_exec')->willReturnCallback(function () {
+            $body = json_encode([
+                'error_description' => 'Invalid refresh token',
+            ]);
+
+            return create_http_response($body, 400);
+        });
+        $this->setupFunctionMock('curl_getinfo')->willReturn(400);
 
         $parameters = [
             'grant_type' => 'refresh_token',
-            'refresh_token' => 'Invalid refresh token',
+            'refresh_token' => 'invalid_refresh_token',
         ];
 
         $headers = [
-            'Authorization' => 'Basic ' . $payload,
+            'Authorization' => 'Basic ' . base64_encode('VALID_ID:VALID_SECRET'),
         ];
 
-        $return = new SpotifyWebAPI\SpotifyWebAPIAuthException('Invalid refresh token', 400);
-
-        $request = $this->setupStub(
-            'POST',
-            'https://accounts.spotify.com/api/token',
-            $parameters,
-            $headers,
-            $return
-        );
-
-        $this->expectException(SpotifyWebAPI\SpotifyWebAPIAuthException::class);
-
         try {
+            $request = new Request();
             $request->account('POST', '/api/token', $parameters, $headers);
-        } catch (Exception $e) {
-            $this->assertInstanceOf(SpotifyWebAPI\SpotifyWebAPIAuthException::class, $e);
+        } catch (SpotifyWebAPIAuthException $e) {
             $this->assertTrue($e->hasInvalidRefreshToken());
-            throw $e;
+        } catch (\Exception) {
+            $this->fail('No exception of type SpotifyWebAPIAuthException thrown');
         }
     }
 
     public function testGetLastResponse()
     {
-        $request = new SpotifyWebAPI\Request();
-        $request->send('GET', 'https://httpbin.org/get');
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response('album'));
+
+        $request = new Request();
+        $request->send('GET', 'https://www.example.com');
 
         $response = $request->getLastResponse();
 
@@ -194,126 +161,178 @@ class RequestTest extends PHPUnit\Framework\TestCase
 
     public function testSend()
     {
-        $request = new SpotifyWebAPI\Request();
-        $response = $request->send('GET', 'https://httpbin.org/get');
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response('album'));
+
+        $request = new Request();
+        $response = $request->send('GET', 'https://www.example.com');
 
         $this->assertNotEmpty($response['url']);
     }
 
     public function testSendDelete()
     {
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response('album'));
+        $this->setupFunctionMock('curl_setopt_array')->willReturnCallback(
+            function (\CurlHandle $ch, array $options) {
+                $this->assertEquals('DELETE', $options[CURLOPT_CUSTOMREQUEST]);
+                $this->assertEquals('foo=bar', $options[CURLOPT_POSTFIELDS]);
+            }
+        );
+
         $parameters = [
             'foo' => 'bar',
         ];
 
-        $request = new SpotifyWebAPI\Request();
-        $response = $request->send('DELETE', 'https://httpbin.org/delete', $parameters);
-
-        $this->assertNotEmpty($response['body']->form->foo);
+        $request = new Request();
+        $request->send('DELETE', 'https://www.example.com', $parameters);
     }
 
     public function testSendPost()
     {
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response('album'));
+        $this->setupFunctionMock('curl_setopt_array')->willReturnCallback(
+            function (\CurlHandle $ch, array $options) {
+                $this->assertEquals(true, $options[CURLOPT_POST]);
+                $this->assertEquals('foo=bar', $options[CURLOPT_POSTFIELDS]);
+            }
+        );
+
         $parameters = [
             'foo' => 'bar',
         ];
 
-        $request = new SpotifyWebAPI\Request();
-        $response = $request->send('POST', 'https://httpbin.org/post', $parameters);
-
-        $this->assertNotEmpty($response['body']->form->foo);
+        $request = new Request();
+        $request->send('POST', 'https://www.example.com', $parameters);
     }
 
     public function testSendPut()
     {
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response('album'));
+        $this->setupFunctionMock('curl_setopt_array')->willReturnCallback(
+            function (\CurlHandle $ch, array $options) {
+                $this->assertEquals('PUT', $options[CURLOPT_CUSTOMREQUEST]);
+                $this->assertEquals('foo=bar', $options[CURLOPT_POSTFIELDS]);
+            }
+        );
+
         $parameters = [
             'foo' => 'bar',
         ];
 
-        $request = new SpotifyWebAPI\Request();
-        $response = $request->send('PUT', 'https://httpbin.org/put', $parameters);
-
-        $this->assertNotEmpty($response['body']->form->foo);
+        $request = new Request();
+        $request->send('PUT', 'https://www.example.com', $parameters);
     }
 
     public function testSendGetParameters()
     {
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response('album'));
+        $this->setupFunctionMock('curl_setopt_array')->willReturnCallback(
+            function (\CurlHandle $ch, array $options) {
+                $this->assertEquals('GET', $options[CURLOPT_CUSTOMREQUEST]);
+                $this->assertEquals('https://www.example.com/?foo=bar', $options[CURLOPT_URL]);
+            }
+        );
+
         $parameters = [
             'foo' => 'bar',
         ];
 
-        $request = new SpotifyWebAPI\Request();
-
-        /**
-         * httpbin doesn't like trailing slashes which we append to
-         * GET requests with parameters. So it'll throw which we ignore.
-         * Not super pretty, but we really just want to assert the URL creation.
-         */
-        $this->expectException(SpotifyWebAPI\SpotifyWebAPIException::class);
-
-        $response = $request->send('GET', 'https://httpbin.org/get', $parameters);
-
-        $this->assertEquals('https://httpbin.org/get/?foo=bar', $response['url']);
+        $request = new Request();
+        $request->send('GET', 'https://www.example.com', $parameters);
     }
 
     public function testSendHeaders()
     {
-        $request = new SpotifyWebAPI\Request();
-        $response = $request->send('GET', 'https://httpbin.org/get');
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response('album'));
 
-        $this->assertIsArray($response['headers']);
-    }
-
-    public function testSendHeadersParsingKey()
-    {
-        $request = new SpotifyWebAPI\Request();
-        $response = $request->send('GET', 'https://httpbin.org/get');
-
-        $this->assertArrayHasKey('content-type', $response['headers']);
-    }
-
-    public function testSendHeadersParsingValue()
-    {
-        $request = new SpotifyWebAPI\Request();
-        $response = $request->send('GET', 'https://httpbin.org/get');
+        $request = new Request();
+        $response = $request->send('GET', 'https://www.example.com');
 
         $this->assertEquals('application/json', $response['headers']['content-type']);
     }
 
     public function testSendStatus()
     {
-        $request = new SpotifyWebAPI\Request();
-        $response = $request->send('GET', 'https://httpbin.org/get');
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response('album'));
+        $this->setupFunctionMock('curl_getinfo')->willReturn(200);
+
+        $request = new Request();
+        $response = $request->send('GET', 'https://www.example.com');
 
         $this->assertEquals(200, $response['status']);
     }
 
     public function testSendTransportError()
     {
-        $this->expectException(SpotifyWebAPI\SpotifyWebAPIException::class);
-        $this->expectExceptionMessage('cURL transport error: 6 Could not resolve host: non-existent');
+        $this->expectExceptionObject(
+            new SpotifyWebAPIException('cURL transport error: 6 Could not resolve host: non-existent')
+        );
 
-        $request = new SpotifyWebAPI\Request();
-        $request->send('GET', 'https://non-existent/get');
+        $request = new Request();
+        $request->send('GET', 'https://non-existent');
+    }
+
+    public function testSendErrorReason()
+    {
+        $this->setupFunctionMock('curl_exec')->willReturnCallback(function () {
+            $body = json_encode([
+                'error' => [
+                    'message' => 'Playback already paused',
+                    'status' => 400,
+                    'reason' => 'ALREADY_PAUSED',
+                ],
+            ]);
+
+            return create_http_response($body, 400);
+        });
+        $this->setupFunctionMock('curl_getinfo')->willReturn(400);
+
+        try {
+            $request = new Request();
+            $request->api('PUT', '/me/player/play', [], []);
+        } catch (SpotifyWebAPIException $e) {
+            $this->assertEquals('ALREADY_PAUSED', $e->getReason());
+        } catch (\Exception) {
+            $this->fail('No exception of type SpotifyWebAPIException thrown');
+        }
     }
 
     public function testSendUnknownError()
     {
-        $this->expectException(SpotifyWebAPI\SpotifyWebAPIException::class);
-        $this->expectExceptionMessage('An unknown error occurred.');
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response('', 400));
+        $this->setupFunctionMock('curl_getinfo')->willReturn(400);
 
-        $request = new SpotifyWebAPI\Request();
-        $request->send('GET', 'https://httpbin.org/status/400');
+        $this->expectExceptionObject(
+            new SpotifyWebAPIException('An unknown error occurred.', 400)
+        );
+
+        $request = new Request();
+        $request->send('GET', 'https://www.example.com');
+    }
+
+    public function testSendUnknownErrorBodyFallback()
+    {
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response('Foobar error', 400));
+        $this->setupFunctionMock('curl_getinfo')->willReturn(400);
+
+        $this->expectExceptionObject(
+            new SpotifyWebAPIException('Foobar error', 400)
+        );
+
+        $request = new Request();
+        $request->send('GET', 'https://www.example.com');
     }
 
     public function testSetOptions()
     {
-        $request = new SpotifyWebAPI\Request();
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response(load_fixture('album')));
+
+        $request = new Request();
         $returnedValue = $request->setOptions([
             'return_assoc' => true,
         ]);
 
-        $response = $request->send('GET', 'https://httpbin.org/get');
+        $response = $request->send('GET', 'https://www.example.com');
 
         $this->assertIsArray($response['body']);
         $this->assertSame($request, $returnedValue);

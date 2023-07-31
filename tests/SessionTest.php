@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
-class SessionTest extends PHPUnit\Framework\TestCase
+namespace SpotifyWebAPI;
+
+use \PHPUnit\Framework\TestCase;
+
+class SessionTest extends TestCase
 {
     private string $clientID = 'b777292af0def22f9257991fc770b520';
     private string $clientSecret = '6a0419f43d0aa93b2ae881429b6b9bc2';
@@ -17,7 +21,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
         array $expectedHeaders,
         array $expectedReturn
     ) {
-        $requestMock = $this->createMock(SpotifyWebAPI\Request::class);
+        $requestMock = $this->createMock(Request::class);
 
         $requestMock->expects($this->once())
             ->method('account')
@@ -34,7 +38,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
     public function testGenerateState()
     {
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI);
 
         $state = $session->generateState();
 
@@ -44,7 +48,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
     public function testGetAuthorizeUrl()
     {
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI);
 
         $state = 'state_value';
         $url = $session->getAuthorizeUrl([
@@ -62,7 +66,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
     public function testGetAuthorizeUrlPkce()
     {
-        $session = new SpotifyWebAPI\Session($this->clientID, '', $this->redirectURI);
+        $session = new Session($this->clientID, '', $this->redirectURI);
 
         $verifier = $session->generateCodeVerifier(64);
         $challenge = $session->generateCodeChallenge($verifier);
@@ -88,7 +92,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
     public function testGetClientId()
     {
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI);
         $expected = $this->clientID;
 
         $session->setClientId($expected);
@@ -98,7 +102,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
     public function testGetClientSecret()
     {
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI);
         $expected = $this->clientSecret;
 
         $session->setClientSecret($expected);
@@ -108,7 +112,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
     public function testGetRedirectUri()
     {
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI);
         $expected = $this->redirectURI;
 
         $session->setRedirectUri($expected);
@@ -139,7 +143,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
         $session->refreshAccessToken($this->refreshToken);
 
         $this->assertNotEmpty($session->getAccessToken());
@@ -167,7 +171,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $session = new SpotifyWebAPI\Session($this->clientID, '', $this->redirectURI, $requestMock);
+        $session = new Session($this->clientID, '', $this->redirectURI, $requestMock);
         $session->refreshAccessToken($this->refreshToken);
 
         $this->assertNotEmpty($session->getAccessToken());
@@ -199,7 +203,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
         $session->setRefreshToken($this->refreshToken);
         $session->refreshAccessToken();
 
@@ -233,7 +237,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
         $session->setRefreshToken($this->refreshToken);
         $session->refreshAccessToken($refreshToken);
 
@@ -263,7 +267,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
         $session->refreshAccessToken($this->refreshToken);
 
         $this->assertEquals($session->getRefreshToken(), $this->refreshToken);
@@ -292,7 +296,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
         $result = $session->requestAccessToken($authorizationCode);
 
         $this->assertTrue($result);
@@ -326,7 +330,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $session = new SpotifyWebAPI\Session($this->clientID, '', $this->redirectURI, $requestMock);
+        $session = new Session($this->clientID, '', $this->redirectURI, $requestMock);
         $result = $session->requestAccessToken($authorizationCode, $verifier);
 
         $this->assertTrue($result);
@@ -358,7 +362,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
             $return
         );
 
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
         $result = $session->requestCredentialsToken();
 
         $this->assertTrue($result);
@@ -368,7 +372,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
     public function testSetAccessToken()
     {
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI);
         $expected = $this->accessToken;
 
         $returnedValue = $session->setAccessToken($expected);
@@ -379,7 +383,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
     public function testSetClientId()
     {
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI);
         $expected = $this->clientID;
 
         $returnedValue = $session->setClientId($expected);
@@ -390,7 +394,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
     public function testSetClientSecret()
     {
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI);
         $expected = $this->clientSecret;
 
         $returnedValue = $session->setClientSecret($expected);
@@ -401,7 +405,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
     public function testSetRedirectUri()
     {
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI);
         $expected = $this->redirectURI;
 
         $returnedValue = $session->setRedirectUri($expected);
@@ -412,7 +416,7 @@ class SessionTest extends PHPUnit\Framework\TestCase
 
     public function testSetRefreshToken()
     {
-        $session = new SpotifyWebAPI\Session($this->clientID, $this->clientSecret, $this->redirectURI);
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI);
         $expected = $this->refreshToken;
 
         $returnedValue = $session->setRefreshToken($expected);

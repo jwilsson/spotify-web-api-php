@@ -14,10 +14,26 @@ function error_handler($errno) {
 }
 
 // Test helper functions
-function get_fixture($fixture)
+function load_fixture($fixture)
 {
     $fixture = __DIR__ . '/tests/fixtures/' . $fixture . '.json';
-    $fixture = file_get_contents($fixture);
+
+    return file_get_contents($fixture);
+}
+
+function get_fixture($fixture)
+{
+    $fixture = load_fixture($fixture);
 
     return json_decode($fixture);
+}
+
+function create_http_response($body, $status = 200)
+{
+    return <<<END
+        HTTP/1.1 $status OK
+        Content-Type: application/json
+
+        $body
+        END;
 }
