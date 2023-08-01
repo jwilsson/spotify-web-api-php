@@ -369,7 +369,10 @@ class SpotifyWebAPI
     {
         if (is_array($userId) || is_object($userId)) {
             $options = $userId;
-            $userId = 'me';
+            $uri = '/v1/me/playlists';
+        } else {
+            $userId = $this->uriToId($userId, 'user');
+            $uri = '/v1/users/' . $userId . '/playlists';
         }
 
         $options = json_encode($options);
@@ -377,9 +380,6 @@ class SpotifyWebAPI
         $headers = [
             'Content-Type' => 'application/json',
         ];
-
-        $userId = $this->uriToId($userId, 'user');
-        $uri = '/v1/' . $userId . '/playlists';
 
         $this->lastResponse = $this->sendRequest('POST', $uri, $options, $headers);
 
