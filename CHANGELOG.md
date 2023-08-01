@@ -1,4 +1,10 @@
 # Changelog
+## 6.0.0 (2023-08-01)
+* **Breaking** Dropped support for PHP versions less than 8.1. ([c3f69bd](https://github.com/jwilsson/spotify-web-api-php/commit/c3f69bdd05ae5d6ee7fb761ba0e8d4434dde215f))
+* **Breaking** `SpotifyWebAPI::getAudioFeatures()` no longer accepts arrays, `SpotifyWebAPI::getMultipleAudioFeatures()` should be used instead. ([ec4ccd2](https://github.com/jwilsson/spotify-web-api-php/commit/ec4ccd2ab9293476fc5d77e02b0dec9f4e181278))
+* All methods now include complete type declarations. ([a80a55e](https://github.com/jwilsson/spotify-web-api-php/commit/a80a55ec6205050a0ee1e33c3de2a95d084649aa))
+* Calling `SpotifyWebAPI::createPlaylist()` without a user ID is now deprecated and will print warnings. ([055f3df](https://github.com/jwilsson/spotify-web-api-php/commit/055f3dfa0c971443f847deb0cc61b9f4a8445adf))
+
 ## 5.7.0 (2023-07-29)
 * Added support for passing a user ID to `SpotifyWebAPI::createPlaylist()`. ([b91f71](https://github.com/jwilsson/spotify-web-api-php/commit/b91f714dfab4f4499cf5079694c3c8bf8178ad55))
 * Updated CA bundle. ([b099498](https://github.com/jwilsson/spotify-web-api-php/commit/b099498d753e8571a2cd69f55c228dc67ebf5203))
