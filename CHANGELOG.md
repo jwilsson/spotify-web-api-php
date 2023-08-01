@@ -5,6 +5,9 @@
 * All methods now include complete type declarations. ([a80a55e](https://github.com/jwilsson/spotify-web-api-php/commit/a80a55ec6205050a0ee1e33c3de2a95d084649aa))
 * Calling `SpotifyWebAPI::createPlaylist()` without a user ID is now deprecated and will print warnings. ([055f3df](https://github.com/jwilsson/spotify-web-api-php/commit/055f3dfa0c971443f847deb0cc61b9f4a8445adf))
 
+## 5.7.1 (2023-08-01)
+* Fixed faulty endpoint URL in `SpotifyWebAPI::createPlaylist()`. ([c1a499c](https://github.com/jwilsson/spotify-web-api-php/commit/c1a499c6883490149699d39df9dd0624cff93fb3))
+
 ## 5.7.0 (2023-07-29)
 * Added support for passing a user ID to `SpotifyWebAPI::createPlaylist()`. ([b91f71](https://github.com/jwilsson/spotify-web-api-php/commit/b91f714dfab4f4499cf5079694c3c8bf8178ad55))
 * Updated CA bundle. ([b099498](https://github.com/jwilsson/spotify-web-api-php/commit/b099498d753e8571a2cd69f55c228dc67ebf5203))

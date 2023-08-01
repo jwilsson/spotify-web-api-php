@@ -338,7 +338,7 @@ class SpotifyWebAPITest extends TestCase
         $return = ['body' => get_fixture('user-playlist')];
         $api = $this->setupApi(
             'POST',
-            '/v1/mcgurk/playlists',
+            '/v1/users/mcgurk/playlists',
             $expected,
             $headers,
             $return
