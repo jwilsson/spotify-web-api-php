@@ -1,4 +1,7 @@
 # Changelog
+## 6.0.1 (2023-08-01)
+* Fixed faulty endpoint URL in `SpotifyWebAPI::createPlaylist()`. ([c1a499c](https://github.com/jwilsson/spotify-web-api-php/commit/c1a499c6883490149699d39df9dd0624cff93fb3))
+
 ## 6.0.0 (2023-08-01)
 * **Breaking** Dropped support for PHP versions less than 8.1. ([c3f69bd](https://github.com/jwilsson/spotify-web-api-php/commit/c3f69bdd05ae5d6ee7fb761ba0e8d4434dde215f))
 * **Breaking** `SpotifyWebAPI::getAudioFeatures()` no longer accepts arrays, `SpotifyWebAPI::getMultipleAudioFeatures()` should be used instead. ([ec4ccd2](https://github.com/jwilsson/spotify-web-api-php/commit/ec4ccd2ab9293476fc5d77e02b0dec9f4e181278))
