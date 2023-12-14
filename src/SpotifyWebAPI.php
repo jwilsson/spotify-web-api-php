@@ -1133,9 +1133,10 @@ class SpotifyWebAPI
      * - string market Optional. ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      * - string|array additional_types Optional. Types of media to return info about.
      *
-     * @return array|object The user's currently playing track. Type is controlled by the `return_assoc` option.
+     * @return array|object|null The user's currently playing track or null if nothing's currently playing.
+     * Type is controlled by the `return_assoc` option.
      */
-    public function getMyCurrentTrack(array|object $options = []): array|object
+    public function getMyCurrentTrack(array|object $options = []): array|object|null
     {
         $uri = '/v1/me/player/currently-playing';
         $options = (array) $options;
@@ -1172,9 +1173,10 @@ class SpotifyWebAPI
      * - string market Optional. ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
      * - string|array additional_types Optional. Types of media to return info about.
      *
-     * @return array|object The user's playback information. Type is controlled by the `return_assoc` option.
+     * @return array|object|null The user's playback information or null if nothing's currently playing.
+     * Type is controlled by the `return_assoc` option.
      */
-    public function getMyCurrentPlaybackInfo(array|object $options = []): array|object
+    public function getMyCurrentPlaybackInfo(array|object $options = []): array|object|null
     {
         $uri = '/v1/me/player';
         $options = (array) $options;

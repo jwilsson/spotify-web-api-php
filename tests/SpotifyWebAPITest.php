@@ -1266,6 +1266,22 @@ class SpotifyWebAPITest extends TestCase
         $this->assertObjectHasProperty('item', $response);
     }
 
+    public function testGetMyCurrentTrackEmptyResponse()
+    {
+        $return = ['body' => null];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/me/player/currently-playing',
+            [],
+            [],
+            $return
+        );
+
+        $response = $api->getMyCurrentTrack([]);
+
+        $this->assertNull($response);
+    }
+
     public function testGetMyDevices()
     {
         $return = ['body' => get_fixture('user-devices')];
@@ -1306,6 +1322,22 @@ class SpotifyWebAPITest extends TestCase
         $response = $api->getMyCurrentPlaybackInfo($options);
 
         $this->assertObjectHasProperty('item', $response);
+    }
+
+    public function testGetMyCurrentPlaybackInfoEmptyResponse()
+    {
+        $return = ['body' => null];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/me/player',
+            [],
+            [],
+            $return
+        );
+
+        $response = $api->getMyCurrentPlaybackInfo([]);
+
+        $this->assertNull($response);
     }
 
     public function testGetMyPlaylists()
