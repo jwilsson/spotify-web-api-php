@@ -63,7 +63,7 @@ class SpotifyWebAPI
     {
         $body = (array) $body;
 
-        return $body['snapshot_id'] ?? null;
+        return $body['snapshot_id'] ?? false;
     }
 
     /**

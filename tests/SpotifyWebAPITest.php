@@ -283,6 +283,31 @@ class SpotifyWebAPITest extends TestCase
         );
     }
 
+    public function testAddPlaylistTracksNoSnapshotId()
+    {
+        $expected = json_encode([
+            'uris' => [],
+        ]);
+
+        $headers = ['Content-Type' => 'application/json'];
+        $return = ['body' => []];
+        $api = $this->setupApi(
+            'POST',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $this->assertFalse(
+            $api->addPlaylistTracks(
+                'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+                [],
+                []
+            )
+        );
+    }
+
     public function testChangeMyDevice()
     {
         $options = ['device_ids' => 'abc123'];
@@ -613,6 +638,30 @@ class SpotifyWebAPITest extends TestCase
                 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
                 $trackPositions,
                 'snapshot_id'
+            )
+        );
+    }
+
+    public function testDeletePlaylistTracksNoSnapshotId()
+    {
+        $expected = json_encode([
+            'positions' => [],
+        ]);
+
+        $headers = ['Content-Type' => 'application/json'];
+        $return = ['body' => []];
+        $api = $this->setupApi(
+            'DELETE',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $this->assertFalse(
+            $api->deletePlaylistTracks(
+                'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+                ['positions' => []]
             )
         );
     }
@@ -2010,6 +2059,29 @@ class SpotifyWebAPITest extends TestCase
             $api->reorderPlaylistTracks(
                 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
                 $options
+            )
+        );
+    }
+
+    public function testReorderPlaylistTracksNoSnapshotId()
+    {
+        $expected = json_encode([
+        ]);
+
+        $headers = ['Content-Type' => 'application/json'];
+        $return = ['body' => []];
+        $api = $this->setupApi(
+            'PUT',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $this->assertFalse(
+            $api->reorderPlaylistTracks(
+                'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+                []
             )
         );
     }
