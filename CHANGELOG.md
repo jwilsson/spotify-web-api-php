@@ -1,4 +1,9 @@
 # Changelog
+## 6.0.2 (2023-12-14)
+* Corrected return value of `SpotifyWebAPI::getSnapshotId()`. ([c115c3c](https://github.com/jwilsson/spotify-web-api-php/commit/c115c3c157edf42a7b3ec61c859f3c84d78e5bc1))
+* Added `null` return type to `SpotifyWebAPI::getMyCurrentTrack()` and `SpotifyWebAPI::getMyCurrentPlaybackInfo()`. ([776d063](https://github.com/jwilsson/spotify-web-api-php/commit/776d06338a0ff45dddf0f84edfac3f380c364eec))
+* Updated CA bundle. ([3f9e57b](https://github.com/jwilsson/spotify-web-api-php/commit/3f9e57b46835c6492e98eee2e7a20eb8d83350f5))
+
 ## 6.0.1 (2023-08-01)
 * Fixed faulty endpoint URL in `SpotifyWebAPI::createPlaylist()`. ([c1a499c](https://github.com/jwilsson/spotify-web-api-php/commit/c1a499c6883490149699d39df9dd0624cff93fb3))
 
