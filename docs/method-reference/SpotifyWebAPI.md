@@ -868,7 +868,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-t
     * string\|array additional_types Optional. Types of media to return info about.
 
 #### Return values
-* **array\|object** The user's currently playing track. Type is controlled by the `return_assoc` option.
+* **array\|object\|null** The user's currently playing track or null if nothing's currently playing. Type is controlled by the `return_assoc` option.
 
 ---
 ### getMyDevices
@@ -902,7 +902,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-i
     * string\|array additional_types Optional. Types of media to return info about.
 
 #### Return values
-* **array\|object** The user's playback information. Type is controlled by the `return_assoc` option.
+* **array\|object\|null** The user's playback information or null if nothing's currently playing. Type is controlled by the `return_assoc` option.
 
 ---
 ### getMyPlaylists
