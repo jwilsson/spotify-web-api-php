@@ -1,4 +1,8 @@
 # Changelog
+## 6.0.3 (2024-03-14)
+* Fixed faulty passing of `null` in `SpotifyWebAPI::followPlaylist()` and `SpotifyWebAPI::play()`. ([f60b0c3](https://github.com/jwilsson/spotify-web-api-php/commit/f60b0c399c8b86e044ebbd1e285fd3106117978e))
+* Updated CA bundle. ([dd82fba](https://github.com/jwilsson/spotify-web-api-php/commit/dd82fba257892c460cc586e3bac7fcc3a000a5ff))
+
 ## 6.0.2 (2023-12-14)
 * Corrected return value of `SpotifyWebAPI::getSnapshotId()`. ([c115c3c](https://github.com/jwilsson/spotify-web-api-php/commit/c115c3c157edf42a7b3ec61c859f3c84d78e5bc1))
 * Added `null` return type to `SpotifyWebAPI::getMyCurrentTrack()` and `SpotifyWebAPI::getMyCurrentPlaybackInfo()`. ([776d063](https://github.com/jwilsson/spotify-web-api-php/commit/776d06338a0ff45dddf0f84edfac3f380c364eec))
