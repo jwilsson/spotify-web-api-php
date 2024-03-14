@@ -613,7 +613,7 @@ class SpotifyWebAPI
      */
     public function followPlaylist(string $playlistId, array|object $options = []): bool
     {
-        $options = $options ? json_encode($options) : null;
+        $options = $options ? json_encode($options) : '';
 
         $headers = [
             'Content-Type' => 'application/json',
@@ -1840,7 +1840,7 @@ class SpotifyWebAPI
      */
     public function play(string $deviceId = '', array|object $options = []): bool
     {
-        $options = $options ? json_encode($options) : null;
+        $options = $options ? json_encode($options) : '';
 
         $headers = [
             'Content-Type' => 'application/json',
