@@ -1,4 +1,7 @@
 # Changelog
+## 6.0.4 (2024-05-13)
+* Updated succesfull response code check in `SpotifyWebAPI::replacePlaylistTracks()`. ([bc402ce](https://github.com/jwilsson/spotify-web-api-php/commit/bc402ceb122cae6854c01b2db03ba4873ac09f23))
+
 ## 6.0.3 (2024-03-14)
 * Fixed faulty passing of `null` in `SpotifyWebAPI::followPlaylist()` and `SpotifyWebAPI::play()`. ([f60b0c3](https://github.com/jwilsson/spotify-web-api-php/commit/f60b0c399c8b86e044ebbd1e285fd3106117978e))
 * Updated CA bundle. ([dd82fba](https://github.com/jwilsson/spotify-web-api-php/commit/dd82fba257892c460cc586e3bac7fcc3a000a5ff))
