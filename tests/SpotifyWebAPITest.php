@@ -2151,7 +2151,7 @@ class SpotifyWebAPITest extends TestCase
         ]);
 
         $headers = ['Content-Type' => 'application/json'];
-        $return = ['status' => 201];
+        $return = ['status' => 200];
         $api = $this->setupApi(
             'PUT',
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
