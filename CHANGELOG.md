@@ -1,6 +1,9 @@
 # Changelog
+## 6.1.0 (2024-06-06)
+* Added `Request::parseBody()` helper method. ([980e2b2](https://github.com/jwilsson/spotify-web-api-php/commit/980e2b24754bdc5c5ff648b97b2a53f32592b0a0))
+
 ## 6.0.4 (2024-05-13)
-* Updated succesfull response code check in `SpotifyWebAPI::replacePlaylistTracks()`. ([bc402ce](https://github.com/jwilsson/spotify-web-api-php/commit/bc402ceb122cae6854c01b2db03ba4873ac09f23))
+* Updated successful response code check in `SpotifyWebAPI::replacePlaylistTracks()`. ([bc402ce](https://github.com/jwilsson/spotify-web-api-php/commit/bc402ceb122cae6854c01b2db03ba4873ac09f23))
 
 ## 6.0.3 (2024-03-14)
 * Fixed faulty passing of `null` in `SpotifyWebAPI::followPlaylist()` and `SpotifyWebAPI::play()`. ([f60b0c3](https://github.com/jwilsson/spotify-web-api-php/commit/f60b0c399c8b86e044ebbd1e285fd3106117978e))
