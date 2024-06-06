@@ -26,6 +26,7 @@ First, start by checking out the [Getting started guide](/docs/getting-started.m
     * [Managing a user's profile](/docs/examples/managing-user-profiles.md)
 * **Working with the API**
     * [Handling errors](/docs/examples/handling-errors.md)
+    * [Passing a custom Request instance](/docs/examples/passing-a-custom-request-instance.md)
     * [Setting custom cURL options](/docs/examples/setting-custom-curl-options.md)
     * [Setting options](/docs/examples/setting-options.md)
 
