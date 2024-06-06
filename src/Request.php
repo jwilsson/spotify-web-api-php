@@ -64,6 +64,14 @@ class Request
     }
 
     /**
+     * Parse HTTP response body, taking the "return_assoc" option into account.
+     */
+    protected function parseBody(string $body): mixed
+    {
+        return json_decode($body, $this->options['return_assoc']);
+    }
+
+    /**
      * Parse HTTP response headers and normalize names.
      *
      * @param string $headers The raw, unparsed response headers.
@@ -226,9 +234,9 @@ class Request
 
         [$headers, $body] = $this->splitResponse($response);
 
-        $parsedBody = json_decode($body, $this->options['return_assoc']);
-        $status = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        $parsedBody = $this->parseBody($body);
         $parsedHeaders = $this->parseHeaders($headers);
+        $status = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
 
         $this->lastResponse = [
             'body' => $parsedBody,
