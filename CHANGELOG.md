@@ -1,7 +1,7 @@
 # Changelog
 ## 6.1.1 (2024-10-09)
-* Corrected request bodies of `SpotifyWebAPI::addMy*` methods: ([07a1de0](https://github.com/jwilsson/spotify-web-api-php/commit/07a1de0a8a749f80687a20b7450f7a8782415dfb))
-* Corrected request bodies of `SpotifyWebAPI::deleteMy*` methods: ([f61995e](https://github.com/jwilsson/spotify-web-api-php/commit/f61995e1ab89e675cebf7a2560a97781be1dcd23))
+* Corrected request bodies of `SpotifyWebAPI::addMy*` methods. ([07a1de0](https://github.com/jwilsson/spotify-web-api-php/commit/07a1de0a8a749f80687a20b7450f7a8782415dfb))
+* Corrected request bodies of `SpotifyWebAPI::deleteMy*` methods. ([f61995e](https://github.com/jwilsson/spotify-web-api-php/commit/f61995e1ab89e675cebf7a2560a97781be1dcd23))
 
 ## 6.1.0 (2024-06-06)
 * Added `Request::parseBody()` helper method. ([980e2b2](https://github.com/jwilsson/spotify-web-api-php/commit/980e2b24754bdc5c5ff648b97b2a53f32592b0a0))
