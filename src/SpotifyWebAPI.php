@@ -442,7 +442,9 @@ class SpotifyWebAPI
     public function deleteMyAlbums(string|array $albums): bool
     {
         $albums = $this->uriToId($albums, 'album');
-        $albums = json_encode((array) $albums);
+        $albums = json_encode([
+            'ids' => (array) $albums,
+        ]);
 
         $headers = [
             'Content-Type' => 'application/json',
@@ -466,7 +468,9 @@ class SpotifyWebAPI
     public function deleteMyEpisodes(string|array $episodes): bool
     {
         $episodes = $this->uriToId($episodes, 'episode');
-        $episodes = json_encode((array) $episodes);
+        $episodes = json_encode([
+            'ids' => (array) $episodes,
+        ]);
 
         $headers = [
             'Content-Type' => 'application/json',
@@ -490,7 +494,9 @@ class SpotifyWebAPI
     public function deleteMyShows(string|array $shows): bool
     {
         $shows = $this->uriToId($shows, 'show');
-        $shows = json_encode((array) $shows);
+        $shows = json_encode([
+            'ids' => (array) $shows,
+        ]);
 
         $headers = [
             'Content-Type' => 'application/json',
@@ -514,7 +520,9 @@ class SpotifyWebAPI
     public function deleteMyTracks(string|array $tracks): bool
     {
         $tracks = $this->uriToId($tracks, 'track');
-        $tracks = json_encode((array) $tracks);
+        $tracks = json_encode([
+            'ids' => (array) $tracks,
+        ]);
 
         $headers = [
             'Content-Type' => 'application/json',
