@@ -140,9 +140,11 @@ class SpotifyWebAPITest extends TestCase
         ];
 
         $expected = json_encode([
-            '1oR3KrPIp4CbagPa3PhtPp',
-            '6lPb7Eoon6QPbscWbMsk6a',
-            '1oR3KrPIp4CbagPa3PhtPp',
+            'ids' => [
+                '1oR3KrPIp4CbagPa3PhtPp',
+                '6lPb7Eoon6QPbscWbMsk6a',
+                '1oR3KrPIp4CbagPa3PhtPp',
+            ],
         ]);
 
         $headers = ['Content-Type' => 'application/json'];
@@ -169,9 +171,11 @@ class SpotifyWebAPITest extends TestCase
         ];
 
         $expected = json_encode([
-            '0zov0kd6MA3BqT1FKpOeYO',
-            '3pLx6LaVQbWl5IfW8nxq56',
-            '6kSGLgKWhBg8AoCzylVfc2',
+            'ids' => [
+                '0zov0kd6MA3BqT1FKpOeYO',
+                '3pLx6LaVQbWl5IfW8nxq56',
+                '6kSGLgKWhBg8AoCzylVfc2',
+            ],
         ]);
 
         $headers = ['Content-Type' => 'application/json'];
@@ -197,8 +201,10 @@ class SpotifyWebAPITest extends TestCase
         ];
 
         $expected = json_encode([
-            '2C6ups0LMt1G8n81XLlkbsPo',
-            '5AvwZVawapvyhJUIx71pdJ',
+            'ids' => [
+                '2C6ups0LMt1G8n81XLlkbsPo',
+                '5AvwZVawapvyhJUIx71pdJ',
+            ],
         ]);
 
         $headers = ['Content-Type' => 'application/json'];
@@ -225,9 +231,11 @@ class SpotifyWebAPITest extends TestCase
         ];
 
         $expected = json_encode([
-            '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l',
-            '1id6H6vcwSB9GGv9NXh5cl',
+            'ids' => [
+                '1id6H6vcwSB9GGv9NXh5cl',
+                '3mqRLlD9j92BBv1ueFhJ1l',
+                '1id6H6vcwSB9GGv9NXh5cl',
+            ],
         ]);
 
         $headers = ['Content-Type' => 'application/json'];
