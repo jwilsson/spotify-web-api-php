@@ -114,7 +114,7 @@ class Request
      */
     public function account(string $method, string $uri, string|array $parameters = [], array $headers = []): array
     {
-        return $this->send($method, self::ACCOUNT_URL . $uri, $parameters, $headers);
+        return $this->send($method, static::ACCOUNT_URL . $uri, $parameters, $headers);
     }
 
     /**
@@ -136,7 +136,7 @@ class Request
      */
     public function api(string $method, string $uri, string|array $parameters = [], array $headers = []): array
     {
-        return $this->send($method, self::API_URL . $uri, $parameters, $headers);
+        return $this->send($method, static::API_URL . $uri, $parameters, $headers);
     }
 
     /**
