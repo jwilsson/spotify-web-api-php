@@ -1,4 +1,9 @@
 # Changelog
+## 6.2.0 (2025-01-18)
+* Converted `self` to `static` in `Request` class. ([42edbe9](https://github.com/jwilsson/spotify-web-api-php/commit/42edbe9ed7d6f256c1f9cdc9742211c1e8c43349))
+* Marked deprecated endpoints in inline docs. ([298b1e6](https://github.com/jwilsson/spotify-web-api-php/commit/298b1e6d9eb2eed523c7e9d9c960580f27d73d04))
+* Updated CA bundle. ([d95e5f5](https://github.com/jwilsson/spotify-web-api-php/commit/d95e5f51ef827862aaf50678b08ac6b77b8040fe))
+
 ## 6.1.1 (2024-10-09)
 * Corrected request bodies of `SpotifyWebAPI::addMy*` methods. ([07a1de0](https://github.com/jwilsson/spotify-web-api-php/commit/07a1de0a8a749f80687a20b7450f7a8782415dfb))
 * Corrected request bodies of `SpotifyWebAPI::deleteMy*` methods. ([f61995e](https://github.com/jwilsson/spotify-web-api-php/commit/f61995e1ab89e675cebf7a2560a97781be1dcd23))
