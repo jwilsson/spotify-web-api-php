@@ -756,6 +756,8 @@ class SpotifyWebAPI
      * Get an artist's related artists.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-artists-related-artists
      *
+     * @deprecated See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api
+     *
      * @param string $artistId ID or URI of the artist.
      *
      * @return array|object The artist's related artists. Type is controlled by the `return_assoc` option.
@@ -823,6 +825,8 @@ class SpotifyWebAPI
      * Get audio analysis for track.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-audio-analysis
      *
+     * @deprecated See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api
+     *
      * @param string $trackId ID or URI of the track.
      *
      * @return array|object The track's audio analysis. Type is controlled by the `return_assoc` option.
@@ -886,6 +890,8 @@ class SpotifyWebAPI
     /**
      * Get audio features of a single track.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-audio-features
+     *
+     * @deprecated See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api
      *
      * @param string $trackId ID or URI of the track.
      *
@@ -1057,6 +1063,8 @@ class SpotifyWebAPI
      * Get Spotify featured playlists.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-featured-playlists
      *
+     * @deprecated See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api
+     *
      * @param array|object $options Optional. Options for the playlists.
      * - string locale Optional. Language to show playlists in, for example 'sv_SE'.
      * - string country Optional. ISO 3166-1 alpha-2 country code. Show playlists from this country.
@@ -1078,6 +1086,8 @@ class SpotifyWebAPI
     /**
      * Get a list of possible seed genres.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recommendation-genres
+     *
+     * @deprecated See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api
      *
      * @return array|object All possible seed genres. Type is controlled by the `return_assoc` option.
      */
@@ -1122,6 +1132,8 @@ class SpotifyWebAPI
     /**
      * Get audio features of multiple tracks.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features
+     *
+     * @deprecated See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api
      *
      * @param string|array $trackIds IDs or URIs of the tracks.
      *
@@ -1472,6 +1484,8 @@ class SpotifyWebAPI
     /**
      * Get recommendations based on artists, tracks, or genres.
      * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recommendations
+     *
+     * @deprecated See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api
      *
      * @param array|object $options Optional. Options for the recommendations.
      * - int limit Optional. Limit the number of recommendations.

@@ -499,6 +499,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-m
 ---
 ### getArtistRelatedArtists
 
+_Deprecated. See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api_
 
 ```php
 SpotifyWebAPI::getArtistRelatedArtists($artistId)
@@ -557,6 +558,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a
 ---
 ### getAudioAnalysis
 
+_Deprecated. See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api_
 
 ```php
 SpotifyWebAPI::getAudioAnalysis($trackId)
@@ -612,6 +614,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-m
 ---
 ### getAudioFeatures
 
+_Deprecated. See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api_
 
 ```php
 SpotifyWebAPI::getAudioFeatures($trackId)
@@ -767,6 +770,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-m
 ---
 ### getFeaturedPlaylists
 
+_Deprecated. See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api_
 
 ```php
 SpotifyWebAPI::getFeaturedPlaylists($options)
@@ -789,6 +793,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-f
 ---
 ### getGenreSeeds
 
+_Deprecated. See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api_
 
 ```php
 SpotifyWebAPI::getGenreSeeds()
@@ -837,6 +842,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a
 ---
 ### getMultipleAudioFeatures
 
+_Deprecated. See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api_
 
 ```php
 SpotifyWebAPI::getMultipleAudioFeatures($trackIds)
@@ -1142,6 +1148,7 @@ https://developer.spotify.com/documentation/web-api/reference/#/operations/get-p
 ---
 ### getRecommendations
 
+_Deprecated. See https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api_
 
 ```php
 SpotifyWebAPI::getRecommendations($options)
