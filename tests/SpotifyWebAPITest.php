@@ -440,30 +440,6 @@ class SpotifyWebAPITest extends TestCase
         $this->assertObjectHasProperty('id', $response);
     }
 
-    public function testCreatePlaylistDeprecatedOptions()
-    {
-        $options = [
-            'name' => 'Test playlist',
-            'public' => false,
-        ];
-
-        $expected = json_encode($options);
-
-        $headers = ['Content-Type' => 'application/json'];
-        $return = ['body' => get_fixture('user-playlist')];
-        $api = $this->setupApi(
-            'POST',
-            '/v1/me/playlists',
-            $expected,
-            $headers,
-            $return
-        );
-
-        $response = $api->createPlaylist($options);
-
-        $this->assertObjectHasProperty('id', $response);
-    }
-
     public function testCurrentUserFollows()
     {
         $options = [
