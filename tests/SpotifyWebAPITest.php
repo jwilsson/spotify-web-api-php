@@ -10,18 +10,18 @@ class SpotifyWebAPITest extends TestCase
 {
     private $accessToken = 'access_token';
 
-    private function setupRequestMock(
+    private function setupRequestStub(
         string $expectedMethod,
         string $expectedUri,
         string|array $expectedParameters,
         array $expectedHeaders,
         mixed $expectedReturn
     ) {
-        $requestMock = $this->createConfiguredMock(Request::class, [
+        $requestStub = $this->createConfiguredStub(Request::class, [
             'getLastResponse' => $expectedReturn,
         ]);
 
-        $requestMock->expects($this->any())
+        $requestStub
             ->method('api')
             ->with(
                 $this->equalTo($expectedMethod),
@@ -31,12 +31,12 @@ class SpotifyWebAPITest extends TestCase
             )
             ->willReturn($expectedReturn);
 
-        return $requestMock;
+        return $requestStub;
     }
 
-    private function setupSessionMock()
+    private function setupSessionStub()
     {
-        return $this->createConfiguredMock(Session::class, [
+        return $this->createConfiguredStub(Session::class, [
             'getAccessToken' => $this->accessToken,
             'refreshAccessToken' => true,
         ]);
@@ -49,7 +49,7 @@ class SpotifyWebAPITest extends TestCase
         array $expectedHeaders,
         mixed $expectedReturn
     ) {
-        $requestMock = $this->setupRequestMock(
+        $requestStub = $this->setupRequestStub(
             $expectedMethod,
             $expectedUri,
             $expectedParameters,
@@ -57,7 +57,7 @@ class SpotifyWebAPITest extends TestCase
             $expectedReturn
         );
 
-        return new SpotifyWebAPI([], null, $requestMock);
+        return new SpotifyWebAPI([], null, $requestStub);
     }
 
     public function testAutoRefreshOption()
@@ -67,8 +67,8 @@ class SpotifyWebAPITest extends TestCase
         $headers = ['Authorization' => 'Bearer ' . $this->accessToken];
         $return = ['body' => get_fixture('track')];
 
-        $sessionMock = $this->setupSessionMock();
-        $requestMock = $this->setupRequestMock(
+        $sessionStub = $this->setupSessionStub();
+        $requestStub = $this->setupRequestStub(
             'GET',
             '/v1/tracks/0eGsygTp906u18L0Oimnem',
             [],
@@ -76,17 +76,13 @@ class SpotifyWebAPITest extends TestCase
             $return
         );
 
-        $requestMock->method('api')
-            ->will(
-                $this->onConsecutiveCalls(
-                    $this->throwException(
-                        new SpotifyWebAPIException('The access token expired', 401)
-                    ),
-                    $this->returnValue($return)
-                )
-            );
+        $requestStub->method('api')
+            ->willThrowException(
+                new SpotifyWebAPIException('The access token expired', 401)
+            )
+            ->willReturn($return);
 
-        $api = new SpotifyWebAPI($options, $sessionMock, $requestMock);
+        $api = new SpotifyWebAPI($options, $sessionStub, $requestStub);
         $response = $api->getTrack('0eGsygTp906u18L0Oimnem');
 
         $this->assertObjectHasProperty('id', $response);
@@ -105,7 +101,7 @@ class SpotifyWebAPITest extends TestCase
             'status' => 429,
         ];
 
-        $requestMock = $this->setupRequestMock(
+        $requestStub = $this->setupRequestStub(
             'GET',
             '/v1/tracks/0eGsygTp906u18L0Oimnem',
             [],
@@ -113,17 +109,13 @@ class SpotifyWebAPITest extends TestCase
             $return
         );
 
-        $requestMock->method('api')
-            ->will(
-                $this->onConsecutiveCalls(
-                    $this->throwException(
-                        new SpotifyWebAPIException('API rate limit exceeded', 429)
-                    ),
-                    $this->returnValue($return)
-                )
-            );
+        $requestStub->method('api')
+            ->willThrowException(
+                new SpotifyWebAPIException('API rate limit exceeded', 429)
+            )
+            ->willReturn($return);
 
-        $api = new SpotifyWebAPI($options, null, $requestMock);
+        $api = new SpotifyWebAPI($options, null, $requestStub);
         $api->setAccessToken($this->accessToken);
 
         $response = $api->getTrack('0eGsygTp906u18L0Oimnem');
@@ -2488,7 +2480,7 @@ class SpotifyWebAPITest extends TestCase
 
     public function testSetSession() {
         $api = new SpotifyWebAPI();
-        $returnedValue = $api->setSession($this->setupSessionMock());
+        $returnedValue = $api->setSession($this->setupSessionStub());
 
         $this->assertSame($api, $returnedValue);
     }
