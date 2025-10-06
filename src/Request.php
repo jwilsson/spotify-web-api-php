@@ -6,8 +6,8 @@ namespace SpotifyWebAPI;
 
 class Request
 {
-    public const ACCOUNT_URL = 'https://accounts.spotify.com';
-    public const API_URL = 'https://api.spotify.com';
+    public const string ACCOUNT_URL = 'https://accounts.spotify.com';
+    public const string API_URL = 'https://api.spotify.com';
 
     protected array $lastResponse = [];
     protected array $options = [
