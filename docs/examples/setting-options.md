@@ -5,6 +5,7 @@ There are a few options that can be used to control the behaviour of the API. Al
 ```php
 $options = [
     'auto_refresh' => true,
+    'default_headers' => ['Accept-Language' => 'en-US'],
 ];
 
 // Options can be set using the SpotifyWebAPI constructor
@@ -27,6 +28,12 @@ Used to control [automatic refresh of access tokens](refreshing-access-tokens.md
 * Possible values: `true`/`false` (default)
 
 Used to control automatic retries of [rate limited requests](https://developer.spotify.com/documentation/web-api/guides/rate-limits/).
+
+### `default_headers`
+
+* Possible values: `[]` (default)
+
+Used to set default HTTP headers that will be included in every request. For example `Accept-Language` to force Latin alphabet in returned results. Passed as key-value pairs, e.g. `['Accept-Language' => 'en-US']`.
 
 ### `return_assoc`
 

@@ -12,6 +12,7 @@ class Request
     protected array $lastResponse = [];
     protected array $options = [
         'curl_options' => [],
+        'default_headers' => [],
         'return_assoc' => false,
     ];
 
@@ -24,6 +25,25 @@ class Request
     public function __construct(array|object $options = [])
     {
         $this->setOptions($options);
+    }
+
+    /**
+     * Format request headers to be used with cURL.
+     *
+     * @param array|object $headers The headers to format.
+     *
+     * @return array The formatted headers.
+     */
+    protected function formatHeaders(array|object $headers): array
+    {
+        $headers = array_merge((array) $this->options['default_headers'], $headers);
+
+        $formattedHeaders = [];
+        foreach ($headers as $key => $val) {
+            $formattedHeaders[] = "$key: $val";
+        }
+
+        return $formattedHeaders;
     }
 
     /**
@@ -181,20 +201,15 @@ class Request
             $parameters = http_build_query($parameters, '', '&');
         }
 
+        $method = strtoupper($method);
         $options = [
             CURLOPT_CAINFO => __DIR__ . '/cacert.pem',
             CURLOPT_ENCODING => '',
             CURLOPT_HEADER => true,
-            CURLOPT_HTTPHEADER => [],
+            CURLOPT_HTTPHEADER => $this->formatHeaders($headers),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL => rtrim($url, '/'),
         ];
-
-        foreach ($headers as $key => $val) {
-            $options[CURLOPT_HTTPHEADER][] = "$key: $val";
-        }
-
-        $method = strtoupper($method);
 
         switch ($method) {
             case 'DELETE': // No break

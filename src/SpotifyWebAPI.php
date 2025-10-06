@@ -11,6 +11,7 @@ class SpotifyWebAPI
     protected array $options = [
         'auto_refresh' => false,
         'auto_retry' => false,
+        'default_headers' => [],
         'return_assoc' => false,
     ];
     protected ?Request $request = null;
@@ -113,6 +114,7 @@ class SpotifyWebAPI
         array $headers = []
     ): array {
         $this->request->setOptions([
+            'default_headers' => $this->options['default_headers'],
             'return_assoc' => $this->options['return_assoc'],
         ]);
 
