@@ -2299,6 +2299,11 @@ class SpotifyWebAPI
         $options = (array) $options;
 
         if (isset($options['ids'])) {
+            trigger_error(
+                'Passing IDs to usersFollowPlaylist is deprecated. The current user will always be used.',
+                E_USER_DEPRECATED
+            );
+
             $options['ids'] = $this->uriToId($options['ids'], 'user');
             $options['ids'] = $this->toCommaString($options['ids']);
         }
