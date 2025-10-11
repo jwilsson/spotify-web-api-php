@@ -432,6 +432,24 @@ class SpotifyWebAPITest extends TestCase
         $this->assertTrue($response[0]);
     }
 
+    public function testCurrentUserFollowsPlaylist()
+    {
+        $return = ['body' => get_fixture('users-follows-playlist')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers/contains',
+            [],
+            [],
+            $return
+        );
+
+        $response = $api->currentUserFollowsPlaylist(
+            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+        );
+
+        $this->assertTrue($response[0]);
+    }
+
     public function testDeleteMyAlbums()
     {
         $albums = [
@@ -2363,13 +2381,12 @@ class SpotifyWebAPITest extends TestCase
     {
         $options = [
             'ids' => [
-                'possan',
-                'spotify:user:elogain',
+                'spotify:user:mcgurk',
             ],
         ];
 
         $expected = [
-            'ids' => 'possan,elogain',
+            'ids' => 'mcgurk',
         ];
 
         $return = ['body' => get_fixture('users-follows-playlist')];

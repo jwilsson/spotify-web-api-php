@@ -34,17 +34,10 @@ $api->followPlaylist('PLAYLIST_ID');
 $api->unfollowPlaylist('PLAYLIST_ID');
 ```
 
-## Checking if user(s) are following a playlist
+## Checking if the current user is following a playlist
 
 ```php
-$users = [
-    'USER_1',
-    'USER_2',
-];
-
-$api->usersFollowsPlaylist('PLAYLIST_ID', [
-    'ids' => $users,
-]);
+$api->currentUserFollowsPlaylist('PLAYLIST_ID');
 ```
 
 Please see the [method reference](/docs/method-reference/SpotifyWebAPI.md) for more available options for each method.

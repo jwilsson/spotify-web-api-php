@@ -434,6 +434,25 @@ class SpotifyWebAPI
     }
 
     /**
+     * Check if the current user is following a playlist.
+     * https://developer.spotify.com/documentation/web-api/reference/check-if-user-follows-playlist
+     *
+     * @param string $playlistId ID or URI of the playlist to check.
+     *
+     * @return array Array containing one boolean describing whether the playlist is followed.
+     */
+    public function currentUserFollowsPlaylist(string $playlistId): array
+    {
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
+        $uri = '/v1/playlists/' . $playlistId . '/followers/contains';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Delete albums from the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/remove-albums-user
      *
@@ -2234,14 +2253,22 @@ class SpotifyWebAPI
      * Check if a set of users are following a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/check-if-user-follows-playlist
      *
-     * @param string $playlistId ID or URI of the playlist.
-     * @param array|object $options Options for the check.
-     * - ids string|array Required. IDs or URIs of the users to check for.
+     * @deprecated Use SpotifyWebAPI::currentUserFollowsPlaylist() instead.
      *
-     * @return array Whether each user is following the playlist.
+     * @param string $playlistId ID or URI of the playlist.
+     * @param array|object $options Optional. Options for the check.
+     * - ids string|array ID or URI of the current user.
+     *
+     * @return array Whether the current user is following the playlist.
      */
-    public function usersFollowPlaylist(string $playlistId, array|object $options): array
+    public function usersFollowPlaylist(string $playlistId, array|object $options = []): array
     {
+        trigger_error(
+            // phpcs:ignore
+            'SpotifyWebAPI::usersFollowPlaylist() is deprecated. Use SpotifyWebAPI::currentUserFollowsPlaylist() instead.',
+            E_USER_DEPRECATED
+        );
+
         $options = (array) $options;
 
         if (isset($options['ids'])) {

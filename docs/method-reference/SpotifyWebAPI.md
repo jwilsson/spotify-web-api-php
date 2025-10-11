@@ -11,6 +11,7 @@
 * [changeVolume](#changevolume)
 * [createPlaylist](#createplaylist)
 * [currentUserFollows](#currentuserfollows)
+* [currentUserFollowsPlaylist](#currentuserfollowsplaylist)
 * [deleteMyAlbums](#deletemyalbums)
 * [deleteMyEpisodes](#deletemyepisodes)
 * [deleteMyShows](#deletemyshows)
@@ -276,6 +277,23 @@ https://developer.spotify.com/documentation/web-api/reference/check-current-user
 
 #### Return values
 * **array** Whether each user or artist is followed.
+
+---
+### currentUserFollowsPlaylist
+
+
+```php
+SpotifyWebAPI::currentUserFollowsPlaylist($playlistId)
+```
+
+Check if the current user is following a playlist.<br>
+https://developer.spotify.com/documentation/web-api/reference/check-if-user-follows-playlist
+
+#### Arguments
+* `$playlistId` **string** - ID or URI of the playlist to check.
+
+#### Return values
+* **array** Array containing one boolean describing whether the playlist is followed.
 
 ---
 ### deleteMyAlbums
@@ -1627,7 +1645,7 @@ Set the access token to use.
 * `$accessToken` **string** - The access token.
 
 #### Return values
-* **self**
+* **self** 
 
 ---
 ### setOptions
@@ -1643,7 +1661,7 @@ Set options
 * `$options` **array\|object** - Options to set.
 
 #### Return values
-* **self**
+* **self** 
 
 ---
 ### setSession
@@ -1659,7 +1677,7 @@ Set the Session object to use.
 * `$session` **\SpotifyWebAPI\Session** - The Session object.
 
 #### Return values
-* **self**
+* **self** 
 
 ---
 ### shuffle
@@ -1758,6 +1776,7 @@ https://developer.spotify.com/documentation/web-api/reference/upload-custom-play
 ---
 ### usersFollowPlaylist
 
+_Deprecated. Use SpotifyWebAPI::currentUserFollowsPlaylist() instead._
 
 ```php
 SpotifyWebAPI::usersFollowPlaylist($playlistId, $options)
@@ -1768,10 +1787,10 @@ https://developer.spotify.com/documentation/web-api/reference/check-if-user-foll
 
 #### Arguments
 * `$playlistId` **string** - ID or URI of the playlist.
-* `$options` **array\|object** - Options for the check.
-    * ids string\|array Required. IDs or URIs of the users to check for.
+* `$options` **array\|object** - Optional. Options for the check.
+    * ids string\|array ID or URI of the current user.
 
 #### Return values
-* **array** Whether each user is following the playlist.
+* **array** Whether the current user is following the playlist.
 
 ---
