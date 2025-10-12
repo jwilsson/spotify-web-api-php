@@ -2411,35 +2411,6 @@ class SpotifyWebAPITest extends TestCase
         );
     }
 
-    public function testUsersFollowPlaylist()
-    {
-        $options = [
-            'ids' => [
-                'spotify:user:mcgurk',
-            ],
-        ];
-
-        $expected = [
-            'ids' => 'mcgurk',
-        ];
-
-        $return = ['body' => get_fixture('users-follows-playlist')];
-        $api = $this->setupApi(
-            'GET',
-            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers/contains',
-            $expected,
-            [],
-            $return
-        );
-
-        $response = $api->usersFollowPlaylist(
-            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
-            $options
-        );
-
-        $this->assertTrue($response[0]);
-    }
-
     public function testSetAccessToken() {
         $api = new SpotifyWebAPI();
         $returnedValue = $api->setAccessToken($this->accessToken);

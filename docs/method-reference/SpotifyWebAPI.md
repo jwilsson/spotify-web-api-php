@@ -91,7 +91,6 @@
 * [unfollowPlaylist](#unfollowplaylist)
 * [updatePlaylist](#updateplaylist)
 * [updatePlaylistImage](#updateplaylistimage)
-* [usersFollowPlaylist](#usersfollowplaylist)
 
 ## Constants
 
@@ -1774,25 +1773,5 @@ https://developer.spotify.com/documentation/web-api/reference/upload-custom-play
 
 #### Return values
 * **bool** Whether the playlist was successfully updated.
-
----
-### usersFollowPlaylist
-
-_Deprecated. Use SpotifyWebAPI::currentUserFollowsPlaylist() instead._
-
-```php
-SpotifyWebAPI::usersFollowPlaylist($playlistId, $options)
-```
-
-Check if a set of users are following a playlist.<br>
-https://developer.spotify.com/documentation/web-api/reference/check-if-user-follows-playlist
-
-#### Arguments
-* `$playlistId` **string** - ID or URI of the playlist.
-* `$options` **array\|object** - Optional. Options for the check.
-    * ids string\|array ID or URI of the current user.
-
-#### Return values
-* **array** Whether the current user is following the playlist.
 
 ---

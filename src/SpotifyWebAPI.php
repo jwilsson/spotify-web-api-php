@@ -2265,45 +2265,4 @@ class SpotifyWebAPI
 
         return $this->lastResponse['status'] == 202;
     }
-
-    /**
-     * Check if a set of users are following a playlist.
-     * https://developer.spotify.com/documentation/web-api/reference/check-if-user-follows-playlist
-     *
-     * @deprecated Use SpotifyWebAPI::currentUserFollowsPlaylist() instead.
-     *
-     * @param string $playlistId ID or URI of the playlist.
-     * @param array|object $options Optional. Options for the check.
-     * - ids string|array ID or URI of the current user.
-     *
-     * @return array Whether the current user is following the playlist.
-     */
-    public function usersFollowPlaylist(string $playlistId, array|object $options = []): array
-    {
-        trigger_error(
-            // phpcs:ignore
-            'SpotifyWebAPI::usersFollowPlaylist() is deprecated. Use SpotifyWebAPI::currentUserFollowsPlaylist() instead.',
-            E_USER_DEPRECATED
-        );
-
-        $options = (array) $options;
-
-        if (isset($options['ids'])) {
-            trigger_error(
-                'Passing IDs to usersFollowPlaylist is deprecated. The current user will always be used.',
-                E_USER_DEPRECATED
-            );
-
-            $options['ids'] = $this->uriToId($options['ids'], 'user');
-            $options['ids'] = $this->toCommaString($options['ids']);
-        }
-
-        $playlistId = $this->uriToId($playlistId, 'playlist');
-
-        $uri = '/v1/playlists/' . $playlistId . '/followers/contains';
-
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
-
-        return $this->lastResponse['body'];
-    }
 }
