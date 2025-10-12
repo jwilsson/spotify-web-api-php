@@ -266,16 +266,16 @@ class SpotifyWebAPI
      *
      * @return bool Whether the tracks was successfully added.
      */
-    public function addMyTracks(string|array|object $tracks): bool
+    public function addMyTracks(array|object $tracks): bool
     {
-        $tracks = is_object($tracks) ? (array) $tracks : $tracks;
+        $tracks = (array) $tracks;
 
-        if (is_array($tracks) && isset($tracks['ids'])) {
+        if (isset($tracks['ids'])) {
             $tracks = (array) $this->uriToId($tracks['ids'], 'track');
             $options = json_encode([
                 'ids' => $tracks,
             ]);
-        } elseif (is_array($tracks) && isset($tracks['timestamped_ids'])) {
+        } elseif (isset($tracks['timestamped_ids'])) {
             $tracks = array_map(function ($item) {
                 $item['id'] = $this->uriToId($item['id'], 'track');
 
@@ -284,17 +284,6 @@ class SpotifyWebAPI
 
             $options = json_encode([
                 'timestamped_ids' => $tracks,
-            ]);
-        } else {
-            trigger_error(
-                // phpcs:ignore
-                'Passing string or array without "ids" or "timestamped_ids" key to SpotifyWebAPI::addMyTracks() is deprecated',
-                E_USER_DEPRECATED
-            );
-
-            $tracks = (array) $this->uriToId($tracks, 'track');
-            $options = json_encode([
-                'ids' => $tracks,
             ]);
         }
 
