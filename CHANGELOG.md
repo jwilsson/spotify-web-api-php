@@ -1,4 +1,10 @@
 # Changelog
+## 6.3.0 (2025-10-12)
+* Added support for `timestamped_ids` to `SpotifyWebAPI::addMyTracks()` and deprecated passing strings or array without an `ids` key. ([f17cdff](https://github.com/jwilsson/spotify-web-api-php/commit/f17cdff1135c6490eb7597c230b5ed4aa7aafd4c))
+* Added a `default_headers` options to add HTTP headers that should be included in each request. ([ef9b92e](https://github.com/jwilsson/spotify-web-api-php/commit/ef9b92e57bb5bd2859d8a8e660b0a009e0409cf8))
+* Deprecated `SpotifyWebAPI::usersFollowPlaylist()`, use `SpotifyWebAPI::currentUserFollowsPlaylist()` instead. ([1427059](https://github.com/jwilsson/spotify-web-api-php/commit/14270598f479f588b9dea22c05b8fbe325d25a9a))
+* Updated CA bundle. ([4e82140](https://github.com/jwilsson/spotify-web-api-php/commit/4e821405f343d5d5607f70a931ba31269dd4ed3e))
+
 ## 6.2.0 (2025-01-18)
 * Converted `self` to `static` in `Request` class. ([42edbe9](https://github.com/jwilsson/spotify-web-api-php/commit/42edbe9ed7d6f256c1f9cdc9742211c1e8c43349))
 * Marked deprecated endpoints in inline docs. ([298b1e6](https://github.com/jwilsson/spotify-web-api-php/commit/298b1e6d9eb2eed523c7e9d9c960580f27d73d04))
