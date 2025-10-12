@@ -222,7 +222,73 @@ class SpotifyWebAPITest extends TestCase
         );
     }
 
-    public function testAddMyTracks()
+    public function testAddMyTracksIds()
+    {
+        $tracks = [
+            'ids' => [
+                '1id6H6vcwSB9GGv9NXh5cl',
+                '3mqRLlD9j92BBv1ueFhJ1l',
+                'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
+            ],
+        ];
+
+        $expected = json_encode([
+            'ids' => [
+                '1id6H6vcwSB9GGv9NXh5cl',
+                '3mqRLlD9j92BBv1ueFhJ1l',
+                '1id6H6vcwSB9GGv9NXh5cl',
+            ],
+        ]);
+
+        $headers = ['Content-Type' => 'application/json'];
+        $return = ['status' => 200];
+        $api = $this->setupApi(
+            'PUT',
+            '/v1/me/tracks',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $this->assertTrue(
+            $api->addMyTracks($tracks)
+        );
+    }
+
+    public function testAddMyTracksTimestampedIds()
+    {
+        $tracks = [
+            'timestamped_ids' => [
+                ['id' => '1id6H6vcwSB9GGv9NXh5cl', 'added_at' => '2025-10-01T10:00:00.000Z'],
+                ['id' => '3mqRLlD9j92BBv1ueFhJ1l', 'added_at' => '2025-10-01T11:00:00.000Z'],
+                ['id' => 'spotify:track:1id6H6vcwSB9GGv9NXh5cl', 'added_at' => '2025-10-01T12:00:00.000Z'],
+            ],
+        ];
+
+        $expected = json_encode([
+            'timestamped_ids' => [
+                ['id' => '1id6H6vcwSB9GGv9NXh5cl', 'added_at' => '2025-10-01T10:00:00.000Z'],
+                ['id' => '3mqRLlD9j92BBv1ueFhJ1l', 'added_at' => '2025-10-01T11:00:00.000Z'],
+                ['id' => '1id6H6vcwSB9GGv9NXh5cl', 'added_at' => '2025-10-01T12:00:00.000Z'],
+            ],
+        ]);
+
+        $headers = ['Content-Type' => 'application/json'];
+        $return = ['status' => 200];
+        $api = $this->setupApi(
+            'PUT',
+            '/v1/me/tracks',
+            $expected,
+            $headers,
+            $return
+        );
+
+        $this->assertTrue(
+            $api->addMyTracks($tracks)
+        );
+    }
+
+    public function testAddMyTracksDeprecated()
     {
         $tracks = [
             '1id6H6vcwSB9GGv9NXh5cl',

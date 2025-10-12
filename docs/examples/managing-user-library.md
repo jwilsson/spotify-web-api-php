@@ -22,12 +22,44 @@ It's also possible to list the albums, podcast episodes, or podcast shows in a u
 
 ```php
 $api->addMyTracks([
-    'TRACK_ID',
-    'TRACK_ID',
+    'ids' => [
+        'TRACK_ID',
+        'TRACK_ID',
+    ],
 ]);
 ```
 
-It's also possible to add an album, a podcast episode, or a podcast show to a user's library using `addMyAlbums`, `addMyEpisodes`, or `addMyShows`.
+```php
+$api->addMyTracks([
+    'timestamped_ids' => [
+        ['id' => 'TRACK_ID', 'added_at' => '2025-10-01T11:00:00.000Z'],
+        ['id' => 'TRACK_ID', 'added_at' => '2025-10-01T12:00:00.000Z'],
+    ],
+]);
+```
+
+## Adding albums, episodes, or shows to a user's library
+
+```php
+$api->addMyAlbums([
+    'ALBUM_ID',
+    'ALBUM_ID',
+]);
+```
+
+```php
+$api->addMyEpisodes([
+    'EPISODE_ID',
+    'EPISODE_ID',
+]);
+```
+
+```php
+$api->addMyShows([
+    'SHOW_ID',
+    'SHOW_ID',
+]);
+```
 
 ## Deleting tracks from a user's library
 

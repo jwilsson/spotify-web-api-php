@@ -175,7 +175,9 @@ Add tracks to the current user's Spotify library.<br>
 https://developer.spotify.com/documentation/web-api/reference/save-tracks-user
 
 #### Arguments
-* `$tracks` **string\|array** - Track IDs or URIs to add.
+* `$tracks` **array\|object** - Track IDs or URIs to add. One of "ids" or "timestamped_ids" key must be present.
+    * array ids Optional. An array of track IDs or URIs.
+    * array timestamped_ids Optional. An array of objects containing track IDs or URIs and added_at timestamp.
 
 #### Return values
 * **bool** Whether the tracks was successfully added.

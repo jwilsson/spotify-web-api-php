@@ -260,16 +260,43 @@ class SpotifyWebAPI
      * Add tracks to the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/save-tracks-user
      *
-     * @param string|array $tracks Track IDs or URIs to add.
+     * @param array|object $tracks Track IDs or URIs to add. One of "ids" or "timestamped_ids" key must be present.
+     * - array ids Optional. An array of track IDs or URIs.
+     * - array timestamped_ids Optional. An array of objects containing track IDs or URIs and added_at timestamp.
      *
      * @return bool Whether the tracks was successfully added.
      */
-    public function addMyTracks(string|array $tracks): bool
+    public function addMyTracks(string|array|object $tracks): bool
     {
-        $tracks = $this->uriToId($tracks, 'track');
-        $tracks = json_encode([
-            'ids' => (array) $tracks,
-        ]);
+        $tracks = is_object($tracks) ? (array) $tracks : $tracks;
+
+        if (is_array($tracks) && isset($tracks['ids'])) {
+            $tracks = (array) $this->uriToId($tracks['ids'], 'track');
+            $options = json_encode([
+                'ids' => $tracks,
+            ]);
+        } elseif (is_array($tracks) && isset($tracks['timestamped_ids'])) {
+            $tracks = array_map(function ($item) {
+                $item['id'] = $this->uriToId($item['id'], 'track');
+
+                return $item;
+            }, $tracks['timestamped_ids']);
+
+            $options = json_encode([
+                'timestamped_ids' => $tracks,
+            ]);
+        } else {
+            trigger_error(
+                // phpcs:ignore
+                'Passing string or array without "ids" or "timestamped_ids" key to SpotifyWebAPI::addMyTracks() is deprecated',
+                E_USER_DEPRECATED
+            );
+
+            $tracks = (array) $this->uriToId($tracks, 'track');
+            $options = json_encode([
+                'ids' => $tracks,
+            ]);
+        }
 
         $headers = [
             'Content-Type' => 'application/json',
@@ -277,7 +304,7 @@ class SpotifyWebAPI
 
         $uri = '/v1/me/tracks';
 
-        $this->lastResponse = $this->sendRequest('PUT', $uri, $tracks, $headers);
+        $this->lastResponse = $this->sendRequest('PUT', $uri, $options, $headers);
 
         return $this->lastResponse['status'] == 200;
     }
