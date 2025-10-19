@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace SpotifyWebAPI;
 
-use \phpmock\phpunit\PHPMock;
-use \PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
-use \PHPUnit\Framework\TestCase;
+use phpmock\phpunit\PHPMock;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use PHPUnit\Framework\TestCase;
 
 #[RunTestsInSeparateProcesses]
 class RequestTest extends TestCase
@@ -75,7 +75,7 @@ class RequestTest extends TestCase
         $this->setupFunctionMock('curl_getinfo')->willReturn(400);
 
         $parameters = [
-            'grant_type' => 'client_credentials'
+            'grant_type' => 'client_credentials',
         ];
 
         $headers = [
@@ -176,7 +176,7 @@ class RequestTest extends TestCase
             function (\CurlHandle $ch, array $options) {
                 $this->assertEquals('DELETE', $options[CURLOPT_CUSTOMREQUEST]);
                 $this->assertEquals('foo=bar', $options[CURLOPT_POSTFIELDS]);
-            }
+            },
         );
 
         $parameters = [
@@ -194,7 +194,7 @@ class RequestTest extends TestCase
             function (\CurlHandle $ch, array $options) {
                 $this->assertEquals(true, $options[CURLOPT_POST]);
                 $this->assertEquals('foo=bar', $options[CURLOPT_POSTFIELDS]);
-            }
+            },
         );
 
         $parameters = [
@@ -212,7 +212,7 @@ class RequestTest extends TestCase
             function (\CurlHandle $ch, array $options) {
                 $this->assertEquals('PUT', $options[CURLOPT_CUSTOMREQUEST]);
                 $this->assertEquals('foo=bar', $options[CURLOPT_POSTFIELDS]);
-            }
+            },
         );
 
         $parameters = [
@@ -230,7 +230,7 @@ class RequestTest extends TestCase
             function (\CurlHandle $ch, array $options) {
                 $this->assertEquals('GET', $options[CURLOPT_CUSTOMREQUEST]);
                 $this->assertEquals('https://www.example.com/?foo=bar', $options[CURLOPT_URL]);
-            }
+            },
         );
 
         $parameters = [
@@ -265,7 +265,7 @@ class RequestTest extends TestCase
     public function testSendTransportError()
     {
         $this->expectExceptionObject(
-            new SpotifyWebAPIException('cURL transport error: 6 Could not resolve host: non-existent')
+            new SpotifyWebAPIException('cURL transport error: 6 Could not resolve host: non-existent'),
         );
 
         $request = new Request();
@@ -303,7 +303,7 @@ class RequestTest extends TestCase
         $this->setupFunctionMock('curl_getinfo')->willReturn(400);
 
         $this->expectExceptionObject(
-            new SpotifyWebAPIException('An unknown error occurred.', 400)
+            new SpotifyWebAPIException('An unknown error occurred.', 400),
         );
 
         $request = new Request();
@@ -316,7 +316,7 @@ class RequestTest extends TestCase
         $this->setupFunctionMock('curl_getinfo')->willReturn(400);
 
         $this->expectExceptionObject(
-            new SpotifyWebAPIException('Foobar error', 400)
+            new SpotifyWebAPIException('Foobar error', 400),
         );
 
         $request = new Request();

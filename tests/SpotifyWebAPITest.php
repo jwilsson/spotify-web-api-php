@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SpotifyWebAPI;
 
-use \PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class SpotifyWebAPITest extends TestCase
 {
@@ -15,7 +15,7 @@ class SpotifyWebAPITest extends TestCase
         string $expectedUri,
         string|array $expectedParameters,
         array $expectedHeaders,
-        mixed $expectedReturn
+        mixed $expectedReturn,
     ) {
         $requestStub = $this->createConfiguredStub(Request::class, [
             'getLastResponse' => $expectedReturn,
@@ -27,7 +27,7 @@ class SpotifyWebAPITest extends TestCase
                 $this->equalTo($expectedMethod),
                 $this->equalTo($expectedUri),
                 $this->equalTo($expectedParameters),
-                $this->equalTo($expectedHeaders)
+                $this->equalTo($expectedHeaders),
             )
             ->willReturn($expectedReturn);
 
@@ -47,14 +47,14 @@ class SpotifyWebAPITest extends TestCase
         string $expectedUri,
         mixed $expectedParameters,
         array $expectedHeaders,
-        mixed $expectedReturn
+        mixed $expectedReturn,
     ) {
         $requestStub = $this->setupRequestStub(
             $expectedMethod,
             $expectedUri,
             $expectedParameters,
             $expectedHeaders,
-            $expectedReturn
+            $expectedReturn,
         );
 
         return new SpotifyWebAPI([], null, $requestStub);
@@ -73,12 +73,12 @@ class SpotifyWebAPITest extends TestCase
             '/v1/tracks/0eGsygTp906u18L0Oimnem',
             [],
             $headers,
-            $return
+            $return,
         );
 
         $requestStub->method('api')
             ->willThrowException(
-                new SpotifyWebAPIException('The access token expired', 401)
+                new SpotifyWebAPIException('The access token expired', 401),
             )
             ->willReturn($return);
 
@@ -106,12 +106,12 @@ class SpotifyWebAPITest extends TestCase
             '/v1/tracks/0eGsygTp906u18L0Oimnem',
             [],
             $headers,
-            $return
+            $return,
         );
 
         $requestStub->method('api')
             ->willThrowException(
-                new SpotifyWebAPIException('API rate limit exceeded', 429)
+                new SpotifyWebAPIException('API rate limit exceeded', 429),
             )
             ->willReturn($return);
 
@@ -146,11 +146,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/albums',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->addMyAlbums($albums)
+            $api->addMyAlbums($albums),
         );
     }
 
@@ -177,11 +177,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/episodes',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->addMyEpisodes($episodes)
+            $api->addMyEpisodes($episodes),
         );
     }
 
@@ -206,11 +206,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/shows',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->addMyShows($shows)
+            $api->addMyShows($shows),
         );
     }
 
@@ -239,11 +239,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/tracks',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->addMyTracks($tracks)
+            $api->addMyTracks($tracks),
         );
     }
 
@@ -272,11 +272,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/tracks',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->addMyTracks($tracks)
+            $api->addMyTracks($tracks),
         );
     }
 
@@ -306,15 +306,15 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertNotFalse(
             $api->addPlaylistTracks(
                 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
                 $tracks,
-                $options
-            )
+                $options,
+            ),
         );
     }
 
@@ -331,15 +331,15 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertFalse(
             $api->addPlaylistTracks(
                 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
                 [],
-                []
-            )
+                [],
+            ),
         );
     }
 
@@ -358,11 +358,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->changeMyDevice($options)
+            $api->changeMyDevice($options),
         );
     }
 
@@ -376,11 +376,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/volume?volume_percent=100',
             [],
             [],
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->changeVolume($options)
+            $api->changeVolume($options),
         );
     }
 
@@ -401,7 +401,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/users/mcgurk/playlists',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $response = $api->createPlaylist($userId, $options);
@@ -427,7 +427,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/following/contains',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->currentUserFollows('artist', $options);
@@ -443,7 +443,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers/contains',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->currentUserFollowsPlaylist(
@@ -476,11 +476,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/albums',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->deleteMyAlbums($albums)
+            $api->deleteMyAlbums($albums),
         );
     }
 
@@ -507,11 +507,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/episodes',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->deleteMyEpisodes($episodes)
+            $api->deleteMyEpisodes($episodes),
         );
     }
 
@@ -520,7 +520,7 @@ class SpotifyWebAPITest extends TestCase
         $shows = [
             '1oR3KrPIp4CbagPa3PhtPp',
             '6lPb7Eoon6QPbscWbMsk6a',
-            'spotify:show:1oR3KrPIp4CbagPa3PhtPp'
+            'spotify:show:1oR3KrPIp4CbagPa3PhtPp',
         ];
 
         $expected = json_encode([
@@ -538,11 +538,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/shows',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->deleteMyShows($shows)
+            $api->deleteMyShows($shows),
         );
     }
 
@@ -569,11 +569,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/tracks',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->deleteMyTracks($tracks)
+            $api->deleteMyTracks($tracks),
         );
     }
 
@@ -631,15 +631,15 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertNotFalse(
             $api->deletePlaylistTracks(
                 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
                 $tracks,
-                'snapshot_id'
-            )
+                'snapshot_id',
+            ),
         );
     }
 
@@ -667,15 +667,15 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertNotFalse(
             $api->deletePlaylistTracks(
                 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
                 $trackPositions,
-                'snapshot_id'
-            )
+                'snapshot_id',
+            ),
         );
     }
 
@@ -692,14 +692,14 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertFalse(
             $api->deletePlaylistTracks(
                 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
-                ['positions' => []]
-            )
+                ['positions' => []],
+            ),
         );
     }
 
@@ -707,7 +707,7 @@ class SpotifyWebAPITest extends TestCase
     {
         $options = [
             'spotify:artist:74ASZWbe4lXaubB36ztrGX',
-            '36QJpDe2go2KgaRleHCDTp'
+            '36QJpDe2go2KgaRleHCDTp',
         ];
 
         $expected = json_encode([
@@ -724,12 +724,12 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/following?type=artist',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue($api->followArtistsOrUsers(
             'artist',
-            $options
+            $options,
         ));
     }
 
@@ -745,12 +745,12 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue($api->followPlaylist(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
-            $options
+            $options,
         ));
     }
 
@@ -765,7 +765,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/albums/7u6zL7kqpgLPISZYXNTgYk',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getAlbum('spotify:album:7u6zL7kqpgLPISZYXNTgYk', $options);
@@ -781,7 +781,7 @@ class SpotifyWebAPITest extends TestCase
         ];
 
         $options = [
-            'market' => 'SE'
+            'market' => 'SE',
         ];
 
         $expected = [
@@ -795,7 +795,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/albums/',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getAlbums($albums, $options);
@@ -821,7 +821,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/albums/1oR3KrPIp4CbagPa3PhtPp/tracks',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getAlbumTracks('spotify:album:1oR3KrPIp4CbagPa3PhtPp', $options);
@@ -837,7 +837,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/artists/36QJpDe2go2KgaRleHCDTp',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->getArtist('spotify:artist:36QJpDe2go2KgaRleHCDTp');
@@ -853,7 +853,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/artists/36QJpDe2go2KgaRleHCDTp/related-artists',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->getArtistRelatedArtists('spotify:artist:36QJpDe2go2KgaRleHCDTp');
@@ -878,7 +878,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/artists/',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getArtists($artists);
@@ -906,7 +906,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/artists/36QJpDe2go2KgaRleHCDTp/albums',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getArtistAlbums('spotify:artist:36QJpDe2go2KgaRleHCDTp', $options);
@@ -925,7 +925,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/artists/36QJpDe2go2KgaRleHCDTp/top-tracks',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getArtistTopTracks('spotify:artist:36QJpDe2go2KgaRleHCDTp', $options);
@@ -941,7 +941,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/audio-analysis/0eGsygTp906u18L0Oimnem',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->getAudioAnalysis('spotify:track:0eGsygTp906u18L0Oimnem');
@@ -960,7 +960,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/audiobooks/6QYoIxxar5q4AfdTOGsZqE',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getAudiobook('spotify:show:6QYoIxxar5q4AfdTOGsZqE', $options);
@@ -987,7 +987,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/audiobooks/',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getAudiobooks($audiobooks, $options);
@@ -1005,7 +1005,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/audio-features/0eGsygTp906u18L0Oimnem',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->getAudioFeatures($track);
@@ -1031,7 +1031,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/browse/categories',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getCategoriesList($options);
@@ -1052,7 +1052,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/browse/categories/party',
             $options,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getCategory('party', $options);
@@ -1078,7 +1078,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/browse/categories/party/playlists',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getCategoryPlaylists('party', $options);
@@ -1094,7 +1094,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/chapters/2IEBhnu61ieYGFRPEJIO40',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->getChapter('spotify:episode:2IEBhnu61ieYGFRPEJIO40');
@@ -1119,7 +1119,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/chapters/',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getChapters($chapters);
@@ -1138,7 +1138,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/episodes/38bS44xjbVVZ3No3ByF1dJ',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getEpisode('spotify:episode:38bS44xjbVVZ3No3ByF1dJ', $options);
@@ -1168,7 +1168,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/episodes/',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getEpisodes($episodes, $options);
@@ -1194,7 +1194,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/browse/featured-playlists',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getFeaturedPlaylists($options);
@@ -1210,7 +1210,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/recommendations/available-genre-seeds',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->getGenreSeeds();
@@ -1226,7 +1226,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/tracks/7EjyzZcbLxW7PaaLua9Ksb',
             [],
             [],
-            $return
+            $return,
         );
 
         $api->getTrack('7EjyzZcbLxW7PaaLua9Ksb');
@@ -1244,7 +1244,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/markets',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMarkets();
@@ -1269,7 +1269,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/audio-features',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMultipleAudioFeatures($tracks);
@@ -1295,7 +1295,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/currently-playing',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMyCurrentTrack($options);
@@ -1311,7 +1311,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/currently-playing',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMyCurrentTrack([]);
@@ -1327,7 +1327,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/devices',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMyDevices();
@@ -1353,7 +1353,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMyCurrentPlaybackInfo($options);
@@ -1369,7 +1369,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMyCurrentPlaybackInfo([]);
@@ -1388,7 +1388,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/playlists',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMyPlaylists($options);
@@ -1404,7 +1404,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/queue',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMyQueue();
@@ -1423,7 +1423,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/recently-played',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMyRecentTracks($options);
@@ -1449,7 +1449,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/albums',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMySavedAlbums($options);
@@ -1475,7 +1475,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/episodes',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMySavedEpisodes($options);
@@ -1494,7 +1494,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/shows',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMySavedShows($options);
@@ -1520,7 +1520,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/tracks',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMySavedTracks($options);
@@ -1546,7 +1546,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/top/artists',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getMyTop('artists', $options);
@@ -1572,7 +1572,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/browse/new-releases',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getNewReleases($options);
@@ -1598,7 +1598,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/recommendations',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getRecommendations($options);
@@ -1624,7 +1624,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/shows/38bS44xjbVVZ3No3ByF1dJ',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getShow('spotify:show:38bS44xjbVVZ3No3ByF1dJ', $options);
@@ -1650,7 +1650,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/shows/38bS44xjbVVZ3No3ByF1dJ/episodes',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getShowEpisodes('spotify:show:38bS44xjbVVZ3No3ByF1dJ', $options);
@@ -1680,7 +1680,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/shows/',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getShows($shows, $options);
@@ -1699,7 +1699,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/tracks/0eGsygTp906u18L0Oimnem',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getTrack('spotify:track:0eGsygTp906u18L0Oimnem', $options);
@@ -1729,7 +1729,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/tracks/',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getTracks($tracks, $options);
@@ -1745,7 +1745,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/users/mcgurk',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->getUser('spotify:user:mcgurk');
@@ -1770,7 +1770,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/following',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getUserFollowedArtists($options);
@@ -1796,12 +1796,12 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getPlaylist(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
-            $options
+            $options,
         );
 
         $this->assertObjectHasProperty('id', $response);
@@ -1815,11 +1815,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/3cEYpjA9oz9GiPac4AsH4n/images',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->getPlaylistImage(
-            'spotify:playlist:3cEYpjA9oz9GiPac4AsH4n'
+            'spotify:playlist:3cEYpjA9oz9GiPac4AsH4n',
         );
 
         $this->assertObjectHasProperty('url', $response);
@@ -1836,7 +1836,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/users/mcgurk/playlists',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getUserPlaylists('spotify:user:mcgurk', $options);
@@ -1866,12 +1866,12 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->getPlaylistTracks(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
-            $options
+            $options,
         );
 
         $this->assertObjectHasProperty('items', $response);
@@ -1885,7 +1885,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me',
             [],
             [],
-            $return
+            $return,
         );
 
         $response = $api->me();
@@ -1911,7 +1911,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/albums/contains',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->myAlbumsContains($albums);
@@ -1937,7 +1937,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/episodes/contains',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->myEpisodesContains($episodes);
@@ -1963,7 +1963,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/shows/contains',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->myShowsContains($shows);
@@ -1989,7 +1989,7 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/tracks/contains',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->myTracksContains($tracks);
@@ -2005,11 +2005,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/next?device_id=abc123',
             [],
             [],
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->next('abc123')
+            $api->next('abc123'),
         );
     }
 
@@ -2021,11 +2021,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/pause?device_id=abc123',
             [],
             [],
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->pause('abc123')
+            $api->pause('abc123'),
         );
     }
 
@@ -2044,11 +2044,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/play?device_id=abc123',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->play('abc123', $options)
+            $api->play('abc123', $options),
         );
     }
 
@@ -2060,11 +2060,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/previous?device_id=abc123',
             [],
             [],
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->previous('abc123')
+            $api->previous('abc123'),
         );
     }
 
@@ -2076,11 +2076,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/queue?uri=spotify:track:6ek0XS2AUbzrHS0B5wPNcU&device_id=abc123',
             [],
             [],
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->queue('6ek0XS2AUbzrHS0B5wPNcU', 'abc123')
+            $api->queue('6ek0XS2AUbzrHS0B5wPNcU', 'abc123'),
         );
     }
 
@@ -2092,11 +2092,11 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/queue?uri=spotify:episode:0Q86acNRm6V9GYx55SXKwf&device_id=abc123',
             [],
             [],
-            $return
+            $return,
         );
 
         $this->assertTrue(
-            $api->queue('spotify:episode:0Q86acNRm6V9GYx55SXKwf', 'abc123')
+            $api->queue('spotify:episode:0Q86acNRm6V9GYx55SXKwf', 'abc123'),
         );
     }
 
@@ -2121,14 +2121,14 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertNotFalse(
             $api->reorderPlaylistTracks(
                 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
-                $options
-            )
+                $options,
+            ),
         );
     }
 
@@ -2144,14 +2144,14 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertFalse(
             $api->reorderPlaylistTracks(
                 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
-                []
-            )
+                [],
+            ),
         );
     }
 
@@ -2163,13 +2163,13 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/repeat?state=track',
             [],
             [],
-            $return
+            $return,
         );
 
         $this->assertTrue(
             $api->repeat([
                 'state' => 'track',
-            ])
+            ]),
         );
     }
 
@@ -2194,14 +2194,14 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/tracks',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
             $api->replacePlaylistTracks(
                 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
-                $tracks
-            )
+                $tracks,
+            ),
         );
     }
 
@@ -2228,13 +2228,13 @@ class SpotifyWebAPITest extends TestCase
             '/v1/search',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $response = $api->search(
             'blur',
             $types,
-            $options
+            $options,
         );
 
         $this->assertObjectHasProperty('albums', $response);
@@ -2248,13 +2248,13 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/seek?position_ms=5000',
             [],
             [],
-            $return
+            $return,
         );
 
         $this->assertTrue(
             $api->seek([
                 'position_ms' => 5000,
-            ])
+            ]),
         );
     }
 
@@ -2275,13 +2275,13 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/player/shuffle?state=false',
             [],
             [],
-            $return
+            $return,
         );
 
         $this->assertTrue(
             $api->shuffle([
                 'state' => false,
-            ])
+            ]),
         );
     }
 
@@ -2303,14 +2303,14 @@ class SpotifyWebAPITest extends TestCase
             '/v1/me/following?type=artist',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
             $api->unFollowArtistsOrUsers(
                 'artist',
-                ['74ASZWbe4lXaubB36ztrGX', 'spotify:artist:36QJpDe2go2KgaRleHCDTp']
-            )
+                ['74ASZWbe4lXaubB36ztrGX', 'spotify:artist:36QJpDe2go2KgaRleHCDTp'],
+            ),
         );
     }
 
@@ -2322,13 +2322,13 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers',
             [],
             [],
-            $return
+            $return,
         );
 
         $this->assertTrue(
             $api->unfollowPlaylist(
-                'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9'
-            )
+                'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+            ),
         );
     }
 
@@ -2348,14 +2348,14 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $this->assertTrue(
             $api->updatePlaylist(
                 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
-                $options
-            )
+                $options,
+            ),
         );
     }
 
@@ -2369,32 +2369,35 @@ class SpotifyWebAPITest extends TestCase
             '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/images',
             $imageData,
             [],
-            $return
+            $return,
         );
 
         $this->assertTrue(
             $api->updatePlaylistImage(
                 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
-                $imageData
-            )
+                $imageData,
+            ),
         );
     }
 
-    public function testSetAccessToken() {
+    public function testSetAccessToken()
+    {
         $api = new SpotifyWebAPI();
         $returnedValue = $api->setAccessToken($this->accessToken);
 
         $this->assertSame($api, $returnedValue);
     }
 
-    public function testSetOptions() {
+    public function testSetOptions()
+    {
         $api = new SpotifyWebAPI();
         $returnedValue = $api->setOptions([]);
 
         $this->assertSame($api, $returnedValue);
     }
 
-    public function testSetSession() {
+    public function testSetSession()
+    {
         $api = new SpotifyWebAPI();
         $returnedValue = $api->setSession($this->setupSessionStub());
 

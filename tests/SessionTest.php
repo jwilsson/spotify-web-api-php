@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SpotifyWebAPI;
 
-use \PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class SessionTest extends TestCase
 {
@@ -19,7 +19,7 @@ class SessionTest extends TestCase
         string $expectedUri,
         string|array $expectedParameters,
         array $expectedHeaders,
-        array $expectedReturn
+        array $expectedReturn,
     ) {
         $requestMock = $this->createMock(Request::class);
 
@@ -29,7 +29,7 @@ class SessionTest extends TestCase
                 $this->equalTo($expectedMethod),
                 $this->equalTo($expectedUri),
                 $this->equalTo($expectedParameters),
-                $this->equalTo($expectedHeaders)
+                $this->equalTo($expectedHeaders),
             )
             ->willReturn($expectedReturn);
 
@@ -140,7 +140,7 @@ class SessionTest extends TestCase
             '/api/token',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
@@ -168,7 +168,7 @@ class SessionTest extends TestCase
             '/api/token',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $session = new Session($this->clientID, '', $this->redirectURI, $requestMock);
@@ -200,7 +200,7 @@ class SessionTest extends TestCase
             '/api/token',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
@@ -234,7 +234,7 @@ class SessionTest extends TestCase
             '/api/token',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
@@ -264,7 +264,7 @@ class SessionTest extends TestCase
             '/api/token',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
@@ -293,7 +293,7 @@ class SessionTest extends TestCase
             '/api/token',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);
@@ -327,7 +327,7 @@ class SessionTest extends TestCase
             '/api/token',
             $expected,
             [],
-            $return
+            $return,
         );
 
         $session = new Session($this->clientID, '', $this->redirectURI, $requestMock);
@@ -359,7 +359,7 @@ class SessionTest extends TestCase
             '/api/token',
             $expected,
             $headers,
-            $return
+            $return,
         );
 
         $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI, $requestMock);

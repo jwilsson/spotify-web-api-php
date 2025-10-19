@@ -18,10 +18,10 @@
         "ext-curl": "*"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.89",
         "php-coveralls/php-coveralls": "^2.5",
         "php-mock/php-mock-phpunit": "^2.7",
-        "phpunit/phpunit": "^12.0",
-        "squizlabs/php_codesniffer": "^3.0"
+        "phpunit/phpunit": "^12.0"
     },
     "autoload": {
         "psr-4": {
@@ -29,6 +29,8 @@
         }
     },
     "scripts": {
-        "test": "phpcs src -v && phpunit"
+        "lint": "php-cs-fixer fix -v --dry-run",
+        "lint:fix": "php-cs-fixer fix -v",
+        "test": "phpunit"
     }
 }

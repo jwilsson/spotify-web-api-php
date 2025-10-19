@@ -111,7 +111,7 @@ class SpotifyWebAPI
         string $method,
         string $uri,
         string|array $parameters = [],
-        array $headers = []
+        array $headers = [],
     ): array {
         $this->request->setOptions([
             'default_headers' => $this->options['default_headers'],
@@ -312,10 +312,10 @@ class SpotifyWebAPI
     public function addPlaylistTracks(
         string $playlistId,
         string|array $tracks,
-        array|object $options = []
+        array|object $options = [],
     ): string|bool {
         $options = array_merge((array) $options, [
-            'uris' => (array) $this->idToUri($tracks, 'track')
+            'uris' => (array) $this->idToUri($tracks, 'track'),
         ]);
 
         $options = json_encode($options);

@@ -16,9 +16,9 @@ Please submit all your bug reports, feature requests and pull requests here but 
 If you have an idea for a new feature, please file an issue first to see if it fits the scope of this project. That way no one's time needs to be wasted.
 
 ## Coding Guidelines
-We follow the coding standards outlined in [PSR-1](https://www.php-fig.org/psr/psr-1/) and [PSR-12](https://www.php-fig.org/psr/psr-12/). Please follow these guidelines when committing new code.
+We follow the coding standards outlined in [PER Coding Style 3.0](https://www.php-fig.org/per/coding-style/). Please follow these guidelines when committing new code. The `composer lint:fix` command can be used to automatically fix any issues.
 
-In addition to the PSR guidelines we try to adhere to the following points:
+In addition to the PSR/PER guidelines we try to adhere to the following points:
 * We order all methods by visibility and then alphabetically, `private`/`protected` methods first and then `public`. For example:
 
 ```

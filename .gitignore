@@ -1,4 +1,5 @@
 .DS_Store
+.php-cs-fixer.cache
 .phpunit.cache
 build
 composer.lock

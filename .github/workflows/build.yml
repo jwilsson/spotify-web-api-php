@@ -21,5 +21,6 @@ jobs:
         coverage: pcov
 
     - run: composer install
+    - run: composer lint
     - run: composer test
     - run: php vendor/bin/php-coveralls -v
