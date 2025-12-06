@@ -242,7 +242,6 @@ class Request
         if (curl_error($ch)) {
             $error = curl_error($ch);
             $errno = curl_errno($ch);
-            curl_close($ch);
 
             throw new SpotifyWebAPIException('cURL transport error: ' . $errno . ' ' . $error);
         }
@@ -259,8 +258,6 @@ class Request
             'status' => $status,
             'url' => $url,
         ];
-
-        curl_close($ch);
 
         if ($status >= 400) {
             $this->handleResponseError($body, $status);
