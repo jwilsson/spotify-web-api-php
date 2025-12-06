@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: ['8.4', '8.3', '8.2', '8.1']
+        php-versions: ['8.5', '8.4', '8.3', '8.2', '8.1']
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - uses: shivammathur/setup-php@v2
       with:
