@@ -1,4 +1,8 @@
 # Changelog
+## 6.3.1 (2025-12-06)
+* Removed deprecated `curl_close()` calls. ([6c4df99](https://github.com/jwilsson/spotify-web-api-php/commit/6c4df99ef852a3efe55196964671a546c2292513))
+* Updated CA bundle. ([bd71490](https://github.com/jwilsson/spotify-web-api-php/commit/bd7149015773ca07cf2d21e8807afebd252bb246))
+
 ## 6.3.0 (2025-10-12)
 * Added support for `timestamped_ids` to `SpotifyWebAPI::addMyTracks()` and deprecated passing strings or array without an `ids` key. ([f17cdff](https://github.com/jwilsson/spotify-web-api-php/commit/f17cdff1135c6490eb7597c230b5ed4aa7aafd4c))
 * Added a `default_headers` options to add HTTP headers that should be included in each request. ([ef9b92e](https://github.com/jwilsson/spotify-web-api-php/commit/ef9b92e57bb5bd2859d8a8e660b0a009e0409cf8))
