@@ -262,6 +262,16 @@ class RequestTest extends TestCase
         $this->assertEquals(200, $response['status']);
     }
 
+    public function testSendProxyResponse()
+    {
+        $this->setupFunctionMock('curl_exec')->willReturn(create_http_response(load_fixture('album'), 200, 'HTTP/1.1 100 Continue'));
+
+        $request = new Request();
+        $response = $request->send('GET', 'https://www.example.com');
+
+        $this->assertObjectHasProperty('id', $response['body']);
+    }
+
     public function testSendTransportError()
     {
         $this->expectExceptionObject(

@@ -294,9 +294,7 @@ class Request
         $parts = explode("\n\n", $response, 3);
 
         // Skip first set of headers for proxied requests etc.
-        if (
-            preg_match('/^HTTP\/1.\d [100 Continue|200 Connection established|200 Tunnel established]/', $parts[0])
-        ) {
+        if (preg_match('/^HTTP\/1\.\d (100 Continue|200 (Connection established|Tunnel established))/', $parts[0])) {
             return [
                 $parts[1],
                 $parts[2],

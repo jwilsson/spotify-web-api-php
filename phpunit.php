@@ -21,12 +21,14 @@ function get_fixture($fixture)
     return json_decode($fixture);
 }
 
-function create_http_response($body, $status = 200)
+function create_http_response($body, $status = 200, $prefix = '')
 {
-    return <<<END
+    return ltrim(<<<END
+        $prefix
+
         HTTP/1.1 $status OK
         Content-Type: application/json
 
         $body
-        END;
+        END);
 }
