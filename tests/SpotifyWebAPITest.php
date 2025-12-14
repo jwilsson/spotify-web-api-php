@@ -110,10 +110,10 @@ class SpotifyWebAPITest extends TestCase
         );
 
         $requestStub->method('api')
-            ->willThrowException(
-                new SpotifyWebAPIException('API rate limit exceeded', 429),
-            )
-            ->willReturn($return);
+            ->willReturnOnConsecutiveCalls(
+                $this->throwException(new SpotifyWebAPIException('API rate limit exceeded', 429)),
+                $return,
+            );
 
         $api = new SpotifyWebAPI($options, null, $requestStub);
         $api->setAccessToken($this->accessToken);
