@@ -1,4 +1,11 @@
 # Changelog
+## 7.0.0 (2025-12-14)
+* **Breaking** Dropped support for PHP versions less than 8.3. ([ff6ea06](https://github.com/jwilsson/spotify-web-api-php/commit/ff6ea067937f1914c1f1f8b46979ca5f79a57469))
+* **Breaking** Removed deprecated `SpotifyWebAPI::usersFollowPlaylist()` method. Use `SpotifyWebAPI::currentUserFollowsPlaylist()` instead. ([12f1596](https://github.com/jwilsson/spotify-web-api-php/commit/12f15966a0f562a978b2aa30bfda8037d94562c7))
+* **Breaking** Calling `SpotifyWebAPI::createPlaylist()` without a user ID is no longer possible. ([80adafd](https://github.com/jwilsson/spotify-web-api-php/commit/80adafd77a0ed6cd9a11aca1e0acef2ff536b3fd))
+* **Breaking** Calling `SpotifyWebAPI::addMyTracks()` without `ids` or `timestamped_ids` is no longer possible. ([1b12cda](https://github.com/jwilsson/spotify-web-api-php/commit/1b12cda6808ed8852bf7970535bcc67043406e4f))
+
+
 ## 6.3.1 (2025-12-06)
 * Removed deprecated `curl_close()` calls. ([6c4df99](https://github.com/jwilsson/spotify-web-api-php/commit/6c4df99ef852a3efe55196964671a546c2292513))
 * Updated CA bundle. ([bd71490](https://github.com/jwilsson/spotify-web-api-php/commit/bd7149015773ca07cf2d21e8807afebd252bb246))
