@@ -5,7 +5,9 @@ There are a few options that can be used to control the behaviour of the API. Al
 ```php
 $options = [
     'auto_refresh' => true,
-    'default_headers' => ['Accept-Language' => 'en-US'],
+    'default_headers' => [
+        ['Accept-Language' => 'en-US'],
+    ],
 ];
 
 // Options can be set using the SpotifyWebAPI constructor
