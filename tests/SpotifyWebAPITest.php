@@ -1783,11 +1783,13 @@ class SpotifyWebAPITest extends TestCase
         $options = [
             'fields' => ['id', 'uri'],
             'market' => 'SE',
+            'additional_types' => ['track', 'episode'],
         ];
 
         $expected = [
             'fields' => 'id,uri',
             'market' => 'SE',
+            'additional_types' => 'track,episode',
         ];
 
         $return = ['body' => get_fixture('user-playlist')];
