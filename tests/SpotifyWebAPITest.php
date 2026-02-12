@@ -2558,6 +2558,46 @@ class SpotifyWebAPITest extends TestCase
         );
     }
 
+    public function testUpdatePlaylistItems()
+    {
+        $options = [
+            'uris' => [
+                'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
+                'spotify:track:3mqRLlD9j92BBv1ueFhJ1l',
+            ],
+            'insert_before' => 20,
+            'range_length' => 5,
+            'range_start' => 0,
+        ];
+
+        $expected = json_encode([
+            'uris' => [
+                'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
+                'spotify:track:3mqRLlD9j92BBv1ueFhJ1l',
+            ],
+            'insert_before' => 20,
+            'range_length' => 5,
+            'range_start' => 0,
+        ]);
+
+        $headers = ['Content-Type' => 'application/json'];
+        $return = ['body' => get_fixture('snapshot-id')];
+        $api = $this->setupApi(
+            'PUT',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/items',
+            $expected,
+            $headers,
+            $return,
+        );
+
+        $this->assertNotFalse(
+            $api->updatePlaylistItems(
+                'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+                $options,
+            ),
+        );
+    }
+
     public function testSetAccessToken()
     {
         $api = new SpotifyWebAPI();

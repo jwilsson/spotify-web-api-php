@@ -2112,6 +2112,8 @@ class SpotifyWebAPI
      * Reorder the tracks in a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/reorder-or-replace-playlists-tracks
      *
+     * @deprecated Use SpotifyWebAPI::updatePlaylistItems() instead.
+     *
      * @param string $playlistId ID or URI of the playlist.
      * @param array|object $options Options for the new tracks.
      * - int range_start Required. Position of the first track to be reordered.
@@ -2163,6 +2165,8 @@ class SpotifyWebAPI
     /**
      * Replace all tracks in a playlist with new ones.
      * https://developer.spotify.com/documentation/web-api/reference/reorder-or-replace-playlists-tracks
+     *
+     * @deprecated Use SpotifyWebAPI::updatePlaylistItems() instead.
      *
      * @param string $playlistId ID or URI of the playlist.
      * @param string|array $tracks IDs, track URIs, or episode URIs to replace with.
@@ -2390,5 +2394,36 @@ class SpotifyWebAPI
         $this->lastResponse = $this->sendRequest('PUT', $uri, $imageData);
 
         return $this->lastResponse['status'] == 202;
+    }
+
+    /**
+     * Update the items in a playlist.
+     * https://developer.spotify.com/documentation/web-api/reference/reorder-or-replace-playlists-items
+     *
+     * @param string $playlistId ID or URI of the playlist.
+     * @param array|object $options Options for the new items.
+     * - array uris Optional. Array of item or episode URIs to set in the playlist.
+     * - int range_start Optional. Position of the first item to be reordered.
+     * - int range_length Optional. The amount of items to be reordered.
+     * - int insert_before Optional. Position where the items should be inserted.
+     * - string snapshot_id Optional. The playlist's snapshot ID.
+     *
+     * @return string|bool A new snapshot ID or false if the items weren't successfully updated.
+     */
+    public function updatePlaylistItems(string $playlistId, array|object $options): string|bool
+    {
+        $options = json_encode($options);
+
+        $headers = [
+            'Content-Type' => 'application/json',
+        ];
+
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
+        $uri = '/v1/playlists/' . $playlistId . '/items';
+
+        $this->lastResponse = $this->sendRequest('PUT', $uri, $options, $headers);
+
+        return $this->getSnapshotId($this->lastResponse['body']);
     }
 }
