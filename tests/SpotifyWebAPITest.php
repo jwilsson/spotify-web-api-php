@@ -733,24 +733,20 @@ class SpotifyWebAPITest extends TestCase
         ));
     }
 
-    public function testFollowPlaylistFor()
+    public function testFollowPlaylist()
     {
-        $options = ['public' => false];
-        $expected = json_encode($options);
-
-        $headers = ['Content-Type' => 'application/json'];
         $return = ['status' => 200];
         $api = $this->setupApi(
             'PUT',
-            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers',
-            $expected,
-            $headers,
+            '/v1/me/library?uris=spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+            [],
+            [],
             $return,
         );
 
         $this->assertTrue($api->followPlaylist(
             'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
-            $options,
+            [],
         ));
     }
 

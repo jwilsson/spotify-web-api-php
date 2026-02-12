@@ -639,27 +639,18 @@ class SpotifyWebAPI
      * Add the current user as a follower of a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/follow-playlist
      *
+     * @deprecated Use SpotifyWebAPI::addMyLibrary() instead.
+     *
      * @param string $playlistId ID or URI of the playlist to follow.
-     * @param array|object $options Optional. Options for the followed playlist.
-     * - bool public Optional. Whether the playlist should be followed publicly or not.
+     * @param array|object $options Unused. Use SpotifyWebAPI::updatePlaylist() instead.
      *
      * @return bool Whether the playlist was successfully followed.
      */
     public function followPlaylist(string $playlistId, array|object $options = []): bool
     {
-        $options = $options ? json_encode($options) : '';
+        $playlistUri = $this->idToUri($playlistId, 'playlist');
 
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
-
-        $playlistId = $this->uriToId($playlistId, 'playlist');
-
-        $uri = '/v1/playlists/' . $playlistId . '/followers';
-
-        $this->lastResponse = $this->sendRequest('PUT', $uri, $options, $headers);
-
-        return $this->lastResponse['status'] == 200;
+        return $this->addMyLibrary($playlistUri);
     }
 
     /**
