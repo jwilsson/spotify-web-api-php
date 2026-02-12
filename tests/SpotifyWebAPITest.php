@@ -386,7 +386,6 @@ class SpotifyWebAPITest extends TestCase
 
     public function testCreatePlaylist()
     {
-        $userId = 'mcgurk';
         $options = [
             'name' => 'Test playlist',
             'public' => false,
@@ -398,13 +397,13 @@ class SpotifyWebAPITest extends TestCase
         $return = ['body' => get_fixture('user-playlist')];
         $api = $this->setupApi(
             'POST',
-            '/v1/users/mcgurk/playlists',
+            '/v1/me/playlists',
             $expected,
             $headers,
             $return,
         );
 
-        $response = $api->createPlaylist($userId, $options);
+        $response = $api->createPlaylist('', $options);
 
         $this->assertObjectHasProperty('id', $response);
     }

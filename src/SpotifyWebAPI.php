@@ -385,10 +385,10 @@ class SpotifyWebAPI
     }
 
     /**
-     * Create a new playlist.
+     * Create a new playlist for the current user.
      * https://developer.spotify.com/documentation/web-api/reference/create-playlist
      *
-     * @param string $userId ID or URI of the user to create the playlist for.
+     * @param string $userId Deprecated. The current user will always be used.
      * @param array|object $options Options for the new playlist.
      * - string name Required. Name of the playlist.
      * - bool collaborative Optional. Whether the playlist should be collaborative or not.
@@ -399,8 +399,7 @@ class SpotifyWebAPI
      */
     public function createPlaylist(string|array|object $userId, array|object $options = []): array|object
     {
-        $userId = $this->uriToId($userId, 'user');
-        $uri = '/v1/users/' . $userId . '/playlists';
+        $uri = '/v1/me/playlists';
 
         $options = json_encode($options);
 
