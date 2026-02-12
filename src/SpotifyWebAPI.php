@@ -694,6 +694,8 @@ class SpotifyWebAPI
      * Get multiple albums.
      * https://developer.spotify.com/documentation/web-api/reference/get-multiple-albums
      *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
+     *
      * @param array $albumIds IDs or URIs of the albums.
      * @param array|object $options Optional. Options for the albums.
      * - string market Optional. ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
@@ -757,6 +759,8 @@ class SpotifyWebAPI
     /**
      * Get multiple artists.
      * https://developer.spotify.com/documentation/web-api/reference/get-multiple-artists
+     *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
      *
      * @param array $artistIds IDs or URIs of the artists.
      *
@@ -831,6 +835,8 @@ class SpotifyWebAPI
      * Get an artist's top tracks in a country.
      * https://developer.spotify.com/documentation/web-api/reference/get-an-artists-top-tracks
      *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
+     *
      * @param string $artistId ID or URI of the artist.
      * @param array|object $options Options for the tracks.
      * - string market Required. An ISO 3166-1 alpha-2 country code specifying the country to get the top tracks for.
@@ -891,6 +897,8 @@ class SpotifyWebAPI
      * Get multiple audiobooks.
      * https://developer.spotify.com/documentation/web-api/reference/get-multiple-audiobooks
      *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
+     *
      * @param array $audiobookIds IDs or URIs of the audiobooks.
      * @param array|object $options Optional. Options for the audiobooks.
      * - string market Optional. ISO 3166-1 alpha-2 country code, limit results to audiobooks available in that market.
@@ -937,6 +945,8 @@ class SpotifyWebAPI
      * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s "Discover" tab).
      * https://developer.spotify.com/documentation/web-api/reference/get-categories
      *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
+     *
      * @param array|object $options Optional. Options for the categories.
      * - string locale Optional. Language to show categories in, for example 'sv_SE'.
      * - string country Optional. ISO 3166-1 alpha-2 country code. Show categories from this country.
@@ -958,8 +968,9 @@ class SpotifyWebAPI
      * Get a single category used to tag items in Spotify (on, for example, the Spotify player’s "Discover" tab).
      * https://developer.spotify.com/documentation/web-api/reference/get-a-category
      *
-     * @param string $categoryId ID of the category.
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
      *
+     * @param string $categoryId ID of the category.
      * @param array|object $options Optional. Options for the category.
      * - string locale Optional. Language to show category in, for example 'sv_SE'.
      * - string country Optional. ISO 3166-1 alpha-2 country code. Show category from this country.
@@ -1021,6 +1032,8 @@ class SpotifyWebAPI
      * Get multiple chapters.
      * https://developer.spotify.com/documentation/web-api/reference/get-several-chapters
      *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
+     *
      * @param array $chapterIds IDs or URIs of the chapters.
      * @param array|object $options Optional. Options for the chapters.
      * - string market Optional. ISO 3166-1 alpha-2 country code, limit results to episodes available in that market.
@@ -1064,6 +1077,8 @@ class SpotifyWebAPI
     /**
      * Get multiple episodes.
      * https://developer.spotify.com/documentation/web-api/reference/get-multiple-episodes
+     *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
      *
      * @param string|array $episodeIds IDs or URIs of the episodes.
      * @param array|object $options Optional. Options for the episodes.
@@ -1143,6 +1158,8 @@ class SpotifyWebAPI
     /**
      * Get all markets where Spotify is available.
      * https://developer.spotify.com/documentation/web-api/reference/get-available-markets
+     *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
      *
      * @return array|object All markets where Spotify is available. Type is controlled by the `return_assoc` option.
      */
@@ -1404,6 +1421,8 @@ class SpotifyWebAPI
      * Get new releases.
      * https://developer.spotify.com/documentation/web-api/reference/get-new-releases
      *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
+     *
      * @param array|object $options Optional. Options for the items.
      * - string country Optional. ISO 3166-1 alpha-2 country code. Show items relevant to this country.
      * - int limit Optional. Limit the number of items.
@@ -1598,6 +1617,8 @@ class SpotifyWebAPI
      * Get multiple shows.
      * https://developer.spotify.com/documentation/web-api/reference/get-multiple-shows
      *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
+     *
      * @param string|array $showIds IDs or URIs of the shows.
      * @param array|object $options Optional. Options for the shows.
      * - string market Optional. ISO 3166-1 alpha-2 country code, limit results to shows available in that market.
@@ -1642,6 +1663,8 @@ class SpotifyWebAPI
      * Get multiple tracks.
      * https://developer.spotify.com/documentation/web-api/reference/get-several-tracks
      *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
+     *
      * @param array $trackIds IDs or URIs of the tracks.
      * @param array|object $options Optional. Options for the tracks.
      * - string market Optional. ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
@@ -1665,6 +1688,8 @@ class SpotifyWebAPI
     /**
      * Get a user.
      * https://developer.spotify.com/documentation/web-api/reference/get-users-profile
+     *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
      *
      * @param string $userId ID or URI of the user.
      *
@@ -1708,6 +1733,8 @@ class SpotifyWebAPI
     /**
      * Get a user's playlists.
      * https://developer.spotify.com/documentation/web-api/reference/get-list-users-playlists
+     *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
      *
      * @param string $userId ID or URI of the user.
      * @param array|object $options Optional. Options for the tracks.
