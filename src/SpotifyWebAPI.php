@@ -478,26 +478,17 @@ class SpotifyWebAPI
      * Delete albums from the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/remove-albums-user
      *
+     * @deprecated Use SpotifyWebAPI::deleteMyLibrary() instead.
+     *
      * @param string|array $albums Album IDs or URIs to delete.
      *
      * @return bool Whether the albums was successfully deleted.
      */
     public function deleteMyAlbums(string|array $albums): bool
     {
-        $albums = $this->uriToId($albums, 'album');
-        $albums = json_encode([
-            'ids' => (array) $albums,
-        ]);
+        $albums = $this->idToUri($albums, 'album');
 
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
-
-        $uri = '/v1/me/albums';
-
-        $this->lastResponse = $this->sendRequest('DELETE', $uri, $albums, $headers);
-
-        return $this->lastResponse['status'] == 200;
+        return $this->deleteMyLibrary($albums);
     }
 
     /**
@@ -521,24 +512,35 @@ class SpotifyWebAPI
      * Delete episodes from the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/remove-episodes-user
      *
+     * @deprecated Use SpotifyWebAPI::deleteMyLibrary() instead.
+     *
      * @param string|array $episodes Episode IDs or URIs to delete.
      *
      * @return bool Whether the episodes was successfully deleted.
      */
     public function deleteMyEpisodes(string|array $episodes): bool
     {
-        $episodes = $this->uriToId($episodes, 'episode');
-        $episodes = json_encode([
-            'ids' => (array) $episodes,
-        ]);
+        $episodes = $this->idToUri($episodes, 'episode');
 
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
+        return $this->deleteMyLibrary($episodes);
+    }
 
-        $uri = '/v1/me/episodes';
+    /**
+     * Delete items from the current user's Spotify library.
+     * https://developer.spotify.com/documentation/web-api/reference/remove-library-items
+     *
+     * @param string|array $items Spotify URIs to delete.
+     *
+     * @return bool Whether the items were successfully deleted.
+     */
+    public function deleteMyLibrary(string|array $uris): bool
+    {
+        $uris = $this->toCommaString($uris);
 
-        $this->lastResponse = $this->sendRequest('DELETE', $uri, $episodes, $headers);
+        // We need to manually append data to the URI since it's a DELETE request
+        $uri = '/v1/me/library?uris=' . $uris;
+
+        $this->lastResponse = $this->sendRequest('DELETE', $uri);
 
         return $this->lastResponse['status'] == 200;
     }
@@ -547,31 +549,24 @@ class SpotifyWebAPI
      * Delete shows from the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/remove-shows-user
      *
+     * @deprecated Use SpotifyWebAPI::deleteMyLibrary() instead.
+     *
      * @param string|array $shows Show IDs or URIs to delete.
      *
      * @return bool Whether the shows was successfully deleted.
      */
     public function deleteMyShows(string|array $shows): bool
     {
-        $shows = $this->uriToId($shows, 'show');
-        $shows = json_encode([
-            'ids' => (array) $shows,
-        ]);
+        $shows = $this->idToUri($shows, 'show');
 
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
-
-        $uri = '/v1/me/shows';
-
-        $this->lastResponse = $this->sendRequest('DELETE', $uri, $shows, $headers);
-
-        return $this->lastResponse['status'] == 200;
+        return $this->deleteMyLibrary($shows);
     }
 
     /**
      * Delete tracks from the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/remove-tracks-user
+     *
+     * @deprecated Use SpotifyWebAPI::deleteMyLibrary() instead.
      *
      * @param string|array $tracks Track IDs or URIs to delete.
      *
@@ -579,20 +574,9 @@ class SpotifyWebAPI
      */
     public function deleteMyTracks(string|array $tracks): bool
     {
-        $tracks = $this->uriToId($tracks, 'track');
-        $tracks = json_encode([
-            'ids' => (array) $tracks,
-        ]);
+        $tracks = $this->idToUri($tracks, 'track');
 
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
-
-        $uri = '/v1/me/tracks';
-
-        $this->lastResponse = $this->sendRequest('DELETE', $uri, $tracks, $headers);
-
-        return $this->lastResponse['status'] == 200;
+        return $this->deleteMyLibrary($tracks);
     }
 
     /**
@@ -2259,6 +2243,8 @@ class SpotifyWebAPI
      * Remove the current user as a follower of one or more artists or other Spotify users.
      * https://developer.spotify.com/documentation/web-api/reference/unfollow-artists-users
      *
+     * @deprecated Use SpotifyWebAPI::deleteMyLibrary() instead.
+     *
      * @param string $type The type to check: either 'artist' or 'user'.
      * @param string|array $ids IDs or URIs of the users or artists to unfollow.
      *
@@ -2266,26 +2252,16 @@ class SpotifyWebAPI
      */
     public function unfollowArtistsOrUsers(string $type, string|array $ids): bool
     {
-        $ids = $this->uriToId($ids, $type);
-        $ids = json_encode([
-            'ids' => (array) $ids,
-        ]);
+        $uris = $this->idToUri($ids, $type);
 
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
-
-        // We need to manually append data to the URI since it's a DELETE request
-        $uri = '/v1/me/following?type=' . $type;
-
-        $this->lastResponse = $this->sendRequest('DELETE', $uri, $ids, $headers);
-
-        return $this->lastResponse['status'] == 204;
+        return $this->deleteMyLibrary($uris);
     }
 
     /**
      * Remove the current user as a follower of a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/unfollow-playlist
+     *
+     * @deprecated Use SpotifyWebAPI::deleteMyLibrary() instead.
      *
      * @param string $playlistId ID or URI of the playlist to unfollow.
      *
@@ -2293,12 +2269,9 @@ class SpotifyWebAPI
      */
     public function unfollowPlaylist(string $playlistId): bool
     {
-        $playlistId = $this->uriToId($playlistId, 'playlist');
-        $uri = '/v1/playlists/' . $playlistId . '/followers';
+        $playlistUri = $this->idToUri($playlistId, 'playlist');
 
-        $this->lastResponse = $this->sendRequest('DELETE', $uri);
-
-        return $this->lastResponse['status'] == 200;
+        return $this->deleteMyLibrary($playlistUri);
     }
 
     /**
