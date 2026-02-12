@@ -427,6 +427,8 @@ class SpotifyWebAPI
      * Check to see if the current user is following one or more artists or other Spotify users.
      * https://developer.spotify.com/documentation/web-api/reference/check-current-user-follows
      *
+     * @deprecated Use SpotifyWebAPI::myLibraryContains() instead.
+     *
      * @param string $type The type to check: either 'artist' or 'user'.
      * @param string|array $ids IDs or URIs of the users or artists to check for.
      *
@@ -434,24 +436,16 @@ class SpotifyWebAPI
      */
     public function currentUserFollows(string $type, string|array $ids): array
     {
-        $ids = $this->uriToId($ids, $type);
-        $ids = $this->toCommaString($ids);
+        $uris = $this->idToUri($ids, $type);
 
-        $options = [
-            'ids' => $ids,
-            'type' => $type,
-        ];
-
-        $uri = '/v1/me/following/contains';
-
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
-
-        return $this->lastResponse['body'];
+        return $this->myLibraryContains($uris);
     }
 
     /**
      * Check if the current user is following a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/check-if-user-follows-playlist
+     *
+     * @deprecated Use SpotifyWebAPI::myLibraryContains() instead.
      *
      * @param string $playlistId ID or URI of the playlist to check.
      *
@@ -459,13 +453,9 @@ class SpotifyWebAPI
      */
     public function currentUserFollowsPlaylist(string $playlistId): array
     {
-        $playlistId = $this->uriToId($playlistId, 'playlist');
+        $playlistUri = $this->idToUri($playlistId, 'playlist');
 
-        $uri = '/v1/playlists/' . $playlistId . '/followers/contains';
-
-        $this->lastResponse = $this->sendRequest('GET', $uri);
-
-        return $this->lastResponse['body'];
+        return $this->myLibraryContains($playlistUri);
     }
 
     /**
@@ -1793,24 +1783,17 @@ class SpotifyWebAPI
      * Check if albums are saved in the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/check-users-saved-albums
      *
+     * @deprecated Use SpotifyWebAPI::myLibraryContains() instead.
+     *
      * @param string|array $albums Album IDs or URIs to check for.
      *
      * @return array Whether each album is saved.
      */
     public function myAlbumsContains(string|array $albums): array
     {
-        $albums = $this->uriToId($albums, 'album');
-        $albums = $this->toCommaString($albums);
+        $albums = $this->idToUri($albums, 'album');
 
-        $options = [
-            'ids' => $albums,
-        ];
-
-        $uri = '/v1/me/albums/contains';
-
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
-
-        return $this->lastResponse['body'];
+        return $this->myLibraryContains($albums);
     }
 
     /**
@@ -1834,20 +1817,36 @@ class SpotifyWebAPI
      * Check if episodes are saved in the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/check-users-saved-episodes
      *
+     * @deprecated Use SpotifyWebAPI::myLibraryContains() instead.
+     *
      * @param string|array $episodes Episode IDs or URIs to check for.
      *
      * @return array Whether each episode is saved.
      */
     public function myEpisodesContains(string|array $episodes): array
     {
-        $episodes = $this->uriToId($episodes, 'episode');
-        $episodes = $this->toCommaString($episodes);
+        $episodes = $this->idToUri($episodes, 'episode');
+
+        return $this->myLibraryContains($episodes);
+    }
+
+    /**
+     * Check if items are saved in the current user's Spotify library.
+     * https://developer.spotify.com/documentation/web-api/reference/check-library-contains
+     *
+     * @param string|array $uris Spotify URIs to check for.
+     *
+     * @return array Whether each item is saved.
+     */
+    public function myLibraryContains(string|array $uris): array
+    {
+        $uris = $this->toCommaString($uris);
 
         $options = [
-            'ids' => $episodes,
+            'uris' => $uris,
         ];
 
-        $uri = '/v1/me/episodes/contains';
+        $uri = '/v1/me/library/contains';
 
         $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
@@ -1858,29 +1857,24 @@ class SpotifyWebAPI
      * Check if shows are saved in the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/check-users-saved-shows
      *
+     * @deprecated Use SpotifyWebAPI::myLibraryContains() instead.
+     *
      * @param string|array $shows Show IDs or URIs to check for.
      *
      * @return array Whether each show is saved.
      */
     public function myShowsContains(string|array $shows): array
     {
-        $shows = $this->uriToId($shows, 'show');
-        $shows = $this->toCommaString($shows);
+        $shows = $this->idToUri($shows, 'show');
 
-        $options = [
-            'ids' => $shows,
-        ];
-
-        $uri = '/v1/me/shows/contains';
-
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
-
-        return $this->lastResponse['body'];
+        return $this->myLibraryContains($shows);
     }
 
     /**
      * Check if tracks are saved in the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/check-users-saved-tracks
+     *
+     * @deprecated Use SpotifyWebAPI::myLibraryContains() instead.
      *
      * @param string|array $tracks Track IDs or URIs to check for.
      *
@@ -1888,18 +1882,9 @@ class SpotifyWebAPI
      */
     public function myTracksContains(string|array $tracks): array
     {
-        $tracks = $this->uriToId($tracks, 'track');
-        $tracks = $this->toCommaString($tracks);
+        $tracks = $this->idToUri($tracks, 'track');
 
-        $options = [
-            'ids' => $tracks,
-        ];
-
-        $uri = '/v1/me/tracks/contains';
-
-        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
-
-        return $this->lastResponse['body'];
+        return $this->myLibraryContains($tracks);
     }
 
     /**

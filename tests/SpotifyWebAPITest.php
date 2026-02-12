@@ -420,14 +420,13 @@ class SpotifyWebAPITest extends TestCase
         ];
 
         $expected = [
-            'ids' => '74ASZWbe4lXaubB36ztrGX,36QJpDe2go2KgaRleHCDTp',
-            'type' => 'artist',
+            'uris' => 'spotify:artist:74ASZWbe4lXaubB36ztrGX,spotify:artist:36QJpDe2go2KgaRleHCDTp',
         ];
 
         $return = ['body' => get_fixture('user-follows')];
         $api = $this->setupApi(
             'GET',
-            '/v1/me/following/contains',
+            '/v1/me/library/contains',
             $expected,
             [],
             $return,
@@ -440,17 +439,21 @@ class SpotifyWebAPITest extends TestCase
 
     public function testCurrentUserFollowsPlaylist()
     {
+        $expected = [
+            'uris' => 'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+        ];
+
         $return = ['body' => get_fixture('users-follows-playlist')];
         $api = $this->setupApi(
             'GET',
-            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/followers/contains',
-            [],
+            '/v1/me/library/contains',
+            $expected,
             [],
             $return,
         );
 
         $response = $api->currentUserFollowsPlaylist(
-            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+            '0UZ0Ll4HJHR7yvURYbHJe9',
         );
 
         $this->assertTrue($response[0]);
@@ -1922,18 +1925,17 @@ class SpotifyWebAPITest extends TestCase
     {
         $albums = [
             '1oR3KrPIp4CbagPa3PhtPp',
-            '6lPb7Eoon6QPbscWbMsk6a',
             'spotify:album:1oR3KrPIp4CbagPa3PhtPp',
         ];
 
         $expected = [
-            'ids' => '1oR3KrPIp4CbagPa3PhtPp,6lPb7Eoon6QPbscWbMsk6a,1oR3KrPIp4CbagPa3PhtPp',
+            'uris' => 'spotify:album:1oR3KrPIp4CbagPa3PhtPp,spotify:album:1oR3KrPIp4CbagPa3PhtPp',
         ];
 
         $return = ['body' => get_fixture('user-albums-contains')];
         $api = $this->setupApi(
             'GET',
-            '/v1/me/albums/contains',
+            '/v1/me/library/contains',
             $expected,
             [],
             $return,
@@ -1973,18 +1975,17 @@ class SpotifyWebAPITest extends TestCase
     {
         $episodes = [
             '0zov0kd6MA3BqT1FKpOeYO',
-            '3pLx6LaVQbWl5IfW8nxq56',
             'spotify:episode:6kSGLgKWhBg8AoCzylVfc2',
         ];
 
         $expected = [
-            'ids' => '0zov0kd6MA3BqT1FKpOeYO,3pLx6LaVQbWl5IfW8nxq56,6kSGLgKWhBg8AoCzylVfc2',
+            'uris' => 'spotify:episode:0zov0kd6MA3BqT1FKpOeYO,spotify:episode:6kSGLgKWhBg8AoCzylVfc2',
         ];
 
         $return = ['body' => get_fixture('user-episodes-contains')];
         $api = $this->setupApi(
             'GET',
-            '/v1/me/episodes/contains',
+            '/v1/me/library/contains',
             $expected,
             [],
             $return,
@@ -1995,22 +1996,46 @@ class SpotifyWebAPITest extends TestCase
         $this->assertTrue($response[0]);
     }
 
+    public function testMyLibraryContains()
+    {
+        $ids = [
+            'spotify:album:1oR3KrPIp4CbagPa3PhtPp',
+            'spotify:episode:0zov0kd6MA3BqT1FKpOeYO',
+        ];
+
+        $expected = [
+            'uris' => 'spotify:album:1oR3KrPIp4CbagPa3PhtPp,spotify:episode:0zov0kd6MA3BqT1FKpOeYO',
+        ];
+
+        $return = ['body' => get_fixture('user-library-contains')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/me/library/contains',
+            $expected,
+            [],
+            $return,
+        );
+
+        $response = $api->myLibraryContains($ids);
+
+        $this->assertTrue($response[0]);
+    }
+
     public function testMyShowsContains()
     {
         $shows = [
             '5AvwZVawapvyhJUIx71pdJ',
-            '2C6ups0LMt1G8n81XLlkbsPo',
             'spotify:show:2C5AvwZVawapvyhJUIx71pdJ',
         ];
 
         $expected = [
-            'ids' => '5AvwZVawapvyhJUIx71pdJ,2C6ups0LMt1G8n81XLlkbsPo,2C5AvwZVawapvyhJUIx71pdJ',
+            'uris' => 'spotify:show:5AvwZVawapvyhJUIx71pdJ,spotify:show:2C5AvwZVawapvyhJUIx71pdJ',
         ];
 
         $return = ['body' => get_fixture('user-shows-contains')];
         $api = $this->setupApi(
             'GET',
-            '/v1/me/shows/contains',
+            '/v1/me/library/contains',
             $expected,
             [],
             $return,
@@ -2025,18 +2050,17 @@ class SpotifyWebAPITest extends TestCase
     {
         $tracks = [
             '1id6H6vcwSB9GGv9NXh5cl',
-            '3mqRLlD9j92BBv1ueFhJ1l',
-            'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
+            'spotify:track:3mqRLlD9j92BBv1ueFhJ1l',
         ];
 
         $expected = [
-            'ids' => '1id6H6vcwSB9GGv9NXh5cl,3mqRLlD9j92BBv1ueFhJ1l,1id6H6vcwSB9GGv9NXh5cl',
+            'uris' => 'spotify:track:1id6H6vcwSB9GGv9NXh5cl,spotify:track:3mqRLlD9j92BBv1ueFhJ1l',
         ];
 
         $return = ['body' => get_fixture('user-tracks-contains')];
         $api = $this->setupApi(
             'GET',
-            '/v1/me/tracks/contains',
+            '/v1/me/library/contains',
             $expected,
             [],
             $return,
@@ -2339,7 +2363,7 @@ class SpotifyWebAPITest extends TestCase
     {
         $options = [
             '74ASZWbe4lXaubB36ztrGX',
-            'spotify:artist:36QJpDe2go2KgaRleHCDTp'
+            'spotify:artist:36QJpDe2go2KgaRleHCDTp',
         ];
 
         $return = ['status' => 200];
