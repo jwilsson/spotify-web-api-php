@@ -564,8 +564,45 @@ class SpotifyWebAPI
     }
 
     /**
+     * Delete items from a playlist and retrieve a new snapshot ID.
+     * https://developer.spotify.com/documentation/web-api/reference/remove-items-playlist
+     *
+     * @param string $playlistId ID or URI of the playlist to delete tracks from.
+     * @param array $items An array of objects containing track or episode URIs.
+     * @param string $snapshotId Optional. The playlist's snapshot ID.
+     *
+     * @return string|bool A new snapshot ID or false if the items weren't successfully deleted.
+     */
+    public function deletePlaylistItems(string $playlistId, array $items, string $snapshotId = ''): string|bool
+    {
+        $options = [
+            'items' => $items,
+        ];
+
+        if ($snapshotId) {
+            $options['snapshot_id'] = $snapshotId;
+        }
+
+        $options = json_encode($options);
+
+        $headers = [
+            'Content-Type' => 'application/json',
+        ];
+
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
+        $uri = '/v1/playlists/' . $playlistId . '/items';
+
+        $this->lastResponse = $this->sendRequest('DELETE', $uri, $options, $headers);
+
+        return $this->getSnapshotId($this->lastResponse['body']);
+    }
+
+    /**
      * Delete tracks from a playlist and retrieve a new snapshot ID.
      * https://developer.spotify.com/documentation/web-api/reference/remove-tracks-playlist
+     *
+     * @deprecated Use SpotifyWebAPI::deletePlaylistItems() instead.
      *
      * @param string $playlistId ID or URI of the playlist to delete tracks from.
      * @param array $tracks An array with the key "tracks" containing arrays or objects with tracks to delete.

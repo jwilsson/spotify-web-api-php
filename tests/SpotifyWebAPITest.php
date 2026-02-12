@@ -585,6 +585,48 @@ class SpotifyWebAPITest extends TestCase
         );
     }
 
+    public function testDeletePlaylistItems()
+    {
+        $items = [
+            [
+                'uri' => 'spotify:track:1hChLdk0hBQbapbpVUVlNa',
+            ],
+            [
+                'uri' => 'spotify:episode:0Q86acNRm6V9GYx55SXKwf',
+            ],
+        ];
+
+        $expected = json_encode([
+            'items' => [
+                [
+                    'uri' => 'spotify:track:1hChLdk0hBQbapbpVUVlNa',
+                ],
+                [
+                    'uri' => 'spotify:episode:0Q86acNRm6V9GYx55SXKwf',
+                ],
+            ],
+            'snapshot_id' => 'snapshot_id',
+        ]);
+
+        $headers = ['Content-Type' => 'application/json'];
+        $return = ['body' => get_fixture('snapshot-id')];
+        $api = $this->setupApi(
+            'DELETE',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/items',
+            $expected,
+            $headers,
+            $return,
+        );
+
+        $this->assertNotFalse(
+            $api->deletePlaylistItems(
+                'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+                $items,
+                'snapshot_id',
+            ),
+        );
+    }
+
     public function testDeletePlaylistTracksTracks()
     {
         $tracks = [
