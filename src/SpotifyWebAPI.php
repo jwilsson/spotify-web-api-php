@@ -1565,8 +1565,45 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the items in a playlist.
+     * https://developer.spotify.com/documentation/web-api/reference/get-playlists-items
+     *
+     * @param string $playlistId ID or URI of the playlist.
+     * @param array|object $options Optional. Options for the items.
+     * - string|array fields Optional. A list of fields to return. See Spotify docs for more info.
+     * - int limit Optional. Limit the number of items.
+     * - int offset Optional. Number of items to skip.
+     * - string market Optional. ISO 3166-1 alpha-2 country code, provide this if you wish to apply Track Relinking.
+     * - string|array additional_types Optional. Types of media to return info about.
+     *
+     * @return array|object The items in the playlist. Type is controlled by the `return_assoc` option.
+     */
+    public function getPlaylistItems(string $playlistId, array|object $options = []): array|object
+    {
+        $options = (array) $options;
+
+        if (isset($options['fields'])) {
+            $options['fields'] = $this->toCommaString($options['fields']);
+        }
+
+        if (isset($options['additional_types'])) {
+            $options['additional_types'] = $this->toCommaString($options['additional_types']);
+        }
+
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
+        $uri = '/v1/playlists/' . $playlistId . '/items';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get the tracks in a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/get-playlists-tracks
+     *
+     * @deprecated Use SpotifyWebAPI::getPlaylistItems() instead.
      *
      * @param string $playlistId ID or URI of the playlist.
      * @param array|object $options Optional. Options for the tracks.

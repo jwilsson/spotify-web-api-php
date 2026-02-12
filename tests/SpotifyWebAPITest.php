@@ -1948,6 +1948,39 @@ class SpotifyWebAPITest extends TestCase
         $this->assertObjectHasProperty('items', $response);
     }
 
+    public function testGetPlaylistItems()
+    {
+        $options = [
+            'additional_types' => ['track', 'episode'],
+            'fields' => ['id', 'uri'],
+            'limit' => 10,
+            'market' => 'SE',
+        ];
+
+        $expected = [
+            'additional_types' => 'track,episode',
+            'fields' => 'id,uri',
+            'limit' => 10,
+            'market' => 'SE',
+        ];
+
+        $return = ['body' => get_fixture('user-playlist-items')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/items',
+            $expected,
+            [],
+            $return,
+        );
+
+        $response = $api->getPlaylistItems(
+            'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+            $options,
+        );
+
+        $this->assertObjectHasProperty('items', $response);
+    }
+
     public function testGetPlaylistTracks()
     {
         $options = [
