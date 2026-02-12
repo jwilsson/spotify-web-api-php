@@ -182,26 +182,17 @@ class SpotifyWebAPI
      * Add albums to the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/save-albums-user
      *
+     * @deprecated Use SpotifyWebAPI::addMyLibrary() instead.
+     *
      * @param string|array $albums Album IDs or URIs to add.
      *
      * @return bool Whether the albums was successfully added.
      */
     public function addMyAlbums(string|array $albums): bool
     {
-        $albums = $this->uriToId($albums, 'album');
-        $albums = json_encode([
-            'ids' => (array) $albums,
-        ]);
+        $albums = $this->idToUri($albums, 'album');
 
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
-
-        $uri = '/v1/me/albums';
-
-        $this->lastResponse = $this->sendRequest('PUT', $uri, $albums, $headers);
-
-        return $this->lastResponse['status'] == 200;
+        return $this->addMyLibrary($albums);
     }
 
     /**
@@ -225,24 +216,35 @@ class SpotifyWebAPI
      * Add episodes to the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/save-episodes-user
      *
+     * @deprecated Use SpotifyWebAPI::addMyLibrary() instead.
+     *
      * @param string|array $episodes Episode IDs or URIs to add.
      *
      * @return bool Whether the episodes was successfully added.
      */
     public function addMyEpisodes(string|array $episodes): bool
     {
-        $episodes = $this->uriToId($episodes, 'episode');
-        $episodes = json_encode([
-            'ids' => (array) $episodes,
-        ]);
+        $episodes = $this->idToUri($episodes, 'episode');
 
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
+        return $this->addMyLibrary($episodes);
+    }
 
-        $uri = '/v1/me/episodes';
+    /**
+     * Add items to the current user's Spotify library.
+     * https://developer.spotify.com/documentation/web-api/reference/save-library-items
+     *
+     * @param string|array $uris Spotify URIs to add.
+     *
+     * @return bool Whether the items was successfully added.
+     */
+    public function addMyLibrary(string|array $uris): bool
+    {
+        $uris = $this->toCommaString($uris);
 
-        $this->lastResponse = $this->sendRequest('PUT', $uri, $episodes, $headers);
+        // We need to manually append data to the URI since it's a PUT request
+        $uri = '/v1/me/library?uris=' . $uris;
+
+        $this->lastResponse = $this->sendRequest('PUT', $uri);
 
         return $this->lastResponse['status'] == 200;
     }
@@ -251,31 +253,24 @@ class SpotifyWebAPI
      * Add shows to the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/save-shows-user
      *
+     * @deprecated Use SpotifyWebAPI::addMyLibrary() instead.
+     *
      * @param string|array $shows Show IDs or URIs to add.
      *
      * @return bool Whether the shows was successfully added.
      */
     public function addMyShows(string|array $shows): bool
     {
-        $shows = $this->uriToId($shows, 'show');
-        $shows = json_encode([
-            'ids' => (array) $shows,
-        ]);
+        $shows = $this->idToUri($shows, 'show');
 
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
-
-        $uri = '/v1/me/shows';
-
-        $this->lastResponse = $this->sendRequest('PUT', $uri, $shows, $headers);
-
-        return $this->lastResponse['status'] == 200;
+        return $this->addMyLibrary($shows);
     }
 
     /**
      * Add tracks to the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/save-tracks-user
+     *
+     * @deprecated Use SpotifyWebAPI::addMyLibrary() instead.
      *
      * @param array|object $tracks Track IDs or URIs to add. One of "ids" or "timestamped_ids" key must be present.
      * - array ids Optional. An array of track IDs or URIs.
@@ -288,10 +283,9 @@ class SpotifyWebAPI
         $tracks = (array) $tracks;
 
         if (isset($tracks['ids'])) {
-            $tracks = (array) $this->uriToId($tracks['ids'], 'track');
-            $options = json_encode([
-                'ids' => $tracks,
-            ]);
+            $tracks = $this->idToUri($tracks['ids'], 'track');
+
+            return $this->addMyLibrary($tracks);
         } elseif (isset($tracks['timestamped_ids'])) {
             $tracks = array_map(function ($item) {
                 $item['id'] = $this->uriToId($item['id'], 'track');
@@ -637,6 +631,8 @@ class SpotifyWebAPI
      * Add the current user as a follower of one or more artists or other Spotify users.
      * https://developer.spotify.com/documentation/web-api/reference/follow-artists-users
      *
+     * @deprecated Use SpotifyWebAPI::addMyLibrary() instead.
+     *
      * @param string $type The type of ID to follow: either 'artist' or 'user'.
      * @param string|array $ids IDs or URIs of the users or artists to follow.
      *
@@ -644,21 +640,9 @@ class SpotifyWebAPI
      */
     public function followArtistsOrUsers(string $type, string|array $ids): bool
     {
-        $ids = $this->uriToId($ids, $type);
-        $ids = json_encode([
-            'ids' => (array) $ids,
-        ]);
+        $uris = $this->idToUri($ids, $type);
 
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
-
-        // We need to manually append data to the URI since it's a PUT request
-        $uri = '/v1/me/following?type=' . $type;
-
-        $this->lastResponse = $this->sendRequest('PUT', $uri, $ids, $headers);
-
-        return $this->lastResponse['status'] == 204;
+        return $this->addMyLibrary($uris);
     }
 
     /**

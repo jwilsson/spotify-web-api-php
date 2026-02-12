@@ -127,25 +127,15 @@ class SpotifyWebAPITest extends TestCase
     {
         $albums = [
             '1oR3KrPIp4CbagPa3PhtPp',
-            '6lPb7Eoon6QPbscWbMsk6a',
             'spotify:album:1oR3KrPIp4CbagPa3PhtPp',
         ];
 
-        $expected = json_encode([
-            'ids' => [
-                '1oR3KrPIp4CbagPa3PhtPp',
-                '6lPb7Eoon6QPbscWbMsk6a',
-                '1oR3KrPIp4CbagPa3PhtPp',
-            ],
-        ]);
-
-        $headers = ['Content-Type' => 'application/json'];
         $return = ['status' => 200];
         $api = $this->setupApi(
             'PUT',
-            '/v1/me/albums',
-            $expected,
-            $headers,
+            '/v1/me/library?uris=spotify:album:1oR3KrPIp4CbagPa3PhtPp,spotify:album:1oR3KrPIp4CbagPa3PhtPp',
+            [],
+            [],
             $return,
         );
 
@@ -179,30 +169,41 @@ class SpotifyWebAPITest extends TestCase
     {
         $episodes = [
             '0zov0kd6MA3BqT1FKpOeYO',
-            '3pLx6LaVQbWl5IfW8nxq56',
             'spotify:episode:6kSGLgKWhBg8AoCzylVfc2',
         ];
 
-        $expected = json_encode([
-            'ids' => [
-                '0zov0kd6MA3BqT1FKpOeYO',
-                '3pLx6LaVQbWl5IfW8nxq56',
-                '6kSGLgKWhBg8AoCzylVfc2',
-            ],
-        ]);
-
-        $headers = ['Content-Type' => 'application/json'];
         $return = ['status' => 200];
         $api = $this->setupApi(
             'PUT',
-            '/v1/me/episodes',
-            $expected,
-            $headers,
+            '/v1/me/library?uris=spotify:episode:0zov0kd6MA3BqT1FKpOeYO,spotify:episode:6kSGLgKWhBg8AoCzylVfc2',
+            [],
+            [],
             $return,
         );
 
         $this->assertTrue(
             $api->addMyEpisodes($episodes),
+        );
+    }
+
+    public function testAddMyLibrary()
+    {
+        $items = [
+            'spotify:album:1oR3KrPIp4CbagPa3PhtPp',
+            'spotify:episode:6kSGLgKWhBg8AoCzylVfc2',
+        ];
+
+        $return = ['status' => 200];
+        $api = $this->setupApi(
+            'PUT',
+            '/v1/me/library?uris=spotify:album:1oR3KrPIp4CbagPa3PhtPp,spotify:episode:6kSGLgKWhBg8AoCzylVfc2',
+            [],
+            [],
+            $return,
+        );
+
+        $this->assertTrue(
+            $api->addMyLibrary($items),
         );
     }
 
@@ -213,20 +214,12 @@ class SpotifyWebAPITest extends TestCase
             'spotify:show:5AvwZVawapvyhJUIx71pdJ',
         ];
 
-        $expected = json_encode([
-            'ids' => [
-                '2C6ups0LMt1G8n81XLlkbsPo',
-                '5AvwZVawapvyhJUIx71pdJ',
-            ],
-        ]);
-
-        $headers = ['Content-Type' => 'application/json'];
         $return = ['status' => 200];
         $api = $this->setupApi(
             'PUT',
-            '/v1/me/shows',
-            $expected,
-            $headers,
+            '/v1/me/library?uris=spotify:show:2C6ups0LMt1G8n81XLlkbsPo,spotify:show:5AvwZVawapvyhJUIx71pdJ',
+            [],
+            [],
             $return,
         );
 
@@ -240,26 +233,16 @@ class SpotifyWebAPITest extends TestCase
         $tracks = [
             'ids' => [
                 '1id6H6vcwSB9GGv9NXh5cl',
-                '3mqRLlD9j92BBv1ueFhJ1l',
                 'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
             ],
         ];
 
-        $expected = json_encode([
-            'ids' => [
-                '1id6H6vcwSB9GGv9NXh5cl',
-                '3mqRLlD9j92BBv1ueFhJ1l',
-                '1id6H6vcwSB9GGv9NXh5cl',
-            ],
-        ]);
-
-        $headers = ['Content-Type' => 'application/json'];
         $return = ['status' => 200];
         $api = $this->setupApi(
             'PUT',
-            '/v1/me/tracks',
-            $expected,
-            $headers,
+            '/v1/me/library?uris=spotify:track:1id6H6vcwSB9GGv9NXh5cl,spotify:track:1id6H6vcwSB9GGv9NXh5cl',
+            [],
+            [],
             $return,
         );
 
@@ -732,20 +715,12 @@ class SpotifyWebAPITest extends TestCase
             '36QJpDe2go2KgaRleHCDTp',
         ];
 
-        $expected = json_encode([
-            'ids' => [
-                '74ASZWbe4lXaubB36ztrGX',
-                '36QJpDe2go2KgaRleHCDTp',
-            ],
-        ]);
-
-        $headers = ['Content-Type' => 'application/json'];
-        $return = ['status' => 204];
+        $return = ['status' => 200];
         $api = $this->setupApi(
             'PUT',
-            '/v1/me/following?type=artist',
-            $expected,
-            $headers,
+            '/v1/me/library?uris=spotify:artist:74ASZWbe4lXaubB36ztrGX,spotify:artist:36QJpDe2go2KgaRleHCDTp',
+            [],
+            [],
             $return,
         );
 
