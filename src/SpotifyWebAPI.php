@@ -310,8 +310,42 @@ class SpotifyWebAPI
     }
 
     /**
+     * Add items to a playlist.
+     * https://developer.spotify.com/documentation/web-api/reference/add-items-to-playlist
+     *
+     * @param string $playlistId ID of the playlist to add items to.
+     * @param string|array $items Track and episode URIs to add.
+     * @param array|object $options Optional. Options for the new items.
+     * - int position Optional. Zero-based track position in playlist. Items will be appended if omitted or false.
+     *
+     * @return string|bool A new snapshot ID or false if the items weren't successfully added.
+     */
+    public function addPlaylistItems(string $playlistId, string|array $items, array|object $options = []): string|bool
+    {
+        $options = array_merge((array) $options, [
+            'uris' => (array) $items,
+        ]);
+
+        $options = json_encode($options);
+
+        $headers = [
+            'Content-Type' => 'application/json',
+        ];
+
+        $playlistId = $this->uriToId($playlistId, 'playlist');
+
+        $uri = '/v1/playlists/' . $playlistId . '/items';
+
+        $this->lastResponse = $this->sendRequest('POST', $uri, $options, $headers);
+
+        return $this->getSnapshotId($this->lastResponse['body']);
+    }
+
+    /**
      * Add tracks to a playlist.
      * https://developer.spotify.com/documentation/web-api/reference/add-tracks-to-playlist
+     *
+     * @deprecated Use SpotifyWebAPI::addPlaylistItems() instead.
      *
      * @param string $playlistId ID of the playlist to add tracks to.
      * @param string|array $tracks Track IDs, track URIs, and episode URIs to add.

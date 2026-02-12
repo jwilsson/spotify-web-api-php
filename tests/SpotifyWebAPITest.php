@@ -284,6 +284,44 @@ class SpotifyWebAPITest extends TestCase
         );
     }
 
+    public function testAddPlaylistItems()
+    {
+        $items = [
+            'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
+            'spotify:episode:0Q86acNRm6V9GYx55SXKwf',
+        ];
+
+        $options = [
+            'position' => 0,
+        ];
+
+        $expected = json_encode([
+            'position' => 0,
+            'uris' => [
+                'spotify:track:1id6H6vcwSB9GGv9NXh5cl',
+                'spotify:episode:0Q86acNRm6V9GYx55SXKwf',
+            ],
+        ]);
+
+        $headers = ['Content-Type' => 'application/json'];
+        $return = ['body' => get_fixture('snapshot-id')];
+        $api = $this->setupApi(
+            'POST',
+            '/v1/playlists/0UZ0Ll4HJHR7yvURYbHJe9/items',
+            $expected,
+            $headers,
+            $return,
+        );
+
+        $this->assertNotFalse(
+            $api->addPlaylistItems(
+                'spotify:playlist:0UZ0Ll4HJHR7yvURYbHJe9',
+                $items,
+                $options,
+            ),
+        );
+    }
+
     public function testAddPlaylistTracks()
     {
         $tracks = [
