@@ -96,7 +96,7 @@ SpotifyWebAPIAuthException::setReason($reason)
 Set the reason string.
 
 #### Arguments
-* `$reason` **string**
+    * `$reason` **string**
 
 #### Return values
 * **void** 

@@ -2,6 +2,50 @@
 
 There are lots of operations involving a user's library that can be performed. Remember to request the correct [scopes](working-with-scopes.md) beforehand.
 
+## Adding items to a user's library
+
+```php
+$api->addMyLibrary([
+    'spotify:album:album_id',
+    'spotify:artist:artist_id',
+    'spotify:episode:episode_id',
+    'spotify:playlist:playlist_id',
+    'spotify:show:show_id',
+    'spotify:track:track_id',
+    'spotify:user:user_id',
+]);
+```
+
+## Deleting items from a user's library
+
+```php
+$api->deleteMyLibrary([
+    'spotify:album:album_id',
+    'spotify:artist:artist_id',
+    'spotify:episode:episode_id',
+    'spotify:playlist:playlist_id',
+    'spotify:show:show_id',
+    'spotify:track:track_id',
+    'spotify:user:user_id',
+]);
+```
+
+## Checking if items are present in a user's library
+
+```php
+$contains = $api->myLibraryContains([
+    'spotify:album:album_id',
+    'spotify:artist:artist_id',
+    'spotify:episode:episode_id',
+    'spotify:playlist:playlist_id',
+    'spotify:show:show_id',
+    'spotify:track:track_id',
+    'spotify:user:user_id',
+]);
+
+var_dump($contains);
+```
+
 ## Listing the tracks in a user's library
 
 ```php
@@ -16,7 +60,7 @@ foreach ($tracks->items as $track) {
 }
 ```
 
-It's also possible to list the albums, podcast episodes, or podcast shows in a user's library using `getMySavedAlbums`, `getMySavedEpisodes`, or `getMySavedShows`.
+It's also possible to list the albums, audiobooks, podcast episodes, or podcast shows in a user's library using `getMySavedAlbums`, `getMySavedAudiobooks`, `getMySavedEpisodes`, or `getMySavedShows`.
 
 ## Adding tracks to a user's library
 
@@ -38,12 +82,21 @@ $api->addMyTracks([
 ]);
 ```
 
-## Adding albums, episodes, or shows to a user's library
+## Adding albums, audiobooks, episodes, or shows to a user's library
+
+*Note: These methods are only available to extended quota apps.*
 
 ```php
 $api->addMyAlbums([
     'ALBUM_ID',
     'ALBUM_ID',
+]);
+```
+
+```php
+$api->addMyAudiobooks([
+    'AUDIOBOOK_ID',
+    'AUDIOBOOK_ID',
 ]);
 ```
 
@@ -63,6 +116,8 @@ $api->addMyShows([
 
 ## Deleting tracks from a user's library
 
+*Note: These methods are only available to extended quota apps.*
+
 ```php
 $api->deleteMyTracks([
     'TRACK_ID',
@@ -70,9 +125,11 @@ $api->deleteMyTracks([
 ]);
 ```
 
-It's also possible to delete an album, a podcast episode, or a podcast show from a user's library using `deleteMyAlbums`, `deleteMyEpisodes`, or `deleteMyShows`.
+It's also possible to delete an album, an audiobook, a podcast episode, or a podcast show from a user's library using `deleteMyAlbums`, `deleteMyAudiobooks`, `deleteMyEpisodes`, or `deleteMyShows`.
 
 ## Checking if tracks are present in a user's library
+
+*Note: These methods are only available to extended quota apps.*
 
 ```php
 $contains = $api->myTracksContains([
@@ -83,6 +140,6 @@ $contains = $api->myTracksContains([
 var_dump($contains);
 ```
 
-It's also possible to check if an album, a podcast episode, or a podcast show is present in a user's library using `myAlbumsContains`, `myEpisodesContains`, or `myShowsContains`.
+It's also possible to check if an album, an audiobook, a podcast episode, or a podcast show is present in a user's library using `myAlbumsContains`, `myAudiobooksContains`, `myEpisodesContains`, or `myShowsContains`.
 
 Please see the [method reference](/docs/method-reference/SpotifyWebAPI.md) for more available options for each method.

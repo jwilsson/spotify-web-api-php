@@ -4,6 +4,8 @@ If you wish to access content that's featured and/or curated by Spotify there ar
 
 ## Getting a list of new releases
 
+*Note: This method is only available to extended quota apps.*
+
 ```php
 $releases = $api->getNewReleases([
     'country' => 'se',
@@ -30,6 +32,8 @@ foreach ($playlists->playlists->items as $playlist) {
 
 ## Getting a list of Spotify categories
 
+*Note: This method is only available to extended quota apps.*
+
 ```php
 $categories = $api->getCategoriesList([
     'country' => 'se',
@@ -41,8 +45,11 @@ $categories = $api->getCategoriesList([
 foreach ($categories->categories->items as $category) {
     echo '<a href="' . $category->href . '">' . $category->name . '</a><br>';
 }
+```
 
 ## Getting a single Spotify category
+
+*Note: This method is only available to extended quota apps.*
 
 ```php
 $category = $api->getCategory('dinner', [
@@ -64,6 +71,16 @@ $playlists = $api->getCategoryPlaylists('dinner', [
 foreach ($playlists->playlists->items as $playlist) {
     echo '<a href="' . $playlist->href . '">' . $playlist->name . '</a><br>';
 }
+```
+
+## Getting list of markets where Spotify is available
+
+*Note: This method is only available to extended quota apps.*
+
+```php
+$markets = $api->getMarkets();
+
+print_r($markets);
 ```
 
 Please see the [method reference](/docs/method-reference/SpotifyWebAPI.md) for more available options for each method.

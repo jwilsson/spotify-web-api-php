@@ -36,10 +36,10 @@ Constructor<br>
 Set up client credentials.
 
 #### Arguments
-* `$clientId` **string** - The client ID.
-* `$clientSecret` **string** - Optional. The client secret.
-* `$redirectUri` **string** - Optional. The redirect URI.
-* `$request` **\SpotifyWebAPI\Request** - Optional. The Request object to use.
+    * `$clientId` **string** - The client ID.
+    * `$clientSecret` **string** - Optional. The client secret.
+    * `$redirectUri` **string** - Optional. The redirect URI.
+    * `$request` **\SpotifyWebAPI\Request** - Optional. The Request object to use.
 
 
 ---
@@ -53,8 +53,8 @@ Session::generateCodeChallenge($codeVerifier, $hashAlgo)
 Generate a code challenge from a code verifier for use with the PKCE flow.
 
 #### Arguments
-* `$codeVerifier` **string** - The code verifier to create a challenge from.
-* `$hashAlgo` **string** - Optional. The hash algorithm to use. Defaults to "sha256".
+    * `$codeVerifier` **string** - The code verifier to create a challenge from.
+    * `$hashAlgo` **string** - Optional. The hash algorithm to use. Defaults to "sha256".
 
 #### Return values
 * **string** The code challenge.
@@ -70,7 +70,7 @@ Session::generateCodeVerifier($length)
 Generate a code verifier for use with the PKCE flow.
 
 #### Arguments
-* `$length` **int** - Optional. Code verifier length. Must be between 43 and 128 characters long, default is 128.
+    * `$length` **int** - Optional. Code verifier length. Must be between 43 and 128 characters long, default is 128.
 
 #### Return values
 * **string** A code verifier string.
@@ -86,7 +86,7 @@ Session::generateState($length)
 Generate a random state value.
 
 #### Arguments
-* `$length` **int** - Optional. Length of the state. Default is 16 characters.
+    * `$length` **int** - Optional. Length of the state. Default is 16 characters.
 
 #### Return values
 * **string** A random state value.
@@ -102,11 +102,11 @@ Session::getAuthorizeUrl($options)
 Get the authorization URL.
 
 #### Arguments
-* `$options` **array\|object** - Optional. Options for the authorization URL.
-    * string code_challenge Optional. A PKCE code challenge.
-    * array scope Optional. Scope(s) to request from the user.
-    * boolean show_dialog Optional. Whether or not to force the user to always approve the app. Default is false.
-    * string state Optional. A CSRF token.
+    * `$options` **array\|object** - Optional. Options for the authorization URL.
+- string code_challenge Optional. A PKCE code challenge.
+- array scope Optional. Scope(s) to request from the user.
+- boolean show_dialog Optional. Whether or not to force the user to always approve the app. Default is false.
+- string state Optional. A CSRF token.
 
 #### Return values
 * **string** The authorization URL.
@@ -220,7 +220,7 @@ Session::refreshAccessToken($refreshToken)
 Refresh an access token.
 
 #### Arguments
-* `$refreshToken` **string** - Optional. The refresh token to use.
+    * `$refreshToken` **string** - Optional. The refresh token to use.
 
 #### Return values
 * **bool** Whether the access token was successfully refreshed.
@@ -236,8 +236,8 @@ Session::requestAccessToken($authorizationCode, $codeVerifier)
 Request an access token given an authorization code.
 
 #### Arguments
-* `$authorizationCode` **string** - The authorization code from Spotify.
-* `$codeVerifier` **string** - Optional. A previously generated code verifier. Will assume a PKCE flow if passed.
+    * `$authorizationCode` **string** - The authorization code from Spotify.
+    * `$codeVerifier` **string** - Optional. A previously generated code verifier. Will assume a PKCE flow if passed.
 
 #### Return values
 * **bool** True when the access token was successfully granted, false otherwise.
@@ -267,7 +267,7 @@ Session::setAccessToken($accessToken)
 Set the access token.
 
 #### Arguments
-* `$accessToken` **string** - The access token
+    * `$accessToken` **string** - The access token
 
 #### Return values
 * **self** 
@@ -283,7 +283,7 @@ Session::setClientId($clientId)
 Set the client ID.
 
 #### Arguments
-* `$clientId` **string** - The client ID.
+    * `$clientId` **string** - The client ID.
 
 #### Return values
 * **self** 
@@ -299,7 +299,7 @@ Session::setClientSecret($clientSecret)
 Set the client secret.
 
 #### Arguments
-* `$clientSecret` **string** - The client secret.
+    * `$clientSecret` **string** - The client secret.
 
 #### Return values
 * **self** 
@@ -315,7 +315,7 @@ Session::setRedirectUri($redirectUri)
 Set the client's redirect URI.
 
 #### Arguments
-* `$redirectUri` **string** - The redirect URI.
+    * `$redirectUri` **string** - The redirect URI.
 
 #### Return values
 * **self** 
@@ -331,7 +331,7 @@ Session::setRefreshToken($refreshToken)
 Set the session's refresh token.
 
 #### Arguments
-* `$refreshToken` **string** - The refresh token.
+    * `$refreshToken` **string** - The refresh token.
 
 #### Return values
 * **self** 

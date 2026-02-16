@@ -12,6 +12,8 @@ echo '<b>' . $show->name . '</b>';
 
 ## Getting info about multiple podcast shows
 
+*Note: This method is only available to extended quota apps.*
+
 ```php
 $shows = $api->getShows([
     'SHOW_ID',
@@ -32,6 +34,8 @@ echo '<b>' . $episode->name . '</b>';
 ```
 
 ## Getting info about multiple podcast episodes
+
+*Note: This method is only available to extended quota apps.*
 
 ```php
 $episodes = $api->getEpisodeS([

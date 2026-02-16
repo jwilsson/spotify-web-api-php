@@ -4,6 +4,8 @@ There are lots of operations involving user's playlists that can be performed. R
 
 ## Listing a user's playlists
 
+*Note: This method is only available to extended quota apps.*
+
 ```php
 $playlists = $api->getUserPlaylists('USER_ID', [
     'limit' => 5
@@ -27,15 +29,15 @@ echo $playlist->name;
 $playlistImage = $api->getPlaylistImage('PLAYLIST_ID');
 ```
 
-## Getting all tracks in a playlist
+## Getting all items in a playlist
 
 ```php
-$playlistTracks = $api->getPlaylistTracks('PLAYLIST_ID');
+$playlistItems = $api->getPlaylistItems('PLAYLIST_ID');
 
-foreach ($playlistTracks->items as $track) {
-    $track = $track->track;
+foreach ($playlistItems->items as $item) {
+    $item = $item->item;
 
-    echo '<a href="' . $track->external_urls->spotify . '">' . $track->name . '</a> <br>';
+    echo '<a href="' . $item->external_urls->spotify . '">' . $item->name . '</a> <br>';
 }
 ```
 
@@ -65,56 +67,36 @@ $api->updatePlaylistImage('PLAYLIST_ID', $imageData);
 ## Adding tracks to a user's playlist
 
 ```php
-$api->addPlaylistTracks('PLAYLIST_ID', [
-    'TRACK_ID',
+$api->addPlaylistItems('PLAYLIST_ID', [
+    'TRACK_URI',
     'EPISODE_URI'
 ]);
 ```
 
-## Delete tracks from a user's playlist based on IDs
+## Delete items from a user's playlist
 
 ```php
-$tracks = [
-    'tracks' => [
-        ['uri' => 'TRACK_ID'],
-        ['uri' => 'EPISODE_URI'],
-    ],
+$items = [
+    ['uri' => 'TRACK_URI'],
+    ['uri' => 'EPISODE_URI'],
 ];
 
-$api->deletePlaylistTracks('PLAYLIST_ID', $tracks, 'SNAPSHOT_ID');
+$api->deletePlaylistItems('PLAYLIST_ID', $tracks, 'SNAPSHOT_ID');
 ```
 
-## Delete tracks from a user's playlist based on positions
+## Updating the items in a playlist
 
 ```php
-$trackOptions = [
-    'positions' => [
-        5,
-        12,
-    ],
-];
-
-$api->deletePlaylistTracks('PLAYLIST_ID', $trackOptions, 'SNAPSHOT_ID');
-```
-
-## Replacing all tracks in a user's playlist with new ones
-
-```php
-$api->replacePlaylistTracks('PLAYLIST_ID', [
-    'TRACK_ID',
+$items = [
+    'TRACK_URI',
     'EPISODE_URI'
-]);
-```
+];
 
-## Reorder the tracks in a user's playlist
-
-```php
-$api->reorderPlaylistTracks('PLAYLIST_ID', [
-    'range_start' => 1,
-    'range_length' => 5,
+$options = [
     'insert_before' => 10,
-    'snapshot_id' => 'SNAPSHOT_ID'
-]);
+];
+
+$api->updatePlaylistItems('PLAYLIST_ID', $items, $options, 'SNAPSHOT_ID');
 ```
 
 Please see the [method reference](/docs/method-reference/SpotifyWebAPI.md) for more available options for each method.

@@ -24,7 +24,7 @@ Constructor<br>
 Set options.
 
 #### Arguments
-* `$options` **array\|object** - Optional. Options to set.
+    * `$options` **array\|object** - Optional. Options to set.
 
 
 ---
@@ -38,17 +38,17 @@ Request::account($method, $uri, $parameters, $headers)
 Make a request to the "account" endpoint.
 
 #### Arguments
-* `$method` **string** - The HTTP method to use.
-* `$uri` **string** - The URI to request.
-* `$parameters` **string\|array** - Optional. Query string parameters or HTTP body, depending on $method.
-* `$headers` **array** - Optional. HTTP headers.
+    * `$method` **string** - The HTTP method to use.
+    * `$uri` **string** - The URI to request.
+    * `$parameters` **string\|array** - Optional. Query string parameters or HTTP body, depending on $method.
+    * `$headers` **array** - Optional. HTTP headers.
 
 #### Return values
 * **array** Response data.
-    * array\|object body The response body. Type is controlled by the `return_assoc` option.
-    * array headers Response headers.
-    * int status HTTP status code.
-    * string url The requested URL.
+- array\|object body The response body. Type is controlled by the `return_assoc` option.
+- array headers Response headers.
+- int status HTTP status code.
+- string url The requested URL.
 
 ---
 ### api
@@ -61,17 +61,17 @@ Request::api($method, $uri, $parameters, $headers)
 Make a request to the "api" endpoint.
 
 #### Arguments
-* `$method` **string** - The HTTP method to use.
-* `$uri` **string** - The URI to request.
-* `$parameters` **string\|array** - Optional. Query string parameters or HTTP body, depending on $method.
-* `$headers` **array** - Optional. HTTP headers.
+    * `$method` **string** - The HTTP method to use.
+    * `$uri` **string** - The URI to request.
+    * `$parameters` **string\|array** - Optional. Query string parameters or HTTP body, depending on $method.
+    * `$headers` **array** - Optional. HTTP headers.
 
 #### Return values
 * **array** Response data.
-    * array\|object body The response body. Type is controlled by the `return_assoc` option.
-    * array headers Response headers.
-    * int status HTTP status code.
-    * string url The requested URL.
+- array\|object body The response body. Type is controlled by the `return_assoc` option.
+- array headers Response headers.
+- int status HTTP status code.
+- string url The requested URL.
 
 ---
 ### getLastResponse
@@ -86,10 +86,10 @@ Get the latest full response from the Spotify API.
 
 #### Return values
 * **array** Response data.
-    * array\|object body The response body. Type is controlled by the `return_assoc` option.
-    * array headers Response headers.
-    * int status HTTP status code.
-    * string url The requested URL.
+- array\|object body The response body. Type is controlled by the `return_assoc` option.
+- array headers Response headers.
+- int status HTTP status code.
+- string url The requested URL.
 
 ---
 ### send
@@ -103,17 +103,17 @@ Make a request to Spotify.<br>
 You'll probably want to use one of the convenience methods instead.
 
 #### Arguments
-* `$method` **string** - The HTTP method to use.
-* `$url` **string** - The URL to request.
-* `$parameters` **string\|array\|object** - Optional. Query string parameters or HTTP body, depending on $method.
-* `$headers` **array** - Optional. HTTP headers.
+    * `$method` **string** - The HTTP method to use.
+    * `$url` **string** - The URL to request.
+    * `$parameters` **string\|array\|object** - Optional. Query string parameters or HTTP body, depending on $method.
+    * `$headers` **array** - Optional. HTTP headers.
 
 #### Return values
 * **array** Response data.
-    * array\|object body The response body. Type is controlled by the `return_assoc` option.
-    * array headers Response headers.
-    * int status HTTP status code.
-    * string url The requested URL.
+- array\|object body The response body. Type is controlled by the `return_assoc` option.
+- array headers Response headers.
+- int status HTTP status code.
+- string url The requested URL.
 
 ---
 ### setOptions
@@ -126,7 +126,7 @@ Request::setOptions($options)
 Set options
 
 #### Arguments
-* `$options` **array\|object** - Options to set.
+    * `$options` **array\|object** - Options to set.
 
 #### Return values
 * **self** 

@@ -12,6 +12,8 @@ echo '<b>' . $audiobook->name . '</b>';
 
 ## Getting info about multiple audiobooks
 
+*Note: This method is only available to extended quota apps.*
+
 ```php
 $audiobooks = $api->getAudiobooks([
     'AUDIOBOOK_ID',
@@ -32,6 +34,8 @@ echo '<b>' . $chapter->name . '</b>';
 ```
 
 ## Getting info about multiple audiobook chapters
+
+*Note: This method is only available to extended quota apps.*
 
 ```php
 $chapters = $api->getChapters([

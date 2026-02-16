@@ -12,6 +12,8 @@ echo $me->display_name;
 
 ### Getting any user's profile
 
+*Note: This method is only available to extended quota apps.*
+
 ```php
 $user = $api->getUser('USER_ID');
 

@@ -12,6 +12,8 @@ echo '<b>' . $track->name . '</b> by <b>' . $track->artists[0]->name . '</b>';
 
 ## Getting info about multiple tracks
 
+*Note: This method is only available to extended quota apps.*
+
 ```php
 $tracks = $api->getTracks([
     'TRACK_ID',

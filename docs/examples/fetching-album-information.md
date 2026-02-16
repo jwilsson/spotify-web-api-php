@@ -12,6 +12,8 @@ echo '<b>' . $album->name . '</b>';
 
 ## Getting info about multiple albums
 
+*Note: This method is only available to extended quota apps.*
+
 ```php
 $albums = $api->getAlbums([
     'ALBUM_ID',

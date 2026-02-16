@@ -12,6 +12,8 @@ echo '<b>' . $artist->name . '</b>';
 
 ## Getting info about multiple artists
 
+*Note: This method is only available to extended quota apps.*
+
 ```php
 $artists = $api->getArtists([
     'ARTIST_ID',
@@ -44,6 +46,8 @@ foreach ($artists->artists as $artist) {
 ```
 
 ## Getting an artist’s top tracks in a country
+
+*Note: This method is only available to extended quota apps.*
 
 ```php
 $tracks = $api->getArtistTopTracks('ARTIST_ID', [
