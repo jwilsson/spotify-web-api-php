@@ -205,6 +205,23 @@ class SpotifyWebAPI
     }
 
     /**
+     * Add audiobooks to the current user's Spotify library.
+     * https://developer.spotify.com/documentation/web-api/reference/save-audiobooks-user
+     *
+     * @deprecated Use SpotifyWebAPI::addMyLibrary() instead.
+     *
+     * @param string|array $audiobooks Audiobook IDs or URIs to add.
+     *
+     * @return bool Whether the audiobooks was successfully added.
+     */
+    public function addMyAudiobooks(string|array $audiobooks): bool
+    {
+        $audiobooks = $this->idToUri($audiobooks, 'show');
+
+        return $this->addMyLibrary($audiobooks);
+    }
+
+    /**
      * Add episodes to the current user's Spotify library.
      * https://developer.spotify.com/documentation/web-api/reference/save-episodes-user
      *
@@ -481,6 +498,23 @@ class SpotifyWebAPI
         $this->lastResponse = $this->sendRequest('DELETE', $uri, $albums, $headers);
 
         return $this->lastResponse['status'] == 200;
+    }
+
+    /**
+     * Delete audiobooks from the current user's Spotify library.
+     * https://developer.spotify.com/documentation/web-api/reference/remove-audiobooks-user
+     *
+     * @deprecated Use SpotifyWebAPI::deleteMyLibrary() instead.
+     *
+     * @param string|array $audiobooks Audiobook IDs or URIs to delete.
+     *
+     * @return bool Whether the audiobooks was successfully deleted.
+     */
+    public function deleteMyAudiobooks(string|array $audiobooks): bool
+    {
+        $audiobooks = $this->idToUri($audiobooks, 'show');
+
+        return $this->deleteMyLibrary($audiobooks);
     }
 
     /**
@@ -1338,6 +1372,25 @@ class SpotifyWebAPI
     }
 
     /**
+     * Get the current user’s saved audiobooks.
+     * https://developer.spotify.com/documentation/web-api/reference/get-users-saved-audiobooks
+     *
+     * @param array|object $options Optional. Options for the audiobooks.
+     * - int limit Optional. Number of audiobooks to return.
+     * - int offset Optional. Number of audiobooks to skip.
+     *
+     * @return array|object The user's saved audiobooks. Type is controlled by the `return_assoc` option.
+     */
+    public function getMySavedAudiobooks(array|object $options = []): array|object
+    {
+        $uri = '/v1/me/audiobooks';
+
+        $this->lastResponse = $this->sendRequest('GET', $uri, $options);
+
+        return $this->lastResponse['body'];
+    }
+
+    /**
      * Get the current user’s saved episodes.
      * https://developer.spotify.com/documentation/web-api/reference/get-users-saved-episodes
      *
@@ -1790,6 +1843,23 @@ class SpotifyWebAPI
         $this->lastResponse = $this->sendRequest('GET', $uri, $options);
 
         return $this->lastResponse['body'];
+    }
+
+    /**
+     * Check if audiobooks are saved in the current user's Spotify library.
+     * https://developer.spotify.com/documentation/web-api/reference/check-users-saved-audiobooks
+     *
+     * @deprecated Use SpotifyWebAPI::myLibraryContains() instead.
+     *
+     * @param string|array $audiobooks Audiobook IDs or URIs to check for.
+     *
+     * @return array Whether each audiobook is saved.
+     */
+    public function myAudiobooksContains(string|array $audiobooks): array
+    {
+        $audiobooks = $this->idToUri($audiobooks, 'show');
+
+        return $this->myLibraryContains($audiobooks);
     }
 
     /**

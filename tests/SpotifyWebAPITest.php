@@ -154,6 +154,27 @@ class SpotifyWebAPITest extends TestCase
         );
     }
 
+    public function testAddMyAudiobooks()
+    {
+        $audiobooks = [
+            '7491iWykMaMXfKV72lNDf6',
+            'spotify:show:5zv24ErpU3fmPU1SVuCmHC',
+        ];
+
+        $return = ['status' => 200];
+        $api = $this->setupApi(
+            'PUT',
+            '/v1/me/library?uris=spotify:show:7491iWykMaMXfKV72lNDf6,spotify:show:5zv24ErpU3fmPU1SVuCmHC',
+            [],
+            [],
+            $return,
+        );
+
+        $this->assertTrue(
+            $api->addMyAudiobooks($audiobooks),
+        );
+    }
+
     public function testAddMyEpisodes()
     {
         $episodes = [
@@ -480,6 +501,27 @@ class SpotifyWebAPITest extends TestCase
 
         $this->assertTrue(
             $api->deleteMyAlbums($albums),
+        );
+    }
+
+    public function testDeleteMyAudiobooks()
+    {
+        $audiobooks = [
+            '7491iWykMaMXfKV72lNDf6',
+            'spotify:show:5zv24ErpU3fmPU1SVuCmHC',
+        ];
+
+        $return = ['status' => 200];
+        $api = $this->setupApi(
+            'DELETE',
+            '/v1/me/library?uris=spotify:show:7491iWykMaMXfKV72lNDf6,spotify:show:5zv24ErpU3fmPU1SVuCmHC',
+            [],
+            [],
+            $return,
+        );
+
+        $this->assertTrue(
+            $api->deleteMyAudiobooks($audiobooks),
         );
     }
 
@@ -1456,6 +1498,32 @@ class SpotifyWebAPITest extends TestCase
         $this->assertObjectHasProperty('items', $response);
     }
 
+    public function testGetMySavedAudiobooks()
+    {
+        $options = [
+            'limit' => 10,
+            'market' => 'SE',
+        ];
+
+        $expected = [
+            'limit' => 10,
+            'market' => 'SE',
+        ];
+
+        $return = ['body' => get_fixture('user-audiobooks')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/me/audiobooks',
+            $expected,
+            [],
+            $return,
+        );
+
+        $response = $api->getMySavedAudiobooks($options);
+
+        $this->assertObjectHasProperty('items', $response);
+    }
+
     public function testGetMySavedEpisodes()
     {
         $options = [
@@ -1916,6 +1984,31 @@ class SpotifyWebAPITest extends TestCase
         );
 
         $response = $api->myAlbumsContains($albums);
+
+        $this->assertTrue($response[0]);
+    }
+
+    public function testMyAudiobooksC()
+    {
+        $audiobooks = [
+            '7491iWykMaMXfKV72lNDf6',
+            'spotify:show:5zv24ErpU3fmPU1SVuCmHC',
+        ];
+
+        $expected = [
+            'uris' => 'spotify:show:7491iWykMaMXfKV72lNDf6,spotify:show:5zv24ErpU3fmPU1SVuCmHC',
+        ];
+
+        $return = ['body' => get_fixture('user-audiobooks-contains')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/me/library/contains',
+            $expected,
+            [],
+            $return,
+        );
+
+        $response = $api->myAudiobooksContains($audiobooks);
 
         $this->assertTrue($response[0]);
     }
