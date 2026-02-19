@@ -1,4 +1,62 @@
 # Changelog
+## 7.1.0 (2025-02-19)
+* Deprecated the following methods due to [February 2026 Spotify Web API changes](https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security): ([e436a3c](https://github.com/jwilsson/spotify-web-api-php/commit/e436a3c0bd1ee13915697b1159fa465324ef1070))
+    * `SpotifyWebAPI::addMyAlbums()`
+    * `SpotifyWebAPI::addMyAudiobooks()`
+    * `SpotifyWebAPI::addMyEpisodes()`
+    * `SpotifyWebAPI::addMyLibrary()`
+    * `SpotifyWebAPI::addMyShows()`
+    * `SpotifyWebAPI::addMyTracks()`
+    * `SpotifyWebAPI::addPlaylistTracks()`
+    * `SpotifyWebAPI::currentUserFollows()`
+    * `SpotifyWebAPI::currentUserFollowsPlaylist()`
+    * `SpotifyWebAPI::deleteMyAlbums()`
+    * `SpotifyWebAPI::deleteMyAudiobooks()`
+    * `SpotifyWebAPI::deleteMyEpisodes()`
+    * `SpotifyWebAPI::deleteMyLibrary()`
+    * `SpotifyWebAPI::deleteMyShows()`
+    * `SpotifyWebAPI::deleteMyTracks()`
+    * `SpotifyWebAPI::deletePlaylistTracks()`
+    * `SpotifyWebAPI::followArtistsOrUsers()`
+    * `SpotifyWebAPI::followArtistsOrUsers()`
+    * `SpotifyWebAPI::followPlaylist()`
+    * `SpotifyWebAPI::getAlbums()`
+    * `SpotifyWebAPI::getArtists()`
+    * `SpotifyWebAPI::getArtistTopTracks()`
+    * `SpotifyWebAPI::getAudiobooks()`
+    * `SpotifyWebAPI::getCategoriesList()`
+    * `SpotifyWebAPI::getCategory()`
+    * `SpotifyWebAPI::getChapters()`
+    * `SpotifyWebAPI::getEpisodes()`
+    * `SpotifyWebAPI::getMarkets()`
+    * `SpotifyWebAPI::getNewReleases()`
+    * `SpotifyWebAPI::getPlaylistTracks()`
+    * `SpotifyWebAPI::getShows()`
+    * `SpotifyWebAPI::getTracks()`
+    * `SpotifyWebAPI::getUserPlaylists()`
+    * `SpotifyWebAPI::myAlbumsContains()`
+    * `SpotifyWebAPI::myAudiobooksContains()`
+    * `SpotifyWebAPI::myEpisodesContains()`
+    * `SpotifyWebAPI::myShowsContains()`
+    * `SpotifyWebAPI::myTracksContains()`
+    * `SpotifyWebAPI::reorderPlaylistTracks()`
+    * `SpotifyWebAPI::replacePlaylistTracks()`
+    * `SpotifyWebAPI::unfollowArtistsOrUsers()`
+    * `SpotifyWebAPI::unfollowPlaylist()`
+* Added the following methods:
+    * `SpotifyWebAPI::addMyAudiobooks()` ([9f6f8ad](https://github.com/jwilsson/spotify-web-api-php/commit/9f6f8adde57375f1666222a4f975b792a87c9174))
+    * `SpotifyWebAPI::addMyLibrary()` ([3e91670](https://github.com/jwilsson/spotify-web-api-php/commit/3e9167025f6c63afb0dd3c4665997c85c4d0725b))
+    * `SpotifyWebAPI::addPlaylistItems()` ([ad903a7](https://github.com/jwilsson/spotify-web-api-php/commit/ad903a727a2759e610d1f16094faa3fb7fbf4e0c))
+    * `SpotifyWebAPI::deleteMyAudiobooks()` ([9f6f8ad](https://github.com/jwilsson/spotify-web-api-php/commit/9f6f8adde57375f1666222a4f975b792a87c9174))
+    * `SpotifyWebAPI::deleteMyLibrary()` ([6531b15](https://github.com/jwilsson/spotify-web-api-php/commit/6531b15010a9b917124744fd19279d0281562329))
+    * `SpotifyWebAPI::deletePlaylistItems()` ([958cbe0](https://github.com/jwilsson/spotify-web-api-php/commit/958cbe07d04505185020f37814f50c0988658e39))
+    * `SpotifyWebAPI::getMySavedAudiobooks()` ([9f6f8ad](https://github.com/jwilsson/spotify-web-api-php/commit/9f6f8adde57375f1666222a4f975b792a87c9174))
+    * `SpotifyWebAPI::getPlaylistItems()` ([c8d3904](https://github.com/jwilsson/spotify-web-api-php/commit/c8d390441aeaffc5b0c4a67788daf13eca76d509))
+    * `SpotifyWebAPI::myAudiobooksContains()` ([9f6f8ad](https://github.com/jwilsson/spotify-web-api-php/commit/9f6f8adde57375f1666222a4f975b792a87c9174))
+    * `SpotifyWebAPI::myLibraryContains()` ([b3870b7](https://github.com/jwilsson/spotify-web-api-php/commit/b3870b7249e6148af65d6c994478abde8ad3dea1))
+    * `SpotifyWebAPI::updatePlaylistItems()` ([890926a](https://github.com/jwilsson/spotify-web-api-php/commit/890926af7c1a4835e944c071bc05449e82cfb694))
+* `SpotifyWebAPI::createPlaylist()` will now always use the current user. ([01e53a5](https://github.com/jwilsson/spotify-web-api-php/commit/01e53a5bb71f5c32d681bd924e5ff01f3496bbc4))
+
 ## 7.0.0 (2025-12-14)
 * **Breaking** Dropped support for PHP versions less than 8.3. ([ff6ea06](https://github.com/jwilsson/spotify-web-api-php/commit/ff6ea067937f1914c1f1f8b46979ca5f79a57469))
 * **Breaking** Removed deprecated `SpotifyWebAPI::usersFollowPlaylist()` method. Use `SpotifyWebAPI::currentUserFollowsPlaylist()` instead. ([12f1596](https://github.com/jwilsson/spotify-web-api-php/commit/12f15966a0f562a978b2aa30bfda8037d94562c7))
