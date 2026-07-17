@@ -1044,6 +1044,8 @@ class SpotifyWebAPI
      * Get a list of Spotify playlists tagged with a particular category.
      * https://developer.spotify.com/documentation/web-api/reference/get-a-categories-playlists
      *
+     * @deprecated See https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security
+     *
      * @param string $categoryId ID of the category.
      *
      * @param array|object $options Optional. Options for the category's playlists.
