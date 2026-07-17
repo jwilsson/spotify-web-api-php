@@ -24,7 +24,7 @@ Constructor<br>
 Set options.
 
 #### Arguments
-    * `$options` **array\|object** - Optional. Options to set.
+* `$options` **array\|object** - Optional. Options to set.
 
 
 ---
@@ -38,10 +38,10 @@ Request::account($method, $uri, $parameters, $headers)
 Make a request to the "account" endpoint.
 
 #### Arguments
-    * `$method` **string** - The HTTP method to use.
-    * `$uri` **string** - The URI to request.
-    * `$parameters` **string\|array** - Optional. Query string parameters or HTTP body, depending on $method.
-    * `$headers` **array** - Optional. HTTP headers.
+* `$method` **string** - The HTTP method to use.
+* `$uri` **string** - The URI to request.
+* `$parameters` **string\|array** - Optional. Query string parameters or HTTP body, depending on $method.
+* `$headers` **array** - Optional. HTTP headers.
 
 #### Return values
 * **array** Response data.
@@ -61,10 +61,10 @@ Request::api($method, $uri, $parameters, $headers)
 Make a request to the "api" endpoint.
 
 #### Arguments
-    * `$method` **string** - The HTTP method to use.
-    * `$uri` **string** - The URI to request.
-    * `$parameters` **string\|array** - Optional. Query string parameters or HTTP body, depending on $method.
-    * `$headers` **array** - Optional. HTTP headers.
+* `$method` **string** - The HTTP method to use.
+* `$uri` **string** - The URI to request.
+* `$parameters` **string\|array** - Optional. Query string parameters or HTTP body, depending on $method.
+* `$headers` **array** - Optional. HTTP headers.
 
 #### Return values
 * **array** Response data.
@@ -103,10 +103,10 @@ Make a request to Spotify.<br>
 You'll probably want to use one of the convenience methods instead.
 
 #### Arguments
-    * `$method` **string** - The HTTP method to use.
-    * `$url` **string** - The URL to request.
-    * `$parameters` **string\|array\|object** - Optional. Query string parameters or HTTP body, depending on $method.
-    * `$headers` **array** - Optional. HTTP headers.
+* `$method` **string** - The HTTP method to use.
+* `$url` **string** - The URL to request.
+* `$parameters` **string\|array\|object** - Optional. Query string parameters or HTTP body, depending on $method.
+* `$headers` **array** - Optional. HTTP headers.
 
 #### Return values
 * **array** Response data.
@@ -126,7 +126,7 @@ Request::setOptions($options)
 Set options
 
 #### Arguments
-    * `$options` **array\|object** - Options to set.
+* `$options` **array\|object** - Options to set.
 
 #### Return values
 * **self** 
