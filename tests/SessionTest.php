@@ -46,6 +46,15 @@ class SessionTest extends TestCase
         $this->assertEquals(16, strlen($state));
     }
 
+    public function testGenerateCodeVerifierOddLength()
+    {
+        $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI);
+
+        $verifier = $session->generateCodeVerifier(43);
+
+        $this->assertEquals(43, strlen($verifier));
+    }
+
     public function testGetAuthorizeUrl()
     {
         $session = new Session($this->clientID, $this->clientSecret, $this->redirectURI);
