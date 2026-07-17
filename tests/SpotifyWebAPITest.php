@@ -1044,6 +1044,37 @@ class SpotifyWebAPITest extends TestCase
         $this->assertObjectHasProperty('id', $response);
     }
 
+    public function testGetAudiobookChapters()
+    {
+        $options = [
+            'limit' => 10,
+            'market' => 'SE',
+            'offset' => 5,
+        ];
+
+        $expected = [
+            'limit' => 10,
+            'market' => 'SE',
+            'offset' => 5,
+        ];
+
+        $return = ['body' => get_fixture('audiobook-chapters')];
+        $api = $this->setupApi(
+            'GET',
+            '/v1/audiobooks/0IsXVP0JmcB2adSE338GkK/chapters',
+            $expected,
+            [],
+            $return,
+        );
+
+        $response = $api->getAudiobookChapters(
+            'spotify:episode:0IsXVP0JmcB2adSE338GkK',
+            $options,
+        );
+
+        $this->assertObjectHasProperty('items', $response);
+    }
+
     public function testGetAudiobooks()
     {
         $options = ['market' => 'SE'];

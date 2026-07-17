@@ -35,15 +35,10 @@ echo '<b>' . $chapter->name . '</b>';
 
 ## Getting info about multiple audiobook chapters
 
-*Note: This method is only available to extended quota apps.*
-
 ```php
-$chapters = $api->getChapters([
-    'CHAPTER_ID',
-    'CHAPTER_ID',
-]);
+$chapters = $api->getAudiobookChapters('AUDIOBOOK_ID');
 
-foreach ($chapters->chapters as $chapter) {
+foreach ($chapters->items as $chapter) {
     echo '<b>' . $chapter->name . '</b> <br>';
 }
 ```
