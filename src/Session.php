@@ -78,7 +78,7 @@ class Session
     {
         // Length will be doubled when converting to hex
         $state = bin2hex(
-            random_bytes((int) ceil($length / 2))
+            random_bytes((int) ceil($length / 2)),
         );
 
         return substr($state, 0, $length);
