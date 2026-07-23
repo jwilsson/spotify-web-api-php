@@ -229,7 +229,7 @@ class RequestTest extends TestCase
         $this->setupFunctionMock('curl_setopt_array')->willReturnCallback(
             function (\CurlHandle $ch, array $options) {
                 $this->assertEquals('GET', $options[CURLOPT_CUSTOMREQUEST]);
-                $this->assertEquals('https://www.example.com/?foo=bar', $options[CURLOPT_URL]);
+                $this->assertEquals('https://www.example.com?foo=bar', $options[CURLOPT_URL]);
             },
         );
 
