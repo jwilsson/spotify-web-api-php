@@ -1,4 +1,13 @@
 # Changelog
+## 7.2.0 (2025-07-25)
+* Added `SpotifyWebAPI::getAudiobookChapters()` method. ([c8abfb9](https://github.com/jwilsson/spotify-web-api-php/commit/c8abfb964b339bb595adf3e4d4eb566d0bb01f3f))
+* Added `SpotifyWebAPIException::isQuotaExceeded()` helper. ([049543d](https://github.com/jwilsson/spotify-web-api-php/commit/049543daa059cc61cc7f4ffce21fd1506a727a49))
+* Marked `SpotifyWebAPI::getCategoryPlaylists()` as deprecated. ([052f30d](https://github.com/jwilsson/spotify-web-api-php/commit/052f30d3cf9b8b0530fa2fd5b78b11b2b88d9bef))
+* Fixed trailing slash before GET query parameters. ([db7e66f](https://github.com/jwilsson/spotify-web-api-php/commit/db7e66f967e33144150893148abda98fcf7ae27b))
+* Fixed odd-length PKCE verifier generation. ([d9b29e9](https://github.com/jwilsson/spotify-web-api-php/commit/d9b29e92f111bcdcd2334553b5f94cca028a62db))
+* Fixed access token expired message check. ([d106507](https://github.com/jwilsson/spotify-web-api-php/commit/d106507d2fe07969dd232243058dfe7f54a3dd98))
+* Updated CA bundle. ([79328aa](https://github.com/jwilsson/spotify-web-api-php/commit/79328aa64bacbcf7ccec9879355ca82399cd53f4))
+
 ## 7.1.0 (2025-02-19)
 * Deprecated the following methods due to [February 2026 Spotify Web API changes](https://developer.spotify.com/blog/2026-02-06-update-on-developer-access-and-platform-security): ([e436a3c](https://github.com/jwilsson/spotify-web-api-php/commit/e436a3c0bd1ee13915697b1159fa465324ef1070))
     * `SpotifyWebAPI::addMyAlbums()`
