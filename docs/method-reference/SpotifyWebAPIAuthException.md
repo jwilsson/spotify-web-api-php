@@ -5,6 +5,7 @@
 * [hasInvalidRefreshToken](#hasinvalidrefreshtoken)
 * [getReason](#getreason)
 * [hasExpiredToken](#hasexpiredtoken)
+* [isQuotaExceeded](#isquotaexceeded)
 * [isRateLimited](#isratelimited)
 * [setReason](#setreason)
 
@@ -12,6 +13,7 @@
 * **INVALID_CLIENT**
 * **INVALID_CLIENT_SECRET**
 * **INVALID_REFRESH_TOKEN**
+* **QUOTA_EXCEEDED**
 * **TOKEN_EXPIRED**
 * **RATE_LIMIT_STATUS**
 
@@ -66,6 +68,20 @@ SpotifyWebAPIAuthException::hasExpiredToken()
 ```
 
 Returns whether the exception was thrown because of an expired access token.
+
+
+#### Return values
+* **bool** 
+
+---
+### isQuotaExceeded
+
+
+```php
+SpotifyWebAPIAuthException::isQuotaExceeded()
+```
+
+Returns whether the exception was thrown because of the quota limit being exceeded.
 
 
 #### Return values

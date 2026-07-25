@@ -6,6 +6,7 @@ namespace SpotifyWebAPI;
 
 class SpotifyWebAPIException extends \Exception
 {
+    public const string QUOTA_EXCEEDED = 'QUOTA_EXCEEDED';
     public const string TOKEN_EXPIRED = 'The access token expired';
     public const int RATE_LIMIT_STATUS = 429;
 
@@ -34,6 +35,16 @@ class SpotifyWebAPIException extends \Exception
     public function hasExpiredToken(): bool
     {
         return $this->getMessage() === self::TOKEN_EXPIRED;
+    }
+
+    /**
+     * Returns whether the exception was thrown because of the quota limit being exceeded.
+     *
+     * @return bool
+     */
+    public function isQuotaExceeded(): bool
+    {
+        return $this->getReason() === self::QUOTA_EXCEEDED;
     }
 
     /**
