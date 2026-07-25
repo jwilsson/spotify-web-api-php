@@ -78,7 +78,7 @@ class SpotifyWebAPITest extends TestCase
 
         $requestStub->method('api')
             ->willReturnOnConsecutiveCalls(
-                $this->throwException(new SpotifyWebAPIException('The access token expired', 401)),
+                $this->throwException(new SpotifyWebAPIException('Missing/invalid/expired access token', 401)),
                 $return,
             );
 

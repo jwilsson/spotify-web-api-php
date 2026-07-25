@@ -26,6 +26,13 @@ class SpotifyWebAPIExceptionTest extends TestCase
         $this->assertTrue($exception->hasExpiredToken());
     }
 
+    public function testHasInvalidToken(): void
+    {
+        $exception = new SpotifyWebAPIException(SpotifyWebAPIException::TOKEN_INVALID);
+
+        $this->assertTrue($exception->hasExpiredToken());
+    }
+
     public function testIsQuotaExceeded(): void
     {
         $exception = new SpotifyWebAPIException();

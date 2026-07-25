@@ -8,6 +8,7 @@ class SpotifyWebAPIException extends \Exception
 {
     public const string QUOTA_EXCEEDED = 'QUOTA_EXCEEDED';
     public const string TOKEN_EXPIRED = 'The access token expired';
+    public const string TOKEN_INVALID = 'Missing/invalid/expired access token';
     public const int RATE_LIMIT_STATUS = 429;
 
     /**
@@ -34,7 +35,7 @@ class SpotifyWebAPIException extends \Exception
      */
     public function hasExpiredToken(): bool
     {
-        return $this->getMessage() === self::TOKEN_EXPIRED;
+        return $this->getMessage() === self::TOKEN_EXPIRED || $this->getMessage() === self::TOKEN_INVALID;
     }
 
     /**
