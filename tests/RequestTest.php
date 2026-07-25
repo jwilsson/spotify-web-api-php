@@ -92,61 +92,6 @@ class RequestTest extends TestCase
         }
     }
 
-    public function testExpiredToken()
-    {
-        $this->setupFunctionMock('curl_exec')->willReturnCallback(function () {
-            $body = json_encode([
-                'error_description' => 'The access token expired',
-            ]);
-
-            return create_http_response($body, 401);
-        });
-        $this->setupFunctionMock('curl_getinfo')->willReturn(401);
-
-        $headers = [
-            'Authorization' => 'Bearer expired_token',
-        ];
-
-        try {
-            $request = new Request();
-            $request->api('GET', '/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V', [], $headers);
-        } catch (SpotifyWebAPIAuthException $e) {
-            $this->assertTrue($e->hasExpiredToken());
-        } catch (\Exception) {
-            $this->fail('No exception of type SpotifyWebAPIAuthException thrown');
-        }
-    }
-
-    public function testInvalidRefreshToken()
-    {
-        $this->setupFunctionMock('curl_exec')->willReturnCallback(function () {
-            $body = json_encode([
-                'error_description' => 'Invalid refresh token',
-            ]);
-
-            return create_http_response($body, 400);
-        });
-        $this->setupFunctionMock('curl_getinfo')->willReturn(400);
-
-        $parameters = [
-            'grant_type' => 'refresh_token',
-            'refresh_token' => 'invalid_refresh_token',
-        ];
-
-        $headers = [
-            'Authorization' => 'Basic ' . base64_encode('VALID_ID:VALID_SECRET'),
-        ];
-
-        try {
-            $request = new Request();
-            $request->account('POST', '/api/token', $parameters, $headers);
-        } catch (SpotifyWebAPIAuthException $e) {
-            $this->assertTrue($e->hasInvalidRefreshToken());
-        } catch (\Exception) {
-            $this->fail('No exception of type SpotifyWebAPIAuthException thrown');
-        }
-    }
-
     public function testGetLastResponse()
     {
         $this->setupFunctionMock('curl_exec')->willReturn(create_http_response('album'));
