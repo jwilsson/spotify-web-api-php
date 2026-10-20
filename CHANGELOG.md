@@ -1,4 +1,7 @@
 # Changelog
+## 7.2.1 (2025-10-20)
+* Updated CA bundle. ([3aef1ab](https://github.com/jwilsson/spotify-web-api-php/commit/3aef1ab5a0aa43b969ad0dd1e27ba89b48e627fc))
+
 ## 7.2.0 (2025-07-25)
 * Added `SpotifyWebAPI::getAudiobookChapters()` method. ([c8abfb9](https://github.com/jwilsson/spotify-web-api-php/commit/c8abfb964b339bb595adf3e4d4eb566d0bb01f3f))
 * Added `SpotifyWebAPIException::isQuotaExceeded()` helper. ([049543d](https://github.com/jwilsson/spotify-web-api-php/commit/049543daa059cc61cc7f4ffce21fd1506a727a49))
